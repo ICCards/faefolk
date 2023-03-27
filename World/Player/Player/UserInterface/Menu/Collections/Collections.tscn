@@ -1,26 +1,28 @@
-[gd_scene load_steps=232 format=2]
+[gd_scene load_steps=98 format=3 uid="uid://b3ad8jm57r5at"]
 
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/MobCollection.gd" type="Script" id=1]
-[ext_resource path="res://InventoryLogic/CollectionItemDescription.tscn" type="PackedScene" id=2]
-[ext_resource path="res://InventoryLogic/ItemNameBox.tscn" type="PackedScene" id=3]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.gd" type="Script" id=4]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/CropCollection.gd" type="Script" id=5]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/FishCollection.gd" type="Script" id=7]
-[ext_resource path="res://Assets/Images/Misc/Buttons/down button.png" type="Texture" id=8]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/ForageCollection.gd" type="Script" id=9]
-[ext_resource path="res://Assets/Themes/LockedAsset.tres" type="Material" id=10]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/collection_item.gd" type="Script" id=11]
-[ext_resource path="res://Assets/Images/inventory_icons/Forage/mushroom.png" type="Texture" id=12]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/FoodCollection1.gd" type="Script" id=13]
-[ext_resource path="res://Assets/Images/Misc/Buttons/up button.png" type="Texture" id=14]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.gd" id="1_co4t8"]
+[ext_resource type="Texture2D" uid="uid://xdnb6a0u2yhl" path="res://Assets/Images/User interface/inventory/collections/crops-tab.png" id="2_apuhn"]
+[ext_resource type="PackedScene" uid="uid://dvx8ynrvmjy27" path="res://InventoryLogic/CollectionItemDescription.tscn" id="2_bgdpv"]
+[ext_resource type="PackedScene" uid="uid://dpuy0xoq4am3w" path="res://InventoryLogic/ItemNameBox.tscn" id="3_dd2yt"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/CropCollection.gd" id="5_pwxe3"]
+[ext_resource type="Texture2D" uid="uid://by5u0b077vfy6" path="res://Assets/Images/inventory_icons/Crop/carrot.png" id="6_ddxck"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/collection_item.gd" id="7_du1gv"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/MobCollection.gd" id="8_pyiy0"]
+[ext_resource type="Texture2D" uid="uid://bwy1uut25ldmi" path="res://Assets/Images/User interface/buttons-icons/mob icons/wolf.png" id="9_cg53e"]
+[ext_resource type="Material" uid="uid://devwpugyp6x7u" path="res://Assets/Themes/LockedAsset.tres" id="10"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/FishCollection.gd" id="10_78mha"]
+[ext_resource type="Texture2D" uid="uid://b1ju2e10selvc" path="res://Assets/Images/inventory_icons/Fish/albacore.png" id="11_4jrcy"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/ForageCollection.gd" id="11_ii5ys"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/FoodCollection.gd" id="14_00116"]
+[ext_resource type="Texture2D" uid="uid://dejiwi7arb8qh" path="res://Assets/Images/Forage/flower/poppy flower.png" id="14_xeolr"]
+[ext_resource type="Texture2D" uid="uid://utxboaqigwsd" path="res://Assets/Images/inventory_icons/Resource/wood.png" id="15_uwvpa"]
+[ext_resource type="Texture2D" uid="uid://dy3mb48lfw7fd" path="res://Assets/Images/inventory_icons/Food/asparagus omelette.png" id="17_3wrdp"]
+[ext_resource type="Texture2D" uid="uid://cg87fknnqacnk" path="res://Assets/Images/inventory_icons/Food/pepper and asparagus stir fry.png" id="19_3cenc"]
 
-[sub_resource type="StreamTexture" id=384]
-load_path = "res://.import/crops-tab.png-93c3276c2ebcb80cc39b185b5daf8e7c.stex"
-
-[sub_resource type="Shader" id=16]
+[sub_resource type="Shader" id="383"]
 code = "shader_type canvas_item;
 
-uniform vec4 flash_color : hint_color = vec4(1.0);
+uniform vec4 flash_color : source_color = vec4(1.0);
 uniform float flash_modifier : hint_range(0.0, 1.0) = 0.0;
 
 void fragment() {
@@ -29,473 +31,151 @@ void fragment() {
 	COLOR = color;
 }"
 
-[sub_resource type="ShaderMaterial" id=49]
+[sub_resource type="ShaderMaterial" id="141"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=118]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=50]
+[sub_resource type="ShaderMaterial" id="143"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=119]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=51]
+[sub_resource type="ShaderMaterial" id="145"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=120]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=52]
+[sub_resource type="ShaderMaterial" id="147"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=121]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=53]
+[sub_resource type="ShaderMaterial" id="149"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=122]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=54]
+[sub_resource type="ShaderMaterial" id="151"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=123]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=55]
+[sub_resource type="ShaderMaterial" id="153"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=124]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=56]
+[sub_resource type="ShaderMaterial" id="155"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=125]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=57]
+[sub_resource type="ShaderMaterial" id="157"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=126]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=58]
+[sub_resource type="ShaderMaterial" id="159"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=127]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=59]
+[sub_resource type="ShaderMaterial" id="161"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=128]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=60]
+[sub_resource type="ShaderMaterial" id="163"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=129]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=61]
+[sub_resource type="ShaderMaterial" id="165"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=130]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=62]
+[sub_resource type="ShaderMaterial" id="167"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=131]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=63]
+[sub_resource type="ShaderMaterial" id="169"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=132]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=64]
+[sub_resource type="ShaderMaterial" id="171"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=133]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=65]
+[sub_resource type="ShaderMaterial" id="173"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=134]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=66]
+[sub_resource type="ShaderMaterial" id="175"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=135]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=67]
+[sub_resource type="ShaderMaterial" id="177"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=136]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=68]
+[sub_resource type="ShaderMaterial" id="179"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=137]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=69]
+[sub_resource type="ShaderMaterial" id="181"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=138]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=70]
+[sub_resource type="ShaderMaterial" id="183"]
 resource_local_to_scene = true
-shader = SubResource( 16 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=139]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="Shader" id=383]
-code = "shader_type canvas_item;
-
-uniform vec4 flash_color : hint_color = vec4(1.0);
-uniform float flash_modifier : hint_range(0.0, 1.0) = 0.0;
-
-void fragment() {
-	vec4 color = texture(TEXTURE, UV);
-	color.rgb = mix(color.rgb, flash_color.rgb, flash_modifier);
-	COLOR = color;
-}"
-
-[sub_resource type="ShaderMaterial" id=141]
+[sub_resource type="ShaderMaterial" id="185"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=142]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=143]
+[sub_resource type="ShaderMaterial" id="187"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=144]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=145]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=146]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=147]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=148]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=149]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=150]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=151]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=152]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=153]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=154]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=155]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=156]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=157]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=158]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=159]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=160]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=161]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=162]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=163]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=164]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=165]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=166]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=167]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=168]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=169]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=170]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=171]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=172]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=173]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=174]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=175]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=176]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=177]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=178]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=179]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=180]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=181]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=182]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=183]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=184]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=185]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=186]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=187]
-resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=188]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="StreamTexture" id=189]
-
-[sub_resource type="StreamTexture" id=190]
-
-[sub_resource type="StreamTexture" id=191]
-
-[sub_resource type="StreamTexture" id=192]
-
-[sub_resource type="StreamTexture" id=193]
-
-[sub_resource type="StreamTexture" id=194]
-
-[sub_resource type="StreamTexture" id=195]
-
-[sub_resource type="StreamTexture" id=196]
-
-[sub_resource type="StreamTexture" id=197]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="StreamTexture" id=198]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="StreamTexture" id=199]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="StreamTexture" id=200]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="StreamTexture" id=201]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="StreamTexture" id=202]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="StreamTexture" id=203]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="StreamTexture" id=204]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="GDScript" id=205]
+[sub_resource type="GDScript" id="205"]
 script/source = "extends GridContainer
 
 
@@ -504,1842 +184,1338 @@ func initialize():
 	for item in PlayerData.player_data[\"collections\"][\"resources\"].keys():
 		if PlayerData.player_data[\"collections\"][\"resources\"][item] > 0:
 			get_node(item).modulate = Color(\"ffffff\") # unlocked
-			get_node(item).material.set_shader_param(\"flash_modifier\", 0)
+			get_node(item).material.set_shader_parameter(\"flash_modifier\", 0)
 		else:
 			get_node(item).modulate = Color(\"50ffffff\") # locked
-			get_node(item).material.set_shader_param(\"flash_modifier\", 1)
+			get_node(item).material.set_shader_parameter(\"flash_modifier\", 1)
 
 func entered_item_area(item_name):
 	get_parent().item = item_name
-	get_node(\"../Tween\").interpolate_property(get_node(item_name), \"rect_scale\",
-		get_node(item_name).rect_scale, Vector2(1.1, 1.1), 0.075,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	get_node(\"../Tween\").start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(get_node(item_name), \"scale\", Vector2(1.1, 1.1), 0.075)
+
 
 func exited_item_area(item_name):
 	get_parent().item = null
 	if has_node(item_name):
-		get_node(\"../Tween\").interpolate_property(get_node(item_name), \"rect_scale\",
-		get_node(item_name).rect_scale, Vector2(1.0, 1.0), 0.075,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	get_node(\"../Tween\").start()
+		var tween = get_tree().create_tween()
+		tween.tween_property(get_node(item_name), \"scale\", Vector2(1.0, 1.0), 0.075)
 "
 
-[sub_resource type="ShaderMaterial" id=206]
+[sub_resource type="ShaderMaterial" id="206"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=207]
-
-[sub_resource type="ShaderMaterial" id=208]
+[sub_resource type="ShaderMaterial" id="208"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=209]
-
-[sub_resource type="ShaderMaterial" id=210]
+[sub_resource type="ShaderMaterial" id="210"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=211]
-
-[sub_resource type="ShaderMaterial" id=212]
+[sub_resource type="ShaderMaterial" id="212"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=213]
-
-[sub_resource type="ShaderMaterial" id=214]
+[sub_resource type="ShaderMaterial" id="214"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=215]
-
-[sub_resource type="ShaderMaterial" id=216]
+[sub_resource type="ShaderMaterial" id="216"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=217]
-
-[sub_resource type="ShaderMaterial" id=218]
+[sub_resource type="ShaderMaterial" id="218"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=219]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=220]
+[sub_resource type="ShaderMaterial" id="220"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=221]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=222]
+[sub_resource type="ShaderMaterial" id="222"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=223]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=224]
+[sub_resource type="ShaderMaterial" id="224"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=225]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=226]
+[sub_resource type="ShaderMaterial" id="226"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=227]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=228]
+[sub_resource type="ShaderMaterial" id="228"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=229]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=230]
+[sub_resource type="ShaderMaterial" id="230"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=231]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=232]
+[sub_resource type="ShaderMaterial" id="232"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=233]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=234]
+[sub_resource type="ShaderMaterial" id="234"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=235]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=236]
+[sub_resource type="ShaderMaterial" id="236"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=237]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=238]
+[sub_resource type="ShaderMaterial" id="238"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=239]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=240]
+[sub_resource type="ShaderMaterial" id="240"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=241]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=242]
+[sub_resource type="ShaderMaterial" id="242"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=243]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=244]
+[sub_resource type="ShaderMaterial" id="244"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=245]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=246]
+[sub_resource type="ShaderMaterial" id="246"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=247]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=248]
+[sub_resource type="ShaderMaterial" id="248"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=249]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=250]
+[sub_resource type="ShaderMaterial" id="250"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=251]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=252]
+[sub_resource type="ShaderMaterial" id="252"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=253]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=254]
+[sub_resource type="ShaderMaterial" id="254"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=255]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=256]
+[sub_resource type="ShaderMaterial" id="256"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=257]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=258]
+[sub_resource type="ShaderMaterial" id="258"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=259]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=260]
+[sub_resource type="ShaderMaterial" id="260"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=261]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=262]
+[sub_resource type="ShaderMaterial" id="262"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=263]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=266]
+[sub_resource type="ShaderMaterial" id="266"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=267]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=278]
+[sub_resource type="ShaderMaterial" id="278"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=279]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=280]
+[sub_resource type="ShaderMaterial" id="280"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=281]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=282]
+[sub_resource type="ShaderMaterial" id="282"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=283]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=284]
+[sub_resource type="ShaderMaterial" id="284"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=285]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=286]
+[sub_resource type="ShaderMaterial" id="286"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=287]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=288]
+[sub_resource type="ShaderMaterial" id="288"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=289]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=290]
+[sub_resource type="ShaderMaterial" id="290"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=291]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=292]
+[sub_resource type="ShaderMaterial" id="292"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=293]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=294]
+[sub_resource type="ShaderMaterial" id="294"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=295]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=296]
+[sub_resource type="ShaderMaterial" id="296"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=297]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=298]
+[sub_resource type="ShaderMaterial" id="298"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=299]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=300]
+[sub_resource type="ShaderMaterial" id="300"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=301]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=302]
+[sub_resource type="ShaderMaterial" id="302"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=303]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=304]
+[sub_resource type="ShaderMaterial" id="304"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=305]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=306]
+[sub_resource type="ShaderMaterial" id="306"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=307]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=308]
+[sub_resource type="ShaderMaterial" id="308"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=309]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=310]
+[sub_resource type="ShaderMaterial" id="310"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=311]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=268]
+[sub_resource type="ShaderMaterial" id="268"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=269]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=270]
+[sub_resource type="ShaderMaterial" id="270"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=271]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=272]
+[sub_resource type="ShaderMaterial" id="272"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=273]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=274]
+[sub_resource type="ShaderMaterial" id="274"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=275]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=276]
+[sub_resource type="ShaderMaterial" id="276"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
-[sub_resource type="StreamTexture" id=277]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
-
-[sub_resource type="ShaderMaterial" id=264]
+[sub_resource type="ShaderMaterial" id="264"]
 resource_local_to_scene = true
-shader = SubResource( 383 )
-shader_param/flash_color = Color( 0.580392, 0.580392, 0.580392, 1 )
-shader_param/flash_modifier = 0.0
-
-[sub_resource type="StreamTexture" id=265]
-load_path = "res://.import/albacore.png-f06b033090537ab8e97124b399e76836.stex"
+shader = SubResource("383")
+shader_parameter/flash_color = Color(0.580392, 0.580392, 0.580392, 1)
+shader_parameter/flash_modifier = 0.0
 
 [node name="Collections" type="Control"]
-script = ExtResource( 4 )
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_co4t8")
+
+[node name="CollectionItemDescription" parent="." instance=ExtResource("2_bgdpv")]
+visible = false
+
+[node name="ItemNameBox" parent="." instance=ExtResource("3_dd2yt")]
+visible = false
 
 [node name="Background" type="TextureRect" parent="."]
 visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_right = 426.0
-margin_bottom = 240.0
-rect_scale = Vector2( 3, 3 )
-mouse_filter = 2
-texture = SubResource( 384 )
-stretch_mode = 4
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("2_apuhn")
+stretch_mode = 3
 
 [node name="SideTabButtons" type="VBoxContainer" parent="."]
-margin_left = 321.0
-margin_top = 171.0
-margin_right = 369.0
-margin_bottom = 435.0
-rect_min_size = Vector2( 48, 0 )
-custom_constants/separation = 9
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 0
+offset_left = 321.0
+offset_top = 171.0
+offset_right = 369.0
+offset_bottom = 435.0
 
 [node name="Crops" type="Button" parent="SideTabButtons"]
-margin_right = 48.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 48, 48 )
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
 focus_mode = 0
-enabled_focus_mode = 0
 flat = true
 
 [node name="Fish" type="Button" parent="SideTabButtons"]
-margin_top = 57.0
-margin_right = 48.0
-margin_bottom = 105.0
-rect_min_size = Vector2( 48, 48 )
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
 focus_mode = 0
-enabled_focus_mode = 0
 flat = true
 
 [node name="Forage" type="Button" parent="SideTabButtons"]
-margin_top = 114.0
-margin_right = 48.0
-margin_bottom = 162.0
-rect_min_size = Vector2( 48, 48 )
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
 focus_mode = 0
-enabled_focus_mode = 0
 flat = true
 
 [node name="Minerals" type="Button" parent="SideTabButtons"]
-margin_top = 171.0
-margin_right = 48.0
-margin_bottom = 219.0
-rect_min_size = Vector2( 48, 48 )
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
 focus_mode = 0
-enabled_focus_mode = 0
 flat = true
 
 [node name="Foods" type="Button" parent="SideTabButtons"]
-margin_top = 228.0
-margin_right = 48.0
-margin_bottom = 276.0
-rect_min_size = Vector2( 48, 48 )
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
 focus_mode = 0
-enabled_focus_mode = 0
 flat = true
 
 [node name="Mobs" type="Button" parent="SideTabButtons"]
-margin_top = 285.0
-margin_right = 48.0
-margin_bottom = 333.0
-rect_min_size = Vector2( 48, 48 )
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
 focus_mode = 0
-enabled_focus_mode = 0
 flat = true
-
-[node name="CollectionItemDescription" parent="." instance=ExtResource( 2 )]
-visible = false
-
-[node name="ItemNameBox" parent="." instance=ExtResource( 3 )]
-visible = false
-
-[node name="Tween" type="Tween" parent="."]
 
 [node name="CropCollection" type="GridContainer" parent="."]
 visible = false
-margin_left = 426.0
-margin_top = 191.0
-margin_right = 568.0
-margin_bottom = 307.0
-rect_scale = Vector2( 3.5, 3.5 )
-custom_constants/vseparation = 14
-custom_constants/hseparation = 9
+layout_mode = 0
+offset_left = 427.0
+offset_top = 191.0
+offset_right = 569.0
+offset_bottom = 307.0
+scale = Vector2(3.5, 3.5)
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 15
 columns = 6
-script = ExtResource( 5 )
-
-[node name="garlic" type="TextureRect" parent="CropCollection"]
-material = SubResource( 49 )
-margin_right = 16.0
-margin_bottom = 16.0
-texture = SubResource( 118 )
-script = ExtResource( 11 )
+script = ExtResource("5_pwxe3")
 
 [node name="corn" type="TextureRect" parent="CropCollection"]
-material = SubResource( 50 )
-margin_left = 25.0
-margin_right = 41.0
-margin_bottom = 16.0
-texture = SubResource( 119 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
+
+[node name="garlic" type="TextureRect" parent="CropCollection"]
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="blueberry" type="TextureRect" parent="CropCollection"]
-material = SubResource( 51 )
-margin_left = 50.0
-margin_right = 66.0
-margin_bottom = 16.0
-texture = SubResource( 120 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="asparagus" type="TextureRect" parent="CropCollection"]
-material = SubResource( 52 )
-margin_left = 75.0
-margin_right = 91.0
-margin_bottom = 16.0
-texture = SubResource( 121 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="cabbage" type="TextureRect" parent="CropCollection"]
-material = SubResource( 53 )
-margin_left = 100.0
-margin_right = 116.0
-margin_bottom = 16.0
-texture = SubResource( 122 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="carrot" type="TextureRect" parent="CropCollection"]
-material = SubResource( 54 )
-margin_left = 125.0
-margin_right = 141.0
-margin_bottom = 16.0
-texture = SubResource( 123 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="cauliflower" type="TextureRect" parent="CropCollection"]
-material = SubResource( 55 )
-margin_top = 30.0
-margin_right = 16.0
-margin_bottom = 46.0
-texture = SubResource( 124 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="grape" type="TextureRect" parent="CropCollection"]
-material = SubResource( 56 )
-margin_left = 25.0
-margin_top = 30.0
-margin_right = 41.0
-margin_bottom = 46.0
-texture = SubResource( 125 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="green bean" type="TextureRect" parent="CropCollection"]
-material = SubResource( 57 )
-margin_left = 50.0
-margin_top = 30.0
-margin_right = 66.0
-margin_bottom = 46.0
-texture = SubResource( 126 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="honeydew melon" type="TextureRect" parent="CropCollection"]
-material = SubResource( 58 )
-margin_left = 75.0
-margin_top = 30.0
-margin_right = 91.0
-margin_bottom = 46.0
-texture = SubResource( 127 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="green pepper" type="TextureRect" parent="CropCollection"]
-material = SubResource( 59 )
-margin_left = 100.0
-margin_top = 30.0
-margin_right = 116.0
-margin_bottom = 46.0
-texture = SubResource( 128 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="jalapeno" type="TextureRect" parent="CropCollection"]
-material = SubResource( 60 )
-margin_left = 125.0
-margin_top = 30.0
-margin_right = 141.0
-margin_bottom = 46.0
-texture = SubResource( 129 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="potato" type="TextureRect" parent="CropCollection"]
-material = SubResource( 61 )
-margin_top = 60.0
-margin_right = 16.0
-margin_bottom = 76.0
-texture = SubResource( 130 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="radish" type="TextureRect" parent="CropCollection"]
-material = SubResource( 62 )
-margin_left = 25.0
-margin_top = 60.0
-margin_right = 41.0
-margin_bottom = 76.0
-texture = SubResource( 131 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="red pepper" type="TextureRect" parent="CropCollection"]
-material = SubResource( 63 )
-margin_left = 50.0
-margin_top = 60.0
-margin_right = 66.0
-margin_bottom = 76.0
-texture = SubResource( 132 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="strawberry" type="TextureRect" parent="CropCollection"]
-material = SubResource( 64 )
-margin_left = 75.0
-margin_top = 60.0
-margin_right = 91.0
-margin_bottom = 76.0
-texture = SubResource( 133 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="sugar cane" type="TextureRect" parent="CropCollection"]
-material = SubResource( 65 )
-margin_left = 100.0
-margin_top = 60.0
-margin_right = 116.0
-margin_bottom = 76.0
-texture = SubResource( 134 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="tomato" type="TextureRect" parent="CropCollection"]
-material = SubResource( 66 )
-margin_left = 125.0
-margin_top = 60.0
-margin_right = 141.0
-margin_bottom = 76.0
-texture = SubResource( 135 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="wheat" type="TextureRect" parent="CropCollection"]
-material = SubResource( 67 )
-margin_top = 90.0
-margin_right = 16.0
-margin_bottom = 106.0
-texture = SubResource( 136 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="yellow onion" type="TextureRect" parent="CropCollection"]
-material = SubResource( 68 )
-margin_left = 25.0
-margin_top = 90.0
-margin_right = 41.0
-margin_bottom = 106.0
-texture = SubResource( 137 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="yellow pepper" type="TextureRect" parent="CropCollection"]
-material = SubResource( 69 )
-margin_left = 50.0
-margin_top = 90.0
-margin_right = 66.0
-margin_bottom = 106.0
-texture = SubResource( 138 )
-script = ExtResource( 11 )
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="zucchini" type="TextureRect" parent="CropCollection"]
-material = SubResource( 70 )
-margin_left = 75.0
-margin_top = 90.0
-margin_right = 91.0
-margin_bottom = 106.0
-texture = SubResource( 139 )
-script = ExtResource( 11 )
-
-[node name="Tween" type="Tween" parent="CropCollection"]
+modulate = Color(0.521141, 0.521141, 0.521141, 1)
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("6_ddxck")
+script = ExtResource("7_du1gv")
 
 [node name="MobCollection" type="GridContainer" parent="."]
 visible = false
-margin_left = 426.0
-margin_top = 191.0
-margin_right = 568.0
-margin_bottom = 307.0
-rect_scale = Vector2( 3.5, 3.5 )
-custom_constants/vseparation = 14
-custom_constants/hseparation = 9
+layout_mode = 0
+offset_left = 426.0
+offset_top = 191.0
+offset_right = 568.0
+offset_bottom = 307.0
+scale = Vector2(3.5, 3.5)
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 15
 columns = 6
-script = ExtResource( 1 )
+script = ExtResource("8_pyiy0")
 
 [node name="duck" type="TextureRect" parent="MobCollection"]
-material = SubResource( 49 )
-margin_right = 16.0
-margin_bottom = 16.0
-texture = SubResource( 118 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="bunny" type="TextureRect" parent="MobCollection"]
-material = SubResource( 49 )
-margin_left = 25.0
-margin_right = 41.0
-margin_bottom = 16.0
-texture = SubResource( 118 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="deer" type="TextureRect" parent="MobCollection"]
-material = SubResource( 49 )
-margin_left = 50.0
-margin_right = 66.0
-margin_bottom = 16.0
-texture = SubResource( 118 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="bear" type="TextureRect" parent="MobCollection"]
-material = SubResource( 49 )
-margin_left = 75.0
-margin_right = 91.0
-margin_bottom = 16.0
-texture = SubResource( 118 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="wolf" type="TextureRect" parent="MobCollection"]
-material = SubResource( 49 )
-margin_left = 100.0
-margin_right = 116.0
-margin_bottom = 16.0
-texture = SubResource( 118 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="boar" type="TextureRect" parent="MobCollection"]
-material = SubResource( 49 )
-margin_left = 125.0
-margin_right = 141.0
-margin_bottom = 16.0
-texture = SubResource( 118 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="slime" type="TextureRect" parent="MobCollection"]
-material = SubResource( 49 )
-margin_top = 30.0
-margin_right = 16.0
-margin_bottom = 46.0
-texture = SubResource( 118 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="spider" type="TextureRect" parent="MobCollection"]
-material = SubResource( 49 )
-margin_left = 25.0
-margin_top = 30.0
-margin_right = 41.0
-margin_bottom = 46.0
-texture = SubResource( 118 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="bat" type="TextureRect" parent="MobCollection"]
-material = SubResource( 49 )
-margin_left = 50.0
-margin_top = 30.0
-margin_right = 66.0
-margin_bottom = 46.0
-texture = SubResource( 118 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="skeleton" type="TextureRect" parent="MobCollection"]
-material = SubResource( 49 )
-margin_left = 75.0
-margin_top = 30.0
-margin_right = 91.0
-margin_bottom = 46.0
-texture = SubResource( 118 )
-script = ExtResource( 11 )
-
-[node name="Tween" type="Tween" parent="MobCollection"]
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("9_cg53e")
+script = ExtResource("7_du1gv")
 
 [node name="FishCollection" type="GridContainer" parent="."]
 visible = false
-margin_left = 426.0
-margin_top = 191.0
-margin_right = 567.0
-margin_bottom = 282.0
-rect_scale = Vector2( 3.5, 3.5 )
-custom_constants/vseparation = 14
-custom_constants/hseparation = 9
+layout_mode = 0
+offset_left = 426.0
+offset_top = 191.0
+offset_right = 567.0
+offset_bottom = 282.0
+scale = Vector2(3.5, 3.5)
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 15
 columns = 6
-script = ExtResource( 7 )
+script = ExtResource("10_78mha")
 
 [node name="albacore" type="TextureRect" parent="FishCollection"]
-material = SubResource( 141 )
-margin_right = 16.0
-margin_bottom = 16.0
-texture = SubResource( 142 )
-script = ExtResource( 11 )
+material = SubResource("141")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="anchovy" type="TextureRect" parent="FishCollection"]
-material = SubResource( 143 )
-margin_left = 25.0
-margin_right = 41.0
-margin_bottom = 16.0
-texture = SubResource( 144 )
-script = ExtResource( 11 )
+material = SubResource("143")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="angler" type="TextureRect" parent="FishCollection"]
-material = SubResource( 145 )
-margin_left = 50.0
-margin_right = 66.0
-margin_bottom = 16.0
-texture = SubResource( 146 )
-script = ExtResource( 11 )
+material = SubResource("145")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="betta" type="TextureRect" parent="FishCollection"]
-material = SubResource( 147 )
-margin_left = 75.0
-margin_right = 91.0
-margin_bottom = 16.0
-texture = SubResource( 148 )
-script = ExtResource( 11 )
+material = SubResource("147")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="blowfish" type="TextureRect" parent="FishCollection"]
-material = SubResource( 149 )
-margin_left = 100.0
-margin_right = 116.0
-margin_bottom = 16.0
-texture = SubResource( 150 )
-script = ExtResource( 11 )
+material = SubResource("149")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="catfish" type="TextureRect" parent="FishCollection"]
-material = SubResource( 151 )
-margin_left = 125.0
-margin_right = 141.0
-margin_bottom = 16.0
-texture = SubResource( 152 )
-script = ExtResource( 11 )
+material = SubResource("151")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="cisco" type="TextureRect" parent="FishCollection"]
-material = SubResource( 153 )
-margin_top = 30.0
-margin_right = 16.0
-margin_bottom = 46.0
-texture = SubResource( 154 )
-script = ExtResource( 11 )
+material = SubResource("153")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="clownfish" type="TextureRect" parent="FishCollection"]
-material = SubResource( 155 )
-margin_left = 25.0
-margin_top = 30.0
-margin_right = 41.0
-margin_bottom = 46.0
-texture = SubResource( 156 )
-script = ExtResource( 11 )
+material = SubResource("155")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="crab" type="TextureRect" parent="FishCollection"]
-material = SubResource( 157 )
-margin_left = 50.0
-margin_top = 30.0
-margin_right = 66.0
-margin_bottom = 46.0
-texture = SubResource( 158 )
-script = ExtResource( 11 )
+material = SubResource("157")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="dorado" type="TextureRect" parent="FishCollection"]
-material = SubResource( 159 )
-margin_left = 75.0
-margin_top = 30.0
-margin_right = 91.0
-margin_bottom = 46.0
-texture = SubResource( 160 )
-script = ExtResource( 11 )
+material = SubResource("159")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="eel" type="TextureRect" parent="FishCollection"]
-material = SubResource( 161 )
-margin_left = 100.0
-margin_top = 30.0
-margin_right = 116.0
-margin_bottom = 46.0
-texture = SubResource( 162 )
-script = ExtResource( 11 )
+material = SubResource("161")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="goldfish" type="TextureRect" parent="FishCollection"]
-material = SubResource( 163 )
-margin_left = 125.0
-margin_top = 30.0
-margin_right = 141.0
-margin_bottom = 46.0
-texture = SubResource( 164 )
-script = ExtResource( 11 )
+material = SubResource("163")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="halibut" type="TextureRect" parent="FishCollection"]
-material = SubResource( 165 )
-margin_top = 60.0
-margin_right = 16.0
-margin_bottom = 76.0
-texture = SubResource( 166 )
-script = ExtResource( 11 )
+material = SubResource("165")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="koi" type="TextureRect" parent="FishCollection"]
-material = SubResource( 167 )
-margin_left = 25.0
-margin_top = 60.0
-margin_right = 41.0
-margin_bottom = 76.0
-texture = SubResource( 168 )
-script = ExtResource( 11 )
+material = SubResource("167")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="lingcod" type="TextureRect" parent="FishCollection"]
-material = SubResource( 169 )
-margin_left = 50.0
-margin_top = 60.0
-margin_right = 66.0
-margin_bottom = 76.0
-texture = SubResource( 170 )
-script = ExtResource( 11 )
+material = SubResource("169")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="nelma" type="TextureRect" parent="FishCollection"]
-material = SubResource( 171 )
-margin_left = 75.0
-margin_top = 60.0
-margin_right = 91.0
-margin_bottom = 76.0
-texture = SubResource( 172 )
-script = ExtResource( 11 )
+material = SubResource("171")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="octopus" type="TextureRect" parent="FishCollection"]
-material = SubResource( 173 )
-margin_left = 100.0
-margin_top = 60.0
-margin_right = 116.0
-margin_bottom = 76.0
-texture = SubResource( 174 )
-script = ExtResource( 11 )
+material = SubResource("173")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="purple carp" type="TextureRect" parent="FishCollection"]
-material = SubResource( 175 )
-margin_left = 125.0
-margin_top = 60.0
-margin_right = 141.0
-margin_bottom = 76.0
-texture = SubResource( 176 )
-script = ExtResource( 11 )
+material = SubResource("175")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="purple salmon" type="TextureRect" parent="FishCollection"]
-material = SubResource( 177 )
-margin_top = 90.0
-margin_right = 16.0
-margin_bottom = 106.0
-texture = SubResource( 178 )
-script = ExtResource( 11 )
+material = SubResource("177")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="red salmon" type="TextureRect" parent="FishCollection"]
-material = SubResource( 179 )
-margin_left = 25.0
-margin_top = 90.0
-margin_right = 41.0
-margin_bottom = 106.0
-texture = SubResource( 180 )
-script = ExtResource( 11 )
+material = SubResource("179")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="seaweed" type="TextureRect" parent="FishCollection"]
-material = SubResource( 181 )
-margin_left = 50.0
-margin_top = 90.0
-margin_right = 66.0
-margin_bottom = 106.0
-texture = SubResource( 182 )
-script = ExtResource( 11 )
+material = SubResource("181")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="shrimp" type="TextureRect" parent="FishCollection"]
-material = SubResource( 183 )
-margin_left = 75.0
-margin_top = 90.0
-margin_right = 91.0
-margin_bottom = 106.0
-texture = SubResource( 184 )
-script = ExtResource( 11 )
+material = SubResource("183")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="siberian whitefish" type="TextureRect" parent="FishCollection"]
-material = SubResource( 185 )
-margin_left = 100.0
-margin_top = 90.0
-margin_right = 116.0
-margin_bottom = 106.0
-texture = SubResource( 186 )
-script = ExtResource( 11 )
+material = SubResource("185")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="tilapia" type="TextureRect" parent="FishCollection"]
-material = SubResource( 187 )
-margin_left = 125.0
-margin_top = 90.0
-margin_right = 141.0
-margin_bottom = 106.0
-texture = SubResource( 188 )
-script = ExtResource( 11 )
-
-[node name="Tween" type="Tween" parent="FishCollection"]
+material = SubResource("187")
+layout_mode = 2
+texture = ExtResource("11_4jrcy")
+script = ExtResource("7_du1gv")
 
 [node name="ForageCollection" type="GridContainer" parent="."]
 visible = false
-margin_left = 426.0
-margin_top = 191.0
-margin_right = 602.0
-margin_bottom = 300.0
-rect_scale = Vector2( 3.5, 3.5 )
-custom_constants/vseparation = 14
-custom_constants/hseparation = 9
+layout_mode = 0
+offset_left = 426.0
+offset_top = 191.0
+offset_right = 570.0
+offset_bottom = 300.0
+scale = Vector2(3.5, 3.5)
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 15
 columns = 6
-script = ExtResource( 9 )
+script = ExtResource("11_ii5ys")
 
 [node name="poppy flower" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_right = 16.0
-margin_bottom = 16.0
-texture = SubResource( 189 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="lily of the nile" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 25.0
-margin_right = 41.0
-margin_bottom = 16.0
-texture = SubResource( 190 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="tulip" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 50.0
-margin_right = 66.0
-margin_bottom = 16.0
-texture = SubResource( 191 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="dandelion" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 75.0
-margin_right = 91.0
-margin_bottom = 16.0
-texture = SubResource( 192 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="sunflower" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 75.0
-margin_right = 91.0
-margin_bottom = 16.0
-texture = SubResource( 192 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="green grass" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 100.0
-margin_right = 116.0
-margin_bottom = 16.0
-texture = SubResource( 193 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="red grass" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 125.0
-margin_right = 141.0
-margin_bottom = 16.0
-texture = SubResource( 194 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="yellow grass" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_top = 30.0
-margin_right = 16.0
-margin_bottom = 46.0
-texture = SubResource( 195 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="dark green grass" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 25.0
-margin_top = 30.0
-margin_right = 41.0
-margin_bottom = 46.0
-texture = SubResource( 196 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="pink clam" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 50.0
-margin_top = 30.0
-margin_right = 66.0
-margin_bottom = 46.0
-texture = SubResource( 197 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="blue clam" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 75.0
-margin_top = 30.0
-margin_right = 91.0
-margin_bottom = 46.0
-texture = SubResource( 198 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="red clam" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 100.0
-margin_top = 30.0
-margin_right = 116.0
-margin_bottom = 46.0
-texture = SubResource( 199 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="starfish" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 125.0
-margin_top = 30.0
-margin_right = 141.0
-margin_bottom = 46.0
-texture = SubResource( 200 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="baby starfish" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_top = 60.0
-margin_right = 16.0
-margin_bottom = 76.0
-texture = SubResource( 201 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="blue pearl" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 25.0
-margin_top = 60.0
-margin_right = 41.0
-margin_bottom = 76.0
-texture = SubResource( 202 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="pink pearl" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 50.0
-margin_top = 60.0
-margin_right = 66.0
-margin_bottom = 76.0
-texture = SubResource( 203 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="white pearl" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 75.0
-margin_top = 60.0
-margin_right = 91.0
-margin_bottom = 76.0
-texture = SubResource( 204 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="common mushroom" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 100.0
-margin_top = 60.0
-margin_right = 116.0
-margin_bottom = 76.0
-texture = ExtResource( 12 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="healing mushroom" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 100.0
-margin_top = 60.0
-margin_right = 116.0
-margin_bottom = 76.0
-texture = ExtResource( 12 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="purple mushroom" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 100.0
-margin_top = 60.0
-margin_right = 116.0
-margin_bottom = 76.0
-texture = ExtResource( 12 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="chanterelle" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 100.0
-margin_top = 60.0
-margin_right = 116.0
-margin_bottom = 76.0
-texture = ExtResource( 12 )
-script = ExtResource( 11 )
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="raw egg" type="TextureRect" parent="ForageCollection"]
-material = ExtResource( 10 )
-margin_left = 125.0
-margin_top = 60.0
-margin_right = 141.0
-margin_bottom = 76.0
-texture = ExtResource( 12 )
-script = ExtResource( 11 )
-
-[node name="Tween" type="Tween" parent="ForageCollection"]
+material = ExtResource("10")
+layout_mode = 2
+texture = ExtResource("14_xeolr")
+script = ExtResource("7_du1gv")
 
 [node name="ResourceCollection" type="GridContainer" parent="."]
 visible = false
-margin_left = 426.0
-margin_top = 191.0
-margin_right = 602.0
-margin_bottom = 300.0
-rect_scale = Vector2( 3.5, 3.5 )
-custom_constants/vseparation = 14
-custom_constants/hseparation = 9
+layout_mode = 0
+offset_left = 426.0
+offset_top = 191.0
+offset_right = 567.0
+offset_bottom = 300.0
+scale = Vector2(3.5, 3.5)
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 15
 columns = 6
-script = SubResource( 205 )
+script = SubResource("205")
 
 [node name="wood" type="TextureRect" parent="ResourceCollection"]
-material = SubResource( 206 )
-texture = SubResource( 207 )
-script = ExtResource( 11 )
+material = SubResource("206")
+layout_mode = 2
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="stone" type="TextureRect" parent="ResourceCollection"]
-material = SubResource( 206 )
-margin_left = 9.0
-margin_right = 9.0
-texture = SubResource( 207 )
-script = ExtResource( 11 )
+material = SubResource("206")
+layout_mode = 2
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="coal" type="TextureRect" parent="ResourceCollection"]
-material = SubResource( 206 )
-margin_left = 18.0
-margin_right = 18.0
-texture = SubResource( 207 )
-script = ExtResource( 11 )
+material = SubResource("206")
+layout_mode = 2
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="rope" type="TextureRect" parent="ResourceCollection"]
-material = SubResource( 206 )
-margin_left = 27.0
-margin_right = 27.0
-texture = SubResource( 207 )
-script = ExtResource( 11 )
+material = SubResource("206")
+layout_mode = 2
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="bronze ore" type="TextureRect" parent="ResourceCollection"]
-material = SubResource( 206 )
-margin_left = 36.0
-margin_right = 36.0
-texture = SubResource( 207 )
-script = ExtResource( 11 )
+material = SubResource("206")
+layout_mode = 2
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="iron ore" type="TextureRect" parent="ResourceCollection"]
-material = SubResource( 206 )
-margin_left = 45.0
-margin_right = 45.0
-texture = SubResource( 207 )
-script = ExtResource( 11 )
+material = SubResource("206")
+layout_mode = 2
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="gold ore" type="TextureRect" parent="ResourceCollection"]
-material = SubResource( 208 )
-margin_top = 14.0
-margin_bottom = 14.0
-texture = SubResource( 209 )
-script = ExtResource( 11 )
+material = SubResource("208")
+layout_mode = 2
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="aquamarine" type="TextureRect" parent="ResourceCollection"]
-material = SubResource( 210 )
-margin_left = 9.0
-margin_top = 14.0
-margin_right = 9.0
-margin_bottom = 14.0
-texture = SubResource( 211 )
-script = ExtResource( 11 )
+material = SubResource("210")
+layout_mode = 2
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="emerald" type="TextureRect" parent="ResourceCollection"]
-material = SubResource( 212 )
-margin_left = 18.0
-margin_top = 14.0
-margin_right = 18.0
-margin_bottom = 14.0
-texture = SubResource( 213 )
-script = ExtResource( 11 )
+material = SubResource("212")
+layout_mode = 2
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="ruby" type="TextureRect" parent="ResourceCollection"]
-material = SubResource( 214 )
-margin_left = 27.0
-margin_top = 14.0
-margin_right = 27.0
-margin_bottom = 14.0
-texture = SubResource( 215 )
-script = ExtResource( 11 )
+material = SubResource("214")
+layout_mode = 2
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="sapphire" type="TextureRect" parent="ResourceCollection"]
-material = SubResource( 216 )
-margin_left = 36.0
-margin_top = 14.0
-margin_right = 36.0
-margin_bottom = 14.0
-texture = SubResource( 217 )
-script = ExtResource( 11 )
-
-[node name="Tween" type="Tween" parent="ResourceCollection"]
+material = SubResource("216")
+layout_mode = 2
+texture = ExtResource("15_uwvpa")
+script = ExtResource("7_du1gv")
 
 [node name="FoodCollection1" type="GridContainer" parent="."]
 visible = false
-margin_left = 426.0
-margin_top = 191.0
-margin_right = 567.0
-margin_bottom = 282.0
-rect_scale = Vector2( 3.5, 3.5 )
-custom_constants/vseparation = 14
-custom_constants/hseparation = 9
+layout_mode = 0
+offset_left = 426.0
+offset_top = 191.0
+offset_right = 567.0
+offset_bottom = 282.0
+scale = Vector2(3.5, 3.5)
+theme_override_constants/h_separation = 9
+theme_override_constants/v_separation = 15
 columns = 6
-script = ExtResource( 13 )
+script = ExtResource("14_00116")
 
 [node name="asparagus omelette" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 218 )
-margin_right = 16.0
-margin_bottom = 16.0
-texture = SubResource( 219 )
-script = ExtResource( 11 )
+material = SubResource("218")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="baked catfish" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 220 )
-margin_left = 25.0
-margin_right = 41.0
-margin_bottom = 16.0
-texture = SubResource( 221 )
-script = ExtResource( 11 )
+material = SubResource("220")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="baked dorado" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 222 )
-margin_left = 50.0
-margin_right = 66.0
-margin_bottom = 16.0
-texture = SubResource( 223 )
-script = ExtResource( 11 )
+material = SubResource("222")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="baked zucchini" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 224 )
-margin_left = 75.0
-margin_right = 91.0
-margin_bottom = 16.0
-texture = SubResource( 225 )
-script = ExtResource( 11 )
+material = SubResource("224")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="blowfish tails" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 226 )
-margin_left = 100.0
-margin_right = 116.0
-margin_bottom = 16.0
-texture = SubResource( 227 )
-script = ExtResource( 11 )
+material = SubResource("226")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="blueberry cake" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 228 )
-margin_left = 125.0
-margin_right = 141.0
-margin_bottom = 16.0
-texture = SubResource( 229 )
-script = ExtResource( 11 )
+material = SubResource("228")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="blueberry pie" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 230 )
-margin_top = 30.0
-margin_right = 16.0
-margin_bottom = 46.0
-texture = SubResource( 231 )
-script = ExtResource( 11 )
+material = SubResource("230")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="calamari with tomatoes" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 232 )
-margin_left = 25.0
-margin_top = 30.0
-margin_right = 41.0
-margin_bottom = 46.0
-texture = SubResource( 233 )
-script = ExtResource( 11 )
+material = SubResource("232")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="cauliflower soup" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 234 )
-margin_left = 50.0
-margin_top = 30.0
-margin_right = 66.0
-margin_bottom = 46.0
-texture = SubResource( 235 )
-script = ExtResource( 11 )
+material = SubResource("234")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="cooked filet" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 236 )
-margin_left = 75.0
-margin_top = 30.0
-margin_right = 91.0
-margin_bottom = 46.0
-texture = SubResource( 237 )
-script = ExtResource( 11 )
+material = SubResource("236")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="cooked green beans" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 238 )
-margin_left = 100.0
-margin_top = 30.0
-margin_right = 116.0
-margin_bottom = 46.0
-texture = SubResource( 239 )
-script = ExtResource( 11 )
+material = SubResource("238")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="cooked wing" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 240 )
-margin_left = 125.0
-margin_top = 30.0
-margin_right = 141.0
-margin_bottom = 46.0
-texture = SubResource( 241 )
-script = ExtResource( 11 )
+material = SubResource("240")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="crab cakes" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 242 )
-margin_top = 60.0
-margin_right = 16.0
-margin_bottom = 76.0
-texture = SubResource( 243 )
-script = ExtResource( 11 )
+material = SubResource("242")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="filet mignon" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 244 )
-margin_left = 25.0
-margin_top = 60.0
-margin_right = 41.0
-margin_bottom = 76.0
-texture = SubResource( 245 )
-script = ExtResource( 11 )
+material = SubResource("244")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="filet soup" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 246 )
-margin_left = 50.0
-margin_top = 60.0
-margin_right = 66.0
-margin_bottom = 76.0
-texture = SubResource( 247 )
-script = ExtResource( 11 )
+material = SubResource("246")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="filet with garlic mash" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 248 )
-margin_left = 75.0
-margin_top = 60.0
-margin_right = 91.0
-margin_bottom = 76.0
-texture = SubResource( 249 )
-script = ExtResource( 11 )
+material = SubResource("248")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="filet with tomatoes" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 250 )
-margin_left = 100.0
-margin_top = 60.0
-margin_right = 116.0
-margin_bottom = 76.0
-texture = SubResource( 251 )
-script = ExtResource( 11 )
+material = SubResource("250")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="grape pastry" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 252 )
-margin_left = 125.0
-margin_top = 60.0
-margin_right = 141.0
-margin_bottom = 76.0
-texture = SubResource( 253 )
-script = ExtResource( 11 )
+material = SubResource("252")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="green pepper soup" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 254 )
-margin_top = 90.0
-margin_right = 16.0
-margin_bottom = 106.0
-texture = SubResource( 255 )
-script = ExtResource( 11 )
+material = SubResource("254")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="honeydew melon with sugar" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 256 )
-margin_left = 25.0
-margin_top = 90.0
-margin_right = 41.0
-margin_bottom = 106.0
-texture = SubResource( 257 )
-script = ExtResource( 11 )
+material = SubResource("256")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="mushroom soup" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 258 )
-margin_left = 50.0
-margin_top = 90.0
-margin_right = 66.0
-margin_bottom = 106.0
-texture = SubResource( 259 )
-script = ExtResource( 11 )
+material = SubResource("258")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="pepper and asparagus stir fry" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 260 )
-margin_left = 75.0
-margin_top = 90.0
-margin_right = 91.0
-margin_bottom = 106.0
-texture = SubResource( 261 )
-script = ExtResource( 11 )
+material = SubResource("260")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="mini grape tarts" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 262 )
-margin_left = 100.0
-margin_top = 90.0
-margin_right = 116.0
-margin_bottom = 106.0
-texture = SubResource( 263 )
-script = ExtResource( 11 )
+material = SubResource("262")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="potatoes with asparagus" type="TextureRect" parent="FoodCollection1"]
-material = SubResource( 266 )
-margin_left = 125.0
-margin_top = 90.0
-margin_right = 141.0
-margin_bottom = 106.0
-texture = SubResource( 267 )
-script = ExtResource( 11 )
+material = SubResource("266")
+layout_mode = 2
+texture = ExtResource("17_3wrdp")
+script = ExtResource("7_du1gv")
 
 [node name="FoodCollection2" type="GridContainer" parent="."]
 visible = false
-margin_left = 426.0
-margin_top = 191.0
-margin_right = 608.0
-margin_bottom = 307.0
-rect_scale = Vector2( 3.5, 3.5 )
-custom_constants/vseparation = 14
-custom_constants/hseparation = 9
+layout_mode = 0
+offset_left = 426.0
+offset_top = 191.0
+offset_right = 608.0
+offset_bottom = 307.0
+scale = Vector2(3.5, 3.5)
 columns = 6
-script = ExtResource( 13 )
+script = ExtResource("14_00116")
 
 [node name="scrambled eggs" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 278 )
-margin_right = 16.0
-margin_bottom = 16.0
-texture = SubResource( 279 )
-script = ExtResource( 11 )
+material = SubResource("278")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="seaweed salad" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 280 )
-margin_left = 25.0
-margin_right = 41.0
-margin_bottom = 16.0
-texture = SubResource( 281 )
-script = ExtResource( 11 )
+material = SubResource("280")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="sliced tomatoes and potatoes" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 282 )
-margin_left = 50.0
-margin_right = 66.0
-margin_bottom = 16.0
-texture = SubResource( 283 )
-script = ExtResource( 11 )
+material = SubResource("282")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="smoked jalapeno with eggs" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 284 )
-margin_left = 75.0
-margin_right = 91.0
-margin_bottom = 16.0
-texture = SubResource( 285 )
-script = ExtResource( 11 )
+material = SubResource("284")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="spaghetti" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 286 )
-margin_left = 100.0
-margin_right = 116.0
-margin_bottom = 16.0
-texture = SubResource( 287 )
-script = ExtResource( 11 )
+material = SubResource("286")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="spicy eel" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 288 )
-margin_left = 125.0
-margin_right = 141.0
-margin_bottom = 16.0
-texture = SubResource( 289 )
-script = ExtResource( 11 )
+material = SubResource("288")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="spicy shrimps" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 290 )
-margin_top = 30.0
-margin_right = 16.0
-margin_bottom = 46.0
-texture = SubResource( 291 )
-script = ExtResource( 11 )
+material = SubResource("290")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="strawberry cake" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 292 )
-margin_left = 25.0
-margin_top = 30.0
-margin_right = 41.0
-margin_bottom = 46.0
-texture = SubResource( 293 )
-script = ExtResource( 11 )
+material = SubResource("292")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="strawberry tart" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 294 )
-margin_left = 50.0
-margin_top = 30.0
-margin_right = 66.0
-margin_bottom = 46.0
-texture = SubResource( 295 )
-script = ExtResource( 11 )
+material = SubResource("294")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="sugar cane kheer" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 296 )
-margin_left = 75.0
-margin_top = 30.0
-margin_right = 91.0
-margin_bottom = 46.0
-texture = SubResource( 297 )
-script = ExtResource( 11 )
+material = SubResource("296")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="tomato sandwich" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 298 )
-margin_left = 100.0
-margin_top = 30.0
-margin_right = 116.0
-margin_bottom = 46.0
-texture = SubResource( 299 )
-script = ExtResource( 11 )
+material = SubResource("298")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="tomato soup" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 300 )
-margin_left = 125.0
-margin_top = 30.0
-margin_right = 141.0
-margin_bottom = 46.0
-texture = SubResource( 301 )
-script = ExtResource( 11 )
+material = SubResource("300")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="vegetable soup" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 302 )
-margin_top = 60.0
-margin_right = 16.0
-margin_bottom = 76.0
-texture = SubResource( 303 )
-script = ExtResource( 11 )
+material = SubResource("302")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="wings with corn" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 304 )
-margin_left = 25.0
-margin_top = 60.0
-margin_right = 41.0
-margin_bottom = 76.0
-texture = SubResource( 305 )
-script = ExtResource( 11 )
+material = SubResource("304")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="yellow onion soup" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 306 )
-margin_left = 50.0
-margin_top = 60.0
-margin_right = 66.0
-margin_bottom = 76.0
-texture = SubResource( 307 )
-script = ExtResource( 11 )
+material = SubResource("306")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="yellow pepper soup" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 308 )
-margin_left = 75.0
-margin_top = 60.0
-margin_right = 91.0
-margin_bottom = 76.0
-texture = SubResource( 309 )
-script = ExtResource( 11 )
+material = SubResource("308")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="zucchini soup" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 310 )
-margin_left = 100.0
-margin_top = 60.0
-margin_right = 116.0
-margin_bottom = 76.0
-texture = SubResource( 311 )
-script = ExtResource( 11 )
+material = SubResource("310")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="potatoes with green beans" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 268 )
-margin_left = 125.0
-margin_top = 60.0
-margin_right = 141.0
-margin_bottom = 76.0
-texture = SubResource( 269 )
-script = ExtResource( 11 )
+material = SubResource("268")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="radish soup" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 270 )
-margin_top = 90.0
-margin_right = 16.0
-margin_bottom = 106.0
-texture = SubResource( 271 )
-script = ExtResource( 11 )
+material = SubResource("270")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="red pepper soup" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 272 )
-margin_left = 25.0
-margin_top = 90.0
-margin_right = 41.0
-margin_bottom = 106.0
-texture = SubResource( 273 )
-script = ExtResource( 11 )
+material = SubResource("272")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="sashimi" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 274 )
-margin_left = 50.0
-margin_top = 90.0
-margin_right = 66.0
-margin_bottom = 106.0
-texture = SubResource( 275 )
-script = ExtResource( 11 )
+material = SubResource("274")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="sauteed cabbage with garlic" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 276 )
-margin_left = 75.0
-margin_top = 90.0
-margin_right = 91.0
-margin_bottom = 106.0
-texture = SubResource( 277 )
-script = ExtResource( 11 )
+material = SubResource("276")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [node name="potato soup" type="TextureRect" parent="FoodCollection2"]
-material = SubResource( 264 )
-margin_left = 100.0
-margin_top = 90.0
-margin_right = 116.0
-margin_bottom = 106.0
-texture = SubResource( 265 )
-script = ExtResource( 11 )
+material = SubResource("264")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
-[node name="FoodBtnRight" type="TextureButton" parent="."]
-margin_left = 954.0
-margin_top = 564.0
-margin_right = 990.0
-margin_bottom = 606.0
-rect_rotation = 90.0
-texture_normal = ExtResource( 14 )
-
-[node name="FoodBtnLeft" type="TextureButton" parent="."]
-margin_left = 366.0
-margin_top = 564.0
-margin_right = 402.0
-margin_bottom = 606.0
-rect_rotation = 90.0
-texture_normal = ExtResource( 8 )
+[node name="wine" type="TextureRect" parent="FoodCollection2"]
+material = SubResource("264")
+layout_mode = 2
+texture = ExtResource("19_3cenc")
+script = ExtResource("7_du1gv")
 
 [connection signal="mouse_entered" from="SideTabButtons/Crops" to="." method="_on_Crops_mouse_entered"]
 [connection signal="mouse_exited" from="SideTabButtons/Crops" to="." method="_on_Crops_mouse_exited"]
@@ -2359,10 +1535,10 @@ texture_normal = ExtResource( 8 )
 [connection signal="mouse_entered" from="SideTabButtons/Mobs" to="." method="_on_Mobs_mouse_entered"]
 [connection signal="mouse_exited" from="SideTabButtons/Mobs" to="." method="_on_Mobs_mouse_exited"]
 [connection signal="pressed" from="SideTabButtons/Mobs" to="." method="_on_Mobs_pressed"]
-[connection signal="mouse_entered" from="CropCollection/garlic" to="CropCollection/garlic" method="_on_collection_item_mouse_entered"]
-[connection signal="mouse_exited" from="CropCollection/garlic" to="CropCollection/garlic" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="CropCollection/corn" to="CropCollection/corn" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="CropCollection/corn" to="CropCollection/corn" method="_on_collection_item_mouse_exited"]
+[connection signal="mouse_entered" from="CropCollection/garlic" to="CropCollection/garlic" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="CropCollection/garlic" to="CropCollection/garlic" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="CropCollection/blueberry" to="CropCollection/blueberry" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="CropCollection/blueberry" to="CropCollection/blueberry" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="CropCollection/asparagus" to="CropCollection/asparagus" method="_on_collection_item_mouse_entered"]
@@ -2631,5 +1807,5 @@ texture_normal = ExtResource( 8 )
 [connection signal="mouse_exited" from="FoodCollection2/sauteed cabbage with garlic" to="FoodCollection2/sauteed cabbage with garlic" method="_on_collection_item_mouse_exited"]
 [connection signal="mouse_entered" from="FoodCollection2/potato soup" to="FoodCollection2/potato soup" method="_on_collection_item_mouse_entered"]
 [connection signal="mouse_exited" from="FoodCollection2/potato soup" to="FoodCollection2/potato soup" method="_on_collection_item_mouse_exited"]
-[connection signal="pressed" from="FoodBtnRight" to="." method="_on_FoodBtnRight_pressed"]
-[connection signal="pressed" from="FoodBtnLeft" to="." method="_on_FoodBtnLeft_pressed"]
+[connection signal="mouse_entered" from="FoodCollection2/wine" to="FoodCollection2/wine" method="_on_collection_item_mouse_entered"]
+[connection signal="mouse_exited" from="FoodCollection2/wine" to="FoodCollection2/wine" method="_on_collection_item_mouse_exited"]

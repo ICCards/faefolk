@@ -1,9 +1,9 @@
 extends Node2D
 
-onready var PotionProjectile = load("res://World/Objects/Projectiles/PotionProjectile.tscn")
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
-onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
-onready var composite_sprites = get_node("../CompositeSprites")
+@onready var PotionProjectile = load("res://World3D/Objects/Projectiles/PotionProjectile.tscn")
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var player_animation_player = get_node("../CompositeSprites/AnimationPlayer")
+@onready var composite_sprites = get_node("../CompositeSprites")
 
 var is_throwing: bool = false
 var animation: String = ""
@@ -58,20 +58,20 @@ func throw_potion(potion_name, init_direction):
 	get_parent().state = MAGIC_CASTING
 	composite_sprites.set_player_animation(get_parent().character, "throw_" + direction.to_lower(), potion_name)
 	player_animation_player.play("bow draw release")
-	yield(get_tree().create_timer(0.3), "timeout")
+	await get_tree().create_timer(0.3).timeout
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Potion/throw.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
-	yield(player_animation_player, "animation_finished" )
+	await player_animation_player.animation_finished
 	throw(potion_name)
 	is_throwing = false
 	get_parent().state = MOVEMENT
 	get_parent().direction = direction
 	
 func throw(potion_name):
-	var potion = PotionProjectile.instance()
+	var potion = PotionProjectile.instantiate()
 	potion.potion_name = potion_name
 	potion.particles_transform = $ThrowDirection.transform
 	potion.target = get_global_mouse_position()
-	potion.position = $ThrowDirection/Position2D.global_position
+	potion.position = $ThrowDirection/Marker2D.global_position
 	get_node("../../../").add_child(potion)

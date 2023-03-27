@@ -2,11 +2,14 @@ extends Control
 
 var changing_scene_active = false
 var hovered_button = ""
+
+#var tween = get_tree().create_tween()
+
 #var connect_callback = JavaScript.create_callback(self, "_connect_plug")
 #var login_callback = JavaScript.create_callback(self, "_login")
 
 #func _ready():
-#	if not Server.player.empty():
+#	if not Server.player.is_empty():
 #		get_parent().spawn_player_in_menu()
 
 #func _connect_plug(args):
@@ -40,7 +43,7 @@ func wait_for_map_build():
 		$LoadingIndicator.hide()
 		get_parent().spawn_player_in_menu()
 	else:
-		yield(get_tree().create_timer(0.5), "timeout")
+		await get_tree().create_timer(0.5).timeout
 		wait_for_map_build()
 	
 #
@@ -53,10 +56,10 @@ func wait_for_map_build():
 func _on_ConnectToPlugButton_mouse_entered():
 	pass
 	#_play_hover_effect("connect to plug")
-#	$Tween.interpolate_property($ConnectToPlug, "rect_scale",
+#	$Tween.interpolate_property($ConnectToPlug, "scale",
 #		$ConnectToPlug.get_scale(), Vector2(1.015, 1.015), 0.15,
 #		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-#	$Tween.interpolate_property($ConnectToPlug, "rect_position",
+#	$Tween.interpolate_property($ConnectToPlug, "position",
 #		$ConnectToPlug.get_position(), Vector2(-28, 12),  0.15,
 #		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 #	$Tween.start()
@@ -64,10 +67,10 @@ func _on_ConnectToPlugButton_mouse_entered():
 
 func _on_ConnectToPlugButton_mouse_exited():
 	hovered_button = ""
-#	$Tween.interpolate_property($ConnectToPlug, "rect_scale",
+#	$Tween.interpolate_property($ConnectToPlug, "scale",
 #		$ConnectToPlug.get_scale(), Vector2(1, 1), 0.15,
 #		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-#	$Tween.interpolate_property($ConnectToPlug, "rect_position",
+#	$Tween.interpolate_property($ConnectToPlug, "position",
 #		$ConnectToPlug.get_position(), Vector2(0, 0), 0.15,
 #		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 #	$Tween.start()
@@ -76,25 +79,13 @@ func _on_ConnectToPlugButton_mouse_exited():
 
 
 func _on_PlayBtn_mouse_entered():
-	#_play_hover_effect("play")
-	$Tween.interpolate_property($PlayShopQuit/Play, "scale",
-		$PlayShopQuit/Play.get_scale(), Vector2(1.035, 1.035), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($PlayShopQuit/Play, "position",
-		$PlayShopQuit/Play.get_position(), Vector2(94, -5),  0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property($PlayShopQuit/Play, "scale", Vector2(1.03, 1.03), 0.15)
 
 
 func _on_PlayBtn_mouse_exited():
-	hovered_button = ""
-	$Tween.interpolate_property($PlayShopQuit/Play, "scale",
-		$PlayShopQuit/Play.get_scale(), Vector2(1, 1), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($PlayShopQuit/Play, "position",
-		$PlayShopQuit/Play.get_position(), Vector2(94, 0), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property($PlayShopQuit/Play, "scale", Vector2(1, 1), 0.15)
 
 
 func _on_PlayBtn_pressed():
@@ -109,29 +100,31 @@ func _on_PlayBtn_pressed():
 		if MapData.world["is_built"]:
 			SceneChanger.goto_scene(PlayerData.player_data["current_save_scene"])
 		else:
-			SceneChanger.goto_scene("res://World/World/World.tscn")
+			SceneChanger.goto_scene("res://World/Overworld/Overworld.tscn")
 
 
 func _on_ShopBtn_mouse_entered():
+	pass
 	#_play_hover_effect("options")
-	$Tween.interpolate_property($PlayShopQuit/Shop, "scale",
-		$PlayShopQuit/Shop.get_scale(), Vector2(1.035, 1.035), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($PlayShopQuit/Shop, "position",
-		$PlayShopQuit/Shop.get_position(), Vector2(115, -10),  0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+#	$Tween.interpolate_property($PlayShopQuit/Shop, "scale",
+#		$PlayShopQuit/Shop.get_scale(), Vector2(1.035, 1.035), 0.15,
+#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($PlayShopQuit/Shop, "position",
+#		$PlayShopQuit/Shop.get_position(), Vector2(115, -10),  0.15,
+#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#	$Tween.start()
 
 
 func _on_ShopBtn_mouse_exited():
-	hovered_button = ""
-	$Tween.interpolate_property($PlayShopQuit/Shop, "scale",
-		$PlayShopQuit/Shop.get_scale(), Vector2(1, 1), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($PlayShopQuit/Shop, "position",
-		$PlayShopQuit/Shop.get_position(), Vector2(115, 0), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	pass
+#	hovered_button = ""
+#	$Tween.interpolate_property($PlayShopQuit/Shop, "scale",
+#		$PlayShopQuit/Shop.get_scale(), Vector2(1, 1), 0.15,
+#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($PlayShopQuit/Shop, "position",
+#		$PlayShopQuit/Shop.get_position(), Vector2(115, 0), 0.15,
+#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#	$Tween.start()
 
 
 func _on_ShopBtn_pressed():
@@ -143,25 +136,27 @@ func _on_ShopBtn_pressed():
 
 
 func _on_QuitBtn_mouse_entered():
+	pass
 	#_play_hover_effect("quit")
-	$Tween.interpolate_property($PlayShopQuit/Quit, "scale",
-		$PlayShopQuit/Quit.get_scale(), Vector2(1.035, 1.035), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($PlayShopQuit/Quit, "position",
-		$PlayShopQuit/Quit.get_position(), Vector2(137, -15),  0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+#	$Tween.interpolate_property($PlayShopQuit/Quit, "scale",
+#		$PlayShopQuit/Quit.get_scale(), Vector2(1.035, 1.035), 0.15,
+#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($PlayShopQuit/Quit, "position",
+#		$PlayShopQuit/Quit.get_position(), Vector2(137, -15),  0.15,
+#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#	$Tween.start()
 
 
 func _on_QuitBtn_mouse_exited():
-	hovered_button = ""
-	$Tween.interpolate_property($PlayShopQuit/Quit, "scale",
-		$PlayShopQuit/Quit.get_scale(), Vector2(1, 1), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.interpolate_property($PlayShopQuit/Quit, "position",
-		$PlayShopQuit/Quit.get_position(), Vector2(137, 0), 0.15,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	pass
+#	hovered_button = ""
+#	$Tween.interpolate_property($PlayShopQuit/Quit, "scale",
+#		$PlayShopQuit/Quit.get_scale(), Vector2(1, 1), 0.15,
+#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#	$Tween.interpolate_property($PlayShopQuit/Quit, "position",
+#		$PlayShopQuit/Quit.get_position(), Vector2(137, 0), 0.15,
+#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+#	$Tween.start()
 
 
 func _on_QuitBtn_pressed():

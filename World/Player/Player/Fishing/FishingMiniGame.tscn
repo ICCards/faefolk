@@ -1,156 +1,159 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=3 uid="uid://dcjcx6cnv8dnl"]
 
-[ext_resource path="res://World/Player/Player/Fishing/FishingMiniGame.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/Misc/Fishing/Hook.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Images/Misc/Fishing/progress.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/Misc/Fishing/fishing with extra bar.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/Misc/Fishing/rod decoration.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Images/Misc/Fishing/spr_fish_64_x.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Images/Misc/Fishing/animated reel.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Images/Misc/Fishing/hook2.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Images/Misc/Fishing/hook3.png" type="Texture" id=9]
+[ext_resource type="Script" path="res://World/Player/Player/Fishing/FishingMiniGame.gd" id="1_q5frc"]
+[ext_resource type="Texture2D" uid="uid://csb4wdm6ni8qd" path="res://Assets/Images/Misc/Fishing/Hook.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://e6xxjwxhsivr" path="res://Assets/Images/Misc/Fishing/progress.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://cnkf7ud1qalck" path="res://Assets/Images/Misc/Fishing/fishing with extra bar.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dpjsd58ljbbgk" path="res://Assets/Images/Misc/Fishing/rod decoration.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://cjovrn40akrsn" path="res://Assets/Images/Misc/Fishing/spr_fish_64_x.png" id="6"]
+[ext_resource type="Texture2D" uid="uid://bhi3o7sytju71" path="res://Assets/Images/Misc/Fishing/animated reel.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://iim4cg2lg800" path="res://Assets/Images/Misc/Fishing/hook2.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://b2n2k4dxs51c2" path="res://Assets/Images/Misc/Fishing/hook3.png" id="9"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 5, 10 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(10, 20)
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 resource_name = "fade"
 length = 1.5
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dt1ig"]
+_data = {
+"RESET": SubResource("2"),
+"fade": SubResource("3")
 }
 
 [node name="FishingMiniGame" type="Node2D"]
-scale = Vector2( 2.5, 2.5 )
 z_index = 1
-script = ExtResource( 1 )
+scale = Vector2(2.5, 2.5)
+script = ExtResource("1_q5frc")
 
 [node name="Bg" type="TextureRect" parent="."]
-margin_left = 0.4
-margin_top = -35.2
-margin_right = 40.4
-margin_bottom = 96.8
-texture = ExtResource( 4 )
+offset_top = -35.0
+offset_right = 30.0
+offset_bottom = 97.0
+texture = ExtResource("4")
 
 [node name="wood fishing rod" type="Node2D" parent="."]
 visible = false
-position = Vector2( 15, 83 )
+position = Vector2(15, 83)
 
-[node name="Sprite" type="Sprite" parent="wood fishing rod"]
-texture = ExtResource( 2 )
+[node name="Sprite2D" type="Sprite2D" parent="wood fishing rod"]
+texture = ExtResource("2")
 
 [node name="Area2D" type="Area2D" parent="wood fishing rod"]
-collision_layer = 1048576
-collision_mask = 0
+collision_layer = 0
+collision_mask = 1048576
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wood fishing rod/Area2D"]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="stone fishing rod" type="Node2D" parent="."]
 visible = false
-position = Vector2( 15, 81 )
+position = Vector2(15, 81)
 
-[node name="Sprite" type="Sprite" parent="stone fishing rod"]
-texture = ExtResource( 8 )
+[node name="Sprite2D" type="Sprite2D" parent="stone fishing rod"]
+texture = ExtResource("8")
 
 [node name="Area2D" type="Area2D" parent="stone fishing rod"]
-scale = Vector2( 1, 1.2 )
+scale = Vector2(1, 1.2)
 collision_layer = 1048576
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="stone fishing rod/Area2D"]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="gold fishing rod" type="Node2D" parent="."]
 visible = false
-position = Vector2( 15, 79 )
+position = Vector2(15, 79)
 
-[node name="Sprite" type="Sprite" parent="gold fishing rod"]
-texture = ExtResource( 9 )
+[node name="Sprite2D" type="Sprite2D" parent="gold fishing rod"]
+texture = ExtResource("9")
 
 [node name="Area2D" type="Area2D" parent="gold fishing rod"]
-scale = Vector2( 1, 1.4 )
+scale = Vector2(1, 1.4)
 collision_layer = 1048576
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="gold fishing rod/Area2D"]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="Clicker" type="TextureButton" parent="."]
-margin_left = -318.4
-margin_top = -84.8
-margin_right = 775.6
-margin_bottom = 583.2
+offset_left = -406.4
+offset_top = -252.4
+offset_right = 687.6
+offset_bottom = 415.6
 
-[node name="Progress" type="TextureProgress" parent="."]
-modulate = Color( 0.313726, 1, 0, 0.854902 )
-margin_left = 2.0
-margin_top = -33.0
-margin_right = 5.0
-margin_bottom = 95.0
+[node name="Progress" type="TextureProgressBar" parent="."]
+modulate = Color(0.313726, 1, 0, 0.854902)
+offset_left = 2.0
+offset_top = -33.0
+offset_right = 5.0
+offset_bottom = 95.0
 max_value = 1000.0
 value = 200.0
-texture_progress = ExtResource( 3 )
 fill_mode = 3
+texture_progress = ExtResource("3")
 
-[node name="TempFishIcon" type="Sprite" parent="."]
+[node name="TempFishIcon" type="Sprite2D" parent="."]
 visible = false
-position = Vector2( 15, 83 )
-scale = Vector2( 0.5, 0.5 )
-texture = ExtResource( 6 )
+position = Vector2(15, 83)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6")
 
 [node name="RodDecoration" type="TextureRect" parent="."]
-margin_left = -8.4
-margin_top = -32.0
-margin_right = 31.6
-margin_bottom = 100.0
+offset_left = -8.4
+offset_top = -32.0
+offset_right = 0.599999
+offset_bottom = 100.0
 mouse_filter = 2
-texture = ExtResource( 5 )
+texture = ExtResource("5")
 
-[node name="AnimatedReel" type="Sprite" parent="."]
-position = Vector2( -2.39999, 87.2 )
-rotation = -6.28319
-texture = ExtResource( 7 )
-offset = Vector2( 0, -1.47369 )
+[node name="AnimatedReel" type="Sprite2D" parent="."]
+position = Vector2(-3.2, 86.8)
+texture = ExtResource("7")
+offset = Vector2(0, -1.47369)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 2 )
-anims/fade = SubResource( 3 )
+libraries = {
+"": SubResource("AnimationLibrary_dt1ig")
+}
 
 [node name="TimerProgress" type="ColorRect" parent="."]
-margin_left = 28.0
-margin_top = 95.0
-margin_right = 31.0
-margin_bottom = 223.0
+offset_left = 28.0
+offset_top = 95.0
+offset_right = 31.0
+offset_bottom = 219.0
 grow_vertical = 0
-rect_rotation = 180.0
-color = Color( 0, 1, 1, 1 )
-
-[node name="Tween" type="Tween" parent="."]
+rotation = 3.14159
+color = Color(0, 1, 1, 1)
 
 [node name="GameTimer" type="Timer" parent="."]
 

@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/sword whoosh.mp3-7b5444a2f4e6291c84cb326c819d8256.mp3str"
+uid="uid://hv03c48sdyrk"
+path="res://.godot/imported/sword whoosh.mp3-7b5444a2f4e6291c84cb326c819d8256.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Sword/sword whoosh.mp3"
-dest_files=[ "res://.import/sword whoosh.mp3-7b5444a2f4e6291c84cb326c819d8256.mp3str" ]
+dest_files=["res://.godot/imported/sword whoosh.mp3-7b5444a2f4e6291c84cb326c819d8256.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

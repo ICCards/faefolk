@@ -1,20 +1,20 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Images/IC Kitties/SpriteFrames/White.tres" type="SpriteFrames" id=1]
-[ext_resource path="res://World/Player/Pet/IcPuppy.gd" type="Script" id=2]
+[ext_resource path="res://World3D/Player/Pet/IcPuppy.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 1.99999
 height = 6.66669
 
-[node name="IcPuppy" type="KinematicBody2D"]
+[node name="IcPuppy" type="CharacterBody2D"]
 script = ExtResource( 2 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color( 1.2, 1.2, 1.2, 1 )
 position = Vector2( 0, -24 )
 scale = Vector2( 2, 2 )
-frames = ExtResource( 1 )
+sprite_frames = ExtResource( 1 )
 animation = "walk right"
 frame = 1
 playing = true

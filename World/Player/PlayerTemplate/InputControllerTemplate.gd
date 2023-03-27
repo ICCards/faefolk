@@ -1,14 +1,14 @@
-extends YSort
+extends Node2D
 
-#amount of input delay in frames
+#amount of input delay in sprite_frames
 var input_delay = 5 
-#number of frame states to save in order to implement rollback (max amount of frames able to rollback)
+#number of frame states to save in order to implement rollback (max amount of sprite_frames able to rollback)
 var rollback = 7 
 
-var frame_num = 0 #ranges between 0-255 per circular input array cycle (cycle is every 256 frames)
+var frame_num = 0 #ranges between 0-255 per circular input array cycle (cycle is every 256 sprite_frames)
 
 var input_array = [] #array to hold 256 Inputs
-var state_queue = [] #queue for Frame_States of past frames (for rollback)
+var state_queue = [] #queue for Frame_States of past sprite_frames (for rollback)
 
 #tracks current game status
 enum Game {END, WAITING, PLAYING}
@@ -52,7 +52,7 @@ class Frame_State:
 	var game_state #dictionary holds the values need for tracking a game's state at a given frame. Keys are child names.
 	var actual_input #boolean, whether the state contains guessed input (false) or actual input (true) from networked player
 
-	func _init(_inputs : Inputs, _frame : int, _game_state : Dictionary, _actual_input : bool):
+	func _init(_inputs : Inputs,_frame : int,_game_state : Dictionary,_actual_input : bool):
 		inputs = _inputs
 		frame = _frame
 		game_state = _game_state #Dictionary of dictionaries
@@ -91,9 +91,9 @@ func thr_network_inputs(result): #thread function to process data from network
 #			1: #request for input received
 #				var frame = result[1]
 #				var packet_arr = [0]
-#				while (frame != result[2]): #send inputs for requested frame and newer past frames
+#				while (frame != result[2]): #send inputs for requested frame and newer past sprite_frames
 #					if input_viable_request_array[frame] == false: 
-#						break #do not send invalid inputs from future frames
+#						break #do not send invalid inputs from future sprite_frames
 #					packet_arr.append(frame)
 #					packet_arr.append(input_array[frame].encoded_local_input)
 #					frame = (frame + 1)%256
@@ -142,7 +142,7 @@ func _physics_process(_delta):
 		else:
 			status = "" 
 			handle_input()
-	elif (game == Game.PLAYING):#send request for needed inputs for past frames
+	elif (game == Game.PLAYING):#send request for needed inputs for past sprite_frames
 		pass
 #		for _x in range(packet_amount):
 #			Server.rpc_id(0,"input",[1, state_queue[0].frame, (frame_num + input_delay)%256],name) #send request for needed input
@@ -180,14 +180,14 @@ func handle_input(): #get input, call child functions and run rollback if necess
 	input_array[(frame_num + input_delay) % 256].local_input = local_input
 	input_array[(frame_num + input_delay) % 256].encoded_local_input = encoded_local_input
 	
-	#send inputs over network for current and past frames
+	#send inputs over network for current and past sprite_frames
 	var packet_arr = [0]
 	for i in dup_send_range + 1:
 		packet_arr.append((frame_num + input_delay - i) % 256)
 		packet_arr.append(input_array[(frame_num + input_delay - i) % 256].encoded_local_input)
 #	for _x in packet_amount:
 #		Server.rpc_id(0,"input",packet_arr,name)
-	var current_input = input_array[frame_num].duplicate() #use duplicate so that networking thread safely can work on input_array
+	var current_input = input_array[frame_num].duplicate() #use duplicate so that networking thread safely can work checked input_array
 	
 	#if the net input for the current frame has not arrived, use a guess instead
 	var actual_input = true
@@ -198,7 +198,7 @@ func handle_input(): #get input, call child functions and run rollback if necess
 	
 	input_arrival_array[(frame_num + input_delay*2 + rollback + 1) % 256] = false #reset input arrival boolean for old frame
 	
-	#get input arrival checks for current frame and for old frames eligible for rollback, compare them to checks of previous frame
+	#get input arrival checks for current frame and for old sprite_frames eligible for rollback, compare them to checks of previous frame
 	var current_frame_arrival_array = []
 	var current_frame_arrival = input_arrival_array[frame_num]
 	var past_actual_inputs_array = []
@@ -207,7 +207,7 @@ func handle_input(): #get input, call child functions and run rollback if necess
 		if input_arrival_array[frame_num - i] != prev_frame_arrival_array[rollback - i]:
 			past_actual_inputs_array.push_front(input_array[frame_num - i].net_input.duplicate())
 	
-	#the input made on the current frame can now be sent by request
+	#the input made checked the current frame can now be sent by request
 	input_viable_request_array[(frame_num + input_delay) % 256] = true
 	input_viable_request_array[frame_num - input_delay - rollback*2] = false #old input is not viable for requests
 
@@ -216,11 +216,11 @@ func handle_input(): #get input, call child functions and run rollback if necess
 	
 	var start_rollback = false
 	#if an actual input for a past frame has arrived to fulfill a guess,
-	if !past_actual_inputs_array.empty():
+	if !past_actual_inputs_array.is_empty():
 		#iterate through all saved states until the state with the guessed input to be replaced by the arrived actual input is found (rollback will begin with that state)
-		#then, continue iterating and operating on remaining saved states to continue the resimulation process
+		#then, continue iterating and operating checked remaining saved states to continue the resimulation process
 		var state_index = 0 #for tracking iterated Frame_State's index in state_queue
-		var new_past_actual_input = null #for operating on individual actual net_inputs in the past_actual_inputs_array
+		var new_past_actual_input = null #for operating checked individual actual net_inputs in the past_actual_inputs_array
 		for frame_state in state_queue: #index 0 is oldest state
 			#if an arrived actual input is for a frame with a guessed input,
 			if (prev_frame_arrival_array[state_index] == false && current_frame_arrival_array[state_index] == true):
@@ -247,12 +247,12 @@ func handle_input(): #get input, call child functions and run rollback if necess
 	
 	#store current frame state into queue
 	state_queue.append(Frame_State.new(current_input, frame_num, pre_game_state, actual_input))
-	#remove oldest state from queue
+	#remove_at oldest state from queue
 	state_queue.pop_front()
 	
 	#reinsert current frame's arrival boolean (for next frame's prev_frame_arrival_array)
 	current_frame_arrival_array.push_back(current_frame_arrival)
-	#remove oldest frame's arrival boolean (unwanted for next frame's prev_frame_arrival_array)
+	#remove_at oldest frame's arrival boolean (unwanted for next frame's prev_frame_arrival_array)
 	current_frame_arrival_array.pop_front() 
 	#save current input arrival array for comaparisons in next frame
 	prev_frame_arrival_array = current_frame_arrival_array 

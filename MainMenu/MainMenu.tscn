@@ -1,70 +1,86 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=30 format=3 uid="uid://blc6g37rg80qc"]
 
-[ext_resource path="res://Assets/Images/Misc/MainMenu/background.png" type="Texture" id=1]
-[ext_resource path="res://MainMenu/MainMenuButtons.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Images/Misc/settings icon.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/mini map/snow.png" type="Texture" id=4]
-[ext_resource path="res://MainMenu/MainMenu.gd" type="Script" id=5]
-[ext_resource path="res://Assets/Themes/world_fog.tres" type="Shader" id=6]
-[ext_resource path="res://Assets/Images/User interface/combat hotbar/set-tab.png" type="Texture" id=7]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/Images/Misc/MainMenu/logo.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Images/Animations/water main menu/2.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Images/Animations/water main menu/4.png" type="Texture" id=12]
-[ext_resource path="res://Assets/Images/Animations/water main menu/1.png" type="Texture" id=13]
-[ext_resource path="res://Assets/Images/Animations/water main menu/3.png" type="Texture" id=14]
-[ext_resource path="res://Assets/Images/Animations/water main menu/5.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Images/Animations/water main menu/5b.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Images/Animations/water main menu/3b.png" type="Texture" id=17]
-[ext_resource path="res://Assets/Images/Animations/water main menu/2b.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Images/Animations/water main menu/1b.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Images/Animations/water main menu/4b.png" type="Texture" id=20]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture" id=21]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Options/Options.tscn" type="PackedScene" id=22]
+[ext_resource type="Texture2D" uid="uid://ds11f4jtks5ik" path="res://Assets/Images/Misc/MainMenu/background.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://bbb43rymu58fb" path="res://Assets/Images/Misc/settings icon.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://cvv5y3ir233ea" path="res://Assets/Images/Animations/water main menu/1.png" id="3_4n707"]
+[ext_resource type="Texture2D" uid="uid://bv2e37vy0s7h4" path="res://Assets/Images/mini map/snow.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://i8gajcq2vlkl" path="res://Assets/Images/Animations/water main menu/2.png" id="4_41lbt"]
+[ext_resource type="Script" path="res://MainMenu/MainMenu.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://br8hgmjtj5nnj" path="res://Assets/Images/Animations/water main menu/3.png" id="5_gkmex"]
+[ext_resource type="Shader" uid="uid://15ocwse0uu5l" path="res://Assets/Themes/world_fog.tres" id="6"]
+[ext_resource type="Texture2D" uid="uid://cyw562q4tjaw1" path="res://Assets/Images/Animations/water main menu/4.png" id="6_y48se"]
+[ext_resource type="Texture2D" uid="uid://c8nggau26yj8t" path="res://Assets/Images/User interface/combat hotbar/set-tab.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://csvt2lu3yxlrp" path="res://Assets/Images/Animations/water main menu/5.png" id="7_g3e4p"]
+[ext_resource type="Texture2D" uid="uid://be4tgvxhiig3a" path="res://Assets/Images/Animations/water main menu/1b.png" id="8_vb86m"]
+[ext_resource type="Texture2D" uid="uid://dfg84dm5mo03a" path="res://Assets/Images/Misc/MainMenu/logo.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://d354v31yurd4f" path="res://Assets/Images/Animations/water main menu/2b.png" id="9_84qdo"]
+[ext_resource type="Texture2D" uid="uid://de3s80bo27kc" path="res://Assets/Images/User interface/buttons-icons/x-button.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://ddd2o5o6mmly0" path="res://Assets/Images/Animations/water main menu/3b.png" id="10_1u1lm"]
+[ext_resource type="Texture2D" uid="uid://d4dk67jrqiqm" path="res://Assets/Images/Animations/water main menu/4b.png" id="11_f44t1"]
+[ext_resource type="Texture2D" uid="uid://dncukd0ceeiwo" path="res://Assets/Images/Animations/water main menu/5b.png" id="12_xq0bx"]
+[ext_resource type="PackedScene" uid="uid://boujb4h3xtdhe" path="res://World/Player/Player/UserInterface/Menu/Options/Options.tscn" id="17_6k084"]
+[ext_resource type="PackedScene" uid="uid://b4k542eq2r5ul" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="17_utbmg"]
+[ext_resource type="Texture2D" uid="uid://ftl1013lhawe" path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" id="18_lxpui"]
+[ext_resource type="PackedScene" uid="uid://b3vdyc3n310f7" path="res://MainMenu/MainMenuButtons.tscn" id="19_22cmn"]
+[ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="21"]
+[ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://BetaLabel.tscn" id="23"]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 50.5, 114 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(101, 228)
 
-[sub_resource type="SpriteFrames" id=3]
-animations = [ {
-"frames": [ ExtResource( 13 ), ExtResource( 11 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 15 ) ],
+[sub_resource type="SpriteFrames" id="3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_4n707")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_41lbt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_gkmex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_y48se")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_g3e4p")
+}],
 "loop": true,
-"name": "default",
-"speed": 4.0
-} ]
+"name": &"loop",
+"speed": 5.0
+}]
 
-[sub_resource type="SpriteFrames" id=4]
-animations = [ {
-"frames": [ ExtResource( 19 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 20 ), ExtResource( 16 ) ],
+[sub_resource type="SpriteFrames" id="4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_vb86m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_84qdo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_1u1lm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_f44t1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_xq0bx")
+}],
 "loop": true,
-"name": "default",
-"speed": 4.0
-} ]
+"name": &"loop",
+"speed": 5.0
+}]
 
-[sub_resource type="ShaderMaterial" id=9]
-shader = ExtResource( 6 )
-shader_param/color = Vector3( 0.05, 0.95, 0.95 )
-shader_param/OCTAVES = 8
-shader_param/circle_size = 0.5
+[sub_resource type="ShaderMaterial" id="9"]
+shader = ExtResource("6")
+shader_parameter/color = Vector3(0.05, 0.95, 0.95)
+shader_parameter/OCTAVES = 8
+shader_parameter/circle_size = 0.5
 
-[sub_resource type="StyleBoxTexture" id=6]
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 273, 273 )
-
-[sub_resource type="StyleBoxTexture" id=7]
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 273, 273 )
-
-[sub_resource type="StyleBoxTexture" id=8]
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 273, 273 )
-
-[sub_resource type="StyleBoxTexture" id=5]
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 273, 273 )
-
-[sub_resource type="Environment" id=10]
+[sub_resource type="Environment" id="10"]
 background_mode = 4
 tonemap_mode = 4
 tonemap_exposure = 0.57
@@ -75,163 +91,159 @@ glow_strength = 1.38
 glow_blend_mode = 0
 
 [node name="MainMenu" type="Control"]
-script = ExtResource( 5 )
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("5")
 
 [node name="Background" type="Control" parent="."]
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="Boundaries" type="Control" parent="Background"]
+anchors_preset = 0
 
 [node name="Left" type="StaticBody2D" parent="Background/Boundaries"]
-position = Vector2( -183, -146 )
 z_index = 1
+position = Vector2(-183, -146)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Boundaries/Left"]
-position = Vector2( 528, 686 )
-shape = SubResource( 1 )
+position = Vector2(528, 686)
+shape = SubResource("1")
 
 [node name="Right" type="StaticBody2D" parent="Background/Boundaries"]
-position = Vector2( -1471, -112 )
+position = Vector2(-1471, -112)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Background/Boundaries/Right"]
-position = Vector2( 2802, 717 )
-shape = SubResource( 1 )
+position = Vector2(2802, 717)
+shape = SubResource("1")
 
 [node name="Background" type="TextureRect" parent="Background"]
-margin_right = 640.0
-margin_bottom = 360.0
-rect_scale = Vector2( 2, 2 )
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+scale = Vector2(2, 2)
 mouse_filter = 2
-texture = ExtResource( 1 )
-expand = true
+texture = ExtResource("1")
+expand_mode = 1
 
-[node name="Water1" type="AnimatedSprite" parent="Background"]
-position = Vector2( 66, 660 )
-scale = Vector2( 2.5, 2.5 )
-frames = SubResource( 3 )
+[node name="Water1" type="AnimatedSprite2D" parent="Background"]
+position = Vector2(66, 660)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("3")
+animation = &"loop"
 
-[node name="Water2" type="AnimatedSprite" parent="Background"]
-position = Vector2( 306, 632.5 )
-scale = Vector2( 2.5, 2.5 )
-frames = SubResource( 4 )
+[node name="Water2" type="AnimatedSprite2D" parent="Background"]
+position = Vector2(306, 632.5)
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("4")
+animation = &"loop"
 
-[node name="Sprite2" type="Sprite" parent="Background"]
-modulate = Color( 1, 1, 1, 0.380392 )
-material = SubResource( 9 )
-position = Vector2( 1075, 608 )
-scale = Vector2( 80, 80 )
-texture = ExtResource( 4 )
+[node name="Sprite2" type="Sprite2D" parent="Background"]
+modulate = Color(1, 1, 1, 0.0627451)
+material = SubResource("9")
+position = Vector2(628, 385)
+scale = Vector2(50, 50)
+texture = ExtResource("4")
+
+[node name="BetaLabel" parent="." instance=ExtResource("23")]
+layout_mode = 1
 
 [node name="OptionsMenuLayer" type="CanvasLayer" parent="."]
 
 [node name="Logo" type="TextureRect" parent="OptionsMenuLayer"]
-margin_left = 24.0
-margin_top = -3.0
-margin_right = 297.0
-margin_bottom = 297.0
-rect_scale = Vector2( 1.1, 1.1 )
+offset_left = 24.0
+offset_top = -3.0
+offset_right = 297.0
+offset_bottom = 297.0
+scale = Vector2(1.1, 1.1)
 mouse_filter = 2
-texture = ExtResource( 9 )
+texture = ExtResource("9")
 
 [node name="Options" type="Control" parent="OptionsMenuLayer"]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Bg" type="TextureRect" parent="OptionsMenuLayer/Options"]
-margin_right = 426.0
-margin_bottom = 240.0
-rect_scale = Vector2( 3, 3 )
-texture = ExtResource( 7 )
-stretch_mode = 4
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("7")
+stretch_mode = 3
 
-[node name="ColorRect" type="ColorRect" parent="OptionsMenuLayer/Options"]
-margin_left = 332.0
-margin_top = 178.0
-margin_right = 946.0
-margin_bottom = 600.0
-color = Color( 0.247059, 0.109804, 0.0627451, 1 )
+[node name="ColorRect" type="ColorRect" parent="OptionsMenuLayer/Options/Bg"]
+layout_mode = 0
+offset_left = 109.0
+offset_top = 58.0
+offset_right = 316.0
+offset_bottom = 197.0
+color = Color(0.247059, 0.109804, 0.0627451, 1)
+metadata/_edit_lock_ = true
 
-[node name="MenuTitle" parent="OptionsMenuLayer/Options" instance=ExtResource( 8 )]
-margin_left = 552.0
-margin_top = 117.0
-margin_right = 915.0
-margin_bottom = 192.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+[node name="Frame" type="TextureRect" parent="OptionsMenuLayer/Options"]
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("18_lxpui")
+stretch_mode = 3
+
+[node name="MenuTitle" parent="OptionsMenuLayer/Options" instance=ExtResource("17_utbmg")]
+layout_mode = 0
+offset_left = 552.0
+offset_top = 117.0
+offset_right = 917.0
+offset_bottom = 192.0
+
+[node name="Label" parent="OptionsMenuLayer/Options/MenuTitle" index="1"]
 text = "Options"
 
+[node name="Options" parent="OptionsMenuLayer/Options" instance=ExtResource("17_6k084")]
+
 [node name="ExitBtn" type="TextureButton" parent="OptionsMenuLayer/Options"]
-margin_left = 918.0
-margin_top = 114.0
-margin_right = 932.0
-margin_bottom = 128.0
-rect_scale = Vector2( 3, 3 )
-texture_normal = ExtResource( 10 )
-texture_pressed = ExtResource( 21 )
-expand = true
+layout_mode = 0
+offset_left = 918.0
+offset_top = 114.0
+offset_right = 932.0
+offset_bottom = 128.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("10")
+texture_pressed = ExtResource("21")
 
-[node name="Options" parent="OptionsMenuLayer/Options" instance=ExtResource( 22 )]
+[node name="MainMenuButtons" parent="." instance=ExtResource("19_22cmn")]
+layout_mode = 1
+offset_left = 64.0
+offset_top = 415.0
+offset_right = -518.0
+offset_bottom = -43.0001
+scale = Vector2(0.6, 0.6)
 
-[node name="MainMenuButtons" parent="." instance=ExtResource( 2 )]
-margin_left = 7.0
-margin_top = 498.0
-margin_right = 7.0
-margin_bottom = 498.0
-rect_scale = Vector2( 0.3, 0.3 )
-
-[node name="PlayShopQuit" parent="MainMenuButtons" index="0"]
-position = Vector2( 256.667, -110 )
-scale = Vector2( 1.5, 1.5 )
-
-[node name="PlayLabel" parent="MainMenuButtons/PlayShopQuit/Play" index="1"]
-margin_left = 149.667
-margin_top = 43.1112
-margin_right = 608.667
-margin_bottom = 189.111
-rect_scale = Vector2( 0.85, 0.85 )
-custom_constants/shadow_offset_x = 8
-custom_constants/shadow_offset_y = 8
-
-[node name="Shop" parent="MainMenuButtons/PlayShopQuit" index="1"]
-visible = false
-
-[node name="Quit" parent="MainMenuButtons/PlayShopQuit" index="2"]
-visible = false
-
-[node name="PlayBtn" parent="MainMenuButtons/PlayShopQuit" index="3"]
-margin_top = 18.3334
-margin_bottom = 169.333
-
-[node name="ConnectToPlug" parent="MainMenuButtons" index="1"]
-margin_left = -270.0
-margin_top = 862.5
-margin_right = -230.0
-margin_bottom = 902.5
-rect_scale = Vector2( 2, 2 )
-
-[node name="LoadingIndicator" parent="MainMenuButtons" index="2"]
-frame = 3
-
-[node name="OptionsIconButton" type="Button" parent="."]
-margin_left = 1187.0
-margin_top = 635.0
-margin_right = 1275.0
-margin_bottom = 715.0
-custom_styles/hover = SubResource( 6 )
-custom_styles/pressed = SubResource( 7 )
-custom_styles/focus = SubResource( 8 )
-custom_styles/normal = SubResource( 5 )
+[node name="OptionsIconButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1208.0
+offset_top = 648.0
+offset_right = 1481.0
+offset_bottom = 921.0
+scale = Vector2(0.25, 0.25)
+texture_normal = ExtResource("3")
 
 [node name="TitleMusic" type="AudioStreamPlayer" parent="."]
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 10 )
+environment = SubResource("10")
 
 [connection signal="pressed" from="OptionsMenuLayer/Options/ExitBtn" to="." method="_on_ExitBtn_pressed"]
 [connection signal="pressed" from="OptionsIconButton" to="." method="_on_OptionsIconButton_pressed"]
 
-[editable path="MainMenuButtons"]
+[editable path="OptionsMenuLayer/Options/MenuTitle"]

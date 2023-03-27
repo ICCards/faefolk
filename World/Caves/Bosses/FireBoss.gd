@@ -1,15 +1,15 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var FireProjectile = load("res://World/Objects/Magic/Fire/FireProjectile.tscn")
-onready var FlameThrower = load("res://World/Objects/Magic/Fire/Flamethrower.tscn")
+@onready var FireProjectile = load("res://World/Objects/Magic/Fire/FireProjectile.tscn")
+@onready var FlameThrower = load("res://World/Objects/Magic/Fire/Flamethrower.tscn")
 
-onready var hit_box: Node2D = $ShootDirection
-onready var boss_sprite: Sprite = $Boss
-onready var animation_player: AnimationPlayer = $AnimationPlayer
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
-onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
-onready var _idle_timer: Timer = $Timers/IdleTimer
-onready var _chase_timer: Timer = $Timers/ChaseTimer
+@onready var hit_box: Node2D = $ShootDirection
+@onready var boss_sprite: Sprite2D = $Boss
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var _idle_timer: Timer = $Timers/IdleTimer
+@onready var _chase_timer: Timer = $Timers/ChaseTimer
 
 
 var direction: String = "down"
@@ -21,7 +21,7 @@ var frozen: bool = false
 var stunned: bool = false
 var attacking: bool = false
 var random_pos := Vector2.ZERO
-var velocity := Vector2.ZERO
+#var velocity := Vector2.ZERO
 var MAX_MOVE_DISTANCE: float = 200.0
 var changed_direction_delay: bool = false
 var health: int = Stats.WIND_BOSS
@@ -49,15 +49,15 @@ func _ready():
 	animation_player.play("loop")
 	$HealthBar/Progress.max_value = Stats.WIND_BOSS
 	$HealthBar/Progress.value = Stats.WIND_BOSS
-	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
-	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
-	navigation_agent.connect("velocity_computed", self, "move") 
+	_chase_timer.connect("timeout",Callable(self,"_update_pathfinding_chase"))
+	_idle_timer.connect("timeout",Callable(self,"_update_pathfinding_idle"))
+	navigation_agent.connect("velocity_computed",Callable(self,"move")) 
 	navigation_agent.set_navigation(get_node("../../").nav_node)
 	_update_pathfinding_idle()
 	
 func _update_pathfinding_chase():
 	if not attacking:
-		random_pos = Vector2(rand_range(-MAX_RANDOM_CHASE_DIST, MAX_RANDOM_CHASE_DIST), rand_range(-MAX_RANDOM_CHASE_DIST, MAX_RANDOM_CHASE_DIST))
+		random_pos = Vector2(randf_range(-MAX_RANDOM_CHASE_DIST, MAX_RANDOM_CHASE_DIST), randf_range(-MAX_RANDOM_CHASE_DIST, MAX_RANDOM_CHASE_DIST))
 		navigation_agent.set_target_location(Server.player_node.global_position+random_pos)
 	
 func _update_pathfinding_idle():
@@ -72,40 +72,40 @@ func attack():
 		$ShootDirection.look_at(Server.player_node.position)
 		state = ATTACK
 		animation_player.play("attack")
-		yield(animation_player, "animation_finished")
+		await animation_player.animation_finished
 		if destroyed:
 			return
 		if phase == 1:
-			var spell = FireProjectile.instance()
+			var spell = FireProjectile.instantiate()
 			spell.is_hostile_projectile = true
-			spell.position =$ShootDirection/Position2D.global_position
+			spell.position =$ShootDirection/Marker2D.global_position
 			spell.velocity = Server.player_node.position - position
 			get_node("../../../").call_deferred("add_child", spell)
-			yield(get_tree().create_timer(0.5), "timeout")
+			await get_tree().create_timer(0.5).timeout
 		elif phase == 2:
 			for i in range(3):
-				var spell = FireProjectile.instance()
+				var spell = FireProjectile.instantiate()
 				spell.debuff = true
-				spell.position =$ShootDirection/Position2D.global_position
+				spell.position =$ShootDirection/Marker2D.global_position
 				spell.is_hostile_projectile = true
 				spell.velocity = Server.player_node.position - position
 				get_node("../../").call_deferred("add_child",spell)
-				yield(get_tree().create_timer(0.5), "timeout")
+				await get_tree().create_timer(0.5).timeout
 		else:
-			var spell = FlameThrower.instance()
+			var spell = FlameThrower.instantiate()
 			spell.is_hostile = true
 			$ShootDirection.call_deferred("add_child",spell)
-			spell.position = $ShootDirection/Position2D.position
-			yield(get_tree().create_timer(0.5), "timeout")
+			spell.position = $ShootDirection/Marker2D.position
+			await get_tree().create_timer(0.5).timeout
 			for i in range(3):
-				var spell2 = FireProjectile.instance()
+				var spell2 = FireProjectile.instantiate()
 				spell2.debuff = true
-				spell2.position =$ShootDirection/Position2D.global_position
+				spell2.position =$ShootDirection/Marker2D.global_position
 				spell2.is_hostile_projectile = true
 				spell2.velocity = Server.player_node.position - position
 				get_node("../../").call_deferred("add_child",spell2)
-				yield(get_tree().create_timer(0.5), "timeout")
-			yield(get_tree().create_timer(2.0), "timeout")
+				await get_tree().create_timer(0.5).timeout
+			await get_tree().create_timer(2.0).timeout
 		if destroyed:
 			return
 		animation_player.play("loop")
@@ -127,13 +127,19 @@ func move(_velocity: Vector2) -> void:
 		return
 	elif frozen:
 		boss_sprite.modulate = Color("00c9ff")
-		velocity = move_and_slide(_velocity*0.75)
+		set_velocity(_velocity*0.75)
+		move_and_slide()
+		velocity = velocity
 	elif poisoned:
 		boss_sprite.modulate = Color("009000")
-		velocity = move_and_slide(_velocity*0.9)
+		set_velocity(_velocity*0.9)
+		move_and_slide()
+		velocity = velocity
 	else:
 		boss_sprite.modulate = Color("ffffff")
-		velocity = move_and_slide(_velocity)
+		set_velocity(_velocity)
+		move_and_slide()
+		velocity = velocity
 
 func _physics_process(delta):
 	if destroyed:
@@ -185,7 +191,7 @@ func destroy(killed_by_player):
 	destroyed = true
 	animation_player.play("death")
 	$Timers/AttackTimer.stop()
-	yield(animation_player, "animation_finished")
+	await animation_player.animation_finished
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
@@ -213,12 +219,12 @@ func set_phase():
 		return
 	elif health > 350 and phase != 2:
 		play_change_phase()
-		yield(get_tree().create_timer(1.0), "timeout")
+		await get_tree().create_timer(1.0).timeout
 		phase = 2
 		MAX_SPEED = 125
 	elif health < 350 and phase != 3:
 		play_change_phase()
-		yield(get_tree().create_timer(1.0), "timeout")
+		await get_tree().create_timer(1.0).timeout
 		MAX_SPEED = 180
 		phase = 3
 
@@ -228,7 +234,7 @@ func play_change_phase():
 	$UpgradePhase.show()
 	$UpgradePhase.frame = 0
 	$UpgradePhase.playing = true
-	yield($UpgradePhase, "animation_finished")
+	await $UpgradePhase.animation_finished
 	animation_player.play()
 	changing_phase = false
 	$UpgradePhase.hide()

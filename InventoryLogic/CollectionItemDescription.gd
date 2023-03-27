@@ -6,25 +6,38 @@ var height
 var lines
 
 
+func _physics_process(delta):
+	position = return_adjusted_position()
+
+func return_adjusted_position():
+	var y
+	var x
+	var pos = get_global_mouse_position() + Vector2(20,25)
+	var height = 3*$GridContainer.size.y
+	var width = 3*$GridContainer.size.x
+	if height+pos.y > 720:
+		y = 720-height
+	else:
+		y = pos.y
+	if width+pos.x > 1080:
+		x = 1080-width
+	else:
+		x = pos.x
+	return Vector2(x,y)
+
+
 func initialize(item_name):
 	show()
 	set_description_text(item_name)
-	yield(get_tree(), "idle_frame")
-	set_size_of_description($ItemName.rect_size.x)
-	$GridContainer.rect_size = Vector2( width , height )
-	$GridContainer/TopRow.rect_size.x = width
-	$GridContainer/MiddleRow.rect_size.x = width
-	$GridContainer/BottomRow.rect_size.x = width
-	$Body.rect_size.x = width*5.7
-	$Body/ItemDescription.rect_size.x = width * 5.7
-	$ItemName.rect_size.x = width
-
+	await get_tree().process_frame
+	set_size_of_description($Body/ItemName.size.x)
+	$GridContainer.size = Vector2( width , height )
 
 
 func set_description_text(item):
 	if item:
 		var description = JsonData.item_data[item]["Description"]
-		$ItemName.set_text(item[0].to_upper() + item.substr(1,-1))
+		$Body/ItemName.set_text(Util.capitalizeFirstLetter(item))
 		$Body/ItemDescription.set_text(description)
 		var category = JsonData.item_data[item]["ItemCategory"]
 		$Body/ItemAmount.modulate = Util.returnCategoryColor(category)
@@ -45,13 +58,10 @@ func set_description_text(item):
 
 
 func set_size_of_description(x):
-	if x <= 210:
-		width = 58	
+	if x <= 726:
+		width = 39
 	else:
-		width = 58 + ((x - 210) / 5)
-	lines = $Body/ItemDescription.get_line_count()
-	if lines > 2:
-		height = (50 + (lines - 2) * 10)
-	else:
-		height = 50
-
+		width = 39 + ((x - 726) / 22)
+	var lines = $Body/ItemDescription.get_line_count()
+	$Body/ItemDescription.custom_minimum_size.y = 124*lines
+	height = 36 + ((lines - 1) * 4.5)

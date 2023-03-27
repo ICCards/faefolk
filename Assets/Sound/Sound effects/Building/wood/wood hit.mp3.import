@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/wood hit.mp3-663a1c8f7ba1bbe79b1008f1ba2d3a11.mp3str"
+uid="uid://b5ni1bikqxdar"
+path="res://.godot/imported/wood hit.mp3-663a1c8f7ba1bbe79b1008f1ba2d3a11.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Building/wood/wood hit.mp3"
-dest_files=[ "res://.import/wood hit.mp3-663a1c8f7ba1bbe79b1008f1ba2d3a11.mp3str" ]
+dest_files=["res://.godot/imported/wood hit.mp3-663a1c8f7ba1bbe79b1008f1ba2d3a11.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

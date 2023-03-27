@@ -5,7 +5,7 @@ using EdjCase.ICP.Agent.Agents;
 using EdjCase.ICP.Agent.Auth;
 using EdjCase.ICP.Candid.Models;
 
-public class ic : Node
+public partial class ic : Node
 {
 	// Declare member variables here. Examples:
 	// private int a = 2;

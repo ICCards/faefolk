@@ -1,12 +1,10 @@
 extends Node2D
 
-
-onready var small_ore_sprite: Sprite = $SmallOre
-onready var animation_player: AnimationPlayer = $AnimationPlayer
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var rng = RandomNumberGenerator.new()
 
-var ore_object
+
 var location
 var variety
 var health
@@ -14,7 +12,7 @@ var destroyed: bool = false
 
 func _ready():
 	rng.randomize()
-	visible = false
+	Tiles.remove_valid_tiles(location)
 	call_deferred("setTexture")
 	
 func remove_from_world():
@@ -23,8 +21,8 @@ func remove_from_world():
 	call_deferred("queue_free")
 
 func setTexture():
-	ore_object = Images.returnOreObject(variety)
-	small_ore_sprite.set_deferred( "texture", ore_object.mediumOres[rng.randi_range(0, 5)])
+	$SmallOre.set_cell(0,Vector2i(0,-1),0,Constants.small_ore_atlas_cords[variety][rng.randi_range(1,6)])
+
 
 func hit(tool_name):
 	rng.randomize()
@@ -38,23 +36,23 @@ func hit(tool_name):
 		sound_effects.set_deferred("stream", Sounds.ore_break[rng.randi_range(0, 2)])
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")
-		InstancedScenes.initiateOreHitEffect(variety, "ore destroyed", position)
+		InstancedScenes.initiateOreHitEffect(variety, "small ore break", position)
 		var amount = Stats.return_item_drop_quantity(tool_name, "small ore")
 		Util.add_to_collection(variety, amount)
 		if variety == "stone1" or variety == "stone2":
-			InstancedScenes.intitiateItemDrop("stone", position+Vector2(0, 12), amount)
+			InstancedScenes.intitiateItemDrop("stone", position, amount)
 		else:
-			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0, 12), amount)
+			InstancedScenes.intitiateItemDrop(variety, position, amount)
 		animation_player.call_deferred("play", "small_ore_break")
-		yield(sound_effects, "finished")
-		yield(get_tree().create_timer(0.6), "timeout")
-		queue_free()
+		await sound_effects.finished
+		await get_tree().create_timer(0.6).timeout
+		call_deferred("queue_free")
 	elif health >= 1:
 		sound_effects.set_deferred("stream", Sounds.ore_hit[rng.randi_range(0, 2)])
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")
-		InstancedScenes.initiateOreHitEffect(variety, "ore hit", position+Vector2(rng.randi_range(-10, 10), 8))
-		animation_player.call_deferred("play", "small_ore_hit_right")
+		InstancedScenes.initiateOreHitEffect(variety, "ore hit", position+Vector2(randf_range(-6,6), randf_range(-6,6)))
+		animation_player.call_deferred("play", "hit")
 
 func _on_SmallHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
@@ -63,7 +61,7 @@ func _on_SmallHurtBox_area_entered(_area):
 		call_deferred("hit", _area.tool_name)
 	if _area.special_ability == "fire buff":
 		health -= Stats.FIRE_DEBUFF_DAMAGE
-		InstancedScenes.initiateExplosionParticles(position+Vector2(rand_range(-8, 8), rand_range(-16,0)))
+		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-8, 8), randf_range(-16,0)))
 
 
 func _on_VisibilityNotifier2D_screen_entered():

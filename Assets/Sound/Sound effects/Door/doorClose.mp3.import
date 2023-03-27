@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/doorClose.mp3-eb88d1d93405d6417a136757e8f09da0.mp3str"
+uid="uid://bwv7h2a7bosw2"
+path="res://.godot/imported/doorClose.mp3-eb88d1d93405d6417a136757e8f09da0.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Door/doorClose.mp3"
-dest_files=[ "res://.import/doorClose.mp3-eb88d1d93405d6417a136757e8f09da0.mp3str" ]
+dest_files=["res://.godot/imported/doorClose.mp3-eb88d1d93405d6417a136757e8f09da0.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

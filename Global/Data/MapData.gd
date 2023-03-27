@@ -7,19 +7,25 @@ var game_state: GameState
 var world_file_name = "res://JSONData/world.json"
 var caves_file_name = "res://JSONData/caves.json"
 
-var tile_types = ["plains", "forest", "dirt", "desert", "snow", "beach", "ocean"]
+var tile_types = ["beach", "ocean", "wet_sand", "deep_ocean1","deep_ocean2","deep_ocean3","deep_ocean4","plains", "forest", "dirt", "snow"]#, "desert", "beach", "ocean", "wet_sand", "deep_ocean"]
+#var autotile_types = ["plains", "forest", "dirt", "snow",]
 var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "forage"]
 var is_world_data_in_chunks = false
 
 var world = {
 	"is_built": false,
 	"ocean": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"deep_ocean3": [],
+	"deep_ocean4": [],
 	"plains": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree": {},
 	"stump": {},
 	"log": {},
@@ -30,35 +36,19 @@ var world = {
 	"animal": {},
 	"crop": {},
 	"tile": {},
-	"placable": {},
+	"placeable": {},
 }
-var starting_caves_data = {
-"Cave 1-1":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 1-2":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 1-3":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 1-4":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 1-5":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 1-6":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 1-7":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 1-Boss":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 1-Fishing":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 2-1":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 2-2":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 2-3":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 2-4":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 2-5":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 2-6":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-"Cave 2-7":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placables":{},"tall_grass":{}},
-"Cave 2-Boss":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}}}
+#var starting_caves_data = {
+#"Cave 1-1":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
 
-var caves = starting_caves_data
+var caves = {} #= starting_caves_data
 
 func _ready() -> void:
-	PlayerData.connect("season_changed", self,  "reset_cave_data")
-	PlayerData.connect("set_day", self, "advance_crop")
+	PlayerData.connect("season_changed",Callable(self,"reset_cave_data"))
+	PlayerData.connect("set_day",Callable(self,"advance_crop"))
 
-func reset_cave_data():
-	caves = starting_caves_data
+#func reset_cave_data():
+#	caves = starting_caves_data
 
 func add_world_data_to_chunks():
 	if not is_world_data_in_chunks:
@@ -71,14 +61,14 @@ func advance_crop():
 	for id in world["tree"]:
 		if Util.isNonFruitTree(world["tree"][id]["v"]): # if non-fruit tree
 			if not str(world["tree"][id]["p"]) == "5":
-				world["tree"][id]["p"] = return_advanced_tree_phase(world["tree"][id]["p"])
+				world["tree"][id]["p"] = Util.return_advanced_tree_phase(world["tree"][id]["p"])
 		else:
-			if not world["tree"][id]["p"] == "harvest":
-				world["tree"][id]["p"] = return_advanced_fruit_tree_phase(world["tree"][id]["p"])
+			if not world["tree"][id]["p"] == "harvest" and not world["tree"][id]["b"] == "snow":
+				world["tree"][id]["p"] = Util.return_advanced_fruit_tree_phase(world["tree"][id]["p"])
 	for id in world["crop"]: 
-		var loc_string = world["crop"][id]["l"]
+		var loc = world["crop"][id]["l"]
 		if not world["crop"][id]["dww"] == 2: # if crop isn't already dead
-			if world["tile"][loc_string] == "w": # if crop is watered, advance a day
+			if world["tile"][loc] == "w": # if crop is watered, advance a day
 				world["crop"][id]["dh"] -= 1 
 				world["crop"][id]["dww"] = 0
 			else: 
@@ -86,95 +76,33 @@ func advance_crop():
 	for tile in world["tile"]: # if tile is watered, set to not watered
 		if world["tile"][tile] == "w":
 			world["tile"][tile] = "h"
-	if Server.world.name == "World": # clear watered tiles if in world
+	if Server.world.name == "Overworld": # clear watered tiles if in world
 		Tiles.watered_tiles.clear()
 	emit_signal("refresh_crops")
-	
-	
-func return_advanced_tree_phase(current_phase):
-	match current_phase:
-		"sapling":
-			return "1"
-		"1":
-			return "2"
-		"2":
-			return "3"
-		"3":
-			return "4"
-		"4":
-			return "5"
-
-
-func return_advanced_fruit_tree_phase(current_phase):
-	match current_phase:
-		"sapling":
-			return "1"
-		"1":
-			return "2"
-		"2":
-			return "3"
-		"3":
-			return "4"
-		"4":
-			return "mature1"
-		"empty":
-			return "mature1"
-		"mature1":
-			return "mature2"
-		"mature2":
-			return "harvest"
-
-
-func add_forage(id,data):
-	world["forage"][id] = data
-
-func remove_animal(id):
-	world["animal"].erase(id)
 
 func set_hoed_tile(loc):
-	world["tile"][str(loc)] = "h"
+	world["tile"][loc] = "h"
 	
 func set_watered_tile(loc):
-	world["tile"][str(loc)] = "w"
+	world["tile"][loc] = "w"
 	
 func remove_hoed_tile(loc):
-	world["tile"].erase(str(loc))
+	world["tile"].erase(loc)
 
-func add_crop(id,data):
-	world["crop"][id] = data
-	
-func remove_crop(id):
-	world["crop"].erase(id)
-	
-func add_tree(id,data):
-	world["tree"][id] = data
-
-func add_placable(id, data):
-	if Server.world.name == "World":
-		world["placable"][id] = data
+func add_object(type,id,data):
+	if Server.world.name == "Overworld":
+		world[type][id] = data
 	else:
-		caves[Server.world.name]["placable"][id] = data
+		caves[Server.world.name][type][id] = data
 
-func remove_placable(id):
-	if Server.world.name == "World":
-		world["placable"].erase(id)
-	else:
-		caves[Server.world.name]["placable"].erase(id)
-
-func remove_forage(id):
-	if Server.world.name == "World":
-		world["forage"].erase(id)
-	else:
-		caves[Server.world.name]["forage"].erase(id)
-
-func remove_object(type, id):
-	if Server.world.name == "World":
+func remove_object(type,id):
+	if Server.world.name == "Overworld":
 		world[type].erase(id)
 	else:
 		caves[Server.world.name][type].erase(id)
 	
 func update_object_health(type, id, new_health):
-	if Server.world.name == "World":
+	if Server.world.name == "Overworld":
 		if world[type].has(id):
 			world[type][id]["h"] = new_health
 	else:
@@ -183,7 +111,7 @@ func update_object_health(type, id, new_health):
 
 func return_cave_data(cave_name):
 	match cave_name:
-		"World":
+		"Overworld":
 			return world
 	return caves[cave_name]
 
@@ -195,10 +123,10 @@ func add_nature_objects_to_chunks():
 
 func add_tiles_to_chunks():
 	for type in tile_types:
-		var loc_array = world[type]
-		for loc_string in loc_array:
-			var loc = Util.string_to_vector2(loc_string)
-			add_tile_to_chunk(type, loc)
+		var tiles = world[type]
+		for tile in tiles:
+			add_tile_to_chunk(type, tile)
+		
 			
 func add_animals_to_chunks():
 	for id in world["animal"]:
@@ -523,12 +451,16 @@ func return_chunk(_row, _col):
 
 var a1 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -540,12 +472,16 @@ var a1 = {
 }
 var a2 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -557,12 +493,16 @@ var a2 = {
 }
 var a3 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -574,12 +514,16 @@ var a3 = {
 }
 var a4 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -591,12 +535,16 @@ var a4 = {
 }
 var a5 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -608,12 +556,16 @@ var a5 = {
 }
 var a6 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -625,12 +577,16 @@ var a6 = {
 }
 var a7 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -642,12 +598,16 @@ var a7 = {
 }
 var a8 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -659,12 +619,16 @@ var a8 = {
 }
 var a9 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -676,12 +640,16 @@ var a9 = {
 }
 var a10 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -693,12 +661,16 @@ var a10 = {
 }
 var a11 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -710,12 +682,16 @@ var a11 = {
 }
 var a12 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -727,12 +703,16 @@ var a12 = {
 }
 var b1 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -744,12 +724,16 @@ var b1 = {
 }
 var b2 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -761,12 +745,16 @@ var b2 = {
 }
 var b3 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -778,12 +766,16 @@ var b3 = {
 }
 var b4 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -795,12 +787,16 @@ var b4 = {
 }
 var b5 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -812,12 +808,16 @@ var b5 = {
 }
 var b6 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -829,12 +829,16 @@ var b6 = {
 }
 var b7 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -846,12 +850,16 @@ var b7 = {
 }
 var b8 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -863,12 +871,16 @@ var b8 = {
 }
 var b9 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -880,12 +892,16 @@ var b9 = {
 }
 var b10 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -897,12 +913,16 @@ var b10 = {
 }
 var b11 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -914,12 +934,16 @@ var b11 = {
 }
 var b12 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -931,12 +955,16 @@ var b12 = {
 }
 var c1 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -948,12 +976,16 @@ var c1 = {
 }
 var c2 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -965,12 +997,16 @@ var c2 = {
 }
 var c3 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -982,12 +1018,16 @@ var c3 = {
 }
 var c4 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -999,12 +1039,16 @@ var c4 = {
 }
 var c5 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1016,12 +1060,16 @@ var c5 = {
 }
 var c6 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1033,12 +1081,16 @@ var c6 = {
 }
 var c7 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1050,12 +1102,16 @@ var c7 = {
 }
 var c8 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1067,12 +1123,16 @@ var c8 = {
 }
 var c9 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1084,12 +1144,16 @@ var c9 = {
 }
 var c10 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1101,12 +1165,16 @@ var c10 = {
 }
 var c11 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1118,12 +1186,16 @@ var c11 = {
 }
 var c12 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1135,12 +1207,16 @@ var c12 = {
 }
 var d1 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1152,12 +1228,16 @@ var d1 = {
 }
 var d2 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1169,12 +1249,16 @@ var d2 = {
 }
 var d3 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1186,12 +1270,16 @@ var d3 = {
 }
 var d4 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1203,12 +1291,16 @@ var d4 = {
 }
 var d5 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1220,12 +1312,16 @@ var d5 = {
 }
 var d6 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1237,12 +1333,16 @@ var d6 = {
 }
 var d7 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1254,12 +1354,16 @@ var d7 = {
 }
 var d8 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1271,12 +1375,16 @@ var d8 = {
 }
 var d9 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1288,12 +1396,16 @@ var d9 = {
 }
 var d10 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1305,12 +1417,16 @@ var d10 = {
 }
 var d11 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1322,12 +1438,16 @@ var d11 = {
 }
 var d12 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1339,12 +1459,16 @@ var d12 = {
 }
 var e1 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1356,12 +1480,16 @@ var e1 = {
 }
 var e2 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1373,12 +1501,16 @@ var e2 = {
 }
 var e3 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1390,12 +1522,16 @@ var e3 = {
 }
 var e4 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1407,12 +1543,16 @@ var e4 = {
 }
 var e5 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1424,12 +1564,16 @@ var e5 = {
 }
 var e6 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1441,12 +1585,16 @@ var e6 = {
 }
 var e7 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1458,12 +1606,16 @@ var e7 = {
 }
 var e8 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1475,12 +1627,16 @@ var e8 = {
 }
 var e9 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1492,12 +1648,16 @@ var e9 = {
 }
 var e10 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1509,12 +1669,16 @@ var e10 = {
 }
 var e11 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1526,12 +1690,16 @@ var e11 = {
 }
 var e12 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1543,12 +1711,16 @@ var e12 = {
 }
 var f1 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1560,12 +1732,16 @@ var f1 = {
 }
 var f2 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1577,12 +1753,16 @@ var f2 = {
 }
 var f3 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1594,12 +1774,16 @@ var f3 = {
 }
 var f4 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1611,12 +1795,16 @@ var f4 = {
 }
 var f5 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1628,12 +1816,16 @@ var f5 = {
 }
 var f6 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1645,12 +1837,16 @@ var f6 = {
 }
 var f7 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1662,12 +1858,16 @@ var f7 = {
 }
 var f8 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1679,12 +1879,16 @@ var f8 = {
 }
 var f9 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1696,12 +1900,16 @@ var f9 = {
 }
 var f10 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1713,12 +1921,16 @@ var f10 = {
 }
 var f11 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1730,12 +1942,16 @@ var f11 = {
 }
 var f12 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1747,12 +1963,16 @@ var f12 = {
 }
 var g1 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1764,12 +1984,16 @@ var g1 = {
 }
 var g2 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1781,12 +2005,16 @@ var g2 = {
 }
 var g3 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1798,12 +2026,16 @@ var g3 = {
 }
 var g4 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1815,12 +2047,16 @@ var g4 = {
 }
 var g5 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1832,12 +2068,16 @@ var g5 = {
 }
 var g6 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1849,12 +2089,16 @@ var g6 = {
 }
 var g7 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1866,12 +2110,16 @@ var g7 = {
 }
 var g8 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1883,12 +2131,16 @@ var g8 = {
 }
 var g9 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1900,12 +2152,16 @@ var g9 = {
 }
 var g10 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1917,12 +2173,16 @@ var g10 = {
 }
 var g11 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1934,12 +2194,16 @@ var g11 = {
 }
 var g12 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1951,12 +2215,16 @@ var g12 = {
 }
 var h1 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1968,12 +2236,16 @@ var h1 = {
 }
 var h2 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -1985,12 +2257,16 @@ var h2 = {
 }
 var h3 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2002,12 +2278,16 @@ var h3 = {
 }
 var h4 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2019,12 +2299,16 @@ var h4 = {
 }
 var h5 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2036,12 +2320,16 @@ var h5 = {
 }
 var h6 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2053,12 +2341,16 @@ var h6 = {
 }
 var h7 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2070,12 +2362,16 @@ var h7 = {
 }
 var h8 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2087,12 +2383,16 @@ var h8 = {
 }
 var h9 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2104,12 +2404,16 @@ var h9 = {
 }
 var h10 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2121,12 +2425,16 @@ var h10 = {
 }
 var h11 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2138,12 +2446,16 @@ var h11 = {
 }
 var h12 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2155,12 +2467,16 @@ var h12 = {
 }
 var i1 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2172,12 +2488,16 @@ var i1 = {
 }
 var i2 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2189,12 +2509,16 @@ var i2 = {
 }
 var i3 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2206,12 +2530,16 @@ var i3 = {
 }
 var i4 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2223,12 +2551,16 @@ var i4 = {
 }
 var i5 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2240,12 +2572,16 @@ var i5 = {
 }
 var i6 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2257,12 +2593,16 @@ var i6 = {
 }
 var i7 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2274,12 +2614,16 @@ var i7 = {
 }
 var i8 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2291,12 +2635,16 @@ var i8 = {
 }
 var i9 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2308,12 +2656,16 @@ var i9 = {
 }
 var i10 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2325,12 +2677,16 @@ var i10 = {
 }
 var i11 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2342,12 +2698,16 @@ var i11 = {
 }
 var i12 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2359,12 +2719,16 @@ var i12 = {
 }
 var j1 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2376,12 +2740,16 @@ var j1 = {
 }
 var j2 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2393,12 +2761,16 @@ var j2 = {
 }
 var j3 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2410,12 +2782,16 @@ var j3 = {
 }
 var j4 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2427,12 +2803,16 @@ var j4 = {
 }
 var j5 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2444,12 +2824,16 @@ var j5 = {
 }
 var j6 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2461,12 +2845,16 @@ var j6 = {
 }
 var j7 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2478,12 +2866,16 @@ var j7 = {
 }
 var j8 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2495,12 +2887,16 @@ var j8 = {
 }
 var j9 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2512,12 +2908,16 @@ var j9 = {
 }
 var j10 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2529,12 +2929,16 @@ var j10 = {
 }
 var j11 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2546,12 +2950,16 @@ var j11 = {
 }
 var j12 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2563,12 +2971,16 @@ var j12 = {
 }
 var k1 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2580,12 +2992,16 @@ var k1 = {
 }
 var k2 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2597,12 +3013,16 @@ var k2 = {
 }
 var k3 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2614,12 +3034,16 @@ var k3 = {
 }
 var k4 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2631,12 +3055,16 @@ var k4 = {
 }
 var k5 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2648,12 +3076,16 @@ var k5 = {
 }
 var k6 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2665,12 +3097,16 @@ var k6 = {
 }
 var k7 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2682,12 +3118,16 @@ var k7 = {
 }
 var k8 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2699,12 +3139,16 @@ var k8 = {
 }
 var k9 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2716,12 +3160,16 @@ var k9 = {
 }
 var k10 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2733,12 +3181,16 @@ var k10 = {
 }
 var k11 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2750,12 +3202,16 @@ var k11 = {
 }
 var k12 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2767,12 +3223,16 @@ var k12 = {
 }
 var l1 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2784,12 +3244,16 @@ var l1 = {
 }
 var l2 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2801,12 +3265,16 @@ var l2 = {
 }
 var l3 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2818,12 +3286,16 @@ var l3 = {
 }
 var l4 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2835,12 +3307,16 @@ var l4 = {
 }
 var l5 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2852,12 +3328,16 @@ var l5 = {
 }
 var l6 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2869,12 +3349,16 @@ var l6 = {
 }
 var l7 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2886,12 +3370,16 @@ var l7 = {
 }
 var l8 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2903,12 +3391,16 @@ var l8 = {
 }
 var l9 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2920,12 +3412,16 @@ var l9 = {
 }
 var l10 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2937,12 +3433,16 @@ var l10 = {
 }
 var l11 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2954,12 +3454,16 @@ var l11 = {
 }
 var l12 = {
 	"ocean": [],
-	"plains": [],
+	"deep_ocean1": [],
+	"deep_ocean2": [],
+	"plains": [],"deep_ocean3": [],
+	"deep_ocean4": [],
 	"forest": [],
 	"desert": [],
 	"dirt": [],
 	"snow": [],
 	"beach":[],
+	"wet_sand":[],
 	"tree":{},
 	"tall_grass":{},
 	"ore_large":{},
@@ -2969,299 +3473,304 @@ var l12 = {
 	"forage": {},
 	"animal": {}
 }
-func add_tile_to_chunk(type, loc):
+func add_tile_to_chunk(type, tile):
+	var loc
+	if type == "plains" or type == "dirt" or type == "forest" or type == "snow":
+		loc = tile[0]
+	else:
+		loc = tile
 	var column
 	var row
 	var chunk_name = get_chunk_from_location(loc)
 	match chunk_name:
 		"A1":
-			a1[type].append(loc)
+			a1[type].append(tile)
 		"A2":
-			a2[type].append(loc)
+			a2[type].append(tile)
 		"A3":
-			a3[type].append(loc)
+			a3[type].append(tile)
 		"A4":
-			a4[type].append(loc)
+			a4[type].append(tile)
 		"A5":
-			a5[type].append(loc)
+			a5[type].append(tile)
 		"A6":
-			a6[type].append(loc)
+			a6[type].append(tile)
 		"A7":
-			a7[type].append(loc)
+			a7[type].append(tile)
 		"A8":
-			a8[type].append(loc)
+			a8[type].append(tile)
 		"A9":
-			a9[type].append(loc)
+			a9[type].append(tile)
 		"A10":
-			a10[type].append(loc)
+			a10[type].append(tile)
 		"A11":
-			a11[type].append(loc)
+			a11[type].append(tile)
 		"A12":
-			a12[type].append(loc)
+			a12[type].append(tile)
 		"B1":
-			b1[type].append(loc)
+			b1[type].append(tile)
 		"B2":
-			b2[type].append(loc)
+			b2[type].append(tile)
 		"B3":
-			b3[type].append(loc)
+			b3[type].append(tile)
 		"B4":
-			b4[type].append(loc)
+			b4[type].append(tile)
 		"B5":
-			b5[type].append(loc)
+			b5[type].append(tile)
 		"B6":
-			b6[type].append(loc)
+			b6[type].append(tile)
 		"B7":
-			b7[type].append(loc)
+			b7[type].append(tile)
 		"B8":
-			b8[type].append(loc)
+			b8[type].append(tile)
 		"B9":
-			b9[type].append(loc)
+			b9[type].append(tile)
 		"B10":
-			b10[type].append(loc)
+			b10[type].append(tile)
 		"B11":
-			b11[type].append(loc)
+			b11[type].append(tile)
 		"B12":
-			b12[type].append(loc)
+			b12[type].append(tile)
 		"C1":
-			c1[type].append(loc)
+			c1[type].append(tile)
 		"C2":
-			c2[type].append(loc)
+			c2[type].append(tile)
 		"C3":
-			c3[type].append(loc)
+			c3[type].append(tile)
 		"C4":
-			c4[type].append(loc)
+			c4[type].append(tile)
 		"C5":
-			c5[type].append(loc)
+			c5[type].append(tile)
 		"C6":
-			c6[type].append(loc)
+			c6[type].append(tile)
 		"C7":
-			c7[type].append(loc)
+			c7[type].append(tile)
 		"C8":
-			c8[type].append(loc)
+			c8[type].append(tile)
 		"C9":
-			c9[type].append(loc)
+			c9[type].append(tile)
 		"C10":
-			c10[type].append(loc)
+			c10[type].append(tile)
 		"C11":
-			c11[type].append(loc)
+			c11[type].append(tile)
 		"C12":
-			c12[type].append(loc)
+			c12[type].append(tile)
 		"D1":
-			d1[type].append(loc)
+			d1[type].append(tile)
 		"D2":
-			d2[type].append(loc)
+			d2[type].append(tile)
 		"D3":
-			d3[type].append(loc)
+			d3[type].append(tile)
 		"D4":
-			d4[type].append(loc)
+			d4[type].append(tile)
 		"D5":
-			d5[type].append(loc)
+			d5[type].append(tile)
 		"D6":
-			d6[type].append(loc)
+			d6[type].append(tile)
 		"D7":
-			d7[type].append(loc)
+			d7[type].append(tile)
 		"D8":
-			d8[type].append(loc)
+			d8[type].append(tile)
 		"D9":
-			d9[type].append(loc)
+			d9[type].append(tile)
 		"D10":
-			d10[type].append(loc)
+			d10[type].append(tile)
 		"D11":
-			d11[type].append(loc)
+			d11[type].append(tile)
 		"D12":
-			d12[type].append(loc)
+			d12[type].append(tile)
 		"E1":
-			e1[type].append(loc)
+			e1[type].append(tile)
 		"E2":
-			e2[type].append(loc)
+			e2[type].append(tile)
 		"E3":
-			e3[type].append(loc)
+			e3[type].append(tile)
 		"E4":
-			e4[type].append(loc)
+			e4[type].append(tile)
 		"E5":
-			e5[type].append(loc)
+			e5[type].append(tile)
 		"E6":
-			e6[type].append(loc)
+			e6[type].append(tile)
 		"E7":
-			e7[type].append(loc)
+			e7[type].append(tile)
 		"E8":
-			e8[type].append(loc)
+			e8[type].append(tile)
 		"E9":
-			e9[type].append(loc)
+			e9[type].append(tile)
 		"E10":
-			e10[type].append(loc)
+			e10[type].append(tile)
 		"E11":
-			e11[type].append(loc)
+			e11[type].append(tile)
 		"E12":
-			e12[type].append(loc)
+			e12[type].append(tile)
 		"F1":
-			f1[type].append(loc)
+			f1[type].append(tile)
 		"F2":
-			f2[type].append(loc)
+			f2[type].append(tile)
 		"F3":
-			f3[type].append(loc)
+			f3[type].append(tile)
 		"F4":
-			f4[type].append(loc)
+			f4[type].append(tile)
 		"F5":
-			f5[type].append(loc)
+			f5[type].append(tile)
 		"F6":
-			f6[type].append(loc)
+			f6[type].append(tile)
 		"F7":
-			f7[type].append(loc)
+			f7[type].append(tile)
 		"F8":
-			f8[type].append(loc)
+			f8[type].append(tile)
 		"F9":
-			f9[type].append(loc)
+			f9[type].append(tile)
 		"F10":
-			f10[type].append(loc)
+			f10[type].append(tile)
 		"F11":
-			f11[type].append(loc)
+			f11[type].append(tile)
 		"F12":
-			f12[type].append(loc)
+			f12[type].append(tile)
 		"G1":
-			g1[type].append(loc)
+			g1[type].append(tile)
 		"G2":
-			g2[type].append(loc)
+			g2[type].append(tile)
 		"G3":
-			g3[type].append(loc)
+			g3[type].append(tile)
 		"G4":
-			g4[type].append(loc)
+			g4[type].append(tile)
 		"G5":
-			g5[type].append(loc)
+			g5[type].append(tile)
 		"G6":
-			g6[type].append(loc)
+			g6[type].append(tile)
 		"G7":
-			g7[type].append(loc)
+			g7[type].append(tile)
 		"G8":
-			g8[type].append(loc)
+			g8[type].append(tile)
 		"G9":
-			g9[type].append(loc)
+			g9[type].append(tile)
 		"G10":
-			g10[type].append(loc)
+			g10[type].append(tile)
 		"G11":
-			g11[type].append(loc)
+			g11[type].append(tile)
 		"G12":
-			g12[type].append(loc)
+			g12[type].append(tile)
 		"H1":
-			h1[type].append(loc)
+			h1[type].append(tile)
 		"H2":
-			h2[type].append(loc)
+			h2[type].append(tile)
 		"H3":
-			h3[type].append(loc)
+			h3[type].append(tile)
 		"H4":
-			h4[type].append(loc)
+			h4[type].append(tile)
 		"H5":
-			h5[type].append(loc)
+			h5[type].append(tile)
 		"H6":
-			h6[type].append(loc)
+			h6[type].append(tile)
 		"H7":
-			h7[type].append(loc)
+			h7[type].append(tile)
 		"H8":
-			h8[type].append(loc)
+			h8[type].append(tile)
 		"H9":
-			h9[type].append(loc)
+			h9[type].append(tile)
 		"H10":
-			h10[type].append(loc)
+			h10[type].append(tile)
 		"H11":
-			h11[type].append(loc)
+			h11[type].append(tile)
 		"H12":
-			h12[type].append(loc)
+			h12[type].append(tile)
 		"I1":
-			i1[type].append(loc)
+			i1[type].append(tile)
 		"I2":
-			i2[type].append(loc)
+			i2[type].append(tile)
 		"I3":
-			i3[type].append(loc)
+			i3[type].append(tile)
 		"I4":
-			i4[type].append(loc)
+			i4[type].append(tile)
 		"I5":
-			i5[type].append(loc)
+			i5[type].append(tile)
 		"I6":
-			i6[type].append(loc)
+			i6[type].append(tile)
 		"I7":
-			i7[type].append(loc)
+			i7[type].append(tile)
 		"I8":
-			i8[type].append(loc)
+			i8[type].append(tile)
 		"I9":
-			i9[type].append(loc)
+			i9[type].append(tile)
 		"I10":
-			i10[type].append(loc)
+			i10[type].append(tile)
 		"I11":
-			i11[type].append(loc)
+			i11[type].append(tile)
 		"I12":
-			i12[type].append(loc)
+			i12[type].append(tile)
 		"J1":
-			j1[type].append(loc)
+			j1[type].append(tile)
 		"J2":
-			j2[type].append(loc)
+			j2[type].append(tile)
 		"J3":
-			j3[type].append(loc)
+			j3[type].append(tile)
 		"J4":
-			j4[type].append(loc)
+			j4[type].append(tile)
 		"J5":
-			j5[type].append(loc)
+			j5[type].append(tile)
 		"J6":
-			j6[type].append(loc)
+			j6[type].append(tile)
 		"J7":
-			j7[type].append(loc)
+			j7[type].append(tile)
 		"J8":
-			j8[type].append(loc)
+			j8[type].append(tile)
 		"J9":
-			j9[type].append(loc)
+			j9[type].append(tile)
 		"J10":
-			j10[type].append(loc)
+			j10[type].append(tile)
 		"J11":
-			j11[type].append(loc)
+			j11[type].append(tile)
 		"J12":
-			j12[type].append(loc)
+			j12[type].append(tile)
 		"K1":
-			k1[type].append(loc)
+			k1[type].append(tile)
 		"K2":
-			k2[type].append(loc)
+			k2[type].append(tile)
 		"K3":
-			k3[type].append(loc)
+			k3[type].append(tile)
 		"K4":
-			k4[type].append(loc)
+			k4[type].append(tile)
 		"K5":
-			k5[type].append(loc)
+			k5[type].append(tile)
 		"K6":
-			k6[type].append(loc)
+			k6[type].append(tile)
 		"K7":
-			k7[type].append(loc)
+			k7[type].append(tile)
 		"K8":
-			k8[type].append(loc)
+			k8[type].append(tile)
 		"K9":
-			k9[type].append(loc)
+			k9[type].append(tile)
 		"K10":
-			k10[type].append(loc)
+			k10[type].append(tile)
 		"K11":
-			k11[type].append(loc)
+			k11[type].append(tile)
 		"K12":
-			k12[type].append(loc)
+			k12[type].append(tile)
 		"L1":
-			l1[type].append(loc)
+			l1[type].append(tile)
 		"L2":
-			l2[type].append(loc)
+			l2[type].append(tile)
 		"L3":
-			l3[type].append(loc)
+			l3[type].append(tile)
 		"L4":
-			l4[type].append(loc)
+			l4[type].append(tile)
 		"L5":
-			l5[type].append(loc)
+			l5[type].append(tile)
 		"L6":
-			l6[type].append(loc)
+			l6[type].append(tile)
 		"L7":
-			l7[type].append(loc)
+			l7[type].append(tile)
 		"L8":
-			l8[type].append(loc)
+			l8[type].append(tile)
 		"L9":
-			l9[type].append(loc)
+			l9[type].append(tile)
 		"L10":
-			l10[type].append(loc)
+			l10[type].append(tile)
 		"L11":
-			l11[type].append(loc)
+			l11[type].append(tile)
 		"L12":
-			l12[type].append(loc)
+			l12[type].append(tile)
 
 
 

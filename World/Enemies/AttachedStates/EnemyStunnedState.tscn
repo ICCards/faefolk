@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://cqt04hkompf5f"]
 
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyStunnedState.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://World/Enemies/AttachedStates/EnemyStunnedState.gd" id="1_irbce"]
 
 [node name="EnemyStunnedState" type="Node"]
-script = ExtResource( 1 )
+script = ExtResource("1_irbce")
 
 [node name="StunnedTimer" type="Timer" parent="."]
 wait_time = 5.0

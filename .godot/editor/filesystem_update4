@@ -1,0 +1,67 @@
+res://World/Player/Player/Fishing/FishingMiniGame.tscn
+res://Assets/Tilesets/foundation/foundation.tres
+res://Assets/Tilesets/terrain/elevated terrain.tres
+res://Assets/Tilesets/walls/walls.tres
+res://Assets/Tilesets/terrain/tres files/plains.tres
+res://Assets/Tilesets/terrain/tres files/deep ocean.tres
+res://Assets/Tilesets/terrain/tres files/dirt.tres
+res://Assets/Tilesets/terrain/tres files/forest.tres
+res://Assets/Themes/MiniMap.tres
+res://Assets/Tilesets/terrain/tres files/freshwater.tres
+res://Assets/Tilesets/terrain/tres files/waves.tres
+res://Assets/Tilesets/objects/objects.tres
+res://Assets/Tilesets/terrain/tres files/snow.tres
+res://Assets/Tilesets/terrain/tres files/wet sand.tres
+res://Assets/Themes/text.tres
+res://Assets/Themes/LockedAsset.tres
+res://Assets/Themes/whiten.tres
+res://Assets/Themes/MenuTitle.tres
+res://World/Player/Player/Fishing/Fish.tscn
+res://World/Overworld/Overworld.tscn
+res://World/Player/Player/Player.tscn
+res://MainMenu/MainMenu.tscn
+res://World/Player/Player/Fishing/Fishing.tscn
+res://World/Objects/Magic/Wind/TornadoProjectile.tscn
+res://World/Objects/Magic/Wind/DashGhost.tscn
+res://World/Objects/Magic/Wind/DashGhost.gd
+res://helpers/Tiles.gd
+res://World/World/BuildTerrain.gd
+res://World/Objects/Nature/Trees/TreeObject.tscn
+res://Assets/Images/tree_sets/plum/mature/animated.tres
+res://World/Objects/Nature/Trees/TreeObject.gd
+res://MainMenu/MainMenuButtons.tscn
+res://MainMenu/MainMenuButtons.gd
+res://World/Player/Player/Fishing/Fishing.gd
+res://World/Player/Player/Fishing/FishingMiniGame.gd
+res://Global/Data/GenerateNewWorld.gd
+res://MainMenu/GenerateWorldLoadingScreen.tscn
+res://MainMenu/LoadingScreen.tscn
+res://Assets/Themes/Flash.tres
+res://Assets/Images/Animals/Bunny/yellowBunny.tres
+res://World/World/BuildNature.gd
+res://World/Animals/Bunny.tscn
+res://Global/Data/MapData.gd
+res://World/Map/WorldMap.gd
+res://World/Objects/Magic/Wind/Whirlwind.tscn
+res://World/Player/Player/Magic.tscn
+res://Global/Data/PlayerData.gd
+res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.gd
+res://World/Animals/Bunny.gd
+res://World/Objects/Nature/Forage/ForageItem.tscn
+res://World/Animals/Duck.tscn
+res://Assets/Images/Animals/Duck/duck3.tres
+res://World/Animals/Duck.gd
+res://World/Objects/Projectiles/PotionProjectile.tscn
+res://World/Animals/Boar.tscn
+res://World/Animals/Wolf.tscn
+res://World/Animals/Wolf.gd
+res://World/Animals/Boar.gd
+res://World/Animals/Bear.tscn
+res://World/Animals/Bear.gd
+res://World/Animals/Deer.tscn
+res://World/Player/Player/Magic.gd
+res://InventoryLogic/ItemNameBox.tscn
+res://InventoryLogic/ItemNameBox.gd
+res://World/Player/Player/UserInterface/UserInterface.tscn
+res://World/Player/Player/UserInterface/UserInterface.gd
+res://World/Player/Player/UserInterface/SaveAndExit/SaveAndExit.tscn

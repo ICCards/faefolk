@@ -1,127 +1,158 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=3 uid="uid://8urgulfeikba"]
 
-[ext_resource path="res://Assets/Sound/Sound effects/Tree/rustle.mp3" type="AudioStream" id=1]
-[ext_resource path="res://World/Objects/Farm/PlantedCrop.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Images/crop_sets/wheat/1.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/Animations/plant/plant break.png" type="Texture" id=4]
+[ext_resource type="AudioStream" uid="uid://2u73yye23mpv" path="res://Assets/Sound/Sound effects/Tree/rustle.mp3" id="1"]
+[ext_resource type="Script" path="res://World/Objects/Farm/PlantedCrop.gd" id="1_37wdp"]
+[ext_resource type="Texture2D" uid="uid://b2foho3vp0sfm" path="res://Assets/Images/Animations/plant/plant break.png" id="2_l6djf"]
+[ext_resource type="TileSet" uid="uid://c5t53fhi1b7fg" path="res://Assets/Tilesets/objects/crops.tres" id="4_kq05n"]
 
-[sub_resource type="CircleShape2D" id=13]
-radius = 48.0
+[sub_resource type="CircleShape2D" id="13"]
+radius = 30.0
 
-[sub_resource type="CircleShape2D" id=2]
+[sub_resource type="CircleShape2D" id="2"]
 
-[sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 15, 15 )
+[sub_resource type="RectangleShape2D" id="4"]
+size = Vector2(16, 16)
 
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_gme2o"]
+atlas = ExtResource("2_l6djf")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 4 )
-region = Rect2( 16, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_kd44x"]
+atlas = ExtResource("2_l6djf")
+region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 4 )
-region = Rect2( 32, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_ndjaw"]
+atlas = ExtResource("2_l6djf")
+region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 4 )
-region = Rect2( 48, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sr0m"]
+atlas = ExtResource("2_l6djf")
+region = Rect2(48, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 4 )
-region = Rect2( 64, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_cij1f"]
+atlas = ExtResource("2_l6djf")
+region = Rect2(64, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 4 )
-region = Rect2( 80, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_ogbbx"]
+atlas = ExtResource("2_l6djf")
+region = Rect2(80, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 4 )
-region = Rect2( 96, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_2meot"]
+atlas = ExtResource("2_l6djf")
+region = Rect2(96, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id=12]
-animations = [ {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+[sub_resource type="SpriteFrames" id="12"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gme2o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kd44x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ndjaw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sr0m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cij1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ogbbx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2meot")
+}],
 "loop": false,
-"name": "default",
+"name": &"havest",
 "speed": 5.0
-} ]
+}]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 resource_name = "animate"
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("CropText:rect_rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Crop:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.45, 0.75, 0.9, 1 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.0001, 0.15, 0.45, 0.75, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [ 0.0, 6.0, -4.0, 2.0, -2.0, 0.0 ]
+"values": [0.0, 0.0, 0.139626, -0.10472, 0.0698132, -0.0349066, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ci831"]
+_data = {
+"animate": SubResource("3")
 }
 
 [node name="PlantedCrop" type="Area2D"]
-collision_layer = 0
-collision_mask = 131072
-script = ExtResource( 2 )
+collision_layer = 131072
+collision_mask = 0
+script = ExtResource("1_37wdp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 13 )
-
-[node name="CropText" type="TextureRect" parent="."]
-margin_left = -16.0
-margin_top = -16.0
-margin_right = 16.0
-margin_bottom = 16.0
-grow_vertical = 0
-rect_pivot_offset = Vector2( 16, 64 )
-mouse_filter = 2
-texture = ExtResource( 3 )
+shape = SubResource("13")
+disabled = true
 
 [node name="PlayAnimBox" type="Area2D" parent="."]
 visible = false
-position = Vector2( -17, -13 )
+position = Vector2(-17, -13)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayAnimBox"]
-position = Vector2( 17, 14 )
-shape = SubResource( 2 )
+position = Vector2(17, 14)
+shape = SubResource("2")
 
 [node name="HurtBox" type="Area2D" parent="."]
-visible = false
-collision_layer = 16
-collision_mask = 0
+collision_layer = 0
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-shape = SubResource( 4 )
+shape = SubResource("4")
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 visible = false
-position = Vector2( 1.90735e-06, 5 )
-scale = Vector2( 3.5, 3.7 )
+position = Vector2(1.90735e-06, 5)
+scale = Vector2(3.5, 3.7)
 
-[node name="LeafEffect" type="AnimatedSprite" parent="."]
+[node name="LeafEffect" type="AnimatedSprite2D" parent="."]
 visible = false
-modulate = Color( 1.2, 1.2, 1.2, 1 )
-position = Vector2( 0, -4 )
-scale = Vector2( 2, 2 )
-frames = SubResource( 12 )
+modulate = Color(1.2, 1.2, 1.2, 1)
+sprite_frames = SubResource("12")
+animation = &"havest"
+frame = 6
+frame_progress = 1.0
 
 [node name="RustleSound" type="AudioStreamPlayer2D" parent="."]
 visible = false
-position = Vector2( -16, 0 )
-stream = ExtResource( 1 )
+position = Vector2(-16, 0)
+stream = ExtResource("1")
 volume_db = -24.0
 
+[node name="Crop" type="Node2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, 8)
+
+[node name="TileMap" type="TileMap" parent="Crop"]
+y_sort_enabled = true
+position = Vector2(-8, 2.08165e-12)
+tile_set = ExtResource("4_kq05n")
+format = 2
+layer_0/y_sort_enabled = true
+layer_0/tile_data = PackedInt32Array(-65536, 1638400, 0)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/animate = SubResource( 3 )
+libraries = {
+"": SubResource("AnimationLibrary_ci831")
+}
 
 [connection signal="body_entered" from="PlayAnimBox" to="." method="_on_PlayAnimBox_body_entered"]
 [connection signal="body_exited" from="PlayAnimBox" to="." method="_on_PlayAnimBox_body_exited"]
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

@@ -1,17 +1,17 @@
 extends GridContainer
 
 
-onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
-onready var SlotClass = load("res://InventoryLogic/Slot.gd")
+@onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
+@onready var SlotClass = load("res://InventoryLogic/Slot.gd")
 
 
 func _ready():
 	var slots = self.get_children()
 	for i in range(slots.size()):
-		PlayerData.connect("active_item_updated", slots[i], "refresh_style")
-		slots[i].connect("gui_input", self, "slot_gui_input", [slots[i]])
-		slots[i].connect("mouse_entered", self, "hovered_slot", [slots[i]])
-		slots[i].connect("mouse_exited", self, "exited_slot", [slots[i]])
+		PlayerData.connect("active_item_updated",Callable(slots[i],"refresh_style"))
+		slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i]))
+		slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i]))
+		slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i]))
 		slots[i].slot_index = i
 		slots[i].slotType = SlotClass.SlotType.COMBAT_HOTBAR
 	initialize_slots()
@@ -26,17 +26,17 @@ func initialize_slots():
 
 func hovered_slot(slot):
 	if slot.item:
-		slot.item.hover_item()
+		#slot.item.hover_item()
 		get_parent().hovered_item = slot.item.item_name
 
 func exited_slot(slot):
 	get_parent().hovered_item = null
-	if slot.item:
-		slot.item.exit_item()
+#	if slot.item:
+#		slot.item.exit_item()
 
 func slot_gui_input(event: InputEvent, slot):
 	if event is InputEventMouseButton:
-		if event.button_index == BUTTON_LEFT && event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT && event.pressed:
 			if Server.player_node.state == 0:
 				Sounds.play_hotbar_slot_selected_sound()
 				PlayerData.hotbar_slot_selected(slot)
@@ -51,7 +51,7 @@ func right_click_slot(slot):
 		find_parent("UserInterface").holding_item.global_position = get_global_mouse_position()
 
 func return_holding_item(item_name, qt):
-	var inventoryItem = InventoryItem.instance()
+	var inventoryItem = InventoryItem.instantiate()
 	inventoryItem.set_item(item_name, qt, null)
 	find_parent("UserInterface").add_child(inventoryItem)
 	return inventoryItem

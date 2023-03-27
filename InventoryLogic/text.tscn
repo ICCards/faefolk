@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://co00lep6a88kp"]
+
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="1_1d2mi"]
+
+[node name="Text" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -842.0
+offset_bottom = -520.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sound" type="Label" parent="."]
+theme = ExtResource("1_1d2mi")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/shadow_outline_size = 0
+text = "Sound:"

@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/groan 1.mp3-a9d0522a7145ce60bb4d0744f648f4d9.mp3str"
+uid="uid://bcnem75rag360"
+path="res://.godot/imported/groan 1.mp3-a9d0522a7145ce60bb4d0744f648f4d9.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/animals/bear/Groan/groan 1.mp3"
-dest_files=[ "res://.import/groan 1.mp3-a9d0522a7145ce60bb4d0744f648f4d9.mp3str" ]
+dest_files=["res://.godot/imported/groan 1.mp3-a9d0522a7145ce60bb4d0744f648f4d9.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

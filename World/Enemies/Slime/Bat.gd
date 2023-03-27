@@ -1,9 +1,9 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
-onready var animation_player: AnimationPlayer = $AnimationPlayer
-onready var bat_sprite: AnimatedSprite = $BatSprite
-onready var hit_box: Area2D = $BatHit
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var bat_sprite: AnimatedSprite2D = $BatSprite
+@onready var hit_box: Area2D = $BatHit
 
 var direction: String = "down"
 var destroyed: bool = false
@@ -22,13 +22,13 @@ var hit_projectiles = []
 
 var health: int = Stats.BAT_HEALTH
 var STARTING_HEALTH: int = Stats.BAT_HEALTH
-var velocity = Vector2.ZERO
+#var velocity = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 
-export var MAX_SPEED = 160
-export var ACCELERATION = 180
-export var FRICTION = 80
-export var KNOCKBACK_AMOUNT = 70
+@export var MAX_SPEED = 160
+@export var ACCELERATION = 180
+@export var FRICTION = 80
+@export var KNOCKBACK_AMOUNT = 70
 
 
 func _ready():
@@ -54,13 +54,19 @@ func move(_velocity: Vector2) -> void:
 		return
 	if frozen:
 		bat_sprite.modulate = Color("00c9ff")
-		velocity = move_and_slide(_velocity*0.75)
+		set_velocity(_velocity*0.75)
+		move_and_slide()
+		velocity = velocity
 	elif poisoned:
 		bat_sprite.modulate = Color("009000")
-		velocity = move_and_slide(_velocity*0.9)
+		set_velocity(_velocity*0.9)
+		move_and_slide()
+		velocity = velocity
 	else:
 		bat_sprite.modulate = Color("ffffff")
-		velocity = move_and_slide(_velocity)
+		set_velocity(_velocity)
+		move_and_slide()
+		velocity = velocity
 
 func _on_HurtBox_area_entered(area):
 	if not hit_projectiles.has(area.id):
@@ -81,10 +87,10 @@ func _on_HurtBox_area_entered(area):
 		if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 			hit(area.tool_name)
 		if area.tool_name == "lingering tornado":
-			$EnemyTornadoState.orbit_radius = rand_range(0,20)
+			$EnemyTornadoState.orbit_radius = randf_range(0,20)
 			tornado_node = area
 		if area.special_ability == "fire":
-			var randomPos = Vector2(rand_range(-8,8), rand_range(-8,8))
+			var randomPos = Vector2(randf_range(-8,8), randf_range(-8,8))
 			InstancedScenes.initiateExplosionParticles(position+randomPos)
 			InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
 			health -= Stats.FIRE_DEBUFF_DAMAGE
@@ -121,7 +127,7 @@ func destroy(killed_by_player):
 	InstancedScenes.intitiateItemDrop("bat wing", position, 1)
 	destroyed = true
 	animation_player.play("death")
-	yield(animation_player, "animation_finished")
+	await animation_player.animation_finished
 	queue_free()
 
 

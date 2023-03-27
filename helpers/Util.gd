@@ -1,6 +1,8 @@
-tool
+@tool
 extends Node
 
+func _ready():
+	randomize()
 
 # the percent chance something happens
 func chance(num):
@@ -17,17 +19,21 @@ func choose(choices):
 	return choices[rand_index]
 
 func tojson(body):
-  var jsonParseResult: JSONParseResult = JSON.parse(body)
-  return jsonParseResult.result	
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(body)
+	var jsonParseResult: JSON = test_json_conv.get_data()
+	return jsonParseResult.result	
 	
 func jsonParse(body):
-  var stringResult: String = body.get_string_from_utf8()
-  var jsonParseResult: JSONParseResult = JSON.parse(stringResult)
-  return jsonParseResult.result
+	var stringResult: String = body.get_string_from_utf8()
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(stringResult)
+	var jsonParseResult: JSON = test_json_conv.get_data()
+	return jsonParseResult.result
 
 func toMessage(name, data):
 	data["n"] = name
-	return JSON.print(data).to_utf8()
+	return JSON.stringify(data).to_utf8_buffer()
 	
 #func string_to_vector2(string := "") -> Vector2:
 #	if string:
@@ -43,8 +49,8 @@ func toMessage(name, data):
 func string_to_vector2(string) -> Vector2:
 	if string is String:
 		var new_string: String = string
-		new_string.erase(0, 1)
-		new_string.erase(new_string.length() - 1, 1)
+		new_string.left(1)
+		new_string.left(-1)
 		var array: Array = new_string.split(", ")
 
 		return Vector2(array[0], array[1])
@@ -52,27 +58,29 @@ func string_to_vector2(string) -> Vector2:
 	return string
 
 
-		
+func capitalizeFirstLetter(string) -> String:
+	return string.left(1).to_upper() + string.right(string.length()-1)
+	
 func set_swing_position(_pos, _direction):
 	match _direction:
 		"UP":
-			_pos += Vector2(0, -32)
+			_pos += Vector2(0, -16)
 		"DOWN":
-			_pos += Vector2(0, 20)
+			_pos += Vector2(0, 10)
 		"LEFT":
-			_pos += Vector2(-32, -8)
+			_pos += Vector2(-16, -4)
 		"RIGHT":
-			_pos += Vector2(32, -8)
+			_pos += Vector2(16, -4)
 	return _pos
 	
 func returnAdjustedWateringCanPariclePos(direction):
 	match direction:
 		"RIGHT":
-			return Vector2(28, -20)
+			return Vector2(14, -10)
 		"LEFT":
-			return Vector2(-28, -20)
+			return Vector2(-14, -10)
 		"DOWN":
-			return Vector2(0, -15)
+			return Vector2(0, -8)
 			
 func returnCategoryColor(category):
 	match category:
@@ -86,7 +94,7 @@ func returnCategoryColor(category):
 			return Color("26ff00")
 		"Food":
 			return Color("eb00ff")
-		"Placable object":
+		"Placeable object":
 			return Color("806aff")
 		"Construction":
 			return Color("ff25f1")
@@ -126,18 +134,18 @@ func return_adjusted_item_name(item_name):
 	elif item_name.substr(0,11) == "round table":
 		return "round table"
 	return item_name
-	
+
 
 func get_random_idle_pos(pos,max_move_dist):
-	var random1 = rand_range(max_move_dist-200,max_move_dist)
-	var random2 = rand_range(max_move_dist-200,max_move_dist)
+	var random1 = randf_range(max_move_dist-100,max_move_dist)
+	var random2 = randf_range(max_move_dist-100,max_move_dist)
 	if Util.chance(50):
 		random1*=-1
 	if Util.chance(50):
 		random2*=-1
-	if Tiles.valid_tiles.get_cellv(Tiles.valid_tiles.world_to_map(pos+Vector2(random1,random2))) != -1:
+	if Tiles.valid_tiles.get_cell_atlas_coords(0,(pos+Vector2(random1,random2))/16) != Vector2i(-1,-1):
 		return pos+Vector2(random1,random2)
-	elif Tiles.valid_tiles.get_cellv(Tiles.valid_tiles.world_to_map(pos-Vector2(random1,random2))) != -1:
+	elif Tiles.valid_tiles.get_cell_atlas_coords(0,(pos+Vector2(random1,random2))/16) !=  Vector2i(-1,-1):
 		return pos-Vector2(random1,random2)
 	else:
 		return pos
@@ -160,4 +168,83 @@ func isNonFruitTree(tree_name):
 		return true
 	return false
 
+func return_advanced_tree_phase(current_phase):
+	match current_phase:
+		"sapling":
+			return "1"
+		"1":
+			return "2"
+		"2":
+			return "3"
+		"3":
+			return "4"
+		"4":
+			return "5"
+
+func return_advanced_fruit_tree_phase(current_phase):
+	match current_phase:
+		"sapling":
+			return "1"
+		"1":
+			return "2"
+		"2":
+			return "3"
+		"3":
+			return "4"
+		"4":
+			return "empty"
+		"empty":
+			if PlayerData.player_data["season"] == "fall":
+				return "mature1"
+			return "empty"
+		"mature1":
+			if PlayerData.player_data["season"] == "fall":
+				return "mature2"
+			return "empty"
+		"mature2":
+			if PlayerData.player_data["season"] == "fall":
+				return "harvest"
+			return "empty"
+
+
+func isObjectPlaceableOnGround(item_name):
+	if item_name == "wood fence" or item_name == "stone fence" or item_name == "metal fence" or \
+	item_name == "wood gate" or item_name == "stone gate" or item_name == "metal gate" or \
+	item_name == "well" or item_name == "torch" or item_name == "campfire":
+		return true
+	return false
+
+
+func isStorageItem(item_name):
+	if item_name == "wood box" or item_name == "wood barrel" or item_name == "wood chest" or \
+	item_name == "stone chest" or item_name == "tool cabinet" or item_name == "furnace" or \
+	item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3" or \
+	item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3" or \
+	item_name == "campfire":
+		return true
+	return false
+
+
+func isSword(item_name):
+	if item_name == "wood sword" or item_name == "stone sword" or item_name == "iron sword" or item_name == "bronze sword" or item_name == "gold sword":
+		return true
+	return false
+
+
+func isValidEnemyAttack(los) -> bool:
+	var collider = los.get_collider()
+	if collider and (collider.name == "WallTiles" or collider.name == "DoorMovementCollision" or collider.name == "SwordBlock"):
+		return false
+	return true
+
+func is_border_tile(_loc, _tiles):
+	if not _tiles.has(_loc+Vector2i(1,0)):
+		return true
+	if not _tiles.has(_loc+Vector2i(-1,0)):
+		return true
+	if not _tiles.has(_loc+Vector2i(0,1)):
+		return true
+	if not _tiles.has(_loc+Vector2i(0,-1)):
+		return true
+	return false
 

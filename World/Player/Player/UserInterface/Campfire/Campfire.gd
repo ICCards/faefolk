@@ -1,6 +1,6 @@
 extends Control
 
-onready var sound_effects: AudioStreamPlayer = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 var id
 var level
@@ -8,10 +8,10 @@ var level
 var hovered_item
 var ingredients = []
 
-onready var fuel_slot = $CampfireSlots/FuelSlot
-onready var ingredient_slot = $CampfireSlots/Ingredient
-onready var yield_slot = $CampfireSlots/YieldSlot
-onready var coal_yield_slot = $CampfireSlots/CoalYieldSlot
+@onready var fuel_slot = $CampfireSlots/FuelSlot
+@onready var ingredient_slot = $CampfireSlots/Ingredient
+@onready var yield_slot = $CampfireSlots/YieldSlot
+@onready var coal_yield_slot = $CampfireSlots/CoalYieldSlot
 
 var current_cooking_item
 

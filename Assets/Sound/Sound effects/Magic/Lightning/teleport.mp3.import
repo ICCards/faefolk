@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/teleport.mp3-d18ebfd57ab49e4bbed9aded6bc8d386.mp3str"
+uid="uid://d3b7ijii5rdm5"
+path="res://.godot/imported/teleport.mp3-d18ebfd57ab49e4bbed9aded6bc8d386.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Magic/Lightning/teleport.mp3"
-dest_files=[ "res://.import/teleport.mp3-d18ebfd57ab49e4bbed9aded6bc8d386.mp3str" ]
+dest_files=["res://.godot/imported/teleport.mp3-d18ebfd57ab49e4bbed9aded6bc8d386.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

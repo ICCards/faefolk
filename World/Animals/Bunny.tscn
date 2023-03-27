@@ -1,306 +1,337 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=3 uid="uid://c8qca66q6syo4"]
 
-[ext_resource path="res://World/Animals/Bunny.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/Animals/Bunny/brownBunny.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=3]
-[ext_resource path="res://Assets/Images/Magic/lightning/Shock_Small.png" type="Texture" id=4]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" type="PackedScene" id=5]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=6]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" type="PackedScene" id=7]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=8]
+[ext_resource type="Script" path="res://World/Animals/Bunny.gd" id="2_bon8t"]
+[ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="3"]
+[ext_resource type="PackedScene" uid="uid://dr88n2qik0tat" path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" id="3_8k70x"]
+[ext_resource type="SpriteFrames" uid="uid://nxdmav8lhx5m" path="res://Assets/Images/Animals/Bunny/yellowBunny.tres" id="3_djxbj"]
+[ext_resource type="PackedScene" uid="uid://cqt04hkompf5f" path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" id="4_lm4gw"]
+[ext_resource type="Texture2D" uid="uid://bbybm4xho1nc8" path="res://Assets/Images/Magic/lightning/Shock_Small.png" id="4_nh64w"]
+[ext_resource type="PackedScene" uid="uid://cvfur4ra58e75" path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" id="5_6f3da"]
+[ext_resource type="PackedScene" uid="uid://dx8hix2epqruo" path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" id="6_klsuf"]
 
-[sub_resource type="CapsuleShape2D" id=14]
+[sub_resource type="CircleShape2D" id="CircleShape2D_h415i"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_es14p"]
 radius = 5.0
-height = 6.0
 
-[sub_resource type="CapsuleShape2D" id=10]
-radius = 15.0
-height = 6.0
-
-[sub_resource type="CircleShape2D" id=12]
+[sub_resource type="CircleShape2D" id="12"]
 radius = 261.008
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id="15"]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:material:shader_param/flash_modifier")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("HurtBox/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("BunnySprite:material:shader_parameter/flash_modifier")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BunnySprite:material:shader_parameter/flash_color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 1)]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id="11"]
 resource_name = "death"
 length = 3.0
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("BunnySprite:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1.5 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("HurtBox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Electricity:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
+tracks/3/path = NodePath("EnemyPoisonState/PoisonParticles/Parts1:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
 tracks/4/imported = false
 tracks/4/enabled = true
+tracks/4/path = NodePath("EnemyPoisonState/PoisonParticles/Parts2:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
+tracks/5/path = NodePath("EnemyPoisonState/PoisonParticles/Parts3:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ false ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath(".:material:shader_param/flash_modifier")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
+"values": [false]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id="13"]
 resource_name = "hit"
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:material:shader_param/flash_modifier")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("BunnySprite:material:shader_parameter/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ 1.0, 0.0 ]
+"values": [1.0, 1.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BunnySprite:material:shader_parameter/flash_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Color(1, 0, 0, 1)]
 }
 
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 24, 24 )
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_epbpm"]
+_data = {
+"RESET": SubResource("15"),
+"death": SubResource("11"),
+"hit": SubResource("13")
+}
 
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 4 )
-region = Rect2( 24, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_qgwis"]
+atlas = ExtResource("4_nh64w")
+region = Rect2(0, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 4 )
-region = Rect2( 48, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_w7nut"]
+atlas = ExtResource("4_nh64w")
+region = Rect2(24, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 4 )
-region = Rect2( 72, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_wymux"]
+atlas = ExtResource("4_nh64w")
+region = Rect2(48, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=20]
-atlas = ExtResource( 4 )
-region = Rect2( 96, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_uw3yx"]
+atlas = ExtResource("4_nh64w")
+region = Rect2(72, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=21]
-atlas = ExtResource( 4 )
-region = Rect2( 120, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqe6r"]
+atlas = ExtResource("4_nh64w")
+region = Rect2(96, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=22]
-atlas = ExtResource( 4 )
-region = Rect2( 144, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_cki0s"]
+atlas = ExtResource("4_nh64w")
+region = Rect2(120, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=23]
-atlas = ExtResource( 4 )
-region = Rect2( 168, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_6to8y"]
+atlas = ExtResource("4_nh64w")
+region = Rect2(144, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 4 )
-region = Rect2( 192, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_ounwy"]
+atlas = ExtResource("4_nh64w")
+region = Rect2(168, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 4 )
-region = Rect2( 216, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_4uhxt"]
+atlas = ExtResource("4_nh64w")
+region = Rect2(192, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 4 )
-region = Rect2( 240, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_wvlkr"]
+atlas = ExtResource("4_nh64w")
+region = Rect2(216, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 4 )
-region = Rect2( 264, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_8bdxm"]
+atlas = ExtResource("4_nh64w")
+region = Rect2(240, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 4 )
-region = Rect2( 288, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_ieka5"]
+atlas = ExtResource("4_nh64w")
+region = Rect2(264, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 4 )
-region = Rect2( 312, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_647js"]
+atlas = ExtResource("4_nh64w")
+region = Rect2(288, 0, 24, 24)
 
-[sub_resource type="SpriteFrames" id=35]
-animations = [ {
-"frames": [ SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ), SubResource( 20 ), SubResource( 21 ), SubResource( 22 ), SubResource( 23 ), SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ), SubResource( 29 ) ],
+[sub_resource type="AtlasTexture" id="AtlasTexture_uxkmp"]
+atlas = ExtResource("4_nh64w")
+region = Rect2(312, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_snwb2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qgwis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w7nut")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wymux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uw3yx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqe6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cki0s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6to8y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ounwy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4uhxt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wvlkr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8bdxm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ieka5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_647js")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uxkmp")
+}],
 "loop": true,
-"name": "default",
+"name": &"new_animation",
 "speed": 8.0
-} ]
+}]
 
-[node name="Bunny" type="KinematicBody2D"]
-material = ExtResource( 3 )
-collision_layer = 0
+[node name="Bunny" type="CharacterBody2D"]
 collision_mask = 67
-script = ExtResource( 1 )
+motion_mode = 1
+script = ExtResource("2_bon8t")
 
-[node name="EnemyFrozenState" parent="." instance=ExtResource( 6 )]
+[node name="EnemyTornadoState" parent="." instance=ExtResource("3_8k70x")]
 
-[node name="EnemyPoisonState" parent="." instance=ExtResource( 7 )]
+[node name="EnemyStunnedState" parent="." instance=ExtResource("4_lm4gw")]
 
-[node name="EnemyStunnedState" parent="." instance=ExtResource( 8 )]
+[node name="EnemyPoisonState" parent="." instance=ExtResource("5_6f3da")]
 
-[node name="EnemyTornadoState" parent="." instance=ExtResource( 5 )]
-
-[node name="BunnySprite" type="AnimatedSprite" parent="."]
-use_parent_material = true
-position = Vector2( 0, -27 )
-scale = Vector2( 0.75, 0.75 )
-frames = ExtResource( 2 )
-animation = "death"
-frame = 3
-playing = true
+[node name="EnemyFrozenState" parent="." instance=ExtResource("6_klsuf")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 1 )
+position = Vector2(0, 1)
 rotation = 1.5708
-shape = SubResource( 14 )
+shape = SubResource("CircleShape2D_h415i")
+
+[node name="BunnySprite" type="AnimatedSprite2D" parent="."]
+material = ExtResource("3")
+position = Vector2(0, -12)
+sprite_frames = ExtResource("3_djxbj")
+animation = &"walk"
+frame_progress = 0.482133
 
 [node name="HurtBox" type="Area2D" parent="."]
-position = Vector2( 0, -7 )
-collision_layer = 262400
-collision_mask = 0
+position = Vector2(0, -2)
+collision_layer = 0
+collision_mask = 262400
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-rotation = 1.5708
-shape = SubResource( 10 )
+shape = SubResource("CircleShape2D_es14p")
 
 [node name="DetectPlayer" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
-shape = SubResource( 12 )
-
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 0, -3 )
-scale = Vector2( 4.16875, 4.16875 )
+shape = SubResource("12")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 15 )
-anims/death = SubResource( 11 )
-anims/hit = SubResource( 13 )
-
-[node name="Electricity" type="AnimatedSprite" parent="."]
-visible = false
-modulate = Color( 1.22, 1.22, 1.22, 1 )
-position = Vector2( 0, -7 )
-scale = Vector2( 2, 2 )
-frames = SubResource( 35 )
-frame = 13
-playing = true
+libraries = {
+"": SubResource("AnimationLibrary_epbpm")
+}
 
 [node name="Timers" type="Node" parent="."]
 
@@ -317,10 +348,16 @@ autostart = true
 path_desired_distance = 100.0
 target_desired_distance = 100.0
 avoidance_enabled = true
+max_speed = 65.0
+
+[node name="Electricity" type="AnimatedSprite2D" parent="."]
+visible = false
+modulate = Color(1.22, 1.22, 1.22, 1)
+position = Vector2(0, -6)
+sprite_frames = SubResource("SpriteFrames_snwb2")
+animation = &"new_animation"
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="Timers/RunStateTimer" to="." method="_on_RunStateTimer_timeout"]
 
 [editable path="EnemyPoisonState"]

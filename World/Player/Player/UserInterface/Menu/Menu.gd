@@ -2,7 +2,7 @@ extends Control
 
 var item
 
-onready var sound_effects: AudioStreamPlayer = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 
 func initialize():
@@ -11,9 +11,10 @@ func initialize():
 	change_inventory_tab("inventory")
 
 func _physics_process(delta):
+	return
 	if not visible:
 		return
-	$ItemDescription.position = get_local_mouse_position() + Vector2(20,25)
+#	$ItemDescription.position = get_local_mouse_position() + Vector2(20,25)
 	$ItemNameBox.position = get_local_mouse_position() + Vector2(20,25)
 
 func _input(_event):

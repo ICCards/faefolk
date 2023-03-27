@@ -1,164 +1,149 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=3 uid="uid://ctp3ra1cmv0de"]
 
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Menu.gd" type="Script" id=1]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Images/User interface/inventory/inventory/inventory-tab.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/User interface/inventory/save/save-button.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture" id=5]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn" type="PackedScene" id=6]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Options/Options.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=8]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture" id=9]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Inventory/inventory_tab_btn.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Assets/Images/User interface/inventory/save/save-button-selected.png" type="Texture" id=11]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" type="Texture" id=14]
-[ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=36]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Skills/Skills.tscn" type="PackedScene" id=39]
-[ext_resource path="res://InventoryLogic/ItemNameBox.tscn" type="PackedScene" id=42]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Menu.gd" id="1_1ymg0"]
+[ext_resource type="PackedScene" uid="uid://4v3igpipcu6i" path="res://InventoryLogic/ItemDescription.tscn" id="2_keu3b"]
+[ext_resource type="Texture2D" uid="uid://r6w3mbmfa6ms" path="res://Assets/Images/User interface/inventory/inventory/inventory-tab.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://2op1sdptpkm7" path="res://Assets/Images/User interface/inventory/save/save-button.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://de3s80bo27kc" path="res://Assets/Images/User interface/buttons-icons/x-button.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://ftl1013lhawe" path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" id="5_tx4ys"]
+[ext_resource type="PackedScene" uid="uid://dtyobd2b5oj0i" path="res://World/Player/Player/UserInterface/Menu/Inventory/inventory_tab_btn.tscn" id="8_nbvbc"]
+[ext_resource type="PackedScene" uid="uid://drxqi2l1pd8af" path="res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.tscn" id="8_rqgkr"]
+[ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="9"]
+[ext_resource type="PackedScene" uid="uid://b2x0kacdfasux" path="res://World/Player/Player/UserInterface/Menu/Skills/Skills.tscn" id="9_fhc6i"]
+[ext_resource type="Texture2D" uid="uid://cgya8546lrfhq" path="res://Assets/Images/User interface/inventory/save/save-button-selected.png" id="11"]
+[ext_resource type="PackedScene" uid="uid://cdfwwoxabb2pn" path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn" id="11_n48af"]
+[ext_resource type="PackedScene" uid="uid://b3ad8jm57r5at" path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.tscn" id="12_8aw2w"]
+[ext_resource type="PackedScene" uid="uid://boujb4h3xtdhe" path="res://World/Player/Player/UserInterface/Menu/Options/Options.tscn" id="12_ntmmq"]
+[ext_resource type="PackedScene" uid="uid://c6wlm3ymf4sq6" path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" id="16_tc1bk"]
 
 [node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -640.0
-margin_right = -640.0
-script = ExtResource( 1 )
+offset_left = -640.0
+offset_right = -640.0
+grow_horizontal = 2
+script = ExtResource("1_1ymg0")
 
-[node name="ItemNameBox" parent="." instance=ExtResource( 42 )]
-visible = false
-position = Vector2( -508, 3 )
-scale = Vector2( 3, 3 )
-
-[node name="ItemDescription" parent="." instance=ExtResource( 36 )]
-visible = false
+[node name="ItemDescription" parent="." instance=ExtResource("2_keu3b")]
+position = Vector2(612, 612)
 
 [node name="Background" type="TextureRect" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_right = 426.0
-margin_bottom = 240.0
-rect_scale = Vector2( 3, 3 )
-mouse_filter = 2
-texture = ExtResource( 3 )
-stretch_mode = 4
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("3")
+stretch_mode = 3
+metadata/_edit_lock_ = true
 
 [node name="Frame" type="TextureRect" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_right = 426.0
-margin_bottom = 240.0
-rect_scale = Vector2( 3, 3 )
-mouse_filter = 2
-texture = ExtResource( 14 )
-stretch_mode = 4
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("5_tx4ys")
+stretch_mode = 3
+metadata/_edit_lock_ = true
 
 [node name="ExitBtn" type="TextureButton" parent="."]
-margin_left = 918.0
-margin_top = 114.0
-margin_right = 932.0
-margin_bottom = 128.0
-rect_scale = Vector2( 3, 3 )
-texture_normal = ExtResource( 5 )
-texture_pressed = ExtResource( 9 )
-expand = true
+layout_mode = 0
+offset_left = 918.0
+offset_top = 114.0
+offset_right = 932.0
+offset_bottom = 128.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("5")
+texture_pressed = ExtResource("9")
+metadata/_edit_lock_ = true
 
 [node name="NamePlates" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_lock_ = true
 
-[node name="inventory" parent="NamePlates" instance=ExtResource( 10 )]
-margin_left = 321.0
-margin_top = 117.0
-margin_right = 352.0
-margin_bottom = 130.0
+[node name="inventory" parent="NamePlates" instance=ExtResource("8_nbvbc")]
+layout_mode = 0
+offset_left = 321.0
+offset_top = 117.0
+offset_right = 352.0
+offset_bottom = 130.0
+metadata/_edit_lock_ = true
 
-[node name="skills" parent="NamePlates" instance=ExtResource( 10 )]
-margin_left = 426.0
-margin_top = 117.0
-margin_right = 457.0
-margin_bottom = 130.0
+[node name="skills" parent="NamePlates" instance=ExtResource("8_nbvbc")]
+layout_mode = 0
+offset_left = 426.0
+offset_top = 117.0
+offset_right = 457.0
+offset_bottom = 130.0
+metadata/_edit_lock_ = true
 
-[node name="crafting" parent="NamePlates" instance=ExtResource( 10 )]
-margin_left = 532.0
-margin_top = 117.0
-margin_right = 563.0
-margin_bottom = 130.0
+[node name="crafting" parent="NamePlates" instance=ExtResource("8_nbvbc")]
+layout_mode = 0
+offset_left = 531.0
+offset_top = 117.0
+offset_right = 562.0
+offset_bottom = 130.0
+metadata/_edit_lock_ = true
 
-[node name="collections" parent="NamePlates" instance=ExtResource( 10 )]
-margin_left = 636.0
-margin_top = 117.0
-margin_right = 667.0
-margin_bottom = 130.0
+[node name="collections" parent="NamePlates" instance=ExtResource("8_nbvbc")]
+layout_mode = 0
+offset_left = 636.0
+offset_top = 117.0
+offset_right = 667.0
+offset_bottom = 130.0
+metadata/_edit_lock_ = true
 
-[node name="options" parent="NamePlates" instance=ExtResource( 10 )]
-margin_left = 741.0
-margin_top = 117.0
-margin_right = 772.0
-margin_bottom = 130.0
+[node name="options" parent="NamePlates" instance=ExtResource("8_nbvbc")]
+layout_mode = 0
+offset_left = 741.0
+offset_top = 117.0
+offset_right = 772.0
+offset_bottom = 130.0
+metadata/_edit_lock_ = true
 
-[node name="save" parent="NamePlates" instance=ExtResource( 10 )]
-margin_left = 846.0
-margin_top = 116.0
-margin_right = 867.0
-margin_bottom = 129.0
-texture_normal = ExtResource( 4 )
-texture_pressed = ExtResource( 11 )
+[node name="save" parent="NamePlates" instance=ExtResource("8_nbvbc")]
+layout_mode = 0
+offset_left = 846.0
+offset_top = 117.0
+offset_right = 867.0
+offset_bottom = 130.0
+texture_normal = ExtResource("4")
+texture_pressed = ExtResource("11")
+metadata/_edit_lock_ = true
 
 [node name="Label" parent="NamePlates/save" index="0"]
-margin_right = 175.0
+offset_right = 500.0
 text = "Save"
 
 [node name="Pages" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_lock_ = true
 
-[node name="inventory" parent="Pages" instance=ExtResource( 2 )]
-
-[node name="skills" parent="Pages" instance=ExtResource( 39 )]
+[node name="skills" parent="Pages" instance=ExtResource("9_fhc6i")]
 visible = false
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="crafting" parent="Pages" instance=ExtResource( 6 )]
+[node name="inventory" parent="Pages" instance=ExtResource("8_rqgkr")]
 visible = false
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="collections" parent="Pages" instance=ExtResource( 13 )]
+[node name="crafting" parent="Pages" instance=ExtResource("11_n48af")]
 visible = false
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="options" parent="Pages" instance=ExtResource( 7 )]
+[node name="options" parent="Pages" instance=ExtResource("12_ntmmq")]
 visible = false
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="Tween" type="Tween" parent="."]
+[node name="collections" parent="Pages" instance=ExtResource("12_8aw2w")]
+visible = false
+
+[node name="Trash" parent="." instance=ExtResource("16_tc1bk")]
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
-[node name="Beta" type="Label" parent="."]
-margin_left = 1137.0
-margin_top = 14.0
-margin_right = 1299.0
-margin_bottom = 108.0
-grow_horizontal = 0
-rect_scale = Vector2( 0.8, 0.8 )
-theme = ExtResource( 8 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_constants/shadow_offset_x = 3
-custom_constants/shadow_offset_y = 3
-text = "Beta  v1.3"
-
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
 
+[editable path="ItemDescription"]
 [editable path="NamePlates/save"]

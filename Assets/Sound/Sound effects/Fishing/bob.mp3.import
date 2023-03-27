@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/bob.mp3-c4874644d8a5a4352e5394eb11ccbc8b.mp3str"
+uid="uid://bsrf5qv0phl7j"
+path="res://.godot/imported/bob.mp3-c4874644d8a5a4352e5394eb11ccbc8b.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Fishing/bob.mp3"
-dest_files=[ "res://.import/bob.mp3-c4874644d8a5a4352e5394eb11ccbc8b.mp3str" ]
+dest_files=["res://.godot/imported/bob.mp3-c4874644d8a5a4352e5394eb11ccbc8b.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/killAnimal.mp3-5f047b617de10cdd50937c0e83576e87.mp3str"
+uid="uid://b0qfy0ayi1dgw"
+path="res://.godot/imported/killAnimal.mp3-5f047b617de10cdd50937c0e83576e87.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3"
-dest_files=[ "res://.import/killAnimal.mp3-5f047b617de10cdd50937c0e83576e87.mp3str" ]
+dest_files=["res://.godot/imported/killAnimal.mp3-5f047b617de10cdd50937c0e83576e87.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

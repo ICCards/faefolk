@@ -1,12 +1,12 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var hit_box: Area2D = $SpiderHit
-onready var spider_sprite: AnimatedSprite = $Spider
-onready var _idle_timer: Timer = $Timers/IdleTimer
-onready var _chase_timer: Timer = $Timers/ChaseTimer
-onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
-onready var animation_player: AnimationPlayer = $AnimationPlayer
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var hit_box: Area2D = $SpiderHit
+@onready var spider_sprite: AnimatedSprite2D = $Spider
+@onready var _idle_timer: Timer = $Timers/IdleTimer
+@onready var _chase_timer: Timer = $Timers/ChaseTimer
+@onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var direction: String = "down"
 var destroyed: bool = false
@@ -18,18 +18,18 @@ var attacking: bool = false
 var knocking_back: bool = false
 var playing_sound_effect: bool = false
 var random_pos := Vector2.ZERO
-var velocity := Vector2.ZERO
+#var velocity := Vector2.ZERO
 var knockback := Vector2.ZERO
-var MAX_MOVE_DISTANCE: float = 60.0
+var MAX_MOVE_DISTANCE: float = 30.0
 var STARTING_HEALTH: int = Stats.SPIDER_HEALTH
 var tornado_node = null
 var state = IDLE
 var hit_projectiles = []
 
-const KNOCKBACK_SPEED = 100
-const ACCELERATION = 180
-const KNOCKBACK_AMOUNT = 70
-const MAX_RANDOM_CHASE_DIST = 50
+const KNOCKBACK_SPEED = 50
+const ACCELERATION = 90
+const KNOCKBACK_AMOUNT = 35
+const MAX_RANDOM_CHASE_DIST = 25
 var health
 
 enum {
@@ -43,54 +43,56 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	randomize()
 	health = STARTING_HEALTH
-	_chase_timer.connect("timeout", self, "_update_pathfinding_chase")
-	_idle_timer.connect("timeout", self, "_update_pathfinding_idle")
-	navigation_agent.connect("velocity_computed", self, "move") 
-	navigation_agent.set_navigation(get_node("../../").nav_node)
+	_chase_timer.connect("timeout",Callable(self,"_update_pathfinding_chase"))
+	_idle_timer.connect("timeout",Callable(self,"_update_pathfinding_idle"))
+	navigation_agent.connect("velocity_computed",Callable(self,"move")) 
 	_update_pathfinding_idle()
 
 func _update_pathfinding_chase():
-	random_pos = Vector2(rand_range(-MAX_RANDOM_CHASE_DIST, MAX_RANDOM_CHASE_DIST), rand_range(-MAX_RANDOM_CHASE_DIST, MAX_RANDOM_CHASE_DIST))
-	navigation_agent.set_target_location(Server.player_node.global_position+random_pos)
+	random_pos = Vector2(randf_range(-MAX_RANDOM_CHASE_DIST, MAX_RANDOM_CHASE_DIST), randf_range(-MAX_RANDOM_CHASE_DIST, MAX_RANDOM_CHASE_DIST))
+	navigation_agent.set_target_position(Server.player_node.global_position+random_pos)
 	
 func _update_pathfinding_idle():
 	state = WALK
-	navigation_agent.set_target_location(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
+	navigation_agent.set_target_position(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE))
 
 func move(_velocity: Vector2) -> void:
 	if tornado_node or stunned or destroyed or state == IDLE:
 		return
 	elif frozen:
 		spider_sprite.modulate = Color("00c9ff")
-		velocity = move_and_slide(_velocity*0.75)
+		set_velocity(_velocity*0.75)
+		move_and_slide()
 	elif poisoned:
 		spider_sprite.modulate = Color("009000")
-		velocity = move_and_slide(_velocity*0.9)
+		set_velocity(_velocity*0.9)
+		move_and_slide()
 	else:
 		spider_sprite.modulate = Color("ffffff")
-		velocity = move_and_slide(_velocity)
+		set_velocity(_velocity)
+		move_and_slide()
 
 func _physics_process(delta):
 	if destroyed or stunned:
-		spider_sprite.playing = false
+		spider_sprite.stop()
 		return
-	spider_sprite.playing = true
 	if knocking_back:
 		velocity = velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
-		velocity = move_and_slide(velocity)
+		set_velocity(velocity)
+		move_and_slide()
 		return
 	set_sprite_texture()
-	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
-		if not chasing:
-			start_chase_state()
-	elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
-		if chasing:
-			end_chase_state()
+#	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
+#		if not chasing:
+#			start_chase_state()
+#	elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
+#		if chasing:
+#			end_chase_state()
 	if navigation_agent.is_navigation_finished() and state == WALK and not chasing:
 		velocity = Vector2.ZERO
 		state = IDLE
 		return
-	var target = navigation_agent.get_next_location()
+	var target = navigation_agent.get_next_path_position()
 	var move_direction = position.direction_to(target)
 	var desired_velocity = move_direction * navigation_agent.max_speed
 	var steering = (desired_velocity - velocity) * delta * 4.0
@@ -144,7 +146,7 @@ func destroy(killed_by_player):
 	InstancedScenes.intitiateItemDrop("silk", position, 1)
 	destroyed = true
 	animation_player.play("destroy")
-	yield(animation_player, "animation_finished")
+	await animation_player.animation_finished
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
@@ -169,10 +171,10 @@ func _on_HurtBox_area_entered(area):
 		if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 			hit(area.tool_name)
 		if area.tool_name == "lingering tornado":
-			$EnemyTornadoState.orbit_radius = rand_range(0,20)
+			$EnemyTornadoState.orbit_radius = randf_range(0,20)
 			tornado_node = area
 		if area.special_ability == "fire":
-			var randomPos = Vector2(rand_range(-8,8), rand_range(-8,8))
+			var randomPos = Vector2(randf_range(-8,8), randf_range(-8,8))
 			InstancedScenes.initiateExplosionParticles(position+randomPos)
 			InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
 			health -= Stats.FIRE_DEBUFF_DAMAGE
@@ -180,7 +182,7 @@ func _on_HurtBox_area_entered(area):
 			$EnemyFrozenState.start(3)
 		elif area.special_ability == "poison":
 			$EnemyPoisonState.start("poison arrow")
-		yield(get_tree().create_timer(0.25), "timeout")
+		await get_tree().create_timer(0.25).timeout
 		$KnockbackParticles.emitting = false
 
 func start_chase_state():

@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://do7vd3a7rt4q5"]
 
-[ext_resource path="res://World/Enemies/AttachedStates/SetEnemyDirection.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://World/Enemies/AttachedStates/SetEnemyDirection.gd" id="1_f1ktk"]
 
 [node name="SetEnemyDirection" type="Node"]
-script = ExtResource( 1 )
+script = ExtResource("1_f1ktk")

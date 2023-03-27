@@ -1,24 +1,22 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://bjaw8dw0tc2qv"]
 
-[ext_resource path="res://World/Player/Player/UserInterface/Stove/item_button.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/inventory_icons/Food/baked catfish.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Themes/LockedAsset.tres" type="Material" id=3]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Stove/item_button.gd" id="1_lj34b"]
+[ext_resource type="Texture2D" uid="uid://d30i5wlgacql1" path="res://Assets/Images/inventory_icons/Food/baked catfish.png" id="2"]
+[ext_resource type="Material" uid="uid://d1xh7kpl8jvj7" path="res://Assets/Themes/HideCollection.tres" id="2_wfss7"]
 
 [node name="item_button" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -1008.0
-margin_bottom = -584.0
-grow_horizontal = 2
-grow_vertical = 2
-rect_min_size = Vector2( 16, 16 )
-script = ExtResource( 1 )
+layout_mode = 3
+anchors_preset = 0
+offset_right = 16.0
+offset_bottom = 16.0
+script = ExtResource("1_lj34b")
 
 [node name="button" type="TextureButton" parent="."]
-material = ExtResource( 3 )
-margin_right = 16.0
-margin_bottom = 16.0
-texture_normal = ExtResource( 2 )
+material = ExtResource("2_wfss7")
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture_normal = ExtResource("2")
 
 [connection signal="mouse_entered" from="button" to="." method="_on_button_mouse_entered"]
 [connection signal="mouse_exited" from="button" to="." method="_on_button_mouse_exited"]

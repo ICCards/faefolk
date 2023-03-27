@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/break stone.mp3-21bf9332b5388820a3b4dffb0b5bc923.mp3str"
+uid="uid://c0boiq7vdv0qb"
+path="res://.godot/imported/break stone.mp3-21bf9332b5388820a3b4dffb0b5bc923.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/objects/break stone.mp3"
-dest_files=[ "res://.import/break stone.mp3-21bf9332b5388820a3b4dffb0b5bc923.mp3str" ]
+dest_files=["res://.godot/imported/break stone.mp3-21bf9332b5388820a3b4dffb0b5bc923.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/explosion.mp3-7e895e3e3cee9d2343a0d085d66a8f6f.mp3str"
+uid="uid://c3jnur2pbj3iy"
+path="res://.godot/imported/explosion.mp3-7e895e3e3cee9d2343a0d085d66a8f6f.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Magic/Fire/explosion.mp3"
-dest_files=[ "res://.import/explosion.mp3-7e895e3e3cee9d2343a0d085d66a8f6f.mp3str" ]
+dest_files=["res://.godot/imported/explosion.mp3-7e895e3e3cee9d2343a0d085d66a8f6f.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

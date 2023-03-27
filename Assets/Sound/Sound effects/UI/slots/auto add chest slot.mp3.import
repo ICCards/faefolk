@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/auto add chest slot.mp3-7f86d04c353769b84697444515e03209.mp3str"
+uid="uid://celpq01eeohfq"
+path="res://.godot/imported/auto add chest slot.mp3-7f86d04c353769b84697444515e03209.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/UI/slots/auto add chest slot.mp3"
-dest_files=[ "res://.import/auto add chest slot.mp3-7f86d04c353769b84697444515e03209.mp3str" ]
+dest_files=["res://.godot/imported/auto add chest slot.mp3-7f86d04c353769b84697444515e03209.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

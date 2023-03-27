@@ -13,15 +13,16 @@ var bodyEnteredFlag = false
 var object_name = "crop"
 
 func _ready():
-	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + return_phase()  + ".png")
-	MapData.connect("refresh_crops", self, "refresh_image")
-	
+	Tiles.remove_valid_tiles(location)
+	$Crop/TileMap.set_cell(0,Vector2i(0,-1),0,Constants.crop_atlas_tiles[crop_name][return_phase()])
+	MapData.connect("refresh_crops",Callable(self,"refresh_image"))
+
 
 func refresh_image():
-	in_regrowth_phase = MapData.world["crops"][name]["rp"]
-	days_until_harvest = MapData.world["crops"][name]["dh"]
-	days_without_water = MapData.world["crops"][name]["dww"]
-	$CropText.texture = load("res://Assets/Images/crop_sets/" + crop_name + "/"  + return_phase()  + ".png")
+	in_regrowth_phase = MapData.world["crop"][name]["rp"]
+	days_until_harvest = MapData.world["crop"][name]["dh"]
+	days_without_water = MapData.world["crop"][name]["dww"]
+	$Crop/TileMap.set_cell(0,Vector2i(0,-1),0,Constants.crop_atlas_tiles[crop_name][return_phase()])
 
 
 func return_phase():
@@ -69,34 +70,40 @@ func return_phase():
 	
 func harvest_and_remove():
 	if !isBeingHarvested:
+		crop_name
 		$LeafEffect.show()
-		$LeafEffect.playing = true
-		$CropText.hide()
+		$LeafEffect.play("havest")
+		$Crop/TileMap.hide()
 		Tiles.add_valid_tiles(location)
 		isBeingHarvested = true
-		yield(get_tree().create_timer(0.6), "timeout")
-		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
-		yield(get_tree().create_timer(1.0), "timeout")
+		await get_tree().create_timer(0.6).timeout
+		yield_harvest(JsonData.crop_data[crop_name]["yield"])
+		await get_tree().create_timer(1.0).timeout
 		queue_free()
 	
 func harvest_and_keep_planted():
 	if !isBeingHarvested:
 		isBeingHarvested = true
-		yield(get_tree().create_timer(0.6), "timeout")
-		intitiateItemDrop(crop_name, Vector2(16, 0), JsonData.crop_data[crop_name]["yield"])
+		await get_tree().create_timer(0.6).timeout
+		yield_harvest(JsonData.crop_data[crop_name]["yield"])
 		MapData.world["crops"][name]["rp"] = true # start regrowth phase
 		MapData.world["crops"][name]["dh"] = 1 # days until next harvest
 		refresh_image()
 		
 
-func intitiateItemDrop(item, pos, yield_list):
-	PlayerData.pick_up_item(item, 1, null)
+func yield_harvest(yield_list):
 	yield_list.shuffle()
-	var amount = yield_list.front()
-	PlayerData.player_data["collections"]["crops"][crop_name] += amount
-	if amount > 1:
-		InstancedScenes.intitiateItemDrop(item, position+Vector2(0,16), amount-1)
-		
+	var yield_amount = yield_list.front()
+	PlayerData.player_data["collections"]["crops"][crop_name] += yield_amount
+	if PlayerDataHelpers.can_item_be_added_to_inventory(crop_name, 1):
+		Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(crop_name, 1)
+		PlayerData.pick_up_item(crop_name, 1, null)
+	else:
+		Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up("Inventory full!", 1)
+		InstancedScenes.intitiateItemDrop(crop_name,position+Vector2(0,8),1)
+	if yield_amount > 1:
+		InstancedScenes.intitiateItemDrop(crop_name,position+Vector2(0,8),yield_amount-1)
+
 
 func play_effect():
 	var phase = return_phase()
@@ -116,8 +123,8 @@ func _on_PlayAnimBox_body_exited(body):
 
 func _on_HurtBox_area_entered(area):
 	Tiles.add_valid_tiles(location)
-	MapData.remove_crop(name)
-	queue_free()
+	MapData.remove_object("crop",name)
+	call_deferred("queue_free")
 
 
 func harvest():

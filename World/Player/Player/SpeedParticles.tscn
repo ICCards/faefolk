@@ -1,64 +1,55 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://c1posnfc3ruce"]
 
-[ext_resource path="res://World/Player/Player/SpeedParticles.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://World/Player/Player/SpeedParticles.gd" id="1_er86h"]
 
 [node name="SpeedParticles" type="Node2D"]
-position = Vector2( 0, -25 )
-script = ExtResource( 1 )
+position = Vector2(0, -16)
+script = ExtResource("1_er86h")
 
-[node name="P3" type="CPUParticles2D" parent="."]
-modulate = Color( 1.35, 1.35, 1.35, 1 )
+[node name="Parts3" type="CPUParticles2D" parent="."]
+modulate = Color(1.35, 1.35, 1.35, 1)
 emitting = false
 amount = 10
 lifetime = 2.5
 lifetime_randomness = 0.8
-local_coords = false
 emission_shape = 2
-emission_rect_extents = Vector2( 12, 4 )
-direction = Vector2( -1, 0 )
+emission_sphere_radius = 1.0
+direction = Vector2(-1, 0)
 spread = 24.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 40.0
-initial_velocity_random = 0.8
-scale_amount = 4.0
-scale_amount_random = 0.7
-color = Color( 0.14902, 0.466667, 0.937255, 1 )
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+color = Color(0.14902, 0.466667, 0.937255, 1)
 
-[node name="P2" type="CPUParticles2D" parent="."]
-modulate = Color( 1.35, 1.35, 1.35, 1 )
+[node name="Parts2" type="CPUParticles2D" parent="."]
+modulate = Color(1.35, 1.35, 1.35, 1)
 emitting = false
 amount = 10
 lifetime = 2.5
 lifetime_randomness = 0.8
-local_coords = false
 emission_shape = 2
-emission_rect_extents = Vector2( 32, 4 )
-direction = Vector2( -1, 0 )
+emission_sphere_radius = 1.0
+direction = Vector2(-1, 0)
 spread = 24.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 40.0
-initial_velocity_random = 0.8
-scale_amount = 4.0
-scale_amount_random = 0.7
-color = Color( 0.545098, 0.701961, 0.937255, 1 )
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+color = Color(0.545098, 0.701961, 0.937255, 1)
 
-[node name="P1" type="CPUParticles2D" parent="."]
-modulate = Color( 1.35, 1.35, 1.35, 1 )
+[node name="Parts1" type="CPUParticles2D" parent="."]
+modulate = Color(1.35, 1.35, 1.35, 1)
 emitting = false
 amount = 10
 lifetime = 2.5
 lifetime_randomness = 0.8
-local_coords = false
 emission_shape = 2
-emission_rect_extents = Vector2( 32, 4 )
-direction = Vector2( -1, 0 )
+emission_sphere_radius = 1.0
+direction = Vector2(-1, 0)
 spread = 24.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 40.0
-initial_velocity_random = 0.8
-scale_amount = 4.0
-scale_amount_random = 0.7
-color = Color( 0.145098, 0.305882, 0.545098, 1 )
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+color = Color(0.145098, 0.305882, 0.545098, 1)
 
 [node name="SpeedStateTimer" type="Timer" parent="."]
 one_shot = true

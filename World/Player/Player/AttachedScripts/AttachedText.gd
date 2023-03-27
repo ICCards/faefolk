@@ -11,13 +11,13 @@ func DisplayMessageBubble(message):
 		$MessageBubble.text = message
 		$Timer.stop()
 		$Timer.start()
-		yield($Timer, "timeout")
+		await $Timer.timeout
 		$MessageBubble.visible = false
 	else:
 		$MessageBubble.text = ""
 		$MessageBubble.text = message
 		$Timer.start()
-		yield($Timer, "timeout")
+		await $Timer.timeout
 		$MessageBubble.visible = false
 
 func set_username(username):

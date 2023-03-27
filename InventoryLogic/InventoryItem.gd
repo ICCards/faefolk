@@ -20,51 +20,21 @@ func set_item(nm, qt, health):
 		$Label.visible = false
 	else:
 		$Label.visible = true
-		$Label.text = String(item_quantity)
+		$Label.text = str(item_quantity)
 	if item_health != null:
 		$HealthBar.visible = true
 		set_health_bar(item_health)
 	if item_quantity == null:
-		$Image.rect_size = Vector2(64,64)
+		$Image.size = Vector2(64,64)
 
 
 func hover_crafting_item():
-	$Tween.interpolate_property($Image, "rect_scale",
-		$Image.rect_scale, Vector2(1.05, 1.05), 0.075,
-	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property($Image, "scale", Vector2(1.05, 1.05), 0.075)
 	
 func exit_crafting_item():
-	$Tween.interpolate_property($Image, "rect_scale",
-		$Image.rect_scale, Vector2(1.0, 1.0), 0.075,
-	Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
-
-func set_init_hovered():
-	pass
-#	$Image.rect_scale = Vector2(1.075, 1.075)
-#	$Image.rect_position = Vector2(1.0, 1.0)
-
-func hover_item():
-	pass
-#	$Tween.interpolate_property($Image, "rect_scale",
-#		$Image.rect_scale, Vector2(1.05, 1.05), 0.075,
-#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-#	$Tween.interpolate_property($Image, "rect_position",
-#		$Image.rect_position, Vector2(0, 0), 0.075,
-#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-#	$Tween.start()
-	 
-func exit_item():
-	pass
-	#if Server.isLoaded:
-#	$Tween.interpolate_property($Image, "rect_scale",
-#		$Image.rect_scale, Vector2(1.0, 1.0), 0.075,
-#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-#	$Tween.interpolate_property($Image, "rect_position",
-#		$Image.rect_position, Vector2(2.0, 2.0), 0.075,
-#		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-#	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property($Image, "scale", Vector2(1.0, 1.0), 0.075,)
 
 
 func set_health_bar(health):
@@ -121,8 +91,8 @@ func set_health_bar(health):
 			
 func add_item_quantity(amount_to_add):
 	item_quantity += amount_to_add
-	$Label.text = String(item_quantity)
+	$Label.text = str(item_quantity)
 	
 func decrease_item_quantity(amount_to_remove):
 	item_quantity -= amount_to_remove
-	$Label.text = String(item_quantity)
+	$Label.text = str(item_quantity)

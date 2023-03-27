@@ -2,12 +2,13 @@
 
 importer="bitmap"
 type="BitMap"
-path="res://.import/3 click mask.png-bacf6075097128ce9ce909c491707e5b.res"
+uid="uid://daibuuq5xh67"
+path="res://.godot/imported/3 click mask.png-bacf6075097128ce9ce909c491707e5b.res"
 
 [deps]
 
 source_file="res://Assets/Images/User interface/radial menus/5-segment-menu/unselected/3 click mask.png"
-dest_files=[ "res://.import/3 click mask.png-bacf6075097128ce9ce909c491707e5b.res" ]
+dest_files=["res://.godot/imported/3 click mask.png-bacf6075097128ce9ce909c491707e5b.res"]
 
 [params]
 

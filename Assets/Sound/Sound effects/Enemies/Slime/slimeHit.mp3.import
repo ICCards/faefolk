@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/slimeHit.mp3-e3c5112d5be13db9385e9b6a5900417b.mp3str"
+uid="uid://yhwxj2c7j32q"
+path="res://.godot/imported/slimeHit.mp3-e3c5112d5be13db9385e9b6a5900417b.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Enemies/Slime/slimeHit.mp3"
-dest_files=[ "res://.import/slimeHit.mp3-e3c5112d5be13db9385e9b6a5900417b.mp3str" ]
+dest_files=["res://.godot/imported/slimeHit.mp3-e3c5112d5be13db9385e9b6a5900417b.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

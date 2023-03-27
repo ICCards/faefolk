@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/hurt3.mp3-eb1f11a909296f93ec39db55f999683a.mp3str"
+uid="uid://dax4ja43sydlc"
+path="res://.godot/imported/hurt3.mp3-eb1f11a909296f93ec39db55f999683a.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/animals/wolf/hurt3.mp3"
-dest_files=[ "res://.import/hurt3.mp3-eb1f11a909296f93ec39db55f999683a.mp3str" ]
+dest_files=["res://.godot/imported/hurt3.mp3-eb1f11a909296f93ec39db55f999683a.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

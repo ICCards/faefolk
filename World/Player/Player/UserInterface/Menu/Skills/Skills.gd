@@ -1,29 +1,41 @@
 extends Control
 
-onready var sound_effects: AudioStreamPlayer = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
-onready var front_progress_bar = $SkillProgress/FrontPgBar
-onready var back_progress_bar = $SkillProgress/BackPgBar
-onready var progress_label = $SkillProgress/ProgressLabel
-onready var max_progress_label = $SkillProgress/MaxProgressLabel
-onready var icon1 = $Icons/Icon1
-onready var icon2 = $Icons/Icon2
-onready var icon3 = $Icons/Icon3
-onready var icon4 = $Icons/Icon4
-onready var sword_btn = $Buttons/SwordBtn
-onready var bow_btn = $Buttons/BowBtn
-onready var wind_btn = $Buttons/WindBtn
-onready var fire_btn = $Buttons/FireBtn
-onready var earth_btn = $Buttons/EarthBtn
-onready var ice_btn = $Buttons/IceBtn
-onready var electric_btn = $Buttons/ElectricBtn
-onready var dark_magic_btn = $Buttons/DarkMagicBtn
+@onready var front_progress_bar = $SkillProgress/FrontPgBar
+@onready var back_progress_bar = $SkillProgress/BackPgBar
+@onready var progress_label = $SkillProgress/ProgressLabel
+@onready var max_progress_label = $SkillProgress/MaxProgressLabel
+@onready var icon1 = $Icons/Icon1
+@onready var icon2 = $Icons/Icon2
+@onready var icon3 = $Icons/Icon3
+@onready var icon4 = $Icons/Icon4
+@onready var sword_btn = $Buttons/SwordBtn
+@onready var bow_btn = $Buttons/BowBtn
+@onready var wind_btn = $Buttons/WindBtn
+@onready var fire_btn = $Buttons/FireBtn
+@onready var earth_btn = $Buttons/EarthBtn
+@onready var ice_btn = $Buttons/IceBtn
+@onready var electric_btn = $Buttons/ElectricBtn
+@onready var dark_magic_btn = $Buttons/DarkMagicBtn
 
 var skill = "sword"
-
+var hovered_button = ""
+ 
 func initialize():
 	show()
 	set_bg()
+	
+func _physics_process(delta):
+	if not visible:
+		hovered_button = ""
+		$ItemNameBox.hide()
+		return
+	if hovered_button == "":
+		$ItemNameBox.hide()
+	else:
+		$ItemNameBox.item_name = hovered_button
+		$ItemNameBox.initialize()
 	
 func set_bg():
 	get_node("../../Background").set_deferred("texture", load("res://Assets/Images/User interface/inventory/skills/"+skill +"-tab.png"))
@@ -32,77 +44,77 @@ func set_bg():
 	set_skills()
 	match skill:
 		"sword":
-			sword_btn.rect_position.x = 351
-			bow_btn.rect_position.x = 318
-			wind_btn.rect_position.x = 318
-			fire_btn.rect_position.x = 318
-			earth_btn.rect_position.x = 318
-			ice_btn.rect_position.x = 318
-			electric_btn.rect_position.x = 318
-			dark_magic_btn.rect_position.x = 318
+			sword_btn.position.x = 351
+			bow_btn.position.x = 318
+			wind_btn.position.x = 318
+			fire_btn.position.x = 318
+			earth_btn.position.x = 318
+			ice_btn.position.x = 318
+			electric_btn.position.x = 318
+			dark_magic_btn.position.x = 318
 		"bow":
-			sword_btn.rect_position.x = 318
-			bow_btn.rect_position.x = 351
-			wind_btn.rect_position.x = 318
-			fire_btn.rect_position.x = 318
-			earth_btn.rect_position.x = 318
-			ice_btn.rect_position.x = 318
-			electric_btn.rect_position.x = 318
-			dark_magic_btn.rect_position.x = 318
+			sword_btn.position.x = 318
+			bow_btn.position.x = 351
+			wind_btn.position.x = 318
+			fire_btn.position.x = 318
+			earth_btn.position.x = 318
+			ice_btn.position.x = 318
+			electric_btn.position.x = 318
+			dark_magic_btn.position.x = 318
 		"wind":
-			sword_btn.rect_position.x = 318
-			bow_btn.rect_position.x = 318
-			wind_btn.rect_position.x = 351
-			fire_btn.rect_position.x = 318
-			earth_btn.rect_position.x = 318
-			ice_btn.rect_position.x = 318
-			electric_btn.rect_position.x = 318
-			dark_magic_btn.rect_position.x = 318
+			sword_btn.position.x = 318
+			bow_btn.position.x = 318
+			wind_btn.position.x = 351
+			fire_btn.position.x = 318
+			earth_btn.position.x = 318
+			ice_btn.position.x = 318
+			electric_btn.position.x = 318
+			dark_magic_btn.position.x = 318
 		"fire":
-			sword_btn.rect_position.x = 318
-			bow_btn.rect_position.x = 318
-			wind_btn.rect_position.x = 318
-			fire_btn.rect_position.x = 351
-			earth_btn.rect_position.x = 318
-			ice_btn.rect_position.x = 318
-			electric_btn.rect_position.x = 318
-			dark_magic_btn.rect_position.x = 318
+			sword_btn.position.x = 318
+			bow_btn.position.x = 318
+			wind_btn.position.x = 318
+			fire_btn.position.x = 351
+			earth_btn.position.x = 318
+			ice_btn.position.x = 318
+			electric_btn.position.x = 318
+			dark_magic_btn.position.x = 318
 		"earth":
-			sword_btn.rect_position.x = 318
-			bow_btn.rect_position.x = 318
-			wind_btn.rect_position.x = 318
-			fire_btn.rect_position.x = 318
-			earth_btn.rect_position.x = 351
-			ice_btn.rect_position.x = 318
-			electric_btn.rect_position.x = 318
-			dark_magic_btn.rect_position.x = 318
+			sword_btn.position.x = 318
+			bow_btn.position.x = 318
+			wind_btn.position.x = 318
+			fire_btn.position.x = 318
+			earth_btn.position.x = 351
+			ice_btn.position.x = 318
+			electric_btn.position.x = 318
+			dark_magic_btn.position.x = 318
 		"ice":
-			sword_btn.rect_position.x = 318
-			bow_btn.rect_position.x = 318
-			wind_btn.rect_position.x = 318
-			fire_btn.rect_position.x = 318
-			earth_btn.rect_position.x = 318
-			ice_btn.rect_position.x = 351
-			electric_btn.rect_position.x = 318
-			dark_magic_btn.rect_position.x = 318
+			sword_btn.position.x = 318
+			bow_btn.position.x = 318
+			wind_btn.position.x = 318
+			fire_btn.position.x = 318
+			earth_btn.position.x = 318
+			ice_btn.position.x = 351
+			electric_btn.position.x = 318
+			dark_magic_btn.position.x = 318
 		"electric":
-			sword_btn.rect_position.x = 318
-			bow_btn.rect_position.x = 318
-			wind_btn.rect_position.x = 318
-			fire_btn.rect_position.x = 318
-			earth_btn.rect_position.x = 318
-			ice_btn.rect_position.x = 318
-			electric_btn.rect_position.x = 351
-			dark_magic_btn.rect_position.x = 318
+			sword_btn.position.x = 318
+			bow_btn.position.x = 318
+			wind_btn.position.x = 318
+			fire_btn.position.x = 318
+			earth_btn.position.x = 318
+			ice_btn.position.x = 318
+			electric_btn.position.x = 351
+			dark_magic_btn.position.x = 318
 		"dark":
-			sword_btn.rect_position.x = 318
-			bow_btn.rect_position.x = 318
-			wind_btn.rect_position.x = 318
-			fire_btn.rect_position.x = 318
-			earth_btn.rect_position.x = 318
-			ice_btn.rect_position.x = 318
-			electric_btn.rect_position.x = 318
-			dark_magic_btn.rect_position.x = 351
+			sword_btn.position.x = 318
+			bow_btn.position.x = 318
+			wind_btn.position.x = 318
+			fire_btn.position.x = 318
+			earth_btn.position.x = 318
+			ice_btn.position.x = 318
+			electric_btn.position.x = 318
+			dark_magic_btn.position.x = 351
 			
 func set_skills():
 	var experience = PlayerData.player_data["skill_experience"][skill]
@@ -266,3 +278,44 @@ func _on_ElectricBtn_pressed():
 	set_bg()
 	
 
+
+
+func _on_sword_btn_mouse_entered():
+	hovered_button = "Sword"
+func _on_sword_btn_mouse_exited():
+	hovered_button = ""
+
+func _on_bow_btn_mouse_entered():
+	hovered_button = "Bow"
+func _on_bow_btn_mouse_exited():
+	hovered_button = ""
+
+func _on_wind_btn_mouse_entered():
+	hovered_button = "Wind Magic"
+func _on_wind_btn_mouse_exited():
+	hovered_button = ""
+
+func _on_fire_btn_mouse_entered():
+	hovered_button = "Fire Magic"
+func _on_fire_btn_mouse_exited():
+	hovered_button = ""
+
+func _on_earth_btn_mouse_entered():
+	hovered_button = "Earth Magic"
+func _on_earth_btn_mouse_exited():
+	hovered_button = ""
+
+func _on_ice_btn_mouse_entered():
+	hovered_button = "Ice Magic"
+func _on_ice_btn_mouse_exited():
+	hovered_button = ""
+
+func _on_electric_btn_mouse_entered():
+	hovered_button = "Electric Magic"
+func _on_electric_btn_mouse_exited():
+	hovered_button = ""
+
+func _on_dark_magic_btn_mouse_entered():
+	hovered_button = "Dark Magic"
+func _on_dark_magic_btn_mouse_exited():
+	hovered_button = ""

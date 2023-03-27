@@ -8,8 +8,8 @@ var time
 var InventorySlots
 var HotbarSlots
 
-onready var SlotClass = load("res://InventoryLogic/Slot.gd")
-onready var ItemClass = load("res://InventoryLogic/InventoryItem.gd")
+@onready var SlotClass = load("res://InventoryLogic/Slot.gd")
+@onready var ItemClass = load("res://InventoryLogic/InventoryItem.gd")
 const NUM_INVENTORY_SLOTS = 10
 const NUM_HOTBAR_SLOTS = 10
 
@@ -237,22 +237,10 @@ func can_item_be_added_to_inventory(item_name, item_quantity):
 	return false
 
 
-		
-
-func update_chest_slot_visual(slot_index, item_name, new_quantity):
-	pass
-#	var slot = get_tree().root.get_node("/root/World/Players/" + str(Server.player_id) + "/" + str(Server.player_id) + "/Camera2D/UserInterface/OpenChest/ChestSlots/Slot" + str(slot_index + 1))
-#	if slot.item != null:
-#		if new_quantity == 0:
-#			remove_item(slot)
-#			slot.removeFromSlot()
-#		else:
-#			slot.item.set_item(item_name, new_quantity)
-#	else:
-#		slot.initialize_item(item_name, new_quantity)
 
 
-func add_item_to_empty_slot(item, slot, var id = null):
+
+func add_item_to_empty_slot(item, slot, id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
@@ -272,7 +260,7 @@ func add_item_to_empty_slot(item, slot, var id = null):
 			tool_cabinets[id][slot.slot_index] = [item.item_name, item.item_quantity, item.item_health]
 
 
-func add_item_quantity(slot, quantity_to_add: int, var id = null):
+func add_item_quantity(slot, quantity_to_add: int, id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index][1] += quantity_to_add
@@ -291,7 +279,7 @@ func add_item_quantity(slot, quantity_to_add: int, var id = null):
 		SlotClass.SlotType.TOOL_CABINET:
 			tool_cabinets[id][slot.slot_index][1] += quantity_to_add
 
-func decrease_item_quantity(slot, quantity_to_subtract: int, var id = null):
+func decrease_item_quantity(slot, quantity_to_subtract: int, id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			hotbar[slot.slot_index][1] -= quantity_to_subtract

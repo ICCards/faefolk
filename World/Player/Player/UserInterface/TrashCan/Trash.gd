@@ -1,6 +1,6 @@
 extends Control
 
-onready var sound_effects: AudioStreamPlayer = $SoundEffects
+@onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 func initialize():
 	show()
@@ -26,16 +26,12 @@ func open_trash_can():
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/trash/trashcanlid.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
-	$Tween.interpolate_property($Top, "rotation_degrees",
-		$Top.rotation_degrees, 90, 0.35,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property($Top, "rotation_degrees", 90, 0.35)
 	
 func close_trash_can():
-	$Tween.interpolate_property($Top, "rotation_degrees",
-		$Top.rotation_degrees, 0, 0.35,
-		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property($Top, "rotation_degrees", 0, 0.35)
 
 
 func _on_BackgroundButton_pressed():

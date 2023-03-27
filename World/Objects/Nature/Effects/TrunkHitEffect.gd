@@ -1,13 +1,13 @@
 extends Node2D
 
-onready var treeChip1Sprite = $TreeChips/TreeChip1
-onready var treeChip2Sprite = $TreeChips/TreeChip2
-onready var treeChip3Sprite = $TreeChips/TreeChip3
-onready var treeChip4Sprite = $TreeChips/TreeChip4
-onready var treeChip5Sprite = $TreeChips/TreeChip5
-onready var treeChip6Sprite = $TreeChips/TreeChip6
+@onready var treeChip1Sprite = $TreeChips/TreeChip1
+@onready var treeChip2Sprite = $TreeChips/TreeChip2
+@onready var treeChip3Sprite = $TreeChips/TreeChip3
+@onready var treeChip4Sprite = $TreeChips/TreeChip4
+@onready var treeChip5Sprite = $TreeChips/TreeChip5
+@onready var treeChip6Sprite = $TreeChips/TreeChip6
 
-onready var animation_player = $AnimationPlayer
+@onready var animation_player = $AnimationPlayer
 
 var rng = RandomNumberGenerator.new()
 
@@ -28,9 +28,7 @@ func _ready():
 	elif effectType == "tree hit left":
 		randomizeDisplayedSprites()
 		animation_player.play("tree hit left")
-	elif effectType == "trunk break":
-		animation_player.play("trunk break")
-	yield(animation_player, "animation_finished")
+	await animation_player.animation_finished
 	queue_free()
 
 	

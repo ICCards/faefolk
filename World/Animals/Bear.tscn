@@ -1,713 +1,719 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=35 format=3 uid="uid://cpos5lnpx7t40"]
 
-[ext_resource path="res://World/Animals/Bear.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Themes/Flash.tres" type="Material" id=3]
-[ext_resource path="res://Assets/Images/Animals/Bear/claw/body/down.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Images/Magic/lightning/lightning effect.png" type="Texture" id=11]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" type="PackedScene" id=12]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" type="PackedScene" id=13]
-[ext_resource path="res://World/Enemies/AttachedStates/SetEnemyDirection.tscn" type="PackedScene" id=14]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" type="PackedScene" id=15]
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" type="PackedScene" id=16]
-[ext_resource path="res://Assets/Images/Enemies/knockback dust.png" type="Texture" id=17]
+[ext_resource type="Script" path="res://World/Animals/Bear.gd" id="2_j0bup"]
+[ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="3"]
+[ext_resource type="PackedScene" uid="uid://dr88n2qik0tat" path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" id="3_7dcao"]
+[ext_resource type="PackedScene" uid="uid://cqt04hkompf5f" path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" id="4_eeqqv"]
+[ext_resource type="PackedScene" uid="uid://cvfur4ra58e75" path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" id="5_jhfrv"]
+[ext_resource type="Texture2D" uid="uid://c7hrhainvy8e5" path="res://Assets/Images/Magic/lightning/lightning effect.png" id="5_s7yqy"]
+[ext_resource type="PackedScene" uid="uid://dx8hix2epqruo" path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" id="6_oy1tb"]
+[ext_resource type="Texture2D" uid="uid://dhjglh7spssrl" path="res://Assets/Images/Animals/Bear/claw/body/down.png" id="7"]
+[ext_resource type="PackedScene" uid="uid://do7vd3a7rt4q5" path="res://World/Enemies/AttachedStates/SetEnemyDirection.tscn" id="7_mfwsv"]
+[ext_resource type="Texture2D" uid="uid://c7pbioiyoq5hg" path="res://Assets/Images/Enemies/knockback dust.png" id="17"]
 
-[sub_resource type="CanvasItemMaterial" id=130]
+[sub_resource type="CanvasItemMaterial" id="130"]
 particles_animation = true
 particles_anim_h_frames = 9
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="Shader" id=18]
+[sub_resource type="CircleShape2D" id="22"]
+radius = 8.0
 
-[sub_resource type="ShaderMaterial" id=19]
-shader = SubResource( 18 )
+[sub_resource type="CapsuleShape2D" id="2"]
+radius = 15.0
+height = 36.0
 
-[sub_resource type="CircleShape2D" id=22]
-radius = 15.5
+[sub_resource type="CircleShape2D" id="24"]
+radius = 12.0
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 37.0
-height = 28.0
+[sub_resource type="CircleShape2D" id="14"]
+radius = 18.0
 
-[sub_resource type="CircleShape2D" id=24]
-radius = 30.0
-
-[sub_resource type="CircleShape2D" id=14]
-radius = 36.0
-
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id="20"]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("..:material:shader_param/flash_modifier")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:material:shader_parameter/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0.0 ]
+"values": [0.0]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id="15"]
 resource_name = "hit"
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("..:material:shader_param/flash_modifier")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("../Body:material:shader_parameter/flash_modifier")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ 1.0, 0.0 ]
+"values": [1.0, 1.0, 0.0]
 }
 
-[sub_resource type="CircleShape2D" id=21]
-radius = 248.032
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rnr43"]
+_data = {
+"RESET": SubResource("20"),
+"hit": SubResource("15")
+}
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="CircleShape2D" id="21"]
+radius = 124.0
+
+[sub_resource type="Animation" id="3"]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Position2D/BearClaw/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Marker2D/BearClaw/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ true ]
+"values": [true]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Position2D/BearClaw/CollisionShape2D:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Marker2D/BearClaw/CollisionShape2D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0.0 ]
+"values": [0.0]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Position2D/BearClaw/CollisionShape2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("Marker2D/BearClaw/CollisionShape2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [Vector2(0, 0)]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("Body/Fangs:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0 ]
+"values": [0]
 }
 tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("Body/Bear:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0 ]
+"values": [0]
 }
 tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("Body/Bear:texture")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ ExtResource( 7 ) ]
+"values": [ExtResource("7")]
 }
 tracks/6/type = "value"
-tracks/6/path = NodePath("Position2D/BearBite/CollisionShape2D:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
 tracks/6/imported = false
 tracks/6/enabled = true
+tracks/6/path = NodePath("Marker2D/BearBite/CollisionShape2D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [Vector2(0, 0)]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("Position2D/BearBite/CollisionShape2D:rotation_degrees")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
+tracks/7/path = NodePath("Marker2D/BearBite/CollisionShape2D:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 90.0 ]
+"values": [90.0]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("Position2D/BearBite/CollisionShape2D:disabled")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
+tracks/8/path = NodePath("Marker2D/BearBite/CollisionShape2D:disabled")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ true ]
+"values": [true]
 }
 tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
 tracks/9/path = NodePath("Body/Fangs:texture")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
 tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ null ]
+"values": [null]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("Position2D/BearBite:rotation_degrees")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
+tracks/10/path = NodePath("Marker2D/BearBite:rotation_degrees")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0.0 ]
+"values": [0.0]
 }
 tracks/11/type = "value"
-tracks/11/path = NodePath("Position2D:rotation_degrees")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
 tracks/11/imported = false
 tracks/11/enabled = true
+tracks/11/path = NodePath("Marker2D:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0.0 ]
+"values": [0.0]
 }
 tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
 tracks/12/path = NodePath("HurtBox/CollisionShape2D:disabled")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
-tracks/12/imported = false
-tracks/12/enabled = true
 tracks/12/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
 tracks/13/path = NodePath("CollisionShape2D:disabled")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
-tracks/13/imported = false
-tracks/13/enabled = true
 tracks/13/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id="10"]
 resource_name = "bite"
 length = 0.6
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Body/Fangs:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ null ]
+"values": [null]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Body/Bear:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Position2D/BearBite/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, true ]
+"values": [0, 1, 2, 3]
 }
 
-[sub_resource type="Animation" id=23]
+[sub_resource type="Animation" id="23"]
 resource_name = "death"
 length = 2.5
 step = 0.05
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Body:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1, 2 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("Body/Bear:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("Body/Fangs:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("Electricity:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("HurtBox/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
 tracks/5/path = NodePath("CollisionShape2D:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
 tracks/6/path = NodePath("KnockbackParticles:visible")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
 tracks/6/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 tracks/7/type = "value"
-tracks/7/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
 tracks/7/imported = false
 tracks/7/enabled = true
+tracks/7/path = NodePath("Marker2D/BearClaw/CollisionShape2D:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ false ]
+"values": [true, true]
 }
 tracks/8/type = "value"
-tracks/8/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
+tracks/8/path = NodePath("Marker2D/BearBite/CollisionShape2D:disabled")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ false ]
+"values": [true, true]
 }
 tracks/9/type = "value"
-tracks/9/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
 tracks/9/imported = false
 tracks/9/enabled = true
+tracks/9/path = NodePath("EnemyPoisonState/PoisonParticles/Parts1:emitting")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 tracks/10/type = "value"
-tracks/10/path = NodePath("Position2D/BearClaw/CollisionShape2D:disabled")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
 tracks/10/imported = false
 tracks/10/enabled = true
+tracks/10/path = NodePath("EnemyPoisonState/PoisonParticles/Parts2:emitting")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PoolRealArray( 0, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true, true ]
+"values": [false]
 }
 tracks/11/type = "value"
-tracks/11/path = NodePath("Position2D/BearBite/CollisionShape2D:disabled")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
 tracks/11/imported = false
 tracks/11/enabled = true
+tracks/11/path = NodePath("EnemyPoisonState/PoisonParticles/Parts3:emitting")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PoolRealArray( 0, 2.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true, true ]
+"values": [false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Body:material:shader_parameter/flash_modifier")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 0.0]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id="8"]
 resource_name = "loop"
 length = 0.6
-loop = true
+loop_mode = 1
 step = 0.05
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Body/Bear:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Position2D/BearClaw/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Marker2D/BearClaw/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Position2D/BearBite/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("Marker2D/BearBite/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("Body/Fangs:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
 }
 
-[sub_resource type="Animation" id=25]
+[sub_resource type="Animation" id="25"]
 resource_name = "loop frozen"
-loop = true
 step = 0.05
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Body/Bear:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Position2D/BearClaw/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Marker2D/BearClaw/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Position2D/BearBite/CollisionShape2D:disabled")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("Marker2D/BearBite/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath("Body/Fangs:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id="7"]
 resource_name = "swing"
 length = 0.6
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("Body/Fangs:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ null ]
+"values": [null]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Position2D/BearClaw/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("Body/Bear:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.45 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ true, true ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Body/Bear:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
 }
 
-[sub_resource type="AtlasTexture" id=122]
-atlas = ExtResource( 11 )
-region = Rect2( 0, 0, 96, 80 )
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3ekk4"]
+_data = {
+"RESET": SubResource("3"),
+"bite": SubResource("10"),
+"death": SubResource("23"),
+"loop": SubResource("8"),
+"loop frozen": SubResource("25"),
+"swing": SubResource("7")
+}
 
-[sub_resource type="AtlasTexture" id=123]
-atlas = ExtResource( 11 )
-region = Rect2( 96, 0, 96, 80 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_ktf2y"]
+atlas = ExtResource("5_s7yqy")
+region = Rect2(0, 0, 96, 80)
 
-[sub_resource type="AtlasTexture" id=124]
-atlas = ExtResource( 11 )
-region = Rect2( 192, 0, 96, 80 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vql7"]
+atlas = ExtResource("5_s7yqy")
+region = Rect2(96, 0, 96, 80)
 
-[sub_resource type="AtlasTexture" id=125]
-atlas = ExtResource( 11 )
-region = Rect2( 0, 80, 96, 80 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_37qdk"]
+atlas = ExtResource("5_s7yqy")
+region = Rect2(192, 0, 96, 80)
 
-[sub_resource type="AtlasTexture" id=126]
-atlas = ExtResource( 11 )
-region = Rect2( 96, 80, 96, 80 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_yg5ix"]
+atlas = ExtResource("5_s7yqy")
+region = Rect2(0, 80, 96, 80)
 
-[sub_resource type="AtlasTexture" id=127]
-atlas = ExtResource( 11 )
-region = Rect2( 192, 80, 96, 80 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rqrj"]
+atlas = ExtResource("5_s7yqy")
+region = Rect2(96, 80, 96, 80)
 
-[sub_resource type="AtlasTexture" id=128]
-atlas = ExtResource( 11 )
-region = Rect2( 0, 160, 96, 80 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_ii2qy"]
+atlas = ExtResource("5_s7yqy")
+region = Rect2(192, 80, 96, 80)
 
-[sub_resource type="SpriteFrames" id=129]
-animations = [ {
-"frames": [ SubResource( 122 ), SubResource( 123 ), SubResource( 124 ), SubResource( 125 ), SubResource( 126 ), SubResource( 127 ), SubResource( 128 ) ],
+[sub_resource type="AtlasTexture" id="AtlasTexture_tykh4"]
+atlas = ExtResource("5_s7yqy")
+region = Rect2(0, 160, 96, 80)
+
+[sub_resource type="SpriteFrames" id="129"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ktf2y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vql7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_37qdk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yg5ix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rqrj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ii2qy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tykh4")
+}],
 "loop": true,
-"name": "play",
-"speed": 8.0
-} ]
+"name": &"play",
+"speed": 5.0
+}]
 
-[node name="Bear" type="KinematicBody2D"]
-modulate = Color( 1.22, 1.22, 1.22, 1 )
-material = ExtResource( 3 )
-collision_layer = 0
+[node name="Bear" type="CharacterBody2D"]
+modulate = Color(1.22, 1.22, 1.22, 1)
 collision_mask = 67
-script = ExtResource( 1 )
+motion_mode = 1
+script = ExtResource("2_j0bup")
+
+[node name="EnemyTornadoState" parent="." instance=ExtResource("3_7dcao")]
+
+[node name="EnemyStunnedState" parent="." instance=ExtResource("4_eeqqv")]
+
+[node name="EnemyPoisonState" parent="." instance=ExtResource("5_jhfrv")]
+
+[node name="EnemyFrozenState" parent="." instance=ExtResource("6_oy1tb")]
+
+[node name="SetEnemyDirection" parent="." instance=ExtResource("7_mfwsv")]
 
 [node name="KnockbackParticles" type="CPUParticles2D" parent="."]
-material = SubResource( 130 )
+visible = false
+material = SubResource("130")
 emitting = false
 amount = 3
 lifetime = 0.5
 explosiveness = 0.5
-local_coords = false
-texture = ExtResource( 17 )
-gravity = Vector2( 0, 0 )
-scale_amount = 2.0
-anim_speed = 2.0
+texture = ExtResource("17")
+gravity = Vector2(0, 0)
+anim_speed_min = 1.0
+anim_speed_max = 1.0
 
-[node name="EnemyTornadoState" parent="." instance=ExtResource( 12 )]
+[node name="Body" type="Node2D" parent="."]
+material = ExtResource("3")
 
-[node name="SetEnemyDirection" parent="." instance=ExtResource( 14 )]
-
-[node name="EnemyStunnedState" parent="." instance=ExtResource( 16 )]
-
-[node name="EnemyFrozenState" parent="." instance=ExtResource( 13 )]
-
-[node name="EnemyPoisonState" parent="." instance=ExtResource( 15 )]
-
-[node name="P3" parent="EnemyPoisonState/PoisonParticles" index="0"]
-position = Vector2( 0, -33 )
-
-[node name="P2" parent="EnemyPoisonState/PoisonParticles" index="1"]
-position = Vector2( 0, -33 )
-
-[node name="P1" parent="EnemyPoisonState/PoisonParticles" index="2"]
-position = Vector2( 0, -33 )
-
-[node name="Body" type="Sprite" parent="."]
-material = SubResource( 19 )
+[node name="Bear" type="Sprite2D" parent="Body"]
 use_parent_material = true
-
-[node name="Bear" type="Sprite" parent="Body"]
-use_parent_material = true
-position = Vector2( 0, -40 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 7 )
+position = Vector2(2.08165e-12, -20)
+texture = ExtResource("7")
 hframes = 4
 
-[node name="Fangs" type="Sprite" parent="Body"]
+[node name="Fangs" type="Sprite2D" parent="Body"]
 visible = false
 use_parent_material = true
-position = Vector2( 0, -40 )
-scale = Vector2( 2, 2 )
+position = Vector2(2.08165e-12, -20)
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -4 )
+position = Vector2(0, -8)
 rotation = 1.5708
-shape = SubResource( 22 )
+shape = SubResource("22")
 
-[node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 0, -40 )
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(0, -21)
 
-[node name="BearClaw" type="Area2D" parent="Position2D"]
-position = Vector2( 40, 0 )
-collision_layer = 0
-collision_mask = 128
+[node name="BearClaw" type="Area2D" parent="Marker2D"]
+position = Vector2(20, 0)
+collision_layer = 128
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/BearClaw"]
-shape = SubResource( 2 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/BearClaw"]
+shape = SubResource("2")
 disabled = true
 
-[node name="BearBite" type="Area2D" parent="Position2D"]
-position = Vector2( 40, 0 )
-collision_layer = 0
-collision_mask = 128
+[node name="BearBite" type="Area2D" parent="Marker2D"]
+position = Vector2(20, 0)
+collision_layer = 128
+collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Position2D/BearBite"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/BearBite"]
 rotation = 1.5708
-shape = SubResource( 24 )
+shape = SubResource("24")
 disabled = true
 
 [node name="HurtBox" type="Area2D" parent="."]
-position = Vector2( 0, -40 )
-collision_layer = 262400
-collision_mask = 0
+position = Vector2(0, -18)
+collision_layer = 0
+collision_mask = 262400
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2( 0, 15 )
-shape = SubResource( 14 )
+shape = SubResource("14")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
-anims/RESET = SubResource( 20 )
-anims/hit = SubResource( 15 )
+libraries = {
+"": SubResource("AnimationLibrary_rnr43")
+}
 
 [node name="DetectPlayer" type="Area2D" parent="."]
 visible = false
@@ -715,43 +721,35 @@ collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
-shape = SubResource( 21 )
+shape = SubResource("21")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 10.0
-target_desired_distance = 10.0
 avoidance_enabled = true
-max_speed = 100.0
+radius = 16.0
+max_neighbors = 8
+max_speed = 50.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 3 )
-anims/bite = SubResource( 10 )
-anims/death = SubResource( 23 )
-anims/loop = SubResource( 8 )
-"anims/loop frozen" = SubResource( 25 )
-anims/swing = SubResource( 7 )
-
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( -4, -32.5 )
-scale = Vector2( 6.5, 6.15 )
+autoplay = "loop"
+libraries = {
+"": SubResource("AnimationLibrary_3ekk4")
+}
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
-[node name="Tween" type="Tween" parent="."]
-
-[node name="Electricity" type="AnimatedSprite" parent="."]
+[node name="Electricity" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2( 0, -31 )
-scale = Vector2( 2, 2 )
-frames = SubResource( 129 )
-animation = "play"
+position = Vector2(0, -19)
+sprite_frames = SubResource("129")
+animation = &"play"
+autoplay = "play"
 frame = 5
-playing = true
+frame_progress = 0.149002
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
-position = Vector2( 0, -25 )
-enabled = true
-cast_to = Vector2( 150, 0 )
+visible = false
+position = Vector2(0, -18)
 collision_mask = 32
 
 [node name="Timers" type="Node" parent="."]
@@ -775,8 +773,6 @@ wait_time = 0.3
 one_shot = true
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="Timers/EndChaseState" to="." method="_on_EndChaseState_timeout"]
 [connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]
 

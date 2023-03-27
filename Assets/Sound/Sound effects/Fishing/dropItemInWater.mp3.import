@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/dropItemInWater.mp3-a3dd0360dd10ef741eae23d8bf4092de.mp3str"
+uid="uid://os4l6ktrtxgj"
+path="res://.godot/imported/dropItemInWater.mp3-a3dd0360dd10ef741eae23d8bf4092de.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Fishing/dropItemInWater.mp3"
-dest_files=[ "res://.import/dropItemInWater.mp3-a3dd0360dd10ef741eae23d8bf4092de.mp3str" ]
+dest_files=["res://.godot/imported/dropItemInWater.mp3-a3dd0360dd10ef741eae23d8bf4092de.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

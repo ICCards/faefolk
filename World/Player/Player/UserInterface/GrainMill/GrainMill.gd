@@ -10,7 +10,7 @@ func _ready():
 
 func initialize():
 	Server.player_node.actions.destroy_placable_object()
-	$MenuTitle.text = "Grain mill #" + str(level)
+	$MenuTitle/Label.text = "Grain mill #" + str(level)
 	show()
 	$InventorySlots.initialize_slots()
 	$HotbarInventorySlots.initialize_slots()

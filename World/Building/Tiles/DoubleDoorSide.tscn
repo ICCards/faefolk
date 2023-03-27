@@ -1,0 +1,300 @@
+[gd_scene load_steps=25 format=3]
+
+[ext_resource type="SpriteFrames" path="res://Assets/Tilesets/doors/animated/side/armored.tres" id="1"]
+[ext_resource type="Script" path="res://World/Building/Tiles/DoubleDoorSide.gd" id="1_bie56"]
+[ext_resource type="Texture2D" path="res://Assets/Tilesets/doors/wood mask/3.png" id="3"]
+[ext_resource type="Texture2D" path="res://Assets/Tilesets/doors/wood mask/1.png" id="4"]
+[ext_resource type="Texture2D" path="res://Assets/Tilesets/doors/wood mask/4.png" id="6"]
+[ext_resource type="Texture2D" path="res://Assets/Tilesets/doors/wood mask/2.png" id="7"]
+[ext_resource type="Texture2D" uid="uid://ckal8dga4akml" path="res://Assets/Images/Misc/watering can progress indicator.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://bv2e37vy0s7h4" path="res://Assets/Images/mini map/snow.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://dckev2t5k4w2d" path="res://Assets/Tilesets/doors/hit effects/armored door/side/open.png" id="10"]
+
+[sub_resource type="Animation" id="20"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="21"]
+resource_name = "hit"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../AnimatedSprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ed0wj"]
+_data = {
+"RESET": SubResource("20"),
+"hit": SubResource("21")
+}
+
+[sub_resource type="RectangleShape2D" id="12"]
+size = Vector2(64, 15)
+
+[sub_resource type="RectangleShape2D" id="13"]
+size = Vector2(61, 30)
+
+[sub_resource type="RectangleShape2D" id="22"]
+size = Vector2(41, 20)
+
+[sub_resource type="RectangleShape2D" id="23"]
+size = Vector2(60, 30)
+
+[sub_resource type="Animation" id="15"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LightMask:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4")]
+}
+
+[sub_resource type="Animation" id="16"]
+resource_name = "close"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LightMask:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("6"), ExtResource("3"), ExtResource("7"), ExtResource("4")]
+}
+
+[sub_resource type="Animation" id="17"]
+resource_name = "open"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LightMask:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("4"), ExtResource("7"), ExtResource("3"), ExtResource("6")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sgnmq"]
+_data = {
+"RESET": SubResource("15"),
+"close": SubResource("16"),
+"open": SubResource("17")
+}
+
+[sub_resource type="Animation" id="18"]
+length = 0.001
+
+[sub_resource type="Animation" id="19"]
+resource_name = "show health bar"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HealthBar:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HealthBar:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i0cok"]
+_data = {
+"RESET": SubResource("18"),
+"show health bar": SubResource("19")
+}
+
+[sub_resource type="RectangleShape2D" id="14"]
+size = Vector2(61, 35)
+
+[node name="DoubleDoorSide" type="Area2D"]
+collision_layer = 0
+collision_mask = 131072
+script = ExtResource("1_bie56")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-14, -50)
+sprite_frames = ExtResource("1")
+animation = &"open"
+offset = Vector2(32, -32)
+
+[node name="HealthBar" type="Node2D" parent="."]
+visible = false
+z_index = 1
+position = Vector2(-15, 2)
+scale = Vector2(2.5, 3)
+
+[node name="Border" type="TextureRect" parent="HealthBar"]
+offset_right = 16.0
+offset_bottom = 3.0
+texture = ExtResource("8")
+
+[node name="Progress" type="TextureProgressBar" parent="HealthBar"]
+modulate = Color(0.109804, 1, 0, 1)
+offset_left = 0.800002
+offset_top = 0.666664
+offset_right = 14.8
+offset_bottom = 1.66666
+max_value = 250.0
+value = 250.0
+nine_patch_stretch = true
+texture_progress = ExtResource("9")
+
+[node name="HitEffect" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="HitEffect"]
+visible = false
+position = Vector2(10, -69)
+texture = ExtResource("10")
+hframes = 3
+vframes = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HitEffect"]
+libraries = {
+"": SubResource("AnimationLibrary_ed0wj")
+}
+
+[node name="DoorMovementCollision" type="StaticBody2D" parent="."]
+position = Vector2(3, -64)
+rotation = 1.5708
+collision_layer = 35
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorMovementCollision"]
+position = Vector2(32, -7.5)
+shape = SubResource("12")
+
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(8, -46)
+rotation = 1.5708
+collision_layer = 24
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+light_mask = 0
+position = Vector2(14, -3.00005)
+shape = SubResource("13")
+
+[node name="DetectObjectOverPathBox" type="Area2D" parent="."]
+visible = false
+collision_layer = 8192
+collision_mask = 8192
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectObjectOverPathBox"]
+position = Vector2(8, -32)
+rotation = 1.5708
+shape = SubResource("22")
+
+[node name="HammerRepairBox" type="Area2D" parent="."]
+visible = false
+rotation = 1.5708
+collision_layer = 16384
+collision_mask = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HammerRepairBox"]
+light_mask = 0
+position = Vector2(-32, -10.9999)
+shape = SubResource("23")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sgnmq")
+}
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i0cok")
+}
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8.5, -30.5)
+rotation = 1.5708
+shape = SubResource("14")
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="area_entered" from="HammerRepairBox" to="." method="_on_HammerRepairBox_area_entered"]

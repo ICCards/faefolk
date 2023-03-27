@@ -1,12 +1,12 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var LightningProjectile = load("res://World/Objects/Magic/Lightning/LightningProjectile.tscn")
-onready var TornadoProjectile = load("res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
-onready var FireProjectile = load("res://World/Objects/Magic/Fire/FireProjectile.tscn")
-onready var IceProjectile = load("res://World/Objects/Magic/Ice/IceProjectile.tscn")
+@onready var LightningProjectile = load("res://World/Objects/Magic/Lightning/LightningProjectile.tscn")
+@onready var TornadoProjectile = load("res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
+@onready var FireProjectile = load("res://World/Objects/Magic/Fire/FireProjectile.tscn")
+@onready var IceProjectile = load("res://World/Objects/Magic/Ice/IceProjectile.tscn")
 
-onready var demon_sprite: AnimatedSprite = $AnimatedSprite
-onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var demon_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var state = IDLE
 
 enum {
@@ -14,13 +14,13 @@ enum {
 	MOVE
 }
 
-var velocity = Vector2.ZERO
+#var velocity = Vector2.ZERO
 var rng = RandomNumberGenerator.new()
 var knockback = Vector2.ZERO
-export var MAX_SPEED = 400
-export var ACCELERATION = 375
-export var FRICTION = 20
-export var KNOCKBACK_AMOUNT = 550
+@export var MAX_SPEED = 400
+@export var ACCELERATION = 375
+@export var FRICTION = 20
+@export var KNOCKBACK_AMOUNT = 550
 
 var enemy_node
 var attacking: bool = false
@@ -46,7 +46,9 @@ func _physics_process(delta):
 				state = MOVE
 				var direction = (enemy_node.global_position - global_position).normalized()
 				velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
-				velocity = move_and_slide(velocity)
+				set_velocity(velocity)
+				move_and_slide()
+				velocity = velocity
 				demon_sprite.flip_h = velocity.x < 0
 				if not attacking and self.position.distance_to(enemy_node.position) < 150:
 					swing()
@@ -57,11 +59,13 @@ func _physics_process(delta):
 					random_movement_position = null
 					var direction = (enemy_node.global_position - global_position).normalized()
 					velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
-					velocity = move_and_slide(velocity)
+					set_velocity(velocity)
+					move_and_slide()
+					velocity = velocity
 				else:
 					if not random_movement_position:
-						var random1 = rand_range(75, 100)
-						var random2 = rand_range(75, 100)
+						var random1 = randf_range(75, 100)
+						var random2 = randf_range(75, 100)
 						if Util.chance(50):
 							random1 *= -1
 						if Util.chance(50):
@@ -69,7 +73,9 @@ func _physics_process(delta):
 						random_movement_position = Vector2(random1, random2)
 					var direction = ((enemy_node.global_position+random_movement_position) - global_position).normalized()
 					velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
-					velocity = move_and_slide(velocity)
+					set_velocity(velocity)
+					move_and_slide()
+					velocity = velocity
 				if attacking:
 					$ShootDirection.look_at(enemy_node.position)
 					var degrees = int($ShootDirection.rotation_degrees) % 360
@@ -108,37 +114,37 @@ func shoot(_pos):
 	attacking = true
 	demon_sprite.frame = 0
 	demon_sprite.play("shoot")
-	yield(get_tree().create_timer(1.0), "timeout")
+	await get_tree().create_timer(1.0).timeout
 	if enemy_node:
 		if not enemy_node.destroyed and not destroyed:
 			shoot_random_projectile()
-			yield(get_tree().create_timer(1.0), "timeout")
+			await get_tree().create_timer(1.0).timeout
 	attacking = false
 
 
 func shoot_random_projectile():
 	randomize()
-	var rand = rand_range(0,100)
+	var rand = randf_range(0,100)
 	if rand < 25:
-		var spell = FireProjectile.instance()
-		spell.position = $ShootDirection/Position2D.global_position
+		var spell = FireProjectile.instantiate()
+		spell.position = $ShootDirection/Marker2D.global_position
 		spell.velocity = enemy_node.position - spell.position
 		get_node("../").add_child(spell)
 	elif rand < 50:
-		var spell = IceProjectile.instance()
+		var spell = IceProjectile.instantiate()
 		spell.projectile_transform = $ShootDirection.transform
-		spell.position = $ShootDirection/Position2D.global_position
+		spell.position = $ShootDirection/Marker2D.global_position
 		spell.velocity = enemy_node.position - spell.position
 		get_node("../").add_child(spell)
 	elif rand < 75:
-		var spell = TornadoProjectile.instance()
-		spell.position = $ShootDirection/Position2D.global_position
+		var spell = TornadoProjectile.instantiate()
+		spell.position = $ShootDirection/Marker2D.global_position
 		spell.velocity = enemy_node.position - spell.position
 		get_node("../").add_child(spell)
 	else:
-		var spell = LightningProjectile.instance()
+		var spell = LightningProjectile.instantiate()
 		spell.transform = $ShootDirection.transform
-		spell.position = $ShootDirection/Position2D.global_position
+		spell.position = $ShootDirection/Marker2D.global_position
 		spell.velocity = enemy_node.position - spell.position
 		get_node("../").add_child(spell)
 
@@ -147,12 +153,12 @@ func swing():
 	attacking = true
 	demon_sprite.frame = 0
 	demon_sprite.play("swing")
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Dark/swoosh.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 	sound_effects.play()
 	$HitBox/CollisionShape2D.set_deferred('disabled', false)
-	yield(get_tree().create_timer(0.5), "timeout")
+	await get_tree().create_timer(0.5).timeout
 	$HitBox/CollisionShape2D.set_deferred('disabled', true)
 	attacking = false
 
@@ -180,12 +186,12 @@ func destroy():
 	$Shadow.hide()
 	destroyed = true
 	set_physics_process(false)
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	state = IDLE
 	$TrailParticles.emitting = false
 	$TrailParticles2.emitting = false
 	$TrailParticles3.emitting = false
 	demon_sprite.frame = 0
 	demon_sprite.play("die")
-	yield(demon_sprite, "animation_finished")
+	await demon_sprite.animation_finished
 	queue_free()

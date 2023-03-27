@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://dx8hix2epqruo"]
 
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyFrozenState.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://World/Enemies/AttachedStates/EnemyFrozenState.gd" id="1_wln5q"]
 
 [node name="EnemyFrozenState" type="Node"]
-script = ExtResource( 1 )
+script = ExtResource("1_wln5q")
 
 [node name="FrozenTimer" type="Timer" parent="."]
 wait_time = 5.0

@@ -1,15 +1,15 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var bodySprite = $CompositeSprites/Body
-onready var armsSprite = $CompositeSprites/Arms
-onready var accessorySprite = $CompositeSprites/Accessory
-onready var headAttributeSprite = $CompositeSprites/HeadAtr
-onready var pantsSprite = $CompositeSprites/Pants
-onready var shirtsSprite = $CompositeSprites/Shirts
-onready var shoesSprite = $CompositeSprites/Shoes
-onready var toolEquippedSprite = $CompositeSprites/ToolEquipped
+@onready var bodySprite = $CompositeSprites/Body
+@onready var armsSprite = $CompositeSprites/Arms
+@onready var accessorySprite = $CompositeSprites/Accessory
+@onready var headAttributeSprite = $CompositeSprites/HeadAtr
+@onready var pantsSprite = $CompositeSprites/Pants
+@onready var shirtsSprite = $CompositeSprites/Shirts
+@onready var shoesSprite = $CompositeSprites/Shoes
+@onready var toolEquippedSprite = $CompositeSprites/ToolEquipped
 
-onready var animation_player = $CompositeSprites/AnimationPlayer
+@onready var animation_player = $CompositeSprites/AnimationPlayer
 var character
 
 var swing_queue = []
@@ -42,18 +42,18 @@ func DisplayMessageBubble(message):
 		#adjust_bubble_position($MessageBubble.get_line_count())
 		$Timer.stop()
 		$Timer.start()
-		yield($Timer, "timeout")
+		await $Timer.timeout
 		$MessageBubble.visible = false
 	else:
 		$MessageBubble.text = ""
 		$MessageBubble.text = message
 		$Timer.start()
 		#adjust_bubble_position($MessageBubble.get_line_count())
-		yield($Timer, "timeout")
+		await $Timer.timeout
 		$MessageBubble.visible = false
 
 func adjust_bubble_position(lines):
-	$MessageBubble.rect_position = $MessageBubble.rect_position + Vector2(0, 4 * (lines - 1))
+	$MessageBubble.position = $MessageBubble.position + Vector2(0, 4 * (lines - 1))
 
 
 	
@@ -82,13 +82,13 @@ func Swing(tool_name, direction):
 	toolEquippedSprite.set_texture(Images.returnToolSprite(tool_name, "swing_" + direction.to_lower()))
 	setPlayerTexture("swing_" + direction.to_lower())
 	animation_player.play("swing")
-	yield(animation_player, "animation_finished")
+	await animation_player.animation_finished
 	toolEquippedSprite.texture = null
 	swingActive = false
 	#MovePlayer(position, direction.to_lower())
 
 
-func setPlayerTexture(var anim):
+func setPlayerTexture(anim):
 	bodySprite.set_texture(character.body_sprites[anim])
 	armsSprite.set_texture(character.arms_sprites[anim])
 	accessorySprite.set_texture(character.acc_sprites[anim])

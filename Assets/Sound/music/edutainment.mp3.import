@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/edutainment.mp3-e175e13e06ea9080da0bc1e867326302.mp3str"
+uid="uid://b8dnk0sn4v01j"
+path="res://.godot/imported/edutainment.mp3-e175e13e06ea9080da0bc1e867326302.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/music/edutainment.mp3"
-dest_files=[ "res://.import/edutainment.mp3-e175e13e06ea9080da0bc1e867326302.mp3str" ]
+dest_files=["res://.godot/imported/edutainment.mp3-e175e13e06ea9080da0bc1e867326302.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

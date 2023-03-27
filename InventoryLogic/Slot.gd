@@ -26,7 +26,8 @@ enum SlotType {
 	CAMPFIRE,
 	CRAFTING,
 	COMBAT_HOTBAR,
-	COMBAT_HOTBAR_INVENTORY
+	COMBAT_HOTBAR_INVENTORY,
+	BARREL
 }
 
 var slotType = null
@@ -44,13 +45,13 @@ func _ready():
 
 func refresh_style():
 	if slotType == SlotType.HOTBAR and PlayerData.active_item_slot == slot_index:
-		set('custom_styles/panel', selected_style)
+		set('theme_override_styles/panel', selected_style)
 	elif slotType == SlotType.COMBAT_HOTBAR and PlayerData.active_item_slot_combat_hotbar == slot_index:
-		set('custom_styles/panel', selected_style)
+		set('theme_override_styles/panel', selected_style)
 	elif item == null:
-		set('custom_styles/panel', empty_style)
+		set('theme_override_styles/panel', empty_style)
 	else:
-		set('custom_styles/panel', default_style)
+		set('theme_override_styles/panel', default_style)
 
 func pickFromSlot():
 	remove_child(item)
@@ -65,7 +66,7 @@ func putIntoSlot(new_item):
 
 func initialize_item(item_name, item_quantity, item_health):
 	if item == null:
-		item = ItemClass.instance()
+		item = ItemClass.instantiate()
 		add_child(item)
 		item.set_item(item_name, item_quantity, item_health)
 	else:

@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/spawn.mp3-0c6224f5b0dd6538ecd223b81a732c1c.mp3str"
+uid="uid://c8kml5g6af2pt"
+path="res://.godot/imported/spawn.mp3-0c6224f5b0dd6538ecd223b81a732c1c.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Magic/Earth/spawn.mp3"
-dest_files=[ "res://.import/spawn.mp3-0c6224f5b0dd6538ecd223b81a732c1c.mp3str" ]
+dest_files=["res://.godot/imported/spawn.mp3-0c6224f5b0dd6538ecd223b81a732c1c.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -12,7 +12,7 @@
     "GrowthImages" : 3,
     "Perennial": false,
     "Regrowth": null,
-    "Seasons": ["spring"],
+    "Seasons": ["spring","fall","summer"],
     "yield": [1, 2],
 },
 "garlic": {
@@ -165,7 +165,7 @@
     "Perennial": false,
     "Regrowth": null,
     "Seasons": ["spring", "summer", "fall"],
-    "yield": [1, 2, 3, 4, 5],
+    "yield": [1, 2, 3, 4],
 },
 "corn": {
     "DaysToGrow": 14,

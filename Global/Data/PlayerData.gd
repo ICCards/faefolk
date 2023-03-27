@@ -16,10 +16,12 @@ signal health_changed
 signal health_depleted
 signal tool_health_change
 signal active_item_updated
+signal play_wind_curse
+signal key_binding_button_changed
 
 var file_name = "res://JSONData/PlayerData.json"
-onready var SlotClass = load("res://InventoryLogic/Slot.gd")
-onready var ItemClass = load("res://InventoryLogic/InventoryItem.gd")
+@onready var SlotClass = load("res://InventoryLogic/Slot.gd")
+@onready var ItemClass = load("res://InventoryLogic/InventoryItem.gd")
 
 var viewInventoryMode: bool = false
 var viewSaveAndExitMode: bool = false
@@ -39,13 +41,12 @@ var HotbarSlots
 var active_item_slot = 0
 var active_item_slot_combat_hotbar = 0
 
-var game_state: GameState
 
 var starting_player_data = {
 	"current_save_location": null,
-	"current_save_scene" : "res://World/World/World.tscn",
+	"current_save_scene" : "res://World/Overworld/Overworld.tscn",
 	"respawn_position": null,
-	"respawn_scene" : "res://World/World/World.tscn",
+	"respawn_scene" : "res://World/Overworld/Overworld.tscn",
 	"season": "spring",
 	"day_week": "Mon.",
 	"day_number": 1,
@@ -55,15 +56,17 @@ var starting_player_data = {
 	"mana": 100,
 	"energy": 100,
 	"hotbar": {
-#		"0": ["stone sword", 1, 100],
-#		"1": ["gold axe", 1, 100],
-#		"4": ["bow", 1, 50],
-#		"2": ["arrow", 999, null],
+		"0": ["bronze pickaxe", 1, 100],
+		"1": ["bronze axe", 1, 100],
+		"2": ["stone sword", 1, 100],
+		"3": ["blueprint", 1, null],
+		"4": ["hammer", 1, null],
+#		"2": ["brewing table #1", 999, null],
 #		"6": ["wind staff", 1, null],
-#		"5": ["fire staff", 1, null],
-#		"7": ["raw egg", 100, null],
-#		"8": ["poison potion III", 100, null],
-	#	"2": ["wood fishing rod", 1, null],
+#		"5": ["furnace", 10, null],
+#		"7": ["grain mill #1", 100, null],
+#		"3": ["corn", 100, null],
+#		"8": ["wood gate", 10, null],
 	#	"3": ["blue flower", 100, null],
 #		"4": ["brewing table #3", 10, null],
 #		"5": ["brewing table #2", 10, null],
@@ -71,22 +74,22 @@ var starting_player_data = {
 #		"8": ["furnace", 10, null],
 	},
 	"inventory": {
-#			"18": ["wood", 999, null],
-#			"19": ["stone", 999, null],
-#			"17": ["wood", 999, null],
-#			"16": ["wood", 500, null],
-#			"16": ["iron ingot", 999, null],
-#			"15": ["bronze ingot", 999, null],
-#			"13": ["apple seeds", 99, null],
-#			"12": ["spruce seeds", 99, null],
-#			"14": ["oak seeds", 99, null],
-#			"15": ["pine seeds", 99, null],
+			"18": ["wood", 999, null],
+			"19": ["stone", 999, null],
+			"17": ["cloth", 999, null],
+			"5": ["cloth", 500, null],
+			"16": ["grape", 999, null],
+			"15": ["bronze ingot", 999, null],
+			"4": ["iron ingot", 999, null],
+			"13": ["wood", 999, null],
+			"12": ["potato seeds", 99, null],
+			"14": ["garlic seeds", 99, null],
+#			"15": ["pear seeds", 99, null],
 #			"10": ["evergreen seeds", 99, null],
-#			"15": ["wheat flour", 99, null],
-	#		"16": ["wheat", 100, null],
+	#		"15": ["wheat flour", 99, null],
+			"3": ["bronze ore", 100, null],
 	},
 	"combat_hotbar": {
-#		"1": ["bread", 20, null],
 	},
 	"chests": {
 		"Cave 1-1": {
@@ -178,6 +181,7 @@ var starting_player_data = {
 			"2": ["wood fishing rod", 1, null],
 		}
 	},
+	"barrels" : {},
 	"furnaces": {},
 	"brewing_tables": {},
 	"grain_mills": {},
@@ -188,7 +192,7 @@ var starting_player_data = {
 			"foraging": 0,
 			"fishing": 0,
 			"mining": 0,
-			"sword": 1,
+			"sword": 100,
 			"bow": 1,
 			"dark": 0,
 			"electric": 0,
@@ -210,7 +214,7 @@ var starting_player_data = {
 			"bat": 0,
 			"skeleton": 0,
 		},
-		 "crops" : {
+		"crops" : {
 			"asparagus": 0,
 			"blueberry": 0,
 			"cabbage": 0,
@@ -234,7 +238,7 @@ var starting_player_data = {
 			"yellow pepper": 0,
 			"zucchini": 0,
 		},
-		 "resources" : {
+		"resources" : {
 			"wood": 0,
 			"stone": 0,
 			"coal": 0,
@@ -271,7 +275,7 @@ var starting_player_data = {
 			"chanterelle": 0,
 			"raw egg": 0,
 		},
-		 "fish" : {
+		"fish" : {
 			"eel": 0,
 			"clownfish": 0,
 			"halibut": 0,
@@ -298,6 +302,7 @@ var starting_player_data = {
 			"nelma": 0
 		},
 		"food": {
+			"wine": 0,
 			"asparagus omelette": 0,
 			"baked catfish": 0,
 			"baked dorado": 0,
@@ -350,62 +355,41 @@ var starting_player_data = {
 	},
 	"settings":{
 		"key_dict": {
-			"move_right":68,
-			"move_left":65,
-			"move_up": 87,
-			"move_down": 83,
-			"open_menu": 73,
+			"move right":68,
+			"move left":65,
+			"move up": 87,
+			"move down": 83,
+			"open menu": 73,
 			"action": 69,
 			"rotate": 82,
-			"open_map": 71,
-			"sprint": 16777237,
-			"change_variety": 86,
-			"use_tool": 67,
-			"toggle_hotbar": 96,
-			"slot1": 49,
-			"slot2": 50,
-			"slot3": 51,
-			"slot4": 52,
-			"slot5": 53,
-			"slot6": 54,
-			"slot7": 55,
-			"slot8": 56,
-			"slot9": 57,
-			"slot10": 48,
+			"open map": 71,
+			"sprint": 4194325,
+			"change variety": 86,
+			"use tool": 67,
+			"switch hotbar": 96,
+			"slot 1": 49,
+			"slot 2": 50,
+			"slot 3": 51,
+			"slot 4": 52,
+			"slot 5": 53,
+			"slot 6": 54,
+			"slot 7": 55,
+			"slot 8": 56,
+			"slot 9": 57,
+			"slot 10": 48,
+			"cancel attack": 4194312,
+			"exit": 4194305
 		},
 		"volume": {
-			"music": 50.0,
+			"music": 0.0,
 			"sound": 50.0,
-			"ambient": 50.0,
+			"ambient": 0.0,
 			"footstep": 50.0
 		}
 	}
 }
 
 var player_data = starting_player_data
-
-
-#func _ready():
-#	load_player_data()
-#
-#func save_player_data():
-#	game_state = GameState.new()
-#	game_state.save_player_state(player_data)
-#	var file = File.new()
-#	file.open(file_name,File.WRITE)
-#	file.store_string(to_json(player_data))
-#	file.close()
-#	print("saved player data")
-
-#func load_player_data():
-#	if GameState.save_exists():
-#		game_state = GameState.new()
-#		game_state.load_state()
-#		player_data = game_state.player_state
-#	else:
-#		game_state = GameState.new()
-#		game_state.save_player_state(starting_player_data)
-#		player_data = starting_player_data
 
 
 func eat(food_name):
@@ -432,6 +416,7 @@ func change_health(amount):
 func change_energy(amount):
 	player_data["energy"] += amount
 	if player_data["energy"] <= 0:
+		change_health(-1)
 		player_data["energy"] = 0
 	elif player_data["energy"] >= energy_maximum:
 		player_data["energy"] = energy_maximum
@@ -472,32 +457,30 @@ func remove_material(item, amount):
 
 func pick_up_item(item_name, item_quantity, item_health):
 	for slot in NUM_HOTBAR_SLOTS: # Add to existing hotbar slot
-		slot = str(slot)
-		if player_data["hotbar"].has(slot):
-			if player_data["hotbar"][slot][0] == item_name:
+		if player_data["hotbar"].has(str(slot)):
+			if player_data["hotbar"][str(slot)][0] == item_name:
 				var stack_size = int(JsonData.item_data[item_name]["StackSize"])
-				var able_to_add = stack_size - player_data["hotbar"][slot][1]
+				var able_to_add = stack_size - player_data["hotbar"][str(slot)][1]
 				if able_to_add >= item_quantity:
-					player_data["hotbar"][slot][1] += item_quantity
-					update_hotbar_slot_visual(slot, player_data["hotbar"][slot][0], player_data["hotbar"][slot][1], player_data["hotbar"][slot][2])
+					player_data["hotbar"][str(slot)][1] += item_quantity
+					update_hotbar_slot_visual(str(slot), player_data["hotbar"][str(slot)][0], player_data["hotbar"][str(slot)][1], player_data["hotbar"][str(slot)][2])
 					return
 				else:
-					player_data["hotbar"][slot][1] += able_to_add
-					update_hotbar_slot_visual(slot, player_data["hotbar"][slot][0], player_data["hotbar"][slot][1], player_data["hotbar"][slot][2])
+					player_data["hotbar"][str(slot)][1] += able_to_add
+					update_hotbar_slot_visual(str(slot), player_data["hotbar"][str(slot)][0], player_data["hotbar"][str(slot)][1], player_data["hotbar"][str(slot)][2])
 					item_quantity = item_quantity - able_to_add
 	for slot in NUM_INVENTORY_SLOTS: # Add to existing inventory slot
-		slot = str(slot)
-		if player_data["inventory"].has(slot):
-			if player_data["inventory"][slot][0] == item_name:
+		if player_data["inventory"].has(str(slot)):
+			if player_data["inventory"][str(slot)][0] == item_name:
 				var stack_size = int(JsonData.item_data[item_name]["StackSize"])
-				var able_to_add = stack_size - player_data["inventory"][slot][1]
+				var able_to_add = stack_size - player_data["inventory"][str(slot)][1]
 				if able_to_add >= item_quantity:
-					player_data["inventory"][slot][1] += item_quantity
-					update_inventory_slot_visual(slot, player_data["inventory"][slot][0], player_data["inventory"][slot][1], player_data["inventory"][slot][2])
+					player_data["inventory"][str(slot)][1] += item_quantity
+					update_inventory_slot_visual(str(slot), player_data["inventory"][str(slot)][0], player_data["inventory"][str(slot)][1], player_data["inventory"][str(slot)][2])
 					return
 				else:
-					player_data["inventory"][slot][1] += able_to_add
-					update_inventory_slot_visual(slot, player_data["inventory"][slot][0], player_data["inventory"][slot][1] , player_data["inventory"][slot][2])
+					player_data["inventory"][str(slot)][1] += able_to_add
+					update_inventory_slot_visual(str(slot), player_data["inventory"][str(slot)][0], player_data["inventory"][str(slot)][1], player_data["inventory"][str(slot)][2])
 					item_quantity = item_quantity - able_to_add
 	for i in range(NUM_HOTBAR_SLOTS): # Add to empty hotbar slot 
 		if player_data["hotbar"].has(str(i)) == false:
@@ -548,7 +531,7 @@ func update_combat_hotbar_slot_visual(slot_index, item_name, new_quantity, item_
 		slot.initialize_item(item_name, new_quantity, item_health)
 
 
-func add_item_to_empty_slot(item, slot, var id = null):
+func add_item_to_empty_slot(item, slot, id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			player_data["hotbar"][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
@@ -570,9 +553,11 @@ func add_item_to_empty_slot(item, slot, var id = null):
 			player_data["furnaces"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.CAMPFIRE:
 			player_data["campfires"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+		SlotClass.SlotType.BARREL:
+			player_data["barrels"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
 
 
-func remove_item(slot, var id = null):
+func remove_item(slot, id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			player_data["hotbar"].erase(str(slot.slot_index))
@@ -594,8 +579,10 @@ func remove_item(slot, var id = null):
 			player_data["furnaces"][id].erase(str(slot.slot_index))
 		SlotClass.SlotType.CAMPFIRE:
 			player_data["campfires"][id].erase(str(slot.slot_index))
+		SlotClass.SlotType.BARREL:
+			player_data["barrels"][id].erase(str(slot.slot_index))
 
-func add_item_quantity(slot, quantity_to_add: int, var id = null):
+func add_item_quantity(slot, quantity_to_add: int, id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			player_data["hotbar"][str(slot.slot_index)][1] += quantity_to_add
@@ -617,8 +604,10 @@ func add_item_quantity(slot, quantity_to_add: int, var id = null):
 			player_data["furnaces"][id][str(slot.slot_index)][1] += quantity_to_add
 		SlotClass.SlotType.CAMPFIRE:
 			player_data["campfires"][id][str(slot.slot_index)][1] += quantity_to_add
+		SlotClass.SlotType.BARREL:
+			player_data["barrels"][id][str(slot.slot_index)][1] += quantity_to_add
 			
-func decrease_item_quantity(slot, quantity_to_subtract: int, var id = null):
+func decrease_item_quantity(slot, quantity_to_subtract: int, id = null):
 	match slot.slotType:
 		SlotClass.SlotType.HOTBAR:
 			player_data["hotbar"][str(slot.slot_index)][1] -= quantity_to_subtract
@@ -640,6 +629,8 @@ func decrease_item_quantity(slot, quantity_to_subtract: int, var id = null):
 			player_data["furnaces"][id][str(slot.slot_index)][1] -= quantity_to_subtract
 		SlotClass.SlotType.CAMPFIRE:
 			player_data["campfires"][id][str(slot.slot_index)][1] -= quantity_to_subtract
+		SlotClass.SlotType.BARREL:
+			player_data["barrels"][id][str(slot.slot_index)][1] -= quantity_to_subtract
 
 func return_resource_total(item_name):
 	var total = 0

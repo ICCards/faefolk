@@ -1,20 +1,19 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-onready var animation_player = $CompositeSprites/AnimationPlayer
-onready var sword_swing = $Swing/SwordSwing
-onready var composite_sprites = $CompositeSprites
-onready var holding_item = $HoldingItem
-
-onready var actions = $Actions
-onready var user_interface = $Camera2D/UserInterface
-onready var sound_effects = $Sounds/SoundEffects
+@onready var animation_player = $CompositeSprites/AnimationPlayer
+@onready var sword_swing = $Swing/SwordSwing
+@onready var composite_sprites = $CompositeSprites
+@onready var holding_item = $CompositeSprites/HoldingItem
+@onready var actions = $Actions
+@onready var user_interface = $Camera2D/UserInterface
+@onready var sound_effects = $Sounds/SoundEffects
 
 var running = false
 var character
-var current_building_item = null
+var current_building_item = ""
 var running_speed_change = 1.0
 
-onready var state = MOVEMENT
+@onready var state = MOVEMENT
 enum {
 	MOVEMENT, 
 	SWINGING,
@@ -25,52 +24,51 @@ enum {
 	SLEEPING,
 	SITTING,
 	MAGIC_CASTING,
-	BOW_ARROW_SHOOTING
+	BOW_ARROW_SHOOTING,
+	SWORD_SWINGING
 }
 
 var cast_movement_direction = ""
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
 var animation = "idle_down"
-var MAX_SPEED_DIRT := 13
-var MAX_SPEED_PATH := 14.5
-var DASH_SPEED := 55
-var MAX_SPEED_SWIMMING := 12
+var MAX_SPEED_DIRT := 8
+var MAX_SPEED_PATH := 9
+var DASH_SPEED := 25
+var MAX_SPEED_SWIMMING := 6
 var is_walking_on_dirt: bool = true
 var is_swimming: bool = false
 var poisoned: bool = false
 var speed_buff_active: bool = false
 var ACCELERATION := 6
 var FRICTION := 8
-var velocity := Vector2.ZERO
 var input_vector
 var is_building_world = false
-onready var _character = load("res://Global/Data/Characters.gd")
+@onready var _character = load("res://Global/Data/Characters.gd")
 
 func _ready():
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
-	PlayerData.connect("active_item_updated", self, "set_held_object")
+	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
 	Server.player_node = self
 	if is_building_world:
 		state = DYING
 		$Camera2D/UserInterface/LoadingScreen.show()
-		yield(get_tree().create_timer(5.0), "timeout")
+		await get_tree().create_timer(5.0).timeout
 	state = MOVEMENT
 	$Camera2D/UserInterface/LoadingScreen.hide()
-	yield(get_tree(), "idle_frame")
+	await get_tree().process_frame
 	set_held_object()
-	yield(get_tree().create_timer(0.25), "timeout")
+	await get_tree().create_timer(0.25).timeout
 	Server.isLoaded = true
 
 
 func _input( event ):
-	if Server.isLoaded:
-		if event is InputEvent:
-			if event.is_action_pressed("sprint"):
-				running = true
-			elif event.is_action_released("sprint"):
-				running = false
+	if event is InputEvent:
+		if event.is_action_pressed("sprint"):
+			running = true
+		elif event.is_action_released("sprint"):
+			running = false
 
 
 func destroy():
@@ -83,33 +81,56 @@ func set_held_object():
 	if PlayerData.normal_hotbar_mode:
 		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 			var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
-			var item_category = JsonData.item_data[item_name]["ItemCategory"]
-			if item_category == "Placable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg"):
-				actions.show_placable_object(item_name, item_category)
-				return
-			if item_name == "blueprint" and current_building_item != null:
-				actions.show_placable_object(current_building_item, "BUILDING")
-				return
-		actions.destroy_placable_object()
+			set_current_object(item_name)
+			return
 	else:
-		actions.destroy_placable_object()
 		if PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)):
 			var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
 			var item_category = JsonData.item_data[item_name]["ItemCategory"]
 			if item_category == "Magic" or item_name == "bow" or item_name == "wood sword" or item_name == "stone sword" or item_name == "iron sword" or item_name == "gold sword" or item_name == "bronze sword":
 				$Camera2D/UserInterface/CombatHotbar/MagicSlots.call_deferred("initialize", item_name)
-				return
-		$Camera2D/UserInterface/CombatHotbar/MagicSlots.call_deferred("hide")
+			else:
+				$Camera2D/UserInterface/CombatHotbar/MagicSlots.call_deferred("hide")
+			set_current_object(item_name)
+			return
+	set_current_object(null)
 
+
+func set_current_object(item_name):
+	print("SET CURRENT OBJECT")
+	var item_category
+	if item_name:
+		item_category = JsonData.item_data[item_name]["ItemCategory"]
+	else:
+		item_category = null
+	# Placable object
+	if item_category == "Placeable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg"):
+		actions.show_placable_object(item_name, item_category)
+		return
+	if item_name == "blueprint" and current_building_item != "":
+		actions.show_placable_object(current_building_item, "BUILDING")
+		return
+	actions.destroy_placable_object()
+	# Holding item
+	if Util.valid_holding_item_category(item_category):
+		holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
+		holding_item.show()
+		$HoldingTorch.set_inactive()
+	elif item_name == "torch":
+		holding_item.hide()
+		$HoldingTorch.set_active()
+	else:
+		holding_item.hide()
+		$HoldingTorch.set_inactive()
 
 func _process(_delta) -> void:
 	if $Area2Ds/PickupZone.items_in_range.size() > 0:
 		var pickup_item = $Area2Ds/PickupZone.items_in_range.values()[0]
 		pickup_item.pick_up_item(self)
 		$Area2Ds/PickupZone.items_in_range.erase(pickup_item)
-	if state == MOVEMENT:
+	if state == MOVEMENT: #or state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING or state == SWORD_SWINGING:
 		movement_state(_delta)
-	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING:
+	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING or state == SWORD_SWINGING:
 		magic_casting_movement_state(_delta)
 
 
@@ -138,48 +159,65 @@ func _unhandled_input(event):
 			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
-				if item_name == "blueprint" and event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
+				if item_name == "blueprint" and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 					$Camera2D/UserInterface/RadialBuildingMenu.initialize()
-				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")):
+				elif (event.is_action_pressed("mouse_click") or event.is_action_pressed("use tool")):
 					player_action(item_name, item_category)
+				elif (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT):
+					if item_category == "Magic":
+						$Magic.cast_spell(item_name, 2)
+					elif item_name == "bow":
+						$Magic.draw_bow(2)
+					elif Util.isSword(item_name):
+						$Swing.sword_swing(item_name, 2)
 			else:
-				if (event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool")):
+				if (event.is_action_pressed("mouse_click") or event.is_action_pressed("use tool")):
 					player_action(null, null)
 		else:
 			if PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)):
 				var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
-				if event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool"):
+				if event.is_action_pressed("mouse_click") or event.is_action_pressed("use tool"):
 					player_action(item_name, item_category)
 				elif item_category == "Magic" or item_name == "bow":
-					if event.is_action_pressed("slot1"):
+					if event.is_action_pressed("slot 1"):
 						if item_category == "Magic":
 							$Magic.cast_spell(item_name, 1)
-						else:
+						elif item_name == "bow":
 							$Magic.draw_bow(1)
-					elif event.is_action_pressed("slot2") or (event is InputEventMouseButton and event.button_index == BUTTON_RIGHT):
+						elif Util.isSword(item_name):
+							$Swing.sword_swing(item_name, 1)
+					elif event.is_action_pressed("slot 2") or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT):
 						if item_category == "Magic":
 							$Magic.cast_spell(item_name, 2)
-						else:
+						elif item_name == "bow":
 							$Magic.draw_bow(2)
-					elif event.is_action_pressed("slot3"):
+						elif Util.isSword(item_name):
+							$Swing.sword_swing(item_name, 2)
+					elif event.is_action_pressed("slot 3"):
 						if item_category == "Magic":
 							$Magic.cast_spell(item_name, 3)
-						else:
+						elif item_name == "bow":
 							$Magic.draw_bow(3)
-					elif event.is_action_pressed("slot4"):
+						elif Util.isSword(item_name):
+							$Swing.sword_swing(item_name, 1)
+					elif event.is_action_pressed("slot 4"):
 						if item_category == "Magic":
 							$Magic.cast_spell(item_name, 4)
-						else:
+						elif item_name == "bow":
 							$Magic.draw_bow(4)
+						elif Util.isSword(item_name):
+							$Swing.sword_swing(item_name, 1)
 			else:
-				if event.is_action_pressed("mouse_click") or event.is_action_pressed("use_tool"):
+				if event.is_action_pressed("mouse_click") or event.is_action_pressed("use tool"):
 					player_action(null, null)
 
 
 func player_action(item_name, item_category):
 	if item_name == "wood fishing rod" or item_name == "stone fishing rod" or item_name == "gold fishing rod":
 		actions.fish()
+	elif Util.isSword(item_name): 
+		$Swing.sword_swing(item_name, user_interface.get_node("CombatHotbar/MagicSlots").selected_spell)
 	elif (item_category == "Tool" or item_name == "hammer") and item_name != "bow":
 		$Swing.swing(item_name)
 	elif item_category == "Potion" or item_name == "raw egg":
@@ -197,23 +235,23 @@ func player_action(item_name, item_category):
 func magic_casting_movement_state(_delta):
 	set_movement_speed_change()
 	input_vector = Vector2.ZERO
-	if Input.is_action_pressed("move_up"):
+	if Input.is_action_pressed("move up"):
 		cast_movement_direction = "up"
 		input_vector.y -= 1.0
 		direction = "UP"
-	if Input.is_action_pressed("move_down"):
+	if Input.is_action_pressed("move down"):
 		cast_movement_direction = "down"
 		input_vector.y += 1.0
 		direction = "DOWN"
-	if Input.is_action_pressed("move_left"):
+	if Input.is_action_pressed("move left"):
 		cast_movement_direction = "left"
 		input_vector.x -= 1.0
 		direction = "LEFT"
-	if Input.is_action_pressed("move_right"):
+	if Input.is_action_pressed("move right"):
 		cast_movement_direction = "right"
 		input_vector.x += 1.0
 		direction = "RIGHT"
-	if !Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left")  && !Input.is_action_pressed("move_up")  && !Input.is_action_pressed("move_down"):
+	if !Input.is_action_pressed("move right") && !Input.is_action_pressed("move left")  && !Input.is_action_pressed("move up")  && !Input.is_action_pressed("move down"):
 		cast_movement_direction = ""
 		pass
 	if cast_movement_direction == "":
@@ -229,26 +267,26 @@ func magic_casting_movement_state(_delta):
 
 
 func movement_state(delta):
-	if (state == MAGIC_CASTING or state == MOVEMENT) and not PlayerData.viewInventoryMode and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
+	if not PlayerData.viewInventoryMode and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
 		set_movement_speed_change()
 		input_vector = Vector2.ZERO
-		if Input.is_action_pressed("move_up"):
+		if Input.is_action_pressed("move up"):
 			input_vector.y -= 1.0
 			direction = "UP"
 			walk_state(direction)
-		if Input.is_action_pressed("move_down"):
+		if Input.is_action_pressed("move down"):
 			input_vector.y += 1.0
 			direction = "DOWN"
 			walk_state(direction)
-		if Input.is_action_pressed("move_left"):
+		if Input.is_action_pressed("move left"):
 			input_vector.x -= 1.0
 			direction = "LEFT"
 			walk_state(direction)
-		if Input.is_action_pressed("move_right"):
+		if Input.is_action_pressed("move right"):
 			input_vector.x += 1.0
 			direction = "RIGHT"
 			walk_state(direction)
-		if !Input.is_action_pressed("move_right") && !Input.is_action_pressed("move_left")  && !Input.is_action_pressed("move_up")  && !Input.is_action_pressed("move_down"):
+		if !Input.is_action_pressed("move right") && !Input.is_action_pressed("move left")  && !Input.is_action_pressed("move up")  && !Input.is_action_pressed("move down"):
 			idle_state(direction)
 		input_vector = input_vector.normalized()
 		if input_vector != Vector2.ZERO:
@@ -274,107 +312,97 @@ func movement_state(delta):
 
 
 func idle_state(_direction):
-	$Sounds/FootstepsSound.stream_paused = true
-	if state != DYING:
+	if state == MOVEMENT:
+		$Sounds/FootstepsSound.stream_paused = true
+		animation_player.play("idle loop")
 		if Sounds.current_footsteps_sound != Sounds.swimming:
-			if state == MOVEMENT:
-				animation_player.play("idle")
-				if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and PlayerData.normal_hotbar_mode:
-					var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
-					var item_category = JsonData.item_data[item_name]["ItemCategory"]
-					if Util.valid_holding_item_category(item_category):
-						holding_item.show()
-						holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
-						animation = "holding_idle_" + _direction.to_lower()
-						$HoldingTorch.hide()
-					elif item_name == "torch":
-						holding_item.hide()
-						$HoldingTorch.show()
-						animation = "holding_idle_" + _direction.to_lower()
-					else:
-						holding_item.hide()
-						animation = "idle_" + _direction.to_lower()
-						$HoldingTorch.hide()
-				elif PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)) and not PlayerData.normal_hotbar_mode:
-					var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
-					var item_category = JsonData.item_data[item_name]["ItemCategory"]
-					if Util.valid_holding_item_category(item_category):
-						holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
-						holding_item.show()
-						animation = "holding_idle_" + _direction.to_lower()
-						$HoldingTorch.hide()
-					else:
-						$HoldingTorch.hide()
-						holding_item.hide()
-						animation = "idle_" + _direction.to_lower()
-				else:
-					$HoldingTorch.hide()
-					holding_item.hide()
-					animation = "idle_" + _direction.to_lower()
-				composite_sprites.set_player_animation(character, animation, null)
-		else:
-			$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
-			animation_player.play("swim")
-			composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
-
-
-func walk_state(_direction):
-	if state != DYING:
-		$Sounds/FootstepsSound.stream_paused = false
-		if Sounds.current_footsteps_sound != Sounds.swimming and not running:
-			animation_player.play("walk")
 			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and PlayerData.normal_hotbar_mode:
 				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
 				if Util.valid_holding_item_category(item_category):
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 					holding_item.show()
-					animation = "holding_walk_" + _direction.to_lower()
-					$HoldingTorch.hide()
-					$TorchLight.enabled = false
+					$HoldingTorch.set_inactive()
+					animation = "holding_idle_" + _direction.to_lower()
 				elif item_name == "torch":
 					holding_item.hide()
-					$HoldingTorch.show()
-					$TorchLight.enabled = true
-					animation = "holding_walk_" + _direction.to_lower()
+					$HoldingTorch.set_active()
+					animation = "holding_idle_" + _direction.to_lower()
 				else:
 					holding_item.hide()
-					animation = "walk_" + _direction.to_lower()
-					$TorchLight.enabled = false
-					$HoldingTorch.hide()
+					$HoldingTorch.set_inactive()
+					animation = "idle_" + _direction.to_lower()
 			elif PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)) and not PlayerData.normal_hotbar_mode:
 				var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
 				if Util.valid_holding_item_category(item_category):
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 					holding_item.show()
-					animation = "holding_walk_" + _direction.to_lower()
-					$TorchLight.enabled = false
-					$HoldingTorch.hide()
+					$HoldingTorch.set_inactive()
+					animation = "holding_idle_" + _direction.to_lower()
 				else:
 					holding_item.hide()
-					animation = "walk_" + _direction.to_lower()
-					$TorchLight.enabled = false
-					$HoldingTorch.hide()
+					$HoldingTorch.set_inactive()
+					animation = "idle_" + _direction.to_lower()
 			else:
 				holding_item.hide()
+				$HoldingTorch.set_inactive()
+				animation = "idle_" + _direction.to_lower()
+			composite_sprites.set_player_animation(character, animation, null)
+		else:
+			holding_item.hide()
+			$HoldingTorch.set_inactive()
+			$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
+			composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
+
+
+func walk_state(_direction):
+	if state == MOVEMENT:
+		animation_player.play("walk loop")
+		$Sounds/FootstepsSound.stream_paused = false
+		if Sounds.current_footsteps_sound != Sounds.swimming and not running:
+			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and PlayerData.normal_hotbar_mode:
+				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
+				var item_category = JsonData.item_data[item_name]["ItemCategory"]
+				if Util.valid_holding_item_category(item_category) or item_name == "torch":
+					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
+					holding_item.show()
+					$HoldingTorch.set_inactive()
+					animation = "holding_walk_" + _direction.to_lower()
+				elif item_name == "torch":
+					holding_item.hide()
+					$HoldingTorch.set_active()
+					animation = "holding_walk_" + _direction.to_lower()
+				else:
+					holding_item.hide()
+					$HoldingTorch.set_inactive()
+					animation = "walk_" + _direction.to_lower()
+			elif PlayerData.player_data["combat_hotbar"].has(str(PlayerData.active_item_slot_combat_hotbar)) and not PlayerData.normal_hotbar_mode:
+				var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
+				var item_category = JsonData.item_data[item_name]["ItemCategory"]
+				if Util.valid_holding_item_category(item_category):
+					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
+					holding_item.show()
+					$HoldingTorch.set_inactive()
+					animation = "holding_walk_" + _direction.to_lower()
+				else:
+					holding_item.hide()
+					$HoldingTorch.set_inactive()
+					animation = "walk_" + _direction.to_lower()
+			else:
+				holding_item.hide()
+				$HoldingTorch.set_inactive()
 				animation = "walk_" + _direction.to_lower()
-				$TorchLight.enabled = false
-				$HoldingTorch.hide()
 			composite_sprites.set_player_animation(character, animation, null)
 		elif running and Sounds.current_footsteps_sound != Sounds.swimming:
 			if state != DYING:
+				holding_item.hide()
+				$HoldingTorch.set_inactive()
 				$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
-				animation_player.play("sprint")
 				animation = "run_" + _direction.to_lower()
 				composite_sprites.set_player_animation(character, animation, null)
-				$TorchLight.enabled = false
-				$HoldingTorch.hide()
-				holding_item.hide()
 		elif Sounds.current_footsteps_sound == Sounds.swimming:
 			$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
-			holding_item.hide()
-			$TorchLight.enabled = false
-			$HoldingTorch.hide()
-			animation_player.play("swim")
 			composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
+			holding_item.hide()
+			$HoldingTorch.set_inactive()

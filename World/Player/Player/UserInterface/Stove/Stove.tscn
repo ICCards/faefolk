@@ -1,203 +1,224 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=3 uid="uid://cly7lxm775u81"]
 
-[ext_resource path="res://Assets/Images/User interface/stove/stove-tab.png" type="Texture" id=1]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" type="PackedScene" id=2]
-[ext_resource path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" type="PackedScene" id=3]
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" type="Texture" id=5]
-[ext_resource path="res://World/Player/Player/UserInterface/Stove/Stove.gd" type="Script" id=6]
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/StoveSlots.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/locked slot.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture" id=10]
-[ext_resource path="res://Assets/Images/User interface/stove/fire/stove-fire-1.png" type="Texture" id=11]
-[ext_resource path="res://Assets/Images/User interface/stove/stove-arrow.png" type="Texture" id=12]
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=13]
-[ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=14]
-[ext_resource path="res://Assets/Images/User interface/stove/fire/stove-fire-6.png" type="Texture" id=15]
-[ext_resource path="res://Assets/Images/User interface/stove/fire/stove-fire-5.png" type="Texture" id=16]
-[ext_resource path="res://Assets/Images/User interface/stove/fire/stove-fire-4.png" type="Texture" id=17]
-[ext_resource path="res://Assets/Images/User interface/stove/fire/stove-fire-7.png" type="Texture" id=18]
-[ext_resource path="res://Assets/Images/User interface/stove/fire/stove-fire-3.png" type="Texture" id=19]
-[ext_resource path="res://Assets/Images/User interface/stove/fire/stove-fire-2.png" type="Texture" id=20]
-[ext_resource path="res://Assets/Images/User interface/stove/fire/stove-fire-0.png" type="Texture" id=21]
+[ext_resource type="Texture2D" uid="uid://b0sjcoimppjry" path="res://Assets/Images/User interface/stove/stove-tab.png" id="1"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Stove/Stove.gd" id="1_vs8ay"]
+[ext_resource type="Texture2D" uid="uid://ftl1013lhawe" path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" id="4_1aon6"]
+[ext_resource type="PackedScene" uid="uid://b4k542eq2r5ul" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="5_xy5qc"]
+[ext_resource type="PackedScene" uid="uid://c4pw0ts6afhqc" path="res://World/Player/Player/UserInterface/Slots/StoveSlots.tscn" id="6_4jxth"]
+[ext_resource type="PackedScene" uid="uid://m20c61iainqg" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="7_mau5r"]
+[ext_resource type="PackedScene" uid="uid://cfhkpql8cboey" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" id="8_fmvqt"]
+[ext_resource type="Texture2D" uid="uid://de3s80bo27kc" path="res://Assets/Images/User interface/buttons-icons/x-button.png" id="9"]
+[ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://bachr3xkjleuo" path="res://Assets/Images/User interface/stove/stove-arrow.png" id="12"]
+[ext_resource type="Texture2D" uid="uid://h1d7iyd8ub08" path="res://Assets/Images/User interface/stove/fire/stove-fire-0.png" id="12_384tb"]
+[ext_resource type="Texture2D" uid="uid://bhdmhl4omrdyy" path="res://Assets/Images/User interface/stove/fire/stove-fire-1.png" id="13_amasl"]
+[ext_resource type="PackedScene" uid="uid://4v3igpipcu6i" path="res://InventoryLogic/ItemDescription.tscn" id="14"]
+[ext_resource type="Texture2D" uid="uid://b0jf6eicb7hrc" path="res://Assets/Images/User interface/stove/fire/stove-fire-2.png" id="14_efhpm"]
+[ext_resource type="Texture2D" uid="uid://cvgubwd5t4f8t" path="res://Assets/Images/User interface/stove/fire/stove-fire-3.png" id="15_lpr44"]
+[ext_resource type="Texture2D" uid="uid://10g5pf2spr5h" path="res://Assets/Images/User interface/stove/fire/stove-fire-4.png" id="16_giohj"]
+[ext_resource type="Texture2D" uid="uid://cgt18sx008i3h" path="res://Assets/Images/User interface/stove/fire/stove-fire-5.png" id="17_8jhlk"]
+[ext_resource type="Texture2D" uid="uid://nltba7be0pq3" path="res://Assets/Images/User interface/stove/fire/stove-fire-6.png" id="18_gr50g"]
+[ext_resource type="Texture2D" uid="uid://cr2j4e5ayayqn" path="res://Assets/Images/User interface/stove/fire/stove-fire-7.png" id="19_xdtd7"]
+[ext_resource type="PackedScene" uid="uid://c6wlm3ymf4sq6" path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" id="20_a3jem"]
 
-[sub_resource type="SpriteFrames" id=5]
-animations = [ {
-"frames": [ ExtResource( 21 ), ExtResource( 11 ), ExtResource( 20 ), ExtResource( 19 ), ExtResource( 17 ), ExtResource( 16 ), ExtResource( 15 ), ExtResource( 18 ) ],
+[sub_resource type="SpriteFrames" id="SpriteFrames_1tcni"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_384tb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_amasl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_efhpm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_lpr44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_giohj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_8jhlk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_gr50g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_xdtd7")
+}],
 "loop": true,
-"name": "default",
-"speed": 8.0
-} ]
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [node name="Stove" type="Control"]
+layout_mode = 3
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -640.0
-margin_top = -360.0
-margin_right = -640.0
-margin_bottom = -360.0
-script = ExtResource( 6 )
+offset_left = -640.0
+offset_top = -360.0
+offset_right = -640.0
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vs8ay")
 
-[node name="ItemDescription" parent="." instance=ExtResource( 14 )]
+[node name="ItemDescription" parent="." instance=ExtResource("14")]
 visible = false
 
-[node name="Bg" type="TextureRect" parent="."]
-margin_right = 426.0
-margin_bottom = 240.0
-rect_scale = Vector2( 3, 3 )
-texture = ExtResource( 1 )
-stretch_mode = 4
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("1")
+stretch_mode = 3
+metadata/_edit_lock_ = true
 
 [node name="Frame" type="TextureRect" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_right = 426.0
-margin_bottom = 240.0
-rect_scale = Vector2( 3, 3 )
-mouse_filter = 2
-texture = ExtResource( 5 )
-stretch_mode = 4
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("4_1aon6")
+stretch_mode = 3
+metadata/_edit_lock_ = true
+
+[node name="MenuTitle" parent="." instance=ExtResource("5_xy5qc")]
+layout_mode = 0
+offset_left = 552.0
+offset_top = 117.0
+offset_right = 917.0
+offset_bottom = 192.0
+
+[node name="StoveSlots" parent="." instance=ExtResource("6_4jxth")]
+offset_left = 88.0
+offset_top = 284.0
+offset_right = 686.0
+offset_bottom = 516.0
+
+[node name="FuelSlot" parent="StoveSlots" index="0"]
+layout_mode = 1
+anchors_preset = 8
+offset_left = 51.0
+offset_top = 113.0
+offset_right = 99.0
+offset_bottom = 161.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Ingredient1" parent="StoveSlots" index="1"]
+offset_left = 287.0
+offset_top = 97.0
+offset_right = 335.0
+offset_bottom = 145.0
+
+[node name="Ingredient2" parent="StoveSlots" index="2"]
+offset_left = 350.0
+offset_top = 97.0
+offset_right = 398.0
+offset_bottom = 145.0
+
+[node name="LockSlot" parent="StoveSlots/Ingredient2" index="0"]
+visible = true
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 51.0
+offset_bottom = 51.0
+
+[node name="Ingredient3" parent="StoveSlots" index="3"]
+offset_left = 413.0
+offset_top = 97.0
+offset_right = 461.0
+offset_bottom = 145.0
+
+[node name="LockSlot" parent="StoveSlots/Ingredient3" index="0"]
+offset_left = -3.0
+offset_top = -3.0
+offset_right = 51.0
+offset_bottom = 51.0
+
+[node name="YieldSlot1" parent="StoveSlots" index="4"]
+offset_left = 287.0
+offset_top = -35.0
+offset_right = 335.0
+offset_bottom = 13.0
+
+[node name="YieldSlot2" parent="StoveSlots" index="5"]
+offset_left = 350.0
+offset_top = -35.0
+offset_right = 398.0
+offset_bottom = 13.0
+
+[node name="CoalYieldSlot" parent="StoveSlots" index="6"]
+offset_left = 413.0
+offset_top = -35.0
+offset_right = 461.0
+offset_bottom = 13.0
 
 [node name="ExitBtn" type="TextureButton" parent="."]
-margin_left = 918.0
-margin_top = 114.0
-margin_right = 932.0
-margin_bottom = 128.0
-rect_scale = Vector2( 3, 3 )
-texture_normal = ExtResource( 9 )
-texture_pressed = ExtResource( 10 )
-expand = true
+layout_mode = 0
+offset_left = 918.0
+offset_top = 114.0
+offset_right = 932.0
+offset_bottom = 128.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("9")
+texture_pressed = ExtResource("10")
 
-[node name="Trash" parent="." instance=ExtResource( 3 )]
+[node name="TimerProgress" type="TextureProgressBar" parent="."]
+modulate = Color(0.513726, 0.513726, 0.513726, 1)
+layout_mode = 0
+offset_left = 441.0
+offset_top = 309.0
+offset_right = 455.0
+offset_bottom = 329.0
+scale = Vector2(3, 3)
+fill_mode = 3
+texture_progress = ExtResource("12")
 
-[node name="FireAnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="FireAnimatedSprite" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2( 461, 465 )
-scale = Vector2( 3, 3 )
-frames = SubResource( 5 )
-frame = 5
-playing = true
+position = Vector2(461, 465)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_1tcni")
+animation = &"new_animation"
 
 [node name="ColorRect" type="ColorRect" parent="FireAnimatedSprite"]
 show_behind_parent = true
-margin_left = -8.66669
-margin_top = -6.00003
-margin_right = 9.33331
-margin_bottom = 13.0
-color = Color( 0.247059, 0.109804, 0.0627451, 1 )
+offset_left = -8.66669
+offset_top = -6.00003
+offset_right = 9.33331
+offset_bottom = 13.0
+color = Color(0.247059, 0.109804, 0.0627451, 1)
 
-[node name="TimerProgress" type="TextureProgress" parent="."]
-modulate = Color( 0.513726, 0.513726, 0.513726, 1 )
-margin_left = 441.0
-margin_top = 309.0
-margin_right = 455.0
-margin_bottom = 329.0
-rect_scale = Vector2( 3, 3 )
-texture_progress = ExtResource( 12 )
-fill_mode = 3
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="StoveSlots" parent="." instance=ExtResource( 7 )]
-margin_left = -316.0
-margin_top = -282.0
-margin_right = 282.0
-margin_bottom = -50.0
-
-[node name="FuelSlot" parent="StoveSlots" index="0"]
-margin_left = 455.0
-margin_top = 679.0
-margin_right = 503.0
-margin_bottom = 727.0
-
-[node name="Ingredient1" parent="StoveSlots" index="1"]
-margin_left = 691.0
-margin_top = 663.0
-margin_right = 739.0
-margin_bottom = 711.0
-
-[node name="Ingredient2" parent="StoveSlots" index="2"]
-margin_left = 754.0
-margin_top = 663.0
-margin_right = 802.0
-margin_bottom = 711.0
-
-[node name="LockSlot" parent="StoveSlots/Ingredient2" index="0"]
-margin_left = -3.0
-margin_top = -3.0
-margin_right = 51.0
-margin_bottom = 51.0
-texture = ExtResource( 8 )
-
-[node name="Ingredient3" parent="StoveSlots" index="3"]
-margin_left = 817.0
-margin_top = 663.0
-margin_right = 865.0
-margin_bottom = 711.0
-
-[node name="LockSlot" parent="StoveSlots/Ingredient3" index="0"]
-margin_left = -2.0
-margin_top = -3.0
-margin_right = 51.0
-margin_bottom = 51.0
-texture = ExtResource( 8 )
-
-[node name="YieldSlot1" parent="StoveSlots" index="4"]
-margin_left = 691.0
-margin_top = 531.0
-margin_right = 739.0
-margin_bottom = 579.0
-
-[node name="YieldSlot2" parent="StoveSlots" index="5"]
-margin_left = 754.0
-margin_top = 531.0
-margin_right = 802.0
-margin_bottom = 579.0
-
-[node name="CoalYieldSlot" parent="StoveSlots" index="6"]
-margin_left = 817.0
-margin_top = 531.0
-margin_right = 865.0
-margin_bottom = 579.0
-
-[node name="InventorySlots" parent="." instance=ExtResource( 13 )]
-margin_left = 639.0
-margin_top = 315.0
-margin_right = 933.0
-margin_bottom = 567.0
-custom_constants/vseparation = 18
-custom_constants/hseparation = 15
-columns = 5
-
-[node name="HotbarInventorySlots" parent="." instance=ExtResource( 4 )]
-margin_left = 639.0
-margin_top = 183.0
-margin_right = 943.0
-margin_bottom = 297.0
-custom_constants/vseparation = 18
-custom_constants/hseparation = 15
-columns = 5
-
-[node name="Tween" type="Tween" parent="."]
+[node name="Trash" parent="." instance=ExtResource("20_a3jem")]
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="CookTimer" type="Timer" parent="."]
 wait_time = 10.0
 
-[node name="MenuTitle" parent="." instance=ExtResource( 2 )]
-margin_left = 552.0
-margin_top = 117.0
-margin_right = 915.0
-margin_bottom = 192.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
-text = "Stove #3"
+[node name="InventorySlots" parent="." instance=ExtResource("8_fmvqt")]
+layout_mode = 0
+offset_left = 639.0
+offset_top = 315.0
+offset_right = 939.0
+offset_bottom = 561.0
+metadata/_edit_lock_ = true
+
+[node name="HotbarInventorySlots" parent="." instance=ExtResource("7_mau5r")]
+layout_mode = 0
+offset_left = 639.0
+offset_top = 183.0
+offset_right = 939.0
+offset_bottom = 297.0
+metadata/_edit_lock_ = true
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
 [connection signal="timeout" from="CookTimer" to="." method="_on_CookTimer_timeout"]

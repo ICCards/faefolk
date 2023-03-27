@@ -1,11 +1,11 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
-var velocity = Vector2.ZERO
+#var velo = Vector2.ZERO
 const MAX_SPEED = 425
 const ACCELERATION = 460
-onready var itemSprite = $Sprite/TextureRect
-onready var itemQuantity = $Sprite/Label
-onready var animationPlayer = $AnimationPlayer
+@onready var itemSprite = $Sprite2D/Image
+@onready var itemQuantity = $Sprite2D/Label
+@onready var animationPlayer = $AnimationPlayer
 
 var rng = RandomNumberGenerator.new()
 
@@ -20,7 +20,7 @@ var adjustedPosition
 var is_tree_harvest: bool = false
 
 
-func initItemDropType(_item_name, var _quantity = 1, var _health = null):
+func initItemDropType(_item_name, _quantity = 1, _health = null):
 	item_name = _item_name
 	item_quantity = _quantity
 	item_health = _health
@@ -33,28 +33,27 @@ func _ready():
 		itemQuantity.call_deferred("hide")
 	else:
 		itemQuantity.set_deferred("text", str(item_quantity))
-#	if is_tree_harvest:
-#		animationPlayer.call_deferred("play", "Tree harvest " + String(rng.randi_range(1, 2)))
-#	else:
-	randomInt = rng.randi_range(1, 5)
-	animationPlayer.call_deferred("play", "Animate " + String(randomInt))
+	randomInt = rng.randi_range(1, 6)
+	animationPlayer.play("Animate " + str(randomInt))
 
 
 func adjustPosition(animation):
 	if animation == 1:
-		adjustedPosition = global_position + Vector2(48, 0)
+		adjustedPosition = global_position + Vector2(24,0)
 	elif animation == 2:
-		adjustedPosition = global_position + Vector2(-48, 0)
+		adjustedPosition = global_position + Vector2(-24,0)
 	elif animation == 3:
-		adjustedPosition = global_position + Vector2(24, -25)
+		adjustedPosition = global_position + Vector2(12,-8)
 	elif animation == 4:
-		adjustedPosition = global_position + Vector2(-24, -25)
+		adjustedPosition = global_position + Vector2(-12,-8)
 	elif animation == 5:
-		adjustedPosition = global_position + Vector2(0, -6)
+		adjustedPosition = global_position + Vector2(4, -8)
+	elif animation == 6:
+		adjustedPosition = global_position + Vector2(-8, 4)
 
 
 func _physics_process(_delta):
-	if !being_picked_up:
+	if not being_picked_up:
 		velocity = Vector2.ZERO
 	else:
 		adjustPosition(randomInt)
@@ -66,15 +65,19 @@ func _physics_process(_delta):
 				return
 			else:
 				being_added_to_inventory = true
-				$Sprite.set_deferred("visible", false)
+				$Sprite2D.set_deferred("visible", false)
 				$CollisionShape2D.set_deferred("disabled", true)
 				PlayerData.pick_up_item(item_name, item_quantity, item_health)
 				$SoundEffects.set_deferred("volume_db",  Sounds.return_adjusted_sound_db("sound", 0))
 				$SoundEffects.call_deferred("play")
-				yield($SoundEffects, "finished")
-				queue_free()
+				await $SoundEffects.finished
+				Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(item_name, item_quantity)
+				call_deferred("queue_free")
 	velocity.normalized()
-	velocity = move_and_slide(velocity, Vector2.UP)
+	set_velocity(velocity)
+	set_up_direction(Vector2.UP)
+	move_and_slide()
+	velocity = velocity
 
 func pick_up_item(body):
 	player = body

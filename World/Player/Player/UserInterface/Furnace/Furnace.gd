@@ -4,13 +4,13 @@ var hovered_item
 var id
 
 
-onready var sound_effects: AudioStreamPlayer = $SoundEffects
-onready var ore_slot1 = $FurnaceSlots/OreSlot1
-onready var ore_slot2 = $FurnaceSlots/OreSlot2
-onready var fuel_slot = $FurnaceSlots/FuelSlot
-onready var yield_slot1 = $FurnaceSlots/YieldSlot1
-onready var yield_slot2 = $FurnaceSlots/YieldSlot2
-onready var coal_yield_slot = $FurnaceSlots/CoalYieldSlot
+@onready var sound_effects: AudioStreamPlayer = $SoundEffects
+@onready var ore_slot1 = $FurnaceSlots/OreSlot1
+@onready var ore_slot2 = $FurnaceSlots/OreSlot2
+@onready var fuel_slot = $FurnaceSlots/FuelSlot
+@onready var yield_slot1 = $FurnaceSlots/YieldSlot1
+@onready var yield_slot2 = $FurnaceSlots/YieldSlot2
+@onready var coal_yield_slot = $FurnaceSlots/CoalYieldSlot
 
 func _ready():
 	initialize()
@@ -161,8 +161,8 @@ func valid_yield_slot(ore_name):
 func cooking_active():
 	$CookTimer.start()
 	$FireAnimatedSprite.show()
-	if Server.world.has_node("PlacableObjects/"+id+"/FurnaceSmoke"):
-		Server.world.get_node("PlacableObjects/"+id+"/FurnaceSmoke").show()
+	if Server.world.name == "Overworld":
+		Server.world.get_node("PlaceableObjects/"+id).interactives.toggle_furnace_smoke(true)
 	if self.visible and Server.isLoaded:
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/furnace/furnace.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
@@ -172,7 +172,8 @@ func cooking_inactive():
 	$CookTimer.stop()
 	$TimerProgress.value = 0
 	$FireAnimatedSprite.hide()
-	Server.world.get_node("PlacableObjects/"+id+"/FurnaceSmoke").hide()
+	if Server.world.name == "Overworld":
+		Server.world.get_node("PlaceableObjects/"+id).interactives.toggle_furnace_smoke(false)
 
 func valid_fuel():
 	if fuel_slot.item:

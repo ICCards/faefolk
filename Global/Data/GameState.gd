@@ -2,12 +2,12 @@ extends Resource
 
 class_name GameState
 
-export var player_state = {}
-export var world_state = {}
-export var cave_state = {}
+@export var player_state = {}
+@export var world_state = {}
+@export var cave_state = {}
 ## any other object here  and the the save and load methods that needs to be save
 
-const GAME_STATE_PATH = "user://gamestatev13New223.tres"
+const GAME_STATE_PATH = "user://gamestate.tres"
 
 var game_state: GameState
 
@@ -15,7 +15,7 @@ static func save_exists():
 	return ResourceLoader.exists(GAME_STATE_PATH)
 
 func save_state():
-	var result = ResourceSaver.save(GAME_STATE_PATH, self)
+	var result = ResourceSaver.save(self, GAME_STATE_PATH, ResourceSaver.FLAG_NONE)
 	if(result == OK):
 		print("saved player data")
 

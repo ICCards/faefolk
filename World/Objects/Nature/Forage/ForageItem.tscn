@@ -1,176 +1,251 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=36 format=3 uid="uid://dgtupng24b2k"]
 
-[ext_resource path="res://Assets/Images/Animations/Flowers/flowers with shadows.png" type="Texture" id=1]
-[ext_resource path="res://World/Objects/Nature/Forage/ForageItem.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Images/Animations/Flowers/tulip.png" type="Texture" id=4]
-[ext_resource path="res://Assets/Images/Animations/Flowers/sunflower.png" type="Texture" id=6]
+[ext_resource type="Script" path="res://World/Objects/Nature/Forage/ForageItem.gd" id="1_43ob6"]
+[ext_resource type="Texture2D" uid="uid://8dj2tnwugqc0" path="res://Assets/Images/Forage/clam/blue clam.png" id="2_4tgp7"]
+[ext_resource type="Texture2D" uid="uid://bkuwouwhenfpm" path="res://Assets/Images/Animations/Flowers/dandelion.png" id="3_v5uxa"]
+[ext_resource type="Texture2D" uid="uid://bn6cjr5tu82r5" path="res://Assets/Images/Animations/Flowers/lily of the nile.png" id="4_cxvef"]
+[ext_resource type="Texture2D" uid="uid://0hcfpwhvx7a0" path="res://Assets/Images/Animations/Flowers/poppy flower.png" id="5_1ndop"]
+[ext_resource type="Texture2D" uid="uid://mqhubn3yemss" path="res://Assets/Images/Animations/Flowers/sunflower.png" id="6_l5ax3"]
+[ext_resource type="Texture2D" uid="uid://dlur3nqia2gjf" path="res://Assets/Images/Animations/Flowers/tulip.png" id="7_dejqu"]
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 16.0
+[sub_resource type="CircleShape2D" id="2"]
+radius = 8.0
 
-[sub_resource type="CircleShape2D" id=3]
-radius = 48.0
+[sub_resource type="CircleShape2D" id="3"]
+radius = 24.0
 
-[sub_resource type="AtlasTexture" id=30]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 112, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_osnug"]
+atlas = ExtResource("3_v5uxa")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=31]
-atlas = ExtResource( 1 )
-region = Rect2( 16, 112, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_ylyec"]
+atlas = ExtResource("3_v5uxa")
+region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=32]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 112, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_bbhec"]
+atlas = ExtResource("3_v5uxa")
+region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=33]
-atlas = ExtResource( 1 )
-region = Rect2( 48, 112, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gr4h"]
+atlas = ExtResource("3_v5uxa")
+region = Rect2(48, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=34]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 112, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_83yth"]
+atlas = ExtResource("3_v5uxa")
+region = Rect2(64, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=35]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 96, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_txhjb"]
+atlas = ExtResource("4_cxvef")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=36]
-atlas = ExtResource( 1 )
-region = Rect2( 16, 96, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_d62pe"]
+atlas = ExtResource("4_cxvef")
+region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=37]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 96, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_a02xm"]
+atlas = ExtResource("4_cxvef")
+region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=38]
-atlas = ExtResource( 1 )
-region = Rect2( 48, 96, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_crh5a"]
+atlas = ExtResource("4_cxvef")
+region = Rect2(48, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=39]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 96, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmsqu"]
+atlas = ExtResource("4_cxvef")
+region = Rect2(64, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=40]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 64, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwt5u"]
+atlas = ExtResource("5_1ndop")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=41]
-atlas = ExtResource( 1 )
-region = Rect2( 16, 64, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtvg5"]
+atlas = ExtResource("5_1ndop")
+region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=42]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 64, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_ttcgh"]
+atlas = ExtResource("5_1ndop")
+region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=43]
-atlas = ExtResource( 1 )
-region = Rect2( 48, 64, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_f387l"]
+atlas = ExtResource("5_1ndop")
+region = Rect2(48, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=44]
-atlas = ExtResource( 1 )
-region = Rect2( 64, 64, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_4wbhl"]
+atlas = ExtResource("5_1ndop")
+region = Rect2(64, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=25]
-atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdpxb"]
+atlas = ExtResource("6_l5ax3")
+region = Rect2(0, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=26]
-atlas = ExtResource( 6 )
-region = Rect2( 24, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_jkrke"]
+atlas = ExtResource("6_l5ax3")
+region = Rect2(24, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=27]
-atlas = ExtResource( 6 )
-region = Rect2( 48, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_llfu2"]
+atlas = ExtResource("6_l5ax3")
+region = Rect2(48, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 6 )
-region = Rect2( 72, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3ovf"]
+atlas = ExtResource("6_l5ax3")
+region = Rect2(72, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 6 )
-region = Rect2( 96, 0, 24, 24 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_utrke"]
+atlas = ExtResource("6_l5ax3")
+region = Rect2(96, 0, 24, 24)
 
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_xhipy"]
+atlas = ExtResource("7_dejqu")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 4 )
-region = Rect2( 16, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_agc72"]
+atlas = ExtResource("7_dejqu")
+region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 4 )
-region = Rect2( 32, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_hkqu2"]
+atlas = ExtResource("7_dejqu")
+region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=18]
-atlas = ExtResource( 4 )
-region = Rect2( 48, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_13nuo"]
+atlas = ExtResource("7_dejqu")
+region = Rect2(48, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=19]
-atlas = ExtResource( 4 )
-region = Rect2( 64, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_rah4q"]
+atlas = ExtResource("7_dejqu")
+region = Rect2(64, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id=9]
-animations = [ {
-"frames": [ SubResource( 30 ), SubResource( 31 ), SubResource( 32 ), SubResource( 33 ), SubResource( 34 ) ],
-"loop": true,
-"name": "dandelion",
-"speed": 4.0
+[sub_resource type="SpriteFrames" id="9"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_osnug")
 }, {
-"frames": [ SubResource( 35 ), SubResource( 36 ), SubResource( 37 ), SubResource( 38 ), SubResource( 39 ) ],
-"loop": true,
-"name": "lily of the nile",
-"speed": 4.0
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ylyec")
 }, {
-"frames": [ SubResource( 40 ), SubResource( 41 ), SubResource( 42 ), SubResource( 43 ), SubResource( 44 ) ],
-"loop": true,
-"name": "poppy flower",
-"speed": 4.0
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bbhec")
 }, {
-"frames": [ SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ), SubResource( 29 ) ],
-"loop": true,
-"name": "sunflower",
-"speed": 4.0
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gr4h")
 }, {
-"frames": [ SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ), SubResource( 19 ) ],
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_83yth")
+}],
 "loop": true,
-"name": "tulip",
-"speed": 4.0
-} ]
+"name": &"dandelion",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_txhjb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d62pe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a02xm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crh5a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmsqu")
+}],
+"loop": true,
+"name": &"lily of the nile",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iwt5u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtvg5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ttcgh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f387l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4wbhl")
+}],
+"loop": true,
+"name": &"poppy flower",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdpxb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jkrke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llfu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3ovf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_utrke")
+}],
+"loop": true,
+"name": &"sunflower",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xhipy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agc72")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hkqu2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13nuo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rah4q")
+}],
+"loop": true,
+"name": &"tulip",
+"speed": 3.0
+}]
 
 [node name="ForageItem" type="Area2D"]
-collision_layer = 0
-collision_mask = 131072
-script = ExtResource( 2 )
+collision_layer = 131072
+collision_mask = 0
+script = ExtResource("1_43ob6")
 
-[node name="Sprite" type="Sprite" parent="."]
-visible = false
-modulate = Color( 1.2, 1.2, 1.2, 1 )
-scale = Vector2( 2, 2 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1.2, 1.2, 1.2, 1)
+texture = ExtResource("2_4tgp7")
 
 [node name="MovementCollision" type="StaticBody2D" parent="."]
-visible = false
 collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MovementCollision"]
-shape = SubResource( 2 )
+shape = SubResource("2")
 disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 3 )
+shape = SubResource("3")
 
-[node name="AnimatedFlower" type="AnimatedSprite" parent="."]
-modulate = Color( 1.2, 1.2, 1.2, 1 )
-scale = Vector2( 2, 2 )
-frames = SubResource( 9 )
-animation = "tulip"
-frame = 3
-playing = true
+[node name="AnimatedFlower" type="AnimatedSprite2D" parent="."]
+modulate = Color(1.2, 1.2, 1.2, 1)
+sprite_frames = SubResource("9")
+animation = &"dandelion"
+frame = 1
+frame_progress = 0.29993
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( -2.86102e-06, 3.33786e-06 )
-scale = Vector2( 7.9, 7.1 )
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0.499994, 1.52588e-05)
+scale = Vector2(5.75, 5.25)
 
-[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

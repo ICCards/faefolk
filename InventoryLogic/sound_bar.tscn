@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://btd1x6vesdiat"]
+
+[ext_resource type="Script" path="res://InventoryLogic/sound_bar.gd" id="1_13jjq"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="1_pvrqn"]
+[ext_resource type="Texture2D" uid="uid://by0j7cyii2tf1" path="res://Assets/Images/User interface/sliders/h-slider3-boundary.png" id="2_kwo1v"]
+[ext_resource type="Texture2D" uid="uid://bmp7vq3jmy1y" path="res://Assets/Images/User interface/sliders/h-slider3-progress.png" id="3_6de2p"]
+[ext_resource type="Texture2D" uid="uid://c0pxp1yu6mnk1" path="res://Assets/Images/User interface/sliders/h-slider3.png" id="4_pntec"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bdbe2"]
+
+[node name="SoundBar" type="Control"]
+custom_minimum_size = Vector2(2.08165e-12, 56)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_13jjq")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_right = 623.0
+offset_bottom = 184.0
+scale = Vector2(0.25, 0.25)
+theme = ExtResource("1_pvrqn")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/shadow_outline_size = 0
+text = "Music vol."
+
+[node name="LeftBoundary" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 266.0
+offset_top = 15.0
+offset_right = 272.0
+offset_bottom = 24.0
+scale = Vector2(3, 3)
+texture = ExtResource("2_kwo1v")
+
+[node name="Middle" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 284.0
+offset_top = 15.0
+offset_right = 355.0
+offset_bottom = 24.0
+scale = Vector2(3, 3)
+texture = ExtResource("3_6de2p")
+
+[node name="Slider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 284.0
+offset_top = 17.6667
+offset_right = 355.0
+offset_bottom = 28.6667
+scale = Vector2(3, 3)
+theme_override_icons/grabber = ExtResource("4_pntec")
+theme_override_icons/grabber_highlight = ExtResource("4_pntec")
+theme_override_icons/grabber_disabled = ExtResource("4_pntec")
+theme_override_styles/slider = SubResource("StyleBoxEmpty_bdbe2")
+value = 50.0
+
+[node name="RightBoundary" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 497.0
+offset_top = 15.0
+offset_right = 503.0
+offset_bottom = 24.0
+scale = Vector2(3, 3)
+texture = ExtResource("2_kwo1v")
+flip_h = true
+
+[connection signal="value_changed" from="Slider" to="." method="_on_slider_value_changed"]

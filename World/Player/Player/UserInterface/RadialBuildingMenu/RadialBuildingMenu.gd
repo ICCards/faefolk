@@ -28,9 +28,9 @@ func _physics_process(delta):
 		$Title.text = buildings[current_item][0].to_upper() + buildings[current_item].substr(1,-1) + ":"
 		$Resources.show()
 		if current_item == 1 or current_item == 0:
-			$Resources.bbcode_text = return_resource_cost_string(current_item)
+			$Resources.text = return_resource_cost_string(current_item)
 		else:
-			$Resources.bbcode_text = "[center]Coming soon...[/center]"
+			$Resources.text = "[center]Coming soon...[/center]"
 	else:
 		$Title.hide()
 		$Resources.hide()
@@ -84,7 +84,7 @@ func destroy():
 	if current_item == 0 or current_item == 1:
 		Server.player_node.current_building_item = buildings[current_item]
 	else:
-		Server.player_node.current_building_item = null
+		Server.player_node.current_building_item = ""
 	Server.player_node.set_held_object()
 	hide()
 
@@ -92,9 +92,9 @@ func destroy():
 func _input(event):
 	if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 		if PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0] == "blueprint":
-			if event is InputEventMouseButton and event.button_index == BUTTON_RIGHT:
+			if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 				if not event.is_pressed():
 					destroy()
-					yield(get_tree().create_timer(0.1), "timeout")
+					await get_tree().create_timer(0.1).timeout
 					PlayerData.viewInventoryMode = false
 #

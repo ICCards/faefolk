@@ -1,11 +1,13 @@
 extends Control
 
-onready var PlayerMenuState = load("res://World/Player/PlayerInMenu/PlayerMenuState.tscn")
+@onready var PlayerMenuState = load("res://World/Player/PlayerInMenu/PlayerMenuState.tscn")
 var playerMenuState
 
 var game_state: GameState
 
+
 func _ready():
+	#get_tree().get_root().set_min_size(Vector2(1280, 720))
 	if GameState.save_exists(): # Load world
 		game_state = GameState.new()
 		game_state.load_state()
@@ -17,21 +19,21 @@ func _ready():
 		game_state = GameState.new()
 		game_state.player_state = PlayerData.starting_player_data 
 		game_state.world_state = MapData.world
-		game_state.cave_state = MapData.starting_caves_data
+		game_state.cave_state = MapData.caves
 		game_state.save_state()
 	$TitleMusic.stream = Sounds.title_music
 	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
 	$TitleMusic.play()
-	Sounds.connect("volume_change", self, "change_title_volume")
-	$Background/Water1.playing = true
-	$Background/Water2.playing = true
-	spawn_player_in_menu()
+	Sounds.connect("volume_change",Callable(self,"change_title_volume"))
+	$Background/Water1.play("loop")
+	$Background/Water2.play("loop")
+	spawn_player_in_menu()  
 
 
 func spawn_player_in_menu():
-	$MainMenuButtons/LoadingIndicator.visible = false
-	$MainMenuButtons/PlayShopQuit.visible = true
-	playerMenuState = PlayerMenuState.instance()
+#	$MainMenuButtons/LoadingIndicator.visible = false
+#	$MainMenuButtons/PlayShopQuit.visible = true
+	playerMenuState = PlayerMenuState.instantiate()
 	playerMenuState.name = "PLAYER"
 	call_deferred("add_child",playerMenuState)
 	playerMenuState.global_position = Vector2(735, 585 )
@@ -52,12 +54,12 @@ func toggle_menu_open():
 func open_options_menu():
 	$OptionsMenuLayer/Options.show()
 	$MainMenuButtons.hide()
-	Server.player_node.hide()
+	get_node("PLAYER").hide()
 
 func close_options_menu():
 	$OptionsMenuLayer/Options.hide()
 	$MainMenuButtons.show()
-	Server.player_node.show()
+	get_node("PLAYER").show()
 
 func _on_OptionsIconButton_pressed():
 	$SoundEffects.stream = Sounds.button_select
@@ -69,6 +71,4 @@ func _on_ExitBtn_pressed():
 	$SoundEffects.stream = Sounds.button_select
 	$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	$SoundEffects.play()
-	$OptionsMenuLayer/Options.hide()
-	$MainMenuButtons.show()
-	Server.player_node.show()
+	close_options_menu()

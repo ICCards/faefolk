@@ -1,11 +1,11 @@
-extends Sprite
+extends Sprite2D
 
 
 
 func _ready():
-	$Tween.interpolate_property(self, "modulate:a", 1.0, 0.0, 0.5, 3, 1)
-	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property(self, "modulate:a", 0.0, 0.25)
+	await get_tree().create_timer(0.5).timeout 
+	call_deferred("queue_free")
 
 
-func _on_Tween_tween_completed(object, key):
-	queue_free()

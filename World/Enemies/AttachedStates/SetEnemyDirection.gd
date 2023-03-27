@@ -77,5 +77,5 @@ func set_direction_idle_state():
 					
 func set_change_direction_delay():
 	changed_direction_delay = true
-	yield(get_tree().create_timer(0.25), "timeout")
+	await get_tree().create_timer(0.25).timeout
 	changed_direction_delay = false

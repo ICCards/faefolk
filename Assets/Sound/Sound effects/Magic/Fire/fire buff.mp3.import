@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/fire buff.mp3-a490ad4a32fad2411b45f09908925db6.mp3str"
+uid="uid://u1s8jop6046i"
+path="res://.godot/imported/fire buff.mp3-a490ad4a32fad2411b45f09908925db6.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Magic/Fire/fire buff.mp3"
-dest_files=[ "res://.import/fire buff.mp3-a490ad4a32fad2411b45f09908925db6.mp3str" ]
+dest_files=["res://.godot/imported/fire buff.mp3-a490ad4a32fad2411b45f09908925db6.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

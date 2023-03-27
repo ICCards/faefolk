@@ -1,86 +1,106 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=12 format=3 uid="uid://bsllownxkbu4p"]
 
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" type="Texture" id=1]
-[ext_resource path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" type="PackedScene" id=2]
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" type="PackedScene" id=3]
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Images/User interface/BrewingTable/brewing-table-tab.png" type="Texture" id=5]
-[ext_resource path="res://InventoryLogic/ItemDescription.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Assets/Images/User interface/buttons-icons/x-button.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" type="Texture" id=8]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" type="PackedScene" id=9]
-[ext_resource path="res://World/Player/Player/UserInterface/BrewingTable/BrewingTable.gd" type="Script" id=10]
-[ext_resource path="res://World/Player/Player/UserInterface/Slots/BrewingTableSlots.tscn" type="PackedScene" id=11]
+[ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="1"]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/BrewingTable/BrewingTable.gd" id="1_onxgg"]
+[ext_resource type="Texture2D" uid="uid://ftl1013lhawe" path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" id="4_1p8va"]
+[ext_resource type="Texture2D" uid="uid://gnyrv8mob6c7" path="res://Assets/Images/User interface/BrewingTable/brewing-table-tab.png" id="5"]
+[ext_resource type="PackedScene" uid="uid://b4k542eq2r5ul" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="5_giwkc"]
+[ext_resource type="PackedScene" uid="uid://4v3igpipcu6i" path="res://InventoryLogic/ItemDescription.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://c6wlm3ymf4sq6" path="res://World/Player/Player/UserInterface/TrashCan/Trash.tscn" id="6_p0tb5"]
+[ext_resource type="Texture2D" uid="uid://de3s80bo27kc" path="res://Assets/Images/User interface/buttons-icons/x-button.png" id="7"]
+[ext_resource type="PackedScene" uid="uid://cfhkpql8cboey" path="res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn" id="7_lhmwm"]
+[ext_resource type="PackedScene" uid="uid://m20c61iainqg" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="8_mpnwt"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="11_dnnw6"]
 
 [node name="BrewingTable" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 10 )
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_onxgg")
 
-[node name="Bg" type="TextureRect" parent="."]
-margin_right = 426.0
-margin_bottom = 240.0
-rect_scale = Vector2( 3, 3 )
-mouse_filter = 2
-texture = ExtResource( 5 )
-stretch_mode = 4
-
-[node name="Frame" type="TextureRect" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -640.0
-margin_top = -360.0
-margin_right = -214.0
-margin_bottom = -120.0
-rect_scale = Vector2( 3, 3 )
-mouse_filter = 2
-texture = ExtResource( 8 )
-stretch_mode = 4
-
-[node name="Trash" parent="." instance=ExtResource( 2 )]
-
-[node name="ItemDescription" parent="." instance=ExtResource( 6 )]
+[node name="ItemDescription" parent="." instance=ExtResource("6")]
 visible = false
 
-[node name="InventorySlots" parent="." instance=ExtResource( 4 )]
-margin_left = 639.0
-margin_top = 315.0
-margin_right = 933.0
-margin_bottom = 567.0
-custom_constants/vseparation = 18
-custom_constants/hseparation = 15
-columns = 5
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("5")
+stretch_mode = 3
+metadata/_edit_lock_ = true
 
-[node name="HotbarInventorySlots" parent="." instance=ExtResource( 3 )]
-margin_left = 639.0
-margin_top = 183.0
-margin_right = 943.0
-margin_bottom = 297.0
-custom_constants/vseparation = 18
-custom_constants/hseparation = 15
-columns = 5
+[node name="Frame" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 426.0
+offset_bottom = 240.0
+scale = Vector2(3, 3)
+texture = ExtResource("4_1p8va")
+stretch_mode = 3
+metadata/_edit_lock_ = true
+
+[node name="MenuTitle" parent="." instance=ExtResource("5_giwkc")]
+offset_left = 552.0
+offset_top = 117.0
+offset_right = 917.0
+offset_bottom = 192.0
+
+[node name="Trash" parent="." instance=ExtResource("6_p0tb5")]
+
+[node name="InventorySlots" parent="." instance=ExtResource("7_lhmwm")]
+layout_mode = 0
+offset_left = 639.0
+offset_top = 315.0
+offset_right = 939.0
+offset_bottom = 561.0
+metadata/_edit_lock_ = true
+
+[node name="HotbarInventorySlots" parent="." instance=ExtResource("8_mpnwt")]
+layout_mode = 0
+offset_left = 639.0
+offset_top = 183.0
+offset_right = 939.0
+offset_bottom = 297.0
+metadata/_edit_lock_ = true
 
 [node name="ExitBtn" type="TextureButton" parent="."]
-margin_left = 918.0
-margin_top = 114.0
-margin_right = 932.0
-margin_bottom = 128.0
-rect_scale = Vector2( 3, 3 )
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 1 )
-expand = true
-
-[node name="MenuTitle" parent="." instance=ExtResource( 9 )]
-margin_left = 552.0
-margin_top = 117.0
-margin_right = 915.0
-margin_bottom = 192.0
-custom_colors/font_color = Color( 1, 1, 1, 1 )
+layout_mode = 0
+offset_left = 918.0
+offset_top = 114.0
+offset_right = 932.0
+offset_bottom = 128.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("7")
+texture_pressed = ExtResource("1")
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
-[node name="Tween" type="Tween" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 353.0
+offset_top = 201.0
+offset_right = 573.0
+offset_bottom = 582.0
+color = Color(0.247059, 0.109804, 0.0627451, 1)
 
-[node name="BrewingTableSlots" parent="." instance=ExtResource( 11 )]
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 321.0
+offset_top = 171.0
+offset_right = 1251.0
+offset_bottom = 1611.0
+scale = Vector2(0.3, 0.3)
+theme = ExtResource("11_dnnw6")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
+text = "Coming soon.."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="ExitBtn" to="." method="_on_exit_btn_pressed"]
+
+[editable path="MenuTitle"]

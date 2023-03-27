@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/metal hit.mp3-47a9d6359300ee47662003ee54ea5814.mp3str"
+uid="uid://ciwah53twt0lv"
+path="res://.godot/imported/metal hit.mp3-47a9d6359300ee47662003ee54ea5814.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Building/metal/metal hit.mp3"
-dest_files=[ "res://.import/metal hit.mp3-47a9d6359300ee47662003ee54ea5814.mp3str" ]
+dest_files=["res://.godot/imported/metal hit.mp3-47a9d6359300ee47662003ee54ea5814.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

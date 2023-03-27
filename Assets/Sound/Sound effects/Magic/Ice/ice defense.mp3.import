@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/ice defense.mp3-65d450b5783307ad37138affd89328e7.mp3str"
+uid="uid://dinwfiff0wbos"
+path="res://.godot/imported/ice defense.mp3-65d450b5783307ad37138affd89328e7.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Magic/Ice/ice defense.mp3"
-dest_files=[ "res://.import/ice defense.mp3-65d450b5783307ad37138affd89328e7.mp3str" ]
+dest_files=["res://.godot/imported/ice defense.mp3-65d450b5783307ad37138affd89328e7.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

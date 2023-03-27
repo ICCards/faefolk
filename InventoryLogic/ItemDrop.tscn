@@ -1,450 +1,426 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=14 format=3 uid="uid://br573c61liq8n"]
 
-[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=1]
-[ext_resource path="res://InventoryLogic/ItemDrop.gd" type="Script" id=2]
-[ext_resource path="res://Assets/Sound/Sound effects/UI/pick up item.mp3" type="AudioStream" id=3]
-[ext_resource path="res://Assets/Images/inventory_icons/Crop/apple.png" type="Texture" id=4]
+[ext_resource type="Script" path="res://InventoryLogic/ItemDrop.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://bbduu3gxlbfp6" path="res://Assets/Images/inventory_icons/Placeable object/workbench #2.png" id="2_0fpab"]
+[ext_resource type="AudioStream" uid="uid://cpmbqua1xm4st" path="res://Assets/Sound/Sound effects/UI/pick up item.mp3" id="3"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="3_w17hp"]
 
-[sub_resource type="CircleShape2D" id=9]
-radius = 11.3333
+[sub_resource type="CircleShape2D" id="9"]
+radius = 5.0
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "Animate 1"
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 32, 0 ) ]
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("../Sprite:position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 0, 0, 0, 0, 0, 32, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 1 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("../Sprite:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.1, -35.7889, 0, -0.1, -36.2075, 0.1, -21.1371, 0, -0.1, -19.8812, 0.1, -6.76441, 0, -0.1, -3.97359, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8, 1 )
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath(".:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="Animation" id=4]
-resource_name = "Animate 2"
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -32, 0 ) ]
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("../Sprite:position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 0, 0, 0, 0, 0, -32, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 1 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("../Sprite:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.2, -39.6961, 0, -0.2, -24.9047, 0.1, -19.6022, 1.32896, -0.1, -20.652, 0.1, -6.1398, 0, -0.1, -5.08992, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8, 1 )
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath(".:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="Animation" id=5]
-resource_name = "Animate 3"
-step = 0.01
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 20, -25 ) ]
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("../Sprite:position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 0, 0, 0, 0, 0, 20, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 1 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("../Sprite:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.1, -41.978, -21.6283, -0.15, -31.553, 0.11, -17.1196, -24.5354, -0.11, -15.9891, 0.05, -6.49055, -25, -0.03, -6.43646, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.81, 1 )
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath(".:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="Animation" id=6]
-resource_name = "Animate 4"
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -20, -25 ) ]
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("../Sprite:position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 0, 0, 0, 0, 0, -20, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 1 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("../Sprite:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.1, -41.978, -21.6283, -0.15, -31.553, 0.11, -17.1196, -24.5354, -0.11, -15.9891, 0.05, -6.49055, -25, -0.03, -6.43646, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.81, 1 )
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath(".:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="Animation" id=7]
-resource_name = "Animate 5"
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, -6 ) ]
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("../Sprite:position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 1 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("../Sprite:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.1, -41.978, -8.54634, -0.15, -31.553, 0.11, -17.1196, -8.86935, -0.11, -15.9891, 0.05, -6.49055, -6, -0.03, -6.43646, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5, 0.8, 1 )
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath(".:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.8 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
-[sub_resource type="Animation" id=3]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/path = NodePath("../Sprite:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"values": [Vector2(0, 0), Vector2(24, 2.08165e-12)]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath(".:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ) ]
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("../Sprite:position:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
+tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.870552, 0.176777),
+"update": 0,
+"values": [2.08165e-12, 24.0]
 }
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("../Sprite:position:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
+tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
+tracks/3/path = NodePath("../Sprite2D:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
 tracks/3/keys = {
-"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0 )
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath(".:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1.86607, 0.535887, 2, 1),
 "update": 0,
-"values": [ true ]
+"values": [0.0, -14.0, 0.0, -8.0, 0.0]
 }
 
-[sub_resource type="Animation" id=10]
-resource_name = "Tree harvest 1"
-length = 1.5
+[sub_resource type="Animation" id="Animation_2gtb2"]
+resource_name = "Animate 2"
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 52, 110 ) ]
+"values": [Vector2(0, 0), Vector2(-24, 2.08165e-12)]
 }
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("../Sprite:position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath(".:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"points": PoolRealArray( 0, 0, 0, 0, 0, 52, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 1.5 )
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("../Sprite:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
+tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/keys = {
-"points": PoolRealArray( 0, -0.216206, 90.4461, 0.3, -125.5, 110, -0.2, -29, 0.132027, 19.1439 ),
-"times": PoolRealArray( 0, 1.5 )
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.933034, 0.176777),
+"update": 0,
+"values": [2.08165e-12, -24.0]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath(".:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
+tracks/3/path = NodePath("../Sprite2D:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(0.757858, 1.31951, 0.707108, 2, 1),
+"update": 0,
+"values": [0.0, -14.0, 0.0, -8.0, 0.0]
 }
 
-[sub_resource type="Animation" id=11]
-resource_name = "Tree harvest 2"
-length = 1.5
+[sub_resource type="Animation" id="Animation_ctqkh"]
+resource_name = "Animate 3"
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( -52, 110 ) ]
+"values": [Vector2(0, 0), Vector2(12, -8)]
 }
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("../Sprite:position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
+tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath(".:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"points": PoolRealArray( 0, 0, 0, 0, 0, -52, 0, 0, 0, 0 ),
-"times": PoolRealArray( 0, 1.5 )
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("../Sprite:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
+tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/keys = {
-"points": PoolRealArray( 0, -0.216206, 90.4461, 0.3, -125.5, 110, -0.2, -29, 0.132027, 19.1439 ),
-"times": PoolRealArray( 0, 1.5 )
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1.1487, 0.176777),
+"update": 0,
+"values": [2.08165e-12, 12.0]
 }
 tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Sprite2D:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(0.659754, 1.51572, 0.378929, 2, 1),
+"update": 0,
+"values": [0.0, -14.0, -8.0, -12.0, -8.0]
+}
+
+[sub_resource type="Animation" id="Animation_7cqmi"]
+resource_name = "Animate 4"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-12, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1.23114, 0.176777),
+"update": 0,
+"values": [2.08165e-12, -12.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Sprite2D:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(0.707107, 1.51572, 0.378929, 2, 1),
+"update": 0,
+"values": [0.0, -14.0, -8.0, -12.0, -8.0]
+}
+
+[sub_resource type="Animation" id="Animation_seehj"]
+resource_name = "Animate 5"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(4, -8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1.1487, 0.176777),
+"update": 0,
+"values": [2.08165e-12, 4.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Sprite2D:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(0.707107, 1.51572, 0.535887, 2, 1),
+"update": 0,
+"values": [0.0, -12.0, -8.0, -12.0, -8.0]
+}
+
+[sub_resource type="Animation" id="Animation_20nbe"]
+resource_name = "Animate 6"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-8, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1.1487, 0.176777),
+"update": 0,
+"values": [2.08165e-12, -8.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Sprite2D:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(0.870551, 1.51572, 0.535887, 2, 1),
+"update": 0,
+"values": [0.0, -4.0, 2.0, 2.08165e-12, 4.0]
+}
+
+[sub_resource type="Animation" id="3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sprite2D:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sprite2D:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
 tracks/3/path = NodePath(".:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
 }
 
-[node name="ItemDrop" type="KinematicBody2D"]
-scale = Vector2( 1.15, 1.15 )
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gvh71"]
+_data = {
+"Animate 1": SubResource("2"),
+"Animate 2": SubResource("Animation_2gtb2"),
+"Animate 3": SubResource("Animation_ctqkh"),
+"Animate 4": SubResource("Animation_7cqmi"),
+"Animate 5": SubResource("Animation_seehj"),
+"Animate 6": SubResource("Animation_20nbe"),
+"RESET": SubResource("3")
+}
+
+[node name="ItemDrop" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 0
-script = ExtResource( 2 )
+motion_mode = 1
+script = ExtResource("2")
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2.08165e-12, 0)
+scale = Vector2(0.75, 0.75)
 
-[node name="TextureRect" type="TextureRect" parent="Sprite"]
-modulate = Color( 1.2, 1.2, 1.2, 1 )
-margin_left = -16.5217
-margin_top = -16.5217
-margin_right = 67.4783
-margin_bottom = 67.4783
-rect_min_size = Vector2( 84, 84 )
-rect_scale = Vector2( 0.4, 0.4 )
+[node name="Image" type="TextureRect" parent="Sprite2D"]
+custom_minimum_size = Vector2(24, 24)
+offset_left = -12.0
+offset_top = -13.3333
+offset_right = 12.0
+offset_bottom = 10.6667
 mouse_filter = 2
-texture = ExtResource( 4 )
-expand = true
+texture = ExtResource("2_0fpab")
+expand_mode = 1
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Sprite"]
-margin_left = 6.08696
-margin_top = 10.4348
-margin_right = 32.087
-margin_bottom = 51.4348
-rect_scale = Vector2( 0.3, 0.3 )
-theme = ExtResource( 1 )
-text = "99
-"
+[node name="Label" type="Label" parent="Sprite2D"]
+offset_left = 2.66667
+offset_top = 5.33334
+offset_right = 242.667
+offset_bottom = 189.333
+scale = Vector2(0.04, 0.04)
+mouse_filter = 1
+theme = ExtResource("3_w17hp")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 160
+text = "999"
+horizontal_alignment = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
-shape = SubResource( 9 )
+shape = SubResource("9")
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../CollisionShape2D")
-"anims/Animate 1" = SubResource( 2 )
-"anims/Animate 2" = SubResource( 4 )
-"anims/Animate 3" = SubResource( 5 )
-"anims/Animate 4" = SubResource( 6 )
-"anims/Animate 5" = SubResource( 7 )
-anims/RESET = SubResource( 3 )
-"anims/Tree harvest 1" = SubResource( 10 )
-"anims/Tree harvest 2" = SubResource( 11 )
+libraries = {
+"": SubResource("AnimationLibrary_gvh71")
+}
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource("3")

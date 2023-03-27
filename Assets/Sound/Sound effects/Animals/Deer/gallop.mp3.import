@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/gallop.mp3-31ee696269785abfe4fb4f902c50fe2d.mp3str"
+uid="uid://cygfj3vs1mjxw"
+path="res://.godot/imported/gallop.mp3-31ee696269785abfe4fb4f902c50fe2d.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/animals/deer/gallop.mp3"
-dest_files=[ "res://.import/gallop.mp3-31ee696269785abfe4fb4f902c50fe2d.mp3str" ]
+dest_files=["res://.godot/imported/gallop.mp3-31ee696269785abfe4fb4f902c50fe2d.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

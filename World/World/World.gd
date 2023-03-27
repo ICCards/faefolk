@@ -1,25 +1,25 @@
-extends YSort
+extends Node2D
 
-onready var dirt = $GeneratedTiles/DirtTiles
-onready var plains = $GeneratedTiles/GreenGrassTiles
-onready var forest = $GeneratedTiles/DarkGreenGrassTiles
-onready var water = $GeneratedTiles/Water
-onready var validTiles = $ValidTiles
-onready var navTiles = $Navigation2D/NavTiles
-onready var hoed = $FarmingTiles/HoedAutoTiles
-onready var watered = $FarmingTiles/WateredAutoTiles
-onready var snow = $GeneratedTiles/SnowTiles
-onready var waves = $GeneratedTiles/WaveTiles
-onready var wetSand = $GeneratedTiles/WetSandBeachBorder
-onready var sand = $GeneratedTiles/DrySandTiles
-onready var shallow_ocean = $GeneratedTiles/ShallowOcean
-onready var deep_ocean = $GeneratedTiles/DeepOcean
-onready var top_ocean = $GeneratedTiles/TopOcean
-onready var Players = $Players
+@onready var dirt = $GeneratedTiles/DirtTiles
+@onready var plains = $GeneratedTiles/GreenGrassTiles
+@onready var forest = $GeneratedTiles/DarkGreenGrassTiles
+@onready var water = $GeneratedTiles/Water
+@onready var validTiles = $ValidTiles
+@onready var navTiles = $Node2D/NavTiles
+@onready var hoed = $FarmingTiles/HoedAutoTiles
+@onready var watered = $FarmingTiles/WateredAutoTiles
+@onready var snow = $GeneratedTiles/SnowTiles
+@onready var waves = $GeneratedTiles/WaveTiles
+@onready var wetSand = $GeneratedTiles/WetSandBeachBorder
+@onready var sand = $GeneratedTiles/DrySandTiles
+@onready var shallow_ocean = $GeneratedTiles/ShallowOcean
+@onready var deep_ocean = $GeneratedTiles/DeepOcean
+@onready var top_ocean = $GeneratedTiles/TopOcean
+@onready var Players = $Players
 
-onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")
-onready var GenerateWorldLoadingScreen = load("res://MainMenu/GenerateWorldLoadingScreen.tscn")
-onready var Player = load("res://World/Player/Player/Player.tscn")
+@onready var CaveLadder = load("res://World3D/Caves/Objects/CaveLadder.tscn")
+@onready var GenerateWorldLoadingScreen = load("res://MainMenu/GenerateWorldLoadingScreen.tscn")
+@onready var Player = load("res://World3D/Player/Player/Player.tscn")
 
 var rng := RandomNumberGenerator.new()
 var thread := Thread.new()
@@ -38,10 +38,10 @@ func _ready():
 func create_or_load_world():
 	if MapData.world["is_built"]: # Load world
 		MapData.add_world_data_to_chunks()
-		thread.start(self, "build_world")
+		thread.start(Callable(self,"build_world"))
 		#build_world()
 	else: # Initial launch
-		var loadingScreen = GenerateWorldLoadingScreen.instance()
+		var loadingScreen = GenerateWorldLoadingScreen.instantiate()
 		loadingScreen.name = "Loading"
 		add_child(loadingScreen)
 		GenerateNewWorld.build()
@@ -52,22 +52,22 @@ func build_world():
 func build_world_deferred():
 	buildMap(MapData.world)
 	spawn_player()
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	$WorldBuilder.initialize()
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	$WorldBuilder/BuildTerrain.initialize()
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	$WorldBuilder/BuildNature.initialize()
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	$WorldBuilder/SpawnAnimal.initialize()
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	$WorldMap.buildMap()
-	yield(get_tree(), "idle_frame")
+	await get_tree().idle_frame
 	thread.wait_to_finish()
 
 
 func spawn_player():
-	var player = Player.instance()
+	var player = Player.instantiate()
 	player.is_building_world = true
 	player.name = str("PLAYER")
 	$Players.add_child(player)
@@ -81,10 +81,10 @@ func spawn_player():
 		var tiles = MapData.world["beach"]
 		tiles.shuffle()
 		spawn_loc = tiles[0]
-		yield(get_tree(), "idle_frame")
+		await get_tree().idle_frame
 		PlayerData.player_data["current_save_location"] =  spawn_loc
-		PlayerData.player_data["current_save_scene"] = "res://World/World/World.tscn"
-		PlayerData.player_data["respawn_scene"] = "res://World/World/World.tscn"
+		PlayerData.player_data["current_save_scene"] = "res://World3D/World3D/World.tscn"
+		PlayerData.player_data["respawn_scene"] = "res://World3D/World3D/World.tscn"
 		PlayerData.player_data["respawn_location"] = spawn_loc
 		var game_state = GameState.new()
 		game_state.player_state = PlayerData.player_data
@@ -125,7 +125,7 @@ func create_cave_entrance(_loc):
 	Tiles.valid_tiles.set_cellv(loc, -1)
 	Tiles.valid_tiles.set_cellv(loc+Vector2(1,0), -1)
 	$GeneratedTiles/DownLadder.set_cellv(loc, 1)
-	var caveLadder = CaveLadder.instance()
+	var caveLadder = CaveLadder.instantiate()
 	caveLadder.is_down_ladder = true
 	caveLadder.position = loc*32 + Vector2(32,16)
 	add_child(caveLadder)

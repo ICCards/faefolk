@@ -1,50 +1,75 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=12 format=3 uid="uid://d0ehi6pdv08eu"]
 
-[ext_resource path="res://World/Objects/Nature/Effects/RemoveBuilding.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Images/Animations/Upgrade/upgrade effect.png" type="Texture" id=2]
+[ext_resource type="Texture2D" uid="uid://cpuye4igeab7q" path="res://Assets/Images/Animations/Upgrade/upgrade effect.png" id="1_j7dns"]
+[ext_resource type="Script" path="res://World/Objects/Nature/Effects/RemoveBuilding.gd" id="1_t1dbq"]
 
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwn4r"]
+atlas = ExtResource("1_j7dns")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 16, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5ui1"]
+atlas = ExtResource("1_j7dns")
+region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 2 )
-region = Rect2( 32, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_d5578"]
+atlas = ExtResource("1_j7dns")
+region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 48, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrgi8"]
+atlas = ExtResource("1_j7dns")
+region = Rect2(48, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bvto"]
+atlas = ExtResource("1_j7dns")
+region = Rect2(64, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 2 )
-region = Rect2( 80, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmjpm"]
+atlas = ExtResource("1_j7dns")
+region = Rect2(80, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 2 )
-region = Rect2( 96, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtjlf"]
+atlas = ExtResource("1_j7dns")
+region = Rect2(96, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 2 )
-region = Rect2( 112, 0, 16, 16 )
+[sub_resource type="AtlasTexture" id="AtlasTexture_cor4y"]
+atlas = ExtResource("1_j7dns")
+region = Rect2(112, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id=9]
-animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+[sub_resource type="SpriteFrames" id="9"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwn4r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m5ui1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d5578")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrgi8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bvto")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmjpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtjlf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cor4y")
+}],
 "loop": false,
-"name": "default",
+"name": &"play",
 "speed": 5.0
-} ]
+}]
 
-[node name="RemoveBuilding" type="AnimatedSprite"]
-scale = Vector2( 2, 2 )
+[node name="RemoveBuilding" type="AnimatedSprite2D"]
+modulate = Color(1.2, 1.2, 1.2, 1)
 z_index = 1
-frames = SubResource( 9 )
-script = ExtResource( 1 )
+sprite_frames = SubResource("9")
+animation = &"play"
+script = ExtResource("1_t1dbq")

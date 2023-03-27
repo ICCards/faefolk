@@ -1,18 +1,17 @@
 extends Node2D
 
+@onready var bodySprite = $Body
+@onready var legsSprite = $Legs
+@onready var armsSprite = $Arms
+@onready var accessorySprite = $Accessory
+@onready var headAttributeSprite = $HeadAtr
+@onready var pantsSprite = $Pants
+@onready var shirtsSprite = $Shirts
+@onready var shoesSprite = $Shoes
+@onready var toolEquippedSprite = $ToolEquipped
 
-onready var bodySprite = $Body
-onready var legsSprite = $Legs
-onready var armsSprite = $Arms
-onready var accessorySprite = $Accessory
-onready var headAttributeSprite = $HeadAtr
-onready var pantsSprite = $Pants
-onready var shirtsSprite = $Shirts
-onready var shoesSprite = $Shoes
-onready var toolEquippedSprite = $ToolEquipped
 
-
-func set_player_animation(_character, _anim, var _tool = ""):
+func set_player_animation(_character, _anim, _tool = ""):
 	bodySprite.set_texture(_character.body_sprites[returnAdjustedAnimTop(_anim)])
 	legsSprite.set_texture(_character.leg_sprites[returnAdjustedAnimBottom(_anim)])
 	armsSprite.set_texture(_character.arms_sprites[returnAdjustedAnimTop(_anim)])

@@ -1,350 +1,404 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=31 format=3 uid="uid://cffchl0ffi2hf"]
 
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_7.png" type="Texture" id=1]
-[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=2]
-[ext_resource path="res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.tscn" type="PackedScene" id=3]
-[ext_resource path="res://MainMenu/LoadingScreen.tscn" type="PackedScene" id=4]
-[ext_resource path="res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Themes/UI_Title.tres" type="Theme" id=6]
-[ext_resource path="res://Assets/Images/Inventory UI/PlaceObject/RotationUI1.png" type="Texture" id=7]
-[ext_resource path="res://Assets/Images/Inventory UI/PlaceObject/RotationUI2.png" type="Texture" id=8]
-[ext_resource path="res://Assets/Themes/button_theme.tres" type="Theme" id=9]
-[ext_resource path="res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_5.png" type="Texture" id=11]
-[ext_resource path="res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Assets/Sound/Sound effects/Ambience/thunder crack.mp3" type="AudioStream" id=13]
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_4.png" type="Texture" id=14]
-[ext_resource path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_1.png" type="Texture" id=16]
-[ext_resource path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn" type="PackedScene" id=17]
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_3.png" type="Texture" id=18]
-[ext_resource path="res://World/Player/Player/AttachedScripts/WeatherEffects.gd" type="Script" id=19]
-[ext_resource path="res://Assets/Images/Animations/loading/sprite_6.png" type="Texture" id=20]
-[ext_resource path="res://World/Player/Player/UserInterface/UserInterface.gd" type="Script" id=23]
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/UserInterface.gd" id="1_pv3v8"]
+[ext_resource type="PackedScene" uid="uid://ctp3ra1cmv0de" path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" id="2_dv8vv"]
+[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/WeatherEffects.gd" id="2_rl35f"]
+[ext_resource type="PackedScene" uid="uid://3vr0ijbqi0bd" path="res://MainMenu/LoadingScreen.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://dkn2fivmq1v8o" path="res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn" id="4_nwvkq"]
+[ext_resource type="PackedScene" uid="uid://dh7qoqj6wpcf8" path="res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.tscn" id="5_mppsu"]
+[ext_resource type="Texture2D" uid="uid://c81fev363dte8" path="res://Assets/Images/User interface/PlaceObject/RotationUI1.png" id="5_yyu54"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="6_rh7sc"]
+[ext_resource type="Texture2D" uid="uid://bydhgjfsoxl8x" path="res://Assets/Images/User interface/PlaceObject/RotationUI2.png" id="7_u87cj"]
+[ext_resource type="Texture2D" uid="uid://rf3gophkir0h" path="res://Assets/Images/Animations/loading/sprite_0.png" id="7_wlu5k"]
+[ext_resource type="Texture2D" uid="uid://dvfrk41vachbj" path="res://Assets/Images/Animations/loading/sprite_2.png" id="8_tq2d6"]
+[ext_resource type="Texture2D" uid="uid://u7b5ardk075b" path="res://Assets/Images/Animations/loading/sprite_1.png" id="9_ela15"]
+[ext_resource type="Texture2D" uid="uid://dtv2tv7c6saxr" path="res://Assets/Images/Animations/loading/sprite_3.png" id="10_k0pdh"]
+[ext_resource type="Texture2D" uid="uid://b72oxa6602dkg" path="res://Assets/Images/Animations/loading/sprite_4.png" id="11_6e6cq"]
+[ext_resource type="Texture2D" uid="uid://bh0xuop77usp4" path="res://Assets/Images/Animations/loading/sprite_5.png" id="12_13luq"]
+[ext_resource type="AudioStream" uid="uid://86w4gtnxusdy" path="res://Assets/Sound/Sound effects/Ambience/thunder crack.mp3" id="13"]
+[ext_resource type="Texture2D" uid="uid://40dmypwmoqg6" path="res://Assets/Images/Animations/loading/sprite_6.png" id="13_y8wut"]
+[ext_resource type="Texture2D" uid="uid://dw0g2r5gq0txa" path="res://Assets/Images/Animations/loading/sprite_7.png" id="14_0pw86"]
+[ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://BetaLabel.tscn" id="15_tm6fr"]
+[ext_resource type="PackedScene" uid="uid://bhilgn3waubes" path="res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.tscn" id="16_cnrm0"]
+[ext_resource type="PackedScene" uid="uid://dd0n86ke85w5d" path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn" id="17_n0y8n"]
+[ext_resource type="PackedScene" uid="uid://cm8c7p7g6ii7g" path="res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.tscn" id="18_gbc14"]
+[ext_resource type="PackedScene" uid="uid://rpuaufnru6of" path="res://World/Player/Player/UserInterface/ItemPickUpDialogue/ItemPickUpDialogue.tscn" id="19_n03k2"]
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id="18"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ true ]
+"values": [true]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".:color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id="19"]
 resource_name = "lightning day"
 length = 0.6
 step = 0.05
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.15, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 0 ) ]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ true, false ]
+"values": [true, false]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7yubf"]
+_data = {
+"RESET": SubResource("18"),
+"lightning day": SubResource("19")
+}
+
+[sub_resource type="Animation" id="20"]
 length = 0.001
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ false ]
+"values": [false]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".:color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Color( 0, 0, 0, 0.552941 ) ]
+"values": [Color(0, 0, 0, 0.552941)]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("SavingProgress:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ false ]
+"values": [false]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id="21"]
 resource_name = "sleep"
 length = 5.0
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ true ]
+"values": [true]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath(".:color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1, 1.5, 4, 5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 1, 1.5, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [ Color( 0, 0, 0, 0.552941 ), Color( 0, 0, 0, 0.552941 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+"values": [Color(0, 0, 0, 0.552941), Color(0, 0, 0, 0.552941), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("SavingProgress:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 1.5, 4 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(1.5, 4),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ true, false ]
+"values": [true, false]
 }
 
-[sub_resource type="SpriteFrames" id=22]
-animations = [ {
-"frames": [ ExtResource( 16 ), ExtResource( 18 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 20 ), ExtResource( 1 ) ],
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ll8n3"]
+_data = {
+"RESET": SubResource("20"),
+"sleep": SubResource("21")
+}
+
+[sub_resource type="SpriteFrames" id="22"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_wlu5k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tq2d6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ela15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_k0pdh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6e6cq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_13luq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_y8wut")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_0pw86")
+}],
 "loop": true,
-"name": "default",
+"name": &"new_animation",
 "speed": 5.0
-} ]
+}]
 
 [node name="UserInterface" type="CanvasLayer"]
-script = ExtResource( 23 )
+script = ExtResource("1_pv3v8")
 
 [node name="WeatherEffects" type="ColorRect" parent="."]
-margin_left = -49.0
-margin_top = -39.0
-margin_right = 1966.0
-margin_bottom = 1120.0
+offset_right = 1280.0
+offset_bottom = 720.0
 mouse_filter = 2
-color = Color( 1, 1, 1, 0 )
-script = ExtResource( 19 )
+color = Color(1, 1, 1, 0)
+script = ExtResource("2_rl35f")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="WeatherEffects"]
-anims/RESET = SubResource( 18 )
-"anims/lightning day" = SubResource( 19 )
+libraries = {
+"": SubResource("AnimationLibrary_7yubf")
+}
 
 [node name="ThunderSoundEffects" type="AudioStreamPlayer" parent="WeatherEffects"]
-stream = ExtResource( 13 )
+stream = ExtResource("13")
 
 [node name="LightningTimer" type="Timer" parent="WeatherEffects"]
 
 [node name="DeathEffect" type="ColorRect" parent="."]
 visible = false
-margin_left = -58.0
-margin_top = -70.0
-margin_right = 2021.0
-margin_bottom = 1142.0
+offset_right = 1280.0
+offset_bottom = 720.0
 mouse_filter = 2
-color = Color( 1, 0, 0, 0 )
-
-[node name="CombatHotbar" parent="." instance=ExtResource( 10 )]
-visible = false
-
-[node name="Hotbar" parent="." instance=ExtResource( 17 )]
-visible = false
-margin_top = 593.0
-margin_bottom = 593.0
-
-[node name="Menu" parent="." instance=ExtResource( 15 )]
-visible = false
-
-[node name="RadialBuildingMenu" parent="." instance=ExtResource( 3 )]
-visible = false
-
-[node name="RadialUpgradeMenu" parent="." instance=ExtResource( 5 )]
-visible = false
-
-[node name="PlayerDataUI" parent="." instance=ExtResource( 12 )]
-margin_left = 1.0
-margin_right = 1.0
+color = Color(1, 0, 0, 0)
 
 [node name="SleepEffect" type="ColorRect" parent="."]
 visible = false
-margin_right = 1280.0
-margin_bottom = 720.0
+offset_right = 1280.0
+offset_bottom = 720.0
 mouse_filter = 2
-color = Color( 0, 0, 0, 0.552941 )
+color = Color(0, 0, 0, 0.552941)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SleepEffect"]
-anims/RESET = SubResource( 20 )
-anims/sleep = SubResource( 21 )
+libraries = {
+"": SubResource("AnimationLibrary_ll8n3")
+}
 
 [node name="SavingProgress" type="RichTextLabel" parent="SleepEffect"]
 visible = false
-margin_left = 20.0
-margin_top = 640.0
-margin_right = 357.0
-margin_bottom = 710.0
-theme = ExtResource( 2 )
+layout_mode = 0
+offset_left = 20.0
+offset_top = 640.0
+offset_right = 1217.0
+offset_bottom = 863.0
+scale = Vector2(0.35, 0.35)
+theme = ExtResource("6_rh7sc")
 bbcode_enabled = true
-bbcode_text = "[wave]Saving progress"
 text = "Saving progress"
 
-[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+[node name="RadialUpgradeMenu" parent="." instance=ExtResource("4_nwvkq")]
+visible = false
+
+[node name="RadialBuildingMenu" parent="." instance=ExtResource("5_mppsu")]
+visible = false
+
+[node name="Menu" parent="." instance=ExtResource("2_dv8vv")]
+visible = false
 
 [node name="ChangeRotation" type="Control" parent="."]
 visible = false
-margin_left = 115.0
-margin_top = 110.0
-margin_right = 155.0
-margin_bottom = 150.0
+layout_mode = 3
+anchors_preset = 0
+offset_left = 325.0
+offset_top = 579.0
+offset_right = 325.0
+offset_bottom = 579.0
 
 [node name="TextureRect" type="TextureRect" parent="ChangeRotation"]
-margin_left = 209.0
-margin_top = 469.0
-margin_right = 310.0
-margin_bottom = 488.0
-rect_scale = Vector2( 2, 2 )
-texture = ExtResource( 7 )
+layout_mode = 0
+offset_left = -4.0
+offset_top = -18.0
+offset_right = 97.0
+offset_bottom = 1.0
+scale = Vector2(3, 3)
+texture = ExtResource("5_yyu54")
 
 [node name="RotateLabel" type="Label" parent="ChangeRotation"]
-margin_left = 248.0
-margin_top = 475.0
-margin_right = 1028.0
-margin_bottom = 621.0
-rect_scale = Vector2( 0.2, 0.2 )
-theme = ExtResource( 6 )
+layout_mode = 0
+offset_left = 56.0
+offset_top = -9.0
+offset_right = 1018.0
+offset_bottom = 175.0
+scale = Vector2(0.22, 0.22)
+theme = ExtResource("6_rh7sc")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/shadow_outline_size = 0
 text = "Change rotation"
-align = 1
 
 [node name="RotateKey" type="Label" parent="ChangeRotation"]
-modulate = Color( 0, 0, 0, 1 )
-margin_left = 217.0
-margin_top = 471.0
-margin_right = 337.0
-margin_bottom = 617.0
-rect_scale = Vector2( 0.2, 0.2 )
-theme = ExtResource( 6 )
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 8.0
+offset_top = -15.0
+offset_right = 152.0
+offset_bottom = 169.0
+scale = Vector2(0.25, 0.25)
+theme = ExtResource("6_rh7sc")
 text = "R"
-align = 1
+horizontal_alignment = 1
 
 [node name="ChangeVariety" type="Control" parent="."]
 visible = false
-margin_left = 138.0
-margin_top = 110.0
-margin_right = 178.0
-margin_bottom = 150.0
+layout_mode = 3
+anchors_preset = 0
 
 [node name="TextureRect" type="TextureRect" parent="ChangeVariety"]
-margin_left = 613.0
-margin_top = 469.0
-margin_right = 714.0
-margin_bottom = 488.0
-rect_scale = Vector2( 2, 2 )
-texture = ExtResource( 8 )
+layout_mode = 0
+offset_left = 654.0
+offset_top = 561.0
+offset_right = 755.0
+offset_bottom = 580.0
+scale = Vector2(3, 3)
+texture = ExtResource("7_u87cj")
 
 [node name="VarietyLabel" type="Label" parent="ChangeVariety"]
-margin_left = 621.0
-margin_top = 475.0
-margin_right = 1411.0
-margin_bottom = 621.0
-rect_scale = Vector2( 0.2, 0.2 )
-theme = ExtResource( 6 )
+layout_mode = 0
+offset_left = 691.0
+offset_top = 570.0
+offset_right = 1653.0
+offset_bottom = 754.0
+scale = Vector2(0.22, 0.22)
+theme = ExtResource("6_rh7sc")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/shadow_outline_size = 0
 text = "Change variety"
 
 [node name="VarietyKey" type="Label" parent="ChangeVariety"]
-modulate = Color( 0, 0, 0, 1 )
-margin_left = 783.0
-margin_top = 471.0
-margin_right = 903.0
-margin_bottom = 617.0
-rect_scale = Vector2( 0.2, 0.2 )
-theme = ExtResource( 6 )
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 910.0
+offset_top = 564.0
+offset_right = 1043.0
+offset_bottom = 748.0
+scale = Vector2(0.25, 0.25)
+theme = ExtResource("6_rh7sc")
 text = "V"
-align = 1
+horizontal_alignment = 1
 
 [node name="LoadingIndicator" type="Panel" parent="."]
 visible = false
-modulate = Color( 1, 1, 1, 0.921569 )
-margin_right = 1280.0
-margin_bottom = 720.0
+modulate = Color(1, 1, 1, 0.921569)
+offset_right = 1280.0
+offset_bottom = 720.0
 
-[node name="LoadingIndicator" type="AnimatedSprite" parent="LoadingIndicator"]
-position = Vector2( 671, 374 )
-scale = Vector2( 10, 10 )
-frames = SubResource( 22 )
-frame = 4
-playing = true
+[node name="LoadingIndicator" type="AnimatedSprite2D" parent="LoadingIndicator"]
+position = Vector2(721, 369)
+scale = Vector2(10, 10)
+sprite_frames = SubResource("22")
+animation = &"new_animation"
+autoplay = "new_animation"
+frame_progress = 0.196874
+
+[node name="BetaLabel" parent="LoadingIndicator" instance=ExtResource("15_tm6fr")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 162.0
+offset_bottom = 94.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="SavingProgress" type="RichTextLabel" parent="LoadingIndicator"]
-margin_left = 20.0
-margin_top = 640.0
-margin_right = 357.0
-margin_bottom = 710.0
-theme = ExtResource( 2 )
+layout_mode = 0
+offset_left = 14.0
+offset_top = 634.0
+offset_right = 1177.0
+offset_bottom = 845.0
+scale = Vector2(0.4, 0.4)
+theme = ExtResource("6_rh7sc")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
 bbcode_enabled = true
-bbcode_text = "[wave]Saving progress"
-text = "Saving progress"
+text = "[wave amp=75]Saving progress..."
 
-[node name="Beta" type="Label" parent="LoadingIndicator"]
-margin_left = 1137.0
-margin_top = 14.0
-margin_right = 1299.0
-margin_bottom = 108.0
-grow_horizontal = 0
-rect_scale = Vector2( 0.8, 0.8 )
-theme = ExtResource( 9 )
-text = "Beta  v1.3"
+[node name="ItemPickUpDialogue" parent="." instance=ExtResource("19_n03k2")]
 
-[node name="LoadingScreen" parent="." instance=ExtResource( 4 )]
+[node name="CombatHotbar" parent="." instance=ExtResource("16_cnrm0")]
 visible = false
+
+[node name="Hotbar" parent="." instance=ExtResource("17_n0y8n")]
+visible = false
+
+[node name="PlayerDataUI" parent="." instance=ExtResource("18_gbc14")]
+visible = false
+
+[node name="LoadingScreen" parent="." instance=ExtResource("4")]
+visible = false
+
+[node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [connection signal="timeout" from="WeatherEffects/LightningTimer" to="WeatherEffects" method="_on_LightningTimer_timeout"]

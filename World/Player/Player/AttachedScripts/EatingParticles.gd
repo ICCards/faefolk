@@ -10,7 +10,7 @@ var color6
 var color7
 var color8
 
-var item_name
+var item_name 
 var category
 var tempColor
 
@@ -30,22 +30,18 @@ func eat():
 	$EatingParticles6.emitting = true
 	$EatingParticles7.emitting = true
 	$EatingParticles8.emitting = true
-	yield(get_tree().create_timer(1.5), "timeout")
+	await get_tree().create_timer(1.5).timeout
 	queue_free()
 	
 	
 func set_particle_colors(item_name):
 	var itemImage = Image.new()
 	category = JsonData.item_data[item_name]["ItemCategory"]
-	var stream_texture = load("res://Assets/Images/inventory_icons/" + category +"/" + item_name + ".png")
-	var image_texture = ImageTexture.new()
-	itemImage = stream_texture.get_data()
-	itemImage.lock() # so i can modify pixel data
+	itemImage = Image.load_from_file("res://Assets/Images/inventory_icons/" + category +"/" + item_name + ".png")
 	$EatingParticles1.color = return_pixel_color(itemImage)
 	$EatingParticles2.color = return_pixel_color(itemImage)
 	$EatingParticles3.color = return_pixel_color(itemImage)
 	$EatingParticles4.color = return_pixel_color(itemImage)
-	$EatingParticles5.color = return_pixel_color(itemImage)
 	$EatingParticles6.color = return_pixel_color(itemImage)
 	$EatingParticles7.color = return_pixel_color(itemImage)
 	$EatingParticles8.color = return_pixel_color(itemImage)

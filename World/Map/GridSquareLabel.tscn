@@ -1,14 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://4gsjwvh2fwq7"]
 
-[ext_resource path="res://Assets/Themes/options.tres" type="Theme" id=1]
-[ext_resource path="res://World/Map/GridSquareLabel.gd" type="Script" id=2]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="1_kj33m"]
+[ext_resource type="Script" path="res://World/Map/GridSquareLabel.gd" id="2_th0qu"]
 
 [node name="GridSquareLabel" type="Label" groups=["grid labels"]]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.76837e-07
-rect_scale = Vector2( 0.5, 0.5 )
-theme = ExtResource( 1 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+scale = Vector2(0.16, 0.16)
+theme = ExtResource("1_kj33m")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "A1"
-script = ExtResource( 2 )
+script = ExtResource("2_th0qu")

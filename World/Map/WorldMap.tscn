@@ -1,63 +1,73 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://c66ktnntnkqrx"]
 
-[ext_resource path="res://World/Map/Camera2D.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Themes/MiniMap.tres" type="TileSet" id=2]
-[ext_resource path="res://Assets/Images/mini map/player mini map icon.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Images/mini map/black.png" type="Texture" id=4]
-[ext_resource path="res://World/Map/WorldMap.gd" type="Script" id=5]
-[ext_resource path="res://Assets/Images/Particles/Clouds.png" type="Texture" id=6]
+[ext_resource type="Script" path="res://World/Map/WorldMap.gd" id="1_1tori"]
+[ext_resource type="TileSet" uid="uid://75mobw2f7ncu" path="res://Assets/Themes/MiniMap.tres" id="2"]
+[ext_resource type="Texture2D" uid="uid://ctfn0kqsd2hhf" path="res://Assets/Images/mini map/player mini map icon.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://deic1ed35diif" path="res://Assets/Images/Particles/Clouds.png" id="3_nnvqm"]
+[ext_resource type="Texture2D" uid="uid://cejx0b2rnkjnh" path="res://Assets/Images/mini map/black.png" id="4"]
+[ext_resource type="Script" path="res://World/Map/Camera2D.gd" id="6_c88ao"]
 
-[sub_resource type="TileSet" id=1]
-0/name = "black.png 0"
-0/texture = ExtResource( 4 )
-0/tex_offset = Vector2( 0, 0 )
-0/modulate = Color( 1, 1, 1, 1 )
-0/region = Rect2( 0, 0, 32, 32 )
-0/tile_mode = 0
-0/occluder_offset = Vector2( 0, 0 )
-0/navigation_offset = Vector2( 0, 0 )
-0/shape_offset = Vector2( 0, 0 )
-0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-0/shape_one_way = false
-0/shape_one_way_margin = 0.0
-0/shapes = [  ]
-0/z_index = 0
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_63ton"]
+texture = ExtResource("4")
+texture_region_size = Vector2i(32, 32)
+0:0/next_alternative_id = 8
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/flip_h = true
+0:0/2 = 2
+0:0/2/flip_v = true
+0:0/3 = 3
+0:0/3/flip_h = true
+0:0/3/flip_v = true
+0:0/4 = 4
+0:0/4/transpose = true
+0:0/5 = 5
+0:0/5/flip_h = true
+0:0/5/transpose = true
+0:0/6 = 6
+0:0/6/flip_v = true
+0:0/6/transpose = true
+0:0/7 = 7
+0:0/7/flip_h = true
+0:0/7/flip_v = true
+0:0/7/transpose = true
+
+[sub_resource type="TileSet" id="1"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetAtlasSource_63ton")
 
 [node name="WorldMap" type="Node2D"]
-script = ExtResource( 5 )
+script = ExtResource("1_1tori")
 
 [node name="Map" type="TileMap" parent="."]
-scale = Vector2( 0.05, 0.05 )
-tile_set = ExtResource( 2 )
-cell_size = Vector2( 32, 32 )
-format = 1
-tile_data = PoolIntArray( 65471463, 4, 0, 65471464, 4, 0, 65471465, 4, 0, 65536999, 4, 0, 65537000, 4, 0, 65537001, 4, 0, 65602535, 4, 0, 65602536, 4, 0, 65602537, 4, 0 )
+scale = Vector2(0.05, 0.05)
+tile_set = ExtResource("2")
+format = 2
 
-[node name="StormIcon" type="Sprite" parent="Map"]
-scale = Vector2( 30, 30 )
-texture = ExtResource( 6 )
+[node name="StormIcon" type="Sprite2D" parent="Map"]
+visible = false
+scale = Vector2(30, 30)
+texture = ExtResource("3_nnvqm")
 
-[node name="StormIcon2" type="Sprite" parent="Map"]
-scale = Vector2( 30, 30 )
-texture = ExtResource( 6 )
+[node name="StormIcon2" type="Sprite2D" parent="Map"]
+visible = false
+scale = Vector2(30, 30)
+texture = ExtResource("3_nnvqm")
 
-[node name="PlayerIcon" type="Sprite" parent="Map"]
-scale = Vector2( 80, 80 )
-texture = ExtResource( 3 )
+[node name="PlayerIcon" type="Sprite2D" parent="Map"]
+scale = Vector2(80, 80)
+texture = ExtResource("3")
 
 [node name="Grid" type="TileMap" parent="."]
-scale = Vector2( 0.05, 0.05 )
-tile_set = SubResource( 1 )
-cell_size = Vector2( 32, 32 )
-format = 1
+scale = Vector2(0.05, 0.05)
+tile_set = SubResource("1")
+format = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 800, 800 )
-zoom = Vector2( 1.2, 1.2 )
+enabled = false
+zoom = Vector2(0.8, 0.8)
 limit_left = 0
 limit_top = 0
 limit_right = 1600
 limit_bottom = 1600
-script = ExtResource( 1 )
-
-[node name="Tween" type="Tween" parent="Camera2D"]
+script = ExtResource("6_c88ao")

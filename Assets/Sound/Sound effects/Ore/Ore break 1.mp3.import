@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/Ore break 1.mp3-d73de5472ab2b4a6a0d5379d72c84033.mp3str"
+uid="uid://dl3rb02136p8c"
+path="res://.godot/imported/Ore break 1.mp3-d73de5472ab2b4a6a0d5379d72c84033.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Ore/Ore break 1.mp3"
-dest_files=[ "res://.import/Ore break 1.mp3-d73de5472ab2b4a6a0d5379d72c84033.mp3str" ]
+dest_files=["res://.godot/imported/Ore break 1.mp3-d73de5472ab2b4a6a0d5379d72c84033.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

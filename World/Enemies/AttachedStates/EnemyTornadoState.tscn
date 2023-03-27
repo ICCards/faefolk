@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://dr88n2qik0tat"]
 
-[ext_resource path="res://World/Enemies/AttachedStates/EnemyTornadoState.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://World/Enemies/AttachedStates/EnemyTornadoState.gd" id="1_dncul"]
 
 [node name="EnemyTornadoState" type="Node"]
-script = ExtResource( 1 )
+script = ExtResource("1_dncul")

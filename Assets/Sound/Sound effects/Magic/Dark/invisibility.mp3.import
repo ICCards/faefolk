@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/invisibility.mp3-d284d7d334897b0223a84b733bebdc90.mp3str"
+uid="uid://5cqogwne03kd"
+path="res://.godot/imported/invisibility.mp3-d284d7d334897b0223a84b733bebdc90.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Magic/Dark/invisibility.mp3"
-dest_files=[ "res://.import/invisibility.mp3-d284d7d334897b0223a84b733bebdc90.mp3str" ]
+dest_files=["res://.godot/imported/invisibility.mp3-d284d7d334897b0223a84b733bebdc90.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

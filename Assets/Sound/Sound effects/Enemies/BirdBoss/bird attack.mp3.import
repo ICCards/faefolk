@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/bird attack.mp3-fea372fdb29ba6955fe1bba7713f709c.mp3str"
+uid="uid://cxgjvbklk531q"
+path="res://.godot/imported/bird attack.mp3-fea372fdb29ba6955fe1bba7713f709c.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Enemies/BirdBoss/bird attack.mp3"
-dest_files=[ "res://.import/bird attack.mp3-fea372fdb29ba6955fe1bba7713f709c.mp3str" ]
+dest_files=["res://.godot/imported/bird attack.mp3-fea372fdb29ba6955fe1bba7713f709c.mp3str"]
 
 [params]
 
 loop=false
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,8 +1,7 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 
-var velocity = Vector2(-1,-1)
-var speed = 525
+var speed = 250
 var collided = false
 var is_fire_arrow: bool = false
 var is_ice_arrow: bool = false
@@ -14,43 +13,45 @@ var is_multishot2: bool = false
 var ricochet_enemies = []
 
 var _uuid = load("res://helpers/UUID.gd")
-onready var uuid = _uuid.new()
+@onready var uuid = _uuid.new()
 
 func _physics_process(delta):
 	if not collided:
 		var collision_info = move_and_collide(velocity * delta * speed)
+	if $Hitbox.get_overlapping_areas().size() > 0:
+		destroy()
 
 func _ready():
 	if is_hostile:
-		$Hitbox.set_collision_mask(128+2)
-	rotation_degrees = rad2deg(Vector2(1,0).angle_to(velocity))
+		$Hitbox.set_collision_layer(128+2+32)
+	rotation_degrees = rad_to_deg(Vector2(1,0).angle_to(velocity))
 	$Hitbox.id = uuid.v4()
 	$Hitbox.tool_name = "arrow"
 	$Hitbox.knockback_vector = velocity
 	if is_fire_arrow:
-		$Light2D.enabled = true
+		$PointLight2D.enabled = true
 		$Hitbox.special_ability = "fire"
 		$ArrowBreak.modulate = Color("ff0000")
-		$FireTrailParticles/P1.emitting = true
-		$FireTrailParticles/P2.emitting = true
-		$FireTrailParticles/P3.emitting = true
+		$FireTrailParticles/Particles1.emitting = true
+		$FireTrailParticles/Particles2.emitting = true
+		$FireTrailParticles/Particles3.emitting = true
 	elif is_ice_arrow:
 		$Hitbox.special_ability = "ice"
 		$ArrowBreak.modulate = Color("009bff")
-		$IceTrailParticles/P1.emitting = true
-		$IceTrailParticles/P2.emitting = true
-		$IceTrailParticles/P3.emitting = true
+		$IceTrailParticles/Particles1.emitting = true
+		$IceTrailParticles/Particles2.emitting = true
+		$IceTrailParticles/Particles3.emitting = true
 	elif is_poison_arrow:
 		$Hitbox.special_ability = "poison"
 		$ArrowBreak.modulate = Color("00ee18")
-		$PoisonTrailParticles/P1.emitting = true
-		$PoisonTrailParticles/P2.emitting = true
-		$PoisonTrailParticles/P3.emitting = true
+		$PoisonTrailParticles/Particles1.emitting = true
+		$PoisonTrailParticles/Particles2.emitting = true
+		$PoisonTrailParticles/Particles3.emitting = true
 
 
 func fade_out():
-	$Tween.interpolate_property($Sprite, "modulate:a", 1.0, 0.0, 0.5, 3, 1)
-	$Tween.start()
+	var tween = get_tree().create_tween()
+	tween.tween_property($Sprite2D, "modulate:a", 0.0, 0.5)
 
 func _on_Area2D_area_entered(area):
 	if is_ricochet_shot:
@@ -72,7 +73,7 @@ func find_next_player():
 		return
 	ricochet_enemies.append(temp.name)
 	velocity = (temp.position - self.position).normalized()
-	rotation_degrees = rad2deg(Vector2(1,0).angle_to(velocity))
+	rotation_degrees = rad_to_deg(Vector2(1,0).angle_to(velocity))
 	$Hitbox.knockback_vector = velocity
 
 func _on_Hitbox_body_entered(body):
@@ -80,22 +81,22 @@ func _on_Hitbox_body_entered(body):
 
 func destroy():
 	if not collided:
-		$FireTrailParticles/P1.emitting = false
-		$FireTrailParticles/P2.emitting = false
-		$FireTrailParticles/P3.emitting = false
-		$IceTrailParticles/P1.emitting = false
-		$IceTrailParticles/P2.emitting = false
-		$IceTrailParticles/P3.emitting = false
-		$PoisonTrailParticles/P1.emitting = false
-		$PoisonTrailParticles/P2.emitting = false
-		$PoisonTrailParticles/P3.emitting = false
+		$FireTrailParticles/Particles1.emitting = false
+		$FireTrailParticles/Particles2.emitting = false
+		$FireTrailParticles/Particles3.emitting = false
+		$IceTrailParticles/Particles1.emitting = false
+		$IceTrailParticles/Particles2.emitting = false
+		$IceTrailParticles/Particles3.emitting = false
+		$PoisonTrailParticles/Particles1.emitting = false
+		$PoisonTrailParticles/Particles2.emitting = false
+		$PoisonTrailParticles/Particles3.emitting = false
 		$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 		$CollisionShape2D.set_deferred("disabled", true)
 		collided = true
-		$ArrowBreak.playing = true
-		$Tween.interpolate_property($Light2D, "color", Color("ffffff"), Color("00ffffff"), 0.5, 1, Tween.EASE_IN, 0)
-		$Tween.start()
-		yield($ArrowBreak, "animation_finished")
+		$ArrowBreak.play("break")
+		var tween = get_tree().create_tween()
+		tween.tween_property($PointLight2D, "color", Color("00ffffff"), 0.5)
+		await $ArrowBreak.animation_finished
 		$ArrowBreak.hide()
 
 func _on_Timer_timeout():

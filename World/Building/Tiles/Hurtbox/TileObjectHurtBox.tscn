@@ -1,0 +1,110 @@
+[gd_scene load_steps=14 format=3 uid="uid://b4skq4twt3c8x"]
+
+[ext_resource type="Script" path="res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd" id="1_n8wg3"]
+[ext_resource type="Script" path="res://World/Building/Tiles/Interactives.gd" id="2_i881y"]
+[ext_resource type="TileSet" uid="uid://bmjc5ou5oyowx" path="res://Assets/Tilesets/objects/objects.tres" id="2_tvff0"]
+[ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="3_74bdu"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1jurr"]
+size = Vector2(16, 16)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0okvp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pawgr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6fn2f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pqk2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sqj60"]
+
+[sub_resource type="Animation" id="19"]
+resource_name = "shake"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ObjectTiles:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-8, 8), Vector2(-10, 8), Vector2(-7, 8), Vector2(-9, 8), Vector2(-8, 8)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_36o8j"]
+_data = {
+"shake": SubResource("19")
+}
+
+[node name="TileObjectHurtBox" type="Node2D"]
+script = ExtResource("1_n8wg3")
+
+[node name="Interactives" type="Node" parent="."]
+script = ExtResource("2_i881y")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="HurtBox" type="Area2D" parent="Marker2D"]
+collision_layer = 0
+collision_mask = 262168
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/HurtBox"]
+light_mask = 0
+shape = SubResource("1")
+
+[node name="MovementCollision" type="StaticBody2D" parent="Marker2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/MovementCollision"]
+shape = SubResource("RectangleShape2D_1jurr")
+
+[node name="Btn" type="Button" parent="Marker2D"]
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0okvp")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_pawgr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_6fn2f")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5pqk2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_sqj60")
+disabled = true
+flat = true
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+volume_db = -16.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_36o8j")
+}
+
+[node name="ResetTempHealthTimer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="ObjectTiles" type="TileMap" parent="."]
+modulate = Color(1.2, 1.2, 1.2, 1)
+y_sort_enabled = true
+position = Vector2(-8, 8)
+tile_set = ExtResource("2_tvff0")
+format = 2
+layer_0/y_sort_enabled = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+enabled = false
+color = Color(1, 0.85098, 0.717647, 1)
+blend_mode = 2
+texture = ExtResource("3_74bdu")
+texture_scale = 0.75
+
+[connection signal="area_entered" from="Marker2D/HurtBox" to="." method="_on_HurtBox_area_entered"]
+[connection signal="mouse_exited" from="Marker2D/Btn" to="." method="_on_btn_mouse_exited"]
+[connection signal="pressed" from="Marker2D/Btn" to="." method="_on_btn_pressed"]
+[connection signal="timeout" from="ResetTempHealthTimer" to="." method="_on_ResetTempHealthTimer_timeout"]

@@ -2,14 +2,18 @@
 
 importer="mp3"
 type="AudioStreamMP3"
-path="res://.import/cave ambience.mp3-1c83127f9c4ffd857dc8d5dccf9438cc.mp3str"
+uid="uid://brpidfxlyynld"
+path="res://.godot/imported/cave ambience.mp3-1c83127f9c4ffd857dc8d5dccf9438cc.mp3str"
 
 [deps]
 
 source_file="res://Assets/Sound/Sound effects/Ambience/cave ambience.mp3"
-dest_files=[ "res://.import/cave ambience.mp3-1c83127f9c4ffd857dc8d5dccf9438cc.mp3str" ]
+dest_files=["res://.godot/imported/cave ambience.mp3-1c83127f9c4ffd857dc8d5dccf9438cc.mp3str"]
 
 [params]
 
 loop=true
 loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
