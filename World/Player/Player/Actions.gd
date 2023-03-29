@@ -294,7 +294,7 @@ func sleep(sleeping_bag_pos):
 		get_node("../Sounds/FootstepsSound").stream_paused = true
 		get_parent().z_index = 1
 		get_parent().state = get_parent().SLEEPING
-		get_parent().position = sleeping_bag_pos + Vector2i(16,16)
+		get_parent().position = sleeping_bag_pos + Vector2i(16,8)
 		get_parent().animation_player.play("sleep")
 		get_parent().composite_sprites.set_player_animation(get_parent().character, "sleep_down")
 		get_parent().user_interface.get_node("SleepEffect/AnimationPlayer").play("sleep")
@@ -302,10 +302,10 @@ func sleep(sleeping_bag_pos):
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
-		PlayerData.player_data["current_save_location"] = str(player_enter_position/16)
+		PlayerData.player_data["current_save_location"] = player_enter_position/16
 		PlayerData.player_data["current_save_scene"] = "res://World/Overworld/Overworld.tscn"
 		PlayerData.player_data["respawn_scene"] = "res://World/Overworld/Overworld.tscn"
-		PlayerData.player_data["respawn_location"] = str(player_enter_position/16)
+		PlayerData.player_data["respawn_location"] = player_enter_position/16
 		await get_tree().process_frame
 		game_state = GameState.new()
 		game_state.world_state = MapData.world
@@ -318,16 +318,16 @@ func sleep(sleeping_bag_pos):
 		get_parent().state = get_parent().MOVEMENT
 
 
-func move_placable_object(item_name, location):
-	print("MOVE OBJECT " + item_name)
+func move_placeable_object(data):
 	var placeObject = PlaceObjectScene.instantiate()
-	placeObject.name = "PlaceObject"
-	placeObject.item_name = item_name
+	placeObject.name = "MoveObject"
+	placeObject.previous_moving_object_data = data
+	placeObject.item_name = data["n"]
 	placeObject.moving_object = true
 	placeObject.position = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(16,16))
 	get_node("../").add_child(placeObject)
 
-func show_placable_object(item_name, item_category):
+func show_placeable_object(item_name, item_category):
 	if Server.world.name == "Overworld":
 		if not has_node("../PlaceObject"): # does not exist yet, add to scene tree
 			var placeObject = PlaceObjectScene.instantiate()
@@ -337,30 +337,45 @@ func show_placable_object(item_name, item_category):
 			placeObject.position = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(16,16))
 			get_node("../").add_child(placeObject)
 		else:
-			if get_node("../PlaceObject").item_name != item_name and not get_node("../PlaceObject").moving_object: # exists but item changed
+			if get_node("../PlaceObject").item_name != item_name and not has_node("../MoveObject"): # exists but item changed
 				get_node("../PlaceObject").item_name = item_name
 				get_node("../PlaceObject").item_category = item_category
 				get_node("../PlaceObject").initialize()
-	else:
-		if item_name == "campfire" or item_name == "torch":
-			if not has_node("../PlaceObject"): # does not exist yet, add to scene tree
-				var placeObject = PlaceObjectScene.instantiate()
-				placeObject.name = "PlaceObject"
-				placeObject.moving_object = false
-				placeObject.position = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(16,16))
-				get_node("../").add_child(placeObject)
-			else:
-				if get_node("../PlaceObject").item_name != item_name: # exists but item changed
-					get_node("../PlaceObject").item_name = item_name
-					get_node("../PlaceObject").item_category = item_category
-					get_node("../PlaceObject").initialize()
-		else:
-			destroy_placable_object()
+#	else:
+#		if item_name == "campfire" or item_name == "torch":
+#			if not has_node("../PlaceObject"): # does not exist yet, add to scene tree
+#				var placeObject = PlaceObjectScene.instantiate()
+#				placeObject.name = "PlaceObject"
+#				placeObject.moving_object = false
+#				placeObject.position = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(16,16))
+#				get_node("../").add_child(placeObject)
+#			else:
+#				if get_node("../PlaceObject").item_name != item_name: # exists but item changed
+#					get_node("../PlaceObject").item_name = item_name
+#					get_node("../PlaceObject").item_category = item_category
+#					get_node("../PlaceObject").initialize()
+#	else:
+#		destroy_placeable_object()
 
+#func destroy_movable_object():
+#	if has_node("../PlaceObject"):
+#		get_node("../Camera2D/UserInterface/ChangeRotation").hide()
+#		get_node("../Camera2D/UserInterface/ChangeVariety").hide()
+#		get_node("../PlaceObject").destroy()
 
-func destroy_placable_object():
+func destroy_moveable_object():
+	if has_node("../MoveObject"):
+		get_node("../Camera2D/UserInterface/ChangeRotation").hide()
+		get_node("../Camera2D/UserInterface/ChangeVariety").hide()
+		get_node("../MoveObject").destroy_and_remove_previous_object()
+
+func destroy_placeable_object():
 	if has_node("../PlaceObject"):
 		get_node("../Camera2D/UserInterface/ChangeRotation").hide()
 		get_node("../Camera2D/UserInterface/ChangeVariety").hide()
 		get_node("../PlaceObject").destroy()
+	elif has_node("../MoveObject"):
+		get_node("../Camera2D/UserInterface/ChangeRotation").hide()
+		get_node("../Camera2D/UserInterface/ChangeVariety").hide()
+		get_node("../MoveObject").destroy()
 

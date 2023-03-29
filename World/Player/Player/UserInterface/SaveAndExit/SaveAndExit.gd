@@ -2,7 +2,7 @@ extends Control
 
 
 func _ready():
-	Server.player_node.actions.destroy_placable_object()
+	Server.player_node.actions.destroy_placeable_object()
 
 func _on_ExitBtn_pressed():
 	Sounds.play_deselect_sound()

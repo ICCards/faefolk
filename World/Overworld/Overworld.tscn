@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bpxgic0nhjbf0"]
+[gd_scene load_steps=41 format=3 uid="uid://bpxgic0nhjbf0"]
 
 [ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="1_631cd"]
 [ext_resource type="Script" path="res://World/World/WorldAmbience.gd" id="1_gscqb"]
@@ -21,6 +21,7 @@
 [ext_resource type="TileSet" uid="uid://bmjc5ou5oyowx" path="res://Assets/Tilesets/objects/objects.tres" id="14_6ii0l"]
 [ext_resource type="TileSet" uid="uid://d2u2dc22ifh2g" path="res://Assets/Tilesets/terrain/tres files/snow.tres" id="15_1q6yy"]
 [ext_resource type="TileSet" uid="uid://2bxso62kg8ee" path="res://Assets/Tilesets/terrain/tres files/wet sand.tres" id="16_ckub1"]
+[ext_resource type="PackedScene" uid="uid://bkvw6820ue7ga" path="res://World/Objects/Nature/Particles/FullMapParticles.tscn" id="22_ht74h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7b1tf"]
 texture = ExtResource("1_631cd")
@@ -5048,6 +5049,10 @@ visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2wssv")
+
+[node name="FullMapParticles" parent="." instance=ExtResource("22_ht74h")]
+position = Vector2(18540, 17495)
+rotation = 0.00747698
 
 [connection signal="timeout" from="WorldBuilder/SpawnAnimal/SpawnAnimalTimer" to="WorldBuilder/SpawnAnimal" method="_on_spawn_animal_timer_timeout"]
 [connection signal="timeout" from="WorldBuilder/BuildNature/SpawnNatureTimer" to="WorldBuilder/BuildNature" method="_on_spawn_nature_timer_timeout"]

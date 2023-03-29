@@ -14,7 +14,7 @@ var dirt: Array = []
 var ocean: Array = []
 var desert: Array = []
 var wet_sand: Array = []
-var tile_array_names: Array = ["plains","forest","snow","dirt"]#"deep_ocean1","deep_ocean2","deep_ocean3","deep_ocean4","ocean"]
+var tile_array_names: Array = ["plains","forest","snow","dirt"] #"wet_sand","deep_ocean1","deep_ocean2","deep_ocean3","deep_ocean4","ocean"]
 var tile_arrays_to_fix: Array = [plains, forest, snow, dirt] #deep_ocean1, deep_ocean2, deep_ocean3, deep_ocean4]
 #var tile_arrays: Array = [plains, forest, snow, dirt, deep_ocean]
 
@@ -190,7 +190,7 @@ func build_terrian():
 					deep_ocean3.append(Vector2i(x,y))
 				else:
 					deep_ocean4.append(Vector2i(x,y))
-			if alt > 0.8:
+			elif alt > 0.8:
 				ocean.append(Vector2i(x,y))
 			#Beach	
 			elif between(alt,0.75,0.8):
@@ -225,28 +225,29 @@ func build_terrian():
 	
 func add_ocean_tiles():
 	var border_tiles = []
-	border_tiles = []
-	print("EXTENDING BEACH")
-	for loc in beach:
-		if Util.is_border_tile(loc, beach) and not forest.has(loc) and not plains.has(loc) and not dirt.has(loc):
-			border_tiles.append(loc)
-	for loc in border_tiles: # extend beach
-		if not beach.has(loc+Vector2i(1,0)):
-			beach.append(loc+Vector2i(1,0))
-		if not beach.has(loc+Vector2i(-1,0)):
-			beach.append(loc+Vector2i(-1,0))
-		if not beach.has(loc+Vector2i(0,1)):
-			beach.append(loc+Vector2i(0,1))
-		if not beach.has(loc+Vector2i(0,-1)):
-			beach.append(loc+Vector2i(0,-1))
-		if not beach.has(loc+Vector2i(1,1)):
-			beach.append(loc+Vector2i(1,1))
-		if not beach.has(loc+Vector2i(-1,1)):
-			beach.append(loc+Vector2i(-1,1))
-		if not beach.has(loc+Vector2i(1,-1)):
-			beach.append(loc+Vector2i(1,-1))
-		if not beach.has(loc+Vector2i(-1,-1)):
-			beach.append(loc+Vector2i(-1,-1))
+	for i in range(2):
+		border_tiles = []
+		print("EXTENDING BEACH")
+		for loc in beach:
+			if Util.is_border_tile(loc, beach) and not forest.has(loc) and not plains.has(loc) and not dirt.has(loc):
+				border_tiles.append(loc)
+		for loc in border_tiles: # extend beach
+			if not beach.has(loc+Vector2i(1,0)):
+				beach.append(loc+Vector2i(1,0))
+			if not beach.has(loc+Vector2i(-1,0)):
+				beach.append(loc+Vector2i(-1,0))
+			if not beach.has(loc+Vector2i(0,1)):
+				beach.append(loc+Vector2i(0,1))
+			if not beach.has(loc+Vector2i(0,-1)):
+				beach.append(loc+Vector2i(0,-1))
+			if not beach.has(loc+Vector2i(1,1)):
+				beach.append(loc+Vector2i(1,1))
+			if not beach.has(loc+Vector2i(-1,1)):
+				beach.append(loc+Vector2i(-1,1))
+			if not beach.has(loc+Vector2i(1,-1)):
+				beach.append(loc+Vector2i(1,-1))
+			if not beach.has(loc+Vector2i(-1,-1)):
+				beach.append(loc+Vector2i(-1,-1))
 	print("ADD WET SAND LAYER")
 	border_tiles = []
 	for loc in beach:
@@ -295,7 +296,7 @@ func assign_autotile_id(tile_array_name):
 #	var locations = tiles
 	for loc in locations:
 		MapData.world[tile_array_name].append([loc,Tiles.return_autotile_id(loc,locations)])
-		await get_tree().process_frame
+		#await get_tree().process_frame
 #		tiles[tiles.find(loc)] = [loc,return_tile_id(loc,locations)]
 	if thread_tile_counter == tile_array_names.size():
 		print("assigned all")
@@ -344,7 +345,7 @@ func update_fixed_map():
 	MapData.world["wet_sand"] = wet_sand
 #	MapData.world["plains"] = plains
 #	MapData.world["forest"] = forest
-#	MapData.world["desert"] = desert
+	MapData.world["desert"] = desert
 #	MapData.world["snow"] = snow
 	MapData.world["ocean"] = ocean
 #	MapData.world["dirt"] = dirt

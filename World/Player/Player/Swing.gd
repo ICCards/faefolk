@@ -123,6 +123,10 @@ func swing_deferred(item_name):
 			animation = "punch_" + get_parent().direction.to_lower()
 			player_animation_player.play("punch")
 		else:
+			if item_name == "hammer" and has_node("../MoveObject"):
+				thread.wait_to_finish()
+				get_parent().state = MOVEMENT
+				return
 			set_swing_collision_layer_and_position(item_name, get_parent().direction)
 			animation = "swing_" + get_parent().direction.to_lower()
 			player_animation_player.play("axe pickaxe swing")

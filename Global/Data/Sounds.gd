@@ -169,11 +169,6 @@ var tree_break = load("res://Assets/Sound/Sound effects/Tree/Falling tree.mp3")
 var stump_break = load("res://Assets/Sound/Sound effects/Tree/Stump break.mp3")
 var tool_break = load("res://Assets/Sound/Sound effects/objects/tool break.mp3")
 
-var bear_grown = [
-	load("res://Assets/Sound/Sound effects/Animals/Bear/Groan/groan 1.mp3"),
-	load("res://Assets/Sound/Sound effects/Animals/Bear/Groan/groan 2.mp3"),
-	load("res://Assets/Sound/Sound effects/Animals/Bear/Groan/groan 3.mp3")
-]
 
 
 ### Ambient ###

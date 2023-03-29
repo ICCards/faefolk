@@ -97,20 +97,11 @@ func set_held_object():
 
 
 func set_current_object(item_name):
-	print("SET CURRENT OBJECT")
 	var item_category
 	if item_name:
 		item_category = JsonData.item_data[item_name]["ItemCategory"]
 	else:
 		item_category = null
-	# Placable object
-	if item_category == "Placeable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg"):
-		actions.show_placable_object(item_name, item_category)
-		return
-	if item_name == "blueprint" and current_building_item != "":
-		actions.show_placable_object(current_building_item, "BUILDING")
-		return
-	actions.destroy_placable_object()
 	# Holding item
 	if Util.valid_holding_item_category(item_category):
 		holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
@@ -122,6 +113,17 @@ func set_current_object(item_name):
 	else:
 		holding_item.hide()
 		$HoldingTorch.set_inactive()
+	# Placable object
+	if item_category == "Placeable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg"):
+		actions.show_placeable_object(item_name, item_category)
+		return
+	if item_name == "blueprint" and current_building_item != "":
+		actions.show_placeable_object(current_building_item, "BUILDING")
+		return
+	elif item_name == "hammer" and has_node("MoveObject"):
+		return
+	actions.destroy_placeable_object()
+
 
 func _process(_delta) -> void:
 	if $Area2Ds/PickupZone.items_in_range.size() > 0:

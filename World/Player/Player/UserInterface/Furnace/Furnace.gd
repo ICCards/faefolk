@@ -16,7 +16,7 @@ func _ready():
 	initialize()
 
 func initialize():
-	Server.player_node.actions.destroy_placable_object()
+	Server.player_node.actions.destroy_placeable_object()
 	hovered_item = null
 	show()
 	$InventorySlots.initialize_slots()

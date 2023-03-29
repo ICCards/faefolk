@@ -57,7 +57,7 @@ func spawn_placeables():
 		if item_name == "wall" or item_name == "foundation" or item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 			PlaceObject.place_building_object_in_world(id,item_name,MapData.world["placeable"][id]["d"],MapData.world["placeable"][id]["v"],location,MapData.world["placeable"][id]["h"])
 		else:
-			PlaceObject.place_object_in_world(id,item_name,MapData.world["placeable"][id]["d"],location)
+			PlaceObject.place_object_in_world(id,item_name,MapData.world["placeable"][id]["d"],location,MapData.world["placeable"][id]["v"])
 	placeable_thread.wait_to_finish()
 
 func spawn_crops():

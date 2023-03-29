@@ -15,7 +15,7 @@ var frozen: bool = false
 var health: int = Stats.BUNNY_HEALTH
 var STARTING_HEALTH: int = Stats.BUNNY_HEALTH
 var running_state: bool = false
-var MAX_MOVE_DISTANCE: float = 500.0
+var MAX_MOVE_DISTANCE: float = 300.0
 var tornado_node = null
 
 var variety
@@ -184,7 +184,7 @@ func start_run_state():
 	navigation_agent.set_deferred("max_speed", 135)
 	running_state = true
 	$Timers/RunStateTimer.call_deferred("start")
-	_timer.set_deferred("wait_time", 0.75)
+	_timer.set_deferred("wait_time", 0.5)
 	_update_pathfinding()
 
 func _on_RunStateTimer_timeout():

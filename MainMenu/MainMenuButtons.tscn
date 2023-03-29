@@ -1,10 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3vdyc3n310f7"]
+[gd_scene load_steps=5 format=3 uid="uid://b3vdyc3n310f7"]
 
 [ext_resource type="Script" path="res://MainMenu/MainMenuButtons.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://dfvwmx10y6j7o" path="res://Assets/Images/Misc/MainMenu/play_button.png" id="2_bagk8"]
 [ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="3_0bwq0"]
-[ext_resource type="Texture2D" uid="uid://cqo84wlgvp3e5" path="res://Assets/Images/Misc/MainMenu/quit button.png" id="4"]
-[ext_resource type="Texture2D" uid="uid://2hsesaow6gf" path="res://Assets/Images/Misc/MainMenu/shop button.png" id="5"]
 [ext_resource type="Theme" uid="uid://cj0asnhg7avhi" path="res://Assets/Themes/MenuTitle.tres" id="6"]
 
 [node name="MainMenuButtons" type="Control"]
@@ -48,7 +46,6 @@ position = Vector2(115, 0)
 [node name="ShopSprite" type="Sprite2D" parent="PlayShopQuit/Shop"]
 position = Vector2(396, 270)
 scale = Vector2(3, 3)
-texture = ExtResource("5")
 
 [node name="ShopLabel" type="Label" parent="PlayShopQuit/Shop"]
 offset_left = 278.0
@@ -65,7 +62,6 @@ position = Vector2(137, 0)
 [node name="QuitSprite" type="Sprite2D" parent="PlayShopQuit/Quit"]
 position = Vector2(504, 444)
 scale = Vector2(3, 3)
-texture = ExtResource("4")
 
 [node name="QuitLabel" type="Label" parent="PlayShopQuit/Quit"]
 offset_left = 379.0
@@ -84,6 +80,7 @@ focus_mode = 0
 flat = true
 
 [node name="ShopBtn" type="Button" parent="PlayShopQuit"]
+visible = false
 offset_left = 199.0
 offset_top = 192.0
 offset_right = 820.0
@@ -92,6 +89,7 @@ focus_mode = 0
 flat = true
 
 [node name="QuitBtn" type="Button" parent="PlayShopQuit"]
+visible = false
 offset_left = 329.0
 offset_top = 366.0
 offset_right = 950.0

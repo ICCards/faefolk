@@ -140,7 +140,7 @@ func move(_velocity: Vector2) -> void:
 
 
 func play_groan_sound_effect():
-	sound_effects.set_deferred("stream", Sounds.bear_grown[rng.randi_range(0, 2)])
+	sound_effects.set_deferred("stream", "res://Assets/Sound/Sound effects/animals/bear/groan/groan "+ str(rng.randi_range(1,3)) +".mp3")
 	sound_effects.set_deferred("volume_db",  Sounds.return_adjusted_sound_db("sound", -12))
 	sound_effects.call_deferred("play")
 	await sound_effects.finished
@@ -239,7 +239,6 @@ func destroy(killed_by_player):
 	_idle_timer.call_deferred("stop")
 	set_physics_process(false)
 	destroyed = true
-	bear_sprite.material = null
 	if killed_by_player:
 		MapData.remove_object("animal",name)
 		PlayerData.player_data["collections"]["mobs"]["bear"] += 1

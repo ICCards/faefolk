@@ -1,28 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://jhodf1dplh7s"]
 
-[ext_resource path="res://World3D/Objects/Nature/GPUParticles3D/RainOnFloor.tscn" type="PackedScene" id=1]
-[ext_resource path="res://World3D/Objects/Nature/GPUParticles3D/Rain.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/Images/GPUParticles3D/stardew rain.png" type="Texture2D" id=3]
+[ext_resource type="PackedScene" uid="uid://tgdg3hrajiuq" path="res://World/Objects/Nature/Particles/Rain.tscn" id="1_208lg"]
+[ext_resource type="PackedScene" uid="uid://bm025jompo1fh" path="res://World/Objects/Nature/Particles/RainOnFloor.tscn" id="1_bk6ko"]
 
 [node name="RainStorm" type="Node2D"]
 z_index = 1
 
-[node name="RainOnFloor" parent="." instance=ExtResource( 1 )]
-color = Color( 0.321569, 0.545098, 0.921569, 1 )
-anim_speed = 1.0
-anim_offset = 0.0
-anim_offset_random = 0.0
+[node name="RainOnFloor" parent="." instance=ExtResource("1_bk6ko")]
 
-[node name="Rain" parent="." instance=ExtResource( 2 )]
-lifetime = 2.0
-initial_velocity = 100.0
-anim_speed = 2.0
-anim_offset = 0.0
-anim_offset_random = 0.0
-
-[node name="Rain2" parent="." instance=ExtResource( 2 )]
-visible = false
-lifetime = 2.0
-texture = ExtResource( 3 )
-initial_velocity = 40.0
-anim_speed = 1.0
+[node name="Rain" parent="." instance=ExtResource("1_208lg")]

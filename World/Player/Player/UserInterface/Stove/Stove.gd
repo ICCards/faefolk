@@ -42,7 +42,7 @@ func _physics_process(delta):
 
 func initialize():
 	show()
-	Server.player_node.actions.destroy_placable_object()
+	Server.player_node.actions.destroy_placeable_object()
 	$MenuTitle/Label.text = "Stove #" + str(level)
 	$InventorySlots.initialize_slots()
 	$HotbarInventorySlots.initialize_slots()

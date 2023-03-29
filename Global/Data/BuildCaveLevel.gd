@@ -11,7 +11,7 @@ extends Node
 @onready var LargeOre = load("res://World/Objects/Nature/Ores/LargeOre.tscn")
 @onready var SmallOre = load("res://World/Objects/Nature/Ores/SmallOre.tscn")
 @onready var TallGrass = load("res://World/Objects/Nature/Grasses/TallGrass.tscn")
-@onready var CaveGrass = load("res://World/Caves/Objects/CaveGrass.tscn")
+#@onready var CaveGrass = load("res://World/Caves/Objects/CaveGrass.tscn")
 @onready var CaveLight = load("res://World/Caves/Objects/CaveLight.tscn")
 #@onready var Player = load("res://World/Player/Player/Player.tscn")
 @onready var ForageItem = load("res://World/Objects/Nature/Forage/ForageItem.tscn")
@@ -123,15 +123,15 @@ func load_cave(map):
 		object.location = loc
 		object.position = Tiles.valid_tiles.map_to_local(loc) + Vector2(16, 24)
 		NatureObjects.call_deferred("add_child",object,true)
-	for id in map["tall_grass"]:
-		var loc = Util.string_to_vector2(map["tall_grass"][id]["l"])
-		Tiles.add_navigation_tiles(loc)
-		var caveGrass = CaveGrass.instantiate()
-		caveGrass.name = str(id)
-		caveGrass.variety = map["tall_grass"][id]["v"]
-		caveGrass.loc = loc
-		GrassObjects.call_deferred("add_child", caveGrass)
-		caveGrass.position = loc*32 + Vector2(16,32)
+#	for id in map["tall_grass"]:
+#		var loc = Util.string_to_vector2(map["tall_grass"][id]["l"])
+#		Tiles.add_navigation_tiles(loc)
+#		var caveGrass = CaveGrass.instantiate()
+#		caveGrass.name = str(id)
+#		caveGrass.variety = map["tall_grass"][id]["v"]
+#		caveGrass.loc = loc
+#		GrassObjects.call_deferred("add_child", caveGrass)
+#		caveGrass.position = loc*32 + Vector2(16,32)
 	for id in map["forage"]:
 		var loc = Util.string_to_vector2(map["forage"][id]["l"])
 		Tiles.add_navigation_tiles(loc)
@@ -145,7 +145,7 @@ func load_cave(map):
 		var item_name = map["placable"][id]["n"]
 		var location = Util.string_to_vector2(map["placable"][id]["l"])
 		var direction = map["placable"][id]["d"]
-		PlaceObject.place_object_in_world(id,item_name,direction,location)
+#		PlaceObject.place_object_in_world(id,item_name,direction,location)
 
 
 func build_cave(map):
@@ -249,7 +249,7 @@ func set_initial_chest(map):
 	else:
 		type = "wood chest"
 	MapData.add_placable(Server.world.name, {"n":type,"d":direction,"l":str(location)})
-	PlaceObject.place_object_in_world(Server.world.name, type, direction, location)
+#	PlaceObject.place_object_in_world(Server.world.name, type, direction, location)
 
 func return_chest_direction(loc):
 	var type = Server.world.get_node("Tiles/Chests").get_cellv(loc)
@@ -305,12 +305,12 @@ func generate_grass_bunch(loc, variety, map):
 		if Tiles.valid_tiles.get_cellv(loc) == 0:
 			var id = uuid.v4()
 			Tiles.add_navigation_tiles(loc)
-			var caveGrass = CaveGrass.instantiate()
-			caveGrass.name = str(id)
-			caveGrass.variety = variety
-			caveGrass.loc = loc
-			GrassObjects.call_deferred("add_child", caveGrass)
-			caveGrass.position = loc*32 + Vector2(16,32)
+#			var caveGrass = CaveGrass.instantiate()
+#			caveGrass.name = str(id)
+#			caveGrass.variety = variety
+#			caveGrass.loc = loc
+#			GrassObjects.call_deferred("add_child", caveGrass)
+#			caveGrass.position = loc*32 + Vector2(16,32)
 			map["tall_grass"][id] = {"l": str(loc), "v": variety}
 		else:
 			loc -= randomAdjacentTiles[0]

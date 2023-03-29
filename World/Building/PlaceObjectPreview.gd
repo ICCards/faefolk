@@ -9,6 +9,7 @@ var mousePos := Vector2.ZERO
 var item_name
 var item_category
 var moving_object: bool
+var previous_moving_object_data
 var state
 var variety = 1
 
@@ -34,9 +35,15 @@ func destroy():
 	name = "removing"
 	hide()
 	set_physics_process(false)
-	await get_tree().create_timer(0.25).timeout
-	queue_free()
+	if moving_object:
+		MapData.add_object("placeable",previous_moving_object_data["id"],{"n":previous_moving_object_data["n"],"d":previous_moving_object_data["d"],"l":previous_moving_object_data["l"],"v":previous_moving_object_data["v"]})
+		PlaceObject.place_object_in_world(previous_moving_object_data["id"], previous_moving_object_data["n"], previous_moving_object_data["d"], previous_moving_object_data["l"], previous_moving_object_data["v"])
+	call_deferred("queue_free")
 
+func destroy_and_remove_previous_object():
+	hide()
+	set_physics_process(false)
+	call_deferred("queue_free")
 
 func _physics_process(delta):
 	mousePos = (get_global_mouse_position() + Vector2(-8, -8)).snapped(Vector2(16,16))
@@ -61,6 +68,9 @@ func _physics_process(delta):
 
 
 func initialize():
+	if moving_object:
+		variety = previous_moving_object_data["v"]
+		direction_index = directions.find(previous_moving_object_data["d"])
 	if item_name != "foundation" and item_name != "wall":
 		item_category = JsonData.item_data[item_name]["ItemCategory"]
 	if Constants.rotatable_object_atlas_tiles.keys().has(item_name):
@@ -168,7 +178,7 @@ func place_customizable_state():
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
 		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use tool")):
-			place_object(item_name, null, location, "placable", variety)
+			place_object(item_name, null, location, "placeable", variety)
 
 func place_customizable_rotatable_state():
 	var location = Tiles.valid_tiles.local_to_map(mousePos)
@@ -190,7 +200,7 @@ func place_customizable_rotatable_state():
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
 		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use tool")):
-			place_object(item_name, directions[direction_index], location, "placable", variety)
+			place_object(item_name, directions[direction_index], location, "placeable", variety)
 
 
 func get_variety_index(num_varieties):
@@ -225,7 +235,7 @@ func place_rotatable_state():
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
 		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use tool")):
-			place_object(item_name, directions[direction_index], location, "placable")
+			place_object(item_name, directions[direction_index], location, "placeable")
 
 
 
@@ -239,7 +249,7 @@ func place_foundation_state():
 			$ColorIndicator.indicator_color = "Green"
 			$ColorIndicator.set_indicator_color()
 			if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use tool")):
-				place_object(item_name, null, location, "placable")
+				place_object(item_name, null, location, "placeable")
 
 
 func place_wall_state():
@@ -253,7 +263,7 @@ func place_wall_state():
 			$ColorIndicator.indicator_color = "Green"
 			$ColorIndicator.set_indicator_color()
 			if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use tool")):
-				place_object(item_name, null, location, "placable")
+				place_object(item_name, null, location, "placeable")
 
 
 func get_rotation_index():
@@ -283,7 +293,7 @@ func place_item_state():
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
 		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use tool")):
-			place_object(item_name, null, location, "placable")
+			place_object(item_name, null, location, "placeable")
 
 func place_seed_state():
 	if Server.world.name == "Overworld":
@@ -316,7 +326,7 @@ func place_object(item_name, direction, location, type, variety = null):
 		if item_name != "wall" and item_name != "foundation" and not moving_object:
 			PlayerData.remove_single_object_from_hotbar()
 		var id = Uuid.v4()
-		if type == "placable":
+		if type == "placeable":
 			if item_name == "wall" or item_name == "foundation":
 				if PlayerData.returnSufficentCraftingMaterial("wood", 5) and item_name == "wall":
 					$SoundEffects.stream = Sounds.place_object
@@ -343,6 +353,10 @@ func place_object(item_name, direction, location, type, variety = null):
 				if item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 					MapData.add_object("placeable",id, {"n":item_name,"v":"twig","l":location,"h":Stats.return_starting_door_health(item_name),"d":direction})
 					PlaceObject.place_building_object_in_world(id,item_name,direction,null,location,Stats.return_starting_door_health(item_name))
+				elif moving_object:
+					MapData.add_object("placeable",previous_moving_object_data["id"],{"n":item_name,"d":direction,"l":location,"v":variety})
+					PlaceObject.place_object_in_world(previous_moving_object_data["id"], item_name, direction, location, variety)
+					Server.player_node.actions.destroy_moveable_object()
 				else:
 					MapData.add_object("placeable",id,{"n":item_name,"d":direction,"l":location,"v":variety})
 					PlaceObject.place_object_in_world(id, item_name, direction, location, variety)

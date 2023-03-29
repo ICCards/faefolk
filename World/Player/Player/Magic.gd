@@ -315,6 +315,7 @@ func _physics_process(delta):
 		var end_pt = get_local_mouse_position()
 		$AimDownSightLine.points = [start_pt, end_pt]
 	else:
+		$AimDownSightLine.hide()
 		get_parent().composite_sprites.get_node("Legs").hide()
 		player_animation_player2.stop(false)
 		return

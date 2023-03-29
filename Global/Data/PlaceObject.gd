@@ -138,7 +138,7 @@ func remove_valid_tiles(item_name,direction, location):
 	else:
 		Tiles.remove_valid_tiles(location, Constants.dimensions_dict[item_name])
 		
-func place_object_in_world(id, item_name, direction, location, variety = null):
+func place_object_in_world(id, item_name, direction, location, variety):
 	PlaceableObjects = Server.world.get_node("PlaceableObjects")
 	var tileObjectHurtBox = TileObjectHurtBox.instantiate()
 	tileObjectHurtBox.variety = variety

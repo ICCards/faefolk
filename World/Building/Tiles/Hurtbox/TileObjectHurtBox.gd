@@ -43,14 +43,6 @@ func _ready():
 	set_dimensions()
 
 
-#func _physics_process(delta):
-#	if PlayerData.normal_hotbar_mode:
-#		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
-#			var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
-#			if item_name == "blueprint" and Server.player_node.current_building_item == "":
-#				if $Marker2D/Btn.is_hovered():
-#					Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/grabber.png"))
-
 func set_dimensions():
 	rng.randomize()
 	item_name = Util.return_adjusted_item_name(item_name)
@@ -267,19 +259,33 @@ func drop_items_in_furnace():
 func _on_ResetTempHealthTimer_timeout():
 	temp_health = 3
 
+
+func _physics_process(delta):
+	if PlayerData.normal_hotbar_mode:
+		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+			var selected_hotbar_item = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
+			if selected_hotbar_item == "hammer":
+				if $Marker2D/Btn.is_hovered():
+					Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/grabber.png"))
+
+
 func _on_btn_pressed():
-	pass
-#	if PlayerData.normal_hotbar_mode:
-#		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
-#			var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
-#			if item_name == "blueprint" and Server.player_node.current_building_item == "":
-#				Tiles.object_tiles.erase_cell(0,location)
-#				MapData.remove_object("placeable",name)
-#				Server.player_node.actions.move_placable_object(item_name,location)
-#				Sounds.play_pick_up_placeable_object()
-#				queue_free()
+	if PlayerData.normal_hotbar_mode:
+		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+			var selected_hotbar_item = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
+			if selected_hotbar_item == "hammer":
+				var dimensions = Constants.dimensions_dict[item_name]
+				if direction == "left" or direction == "right":
+					Tiles.add_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
+				else:
+					Tiles.add_valid_tiles(location, dimensions)
+				Tiles.object_tiles.erase_cell(0,location)
+				MapData.remove_object("placeable",name)
+				Server.player_node.actions.move_placeable_object({"id":name,"n":item_name,"d":direction,"v":variety,"l":location})
+				Sounds.play_pick_up_placeable_object()
+				queue_free()
 	
 
 func _on_btn_mouse_exited():
-	pass
-	#Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/cursor.png"))
+	if not Server.player_node.has_node("PlaceObject"):
+		Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/cursor.png"))

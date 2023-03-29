@@ -1,20 +1,15 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://dpt6n60xb76cp"]
 
-[ext_resource path="res://World3D/Objects/Nature/GPUParticles3D/RainStorm.tscn" type="PackedScene" id=1]
-[ext_resource path="res://World3D/Objects/Nature/GPUParticles3D/Snow.tscn" type="PackedScene" id=2]
-[ext_resource path="res://World3D/Objects/Nature/GPUParticles3D/RoamingStorm.gd" type="Script" id=3]
+[ext_resource type="Script" path="res://World/Objects/Nature/Particles/RoamingStorm.gd" id="1_sb75o"]
+[ext_resource type="PackedScene" uid="uid://jhodf1dplh7s" path="res://World/Objects/Nature/Particles/RainStorm.tscn" id="2_57f6s"]
 
 [node name="RoamingStorm" type="Node2D"]
-modulate = Color( 1.2, 1.2, 1.2, 1 )
-script = ExtResource( 3 )
-
-[node name="Snow" parent="." instance=ExtResource( 2 )]
-amount = 4000
-
-[node name="RainStorm" parent="." instance=ExtResource( 1 )]
-modulate = Color( 1.05, 1.05, 1.12, 1 )
+modulate = Color(1.2, 1.2, 1.2, 1)
+script = ExtResource("1_sb75o")
 
 [node name="IdleTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="RainStorm" parent="." instance=ExtResource("2_57f6s")]
 
 [connection signal="timeout" from="IdleTimer" to="." method="_on_IdleTimer_timeout"]

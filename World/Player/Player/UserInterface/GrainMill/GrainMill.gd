@@ -9,7 +9,7 @@ func _ready():
 	initialize()
 
 func initialize():
-	Server.player_node.actions.destroy_placable_object()
+	Server.player_node.actions.destroy_placeable_object()
 	$MenuTitle/Label.text = "Grain mill #" + str(level)
 	show()
 	$InventorySlots.initialize_slots()

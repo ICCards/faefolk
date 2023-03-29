@@ -96,7 +96,8 @@ func _on_PlayBtn_pressed():
 		$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		$SoundEffects.play()
 		PlayerData.spawn_at_last_saved_location = true
-		get_node("../PLAYER").destroy()
+		if has_node("../PLAYER"):
+			get_node("../PLAYER").destroy()
 		if MapData.world["is_built"]:
 			SceneChanger.goto_scene(PlayerData.player_data["current_save_scene"])
 		else:

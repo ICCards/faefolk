@@ -20,10 +20,10 @@ func _ready():
 	get_fish()
 
 func get_fish():
-	if Server.world.name == "Overworld":
-		fish_data = FishData.returnOceanDay()
-	else:
-		fish_data = FishData.returnCaveFish()
+#	if Server.world.name == "Overworld":
+	fish_data = FishData.returnOceanDay()
+#	else:
+#		fish_data = FishData.returnCaveFish()
 	$Fish.texture = load("res://Assets/Images/inventory_icons/Fish/" + fish_data[0] + ".png")
 	set_difficulty(fish_data[1])
 
