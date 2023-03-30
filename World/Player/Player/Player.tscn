@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://bdyinn6aswyx7"]
+[gd_scene load_steps=76 format=3 uid="uid://bdyinn6aswyx7"]
 
 [ext_resource type="Script" path="res://World/Player/Player/Player.gd" id="1_hovno"]
 [ext_resource type="Texture2D" uid="uid://dybsd7fv08hlv" path="res://Assets/Images/inventory_icons/Fish/goldfish.png" id="2"]
@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://bwubv5h3bqf1k" path="res://Assets/Sound/Sound effects/Footsteps/stone footsteps.mp3" id="6"]
 [ext_resource type="Texture2D" uid="uid://b2yqfp3r1tqa4" path="res://Characters/Human/male/HOLDING WALK/body/down/arms.png" id="6_lbf3e"]
 [ext_resource type="PackedScene" uid="uid://bdpp83on80ake" path="res://World/Player/Player/Magic.tscn" id="8_wf6cw"]
-[ext_resource type="Texture2D" uid="uid://eog6qfdmk2ii" path="res://Characters/Weapon swings/fishing rod retract/right.png" id="9_yhqx4"]
+[ext_resource type="Texture2D" uid="uid://wol8ty2drk5k" path="res://Characters/Weapon swings/fishing rod struggle/right.png" id="9_5g54g"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="10"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/PickupZone.gd" id="11_vhk27"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/HurtBox.gd" id="12_7dou1"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://bnfw57dme4x26" path="res://Assets/Images/Animations/objects/torch/2.png" id="21_c3ki0"]
 [ext_resource type="Texture2D" uid="uid://78sds5dnqh0c" path="res://Assets/Images/Animations/objects/torch/3.png" id="22_grgdf"]
 [ext_resource type="Texture2D" uid="uid://bt3ysh31fm3pc" path="res://Assets/Images/Animations/objects/torch/4.png" id="23_i22ks"]
+[ext_resource type="Texture2D" uid="uid://dy0twecogksrh" path="res://Characters/Weapon swings/fishing rod cast/fish hook.png" id="28_ppjmv"]
 
 [sub_resource type="Animation" id="3"]
 length = 0.001
@@ -4537,7 +4538,7 @@ hframes = 4
 texture_filter = 1
 use_parent_material = true
 position = Vector2(0, -16)
-texture = ExtResource("9_yhqx4")
+texture = ExtResource("9_5g54g")
 hframes = 4
 
 [node name="HoldingItem" type="TextureRect" parent="CompositeSprites"]
@@ -4674,6 +4675,10 @@ position = Vector2(0, -40)
 sprite_frames = SubResource("117")
 animation = &"new_animation"
 frame_progress = 0.579862
+
+[node name="FishHook" type="Sprite2D" parent="."]
+position = Vector2(13, -24)
+texture = ExtResource("28_ppjmv")
 
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_exited"]

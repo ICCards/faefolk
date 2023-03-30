@@ -134,7 +134,7 @@ func change_start_point_pos():
 		"DOWN":
 			start_point = Vector2(-6,-16)
 		_:
-			start_point += Vector2(0,-4)
+			start_point += Vector2(0,-9)
 
 func start():
 	line.hide()
@@ -190,17 +190,17 @@ func draw_cast_line():
 	var percent = progress.value/progress.max_value
 	match direction:
 		"RIGHT":
-			start_point = Vector2(11,-15)
+			start_point = Vector2(13,-15)
 			end_point = Vector2( 90*percent+18, -8 )
 			mid_point = Vector2(-(end_point.x-start_point.x)/2, 0)
 			cast_distance = abs(start_point.x - end_point.x)
 		"LEFT":
-			start_point = Vector2(-11,-15)
+			start_point = Vector2(-13,-15)
 			end_point = Vector2( -90*percent - 18, 0 )
 			mid_point = Vector2(-(end_point.x-start_point.x)/2, 0)
 			cast_distance = start_point.x - end_point.x
 		"DOWN":
-			start_point = Vector2(1,-2)
+			start_point = Vector2(0,-1)
 			end_point = Vector2( 2, 80*percent + 4)
 			mid_point = Vector2(-(end_point.x-start_point.x)/2, 0)
 			cast_distance = abs(start_point.y - end_point.y) - 12

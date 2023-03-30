@@ -11,7 +11,7 @@ radius = 30.0
 [sub_resource type="CircleShape2D" id="2"]
 
 [sub_resource type="RectangleShape2D" id="4"]
-size = Vector2(16, 16)
+size = Vector2(15, 15)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gme2o"]
 atlas = ExtResource("2_l6djf")

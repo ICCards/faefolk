@@ -1,3 +1,4 @@
+TileMap
 TextureProgressBar
 Timer
 Node2D
@@ -5,7 +6,6 @@ CollisionShape2D
 AnimatedSprite2D
 Line2D
 Camera2D
-TileMap
 Control
 CanvasModulate
 VisibleOnScreenNotifier2D

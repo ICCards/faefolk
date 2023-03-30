@@ -19,7 +19,7 @@ script = ExtResource("11")
 
 [node name="GridContainer" type="VBoxContainer" parent="."]
 offset_right = 39.0
-offset_bottom = 40.0
+offset_bottom = 38.0
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
@@ -32,17 +32,17 @@ columns = 3
 [node name="TopLeft" type="TextureRect" parent="GridContainer/TopRow"]
 layout_mode = 2
 texture = ExtResource("2_tpejx")
+stretch_mode = 2
 
 [node name="TopMiddle" type="TextureRect" parent="GridContainer/TopRow"]
 layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("3_s3wb8")
-stretch_mode = 1
 
 [node name="TopRight" type="TextureRect" parent="GridContainer/TopRow"]
 layout_mode = 2
 texture = ExtResource("4_tfm81")
-stretch_mode = 1
+stretch_mode = 2
 
 [node name="MiddleRow" type="GridContainer" parent="GridContainer"]
 layout_mode = 2
@@ -54,19 +54,17 @@ columns = 3
 [node name="MiddleLeft" type="TextureRect" parent="GridContainer/MiddleRow"]
 layout_mode = 2
 texture = ExtResource("5_5cdw0")
-stretch_mode = 1
 
-[node name="MiddleLeft2" type="TextureRect" parent="GridContainer/MiddleRow"]
+[node name="MiddleMiddle" type="TextureRect" parent="GridContainer/MiddleRow"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource("6_k43ty")
 expand_mode = 1
 
-[node name="TopRight2" type="TextureRect" parent="GridContainer/MiddleRow"]
+[node name="MiddleRight" type="TextureRect" parent="GridContainer/MiddleRow"]
 layout_mode = 2
 texture = ExtResource("7_rankb")
-stretch_mode = 1
 
 [node name="BottomRow" type="GridContainer" parent="GridContainer"]
 custom_minimum_size = Vector2(0, 16)
@@ -88,7 +86,6 @@ expand_mode = 1
 [node name="BottomRight" type="TextureRect" parent="GridContainer/BottomRow"]
 layout_mode = 2
 texture = ExtResource("10_f5mjf")
-stretch_mode = 1
 
 [node name="Body" type="VBoxContainer" parent="."]
 custom_minimum_size = Vector2(320, 188)

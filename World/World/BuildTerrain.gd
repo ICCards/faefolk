@@ -81,46 +81,46 @@ func spawn_chunk(chunk_name):
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["wet_sand"].size() > 0:
 		for tile in _chunk["wet_sand"]:
-			var atlas_cord = Tiles.return_atlas_tile_cord("wet_sand",tile[1])
-			wet_sand.set_cell(0,tile[0],0,atlas_cord)
+			var atlas_cord = Tiles.return_atlas_tile_cord("wet_sand",0)
+			wet_sand.set_cell(0,tile,0,atlas_cord)
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["deep_ocean1"].size() > 0:
 		for tile in _chunk["deep_ocean1"]:
-			var atlas_cord = Tiles.return_atlas_tile_cord("deep_ocean",tile[1])
-			deep_ocean.set_cell(0,tile[0],0,atlas_cord)
-			validTiles.set_cell(0,tile[0],0,Vector2i(-1,-1))
+			var atlas_cord = Tiles.return_atlas_tile_cord("deep_ocean",0)
+			deep_ocean.set_cell(0,tile,0,atlas_cord)
+			validTiles.set_cell(0,tile,0,Vector2i(-1,-1))
 			if tile[1] == 0:
 				top_ocean.set_cell(0,tile[0],0,Vector2i(24,56))
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["deep_ocean2"].size() > 0:
 		for tile in _chunk["deep_ocean2"]:
-			var atlas_cord = Tiles.return_atlas_tile_cord("deep_ocean",tile[1])
-			deep_ocean.set_cell(0,tile[0],0,atlas_cord)
-			top_ocean.set_cell(0,tile[0],0,Vector2i(24,56))
-			validTiles.set_cell(0,tile[0],0,Vector2i(-1,-1))
+			var atlas_cord = Tiles.return_atlas_tile_cord("deep_ocean",0)
+			deep_ocean.set_cell(0,tile,0,atlas_cord)
+			top_ocean.set_cell(0,tile,0,Vector2i(24,56))
+			validTiles.set_cell(0,tile,0,Vector2i(-1,-1))
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["deep_ocean3"].size() > 0:
 		for tile in _chunk["deep_ocean3"]:
-			var atlas_cord = Tiles.return_atlas_tile_cord("deep_ocean",tile[1])
-			deep_ocean.set_cell(0,tile[0],0,atlas_cord)
-			top_ocean.set_cell(0,tile[0],0,Vector2i(24,56))
-			validTiles.set_cell(0,tile[0],0,Vector2i(-1,-1))
+			var atlas_cord = Tiles.return_atlas_tile_cord("deep_ocean",0)
+			deep_ocean.set_cell(0,tile,0,atlas_cord)
+			top_ocean.set_cell(0,tile,0,Vector2i(24,56))
+			validTiles.set_cell(0,tile,0,Vector2i(-1,-1))
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["deep_ocean4"].size() > 0:
 		for tile in _chunk["deep_ocean4"]:
-			var atlas_cord = Tiles.return_atlas_tile_cord("deep_ocean",tile[1])
-			deep_ocean.set_cell(0,tile[0],0,atlas_cord)
-			top_ocean.set_cell(0,tile[0],0,Vector2i(24,56))
-			validTiles.set_cell(0,tile[0],0,Vector2i(-1,-1))
+			var atlas_cord = Tiles.return_atlas_tile_cord("deep_ocean",0)
+			deep_ocean.set_cell(0,tile,0,atlas_cord)
+			top_ocean.set_cell(0,tile,0,Vector2i(24,56))
+			validTiles.set_cell(0,tile,0,Vector2i(-1,-1))
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["ocean"].size() > 0:
 		for tile in _chunk["ocean"]:
-			var atlas_cord = Tiles.return_atlas_tile_cord("ocean",tile[1])
-			validTiles.set_cell(0,tile[0],0,Constants.NAVIGATION_TILE_ATLAS_CORD)
-			waves.set_cell(0,tile[0],0,atlas_cord)
+			var atlas_cord = Tiles.return_atlas_tile_cord("deep_ocean",0)
+			validTiles.set_cell(0,tile,0,Constants.NAVIGATION_TILE_ATLAS_CORD)
+			waves.set_cell(0,tile,0,atlas_cord)
 			#wet_sand.set_cell(0,tile,0,Vector2i(54,22))
-			shallow_ocean.set_cell(0,tile[0],0,Vector2i(26,58))
-			top_ocean.set_cell(0,tile[0],0,Vector2i(24,56))
+			shallow_ocean.set_cell(0,tile,0,Vector2i(26,58))
+			top_ocean.set_cell(0,tile,0,Vector2i(24,56))
 		await get_tree().create_timer(0.05).timeout
 	await get_tree().create_timer(0.05).timeout
 	terrain_thread.wait_to_finish()

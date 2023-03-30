@@ -273,7 +273,7 @@ func _on_btn_pressed():
 	if PlayerData.normal_hotbar_mode:
 		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 			var selected_hotbar_item = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
-			if selected_hotbar_item == "hammer":
+			if selected_hotbar_item == "hammer" and not Server.player_node.has_node("PlaceObject") and not Server.player_node.has_node("MoveObject"):
 				var dimensions = Constants.dimensions_dict[item_name]
 				if direction == "left" or direction == "right":
 					Tiles.add_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
@@ -287,5 +287,5 @@ func _on_btn_pressed():
 	
 
 func _on_btn_mouse_exited():
-	if not Server.player_node.has_node("PlaceObject"):
+	if not Server.player_node.has_node("PlaceObject") and not Server.player_node.has_node("MoveObject"):
 		Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/cursor.png"))

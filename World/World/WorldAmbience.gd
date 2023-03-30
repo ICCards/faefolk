@@ -10,7 +10,7 @@ func _ready():
 	PlayerData.connect("play_wind_curse",Callable(self,"set_curse_effect"))
 	if PlayerData.player_data:
 		if PlayerData.player_data["time_hours"] >= 22 or PlayerData.player_data["time_hours"] < 6: # night time
-			set_deferred("color", Color("28282d"))
+			set_deferred("color", Color("323237"))
 
 func play_set_day():
 	if Server.world.name == "World":
@@ -27,7 +27,7 @@ func set_day():
 
 func set_night():
 	var tween = get_tree().create_tween()
-	tween.tween_property(self, "color", Color("28282d"), LENGTH_OF_TRANSITION)
+	tween.tween_property(self, "color", Color("323237"), LENGTH_OF_TRANSITION)
 
 
 func set_curse_effect():

@@ -3475,7 +3475,7 @@ var l12 = {
 }
 func add_tile_to_chunk(type, tile):
 	var loc
-	if type != "beach":
+	if type == "plains" or type == "forest" or type == "snow" or type == "dirt":
 		loc = tile[0]
 	else:
 		loc = tile

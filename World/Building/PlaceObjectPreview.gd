@@ -32,6 +32,7 @@ func _ready():
 	initialize()
 
 func destroy():
+	Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/cursor.png"))
 	name = "removing"
 	hide()
 	set_physics_process(false)
@@ -41,6 +42,7 @@ func destroy():
 	call_deferred("queue_free")
 
 func destroy_and_remove_previous_object():
+	Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/cursor.png"))
 	hide()
 	set_physics_process(false)
 	call_deferred("queue_free")

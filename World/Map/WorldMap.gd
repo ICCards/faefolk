@@ -122,13 +122,13 @@ func buildMap():
 	for loc in map["snow"]:
 		miniMap.set_cell(0,loc[0],Tiles.SNOW,Vector2i(0,0))
 	for loc in map["deep_ocean1"]:
-		miniMap.set_cell(0,loc[0],Tiles.DEEP_OCEAN,Vector2i(0,0))
+		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
 	for loc in map["deep_ocean2"]:
-		miniMap.set_cell(0,loc[0],Tiles.DEEP_OCEAN,Vector2i(0,0))
+		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
 	for loc in map["deep_ocean3"]:
-		miniMap.set_cell(0,loc[0],Tiles.DEEP_OCEAN,Vector2i(0,0))
+		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
 	for loc in map["deep_ocean4"]:
-		miniMap.set_cell(0,loc[0],Tiles.DEEP_OCEAN,Vector2i(0,0))
+		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
 	for x in range(MAP_WIDTH):
 		for y in range(MAP_HEIGHT):
 			if miniMap.get_cell_atlas_coords(0,Vector2i(x,y)) == Vector2i(-1,-1):

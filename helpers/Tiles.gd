@@ -492,3 +492,40 @@ func return_autotile_id(loc,tiles):
 	elif array[1] == 1 and array[4] == 1 and array[5] == 1: # bottom right
 		return 12
 	return null #INVALID
+
+
+func return_elevation_autotile_id(loc,locations):
+	if locations.has(loc+Vector2i(1,0)) and locations.has(loc+Vector2i(0,1)): # bottom left
+		return 0 
+	elif locations.has(loc+Vector2i(1,0)) and locations.has(loc+Vector2i(-1,0)): # bottom middle
+		return 1
+	elif locations.has(loc+Vector2i(-1,0)) and locations.has(loc+Vector2i(0,1)): # bottom right
+		return 2
+	elif locations.has(loc+Vector2i(-1,0)) and locations.has(loc+Vector2i(0,-1)): # top left
+		return 3
+	elif locations.has(loc+Vector2i(1,0)) and locations.has(loc+Vector2i(0,-1)): # top right
+		return 4
+	elif locations.has(loc+Vector2i(1,0)): # start left
+		return 5
+	elif locations.has(loc+Vector2i(-1,0)): # start right
+		return 6
+	
+func return_elevation_atlas_tile(elevation,id):
+	if id == 5:
+		return Vector2i(3,22)
+	elif id == 6:
+		return Vector2i(2,22)
+	match elevation:
+		1:
+			match id:
+				0:
+					return Vector2i(0,15)
+				1:
+					return Vector2i(5,15)
+				2:
+					return Vector2i(randi_range(1,4),15)
+				3:
+					return Vector2i(15,15)
+				4:
+					return Vector2i(16,15)
+	return Vector2i(0,0)
