@@ -31,7 +31,8 @@ enum {
 var cast_movement_direction = ""
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
-var animation = "idle_down"
+@export var animation = "idle_down"
+@export var tool_name = ""
 var MAX_SPEED_DIRT := 8
 var MAX_SPEED_PATH := 9
 var DASH_SPEED := 25
@@ -49,21 +50,29 @@ var is_building_world = false
 func _ready():
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
+	if not is_multiplayer_authority(): return
+	$Camera2D.enabled = true
 	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
 	Server.player_node = self
 	if is_building_world:
 		state = DYING
 		$Camera2D/UserInterface/LoadingScreen.show()
-		await get_tree().create_timer(5.0).timeout
+#		await get_tree().create_timer(5.0).timeout
 	state = MOVEMENT
 	$Camera2D/UserInterface/LoadingScreen.hide()
-	await get_tree().process_frame
 	set_held_object()
-	await get_tree().create_timer(0.25).timeout
 	Server.isLoaded = true
 
+func _physics_process(delta):
+	if is_multiplayer_authority(): return
+	composite_sprites.set_player_animation(character,animation,tool_name)
+	animation_player.play(animation_player.current_animation)
+
+func _enter_tree():
+	set_multiplayer_authority(str(name).to_int())
 
 func _input( event ):
+	if not is_multiplayer_authority(): return
 	if event is InputEvent:
 		if event.is_action_pressed("sprint"):
 			running = true
@@ -126,6 +135,7 @@ func set_current_object(item_name):
 
 
 func _process(_delta) -> void:
+	if not is_multiplayer_authority(): return
 	if $Area2Ds/PickupZone.items_in_range.size() > 0:
 		var pickup_item = $Area2Ds/PickupZone.items_in_range.values()[0]
 		pickup_item.pick_up_item(self)
@@ -156,6 +166,7 @@ func set_movement_speed_change():
 
 
 func _unhandled_input(event):
+	if not is_multiplayer_authority(): return
 	if not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and not PlayerData.interactive_screen_mode and not PlayerData.viewMapMode and state == MOVEMENT and Sounds.current_footsteps_sound != Sounds.swimming: 
 		if PlayerData.normal_hotbar_mode:
 			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):

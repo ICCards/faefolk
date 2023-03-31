@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://bdyinn6aswyx7"]
+[gd_scene load_steps=77 format=3 uid="uid://bdyinn6aswyx7"]
 
 [ext_resource type="Script" path="res://World/Player/Player/Player.gd" id="1_hovno"]
 [ext_resource type="Texture2D" uid="uid://dybsd7fv08hlv" path="res://Assets/Images/inventory_icons/Fish/goldfish.png" id="2"]
@@ -4449,6 +4449,20 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mlrl7"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:animation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("CompositeSprites/AnimationPlayer:current_animation")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath(".:tool_name")
+properties/3/spawn = true
+properties/3/sync = true
+
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
 texture_filter = 1
@@ -4460,6 +4474,7 @@ script = ExtResource("1_hovno")
 [node name="Actions" parent="." instance=ExtResource("2_dmkl7")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
 zoom = Vector2(2.75, 2.75)
 position_smoothing_enabled = true
 position_smoothing_speed = 40.0
@@ -4549,6 +4564,7 @@ texture = ExtResource("2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
 root_node = NodePath("../..")
+autoplay = "idle loop"
 libraries = {
 "": SubResource("AnimationLibrary_k6v5m")
 }
@@ -4677,8 +4693,12 @@ animation = &"new_animation"
 frame_progress = 0.579862
 
 [node name="FishHook" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(13, -24)
 texture = ExtResource("28_ppjmv")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_mlrl7")
 
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_exited"]

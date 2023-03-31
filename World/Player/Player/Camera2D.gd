@@ -20,6 +20,7 @@ var doing_shake = false
 
 #connect out timer signal timeouts
 func _ready():
+	if not is_multiplayer_authority(): return
 	timer_wait_times.connect("timeout",Callable(self,"timeout_wait_times"))
 	timer_shake_length.connect("timeout",Callable(self,"timeout_shake_length"))
 	

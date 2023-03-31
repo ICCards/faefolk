@@ -12,32 +12,32 @@ var tile_types = ["beach", "ocean", "wet_sand", "deep_ocean1","deep_ocean2","dee
 var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "forage"]
 var is_world_data_in_chunks = false
 
-var world = {
-	"is_built": false,
-	"ocean": [],
-	"deep_ocean1": [],
-	"deep_ocean2": [],
-	"deep_ocean3": [],
-	"deep_ocean4": [],
-	"plains": [],
-	"forest": [],
-	"desert": [],
-	"dirt": [],
-	"snow": [],
-	"beach":[],
-	"wet_sand":[],
-	"tree": {},
-	"stump": {},
-	"log": {},
-	"ore_large": {},
-	"ore": {},
-	"tall_grass": {},
-	"forage": {},
-	"animal": {},
-	"crop": {},
-	"tile": {},
-	"placeable": {},
-}
+#var world = {
+#	"is_built": false,
+#	"ocean": [],
+#	"deep_ocean1": [],
+#	"deep_ocean2": [],
+#	"deep_ocean3": [],
+#	"deep_ocean4": [],
+#	"plains": [],
+#	"forest": [],
+#	"desert": [],
+#	"dirt": [],
+#	"snow": [],
+#	"beach":[],
+#	"wet_sand":[],
+#	"tree": {},
+#	"stump": {},
+#	"log": {},
+#	"ore_large": {},
+#	"ore": {},
+#	"tall_grass": {},
+#	"forage": {},
+#	"animal": {},
+#	"crop": {},
+#	"tile": {},
+#	"placeable": {},
+#}
 #var starting_caves_data = {
 #"Cave 1-1":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
 
@@ -58,80 +58,82 @@ func add_world_data_to_chunks():
 		#add_animals_to_chunks()
 
 func advance_crop():
-	for id in world["tree"]:
-		if Util.isNonFruitTree(world["tree"][id]["v"]): # if non-fruit tree
-			if not str(world["tree"][id]["p"]) == "5":
-				world["tree"][id]["p"] = Util.return_advanced_tree_phase(world["tree"][id]["p"])
-		else:
-			if not world["tree"][id]["p"] == "harvest" and not world["tree"][id]["b"] == "snow":
-				world["tree"][id]["p"] = Util.return_advanced_fruit_tree_phase(world["tree"][id]["p"])
-	for id in world["crop"]: 
-		var loc = world["crop"][id]["l"]
-		if not world["crop"][id]["dww"] == 2: # if crop isn't already dead
-			if world["tile"][loc] == "w": # if crop is watered, advance a day
-				world["crop"][id]["dh"] -= 1 
-				world["crop"][id]["dww"] = 0
-			else: 
-				world["crop"][id]["dww"] += 1 # crop not watered
-	for tile in world["tile"]: # if tile is watered, set to not watered
-		if world["tile"][tile] == "w":
-			world["tile"][tile] = "h"
-	if Server.world.name == "Overworld": # clear watered tiles if in world
-		Tiles.watered_tiles.clear()
-	emit_signal("refresh_crops")
+	pass
+#	for id in world["tree"]:
+#		if Util.isNonFruitTree(world["tree"][id]["v"]): # if non-fruit tree
+#			if not str(world["tree"][id]["p"]) == "5":
+#				world["tree"][id]["p"] = Util.return_advanced_tree_phase(world["tree"][id]["p"])
+#		else:
+#			if not world["tree"][id]["p"] == "harvest" and not world["tree"][id]["b"] == "snow":
+#				world["tree"][id]["p"] = Util.return_advanced_fruit_tree_phase(world["tree"][id]["p"])
+#	for id in world["crop"]: 
+#		var loc = world["crop"][id]["l"]
+#		if not world["crop"][id]["dww"] == 2: # if crop isn't already dead
+#			if world["tile"][loc] == "w": # if crop is watered, advance a day
+#				world["crop"][id]["dh"] -= 1 
+#				world["crop"][id]["dww"] = 0
+#			else: 
+#				world["crop"][id]["dww"] += 1 # crop not watered
+#	for tile in world["tile"]: # if tile is watered, set to not watered
+#		if world["tile"][tile] == "w":
+#			world["tile"][tile] = "h"
+#	if Server.world.name == "Overworld": # clear watered tiles if in world
+#		Tiles.watered_tiles.clear()
+#	emit_signal("refresh_crops")
 
-func set_hoed_tile(loc):
-	world["tile"][loc] = "h"
-	
-func set_watered_tile(loc):
-	world["tile"][loc] = "w"
-	
-func remove_hoed_tile(loc):
-	world["tile"].erase(loc)
+#func set_hoed_tile(loc):
+#	world["tile"][loc] = "h"
+#
+#func set_watered_tile(loc):
+#	world["tile"][loc] = "w"
+#
+#func remove_hoed_tile(loc):
+#	world["tile"].erase(loc)
 
 func add_object(type,id,data):
 	if Server.world.name == "Overworld":
-		world[type][id] = data
-	else:
-		caves[Server.world.name][type][id] = data
+		Server.world[type][id] = data
+#	else:
+#		Server.caves[Server.world.name][type][id] = data
 
 func remove_object(type,id):
 	if Server.world.name == "Overworld":
-		world[type].erase(id)
-	else:
-		caves[Server.world.name][type].erase(id)
+		Server.world[type].erase(id)
+#	else:
+#		caves[Server.world.name][type].erase(id)
 	
 func update_object_health(type, id, new_health):
 	if Server.world.name == "Overworld":
-		if world[type].has(id):
-			world[type][id]["h"] = new_health
-	else:
-		if caves[Server.world.name].has(id):
-			caves[Server.world.name][id]["h"] = new_health
+		if Server.world[type].has(id):
+			Server.world[type][id]["h"] = new_health
+#	else:
+#		if caves[Server.world.name].has(id):
+#			caves[Server.world.name][id]["h"] = new_health
 
-func return_cave_data(cave_name):
-	match cave_name:
-		"Overworld":
-			return world
-	return caves[cave_name]
+#func return_cave_data(cave_name):
+#	match cave_name:
+#		"Overworld":
+#			return Server.world
+#	return caves[cave_name]
 
 func add_nature_objects_to_chunks():
 	for type in nature_types:
-		for id in world[type]:
-			var loc = Util.string_to_vector2(world[type][id]["l"])
+		for id in Server.world[type]:
+			var loc = Util.string_to_vector2(Server.world[type][id]["l"])
 			add_object_to_chunk(type, loc, id)
 
 func add_tiles_to_chunks():
 	for type in tile_types:
-		var tiles = world[type]
+		var tiles = Server.world[type]
 		for tile in tiles:
 			add_tile_to_chunk(type, tile)
 		
 			
 func add_animals_to_chunks():
-	for id in world["animal"]:
-		var loc = Util.string_to_vector2(world["animal"][id]["l"])
-		add_object_to_chunk("animal", loc, id)
+	pass
+#	for id in Server.world["animal"]:
+#		var loc = Util.string_to_vector2(world["animal"][id]["l"])
+#		add_object_to_chunk("animal", loc, id)
 
 func return_chunk(_row, _col):
 	_col = int(_col)
@@ -3828,296 +3830,297 @@ func get_chunk_from_location(loc):
 	return row+str(column)
 
 func add_object_to_chunk(type, loc, id):
-	var column
-	var row
-	var data = world[type][id]
-	var chunk_name = get_chunk_from_location(loc)
-	match chunk_name:
-		"A1":
-			a1[type][id] = data
-		"A2":
-			a2[type][id] = data
-		"A3":
-			a3[type][id] = data
-		"A4":
-			a4[type][id] = data
-		"A5":
-			a5[type][id] = data
-		"A6":
-			a6[type][id] = data
-		"A7":
-			a7[type][id] = data
-		"A8":
-			a8[type][id] = data
-		"A9":
-			a9[type][id] = data
-		"A10":
-			a10[type][id] = data
-		"A11":
-			a11[type][id] = data
-		"A12":
-			a12[type][id] = data
-		"B1":
-			b1[type][id] = data
-		"B2":
-			b2[type][id] = data
-		"B3":
-			b3[type][id] = data
-		"B4":
-			b4[type][id] = data
-		"B5":
-			b5[type][id] = data
-		"B6":
-			b6[type][id] = data
-		"B7":
-			b7[type][id] = data
-		"B8":
-			b8[type][id] = data
-		"B9":
-			b9[type][id] = data
-		"B10":
-			b10[type][id] = data
-		"B11":
-			b11[type][id] = data
-		"B12":
-			b12[type][id] = data
-		"C1":
-			c1[type][id] = data
-		"C2":
-			c2[type][id] = data
-		"C3":
-			c3[type][id] = data
-		"C4":
-			c4[type][id] = data
-		"C5":
-			c5[type][id] = data
-		"C6":
-			c6[type][id] = data
-		"C7":
-			c7[type][id] = data
-		"C8":
-			c8[type][id] = data
-		"C9":
-			c9[type][id] = data
-		"C10":
-			c10[type][id] = data
-		"C11":
-			c11[type][id] = data
-		"C12":
-			c12[type][id] = data
-		"D1":
-			d1[type][id] = data
-		"D2":
-			d2[type][id] = data
-		"D3":
-			d3[type][id] = data
-		"D4":
-			d4[type][id] = data
-		"D5":
-			d5[type][id] = data
-		"D6":
-			d6[type][id] = data
-		"D7":
-			d7[type][id] = data
-		"D8":
-			d8[type][id] = data
-		"D9":
-			d9[type][id] = data
-		"D10":
-			d10[type][id] = data
-		"D11":
-			d11[type][id] = data
-		"D12":
-			d12[type][id] = data
-		"E1":
-			e1[type][id] = data
-		"E2":
-			e2[type][id] = data
-		"E3":
-			e3[type][id] = data
-		"E4":
-			e4[type][id] = data
-		"E5":
-			e5[type][id] = data
-		"E6":
-			e6[type][id] = data
-		"E7":
-			e7[type][id] = data
-		"E8":
-			e8[type][id] = data
-		"E9":
-			e9[type][id] = data
-		"E10":
-			e10[type][id] = data
-		"E11":
-			e11[type][id] = data
-		"E12":
-			e12[type][id] = data
-		"F1":
-			f1[type][id] = data
-		"F2":
-			f2[type][id] = data
-		"F3":
-			f3[type][id] = data
-		"F4":
-			f4[type][id] = data
-		"F5":
-			f5[type][id] = data
-		"F6":
-			f6[type][id] = data
-		"F7":
-			f7[type][id] = data
-		"F8":
-			f8[type][id] = data
-		"F9":
-			f9[type][id] = data
-		"F10":
-			f10[type][id] = data
-		"F11":
-			f11[type][id] = data
-		"F12":
-			f12[type][id] = data
-		"G1":
-			g1[type][id] = data
-		"G2":
-			g2[type][id] = data
-		"G3":
-			g3[type][id] = data
-		"G4":
-			g4[type][id] = data
-		"G5":
-			g5[type][id] = data
-		"G6":
-			g6[type][id] = data
-		"G7":
-			g7[type][id] = data
-		"G8":
-			g8[type][id] = data
-		"G9":
-			g9[type][id] = data
-		"G10":
-			g10[type][id] = data
-		"G11":
-			g11[type][id] = data
-		"G12":
-			g12[type][id] = data
-		"H1":
-			h1[type][id] = data
-		"H2":
-			h2[type][id] = data
-		"H3":
-			h3[type][id] = data
-		"H4":
-			h4[type][id] = data
-		"H5":
-			h5[type][id] = data
-		"H6":
-			h6[type][id] = data
-		"H7":
-			h7[type][id] = data
-		"H8":
-			h8[type][id] = data
-		"H9":
-			h9[type][id] = data
-		"H10":
-			h10[type][id] = data
-		"H11":
-			h11[type][id] = data
-		"H12":
-			h12[type][id] = data
-		"I1":
-			i1[type][id] = data
-		"I2":
-			i2[type][id] = data
-		"I3":
-			i3[type][id] = data
-		"I4":
-			i4[type][id] = data
-		"I5":
-			i5[type][id] = data
-		"I6":
-			i6[type][id] = data
-		"I7":
-			i7[type][id] = data
-		"I8":
-			i8[type][id] = data
-		"I9":
-			i9[type][id] = data
-		"I10":
-			i10[type][id] = data
-		"I11":
-			i11[type][id] = data
-		"I12":
-			i12[type][id] = data
-		"J1":
-			j1[type][id] = data
-		"J2":
-			j2[type][id] = data
-		"J3":
-			j3[type][id] = data
-		"J4":
-			j4[type][id] = data
-		"J5":
-			j5[type][id] = data
-		"J6":
-			j6[type][id] = data
-		"J7":
-			j7[type][id] = data
-		"J8":
-			j8[type][id] = data
-		"J9":
-			j9[type][id] = data
-		"J10":
-			j10[type][id] = data
-		"J11":
-			j11[type][id] = data
-		"J12":
-			j12[type][id] = data
-		"K1":
-			k1[type][id] = data
-		"K2":
-			k2[type][id] = data
-		"K3":
-			k3[type][id] = data
-		"K4":
-			k4[type][id] = data
-		"K5":
-			k5[type][id] = data
-		"K6":
-			k6[type][id] = data
-		"K7":
-			k7[type][id] = data
-		"K8":
-			k8[type][id] = data
-		"K9":
-			k9[type][id] = data
-		"K10":
-			k10[type][id] = data
-		"K11":
-			k11[type][id] = data
-		"K12":
-			k12[type][id] = data
-		"L1":
-			l1[type][id] = data
-		"L2":
-			l2[type][id] = data
-		"L3":
-			l3[type][id] = data
-		"L4":
-			l4[type][id] = data
-		"L5":
-			l5[type][id] = data
-		"L6":
-			l6[type][id] = data
-		"L7":
-			l7[type][id] = data
-		"L8":
-			l8[type][id] = data
-		"L9":
-			l9[type][id] = data
-		"L10":
-			l10[type][id] = data
-		"L11":
-			l11[type][id] = data
-		"L12":
-			l12[type][id] = data
+	pass
+#	var column
+#	var row
+#	var data = world[type][id]
+#	var chunk_name = get_chunk_from_location(loc)
+#	match chunk_name:
+#		"A1":
+#			a1[type][id] = data
+#		"A2":
+#			a2[type][id] = data
+#		"A3":
+#			a3[type][id] = data
+#		"A4":
+#			a4[type][id] = data
+#		"A5":
+#			a5[type][id] = data
+#		"A6":
+#			a6[type][id] = data
+#		"A7":
+#			a7[type][id] = data
+#		"A8":
+#			a8[type][id] = data
+#		"A9":
+#			a9[type][id] = data
+#		"A10":
+#			a10[type][id] = data
+#		"A11":
+#			a11[type][id] = data
+#		"A12":
+#			a12[type][id] = data
+#		"B1":
+#			b1[type][id] = data
+#		"B2":
+#			b2[type][id] = data
+#		"B3":
+#			b3[type][id] = data
+#		"B4":
+#			b4[type][id] = data
+#		"B5":
+#			b5[type][id] = data
+#		"B6":
+#			b6[type][id] = data
+#		"B7":
+#			b7[type][id] = data
+#		"B8":
+#			b8[type][id] = data
+#		"B9":
+#			b9[type][id] = data
+#		"B10":
+#			b10[type][id] = data
+#		"B11":
+#			b11[type][id] = data
+#		"B12":
+#			b12[type][id] = data
+#		"C1":
+#			c1[type][id] = data
+#		"C2":
+#			c2[type][id] = data
+#		"C3":
+#			c3[type][id] = data
+#		"C4":
+#			c4[type][id] = data
+#		"C5":
+#			c5[type][id] = data
+#		"C6":
+#			c6[type][id] = data
+#		"C7":
+#			c7[type][id] = data
+#		"C8":
+#			c8[type][id] = data
+#		"C9":
+#			c9[type][id] = data
+#		"C10":
+#			c10[type][id] = data
+#		"C11":
+#			c11[type][id] = data
+#		"C12":
+#			c12[type][id] = data
+#		"D1":
+#			d1[type][id] = data
+#		"D2":
+#			d2[type][id] = data
+#		"D3":
+#			d3[type][id] = data
+#		"D4":
+#			d4[type][id] = data
+#		"D5":
+#			d5[type][id] = data
+#		"D6":
+#			d6[type][id] = data
+#		"D7":
+#			d7[type][id] = data
+#		"D8":
+#			d8[type][id] = data
+#		"D9":
+#			d9[type][id] = data
+#		"D10":
+#			d10[type][id] = data
+#		"D11":
+#			d11[type][id] = data
+#		"D12":
+#			d12[type][id] = data
+#		"E1":
+#			e1[type][id] = data
+#		"E2":
+#			e2[type][id] = data
+#		"E3":
+#			e3[type][id] = data
+#		"E4":
+#			e4[type][id] = data
+#		"E5":
+#			e5[type][id] = data
+#		"E6":
+#			e6[type][id] = data
+#		"E7":
+#			e7[type][id] = data
+#		"E8":
+#			e8[type][id] = data
+#		"E9":
+#			e9[type][id] = data
+#		"E10":
+#			e10[type][id] = data
+#		"E11":
+#			e11[type][id] = data
+#		"E12":
+#			e12[type][id] = data
+#		"F1":
+#			f1[type][id] = data
+#		"F2":
+#			f2[type][id] = data
+#		"F3":
+#			f3[type][id] = data
+#		"F4":
+#			f4[type][id] = data
+#		"F5":
+#			f5[type][id] = data
+#		"F6":
+#			f6[type][id] = data
+#		"F7":
+#			f7[type][id] = data
+#		"F8":
+#			f8[type][id] = data
+#		"F9":
+#			f9[type][id] = data
+#		"F10":
+#			f10[type][id] = data
+#		"F11":
+#			f11[type][id] = data
+#		"F12":
+#			f12[type][id] = data
+#		"G1":
+#			g1[type][id] = data
+#		"G2":
+#			g2[type][id] = data
+#		"G3":
+#			g3[type][id] = data
+#		"G4":
+#			g4[type][id] = data
+#		"G5":
+#			g5[type][id] = data
+#		"G6":
+#			g6[type][id] = data
+#		"G7":
+#			g7[type][id] = data
+#		"G8":
+#			g8[type][id] = data
+#		"G9":
+#			g9[type][id] = data
+#		"G10":
+#			g10[type][id] = data
+#		"G11":
+#			g11[type][id] = data
+#		"G12":
+#			g12[type][id] = data
+#		"H1":
+#			h1[type][id] = data
+#		"H2":
+#			h2[type][id] = data
+#		"H3":
+#			h3[type][id] = data
+#		"H4":
+#			h4[type][id] = data
+#		"H5":
+#			h5[type][id] = data
+#		"H6":
+#			h6[type][id] = data
+#		"H7":
+#			h7[type][id] = data
+#		"H8":
+#			h8[type][id] = data
+#		"H9":
+#			h9[type][id] = data
+#		"H10":
+#			h10[type][id] = data
+#		"H11":
+#			h11[type][id] = data
+#		"H12":
+#			h12[type][id] = data
+#		"I1":
+#			i1[type][id] = data
+#		"I2":
+#			i2[type][id] = data
+#		"I3":
+#			i3[type][id] = data
+#		"I4":
+#			i4[type][id] = data
+#		"I5":
+#			i5[type][id] = data
+#		"I6":
+#			i6[type][id] = data
+#		"I7":
+#			i7[type][id] = data
+#		"I8":
+#			i8[type][id] = data
+#		"I9":
+#			i9[type][id] = data
+#		"I10":
+#			i10[type][id] = data
+#		"I11":
+#			i11[type][id] = data
+#		"I12":
+#			i12[type][id] = data
+#		"J1":
+#			j1[type][id] = data
+#		"J2":
+#			j2[type][id] = data
+#		"J3":
+#			j3[type][id] = data
+#		"J4":
+#			j4[type][id] = data
+#		"J5":
+#			j5[type][id] = data
+#		"J6":
+#			j6[type][id] = data
+#		"J7":
+#			j7[type][id] = data
+#		"J8":
+#			j8[type][id] = data
+#		"J9":
+#			j9[type][id] = data
+#		"J10":
+#			j10[type][id] = data
+#		"J11":
+#			j11[type][id] = data
+#		"J12":
+#			j12[type][id] = data
+#		"K1":
+#			k1[type][id] = data
+#		"K2":
+#			k2[type][id] = data
+#		"K3":
+#			k3[type][id] = data
+#		"K4":
+#			k4[type][id] = data
+#		"K5":
+#			k5[type][id] = data
+#		"K6":
+#			k6[type][id] = data
+#		"K7":
+#			k7[type][id] = data
+#		"K8":
+#			k8[type][id] = data
+#		"K9":
+#			k9[type][id] = data
+#		"K10":
+#			k10[type][id] = data
+#		"K11":
+#			k11[type][id] = data
+#		"K12":
+#			k12[type][id] = data
+#		"L1":
+#			l1[type][id] = data
+#		"L2":
+#			l2[type][id] = data
+#		"L3":
+#			l3[type][id] = data
+#		"L4":
+#			l4[type][id] = data
+#		"L5":
+#			l5[type][id] = data
+#		"L6":
+#			l6[type][id] = data
+#		"L7":
+#			l7[type][id] = data
+#		"L8":
+#			l8[type][id] = data
+#		"L9":
+#			l9[type][id] = data
+#		"L10":
+#			l10[type][id] = data
+#		"L11":
+#			l11[type][id] = data
+#		"L12":
+#			l12[type][id] = data

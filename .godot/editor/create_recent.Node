@@ -1,3 +1,11 @@
+MultiplayerSynchronizer
+MultiplayerSpawner
+MarginContainer
+Button
+Label
+VBoxContainer
+PanelContainer
+CanvasLayer
 TileMap
 TextureProgressBar
 Timer
@@ -18,9 +26,7 @@ Sprite2D
 StaticBody2D
 Marker2D
 Area2D
-Label
 ColorRect
 PointLight2D
-Button
 GridContainer
 TextureButton

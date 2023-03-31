@@ -41,6 +41,7 @@ enum {
 }
 
 func _ready():
+	if not is_multiplayer_authority(): queue_free()
 	await get_tree().create_timer(0.25).timeout
 	$Menu.hide()
 	initialize_furnaces_campfires_and_stoves()
@@ -120,6 +121,7 @@ func switch_hotbar():
 
 
 func _input(event):
+	if not is_multiplayer_authority(): return
 	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode and not Server.world.is_changing_scene:
 		if event.is_action_pressed("exit") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode:
 			toggle_save_and_exit()

@@ -34,6 +34,7 @@ func set_new_music_volume():
 
 
 func _process(delta):
+	return
 	if Server.world:
 		if has_node("/root/Overworld"):
 			var location = Tiles.ocean_tiles.local_to_map(Server.player_node.position)

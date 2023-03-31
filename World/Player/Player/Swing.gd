@@ -14,7 +14,6 @@ extends Node2D
 
 var rng = RandomNumberGenerator.new()
 
-var animation
 var direction: String = "down"
 
 enum {
@@ -50,7 +49,7 @@ func sword_swing_deferred(item_name,attack_index):
 				sword_swing_area.special_ability = "fire"
 			else:
 				sword_swing_area.special_ability = ""
-			animation = "sword_swing_" + get_parent().direction.to_lower()
+			get_parent().animation = "sword_swing_" + get_parent().direction.to_lower()
 			sword_swing_area.tool_name = item_name
 			player_animation_player.play("sword_swing")
 			set_sword_swing_position(get_parent().direction)
@@ -58,10 +57,11 @@ func sword_swing_deferred(item_name,attack_index):
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 			sound_effects.play()
 		elif attack_index == 2:
-			animation = "sword_block_" + get_parent().direction.to_lower()
-			player_animation_player.play(animation)
+			get_parent().animation = "sword_block_" + get_parent().direction.to_lower()
+			player_animation_player.play(get_parent().animation)
+		get_parent().tool_name = item_name
 		PlayerData.change_energy(-1)
-		composite_sprites.set_player_animation(get_parent().character, animation, item_name)
+		get_parent().composite_sprites.set_player_animation(get_parent().character, get_parent().animation, item_name)
 		await player_animation_player.animation_finished
 		get_parent().state = MOVEMENT
 		if get_node("../Magic").mouse_left_down and attack_index == 1:
@@ -106,11 +106,11 @@ func swing_deferred(item_name):
 		get_parent().state = SWINGING
 		if item_name == "stone watering can" or item_name == "bronze watering can" or item_name == "gold watering can":
 			set_watered_tile()
-			animation = "watering_" + get_parent().direction.to_lower()
+			get_parent().animation = "watering_" + get_parent().direction.to_lower()
 			player_animation_player.play("axe pickaxe swing")
 		elif item_name == "scythe":
 			player_animation_player.play("scythe_swing_" + get_parent().direction.to_lower())
-			animation = "sword_swing_" + get_parent().direction.to_lower()
+			get_parent().animation = "sword_swing_" + get_parent().direction.to_lower()
 			sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 			sound_effects.play()
@@ -120,7 +120,7 @@ func swing_deferred(item_name):
 			return
 		elif item_name == null:
 			set_swing_collision_layer_and_position(item_name, get_parent().direction)
-			animation = "punch_" + get_parent().direction.to_lower()
+			get_parent().animation = "punch_" + get_parent().direction.to_lower()
 			player_animation_player.play("punch")
 		else:
 			if item_name == "hammer" and has_node("../MoveObject"):
@@ -128,10 +128,11 @@ func swing_deferred(item_name):
 				get_parent().state = MOVEMENT
 				return
 			set_swing_collision_layer_and_position(item_name, get_parent().direction)
-			animation = "swing_" + get_parent().direction.to_lower()
+			get_parent().animation = "swing_" + get_parent().direction.to_lower()
 			player_animation_player.play("axe pickaxe swing")
+		get_parent().tool_name = item_name
 		PlayerData.change_energy(-1)
-		composite_sprites.set_player_animation(get_parent().character, animation, item_name)
+		composite_sprites.set_player_animation(get_parent().character, get_parent().animation, item_name)
 		await player_animation_player.animation_finished
 		get_parent().state = MOVEMENT
 		if get_node("../Magic").mouse_left_down:

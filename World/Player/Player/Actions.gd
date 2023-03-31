@@ -33,6 +33,7 @@ func _ready():
 
 
 func _input(event):
+	if not is_multiplayer_authority(): return
 	if Server.player_node.state == 0 and get_parent().user_interface.holding_item == null and not PlayerData.viewMapMode:
 		if event.is_action_pressed("action") and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode:
 			if $DetectInteractiveArea.get_overlapping_areas().size() > 0:

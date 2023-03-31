@@ -108,29 +108,33 @@ func set_direction(dir):
 			playerIcon.rotation_degrees = -90
 
 func buildMap():
-	var map = MapData.world
-	for loc in map["dirt"]:
-		miniMap.set_cell(0,loc[0],Tiles.DIRT,Vector2i(0,0))
-	for loc in map["forest"]:
-		miniMap.set_cell(0,loc[0],Tiles.FOREST,Vector2i(0,0))
-	for loc in map["plains"]:
-		miniMap.set_cell(0,loc[0],Tiles.PLAINS,Vector2i(0,0))
-	for loc in map["beach"]:
-		miniMap.set_cell(0,loc,Tiles.BEACH,Vector2i(0,0))
-	for loc in map["desert"]:
-		miniMap.set_cell(0,loc,Tiles.DESERT,Vector2i(0,0))
-	for loc in map["snow"]:
-		miniMap.set_cell(0,loc[0],Tiles.SNOW,Vector2i(0,0))
-	for loc in map["deep_ocean1"]:
-		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
-	for loc in map["deep_ocean2"]:
-		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
-	for loc in map["deep_ocean3"]:
-		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
-	for loc in map["deep_ocean4"]:
-		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
-	for x in range(MAP_WIDTH):
-		for y in range(MAP_HEIGHT):
-			if miniMap.get_cell_atlas_coords(0,Vector2i(x,y)) == Vector2i(-1,-1):
-				miniMap.set_cell(0,Vector2i(x,y),Tiles.WATER,Vector2i(0,0))
-	draw_grid()
+	if not get_parent().world == {}:
+		var map = get_parent().world
+		for loc in map["dirt"]:
+			miniMap.set_cell(0,loc[0],Tiles.DIRT,Vector2i(0,0))
+		for loc in map["forest"]:
+			miniMap.set_cell(0,loc[0],Tiles.FOREST,Vector2i(0,0))
+		for loc in map["plains"]:
+			miniMap.set_cell(0,loc[0],Tiles.PLAINS,Vector2i(0,0))
+		for loc in map["beach"]:
+			miniMap.set_cell(0,loc,Tiles.BEACH,Vector2i(0,0))
+		for loc in map["desert"]:
+			miniMap.set_cell(0,loc,Tiles.DESERT,Vector2i(0,0))
+		for loc in map["snow"]:
+			miniMap.set_cell(0,loc[0],Tiles.SNOW,Vector2i(0,0))
+		for loc in map["deep_ocean1"]:
+			miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
+		for loc in map["deep_ocean2"]:
+			miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
+		for loc in map["deep_ocean3"]:
+			miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
+		for loc in map["deep_ocean4"]:
+			miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
+		for x in range(MAP_WIDTH):
+			for y in range(MAP_HEIGHT):
+				if miniMap.get_cell_atlas_coords(0,Vector2i(x,y)) == Vector2i(-1,-1):
+					miniMap.set_cell(0,Vector2i(x,y),Tiles.WATER,Vector2i(0,0))
+		draw_grid()
+	else:
+		await get_tree().create_timer(0.5).timeout
+		buildMap()
