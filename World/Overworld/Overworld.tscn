@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bpxgic0nhjbf0"]
+[gd_scene load_steps=41 format=3 uid="uid://bpxgic0nhjbf0"]
 
 [ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="1_631cd"]
 [ext_resource type="Script" path="res://World/World/WorldAmbience.gd" id="1_gscqb"]
@@ -4867,11 +4867,6 @@ glow_hdr_threshold = 1.2
 fog_light_energy = 0.0
 fog_sun_scatter = 0.64
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_dahr1"]
-properties/0/path = NodePath(".:world")
-properties/0/spawn = true
-properties/0/sync = true
-
 [node name="Overworld" type="Node2D"]
 y_sort_enabled = true
 position = Vector2(2, 0)
@@ -4907,10 +4902,6 @@ theme_override_constants/separation = 15
 layout_mode = 2
 text = "Main Menu"
 horizontal_alignment = 1
-
-[node name="HostBtn" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Host"
 
 [node name="JoinBtn" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -5099,14 +5090,6 @@ environment = SubResource("Environment_2wssv")
 position = Vector2(18540, 17495)
 rotation = 0.00747698
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://World/Player/Player/Player.tscn")
-spawn_path = NodePath("../Players")
-
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_dahr1")
-
-[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/HostBtn" to="." method="_on_host_btn_pressed"]
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinBtn" to="." method="_on_join_btn_pressed"]
 [connection signal="timeout" from="WorldBuilder/SpawnAnimal/SpawnAnimalTimer" to="WorldBuilder/SpawnAnimal" method="_on_spawn_animal_timer_timeout"]
 [connection signal="timeout" from="WorldBuilder/BuildNature/SpawnNatureTimer" to="WorldBuilder/BuildNature" method="_on_spawn_nature_timer_timeout"]

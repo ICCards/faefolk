@@ -12,33 +12,11 @@ res://Assets/Tilesets/terrain/tres files/waves.tres
 res://Assets/Tilesets/objects/objects.tres
 res://Assets/Tilesets/terrain/tres files/snow.tres
 res://Assets/Tilesets/terrain/tres files/wet sand.tres
-res://elevation_test.tscn
-res://ElevationTest.gd
-res://World/Player/Player/Fishing/Fishing.tscn
 res://Assets/Themes/text.tres
 res://Assets/Themes/LockedAsset.tres
 res://Assets/Themes/whiten.tres
-res://World/Player/Player/Fishing/Fishing.gd
-res://World/Player/Player/Player.tscn
-res://helpers/Tiles.gd
-res://InventoryLogic/CollectionItemDescription.tscn
-res://MainMenu/MainMenuButtons.gd
-res://MainMenu/MainMenuButtons.tscn
-res://Assets/Themes/MenuTitle.tres
 res://server/server.tscn
-res://server/server.gd
-res://World/Overworld/Overworld.gd
-res://MainMenu/MainMenu.tscn
+res://World/Player/Player/Player.tscn
 res://World/Player/Player/Player.gd
-res://World/Player/Player/AttachedScripts/FootstepsSound.gd
-res://World/Player/Player/UserInterface/UserInterface.tscn
-res://World/Player/Player/UserInterface/UserInterface.gd
-res://World/Player/Player/Actions.gd
-res://World/Player/Player/Camera2D.gd
-res://World/Player/Player/AttachedScripts/CompositeSprites.gd
-res://World/Player/Player/Swing.gd
-res://World/Player/Player/Actions.tscn
-res://World/Player/Player/PoisonParticles.gd
-res://World/Map/WorldMap.gd
-res://Global/Data/MapData.gd
-res://Global/Data/GameState.gd
+res://World/Overworld/Overworld.gd
+res://World/Player/Player/MultiplayerSynchronizer.gd

@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var actions = $Actions
 @onready var user_interface = $Camera2D/UserInterface
 @onready var sound_effects = $Sounds/SoundEffects
+@onready var syncronizer = $MultiplayerSynchronizer
 
 var running = false
 var character
@@ -48,10 +49,11 @@ var is_building_world = false
 @onready var _character = load("res://Global/Data/Characters.gd")
 
 func _ready():
+	syncronizer.set_multiplayer_authority(str(name).to_int())
+	$Camera2D.enabled = syncronizer.is_multiplayer_authority()
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
-	if not is_multiplayer_authority(): return
-	$Camera2D.enabled = true
+	if not syncronizer.is_multiplayer_authority(): return
 	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
 	Server.player_node = self
 	if is_building_world:
@@ -64,15 +66,18 @@ func _ready():
 	Server.isLoaded = true
 
 func _physics_process(delta):
-	if is_multiplayer_authority(): return
-	composite_sprites.set_player_animation(character,animation,tool_name)
-	animation_player.play(animation_player.current_animation)
+	if syncronizer.is_multiplayer_authority(): 
+#	composite_sprites.set_player_animation(character,animation,tool_name)
+#	animation_player.play(animation_player.current_animation)
+		syncronizer.position = global_position
 
-func _enter_tree():
-	set_multiplayer_authority(str(name).to_int())
+
+#func _enter_tree():
+#	syncronizer.set_multiplayer_authority(str(name).to_int())
+
 
 func _input( event ):
-	if not is_multiplayer_authority(): return
+	if not syncronizer.is_multiplayer_authority(): return
 	if event is InputEvent:
 		if event.is_action_pressed("sprint"):
 			running = true
@@ -135,7 +140,7 @@ func set_current_object(item_name):
 
 
 func _process(_delta) -> void:
-	if not is_multiplayer_authority(): return
+	if not syncronizer.is_multiplayer_authority(): return
 	if $Area2Ds/PickupZone.items_in_range.size() > 0:
 		var pickup_item = $Area2Ds/PickupZone.items_in_range.values()[0]
 		pickup_item.pick_up_item(self)
@@ -166,7 +171,7 @@ func set_movement_speed_change():
 
 
 func _unhandled_input(event):
-	if not is_multiplayer_authority(): return
+	if not syncronizer.is_multiplayer_authority(): return
 	if not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and not PlayerData.interactive_screen_mode and not PlayerData.viewMapMode and state == MOVEMENT and Sounds.current_footsteps_sound != Sounds.swimming: 
 		if PlayerData.normal_hotbar_mode:
 			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):

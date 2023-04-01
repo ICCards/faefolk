@@ -19,19 +19,6 @@ var enet_peer = ENetMultiplayerPeer.new()
 @export var world = {}
 
 
-func _on_host_btn_pressed():
-	$CanvasLayer.hide()
-	if GameState.save_exists(): # Load world
-		game_state = GameState.new()
-		game_state.load_state()
-		world = game_state.world_state
-		build_world()
-	enet_peer.create_server(PORT)
-	multiplayer.multiplayer_peer = enet_peer
-	spawn_player(multiplayer.get_unique_id())
-	multiplayer.peer_connected.connect(spawn_player)
-
-
 func _on_join_btn_pressed():
 	$CanvasLayer.hide()
 	enet_peer.create_client("localhost",PORT)
@@ -79,8 +66,8 @@ func spawn_player(peer_id):
 #	elif PlayerData.spawn_at_last_saved_location:
 #		spawn_loc = PlayerData.player_data["current_save_location"]
 #	if spawn_loc == null: # initial random spawn
-	var tiles = world["beach"]
-	spawn_loc = tiles[0]
+#	var tiles = world["beach"]
+#	spawn_loc = tiles[0]
 #	PlayerData.player_data["current_save_location"] =  spawn_loc
 #	PlayerData.player_data["current_save_scene"] = "res://World/Overworld/Overworld.tscn"
 #	PlayerData.player_data["respawn_scene"] = "res://World/Overworld/Overworld.tscn"
@@ -90,6 +77,7 @@ func spawn_player(peer_id):
 #	game_state.world_state = MapData.world
 #	game_state.cave_state = MapData.caves
 #	game_state.save_state()
+	spawn_loc = Vector2i.ZERO
 	player.position = spawn_loc*16
 	PlayerData.spawn_at_respawn_location = false
 	PlayerData.spawn_at_cave_exit = false
