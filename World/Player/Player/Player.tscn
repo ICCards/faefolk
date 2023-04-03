@@ -27,7 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://bnfw57dme4x26" path="res://Assets/Images/Animations/objects/torch/2.png" id="21_c3ki0"]
 [ext_resource type="Texture2D" uid="uid://78sds5dnqh0c" path="res://Assets/Images/Animations/objects/torch/3.png" id="22_grgdf"]
 [ext_resource type="Texture2D" uid="uid://bt3ysh31fm3pc" path="res://Assets/Images/Animations/objects/torch/4.png" id="23_i22ks"]
-[ext_resource type="Script" path="res://World/Player/Player/MultiplayerSynchronizer.gd" id="29_ilnwe"]
+[ext_resource type="Script" path="res://World/Player/Player/MultiplayerSynchronizer.gd" id="28_3t45i"]
 
 [sub_resource type="Animation" id="3"]
 length = 0.001
@@ -4450,9 +4450,15 @@ animations = [{
 }]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_y6a7k"]
-properties/0/path = NodePath(".:position")
+properties/0/path = NodePath("..:position")
 properties/0/spawn = true
 properties/0/sync = true
+properties/1/path = NodePath("..:tool_name")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("..:animation")
+properties/2/spawn = true
+properties/2/sync = true
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -4541,7 +4547,6 @@ position = Vector2(0, -16)
 hframes = 4
 
 [node name="ToolEquipped" type="Sprite2D" parent="CompositeSprites"]
-visible = false
 texture_filter = 1
 use_parent_material = true
 position = Vector2(0, -16)
@@ -4687,7 +4692,8 @@ frame_progress = 0.579862
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 root_path = NodePath(".")
 replication_config = SubResource("SceneReplicationConfig_y6a7k")
-script = ExtResource("29_ilnwe")
+script = ExtResource("28_3t45i")
+animation = "idle_down"
 
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_exited"]

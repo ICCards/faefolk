@@ -12,6 +12,7 @@ extends Node2D
 
 
 func set_player_animation(_character, _anim, _tool = ""):
+	print("ANIM " + str(_anim))
 	bodySprite.set_texture(_character.body_sprites[returnAdjustedAnimTop(_anim)])
 	legsSprite.set_texture(_character.leg_sprites[returnAdjustedAnimBottom(_anim)])
 	armsSprite.set_texture(_character.arms_sprites[returnAdjustedAnimTop(_anim)])

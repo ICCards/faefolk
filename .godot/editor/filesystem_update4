@@ -15,8 +15,11 @@ res://Assets/Tilesets/terrain/tres files/wet sand.tres
 res://Assets/Themes/text.tres
 res://Assets/Themes/LockedAsset.tres
 res://Assets/Themes/whiten.tres
-res://server/server.tscn
+res://main.gd
+res://World/Overworld/Overworld.gd
+res://main.tscn
 res://World/Player/Player/Player.tscn
 res://World/Player/Player/Player.gd
-res://World/Overworld/Overworld.gd
+res://server/server.tscn
 res://World/Player/Player/MultiplayerSynchronizer.gd
+res://World/Player/Player/AttachedScripts/CompositeSprites.gd

@@ -7,7 +7,8 @@ extends CharacterBody2D
 @onready var actions = $Actions
 @onready var user_interface = $Camera2D/UserInterface
 @onready var sound_effects = $Sounds/SoundEffects
-@onready var syncronizer = $MultiplayerSynchronizer
+@onready var synchronizer = $MultiplayerSynchronizer
+#@onready var networking = $Networking
 
 var running = false
 var character
@@ -32,8 +33,8 @@ enum {
 var cast_movement_direction = ""
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
-@export var animation = "idle_down"
-@export var tool_name = ""
+var animation = "idle_down"
+var tool_name = ""
 var MAX_SPEED_DIRT := 8
 var MAX_SPEED_PATH := 9
 var DASH_SPEED := 25
@@ -49,11 +50,15 @@ var is_building_world = false
 @onready var _character = load("res://Global/Data/Characters.gd")
 
 func _ready():
-	syncronizer.set_multiplayer_authority(str(name).to_int())
-	$Camera2D.enabled = syncronizer.is_multiplayer_authority()
+	synchronizer.set_multiplayer_authority(str(name).to_int())
+	$Camera2D.enabled = synchronizer.is_multiplayer_authority()
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
-	if not syncronizer.is_multiplayer_authority(): return
+	if not synchronizer.is_multiplayer_authority(): 
+		set_process_input(false)
+		set_process_unhandled_input(false)
+		set_process(false)
+		return
 	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
 	Server.player_node = self
 	if is_building_world:
@@ -64,12 +69,13 @@ func _ready():
 	$Camera2D/UserInterface/LoadingScreen.hide()
 	set_held_object()
 	Server.isLoaded = true
-
+#
 func _physics_process(delta):
-	if syncronizer.is_multiplayer_authority(): 
-#	composite_sprites.set_player_animation(character,animation,tool_name)
-#	animation_player.play(animation_player.current_animation)
-		syncronizer.position = global_position
+	if not synchronizer.is_multiplayer_authority(): 
+		synchronizer.position = global_position
+		composite_sprites.set_player_animation(character,synchronizer.animation,synchronizer.tool_name)
+	#	animation_player.play(synchronizer.current_animation)
+#		syncronizer.position = global_position
 
 
 #func _enter_tree():
@@ -77,7 +83,7 @@ func _physics_process(delta):
 
 
 func _input( event ):
-	if not syncronizer.is_multiplayer_authority(): return
+	#if not syncronizer.is_multiplayer_authority(): return
 	if event is InputEvent:
 		if event.is_action_pressed("sprint"):
 			running = true
@@ -140,7 +146,7 @@ func set_current_object(item_name):
 
 
 func _process(_delta) -> void:
-	if not syncronizer.is_multiplayer_authority(): return
+	#if not syncronizer.is_multiplayer_authority(): return
 	if $Area2Ds/PickupZone.items_in_range.size() > 0:
 		var pickup_item = $Area2Ds/PickupZone.items_in_range.values()[0]
 		pickup_item.pick_up_item(self)
@@ -171,7 +177,7 @@ func set_movement_speed_change():
 
 
 func _unhandled_input(event):
-	if not syncronizer.is_multiplayer_authority(): return
+	#if not syncronizer.is_multiplayer_authority(): return
 	if not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and not PlayerData.interactive_screen_mode and not PlayerData.viewMapMode and state == MOVEMENT and Sounds.current_footsteps_sound != Sounds.swimming: 
 		if PlayerData.normal_hotbar_mode:
 			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):

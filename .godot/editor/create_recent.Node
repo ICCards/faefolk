@@ -1,5 +1,6 @@
-MultiplayerSynchronizer
 MultiplayerSpawner
+Node
+MultiplayerSynchronizer
 MarginContainer
 Button
 Label
@@ -20,7 +21,6 @@ VisibleOnScreenNotifier2D
 NavigationRegion2D
 NavigationLink2D
 CanvasGroup
-Node
 AnimationPlayer
 Sprite2D
 StaticBody2D

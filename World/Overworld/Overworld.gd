@@ -13,17 +13,6 @@ var is_changing_scene: bool = false
 
 var game_state: GameState
 
-const PORT = 9999
-var enet_peer = ENetMultiplayerPeer.new()
-
-@export var world = {}
-
-
-func _on_join_btn_pressed():
-	$CanvasLayer.hide()
-	enet_peer.create_client("localhost",PORT)
-	multiplayer.multiplayer_peer = enet_peer
-	build_world()
 
 #func create_or_load_world():
 #	if MapData.world["is_built"]: # Load world
@@ -45,7 +34,7 @@ func build_world():
 #	$WorldBuilder/BuildTerrain.initialize()
 #	$WorldBuilder/BuildNature.initialize()
 #	$WorldBuilder/SpawnAnimal.initialize()
-	$WorldMap.buildMap()
+#	$WorldMap.buildMap()
 
 
 func set_valid_tiles():
@@ -58,7 +47,7 @@ func spawn_player(peer_id):
 	var player = Player.instantiate()
 	player.is_building_world = true
 	player.name = str(peer_id)
-	$Players.add_child(player)
+	add_child(player)
 #	if PlayerData.spawn_at_respawn_location:
 #		spawn_loc = PlayerData.player_data["respawn_location"]
 #	elif PlayerData.spawn_at_cave_exit:

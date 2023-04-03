@@ -3264,7 +3264,7 @@ texture = ExtResource("1_631cd")
 [sub_resource type="TileSet" id="TileSet_po1uq"]
 sources/0 = SubResource("TileSetAtlasSource_7b1tf")
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_qcvch"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_x3ndh"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
@@ -3272,7 +3272,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u3x8b"]
 texture = ExtResource("1_631cd")
 0:0/0 = 0
-0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_qcvch")
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_x3ndh")
 
 [sub_resource type="TileSet" id="TileSet_w85vx"]
 navigation_layer_0/layers = 1
@@ -4872,41 +4872,6 @@ y_sort_enabled = true
 position = Vector2(2, 0)
 script = ExtResource("1_jqwgc")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="MainMenu" type="PanelContainer" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -59.0
-offset_top = -74.0
-offset_right = 59.0
-offset_bottom = 74.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu"]
-layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Label" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Main Menu"
-horizontal_alignment = 1
-
-[node name="JoinBtn" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Join"
-
 [node name="WorldAmbience" type="CanvasModulate" parent="."]
 script = ExtResource("1_gscqb")
 
@@ -5090,7 +5055,6 @@ environment = SubResource("Environment_2wssv")
 position = Vector2(18540, 17495)
 rotation = 0.00747698
 
-[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinBtn" to="." method="_on_join_btn_pressed"]
 [connection signal="timeout" from="WorldBuilder/SpawnAnimal/SpawnAnimalTimer" to="WorldBuilder/SpawnAnimal" method="_on_spawn_animal_timer_timeout"]
 [connection signal="timeout" from="WorldBuilder/BuildNature/SpawnNatureTimer" to="WorldBuilder/BuildNature" method="_on_spawn_nature_timer_timeout"]
 [connection signal="timeout" from="WorldBuilder/BuildTerrain/BuildTerrainTimer" to="WorldBuilder/BuildTerrain" method="_on_build_terrain_timer_timeout"]
