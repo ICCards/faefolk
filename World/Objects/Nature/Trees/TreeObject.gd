@@ -13,8 +13,8 @@ extends Area2D
 
 var rng = RandomNumberGenerator.new()
 
-var location = Vector2i(0,0)
-var variety = "oak"
+@export var location: Vector2i
+@export var variety: String
 var hit_dir
 var health = 40
 var adjusted_leaves_falling_pos 
@@ -35,6 +35,10 @@ func _ready():
 	call_deferred("set_tree")
 	random_leaves_falling_timer.set_deferred("wait_time", rng.randi_range(15.0, 60.0))
 	random_leaves_falling_timer.call_deferred("start")
+
+
+#func _enter_tree():
+#	set_multiplayer_authority(str(name).to_int())
 
 
 func remove_from_world():

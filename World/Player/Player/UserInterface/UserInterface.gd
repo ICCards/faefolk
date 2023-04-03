@@ -41,7 +41,7 @@ enum {
 }
 
 func _ready():
-	#if not is_multiplayer_authority(): queue_free()
+	if not get_node("../../").is_multiplayer_authority(): queue_free()
 	await get_tree().create_timer(0.25).timeout
 	$Menu.hide()
 	initialize_furnaces_campfires_and_stoves()

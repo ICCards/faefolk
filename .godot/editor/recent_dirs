@@ -1,5 +1,7 @@
-res://
+res://World/Objects/Nature/Trees
+res://InventoryLogic
 res://World/Player/Player
+res://
 res://World/Overworld
 res://Assets/Images/Enemies/skeleton
 res://Assets/Images/Magic/lightning
@@ -18,5 +20,3 @@ res://Assets/Images/tree_sets/wood breaks/logs
 res://Assets/Images/Animations/ore
 res://Assets/Images/tree_sets/fruit fall
 res://Assets/Images/tree_sets/wood breaks/trees/spruce/stump
-res://Assets/Images/tree_sets/wood breaks/trees/pine/stump
-res://Assets/Images/tree_sets/wood breaks/trees/evergreen/stump

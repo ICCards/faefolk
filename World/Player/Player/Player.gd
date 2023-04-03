@@ -33,8 +33,8 @@ enum {
 var cast_movement_direction = ""
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
-var animation = "idle_down"
-var tool_name = ""
+@export var animation: String = "idle_down"
+@export var tool_name: String = ""
 var MAX_SPEED_DIRT := 8
 var MAX_SPEED_PATH := 9
 var DASH_SPEED := 25
@@ -50,11 +50,11 @@ var is_building_world = false
 @onready var _character = load("res://Global/Data/Characters.gd")
 
 func _ready():
-	synchronizer.set_multiplayer_authority(str(name).to_int())
-	$Camera2D.enabled = synchronizer.is_multiplayer_authority()
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
-	if not synchronizer.is_multiplayer_authority(): 
+	#set_multiplayer_authority(str(name).to_int())
+	$Camera2D.enabled = is_multiplayer_authority()
+	if not is_multiplayer_authority(): 
 		set_process_input(false)
 		set_process_unhandled_input(false)
 		set_process(false)
@@ -71,15 +71,17 @@ func _ready():
 	Server.isLoaded = true
 #
 func _physics_process(delta):
-	if not synchronizer.is_multiplayer_authority(): 
-		synchronizer.position = global_position
-		composite_sprites.set_player_animation(character,synchronizer.animation,synchronizer.tool_name)
-	#	animation_player.play(synchronizer.current_animation)
+	if not is_multiplayer_authority(): 
+#		synchronizer.position = global_position
+#		synchronizer.animation = animation 
+#		synchronizer.tool_name = tool_name
+		composite_sprites.set_player_animation(character,animation,tool_name)
+		animation_player.play(animation_player.current_animation)
 #		syncronizer.position = global_position
 
 
-#func _enter_tree():
-#	syncronizer.set_multiplayer_authority(str(name).to_int())
+func _enter_tree():
+	set_multiplayer_authority(str(name).to_int())
 
 
 func _input( event ):

@@ -62,7 +62,7 @@ var starting_player_data = {
 		"3": ["blueprint", 1, null],
 		"4": ["hammer", 1, null],
 #		"2": ["brewing table #1", 999, null],
-		"6": ["stone fishing rod", 1, null],
+		#"6": ["stone fishing rod", 1, null],
 #		"5": ["furnace", 10, null],
 #		"7": ["grain mill #1", 100, null],
 #		"3": ["corn", 100, null],

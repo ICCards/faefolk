@@ -77,7 +77,6 @@ func _physics_process(_delta):
 	set_velocity(velocity)
 	set_up_direction(Vector2.UP)
 	move_and_slide()
-	velocity = velocity
 
 func pick_up_item(body):
 	player = body

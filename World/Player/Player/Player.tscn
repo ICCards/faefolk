@@ -4450,15 +4450,18 @@ animations = [{
 }]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_y6a7k"]
-properties/0/path = NodePath("..:position")
+properties/0/path = NodePath(".:animation")
 properties/0/spawn = true
 properties/0/sync = true
-properties/1/path = NodePath("..:tool_name")
+properties/1/path = NodePath(".:tool_name")
 properties/1/spawn = true
 properties/1/sync = true
-properties/2/path = NodePath("..:animation")
+properties/2/path = NodePath(".:position")
 properties/2/spawn = true
 properties/2/sync = true
+properties/3/path = NodePath("CompositeSprites/AnimationPlayer:current_animation")
+properties/3/spawn = true
+properties/3/sync = true
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -4690,10 +4693,8 @@ animation = &"new_animation"
 frame_progress = 0.579862
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-root_path = NodePath(".")
 replication_config = SubResource("SceneReplicationConfig_y6a7k")
 script = ExtResource("28_3t45i")
-animation = "idle_down"
 
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_exited"]
