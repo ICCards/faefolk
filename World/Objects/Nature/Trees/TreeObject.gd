@@ -179,7 +179,8 @@ func setGrownTreeTexture():
 	await get_tree().process_frame
 	animated_tree_top_sprite.play("default")
 
-func hit(tool_name):
+@rpc("call_local", "any_peer", "unreliable")
+func hit(tool_name = "wood axe"):
 	if not destroyed:
 		if not (phase == "5" and Util.isNonFruitTree(variety)) and not (phase == "mature1" or phase == "mature2" or phase == "harvest" or phase == "empty" and Util.isFruitTree(variety)):
 			animation_player_stump.call_deferred("play", "sapling hit")
@@ -286,11 +287,11 @@ func destroy(tool_name):
 func _on_Hurtbox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	if _area.special_ability == "fire buff" and phase == "5":
-		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-16,16), randf_range(-10,22)))
-		health -= Stats.FIRE_DEBUFF_DAMAGE
+#	if _area.special_ability == "fire buff" and phase == "5":
+#		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-16,16), randf_range(-10,22)))
+#		health -= Stats.FIRE_DEBUFF_DAMAGE
 	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
-		call_deferred("hit", _area.tool_name)
+		hit.rpc()
 
 
 ### Tree modulate functions

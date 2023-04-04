@@ -1,7 +1,7 @@
 extends Node2D
 
+@onready var PlayerIcon = load("res://World/Map/player_icon.tscn")
 @onready var GridSquareLabel = load("res://World/Map/GridSquareLabel.tscn")
-@onready var playerIcon = $Map/PlayerIcon
 @onready var stormIcon = $Map/StormIcon
 @onready var stormIcon2 = $Map/StormIcon2
 @onready var miniMap = $Map
@@ -33,22 +33,31 @@ func _input(event):
 		if event.is_action_pressed("open map"):
 			Server.player_node.actions.destroy_placeable_object()
 			#Server.world.get_node("WorldAmbience").call_deferred("hide")
-			call_deferred("show")
-			call_deferred("initialize")
+			initialize()
 		if event.is_action_released("open map"):
 			#Server.world.get_node("WorldAmbience").call_deferred("show")
-			call_deferred("hide")
-			call_deferred("set_inactive")
+			set_inactive()
 			Server.player_node.call_deferred("set_held_object")
 
 func initialize():
+	show()
 	PlayerData.viewMapMode = true
 	Server.player_node.get_node("Camera2D").set_deferred("enabled", false)
 	$Camera2D.set_deferred("enabled", true)
 	Server.player_node.user_interface.get_node("Hotbar").call_deferred("hide") 
 	Server.player_node.user_interface.get_node("CombatHotbar").call_deferred("hide")
+	for player in get_node("../Players").get_children():
+		if player.name != "MultiplayerSpawner":
+			add_player_icon(player.name)
 	
+func add_player_icon(player_name):
+	if not $Map/Players.has_node(str(player_name)):
+		var playerIcon = PlayerIcon.instantiate()
+		playerIcon.name = player_name
+		$Map/Players.add_child(playerIcon)
+
 func set_inactive():
+	hide()
 	PlayerData.viewMapMode = false
 	$Camera2D.set_deferred("enabled", false)
 	Server.player_node.get_node("Camera2D").set_deferred("enabled", true)
@@ -78,9 +87,12 @@ func draw_grid_labels():
 	
 func _physics_process(delta):
 	if is_instance_valid(Server.player_node):
-		playerIcon.position = Server.player_node.position*2
-		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
-		set_direction(Server.player_node.direction)
+#		playerIcon.position = Server.player_node.position*2
+#		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
+		for player in $Map/Players.get_children():
+			#player.rotation_degrees = return_player_direction(get_node("../Players/"+player.name).direction)
+			player.position = get_node("../Players/"+player.name).position
+			#player.scale = adjustedPlayerIconScale($Camera2D.zoom)
 #		roamingStorm = get_node("/root/Overworld/RoamingStorm")
 #		roamingStorm2 = get_node("/root/Overworld/RoamingStorm2")
 #		stormIcon.position = roamingStorm.position
@@ -96,45 +108,41 @@ func adjustedPlayerIconScale(zoom):
 	return Vector2(48,48) * percent_zoomed
 
 
-func set_direction(dir):
+func return_player_direction(dir):
 	match dir:
 		"RIGHT":
-			playerIcon.rotation_degrees = 0
+			return 0
 		"LEFT":
-			playerIcon.rotation_degrees = 180
+			return 180
 		"DOWN":
-			playerIcon.rotation_degrees = 90
+			return 90
 		"UP":
-			playerIcon.rotation_degrees = -90
+			return -90
 
 func buildMap():
-	if not get_parent().world == {}:
-		var map = get_parent().world
-		for loc in map["dirt"]:
-			miniMap.set_cell(0,loc[0],Tiles.DIRT,Vector2i(0,0))
-		for loc in map["forest"]:
-			miniMap.set_cell(0,loc[0],Tiles.FOREST,Vector2i(0,0))
-		for loc in map["plains"]:
-			miniMap.set_cell(0,loc[0],Tiles.PLAINS,Vector2i(0,0))
-		for loc in map["beach"]:
-			miniMap.set_cell(0,loc,Tiles.BEACH,Vector2i(0,0))
-		for loc in map["desert"]:
-			miniMap.set_cell(0,loc,Tiles.DESERT,Vector2i(0,0))
-		for loc in map["snow"]:
-			miniMap.set_cell(0,loc[0],Tiles.SNOW,Vector2i(0,0))
-		for loc in map["deep_ocean1"]:
-			miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
-		for loc in map["deep_ocean2"]:
-			miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
-		for loc in map["deep_ocean3"]:
-			miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
-		for loc in map["deep_ocean4"]:
-			miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
-		for x in range(MAP_WIDTH):
-			for y in range(MAP_HEIGHT):
-				if miniMap.get_cell_atlas_coords(0,Vector2i(x,y)) == Vector2i(-1,-1):
-					miniMap.set_cell(0,Vector2i(x,y),Tiles.WATER,Vector2i(0,0))
-		draw_grid()
-	else:
-		await get_tree().create_timer(0.5).timeout
-		buildMap()
+	var map = get_parent().world
+	for loc in map["dirt"]:
+		miniMap.set_cell(0,loc[0],Tiles.DIRT,Vector2i(0,0))
+	for loc in map["forest"]:
+		miniMap.set_cell(0,loc[0],Tiles.FOREST,Vector2i(0,0))
+	for loc in map["plains"]:
+		miniMap.set_cell(0,loc[0],Tiles.PLAINS,Vector2i(0,0))
+	for loc in map["beach"]:
+		miniMap.set_cell(0,loc,Tiles.BEACH,Vector2i(0,0))
+	for loc in map["desert"]:
+		miniMap.set_cell(0,loc,Tiles.DESERT,Vector2i(0,0))
+	for loc in map["snow"]:
+		miniMap.set_cell(0,loc[0],Tiles.SNOW,Vector2i(0,0))
+	for loc in map["deep_ocean1"]:
+		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
+	for loc in map["deep_ocean2"]:
+		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
+	for loc in map["deep_ocean3"]:
+		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
+	for loc in map["deep_ocean4"]:
+		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
+	for x in range(MAP_WIDTH):
+		for y in range(MAP_HEIGHT):
+			if miniMap.get_cell_atlas_coords(0,Vector2i(x,y)) == Vector2i(-1,-1):
+				miniMap.set_cell(0,Vector2i(x,y),Tiles.WATER,Vector2i(0,0))
+	draw_grid()

@@ -1,3 +1,4 @@
+res://World/Map
 res://World/Objects/Nature/Trees
 res://InventoryLogic
 res://World/Player/Player
@@ -19,4 +20,3 @@ res://World/Building/Tiles/Attached nodes
 res://Assets/Images/tree_sets/wood breaks/logs
 res://Assets/Images/Animations/ore
 res://Assets/Images/tree_sets/fruit fall
-res://Assets/Images/tree_sets/wood breaks/trees/spruce/stump

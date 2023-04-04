@@ -499,6 +499,8 @@ func pick_up_item(item_name, item_quantity, item_health):
 	
 
 func update_inventory_slot_visual(slot_index, item_name, new_quantity, item_health):
+	if not InventorySlots:
+		InventorySlots = Server.player_node.user_interface.get_node("Menu/Pages/inventory/InventorySlots")
 	var slot = InventorySlots.get_node("Slot" + str(int(slot_index) + 1))
 	if slot.item != null:
 		if new_quantity == 0:
@@ -510,6 +512,8 @@ func update_inventory_slot_visual(slot_index, item_name, new_quantity, item_heal
 		slot.initialize_item(item_name, new_quantity, item_health)
 
 func update_hotbar_slot_visual(slot_index, item_name, new_quantity, item_health):
+	if not HotbarSlots:
+		HotbarSlots = Server.player_node.user_interface.get_node("Hotbar/HotbarSlots")
 	var slot = HotbarSlots.get_node("Slot" + str(int(slot_index) + 1))
 	if slot.item != null:
 		if new_quantity == 0:

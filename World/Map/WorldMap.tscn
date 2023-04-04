@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://c66ktnntnkqrx"]
+[gd_scene load_steps=8 format=3 uid="uid://c66ktnntnkqrx"]
 
 [ext_resource type="Script" path="res://World/Map/WorldMap.gd" id="1_1tori"]
 [ext_resource type="TileSet" uid="uid://75mobw2f7ncu" path="res://Assets/Themes/MiniMap.tres" id="2"]
-[ext_resource type="Texture2D" uid="uid://ctfn0kqsd2hhf" path="res://Assets/Images/mini map/player mini map icon.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://deic1ed35diif" path="res://Assets/Images/Particles/Clouds.png" id="3_nnvqm"]
 [ext_resource type="Texture2D" uid="uid://cejx0b2rnkjnh" path="res://Assets/Images/mini map/black.png" id="4"]
 [ext_resource type="Script" path="res://World/Map/Camera2D.gd" id="6_c88ao"]
@@ -54,9 +53,7 @@ visible = false
 scale = Vector2(30, 30)
 texture = ExtResource("3_nnvqm")
 
-[node name="PlayerIcon" type="Sprite2D" parent="Map"]
-scale = Vector2(80, 80)
-texture = ExtResource("3")
+[node name="Players" type="Node2D" parent="Map"]
 
 [node name="Grid" type="TileMap" parent="."]
 scale = Vector2(0.05, 0.05)

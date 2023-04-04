@@ -1,7 +1,8 @@
-MultiplayerSpawner
-MultiplayerSynchronizer
+AudioStreamPlayer2D
 Node2D
 Node
+MultiplayerSpawner
+MultiplayerSynchronizer
 MarginContainer
 Button
 Label
@@ -29,4 +30,3 @@ Area2D
 ColorRect
 PointLight2D
 GridContainer
-TextureButton

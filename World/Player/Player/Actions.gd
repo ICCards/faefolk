@@ -29,12 +29,12 @@ var current_interactive_node = null
 
 
 func _ready():
-	if not get_node("../../").is_multiplayer_authority(): return
+	if not get_node("../").is_multiplayer_authority(): return
 	PlayerData.connect("health_depleted",Callable(self,"player_death"))
 
 
 func _input(event):
-	if not get_node("../../").is_multiplayer_authority(): return
+	if not get_node("../").is_multiplayer_authority(): return
 	if Server.player_node.state == 0 and get_parent().user_interface.holding_item == null and not PlayerData.viewMapMode:
 		if event.is_action_pressed("action") and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode:
 			if $DetectInteractiveArea.get_overlapping_areas().size() > 0:
@@ -137,7 +137,6 @@ func harvest_crop(crop_node):
 		crop_node.harvest()
 		get_parent().state = HARVESTING
 		PlayerData.player_data["skill_experience"]["farming"] += 1
-		Sounds.play_harvest_sound()
 		var anim = "harvest_" + get_parent().direction.to_lower()
 		get_parent().holding_item.texture = load("res://Assets/Images/inventory_icons/Crop/" + crop_node.crop_name + ".png")
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, anim)
@@ -145,32 +144,33 @@ func harvest_crop(crop_node):
 		await get_parent().animation_player.animation_finished
 		get_parent().state = get_parent().MOVEMENT
 
+#
+#func remove_forage_from_world():
+#	Server.world.rpc()
 
 func harvest_forage(forage_node):
 	if get_parent().state != HARVESTING:
+		var item_name = forage_node.item_name
+		var location = forage_node.location
 		get_node("../Sounds/FootstepsSound").stream_paused = true
-		forage_node.hide()
+		forage_node.harvest.rpc()
 		get_parent().state = HARVESTING
 		if forage_node.first_placement:
-			PlayerData.player_data["collections"]["forage"][forage_node.item_name] += 1
+			PlayerData.player_data["collections"]["forage"][item_name] += 1
 			PlayerData.player_data["skill_experience"]["foraging"] += 1
-		if forage_node.item_name != "raw egg":
-			Tiles.add_valid_tiles(forage_node.location)
-			MapData.remove_object("forage",forage_node.name)
-		Sounds.play_harvest_sound()
 		get_parent().state = get_parent().HARVESTING
-		var anim = "harvest_" + get_parent().direction.to_lower()
-		get_parent().holding_item.texture =load("res://Assets/Images/inventory_icons/Forage/"+forage_node.item_name+".png")
-		get_parent().composite_sprites.set_player_animation(Server.player_node.character, anim)
-		get_parent().animation_player.play(anim)
+		get_parent().animation = "harvest_" + get_parent().direction.to_lower()
+		get_parent().holding_item_name = item_name
+		get_parent().holding_item.texture =load("res://Assets/Images/inventory_icons/Forage/"+item_name+".png")
+		get_parent().composite_sprites.set_player_animation(Server.player_node.character, get_parent().animation)
+		get_parent().animation_player.play(get_parent().animation)
 		await get_parent().animation_player.animation_finished
-		if PlayerDataHelpers.can_item_be_added_to_inventory(forage_node.item_name, 1):
-			Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(forage_node.item_name, 1)
-			PlayerData.pick_up_item(forage_node.item_name, 1, null)
+		if PlayerDataHelpers.can_item_be_added_to_inventory(item_name, 1):
+			Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(item_name, 1)
+			PlayerData.pick_up_item(item_name, 1, null)
 		else:
 			Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up("Inventory full!", 1)
-			InstancedScenes.initiateInventoryItemDrop([forage_node.item_name, 1, null], forage_node.position)
-		forage_node.call_deferred("queue_free")
+			InstancedScenes.initiateInventoryItemDrop([item_name, 1, null], position)
 		get_parent().state = get_parent().MOVEMENT
 
 

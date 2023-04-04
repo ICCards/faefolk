@@ -130,7 +130,10 @@ func swing_deferred(item_name):
 			set_swing_collision_layer_and_position(item_name, get_parent().direction)
 			get_parent().animation = "swing_" + get_parent().direction.to_lower()
 			player_animation_player.play("axe pickaxe swing")
-		get_parent().tool_name = item_name
+		if item_name == null:
+			get_parent().tool_name = ""
+		else:
+			get_parent().tool_name = item_name
 		PlayerData.change_energy(-1)
 		composite_sprites.set_player_animation(get_parent().character, get_parent().animation, item_name)
 		await player_animation_player.animation_finished

@@ -153,7 +153,7 @@ func remove_grass():
 			if player_loc.distance_to(node.position/16) > Constants.DISTANCE_TO_REMOVE_OBJECT:
 				node.call_deferred("queue_free")
 				await get_tree().process_frame
-	print("RemOVED GRASS")
+	#print("RemOVED GRASS")
 	var value = remove_grass_thread.wait_to_finish()
 
 func spawn_trees():

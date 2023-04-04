@@ -1,14 +1,12 @@
-[gd_scene load_steps=77 format=3 uid="uid://bdyinn6aswyx7"]
+[gd_scene load_steps=76 format=3 uid="uid://bdyinn6aswyx7"]
 
 [ext_resource type="Script" path="res://World/Player/Player/Player.gd" id="1_hovno"]
-[ext_resource type="Texture2D" uid="uid://dybsd7fv08hlv" path="res://Assets/Images/inventory_icons/Fish/goldfish.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://1ca7mk73gpp0" path="res://World/Player/Player/Actions.tscn" id="2_dmkl7"]
 [ext_resource type="Script" path="res://World/Player/Player/Camera2D.gd" id="2_gk7ji"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" id="3_8lsbn"]
 [ext_resource type="PackedScene" uid="uid://cffchl0ffi2hf" path="res://World/Player/Player/UserInterface/UserInterface.tscn" id="3_w02x5"]
 [ext_resource type="Material" uid="uid://dshi8sn4j6jfa" path="res://Assets/Themes/whiten.tres" id="5_3of15"]
 [ext_resource type="Texture2D" uid="uid://3ik13tk6hyny" path="res://Characters/Human/male/HOLDING WALK/body/down/body.png" id="5_yvg8i"]
-[ext_resource type="AudioStream" uid="uid://bwubv5h3bqf1k" path="res://Assets/Sound/Sound effects/Footsteps/stone footsteps.mp3" id="6"]
 [ext_resource type="Texture2D" uid="uid://b2yqfp3r1tqa4" path="res://Characters/Human/male/HOLDING WALK/body/down/arms.png" id="6_lbf3e"]
 [ext_resource type="PackedScene" uid="uid://bdpp83on80ake" path="res://World/Player/Player/Magic.tscn" id="8_wf6cw"]
 [ext_resource type="Texture2D" uid="uid://wol8ty2drk5k" path="res://Characters/Weapon swings/fishing rod struggle/right.png" id="9_5g54g"]
@@ -17,6 +15,7 @@
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/HurtBox.gd" id="12_7dou1"]
 [ext_resource type="PackedScene" uid="uid://bbsqb6cw7rd7a" path="res://World/Player/Player/Swing.tscn" id="12_s0e2n"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/FootstepsSound.gd" id="15_a8swc"]
+[ext_resource type="AudioStream" uid="uid://qqpxtamwd4do" path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" id="15_w1myp"]
 [ext_resource type="AudioStream" uid="uid://bdedmyao5swjq" path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" id="16"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/BackgroundMusic.gd" id="16_d5bcc"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/AmbientSound.gd" id="17_8vtdb"]
@@ -4462,6 +4461,12 @@ properties/2/sync = true
 properties/3/path = NodePath("CompositeSprites/AnimationPlayer:current_animation")
 properties/3/spawn = true
 properties/3/sync = true
+properties/4/path = NodePath(".:holding_item_name")
+properties/4/spawn = true
+properties/4/sync = true
+properties/5/path = NodePath(".:footstep_stream_paused")
+properties/5/spawn = true
+properties/5/sync = true
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -4560,7 +4565,6 @@ hframes = 4
 visible = false
 offset_top = -16.0
 offset_right = 16.0
-texture = ExtResource("2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
 root_node = NodePath("../..")
@@ -4650,9 +4654,9 @@ rotation = 1.5708
 stream = ExtResource("16")
 volume_db = -16.0
 
-[node name="FootstepsSound" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("6")
-volume_db = -16.0
+[node name="FootstepsSound" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("15_w1myp")
+autoplay = true
 bus = &"Bus1"
 script = ExtResource("15_a8swc")
 

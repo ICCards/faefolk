@@ -14,15 +14,27 @@ func _on_join_btn_pressed():
 	$CanvasLayer.hide()
 	enet_peer.create_client("localhost",PORT)
 	multiplayer.multiplayer_peer = enet_peer
+	build_world()
 
 
 @rpc
+func send_world_data(_world):
+	print("GOT WORLD DATA")
+	world = _world
+	MapData.world = _world
+	$WorldMap.buildMap()
+	await get_tree().create_timer(2).timeout
+	MapData.add_world_data_to_chunks()
+	$WorldBuilder.initialize()
+	$WorldBuilder/BuildTerrain.initialize()
+	$WorldBuilder/BuildNature.initialize()
+	$WorldBuilder/SpawnAnimal.initialize()
+
 func build_world():
 	print("BUILD WORLD")
 	Server.world = self
 #	MapData.add_world_data_to_chunks()
 	set_map_tiles()
-#	PlaceObject.place_tree_in_world("id", "oak", Vector2i(10,0), "forest" ,100, "5")
 #	set_valid_tiles()
 #	$WorldBuilder.initialize()
 #	$WorldBuilder/BuildTerrain.initialize()

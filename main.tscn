@@ -1,10 +1,14 @@
-[gd_scene load_steps=34 format=3 uid="uid://bikiy2vasycja"]
+[gd_scene load_steps=38 format=3 uid="uid://bikiy2vasycja"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_miuy3"]
 [ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="2_jxniw"]
+[ext_resource type="Script" path="res://World/World/WorldBuilder.gd" id="2_mbtah"]
 [ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/terrain/tres files/plains.tres" id="3_s3xh1"]
+[ext_resource type="Script" path="res://World/World/SpawnAnimal.gd" id="3_xbv0j"]
+[ext_resource type="Script" path="res://World/World/BuildNature.gd" id="4_lnadh"]
 [ext_resource type="TileSet" uid="uid://bpd6si5cldst7" path="res://Assets/Tilesets/terrain/tres files/deep ocean.tres" id="4_prix1"]
 [ext_resource type="TileSet" uid="uid://3x3xfgwqdrhm" path="res://Assets/Tilesets/terrain/tres files/dirt.tres" id="5_5eaio"]
+[ext_resource type="Script" path="res://World/World/BuildTerrain.gd" id="5_oye32"]
 [ext_resource type="TileSet" uid="uid://de28nfavviio7" path="res://Assets/Tilesets/terrain/elevated terrain.tres" id="6_1xuhk"]
 [ext_resource type="TileSet" uid="uid://ceprqmvmkacdl" path="res://Assets/Tilesets/terrain/tres files/forest.tres" id="7_rcnxi"]
 [ext_resource type="TileSet" uid="uid://dja0b16fhgms6" path="res://Assets/Tilesets/terrain/tres files/freshwater.tres" id="8_4ak2k"]
@@ -4438,9 +4442,9 @@ sources/0 = SubResource("TileSetAtlasSource_23sj6")
 background_mode = 3
 tonemap_mode = 3
 tonemap_exposure = 0.4
-tonemap_white = 0.8
+tonemap_white = 0.94
 glow_enabled = true
-glow_intensity = 2.8
+glow_intensity = 6.13
 glow_strength = 1.38
 glow_blend_mode = 0
 glow_hdr_threshold = 1.2
@@ -4485,6 +4489,29 @@ horizontal_alignment = 1
 [node name="JoinBtn" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Join"
+
+[node name="WorldBuilder" type="Node" parent="."]
+script = ExtResource("2_mbtah")
+
+[node name="SpawnAnimal" type="Node" parent="WorldBuilder"]
+script = ExtResource("3_xbv0j")
+
+[node name="SpawnAnimalTimer" type="Timer" parent="WorldBuilder/SpawnAnimal"]
+wait_time = 3.3
+
+[node name="BuildNature" type="Node" parent="WorldBuilder"]
+script = ExtResource("4_lnadh")
+
+[node name="SpawnNatureTimer" type="Timer" parent="WorldBuilder/BuildNature"]
+wait_time = 2.1
+
+[node name="BuildTerrain" type="Node" parent="WorldBuilder"]
+script = ExtResource("5_oye32")
+
+[node name="BuildTerrainTimer" type="Timer" parent="WorldBuilder/BuildTerrain"]
+wait_time = 2.9
+
+[node name="WorldBuilderTimer" type="Timer" parent="WorldBuilder"]
 
 [node name="TerrainTiles" type="Node2D" parent="."]
 z_index = -10
@@ -4635,12 +4662,10 @@ y_sort_enabled = true
 [node name="NatureObjects" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="NatureObjects"]
-_spawnable_scenes = PackedStringArray("res://World/Objects/Nature/Trees/TreeObject.tscn")
-spawn_path = NodePath("..")
-
 [node name="GrassObjects" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="NatureSpawner" type="MultiplayerSpawner" parent="."]
 
 [node name="WorldMap" parent="." instance=ExtResource("16_fydq0")]
 visible = false
@@ -4651,3 +4676,7 @@ environment = SubResource("Environment_yn58q")
 [node name="ItemDrops" type="Node2D" parent="."]
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinBtn" to="." method="_on_join_btn_pressed"]
+[connection signal="timeout" from="WorldBuilder/SpawnAnimal/SpawnAnimalTimer" to="WorldBuilder/SpawnAnimal" method="_on_spawn_animal_timer_timeout"]
+[connection signal="timeout" from="WorldBuilder/BuildNature/SpawnNatureTimer" to="WorldBuilder/BuildNature" method="_on_spawn_nature_timer_timeout"]
+[connection signal="timeout" from="WorldBuilder/BuildTerrain/BuildTerrainTimer" to="WorldBuilder/BuildTerrain" method="_on_build_terrain_timer_timeout"]
+[connection signal="timeout" from="WorldBuilder/WorldBuilderTimer" to="WorldBuilder" method="_on_world_build_timer_timeout"]
