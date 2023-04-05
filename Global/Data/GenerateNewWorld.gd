@@ -2,10 +2,7 @@ extends Node
 
 var game_state: GameState
 
-var deep_ocean1: Array = []
-var deep_ocean2: Array = []
-var deep_ocean3: Array = []
-var deep_ocean4: Array = []
+var deep_ocean: Array = []
 var plains: Array = []
 var forest: Array = []
 var beach: Array = []
@@ -62,11 +59,8 @@ var file_name = "res://JSONData/world.json"
 func build():
 	rng.randomize()
 	randomize()
-	#await get_tree().create_timer(1.0).timeout
 	build_temperature(5,0.06)
-	#await get_tree().create_timer(1.0).timeoutg
 	build_moisture(5,0.006)
-	#await get_tree().create_timer(2.0).timeout
 	build_altittude(5,0.003)
 
 func end_altittude():
@@ -133,12 +127,7 @@ func build_moisture(octaves,frequency):
 func build_world():
 	print("building world")
 	uuid = _uuid.new()
-	get_node("/root/Overworld/Loading").call_deferred("set_phase","Building terrain")
 	build_terrian()
-	#await get_tree().create_timer(1.0).timeout
-	#set_cave_entrance()
-	get_node("/root/Overworld/Loading").call_deferred("set_phase","Building nature")
-	#await get_tree().create_timer(1.0).timeout
 	generate_trees(snow,"snow")
 	generate_trees(forest,"forest")
 	generate_trees(desert,"desert")
@@ -153,18 +142,11 @@ func build_world():
 	generate_weeds(plains,"plains")
 	generate_beach_forage(beach)
 	generate_animals()
-	await get_tree().create_timer(1.0).timeout
-	#await get_tree().create_timer(1.0).timeout
-	get_node("/root/Overworld/Loading").call_deferred("set_phase","Saving data")
-	#await get_tree().create_timer(1.0).timeout
 	## make faster
-	fix_tiles()
+	#fix_tiles()
+	save_starting_world_data()
 	##################
-
-func build_map():
-	Server.world.create_or_load_world()
 	
-
 func set_cave_entrance():
 	var loc = Vector2i(rng.randi_range(490, 510), rng.randi_range(490, 510))
 	MapData.world["cave_entrance_location"] = loc
@@ -182,14 +164,7 @@ func build_terrian():
 			var id = uuid.v4()
 			#Ocean
 			if alt > 0.975:
-				if x <= 500 and y <= 500:
-					deep_ocean1.append(Vector2i(x,y))
-				elif x >= 500 and y <= 500:
-					deep_ocean2.append(Vector2i(x,y))
-				elif x <= 500:
-					deep_ocean3.append(Vector2i(x,y))
-				else:
-					deep_ocean4.append(Vector2i(x,y))
+				deep_ocean.append(Vector2i(x,y))
 			elif alt > 0.8:
 				ocean.append(Vector2i(x,y))
 			#Beach	
@@ -223,89 +198,89 @@ func build_terrian():
 	#save_world_data()
 
 	
-func add_ocean_tiles():
-	var border_tiles = []
-	for i in range(2):
-		border_tiles = []
-		print("EXTENDING BEACH")
-		for loc in beach:
-			if Util.is_border_tile(loc, beach) and not forest.has(loc) and not plains.has(loc) and not dirt.has(loc):
-				border_tiles.append(loc)
-		for loc in border_tiles: # extend beach
-			if not beach.has(loc+Vector2i(1,0)):
-				beach.append(loc+Vector2i(1,0))
-			if not beach.has(loc+Vector2i(-1,0)):
-				beach.append(loc+Vector2i(-1,0))
-			if not beach.has(loc+Vector2i(0,1)):
-				beach.append(loc+Vector2i(0,1))
-			if not beach.has(loc+Vector2i(0,-1)):
-				beach.append(loc+Vector2i(0,-1))
-			if not beach.has(loc+Vector2i(1,1)):
-				beach.append(loc+Vector2i(1,1))
-			if not beach.has(loc+Vector2i(-1,1)):
-				beach.append(loc+Vector2i(-1,1))
-			if not beach.has(loc+Vector2i(1,-1)):
-				beach.append(loc+Vector2i(1,-1))
-			if not beach.has(loc+Vector2i(-1,-1)):
-				beach.append(loc+Vector2i(-1,-1))
-	print("ADD WET SAND LAYER")
-	border_tiles = []
-	for loc in beach:
-		if Util.is_border_tile(loc, beach) and not forest.has(loc) and not plains.has(loc) and not dirt.has(loc):
-			border_tiles.append(loc)
-	for loc in border_tiles: # set wet sand layer
-		if not beach.has(loc+Vector2i(1,0)):
-			wet_sand.append(loc+Vector2i(1,0))
-		if not beach.has(loc+Vector2i(-1,0)):
-			wet_sand.append(loc+Vector2i(-1,0))
-		if not beach.has(loc+Vector2i(0,1)):
-			wet_sand.append(loc+Vector2i(0,1))
-		if not beach.has(loc+Vector2i(0,-1)):
-			wet_sand.append(loc+Vector2i(0,-1))
-		if not beach.has(loc+Vector2i(1,1)):
-			wet_sand.append(loc+Vector2i(1,1))
-		if not beach.has(loc+Vector2i(-1,1)):
-			wet_sand.append(loc+Vector2i(-1,1))
-		if not beach.has(loc+Vector2i(1,-1)):
-			wet_sand.append(loc+Vector2i(1,-1))
-		if not beach.has(loc+Vector2i(-1,-1)):
-			wet_sand.append(loc+Vector2i(-1,-1))
-	print("REMOVE OCEAN TILES")
-	for loc in wet_sand: # remove ocean tiles
-		if ocean.has(loc):
-			ocean.erase(loc)
-	for loc in beach:
-		if ocean.has(loc):
-			ocean.erase(loc)
-	for loc in ocean:
-		wet_sand.append(loc)
-	assign_autotiles()
+#func add_ocean_tiles():
+#	var border_tiles = []
+#	for i in range(2):
+#		border_tiles = []
+#		print("EXTENDING BEACH")
+#		for loc in beach:
+#			if Util.is_border_tile(loc, beach) and not forest.has(loc) and not plains.has(loc) and not dirt.has(loc):
+#				border_tiles.append(loc)
+#		for loc in border_tiles: # extend beach
+#			if not beach.has(loc+Vector2i(1,0)):
+#				beach.append(loc+Vector2i(1,0))
+#			if not beach.has(loc+Vector2i(-1,0)):
+#				beach.append(loc+Vector2i(-1,0))
+#			if not beach.has(loc+Vector2i(0,1)):
+#				beach.append(loc+Vector2i(0,1))
+#			if not beach.has(loc+Vector2i(0,-1)):
+#				beach.append(loc+Vector2i(0,-1))
+#			if not beach.has(loc+Vector2i(1,1)):
+#				beach.append(loc+Vector2i(1,1))
+#			if not beach.has(loc+Vector2i(-1,1)):
+#				beach.append(loc+Vector2i(-1,1))
+#			if not beach.has(loc+Vector2i(1,-1)):
+#				beach.append(loc+Vector2i(1,-1))
+#			if not beach.has(loc+Vector2i(-1,-1)):
+#				beach.append(loc+Vector2i(-1,-1))
+#	print("ADD WET SAND LAYER")
+#	border_tiles = []
+#	for loc in beach:
+#		if Util.is_border_tile(loc, beach) and not forest.has(loc) and not plains.has(loc) and not dirt.has(loc):
+#			border_tiles.append(loc)
+#	for loc in border_tiles: # set wet sand layer
+#		if not beach.has(loc+Vector2i(1,0)):
+#			wet_sand.append(loc+Vector2i(1,0))
+#		if not beach.has(loc+Vector2i(-1,0)):
+#			wet_sand.append(loc+Vector2i(-1,0))
+#		if not beach.has(loc+Vector2i(0,1)):
+#			wet_sand.append(loc+Vector2i(0,1))
+#		if not beach.has(loc+Vector2i(0,-1)):
+#			wet_sand.append(loc+Vector2i(0,-1))
+#		if not beach.has(loc+Vector2i(1,1)):
+#			wet_sand.append(loc+Vector2i(1,1))
+#		if not beach.has(loc+Vector2i(-1,1)):
+#			wet_sand.append(loc+Vector2i(-1,1))
+#		if not beach.has(loc+Vector2i(1,-1)):
+#			wet_sand.append(loc+Vector2i(1,-1))
+#		if not beach.has(loc+Vector2i(-1,-1)):
+#			wet_sand.append(loc+Vector2i(-1,-1))
+#	print("REMOVE OCEAN TILES")
+#	for loc in wet_sand: # remove ocean tiles
+#		if ocean.has(loc):
+#			ocean.erase(loc)
+#	for loc in beach:
+#		if ocean.has(loc):
+#			ocean.erase(loc)
+#	for loc in ocean:
+#		wet_sand.append(loc)
+#	assign_autotiles()
 
 
-func assign_autotiles():
-	print("ASSIGN AUTOTILES")
-	for tile_array_name in tile_array_names: 
-		var tileThread = Thread.new()
-		threads.append(tileThread)
-		tileThread.start(Callable(self,"assign_autotile_id").bind(tile_array_name))
+#func assign_autotiles():
+#	print("ASSIGN AUTOTILES")
+#	for tile_array_name in tile_array_names: 
+#		var tileThread = Thread.new()
+#		threads.append(tileThread)
+#		tileThread.start(Callable(self,"assign_autotile_id").bind(tile_array_name))
 
 
-func assign_autotile_id(tile_array_name):
-	print("assigning autotiles")
-	var locations = return_tile_array(tile_array_name)
-#	var locations = tiles
-	for loc in locations:
-		MapData.world[tile_array_name].append([loc,Tiles.return_autotile_id(loc,locations)])
-		#await get_tree().process_frame
-#		tiles[tiles.find(loc)] = [loc,return_tile_id(loc,locations)]
-	if thread_tile_counter == tile_array_names.size():
-		print("assigned all")
-		#call_deferred("build_world")
-		thread_tile_counter = 1
-		update_fixed_map()
-	else:	
-		thread_tile_counter += 1
-		print("assigned: "+str(thread_tile_counter) + tile_array_name)
+#func assign_autotile_id(tile_array_name):
+#	print("assigning autotiles")
+#	var locations = return_tile_array(tile_array_name)
+##	var locations = tiles
+#	for loc in locations:
+#		MapData.world[tile_array_name].append([loc,Tiles.return_autotile_id(loc,locations)])
+#		#await get_tree().process_frame
+##		tiles[tiles.find(loc)] = [loc,return_tile_id(loc,locations)]
+#	if thread_tile_counter == tile_array_names.size():
+#		print("assigned all")
+#		#call_deferred("build_world")
+#		thread_tile_counter = 1
+#		update_fixed_map()
+#	else:	
+#		thread_tile_counter += 1
+#		print("assigned: "+str(thread_tile_counter) + tile_array_name)
 
 
 func return_tile_array(tile_array_name):
@@ -326,34 +301,30 @@ func return_tile_array(tile_array_name):
 			return ocean 
 		"wet_sand":
 			return wet_sand  
-		"deep_ocean1":
-			return deep_ocean1
-		"deep_ocean2":
-			return deep_ocean2
-		"deep_ocean3":
-			return deep_ocean3
-		"deep_ocean4":
-			return deep_ocean4
+		"deep_ocean":
+			return deep_ocean
+#		"deep_ocean2":
+#			return deep_ocean2
+#		"deep_ocean3":
+#			return deep_ocean3
+#		"deep_ocean4":
+#			return deep_ocean4
 		
 
 func update_fixed_map():
 #	print("FOUND BORDER TILES")
-	MapData.world["deep_ocean1"] = deep_ocean1
-	MapData.world["deep_ocean2"] = deep_ocean2
-	MapData.world["deep_ocean3"] = deep_ocean3
-	MapData.world["deep_ocean4"] = deep_ocean4
+	MapData.world["deep_ocean"] = deep_ocean
 	MapData.world["wet_sand"] = wet_sand
-#	MapData.world["plains"] = plains
-#	MapData.world["forest"] = forest
+	MapData.world["plains"] = plains
+	MapData.world["forest"] = forest
 	MapData.world["desert"] = desert
-#	MapData.world["snow"] = snow
+	MapData.world["snow"] = snow
 	MapData.world["ocean"] = ocean
-#	MapData.world["dirt"] = dirt
+	MapData.world["dirt"] = dirt
 	MapData.world["beach"] = beach
 	print("BUILT TERRAIN FINAL")
 	save_starting_world_data()
 	MapData.add_world_data_to_chunks()
-	get_node("/root/Overworld/Loading").call_deferred("queue_free")
 	call_deferred("build_map")
 
 func fix_tiles():
@@ -400,7 +371,6 @@ func _fix_tiles(value):
 
 
 func save_starting_world_data():
-	MapData.world["is_built"] = true
 	game_state = GameState.new()
 	game_state.world_state = MapData.world
 	game_state.cave_state = MapData.caves

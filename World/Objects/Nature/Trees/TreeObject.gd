@@ -179,8 +179,8 @@ func setGrownTreeTexture():
 	await get_tree().process_frame
 	animated_tree_top_sprite.play("default")
 
-@rpc("call_local", "any_peer", "unreliable")
-func hit(tool_name = "wood axe"):
+
+func hit(tool_name):
 	if not destroyed:
 		if not (phase == "5" and Util.isNonFruitTree(variety)) and not (phase == "mature1" or phase == "mature2" or phase == "harvest" or phase == "empty" and Util.isFruitTree(variety)):
 			animation_player_stump.call_deferred("play", "sapling hit")
@@ -291,7 +291,8 @@ func _on_Hurtbox_area_entered(_area):
 #		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-16,16), randf_range(-10,22)))
 #		health -= Stats.FIRE_DEBUFF_DAMAGE
 	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
-		hit.rpc()
+		#get_parent().hit.rpc(name,_area.tool_name)
+		get_parent().rpc("hit",name,_area.tool_name)
 
 
 ### Tree modulate functions
@@ -490,7 +491,7 @@ func _on_TreeTopArea_area_exited(_area):
 
 func _on_RandomLeavesFallingTimer_timeout():
 	random_leaves_falling_timer.set_deferred("wait_time", rng.randi_range(15.0, 60.0))
-	if str(phase) == "5":
+	if str(phase) == "5" and health > 40:
 		InstancedScenes.initiateLeavesFallingEffect(variety, position)
 
 func _on_ResetTempHealthTimer_timeout():

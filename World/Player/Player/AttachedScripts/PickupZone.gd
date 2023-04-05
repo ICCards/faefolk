@@ -4,7 +4,6 @@ extends Area2D
 var items_in_range = {}
 
 func _on_body_entered(body):
-	print("ITEM D ENETERED")
 	if PlayerDataHelpers.can_item_be_added_to_inventory(body.item_name, body.item_quantity):
 		items_in_range[body] = body
 	else:
