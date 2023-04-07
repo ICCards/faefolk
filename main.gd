@@ -21,14 +21,15 @@ func _on_join_btn_pressed():
 func send_world_data(_world):
 	print("GOT WORLD DATA")
 	world = _world
-	MapData.world = _world
-	$WorldMap.buildMap()
-	await get_tree().create_timer(2).timeout
-	MapData.add_world_data_to_chunks()
-	$WorldBuilder.initialize()
-	$WorldBuilder/BuildTerrain.initialize()
-	$WorldBuilder/BuildNature.initialize()
-	$WorldBuilder/SpawnAnimal.initialize()
+#	MapData.world = _world
+#	$WorldMap.buildMap()
+#	await get_tree().create_timer(2).timeout
+#	MapData.add_world_data_to_chunks()
+#	$WorldBuilder.initialize()
+#	$WorldBuilder/BuildTerrain.initialize()
+#	$WorldBuilder/BuildNature.initialize()
+#	$WorldBuilder/SpawnAnimal.initialize()
+
 
 func build_world():
 	print("BUILD WORLD")

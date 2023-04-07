@@ -1,11 +1,12 @@
-AudioStreamPlayer2D
+Button
+TextureRect
+Label
 Node2D
+AudioStreamPlayer2D
 Node
 MultiplayerSpawner
 MultiplayerSynchronizer
 MarginContainer
-Button
-Label
 VBoxContainer
 PanelContainer
 CanvasLayer
@@ -29,4 +30,3 @@ Marker2D
 Area2D
 ColorRect
 PointLight2D
-GridContainer

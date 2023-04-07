@@ -9,18 +9,28 @@ func _ready():
 	initialize_chat_history()
 	inputField.connect("text_submitted",Callable(self,"text_submitted"))
 	
-func initialize_chat_history():
-	for i in range(Chat.message_history.size()):
-		if str(Chat.message_history[i][0]) == str(Server.player_id):
-			add_message(Chat.message_history[i][0], Chat.message_history[i][1], '#1359ff')
-		else:
-			add_message(Chat.message_history[i][0], Chat.message_history[i][1], '#ffffff')
-	
+
+var message_history = []
+
 func ReceiveMessage(player_id, message):
-	if str(player_id) == Server.player_id:
-		add_message(player_id, message, '#00e7ff')
-	else:
-		add_message(player_id, message, '#ffffff')
+	message_history.append([player_id, message])
+	Server.world.get_node("Players/" + str(player_id)).DisplayMessageBubble(message)
+	Server.world.get_node("Players/" + Server.player_id + "/Camera2D/UserInterface/ChatBox").ReceiveMessage(str(player_id), message)
+	
+
+func initialize_chat_history():
+	for i in range(message_history.size()):
+		if str(message_history[i][0]) == str(Server.player_id):
+			add_message(message_history[i][0], message_history[i][1], '#1359ff')
+		else:
+			add_message(message_history[i][0], message_history[i][1], '#ffffff')
+
+
+#func ReceiveMessage(player_id, message):
+#	if str(player_id) == Server.player_id:
+#		add_message(player_id, message, '#00e7ff')
+#	else:
+#		add_message(player_id, message, '#ffffff')
 
 
 func _input(event):
@@ -33,11 +43,12 @@ func _input(event):
 
 func text_submitted(text):
 	if text != "":
-		var data =  {"u": Server.username, "d": text}
-		var message = Util.toMessage("SEND_MESSAGE",data)
-		Server._client.get_peer(1).put_packet(message)
-		inputField.text = ''
-		inputField.release_focus()
+		add_message(Server.player_node.name, text, '#1359ff')
+#		var data =  {"u": Server.username, "d": text}
+#		var message = Util.toMessage("SEND_MESSAGE",data)
+#		Server._client.get_peer(1).put_packet(message)
+#		inputField.text = ''
+#		inputField.release_focus()
 	
 func add_message(username, text, color):
 	chatLog.text += '\n' 
