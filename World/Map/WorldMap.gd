@@ -29,7 +29,7 @@ enum Tiles {
 
 
 func _input(event):
-	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and has_node("/root/Main"):
+	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and not PlayerData.chatMode and has_node("/root/Main"):
 		if event.is_action_pressed("open map"):
 			Server.player_node.actions.destroy_placeable_object()
 			#Server.world.get_node("WorldAmbience").call_deferred("hide")
@@ -46,9 +46,9 @@ func initialize():
 	$Camera2D.set_deferred("enabled", true)
 	Server.player_node.user_interface.get_node("Hotbar").call_deferred("hide") 
 	Server.player_node.user_interface.get_node("CombatHotbar").call_deferred("hide")
-	for player in get_node("../Players").get_children():
-		if player.name != "MultiplayerSpawner":
-			add_player_icon(player.name)
+#	for player in get_node("../Players").get_children():
+#		if player.name != "MultiplayerSpawner":
+#			add_player_icon(player.name)
 	
 func add_player_icon(player_name):
 	if not $Map/Players.has_node(str(player_name)):
@@ -120,27 +120,22 @@ func return_player_direction(dir):
 			return -90
 
 func buildMap():
-	var map = get_parent().world
-	for loc in map["dirt"]:
-		miniMap.set_cell(0,loc[0],Tiles.DIRT,Vector2i(0,0))
-	for loc in map["forest"]:
-		miniMap.set_cell(0,loc[0],Tiles.FOREST,Vector2i(0,0))
-	for loc in map["plains"]:
-		miniMap.set_cell(0,loc[0],Tiles.PLAINS,Vector2i(0,0))
-	for loc in map["beach"]:
-		miniMap.set_cell(0,loc,Tiles.BEACH,Vector2i(0,0))
-	for loc in map["desert"]:
-		miniMap.set_cell(0,loc,Tiles.DESERT,Vector2i(0,0))
-	for loc in map["snow"]:
-		miniMap.set_cell(0,loc[0],Tiles.SNOW,Vector2i(0,0))
-	for loc in map["deep_ocean1"]:
-		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
-	for loc in map["deep_ocean2"]:
-		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
-	for loc in map["deep_ocean3"]:
-		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
-	for loc in map["deep_ocean4"]:
-		miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
+	var map = get_parent().terrain
+	for chunk in map:
+		for loc in map[chunk]["dirt"]:
+			miniMap.set_cell(0,loc[0],Tiles.DIRT,Vector2i(0,0))
+		for loc in map[chunk]["forest"]:
+			miniMap.set_cell(0,loc,Tiles.FOREST,Vector2i(0,0))
+		for loc in map[chunk]["plains"]:
+			miniMap.set_cell(0,loc,Tiles.PLAINS,Vector2i(0,0))
+		for loc in map[chunk]["beach"]:
+			miniMap.set_cell(0,loc,Tiles.BEACH,Vector2i(0,0))
+		for loc in map[chunk]["desert"]:
+			miniMap.set_cell(0,loc,Tiles.DESERT,Vector2i(0,0))
+		for loc in map[chunk]["snow"]:
+			miniMap.set_cell(0,loc,Tiles.SNOW,Vector2i(0,0))
+		for loc in map[chunk]["deep_ocean"]:
+			miniMap.set_cell(0,loc,Tiles.DEEP_OCEAN,Vector2i(0,0))
 	for x in range(MAP_WIDTH):
 		for y in range(MAP_HEIGHT):
 			if miniMap.get_cell_atlas_coords(0,Vector2i(x,y)) == Vector2i(-1,-1):

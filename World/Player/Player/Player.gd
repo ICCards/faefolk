@@ -58,11 +58,11 @@ func _ready():
 	character.LoadPlayerCharacter("human_male")
 	#set_multiplayer_authority(str(name).to_int())
 	$Camera2D.enabled = is_multiplayer_authority()
-	if not is_multiplayer_authority(): 
-		set_process_input(false)
-		set_process_unhandled_input(false)
-		set_process(false)
-		return
+#	if not is_multiplayer_authority(): 
+#		set_process_input(false)
+#		set_process_unhandled_input(false)
+#		set_process(false)
+#		return
 	position = Vector2(500*16,500*16)
 	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
 	Server.player_node = self

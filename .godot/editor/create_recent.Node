@@ -1,6 +1,8 @@
+Camera2D
+Label
+Control
 Button
 TextureRect
-Label
 Node2D
 AudioStreamPlayer2D
 Node
@@ -16,8 +18,6 @@ Timer
 CollisionShape2D
 AnimatedSprite2D
 Line2D
-Camera2D
-Control
 CanvasModulate
 VisibleOnScreenNotifier2D
 NavigationRegion2D

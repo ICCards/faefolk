@@ -4,7 +4,7 @@ extends Node2D
 const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
 
-@export var world = {}
+var terrain = {}
 
 var connected_peer_ids = []
 var is_changing_scene = false
@@ -17,12 +17,13 @@ func _on_join_btn_pressed():
 	build_world()
 
 
+
 @rpc
-func send_world_data(_world):
+func send_world_data(_terrain):
 	print("GOT WORLD DATA")
-	world = _world
+	terrain = _terrain
 #	MapData.world = _world
-#	$WorldMap.buildMap()
+	$WorldMap.buildMap()
 #	await get_tree().create_timer(2).timeout
 #	MapData.add_world_data_to_chunks()
 #	$WorldBuilder.initialize()
@@ -41,7 +42,7 @@ func build_world():
 #	$WorldBuilder/BuildTerrain.initialize()
 #	$WorldBuilder/BuildNature.initialize()
 #	$WorldBuilder/SpawnAnimal.initialize()
-#	$WorldMap.buildMap()
+	#$WorldMap.buildMap()
 
 
 func set_valid_tiles():

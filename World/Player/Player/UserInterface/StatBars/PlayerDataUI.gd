@@ -32,10 +32,11 @@ func set_health_bar():
 
 
 func set_current_time():
-	$DateTime/Day.text = PlayerData.player_data["day_week"] + " " +  str(PlayerData.player_data["day_number"])
-	$DateTime/Time.text = return_adjusted_time_string(PlayerData.player_data["time_hours"],PlayerData.player_data["time_minutes"])
-	$DateTime/SeasonIcon.texture = load("res://Assets/Images/User interface/DateTime/season icons/"+ PlayerData.player_data["season"] +".png")
-	advance_clock_icon()
+	pass
+#	$DateTime/Day.text = PlayerData.player_data["day_week"] + " " +  str(PlayerData.player_data["day_number"])
+#	$DateTime/Time.text = return_adjusted_time_string(PlayerData.player_data["time_hours"],PlayerData.player_data["time_minutes"])
+#	$DateTime/SeasonIcon.texture = load("res://Assets/Images/User interface/DateTime/season icons/"+ PlayerData.player_data["season"] +".png")
+#	advance_clock_icon()
 
 
 func return_adjusted_time_string(hours,minutes):

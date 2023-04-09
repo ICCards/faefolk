@@ -27,6 +27,7 @@ var viewInventoryMode: bool = false
 var viewSaveAndExitMode: bool = false
 var viewMapMode: bool = false
 var interactive_screen_mode: bool = false
+var chatMode: bool = false
 
 var health_maximum = 100
 var energy_maximum = 100

@@ -35,9 +35,9 @@ func initialize_chat_history():
 
 func _input(event):
 	if event is InputEventKey:
-		if event.pressed and event.scancode == KEY_ENTER:
+		if event.pressed and event.keycode == KEY_ENTER:
 			inputField.grab_focus()
-		if event.pressed and event.scancode == KEY_ESCAPE:
+		if event.pressed and event.keycode == KEY_ESCAPE:
 			inputField.release_focus()
 			
 
@@ -47,8 +47,8 @@ func text_submitted(text):
 #		var data =  {"u": Server.username, "d": text}
 #		var message = Util.toMessage("SEND_MESSAGE",data)
 #		Server._client.get_peer(1).put_packet(message)
-#		inputField.text = ''
-#		inputField.release_focus()
+		inputField.text = ''
+		inputField.release_focus()
 	
 func add_message(username, text, color):
 	chatLog.text += '\n' 
