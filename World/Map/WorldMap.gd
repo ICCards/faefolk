@@ -42,8 +42,8 @@ func _input(event):
 func initialize():
 	show()
 	PlayerData.viewMapMode = true
-	Server.player_node.get_node("Camera2D").set_deferred("enabled", false)
-	$Camera2D.set_deferred("enabled", true)
+	Server.player_node.get_node("Camera2D").enabled = false
+	$Camera2D.enabled = true
 	Server.player_node.user_interface.get_node("Hotbar").call_deferred("hide") 
 	Server.player_node.user_interface.get_node("CombatHotbar").call_deferred("hide")
 #	for player in get_node("../Players").get_children():
@@ -85,13 +85,13 @@ func draw_grid_labels():
 			gridSquareLabel.position = Vector2(x*200, y*200) + Vector2(2, 2)
 			add_child(gridSquareLabel)
 	
-func _physics_process(delta):
-	if is_instance_valid(Server.player_node):
-#		playerIcon.position = Server.player_node.position*2
-#		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
-		for player in $Map/Players.get_children():
-			#player.rotation_degrees = return_player_direction(get_node("../Players/"+player.name).direction)
-			player.position = get_node("../Players/"+player.name).position
+#func _physics_process(delta):
+#	if is_instance_valid(Server.player_node):
+##		playerIcon.position = Server.player_node.position*2
+##		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
+#		for player in $Map/Players.get_children():
+#			#player.rotation_degrees = return_player_direction(get_node("../Players/"+player.name).direction)
+#			player.position = get_node("../Players/"+player.name).position
 			#player.scale = adjustedPlayerIconScale($Camera2D.zoom)
 #		roamingStorm = get_node("/root/Overworld/RoamingStorm")
 #		roamingStorm2 = get_node("/root/Overworld/RoamingStorm2")
@@ -123,7 +123,7 @@ func buildMap():
 	var map = get_parent().terrain
 	for chunk in map:
 		for loc in map[chunk]["dirt"]:
-			miniMap.set_cell(0,loc[0],Tiles.DIRT,Vector2i(0,0))
+			miniMap.set_cell(0,loc,Tiles.DIRT,Vector2i(0,0))
 		for loc in map[chunk]["forest"]:
 			miniMap.set_cell(0,loc,Tiles.FOREST,Vector2i(0,0))
 		for loc in map[chunk]["plains"]:

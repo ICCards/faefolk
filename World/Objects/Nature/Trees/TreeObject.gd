@@ -180,7 +180,7 @@ func setGrownTreeTexture():
 	animated_tree_top_sprite.play("default")
 
 
-func hit(tool_name):
+func hit(player_id, new_health):
 	if not destroyed:
 		if not (phase == "5" and Util.isNonFruitTree(variety)) and not (phase == "mature1" or phase == "mature2" or phase == "harvest" or phase == "empty" and Util.isFruitTree(variety)):
 			animation_player_stump.call_deferred("play", "sapling hit")
@@ -292,7 +292,7 @@ func _on_Hurtbox_area_entered(_area):
 #		health -= Stats.FIRE_DEBUFF_DAMAGE
 	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
 		#get_parent().hit.rpc(name,_area.tool_name)
-		get_parent().rpc("hit",name,_area.tool_name)
+		get_parent().rpc_id(1,"nature_object_hit",Server.player_node.name,"tree",name,location,_area.tool_name)
 
 
 ### Tree modulate functions

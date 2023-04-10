@@ -5,6 +5,8 @@ const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
 
 var terrain = {}
+var nature = {}
+var world_data = {}
 
 var connected_peer_ids = []
 var is_changing_scene = false
@@ -19,16 +21,18 @@ func _on_join_btn_pressed():
 
 
 @rpc
-func send_world_data(_terrain):
+func send_world_data(data):
 	print("GOT WORLD DATA")
-	terrain = _terrain
+	terrain = data["terrain"]
+	nature = data["nature"]
+	world_data = data["world_data"]
 #	MapData.world = _world
 	$WorldMap.buildMap()
 #	await get_tree().create_timer(2).timeout
 #	MapData.add_world_data_to_chunks()
-#	$WorldBuilder.initialize()
-#	$WorldBuilder/BuildTerrain.initialize()
-#	$WorldBuilder/BuildNature.initialize()
+	$WorldBuilder.initialize()
+	$WorldBuilder/BuildTerrain.initialize()
+	$WorldBuilder/BuildNature.initialize()
 #	$WorldBuilder/SpawnAnimal.initialize()
 
 
