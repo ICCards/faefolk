@@ -330,7 +330,7 @@ func move_placeable_object(data):
 	get_node("../").add_child(placeObject)
 
 func show_placeable_object(item_name, item_category):
-	if Server.world.name == "Overworld":
+	if Server.world.name == "Main":
 		if not has_node("../PlaceObject"): # does not exist yet, add to scene tree
 			var placeObject = PlaceObjectScene.instantiate()
 			placeObject.name = "PlaceObject"

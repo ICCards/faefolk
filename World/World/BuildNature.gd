@@ -17,12 +17,13 @@ var current_chunks = []
 @onready var GrassObjects = get_node("../../GrassObjects")
 @onready var NatureObjects = get_node("../../NatureObjects")
 @onready var ForageObjects = get_node("../../ForageObjects")
+@onready var PlaceableObjects = get_node("../../ForageObjects")
 
 
 func initialize():
-	await get_tree().process_frame
-	placeable_thread.start(Callable(self,"whoAmIPlaceable").bind(null))
-	crop_thread.start(Callable(self,"whoAmICrop").bind(null))
+	pass
+#	placeable_thread.start(Callable(self,"whoAmIPlaceable").bind(null))
+#	crop_thread.start(Callable(self,"whoAmICrop").bind(null))
 	$SpawnNatureTimer.start()
 
 
@@ -37,7 +38,7 @@ func spawn_forage():
 		if Server.world.is_changing_scene:
 			var value = forage_thread.wait_to_finish()
 			return
-		var map = get_node("../../").nature[chunk] #MapData.return_chunk(chunk[0], chunk.substr(1,-1))
+		var map = get_node("../../").world[chunk] #MapData.return_chunk(chunk[0], chunk.substr(1,-1))
 		for id in map["forage"]:
 			var player_loc = Server.player_node.position / 16
 			var location = map["forage"][id]["l"]
@@ -51,27 +52,39 @@ func spawn_forage():
 
 
 func spawn_placeables():
-	for id in MapData.world["placeable"]:
-		var item_name = MapData.world["placeable"][id]["n"]
-		var location = MapData.world["placeable"][id]["l"]
-		if item_name == "wall" or item_name == "foundation" or item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
-			PlaceObject.place_building_object_in_world(id,item_name,MapData.world["placeable"][id]["d"],MapData.world["placeable"][id]["v"],location,MapData.world["placeable"][id]["h"])
-		else:
-			PlaceObject.place_object_in_world(id,item_name,MapData.world["placeable"][id]["d"],location,MapData.world["placeable"][id]["v"])
+	for chunk in current_chunks:
+		if Server.world.is_changing_scene:
+			var value = forage_thread.wait_to_finish()
+			return
+		var map = get_node("../../").world[chunk]
+		for id in map["placeable"]:
+			var item_name = map["placeable"][id]["n"]
+			var location = map["placeable"][id]["l"]
+			if not PlaceableObjects.has_node(id):
+				if item_name == "wall" or item_name == "foundation" or item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
+					PlaceObject.place_building_object_in_world(id,item_name,map["placeable"][id]["d"],map["placeable"][id]["v"],location,map["placeable"][id]["h"])
+				else:
+					PlaceObject.place_object_in_world(id,item_name,map["placeable"][id]["d"],location,map["placeable"][id]["v"])
 	placeable_thread.wait_to_finish()
 
 func spawn_crops():
-	for id in MapData.world["crop"]:
-		var item_name = MapData.world["crop"][id]["n"]
-		var location = Util.string_to_vector2(MapData.world["crop"][id]["l"])
-		var days_until_harvest = MapData.world["crop"][id]["dh"]
-		var days_without_water = MapData.world["crop"][id]["dww"]
-		var regrowth_phase = MapData.world["crop"][id]["rp"]
-		PlaceObject.place_seed_in_world(id,item_name,location,days_until_harvest,days_without_water,regrowth_phase)
-	for loc in MapData.world["tile"]:
-		Tiles.hoed_tiles.set_cells_terrain_connect(0,[loc],0,0)
-		if MapData.world["tile"][loc] == "w":
-			Tiles.watered_tiles.set_cells_terrain_connect(0,[loc],0,0)
+	for chunk in current_chunks:
+		if Server.world.is_changing_scene:
+			var value = forage_thread.wait_to_finish()
+			return
+		var map = get_node("../../").world[chunk]
+		for id in map["crop"]:
+			if not PlaceableObjects.has_node(id):
+				var item_name = map["crop"][id]["n"]
+				var location = map["crop"][id]["l"]
+				var days_until_harvest = map["crop"][id]["dh"]
+				var days_without_water = map["crop"][id]["dww"]
+				var regrowth_phase = map["crop"][id]["rp"]
+				PlaceObject.place_seed_in_world(id,item_name,location,days_until_harvest,days_without_water,regrowth_phase)
+		for loc in map["tile"]:
+			Tiles.hoed_tiles.set_cells_terrain_connect(0,[loc],0,0)
+			if map["tile"][loc] == "w":
+				Tiles.watered_tiles.set_cells_terrain_connect(0,[loc],0,0)
 	crop_thread.wait_to_finish()
 
 
@@ -162,11 +175,11 @@ func spawn_trees():
 		if Server.world.is_changing_scene:
 			var value = trees_thread.wait_to_finish()
 			return
-		var map = get_node("../../").nature[chunk]  #MapData.return_chunk(chunk[0], chunk.substr(1,-1))
+		var map = get_node("../../").world[chunk]  #MapData.return_chunk(chunk[0], chunk.substr(1,-1))
 		for id in map["tree"]:
 			var loc = map["tree"][id]["l"]+Vector2i(1,0)
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
-				if not NatureObjects.has_node(id): #and MapData.world["tree"].has(id):
+				if not NatureObjects.has_node(id) and get_node("../../").world[chunk]["tree"].has(id):
 					var biome = map["tree"][id]["b"]
 					if biome == "desert":
 						pass
@@ -198,7 +211,7 @@ func spawn_ores():
 		if Server.world.is_changing_scene:
 			var value = ores_thread.wait_to_finish()
 			return
-		var map = get_node("../../").nature[chunk] #MapData.return_chunk(chunk[0], chunk.substr(1,-1))
+		var map = get_node("../../").world[chunk] #MapData.return_chunk(chunk[0], chunk.substr(1,-1))
 		for id in map["ore_large"]:
 			var loc = map["ore_large"][id]["l"] + Vector2i(1,0)
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
@@ -221,7 +234,7 @@ var count = 0
 func spawn_grass():
 	var player_loc = Server.player_node.position / 16
 	for chunk in current_chunks:
-		var map = get_node("../../").nature[chunk] # MapData.return_chunk(chunk[0], chunk.substr(1,-1))
+		var map = get_node("../../").world[chunk] # MapData.return_chunk(chunk[0], chunk.substr(1,-1))
 		for id in map["tall_grass"]:
 			if Server.world.is_changing_scene:
 				var value = grass_thread.wait_to_finish()

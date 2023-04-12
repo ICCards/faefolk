@@ -31,7 +31,7 @@ func remove_from_world():
 	
 	
 func set_grass_texture():
-	var szn = Server.world.world_data["season"]
+	var szn = Server.world.server_data["season"]
 	if biome == "cave1" or biome == "cave2" or biome == "cave3" or biome == "cave4":
 		$Front.texture = load("res://Assets/Images/cave grass sets/"+str(biome.right(1))+"/front.png")
 		$Back.texture = load("res://Assets/Images/cave grass sets/"+str(biome.right(1))+"/back.png")

@@ -44,15 +44,6 @@ func _ready() -> void:
 	PlayerData.connect("season_changed",Callable(self,"reset_cave_data"))
 	PlayerData.connect("set_day",Callable(self,"advance_crop"))
 
-#func reset_cave_data():
-#	caves = starting_caves_data
-
-func add_world_data_to_chunks():
-	if not is_world_data_in_chunks:
-		is_world_data_in_chunks = true
-		add_tiles_to_chunks()
-		add_nature_objects_to_chunks()
-		#add_animals_to_chunks()
 
 func advance_crop():
 	pass
@@ -87,9 +78,10 @@ func advance_crop():
 #func remove_hoed_tile(loc):
 #	world["tile"].erase(loc)
 
-func add_object(type,id,data):
-	#if Server.world.name == "Overworld":
-	world[type][id] = data
+
+#func add_object(loc,type,id,data):
+#	if Server.world.name == "Overworld":
+#	world[type][id] = data
 #	else:
 #		Server.caves[Server.world.name][type][id] = data
 
@@ -3770,7 +3762,6 @@ func add_tile_to_chunk(type, tile):
 			l11[type].append(tile)
 		"L12":
 			l12[type].append(tile)
-
 
 
 func get_chunk_from_location(loc):

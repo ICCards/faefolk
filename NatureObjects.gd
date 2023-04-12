@@ -5,16 +5,17 @@ extends Node2D
 func nature_object_hit(peer_id,type,id,loc,tool_name):pass
 
 @rpc
-func return_new_nature_health(data):
-	print(data["player_id"])
-	print(data["type"])
-	print(data["id"])
-	print(data["chunk"])
-	print(data["health"])
-	get_parent().nature[data["chunk"]][data["type"]][data["id"]]["h"] = data["health"]
-	if get_parent().nature[data["chunk"]][data["type"]][data["id"]]["h"] <= 0:
-		get_parent().nature[data["chunk"]][data["type"]].erase([data["id"]])
-	if self.get_children().has(data["id"]):
-		get_node(data["id"]).hit(data["player_id"],data["health"])
-	print("RECEIVED HIT")
+func update_nature_health(data):
+	get_node("../").world[data["chunk"]][data["type"]][data["id"]]["h"] = data["health"]
+	for node in self.get_children():
+		if node.name == data["id"]:
+			get_node(str(data["id"])).hit(data["player_id"],data["health"])
+			return
 
+@rpc
+func destroy_nature_object(data):
+	get_node("../").world[data["chunk"]][data["type"]].erase(data["id"])
+	for node in self.get_children():
+		if node.name == data["id"]:
+			get_node(str(data["id"])).destroy(data["player_id"])
+			return

@@ -56,22 +56,21 @@ var is_building_world = false
 func _ready():
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
-	#set_multiplayer_authority(str(name).to_int())
+	set_multiplayer_authority(str(name).to_int())
 	$Camera2D.enabled = is_multiplayer_authority()
-#	if not is_multiplayer_authority(): 
-#		set_process_input(false)
-#		set_process_unhandled_input(false)
-#		set_process(false)
-#		return
+	if not is_multiplayer_authority(): 
+		set_process_input(false)
+		set_process_unhandled_input(false)
+		set_process(false)
+		return
 	position = Vector2(500*16,500*16)
 	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
 	Server.player_node = self
-	if is_building_world:
-		state = DYING
-		$Camera2D/UserInterface/LoadingScreen.show()
-#		await get_tree().create_timer(5.0).timeout
+#	if is_building_world:
+	state = DYING
+	$Camera2D/UserInterface/LoadingScreen.initialize(8)
+	await get_tree().create_timer(8.0).timeout
 	state = MOVEMENT
-	$Camera2D/UserInterface/LoadingScreen.hide()
 	set_held_object()
 	Server.isLoaded = true
 #
@@ -189,6 +188,7 @@ func _process(_delta) -> void:
 	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING or state == SWORD_SWINGING:
 		magic_casting_movement_state(_delta)
 	else:
+		footsteps_sound.stream_paused = true
 		footstep_stream_paused = true
 
 

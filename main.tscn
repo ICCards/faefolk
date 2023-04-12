@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://bikiy2vasycja"]
+[gd_scene load_steps=41 format=3 uid="uid://bikiy2vasycja"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_miuy3"]
 [ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="2_jxniw"]
@@ -10,6 +10,7 @@
 [ext_resource type="TileSet" uid="uid://3x3xfgwqdrhm" path="res://Assets/Tilesets/terrain/tres files/dirt.tres" id="5_5eaio"]
 [ext_resource type="Script" path="res://World/World/BuildTerrain.gd" id="5_oye32"]
 [ext_resource type="TileSet" uid="uid://de28nfavviio7" path="res://Assets/Tilesets/terrain/elevated terrain.tres" id="6_1xuhk"]
+[ext_resource type="Script" path="res://Time.gd" id="6_j6htr"]
 [ext_resource type="TileSet" uid="uid://ceprqmvmkacdl" path="res://Assets/Tilesets/terrain/tres files/forest.tres" id="7_rcnxi"]
 [ext_resource type="TileSet" uid="uid://dja0b16fhgms6" path="res://Assets/Tilesets/terrain/tres files/freshwater.tres" id="8_4ak2k"]
 [ext_resource type="TileSet" uid="uid://c0mxloskuawnh" path="res://Assets/Tilesets/terrain/tres files/waves.tres" id="9_d86tr"]
@@ -21,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://ptjidk7r1daj" path="res://Assets/Tilesets/terrain/hoed.png" id="15_hjgjh"]
 [ext_resource type="PackedScene" uid="uid://c66ktnntnkqrx" path="res://World/Map/WorldMap.tscn" id="16_fydq0"]
 [ext_resource type="Script" path="res://NatureObjects.gd" id="20_dvf2e"]
+[ext_resource type="Script" path="res://PlaceableObjects.gd" id="20_hue5x"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7b1tf"]
 texture = ExtResource("2_jxniw")
@@ -4514,6 +4516,9 @@ wait_time = 2.9
 
 [node name="WorldBuilderTimer" type="Timer" parent="WorldBuilder"]
 
+[node name="Time" type="Node" parent="."]
+script = ExtResource("6_j6htr")
+
 [node name="TerrainTiles" type="Node2D" parent="."]
 z_index = -10
 
@@ -4655,6 +4660,7 @@ y_sort_enabled = true
 
 [node name="PlaceableObjects" type="Node2D" parent="."]
 y_sort_enabled = true
+script = ExtResource("20_hue5x")
 
 [node name="ForageObjects" type="Node2D" parent="."]
 y_sort_enabled = true

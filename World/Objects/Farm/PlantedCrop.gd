@@ -15,10 +15,10 @@ var object_name = "crop"
 func _ready():
 	Tiles.remove_valid_tiles(location)
 	$Crop/TileMap.set_cell(0,Vector2i(0,-1),0,Constants.crop_atlas_tiles[crop_name][return_phase()])
-	MapData.connect("refresh_crops",Callable(self,"refresh_image"))
+	#MapData.connect("refresh_crops",Callable(self,"refresh_crop"))
 
 
-func refresh_image():
+func refresh_crop():
 	in_regrowth_phase = MapData.world["crop"][name]["rp"]
 	days_until_harvest = MapData.world["crop"][name]["dh"]
 	days_without_water = MapData.world["crop"][name]["dww"]
@@ -88,7 +88,7 @@ func harvest_and_keep_planted():
 		yield_harvest(JsonData.crop_data[crop_name]["yield"])
 		MapData.world["crops"][name]["rp"] = true # start regrowth phase
 		MapData.world["crops"][name]["dh"] = 1 # days until next harvest
-		refresh_image()
+		refresh_crop()
 		
 
 func yield_harvest(yield_list):

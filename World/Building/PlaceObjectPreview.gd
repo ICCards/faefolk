@@ -242,7 +242,7 @@ func place_rotatable_state():
 
 
 func place_foundation_state():
-	if Server.world.name == "Overworld":
+	if Server.world.name == "Main":
 		var location = Tiles.valid_tiles.local_to_map(mousePos)
 		if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.foundation_tiles.get_cell_atlas_coords(0,location)==Vector2i(-1,-1):
 			$ColorIndicator.indicator_color = "Red"

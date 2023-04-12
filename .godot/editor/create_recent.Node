@@ -1,11 +1,14 @@
+Node
+TextureProgressBar
+ProgressBar
+Control
+AnimatedSprite2D
 Camera2D
 Label
-Control
 Button
 TextureRect
 Node2D
 AudioStreamPlayer2D
-Node
 MultiplayerSpawner
 MultiplayerSynchronizer
 MarginContainer
@@ -13,10 +16,8 @@ VBoxContainer
 PanelContainer
 CanvasLayer
 TileMap
-TextureProgressBar
 Timer
 CollisionShape2D
-AnimatedSprite2D
 Line2D
 CanvasModulate
 VisibleOnScreenNotifier2D
@@ -29,4 +30,3 @@ StaticBody2D
 Marker2D
 Area2D
 ColorRect
-PointLight2D

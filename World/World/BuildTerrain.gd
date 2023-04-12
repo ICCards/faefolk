@@ -47,7 +47,7 @@ func build_terrain():
 func spawn_chunk(chunk_name):
 	print("SPAWN CHUNK " + str(chunk_name))
 	var _chunk
-	_chunk = get_node("../../").terrain[chunk_name]
+	_chunk = get_node("../../").world[chunk_name]
 #	if chunk_name.length() == 2:
 #		_chunk = MapData.return_chunk(chunk_name.left(1),chunk_name.right(1))
 #	else:
