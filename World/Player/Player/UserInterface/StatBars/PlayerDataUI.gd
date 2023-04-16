@@ -10,6 +10,7 @@ func _ready():
 	PlayerData.connect("energy_changed",Callable(self,"set_energy_bar"))
 	PlayerData.connect("health_changed",Callable(self,"set_health_bar"))
 	PlayerData.connect("mana_changed",Callable(self,"set_mana_bar"))
+	PlayerData.connect("set_time",Callable(self,"set_current_time"))
 	set_energy_bar()
 	set_health_bar()
 	set_mana_bar()
@@ -32,11 +33,14 @@ func set_health_bar():
 
 
 func set_current_time():
-	pass
 #	$DateTime/Day.text = PlayerData.player_data["day_week"] + " " +  str(PlayerData.player_data["day_number"])
 #	$DateTime/Time.text = return_adjusted_time_string(PlayerData.player_data["time_hours"],PlayerData.player_data["time_minutes"])
 #	$DateTime/SeasonIcon.texture = load("res://Assets/Images/User interface/DateTime/season icons/"+ PlayerData.player_data["season"] +".png")
-#	advance_clock_icon()
+	if Server.world.server_data != {}:
+		$DateTime/Day.text = Server.world.server_data["day_week"] + " " +  str(Server.world.server_data["day_number"])
+		$DateTime/Time.text = return_adjusted_time_string(Server.world.server_data["time_hours"],Server.world.server_data["time_minutes"])
+		$DateTime/SeasonIcon.texture = load("res://Assets/Images/User interface/DateTime/season icons/"+ Server.world.server_data["season"] +".png")
+		advance_clock_icon()
 
 
 func return_adjusted_time_string(hours,minutes):

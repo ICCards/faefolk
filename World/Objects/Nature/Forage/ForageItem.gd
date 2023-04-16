@@ -21,12 +21,16 @@ func _ready():
 		Tiles.add_navigation_tiles(location)
 	set_forage_texture()
 
-@rpc("call_local", "any_peer", "unreliable")
+
 func harvest():
+	get_parent().rpc_id(1,"forage_object_picked_up",name,location)
+	
+func destroy():
 	hide()
+	$MovementCollision/CollisionShape2D.set_deferred("disabled",true)
 	if item_name != "raw egg":
 		Tiles.add_valid_tiles(location)
-		MapData.remove_object("forage",name)
+		#MapData.remove_object("forage",name)
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
 	await sound_effects.finished

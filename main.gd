@@ -28,9 +28,10 @@ func send_world_data(data):
 	$WorldMap.buildMap()
 #	await get_tree().create_timer(2).timeout
 #	MapData.add_world_data_to_chunks()
+	$WorldAmbience.initialize()
 	$WorldBuilder.initialize()
 	$WorldBuilder/BuildTerrain.initialize()
-	$WorldBuilder/BuildNature.initialize()
+	#$WorldBuilder/BuildNature.initialize()
 #	$WorldBuilder/SpawnAnimal.initialize()
 
 
@@ -39,7 +40,7 @@ func build_world():
 	Server.world = self
 #	MapData.add_world_data_to_chunks()
 	set_map_tiles()
-#	set_valid_tiles()
+	set_valid_tiles()
 #	$WorldBuilder.initialize()
 #	$WorldBuilder/BuildTerrain.initialize()
 #	$WorldBuilder/BuildNature.initialize()

@@ -79,9 +79,9 @@ func advance_crop():
 #	world["tile"].erase(loc)
 
 
-#func add_object(loc,type,id,data):
+func add_object(type,id,data):
 #	if Server.world.name == "Overworld":
-#	world[type][id] = data
+	world[type][id] = data
 #	else:
 #		Server.caves[Server.world.name][type][id] = data
 

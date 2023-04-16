@@ -8,7 +8,7 @@ var grass
 var biome
 var grass_list
 var front_health
-var back_heath
+var back_health
 var location
 var is_front_visible = true
 var is_back_visible = true
@@ -20,9 +20,13 @@ func _ready():
 	rng.randomize()
 	Tiles.add_navigation_tiles(location)
 	PlayerData.connect("season_changed",Callable(self,"set_grass_texture"))
-	front_health = rng.randi_range(1,3)
-	back_heath = rng.randi_range(1,3)
 	set_grass_texture()
+	if back_health == 0:
+		$BackArea2D/CollisionShape2D.set_deferred("disabled", true)
+		is_back_visible = false
+	if front_health == 0:
+		$Area2D/CollisionShape2D.set_deferred("disabled", true)
+		is_front_visible = false
 	
 func remove_from_world():
 	$Area2D.call_deferred("queue_free")
@@ -131,8 +135,8 @@ func _on_Area2D_area_entered(area):
 		$SoundEffects.call_deferred("play")
 
 func _on_BackArea2D_area_entered(area):
-	back_heath -= 1
-	if back_heath == 0:
+	back_health -= 1
+	if back_health == 0:
 		$BackArea2D/CollisionShape2D.set_deferred("disabled", true)
 		$AnimationPlayer2.call_deferred("play", "animate back")
 		await get_tree().create_timer(randf_range(0.0, 0.25)).timeout

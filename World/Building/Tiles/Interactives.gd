@@ -16,114 +16,58 @@ func close_barrel():
 
 
 func open_chest():
-	match get_parent().item_name:
-		"wood chest":
-			match get_parent().direction:
-				"down":
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(0,12))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(2,12))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(4,12))
-				"up":
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(6,12))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(8,12))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(10,12))
-				"left":
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(12,11))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(13,11))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(14,11))
-				"right":
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(19,11))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(18,11))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(16,11))
-		"stone chest":
-			match get_parent().direction:
-				"down":
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(0,15))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(2,15))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(4,15))
-				"up":
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(6,15))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(8,15))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(10,15))
-				"left":
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(12,14))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(13,14))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(14,14))
-				"right":
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(19,14))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(18,14))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(16,14))
+	match get_parent().direction:
+		"down":
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["down"])
+			await get_tree().create_timer(0.2).timeout
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["down"]+Vector2i(2,0))
+			await get_tree().create_timer(0.2).timeout
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["down"]+Vector2i(4,0))
+		"up":
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["up"])
+			await get_tree().create_timer(0.2).timeout
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["up"]+Vector2i(2,0))
+			await get_tree().create_timer(0.2).timeout
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["up"]+Vector2i(4,0))
+		"left":
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["left"])
+			await get_tree().create_timer(0.2).timeout
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["left"]+Vector2i(1,0))
+			await get_tree().create_timer(0.2).timeout
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["left"]+Vector2i(2,0))
+		"right":
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["right"])
+			await get_tree().create_timer(0.2).timeout
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["right"]+Vector2i(-1,0))
+			await get_tree().create_timer(0.2).timeout
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["right"]+Vector2i(-3,0))
 
 func close_chest():
-	match get_parent().item_name:
-		"wood chest":
-			match get_parent().direction:
-				"down":
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(4,12))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(2,12))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(0,12))
-				"up":
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(10,12))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(8,12))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(6,12))
-				"left":
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(14,11))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(13,11))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(12,11))
-				"right":
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(16,11))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(18,11))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(19,11))
-		"stone chest":
-			match get_parent().direction:
-				"down":
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(4,15))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(2,15))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(0,15))
-				"up":
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(10,15))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(8,15))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(6,15))
-				"left":
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(14,14))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(13,14))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(12,14))
-				"right":
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(16,14))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(18,14))
-					await get_tree().create_timer(0.2).timeout
-					get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Vector2i(19,14))
+	match get_parent().direction:
+		"down":
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["down"]+Vector2i(4,0))
+			await get_tree().create_timer(0.2).timeout
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["down"]+Vector2i(2,0))
+			await get_tree().create_timer(0.2).timeout
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["down"])
+		"up":
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["up"]+Vector2i(4,0))
+			await get_tree().create_timer(0.2).timeout
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["up"]+Vector2i(2,0))
+			await get_tree().create_timer(0.2).timeout
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["up"])
+		"left":
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["left"]+Vector2i(2,0))
+			await get_tree().create_timer(0.2).timeout
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["left"]+Vector2i(1,0))
+			await get_tree().create_timer(0.2).timeout
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["left"])
+		"right":
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["right"]+Vector2i(-3,0))
+			await get_tree().create_timer(0.2).timeout
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["right"]+Vector2i(-1,0))
+			await get_tree().create_timer(0.2).timeout
+			get_node("../ObjectTiles").set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles["chest"][get_parent().variety]["right"])
 
 
 func toggle_furnace_smoke(is_active):
@@ -215,49 +159,35 @@ func toggle_door():
 	if not is_opening_door:
 		is_opening_door = true
 		if get_parent().direction == "down" or get_parent().direction == "up":
-			if Tiles.object_tiles.get_cell_atlas_coords(0,get_parent().location) == Constants.rotatable_object_atlas_tiles[get_parent().item_name]["down"]: # open door
+			if Tiles.object_tiles.get_cell_atlas_coords(0,get_parent().location) == Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["down"]: # open door
 				get_parent().door_opened = true
 				get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
 				get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 				get_parent().sound_effects.play()
 				get_parent().movement_collision.set_deferred("disabled", true)
-				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.rotatable_object_atlas_tiles[get_parent().item_name]["down"]+Vector2i(2,0))
-				await get_tree().create_timer(0.2).timeout
-				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.rotatable_object_atlas_tiles[get_parent().item_name]["down"]+Vector2i(4,0))
-				await get_tree().create_timer(0.2).timeout
-				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.rotatable_object_atlas_tiles[get_parent().item_name]["down"]+Vector2i(6,0))
+				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["down"]+Vector2i(2,0))
 			else: # close door
 				get_parent().door_opened = false
 				get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
 				get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 				get_parent().sound_effects.play()
 				get_parent().movement_collision.set_deferred("disabled", false)
-				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.rotatable_object_atlas_tiles[get_parent().item_name]["down"]+Vector2i(4,0))
-				await get_tree().create_timer(0.2).timeout
-				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.rotatable_object_atlas_tiles[get_parent().item_name]["down"]+Vector2i(2,0))
-				await get_tree().create_timer(0.2).timeout
-				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.rotatable_object_atlas_tiles[get_parent().item_name]["down"])
+				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["down"])
 		else:
-			if Tiles.object_tiles.get_cell_atlas_coords(0,get_parent().location) == Constants.rotatable_object_atlas_tiles[get_parent().item_name]["right"]: # open door
+			if Tiles.object_tiles.get_cell_atlas_coords(0,get_parent().location) == Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["right"]: # open door
 				get_parent().door_opened = true
 				get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
 				get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 				get_parent().sound_effects.play()
 				get_parent().movement_collision.set_deferred("disabled", true)
-				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.rotatable_object_atlas_tiles[get_parent().item_name]["right"]+Vector2i(-2,0))
-				await get_tree().create_timer(0.2).timeout
-				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.rotatable_object_atlas_tiles[get_parent().item_name]["right"]+Vector2i(-4,0))
-				await get_tree().create_timer(0.2).timeout
-				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.rotatable_object_atlas_tiles[get_parent().item_name]["right"]+Vector2i(-6,0))
+				Tiles.object_tiles.set_cell(0,get_parent().location+Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["right"]+Vector2i(3,0))
+				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["right"]+Vector2i(1,0))
 			else:
 				get_parent().door_opened = false
 				get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
 				get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 				get_parent().sound_effects.play()
 				get_parent().movement_collision.set_deferred("disabled", false)
-				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.rotatable_object_atlas_tiles[get_parent().item_name]["right"]+Vector2i(-4,0))
-				await get_tree().create_timer(0.2).timeout
-				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.rotatable_object_atlas_tiles[get_parent().item_name]["right"]+Vector2i(-2,0))
-				await get_tree().create_timer(0.2).timeout
-				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.rotatable_object_atlas_tiles[get_parent().item_name]["right"])
+				Tiles.object_tiles.set_cell(0,get_parent().location+Vector2i(0,-1),0,Vector2i(-1,-1))
+				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["right"])
 	is_opening_door = false

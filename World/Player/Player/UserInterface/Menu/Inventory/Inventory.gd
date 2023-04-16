@@ -6,8 +6,8 @@ var hovered_item = null
 
 func _ready():
 	PlayerData.InventorySlots = $InventorySlots
-	PlayerData.connect("set_day",Callable(self,"set_day_bg"))
-	PlayerData.connect("set_night",Callable(self,"set_night_bg"))
+	PlayerData.connect("set_sunrise",Callable(self,"set_day_bg"))
+	PlayerData.connect("set_sunset",Callable(self,"set_night_bg"))
 	$CompositeSprites/AnimationPlayer.play("loop")
 
 func initialize():

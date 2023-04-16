@@ -31,7 +31,7 @@ var temp_health: int = 3
 func _ready():
 	rng.randomize()
 	Tiles.remove_valid_tiles(location+Vector2i(-1,0), Vector2i(2,2))
-	MapData.connect("refresh_crops",Callable(self,"refresh_tree_type"))
+	#MapData.connect("refresh_crops",Callable(self,"refresh_tree_type"))
 	call_deferred("set_tree")
 	random_leaves_falling_timer.set_deferred("wait_time", rng.randi_range(15.0, 60.0))
 	random_leaves_falling_timer.call_deferred("start")
@@ -76,9 +76,7 @@ func harvest():
 	if phase == "harvest" and health > 40:
 		$CollisionShape2D.set_deferred("disabled", true)
 		phase = "empty"
-		### FIX
 		MapData.world["tree"][name]["p"] = "empty"
-		await get_tree().process_frame
 		refresh_tree_type()
 		fruit_fall.frame = 0
 		fruit_fall.show()
@@ -208,8 +206,8 @@ func hit(player_id, new_health):
 					InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position)
 					animation_player_tree.call_deferred("play", "tree hit left")
 			elif not tree_fallen:
-				if health <= 0 and not destroyed:
-					destroy("")
+#				if health <= 0 and not destroyed:
+#					destroy("")
 				tree_fallen = true
 				call_deferred("disable_tree_top_collision_box")
 				sound_effects_stump.set_deferred("stream", Sounds.tree_hit[rng.randi_range(0,2)])
@@ -260,11 +258,11 @@ func hit(player_id, new_health):
 #				call_deferred("destroy", tool_name)
 
 
-func destroy(tool_name):
+func destroy():
 	#MapData.remove_object("tree",name)
 	destroyed = true
 	Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
-	if not tool_name == "sapling":
+	if phase != "sapling" and phase != "1" and phase != "2" and phase != "3" and phase != "4":
 		play_stump_break_animation()
 		animation_player_stump.call_deferred("play", "stump destroyed")
 		sound_effects_stump.set_deferred("stream", Sounds.stump_break)

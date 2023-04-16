@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ho400t7ji3bt"
-path="res://.godot/imported/wood chest.png-2eec2a64a2c4bcd0664d941092a1ca45.ctex"
+path="res://.godot/imported/chest.png-866fa57220e2eaa4d2a268148444b92c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/inventory_icons/Placeable object/wood chest.png"
-dest_files=["res://.godot/imported/wood chest.png-2eec2a64a2c4bcd0664d941092a1ca45.ctex"]
+source_file="res://Assets/Images/inventory_icons/Placeable object/chest.png"
+dest_files=["res://.godot/imported/chest.png-866fa57220e2eaa4d2a268148444b92c.ctex"]
 
 [params]
 

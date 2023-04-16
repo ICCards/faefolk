@@ -58,7 +58,7 @@ func _on_SmallHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
-		call_deferred("hit", _area.tool_name)
+		get_parent().rpc_id(1,"nature_object_hit",Server.player_node.name,"ore",name,location,_area.tool_name)
 	if _area.special_ability == "fire buff":
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-8, 8), randf_range(-16,0)))

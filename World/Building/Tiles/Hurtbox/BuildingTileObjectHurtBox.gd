@@ -13,6 +13,7 @@ var tier
 var health
 var max_health
 var item_name
+var variety
 var location
 var direction
 var door_opened: bool 

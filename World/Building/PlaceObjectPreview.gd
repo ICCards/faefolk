@@ -13,6 +13,8 @@ var previous_moving_object_data
 var state
 var variety = 1
 
+
+
 enum {
 	ITEM,
 	SEED,
@@ -22,7 +24,8 @@ enum {
 	ROTATABLE,
 	CUSTOMIZABLE,
 	CUSTOMIZABLE_ROTATABLE,
-	FORAGE
+	FORAGE,
+	WALL_ART
 }
 
 var _uuid = load("res://helpers/UUID.gd")
@@ -67,6 +70,8 @@ func _physics_process(delta):
 			place_customizable_state()
 		FORAGE:
 			place_forage_state()
+		WALL_ART:
+			place_wall_art_state()
 
 
 func initialize():
@@ -75,7 +80,9 @@ func initialize():
 		direction_index = directions.find(previous_moving_object_data["d"])
 	if item_name != "foundation" and item_name != "wall":
 		item_category = JsonData.item_data[item_name]["ItemCategory"]
-	if Constants.rotatable_object_atlas_tiles.keys().has(item_name):
+	if item_name == "wall art":
+		state = WALL_ART
+	elif Constants.rotatable_object_atlas_tiles.keys().has(item_name):
 		state = ROTATABLE
 	elif Constants.customizable_rotatable_object_atlas_tiles.keys().has(item_name):
 		state = CUSTOMIZABLE_ROTATABLE
@@ -107,6 +114,10 @@ func set_dimensions():
 			$Objects.set_cell(0,Vector2i(0,0),0,Constants.object_atlas_tiles[item_name])
 			var dimensions = Constants.dimensions_dict[item_name]
 			$ColorIndicator.tile_size = dimensions
+		WALL_ART:
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeVariety").show()
+			$Objects.show()
 		SEED:
 			Server.player_node.user_interface.get_node("ChangeRotation").hide()
 			Server.player_node.user_interface.get_node("ChangeVariety").hide()
@@ -149,6 +160,21 @@ func set_dimensions():
 			$ForageItemToPlace.show()
 			$ForageItemToPlace.texture = load("res://Assets/Images/inventory_icons/Forage/"+item_name+".png")
 
+
+func place_wall_art_state():
+	var location = Tiles.valid_tiles.local_to_map(mousePos)
+	var dimensions = Vector2(1,1)
+	$ColorIndicator.tile_size = dimensions
+	get_variety_index(Constants.customizable_object_atlas_tiles[item_name].keys().size())
+	$Objects.set_cell(0,Vector2i(0,0),0,Constants.customizable_object_atlas_tiles[item_name][variety])
+	if not Tiles.object_tiles.get_cell_atlas_coords(0,location) == Vector2i(-1,-1) or Tiles.wall_tiles.get_cell_atlas_coords(0,location) == Vector2i(-1,-1):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	else:
+		$ColorIndicator.indicator_color = "Green"
+		$ColorIndicator.set_indicator_color()
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use tool")):
+			place_object(item_name, null, location, "placeable", variety)
 
 
 func place_forage_state():
@@ -255,7 +281,7 @@ func place_foundation_state():
 
 
 func place_wall_state():
-	if Server.world.name == "Overworld":
+	if Server.world.name == "Main":
 		$ColorIndicator.visible = true
 		var location = Tiles.valid_tiles.local_to_map(mousePos)
 		if not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or not Tiles.validate_foundation_tiles(location,Vector2(1,1)) or not Tiles.validate_tiles(location, Vector2(1,1)):
@@ -298,7 +324,7 @@ func place_item_state():
 			place_object(item_name, null, location, "placeable")
 
 func place_seed_state():
-	if Server.world.name == "Overworld":
+	if Server.world.name == "Main":
 		var location = Tiles.valid_tiles.local_to_map(mousePos)
 		if Util.isNonFruitTree(item_name) or Util.isFruitTree(item_name):
 			if not Tiles.validate_forest_tiles(location) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
@@ -354,7 +380,7 @@ func place_object(item_name, direction, location, type, variety = null):
 				$SoundEffects.play()
 				if item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 					MapData.add_object("placeable",id, {"n":item_name,"v":"twig","l":location,"h":Stats.return_starting_door_health(item_name),"d":direction})
-					PlaceObject.place_building_object_in_world(id,item_name,direction,null,location,Stats.return_starting_door_health(item_name))
+					PlaceObject.place_building_object_in_world(id,item_name,direction,null,location,Stats.return_starting_door_health(item_name),variety)
 				elif moving_object:
 					MapData.add_object("placeable",previous_moving_object_data["id"],{"n":item_name,"d":direction,"l":location,"v":variety})
 					PlaceObject.place_object_in_world(previous_moving_object_data["id"], item_name, direction, location, variety)

@@ -153,7 +153,7 @@ func harvest_forage(forage_node):
 		var item_name = forage_node.item_name
 		var location = forage_node.location
 		get_node("../Sounds/FootstepsSound").stream_paused = true
-		forage_node.harvest.rpc()
+		forage_node.harvest()
 		get_parent().state = HARVESTING
 		if forage_node.first_placement:
 			PlayerData.player_data["collections"]["forage"][item_name] += 1
@@ -340,6 +340,7 @@ func show_placeable_object(item_name, item_category):
 			get_node("../").add_child(placeObject)
 		else:
 			if get_node("../PlaceObject").item_name != item_name and not has_node("../MoveObject"): # exists but item changed
+				get_node("../PlaceObject").variety = 1
 				get_node("../PlaceObject").item_name = item_name
 				get_node("../PlaceObject").item_category = item_category
 				get_node("../PlaceObject").initialize()

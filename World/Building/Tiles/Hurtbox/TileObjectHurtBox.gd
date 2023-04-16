@@ -62,7 +62,7 @@ func set_dimensions():
 			$Marker2D.rotation_degrees = 180
 		"right":
 			$Marker2D.rotation_degrees = 270
-	if item_name == "wood chest" or item_name == "stone chest":
+	if item_name == "chest":
 		add_interactive_area_node("chest")
 		if PlayerData.player_data["chests"].has(name):
 			pass

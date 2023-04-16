@@ -248,7 +248,7 @@ func spawn_grass():
 					if type == "weed":
 						PlaceObject.place_weed_in_world(id,map["tall_grass"][id]["v"],loc)
 					else:
-						PlaceObject.place_tall_grass_in_world(id,map["tall_grass"][id]["b"],loc)
+						PlaceObject.place_tall_grass_in_world(id,map["tall_grass"][id]["b"],loc,map["tall_grass"][id]["fh"],map["tall_grass"][id]["bh"])
 					if count == 20:
 						await get_tree().process_frame
 						count = 0

@@ -7,8 +7,11 @@ var spawn_at_respawn_location: bool = false
 
 var normal_hotbar_mode = true
 
+signal set_time
 signal set_day
-signal set_night
+signal set_season
+signal set_sunrise
+signal set_sunset
 signal season_changed
 signal mana_changed
 signal energy_changed
@@ -16,7 +19,6 @@ signal health_changed
 signal health_depleted
 signal tool_health_change
 signal active_item_updated
-signal play_wind_curse
 signal key_binding_button_changed
 
 var file_name = "res://JSONData/PlayerData.json"
@@ -74,7 +76,7 @@ var starting_player_data = {
 			"19": ["stone", 999, null],
 			"17": ["cloth", 999, null],
 			"5": ["cloth", 500, null],
-			"16": ["grape", 999, null],
+			"16": ["wood", 999, null],
 			"15": ["bronze ingot", 999, null],
 			"4": ["iron ingot", 999, null],
 			"13": ["wood", 999, null],

@@ -47,7 +47,6 @@ pattern_0 = SubResource("TileMapPattern_nngou")
 
 [node name="ElevationTest" type="Node2D"]
 script = ExtResource("1_n2im1")
-redraw = true
 noise_frequency = 0.01
 
 [node name="Plains" type="TileMap" parent="."]
@@ -59,7 +58,6 @@ layer_0/tile_data = PackedInt32Array(3473485, 2162688, 20, 3407949, 2162688, 18,
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(599, 399)
-zoom = Vector2(2, 2)
 
 [node name="Freshwater" type="TileMap" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)

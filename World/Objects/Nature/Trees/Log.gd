@@ -55,12 +55,12 @@ func hit(tool_name, special_ability = ""):
 		call_deferred("queue_free")
 
 func _on_BranchHurtBox_area_entered(_area):
-	print(_area.name)
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	if _area.special_ability == "fire buff":
 		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-16,16), randf_range(-16,16)))
 	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
-		call_deferred("hit", _area.tool_name)
+		get_parent().rpc_id(1,"nature_object_hit",Server.player_node.name,"log",name,location,_area.tool_name)
+		#call_deferred("hit", _area.tool_name)
 
 

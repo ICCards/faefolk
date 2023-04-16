@@ -5,20 +5,21 @@ const LENGTH_OF_TRANSITION = 60.0
 const CURSE_COLOR = Color("cd0000")
 
 func _ready():
-	PlayerData.connect("set_day",Callable(self,"play_set_day"))
-	PlayerData.connect("set_night",Callable(self,"play_set_night"))
-	PlayerData.connect("play_wind_curse",Callable(self,"set_curse_effect"))
-	if PlayerData.player_data:
-		if PlayerData.player_data["time_hours"] >= 22 or PlayerData.player_data["time_hours"] < 6: # night time
-			set_deferred("color", Color("323237"))
+	PlayerData.connect("set_sunrise",Callable(self,"play_set_day"))
+	PlayerData.connect("set_sunset",Callable(self,"play_set_night"))
+
+
+func initialize():
+	if get_node("../").server_data["time_hours"] >= 22 or get_node("../").server_data["time_hours"] < 6: # night time
+		color = Color("323237")
 
 func play_set_day():
-	if Server.world.name == "World":
-		call_deferred("set_day")
+	if Server.world.name == "Main":
+		set_day()
 
 func play_set_night():
-	if Server.world.name == "World":
-		call_deferred("set_night")
+	if Server.world.name == "Main":
+		set_night()
 
 func set_day():
 	var tween = get_tree().create_tween()

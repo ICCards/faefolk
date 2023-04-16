@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuymdxbson770"
-path="res://.godot/imported/stone chest.png-4d308b892b4eedb69909cf0b95cabc91.ctex"
+uid="uid://c8x72x0th3pa0"
+path="res://.godot/imported/wall art.png-07670cb7e2eb4cf707f25873bc2cc85c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/inventory_icons/Placeable object/stone chest.png"
-dest_files=["res://.godot/imported/stone chest.png-4d308b892b4eedb69909cf0b95cabc91.ctex"]
+source_file="res://Assets/Images/inventory_icons/Placeable object/wall art.png"
+dest_files=["res://.godot/imported/wall art.png-07670cb7e2eb4cf707f25873bc2cc85c.ctex"]
 
 [params]
 

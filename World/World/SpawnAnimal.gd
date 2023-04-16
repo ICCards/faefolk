@@ -17,9 +17,6 @@ var remove_thread := Thread.new()
 
 const NUM_WIND_CURSE_ENEMIES = 25
 
-func _ready():
-	PlayerData.connect("play_wind_curse",Callable(self,"spawn_wind_curse_mobs"))
-
 
 #func spawn_wind_curse_mobs():
 #	for i in range(NUM_WIND_CURSE_ENEMIES):

@@ -1386,6 +1386,13 @@
       "Ingredients": [["wood", 12]],
       "EnergyHealth": null
   },
+  "wall art": {
+      "ItemCategory": "Placeable object",
+      "StackSize": 999,
+      "Description": "A wooden barrel for aging products.",
+      "Ingredients": [["wood", 4], ["cloth", 4]],
+      "EnergyHealth": null
+  },
   "barrel": {
       "ItemCategory": "Placeable object",
       "StackSize": 999,
@@ -1400,18 +1407,11 @@
       "Ingredients": [["wood", 4]],
       "EnergyHealth": null
   },
-  "wood chest": {
+  "chest": {
       "ItemCategory": "Placeable object",
       "StackSize": 999,
-      "Description": "Wood chest for storage.",
+      "Description": "A chest for storage.",
       "Ingredients": [["wood", 10],["stone", 2]],
-      "EnergyHealth": null
-  },
-  "stone chest": {
-      "ItemCategory": "Placeable object",
-      "StackSize": 999,
-      "Description": "Stone chest for storage.",
-      "Ingredients": [["wood", 2],["stone", 10]],
       "EnergyHealth": null
   },
   "brewing table #1": {

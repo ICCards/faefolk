@@ -97,6 +97,7 @@ format = 2
 layer_0/y_sort_enabled = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 enabled = false
 color = Color(1, 0.85098, 0.717647, 1)
 blend_mode = 2

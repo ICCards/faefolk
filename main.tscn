@@ -1,8 +1,9 @@
-[gd_scene load_steps=41 format=3 uid="uid://bikiy2vasycja"]
+[gd_scene load_steps=43 format=3 uid="uid://bikiy2vasycja"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_miuy3"]
 [ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="2_jxniw"]
 [ext_resource type="Script" path="res://World/World/WorldBuilder.gd" id="2_mbtah"]
+[ext_resource type="Script" path="res://World/World/WorldAmbience.gd" id="2_u7ce2"]
 [ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/terrain/tres files/plains.tres" id="3_s3xh1"]
 [ext_resource type="Script" path="res://World/World/SpawnAnimal.gd" id="3_xbv0j"]
 [ext_resource type="Script" path="res://World/World/BuildNature.gd" id="4_lnadh"]
@@ -23,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://c66ktnntnkqrx" path="res://World/Map/WorldMap.tscn" id="16_fydq0"]
 [ext_resource type="Script" path="res://NatureObjects.gd" id="20_dvf2e"]
 [ext_resource type="Script" path="res://PlaceableObjects.gd" id="20_hue5x"]
+[ext_resource type="Script" path="res://ForageObjects.gd" id="23_k1cnp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7b1tf"]
 texture = ExtResource("2_jxniw")
@@ -4493,6 +4495,10 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Join"
 
+[node name="WorldAmbience" type="CanvasModulate" parent="."]
+visible = false
+script = ExtResource("2_u7ce2")
+
 [node name="WorldBuilder" type="Node" parent="."]
 script = ExtResource("2_mbtah")
 
@@ -4664,6 +4670,7 @@ script = ExtResource("20_hue5x")
 
 [node name="ForageObjects" type="Node2D" parent="."]
 y_sort_enabled = true
+script = ExtResource("23_k1cnp")
 
 [node name="NatureObjects" type="Node2D" parent="."]
 y_sort_enabled = true
