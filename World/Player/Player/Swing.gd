@@ -30,8 +30,11 @@ enum {
 	SWORD_SWINGING
 }
 
-var thread = Thread.new()
 
+func _ready():
+	if not get_node("../").is_multiplayer_authority(): queue_free()
+
+var thread = Thread.new()
 
 func sword_swing(item_name,attack_index):
 	if not thread.is_alive():
@@ -83,7 +86,7 @@ func set_sword_swing_position(direction):
 			$SwordSwing.set_deferred("position", Vector2(0,4))
 		"UP":
 			$SwordSwing.set_deferred("rotation_degrees", 90)
-			$SwordSwing.set_deferred("position", Vector2(0,-20))
+			$SwordSwing.set_deferred("position", Vector2(0,-22))
 		"RIGHT":
 			$SwordSwing.set_deferred("rotation_degrees", 0)
 			$SwordSwing.set_deferred("position", Vector2(12,-8))
@@ -91,6 +94,20 @@ func set_sword_swing_position(direction):
 			$SwordSwing.set_deferred("rotation_degrees", 0)
 			$SwordSwing.set_deferred("position", Vector2(-12,-8))
 
+func set_scythe_swing_position(direction):
+	match direction:
+		"DOWN":
+			$ScytheSwing.set_deferred("rotation_degrees", 90)
+			$ScytheSwing.set_deferred("position", Vector2(0,8))
+		"UP":
+			$ScytheSwing.set_deferred("rotation_degrees", 90)
+			$ScytheSwing.set_deferred("position", Vector2(0,-26))
+		"RIGHT":
+			$ScytheSwing.set_deferred("rotation_degrees", 0)
+			$ScytheSwing.set_deferred("position", Vector2(16,-8))
+		"LEFT":
+			$ScytheSwing.set_deferred("rotation_degrees", 0)
+			$ScytheSwing.set_deferred("position", Vector2(-16,-8))
 
 func swing(item_name):
 	if not thread.is_started():
@@ -109,7 +126,8 @@ func swing_deferred(item_name):
 			get_parent().animation = "watering_" + get_parent().direction.to_lower()
 			player_animation_player.play("axe pickaxe swing")
 		elif item_name == "scythe":
-			player_animation_player.play("scythe_swing_" + get_parent().direction.to_lower())
+			set_scythe_swing_position(get_parent().direction)
+			player_animation_player.play("scythe_swing")  #("scythe_swing_" + get_parent().direction.to_lower())
 			get_parent().animation = "sword_swing_" + get_parent().direction.to_lower()
 			sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)

@@ -35,11 +35,11 @@ func setTreeBranchType():
 		$Break.offset = Vector2i(-5,-5)
 		
 
-func hit(tool_name, special_ability = ""):
+func destroy(data):
 	if not destroyed:
 		destroyed = true
-		if MapData.world["log"].has(name):
-			MapData.world["log"].erase(name)
+#		if MapData.world["log"].has(name):
+#			MapData.world["log"].erase(name)
 		$Log.call_deferred("hide")
 		$Break.call_deferred("show")
 		$Break.call_deferred("play",str(variety))
@@ -48,9 +48,9 @@ func hit(tool_name, special_ability = ""):
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12)) 
 		sound_effects.call_deferred("play")
 		animation_player.call_deferred("play", "break")
-		var amt = Stats.return_item_drop_quantity(tool_name, "branch")
-		PlayerData.player_data["collections"]["resources"]["wood"] += amt
-		InstancedScenes.intitiateItemDrop("wood",position,amt)
+#		var amt = Stats.return_item_drop_quantity(tool_name, "branch")
+#		PlayerData.player_data["collections"]["resources"]["wood"] += amt
+#		InstancedScenes.intitiateItemDrop("wood",position,amt)
 		await get_tree().create_timer(1.2).timeout
 		call_deferred("queue_free")
 

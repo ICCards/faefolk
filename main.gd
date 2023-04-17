@@ -31,7 +31,7 @@ func send_world_data(data):
 	$WorldAmbience.initialize()
 	$WorldBuilder.initialize()
 	$WorldBuilder/BuildTerrain.initialize()
-	#$WorldBuilder/BuildNature.initialize()
+	$WorldBuilder/BuildNature.initialize()
 #	$WorldBuilder/SpawnAnimal.initialize()
 
 

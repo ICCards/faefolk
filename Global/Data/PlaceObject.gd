@@ -20,6 +20,24 @@ var NatureObjects
 var ForageObjects
 var GrassObjects
 
+
+func place(type,id,data):
+	if type == "forage":
+		place_forage_in_world(id,data["n"],data["l"],data["f"])
+#	elif type == "crop":
+#		PlaceObject.place_seed_in_world(id,data["n"],data["l"],data["d"],0,false)
+#	elif type == "tree":
+#		PlaceObject.place(id,item_name,location,days_to_grow,0,false)
+	elif type == "placeable":
+		var item_name = data["n"]
+		var location = data["l"]
+		var variety = data["v"]
+		var direction = data["d"]
+		if item_name == "wall" or item_name == "foundation" or item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
+			place_building_object_in_world(id,item_name,direction,variety,location,data["h"])
+		else:
+			place_object_in_world(id,item_name,direction,location,variety)
+
 func place_tall_grass_in_world(id,biome,location,front_health,back_health):
 	GrassObjects = Server.world.get_node("GrassObjects")
 	var object = TallGrass.instantiate()
@@ -128,7 +146,7 @@ func place_building_object_in_world(id,item_name,direction,tier,location,health,
 	object.location = location
 	object.item_name = item_name
 	object.tier = "armored" #tier
-	PlaceableObjects.call_deferred("add_child", object)
+	PlaceableObjects.call_deferred("add_child", object, true)
 	object.global_position = Tiles.wall_tiles.map_to_local(location)
 	if item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 		Tiles.object_tiles.set_cell(0,location,0,Constants.customizable_rotatable_object_atlas_tiles[item_name][variety][direction])

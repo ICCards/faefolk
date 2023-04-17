@@ -47,24 +47,23 @@ func setTexture(tree):
 	
 
 
-func hit(player_id, new_health):
+func hit(data):
 #	health -= Stats.return_tool_damage(tool_name)
 #	if MapData.world["stump"].has(name):
 #		MapData.world["stump"][name]["h"] = health
-	health = new_health
-	if health > 0:
+	if not destroyed:
 		sound_effects.set_deferred("stream", Sounds.tree_hit[rng.randi_range(0,2)])
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")
 		animation_player.call_deferred("stop")
-		if Server.world.get_node("Players/"+str(player_id)).get_position().x <= get_position().x:
+		if Server.world.get_node("Players/"+str(data["player_id"])).get_position().x <= get_position().x:
 			animation_player.call_deferred("play", "stump hit right")
 			InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position)
 		else: 
 			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position)
 			animation_player.call_deferred("play", "stump hit right")
 
-func destroy():
+func destroy(data):
 	if not destroyed:
 		destroyed = true
 #		if MapData.world["stump"].has(name):

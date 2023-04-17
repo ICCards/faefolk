@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bikiy2vasycja"]
+[gd_scene load_steps=44 format=3 uid="uid://bikiy2vasycja"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_miuy3"]
 [ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="2_jxniw"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://NatureObjects.gd" id="20_dvf2e"]
 [ext_resource type="Script" path="res://PlaceableObjects.gd" id="20_hue5x"]
 [ext_resource type="Script" path="res://ForageObjects.gd" id="23_k1cnp"]
+[ext_resource type="Script" path="res://GrassObjects.gd" id="25_yatu0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7b1tf"]
 texture = ExtResource("2_jxniw")
@@ -4678,6 +4679,7 @@ script = ExtResource("20_dvf2e")
 
 [node name="GrassObjects" type="Node2D" parent="."]
 y_sort_enabled = true
+script = ExtResource("25_yatu0")
 
 [node name="NatureSpawner" type="MultiplayerSpawner" parent="."]
 

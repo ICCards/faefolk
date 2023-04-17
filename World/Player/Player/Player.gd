@@ -28,7 +28,8 @@ enum {
 	SITTING,
 	MAGIC_CASTING,
 	BOW_ARROW_SHOOTING,
-	SWORD_SWINGING
+	SWORD_SWINGING,
+	SCYTHE_SWINGING,
 }
 
 var cast_movement_direction = ""
@@ -92,7 +93,6 @@ func _physics_process(delta):
 		if footstep_stream_paused:
 			footsteps_sound.stream_paused = true
 		else:
-			footsteps_sound.play()
 			footsteps_sound.volume_db = -10 #Sounds.return_adjusted_sound_db("footstep",-10)
 			footsteps_sound.stream_paused = false
 		if holding_item_name == "":
@@ -178,7 +178,7 @@ func set_current_object(item_name):
 
 
 func _process(_delta) -> void:
-	#if not syncronizer.is_multiplayer_authority(): return
+	if not is_multiplayer_authority(): return
 	if $Area2Ds/PickupZone.items_in_range.size() > 0:
 		var pickup_item = $Area2Ds/PickupZone.items_in_range.values()[0]
 		pickup_item.pick_up_item(self)
