@@ -1,4 +1,4 @@
-res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
+res://main.tscn
 res://Assets/Themes/text.tres
 res://Assets/Themes/LockedAsset.tres
 res://Assets/Themes/whiten.tres
@@ -16,11 +16,12 @@ res://Assets/Tilesets/walls/walls.tres
 res://Assets/Tilesets/objects/objects.tres
 res://Assets/Themes/MiniMap.tres
 res://Assets/Tilesets/objects/crops.tres
-res://World/Building/PlaceObjectPreview.gd
-res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd
-res://main.tscn
-res://World/Objects/Nature/Trees/TreeObject.gd
-res://InventoryLogic/ItemDrop.tscn
+res://Assets/Images/tree_sets/plum/mature/animated.tres
+res://Global/Data/InstancedScenes.gd
+res://ItemDrops.gd
 res://World/Player/Player/Player.tscn
 res://World/Building/PlaceObjectPreview.tscn
-res://NatureObjects.gd
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
+res://InventoryLogic/ItemDrop.tscn
+res://World/Objects/Nature/Trees/TreeObject.tscn
+res://PlaceableObjects.gd

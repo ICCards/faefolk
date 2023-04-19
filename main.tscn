@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bikiy2vasycja"]
+[gd_scene load_steps=45 format=3 uid="uid://bikiy2vasycja"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_miuy3"]
 [ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="2_jxniw"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://c66ktnntnkqrx" path="res://World/Map/WorldMap.tscn" id="16_fydq0"]
 [ext_resource type="Script" path="res://NatureObjects.gd" id="20_dvf2e"]
 [ext_resource type="Script" path="res://PlaceableObjects.gd" id="20_hue5x"]
+[ext_resource type="Script" path="res://ItemDrops.gd" id="22_nrbfv"]
 [ext_resource type="Script" path="res://ForageObjects.gd" id="23_k1cnp"]
 [ext_resource type="Script" path="res://GrassObjects.gd" id="25_yatu0"]
 
@@ -4658,6 +4659,7 @@ _spawnable_scenes = PackedStringArray("res://World/Player/Player/Player.tscn")
 spawn_path = NodePath("..")
 
 [node name="ItemDrops" type="Node2D" parent="."]
+script = ExtResource("22_nrbfv")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ItemDrops"]
 _spawnable_scenes = PackedStringArray("res://InventoryLogic/ItemDrop.tscn")
