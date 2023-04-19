@@ -4657,6 +4657,12 @@ y_sort_enabled = true
 _spawnable_scenes = PackedStringArray("res://World/Player/Player/Player.tscn")
 spawn_path = NodePath("..")
 
+[node name="ItemDrops" type="Node2D" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ItemDrops"]
+_spawnable_scenes = PackedStringArray("res://InventoryLogic/ItemDrop.tscn")
+spawn_path = NodePath("..")
+
 [node name="Enemies" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -4681,15 +4687,11 @@ script = ExtResource("20_dvf2e")
 y_sort_enabled = true
 script = ExtResource("25_yatu0")
 
-[node name="NatureSpawner" type="MultiplayerSpawner" parent="."]
-
 [node name="WorldMap" parent="." instance=ExtResource("16_fydq0")]
 visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yn58q")
-
-[node name="ItemDrops" type="Node2D" parent="."]
 
 [connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinBtn" to="." method="_on_join_btn_pressed"]
 [connection signal="timeout" from="WorldBuilder/SpawnAnimal/SpawnAnimalTimer" to="WorldBuilder/SpawnAnimal" method="_on_spawn_animal_timer_timeout"]

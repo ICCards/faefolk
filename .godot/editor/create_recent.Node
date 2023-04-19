@@ -1,3 +1,5 @@
+MultiplayerSynchronizer
+MultiplayerSpawner
 Node
 TextureProgressBar
 ProgressBar
@@ -9,8 +11,6 @@ Button
 TextureRect
 Node2D
 AudioStreamPlayer2D
-MultiplayerSpawner
-MultiplayerSynchronizer
 MarginContainer
 VBoxContainer
 PanelContainer

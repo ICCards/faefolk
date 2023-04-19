@@ -18,12 +18,11 @@ var location
 var item_name
 var direction
 var variety
-var health
 
 var destroyed: bool = false
 var is_player_sitting: bool = false
 
-var temp_health = 3
+var health = 3
 
 func _ready():
 	if Constants.object_atlas_tiles.keys().has(item_name):
@@ -64,22 +63,22 @@ func set_dimensions():
 			$Marker2D.rotation_degrees = 270
 	if item_name == "chest":
 		add_interactive_area_node("chest")
-		if PlayerData.player_data["chests"].has(name):
-			pass
-		else:
-			PlayerData.player_data["chests"][name] = {}
+#		if PlayerData.player_data["chests"].has(name):
+#			pass
+#		else:
+#			PlayerData.player_data["chests"][name] = {}
 	elif item_name == "crate":
 		add_campfire_interactive_area_node("crate")
-		if PlayerData.player_data["chests"].has(name):
-			pass
-		else:
-			PlayerData.player_data["chests"][name] = {}
+#		if PlayerData.player_data["chests"].has(name):
+#			pass
+#		else:
+#			PlayerData.player_data["chests"][name] = {}
 	elif item_name == "barrel":
 		add_campfire_interactive_area_node("barrel")
-		if PlayerData.player_data["barrels"].has(name):
-			pass
-		else:
-			PlayerData.player_data["barrels"][name] = {}
+#		if PlayerData.player_data["barrels"].has(name):
+#			pass
+#		else:
+#			PlayerData.player_data["barrels"][name] = {}
 	elif item_name == "lamp":
 		add_campfire_interactive_area_node("lamp")
 	elif item_name == "fireplace":
@@ -89,42 +88,42 @@ func set_dimensions():
 	elif item_name == "campfire":
 		add_campfire_interactive_area_node("campfire")
 		$PointLight2D.set_deferred("enabled", true)
-		if PlayerData.player_data["campfires"].has(name):
-			pass
-		else:
-			PlayerData.player_data["campfires"][name] = {}
+#		if PlayerData.player_data["campfires"].has(name):
+#			pass
+#		else:
+#			PlayerData.player_data["campfires"][name] = {}
 	elif item_name == "workbench #1" or item_name == "workbench #2" or item_name == "workbench #3":
 		add_interactive_area_node("workbench",item_name.right(1))
 	elif item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
 		add_interactive_area_node("stove",item_name.right(1))
-		if PlayerData.player_data["stoves"].has(name):
-			pass
-		else:
-			PlayerData.player_data["stoves"][name] = {}
+#		if PlayerData.player_data["stoves"].has(name):
+#			pass
+#		else:
+#			PlayerData.player_data["stoves"][name] = {}
 	elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
 		add_interactive_area_node("grain mill",item_name.right(1))
-		if PlayerData.player_data["grain_mills"].has(name):
-			pass
-		else:
-			PlayerData.player_data["grain_mills"][name] = {}
+#		if PlayerData.player_data["grain_mills"].has(name):
+#			pass
+#		else:
+#			PlayerData.player_data["grain_mills"][name] = {}
 	elif item_name == "brewing table #1" or item_name == "brewing table #2" or item_name == "brewing table #3":
 		add_interactive_area_node("brewing table",item_name.right(1))
-		if PlayerData.player_data["brewing_tables"].has(name):
-			pass
-		else:
-			PlayerData.player_data["brewing_tables"][name] = {}
+#		if PlayerData.player_data["brewing_tables"].has(name):
+#			pass
+#		else:
+#			PlayerData.player_data["brewing_tables"][name] = {}
 	elif item_name == "furnace":
 		add_interactive_area_node("furnace")
-		if PlayerData.player_data["furnaces"].has(name):
-			pass
-		else:
-			PlayerData.player_data["furnaces"][name] = {}
+#		if PlayerData.player_data["furnaces"].has(name):
+#			pass
+#		else:
+#			PlayerData.player_data["furnaces"][name] = {}
 	elif item_name == "tool cabinet":
 		add_interactive_area_node(item_name)
-		if PlayerData.player_data["chests"].has(name):
-			pass
-		else:
-			PlayerData.player_data["chests"][name] = {}
+#		if PlayerData.player_data["chests"].has(name):
+#			pass
+#		else:
+#			PlayerData.player_data["chests"][name] = {}
 	elif item_name == "bed":
 		add_bed_interactive_area_node()
 	elif item_name == "chair" or item_name == "armchair":
@@ -169,14 +168,19 @@ func add_door_interactive_area_node(type):
 func _on_HurtBox_area_entered(area):
 	if area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	if check_if_has_items() and temp_health != 0:
-		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Building/wood/wood hit.mp3"))
-		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound",0))
-		sound_effects.call_deferred("play")
-		$AnimationPlayer.call_deferred("play","shake")
-		temp_health -= 1
-		$ResetTempHealthTimer.call_deferred("start")
-	else:
+	get_parent().rpc_id(1,"object_hit",name,location)
+
+
+func hit():
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Building/wood/wood hit.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound",0))
+	sound_effects.call_deferred("play")
+	$AnimationPlayer.call_deferred("play","shake")
+	health -= 1
+	$ResetTempHealthTimer.call_deferred("start")
+
+func destroy():
+	if not destroyed:
 		destroyed = true
 #		$PointLight2D.set_deferred("enabled", false)
 #		$FurnaceSmoke.call_deferred("hide")
@@ -211,9 +215,9 @@ func _on_HurtBox_area_entered(area):
 			Tiles.add_valid_tiles(location, dimensions)
 		Tiles.object_tiles.erase_cell(0,location)
 		InstancedScenes.intitiateItemDrop(item_name, position, 1)
-		MapData.remove_object("placeable",name,location)
+#		MapData.remove_object("placeable",name,location)
 		await sound_effects.finished
-		queue_free()
+		call_deferred("queue_free")
 
 func check_if_has_items():
 	if item_name == "wood chest" or item_name == "stone chest" or item_name == "wood box" or item_name == "tool cabinet":
@@ -258,7 +262,7 @@ func drop_items_in_furnace():
 
 
 func _on_ResetTempHealthTimer_timeout():
-	temp_health = 3
+	health = 3
 
 
 func _physics_process(delta):

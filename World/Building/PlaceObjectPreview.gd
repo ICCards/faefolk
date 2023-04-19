@@ -382,11 +382,11 @@ func place_object(item_name, direction, location, type, variety = null):
 					MapData.add_object("placeable",id, {"n":item_name,"v":"twig","l":location,"h":Stats.return_starting_door_health(item_name),"d":direction})
 #					PlaceObject.place_building_object_in_world(id,item_name,direction,null,location,Stats.return_starting_door_health(item_name),variety)
 				elif moving_object:
-					MapData.add_object("placeable",previous_moving_object_data["id"],{"n":item_name,"d":direction,"l":location,"v":variety})
+					MapData.add_object("placeable",previous_moving_object_data["id"],{"n":item_name,"d":direction,"l":location,"v":variety,"h":3})
 #					PlaceObject.place_object_in_world(previous_moving_object_data["id"], item_name, direction, location, variety)
 					Server.player_node.actions.destroy_moveable_object()
 				else:
-					MapData.add_object("placeable",id,{"n":item_name,"d":direction,"l":location,"v":variety})
+					MapData.add_object("placeable",id,{"n":item_name,"d":direction,"l":location,"v":variety,"h":3})
 #					PlaceObject.place_object_in_world(id, item_name, direction, location, variety)
 		elif type == "tree":
 			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
