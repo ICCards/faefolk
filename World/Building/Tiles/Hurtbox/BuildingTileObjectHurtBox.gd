@@ -142,9 +142,8 @@ func remove_wall():
 		hurt_box.set_deferred("disabled", true)
 		movement_collision.set_deferred("disabled", true)
 		hammer_repair_box.set_deferred("disabled", true)
-		MapData.remove_object("placeable",name,location)
+		#MapData.remove_object("placeable",name,location)
 		Tiles.add_valid_tiles(location)
-		Tiles.wall_tiles.set_cells_terrain_connect(0,[location],0,-1)
 		play_break_sound_effect()
 		await get_tree().create_timer(1.5).timeout
 		queue_free()
@@ -156,10 +155,11 @@ func remove_foundation():
 		$HealthBar.call_deferred("hide")
 		hurt_box.set_deferred("disabled", true)
 		hammer_repair_box.set_deferred("disabled", true)
-		MapData.remove_object("placeable",name,location)
+		#MapData.remove_object("placeable",name,location)
 		play_break_sound_effect()
 		await get_tree().create_timer(1.0).timeout
 		queue_free()
+
 
 func _on_HurtBox_area_entered(area):
 	if not destroyed:
@@ -167,25 +167,48 @@ func _on_HurtBox_area_entered(area):
 			return
 		if area.name == "AxePickaxeSwing":
 			Stats.decrease_tool_health()
-		health -= Stats.return_tool_damage(area.tool_name)
-		if health > 0:
-#			if MapData.world["placeable"].has(name):
-#				MapData.world["placeable"][name]["h"] = health
-			if item_name == "wall":
-				$WallHit.initialize()
-			elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
-				$DoorHit.initialize()
-			play_hit_sound_effect()
-			show_health()
-			update_health_bar()
-		else:
-			if item_name == "foundation":
-				remove_foundation()
-			elif item_name == "wall":
-				remove_wall()
-			else:
-				remove_door()
+		get_parent().rpc_id(1,"placeable_object_hit",Server.player_node.name,name,location,area.tool_name)
+			
+#		health -= Stats.return_tool_damage(area.tool_name)
+#		if health > 0:
+##			if MapData.world["placeable"].has(name):
+##				MapData.world["placeable"][name]["h"] = health
+#			if item_name == "wall":
+#				$WallHit.initialize()
+#			elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
+#				$DoorHit.initialize()
+#			play_hit_sound_effect()
+#			show_health()
+#			update_health_bar()
+#		else:
+#			if item_name == "foundation":
+#				remove_foundation()
+#			elif item_name == "wall":
+#				remove_wall()
+#			else:
+#				remove_door()
 				
+func hit(data):
+	if not destroyed:
+		health = data["health"]
+		if item_name == "wall":
+			$WallHit.initialize()
+		elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
+			$DoorHit.initialize()
+		play_hit_sound_effect()
+		show_health()
+		update_health_bar()
+
+func destroy(data):
+	if item_name == "foundation":
+		remove_foundation()
+	elif item_name == "wall":
+		remove_wall()
+	else:
+		remove_door()
+
+
+
 func remove_door():
 	if not destroyed:
 		destroyed = true
@@ -197,7 +220,7 @@ func remove_door():
 		hurt_box.set_deferred("disabled", true)
 		movement_collision.set_deferred("disabled", true)
 		hammer_repair_box.set_deferred("disabled", true)
-		MapData.remove_object("placeable",name,location)
+		#MapData.remove_object("placeable",name,location)
 		play_break_sound_effect()
 		await get_tree().create_timer(1.5).timeout
 		queue_free()

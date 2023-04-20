@@ -35,6 +35,7 @@ enum {
 var cast_movement_direction = ""
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
+#@export var position: Vector2
 @export var current_footsteps_sound: String = ""
 @export var animation: String = "idle_down"
 @export var tool_name: String = ""
@@ -57,7 +58,6 @@ var is_building_world = false
 func _ready():
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
-	set_multiplayer_authority(str(name).to_int())
 	$Camera2D.enabled = is_multiplayer_authority()
 	if not is_multiplayer_authority(): 
 		set_process_input(false)
@@ -74,22 +74,11 @@ func _ready():
 	state = MOVEMENT
 	set_held_object()
 	Server.isLoaded = true
-#
+
+
 func _physics_process(delta):
+	position = position
 	if not is_multiplayer_authority(): 
-#		synchronizer.position = global_position
-#		synchronizer.animation = animation 
-#		synchronizer.tool_name = tool_name
-#		if current_footsteps_sound == "":
-#			footsteps_sound.stream_paused = true
-#		else:
-#			footsteps_sound.stream_paused = false
-#			if current_footsteps_sound == "dirt":
-#				footsteps_sound.stream = load("res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3")
-#			elif current_footsteps_sound == "wood":
-#				footsteps_sound.stream = load("res://Assets/Sound/Sound effects/Footsteps/wood footsteps.mp3")
-#			elif current_footsteps_sound == "swim":
-#				footsteps_sound.stream = load("res://Assets/Sound/Sound effects/Footsteps/swimming.mp3")
 		if footstep_stream_paused:
 			footsteps_sound.stream_paused = true
 		else:
@@ -106,6 +95,10 @@ func _physics_process(delta):
 			$CompositeSprites/HoldingItem.texture = load("res://Assets/Images/inventory_icons/"+JsonData.item_data[holding_item_name]["ItemCategory"] +"/"+ holding_item_name +".png")
 		composite_sprites.set_player_animation(character,animation,tool_name)
 		animation_player.play(animation_player.current_animation)
+#		position = Util.string_to_vector2(pos)
+#	else: 
+#		pos = str(position)
+#		print(pos)
 #		syncronizer.position = global_position
 
 

@@ -1,6 +1,9 @@
+Node
+CharacterBody2D
+Area2D
+Node2D
 MultiplayerSynchronizer
 MultiplayerSpawner
-Node
 TextureProgressBar
 ProgressBar
 Control
@@ -9,7 +12,6 @@ Camera2D
 Label
 Button
 TextureRect
-Node2D
 AudioStreamPlayer2D
 MarginContainer
 VBoxContainer
@@ -28,5 +30,3 @@ AnimationPlayer
 Sprite2D
 StaticBody2D
 Marker2D
-Area2D
-ColorRect

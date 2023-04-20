@@ -91,7 +91,7 @@ func add_object(type,id,data):
 func remove_object(type,id,location):
 	Server.world.world[MapData.get_chunk_from_location(location)][type].erase(id)
 #	PlaceObject.place(type,id,data)
-	Server.world.get_node("PlaceableObjects").rpc_id(1,"remove_object",Server.player_node.name,type,id,location)
+	Server.world.get_node("PlaceableObjects").rpc_id(1,"player_remove_object",Server.player_node.name,type,id,location)
 	#if Server.world.name == "Overworld":
 #	world[type].erase(id)
 #	else:

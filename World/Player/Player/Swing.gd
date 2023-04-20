@@ -114,7 +114,7 @@ func swing(item_name):
 		thread.start(Callable(self,"whoAmISwing").bind(item_name))
 
 func whoAmISwing(item_name):
-	call_deferred("swing_deferred",item_name)
+	swing_deferred(item_name)
 	
 
 func swing_deferred(item_name):
@@ -154,6 +154,10 @@ func swing_deferred(item_name):
 			get_parent().tool_name = item_name
 		PlayerData.change_energy(-1)
 		composite_sprites.set_player_animation(get_parent().character, get_parent().animation, item_name)
+		await get_tree().create_timer(0.6).timeout
+		axe_pickaxe_swing.get_node("CollisionShape2D").set_deferred("disabled", false)
+		await get_tree().create_timer(0.1).timeout
+		axe_pickaxe_swing.get_node("CollisionShape2D").set_deferred("disabled", true)
 		await player_animation_player.animation_finished
 		get_parent().state = MOVEMENT
 		if get_node("../Magic").mouse_left_down:

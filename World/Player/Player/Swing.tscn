@@ -24,6 +24,7 @@ script = ExtResource("2_t0hnv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AxePickaxeSwing"]
 shape = SubResource("2")
+disabled = true
 
 [node name="SwordSwing" type="Area2D" parent="."]
 position = Vector2(13, -12)

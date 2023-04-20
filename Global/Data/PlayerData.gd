@@ -55,7 +55,7 @@ var starting_player_data = {
 	"energy": 100,
 	"hotbar": {
 		"0": ["bronze pickaxe", 1, 100],
-		"1": ["bronze axe", 1, 100],
+		"1": ["gold axe", 1, 100],
 		"2": ["bronze sword", 1, 100],
 		"3": ["scythe", 1, null],
 		"4": ["blueprint", 1, null],

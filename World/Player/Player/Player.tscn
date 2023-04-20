@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://bdyinn6aswyx7"]
+[gd_scene load_steps=75 format=3 uid="uid://bdyinn6aswyx7"]
 
 [ext_resource type="Script" path="res://World/Player/Player/Player.gd" id="1_hovno"]
 [ext_resource type="PackedScene" uid="uid://1ca7mk73gpp0" path="res://World/Player/Player/Actions.tscn" id="2_dmkl7"]
@@ -28,7 +28,6 @@
 [ext_resource type="Texture2D" uid="uid://78sds5dnqh0c" path="res://Assets/Images/Animations/objects/torch/3.png" id="22_grgdf"]
 [ext_resource type="Texture2D" uid="uid://bt3ysh31fm3pc" path="res://Assets/Images/Animations/objects/torch/4.png" id="23_i22ks"]
 [ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="28_3r6uk"]
-[ext_resource type="Script" path="res://World/Player/Player/MultiplayerSynchronizer.gd" id="28_3t45i"]
 [ext_resource type="PackedScene" uid="uid://bpcw4ag5bax2t" path="res://World/Player/Player/AttachedScenes/message_bubble.tscn" id="28_dc8ci"]
 
 [sub_resource type="Animation" id="3"]
@@ -432,18 +431,6 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Swing/AxePickaxeSwing/CollisionShape2D:disabled")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
 }
 
 [sub_resource type="Animation" id="72"]
@@ -4011,16 +3998,16 @@ properties/0/sync = true
 properties/1/path = NodePath(".:tool_name")
 properties/1/spawn = true
 properties/1/sync = true
-properties/2/path = NodePath(".:position")
+properties/2/path = NodePath("CompositeSprites/AnimationPlayer:current_animation")
 properties/2/spawn = true
 properties/2/sync = true
-properties/3/path = NodePath("CompositeSprites/AnimationPlayer:current_animation")
+properties/3/path = NodePath(".:holding_item_name")
 properties/3/spawn = true
 properties/3/sync = true
-properties/4/path = NodePath(".:holding_item_name")
+properties/4/path = NodePath(".:footstep_stream_paused")
 properties/4/spawn = true
 properties/4/sync = true
-properties/5/path = NodePath(".:footstep_stream_paused")
+properties/5/path = NodePath(".:position")
 properties/5/spawn = true
 properties/5/sync = true
 
@@ -4137,7 +4124,7 @@ script = ExtResource("11_wgncx")
 
 [node name="PickupZone" type="Area2D" parent="Area2Ds"]
 visible = false
-collision_layer = 4
+collision_layer = 0
 collision_mask = 4
 script = ExtResource("11_vhk27")
 
@@ -4237,10 +4224,6 @@ sprite_frames = SubResource("117")
 animation = &"new_animation"
 frame_progress = 0.579862
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_y6a7k")
-script = ExtResource("28_3t45i")
-
 [node name="AttachedText" type="Node2D" parent="."]
 visible = false
 
@@ -4258,6 +4241,9 @@ scale = Vector2(0.07, 0.07)
 theme = ExtResource("28_3r6uk")
 text = "chuse.icp"
 horizontal_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_y6a7k")
 
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_exited"]

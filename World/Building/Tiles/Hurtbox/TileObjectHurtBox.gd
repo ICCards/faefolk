@@ -189,7 +189,7 @@ func destroy():
 		$ObjectTiles.call_deferred("hide")
 		hurt_box.set_deferred("disabled", true)
 		movement_collision.set_deferred("disabled", true)
-		if item_name == "wood chest" or item_name == "stone chest" or item_name == "tool cabinet":
+		if item_name == "chest" or item_name == "tool cabinet":
 			drop_items_in_chest()
 			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break wood.mp3"))
 		elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
