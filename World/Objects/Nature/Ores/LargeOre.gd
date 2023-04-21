@@ -58,12 +58,13 @@ func hit(data):
 			sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 			sound_effects.call_deferred("play")
 			InstancedScenes.initiateOreHitEffect(variety, "large ore break", position+Vector2(rng.randi_range(-6,6), rng.randi_range(-4,4)))
-	#		var amount = Stats.return_item_drop_quantity(tool_name, "large ore")
-	#		Util.add_to_collection(variety, amount)
-	#		if variety == "stone1" or variety == "stone2":
-	#			InstancedScenes.intitiateItemDrop("stone", position, amount)
-	#		else:
-	#			InstancedScenes.intitiateItemDrop(variety, position, amount)
+			if data["player_id"] == Server.player_node.name:
+				var amount = Stats.return_item_drop_quantity(data["tool_name"], "large ore")
+				Util.add_to_collection(variety, amount)
+				if variety == "stone1" or variety == "stone2":
+					InstancedScenes.intitiateItemDrop("stone", position, amount)
+				else:
+					InstancedScenes.intitiateItemDrop(variety, position, amount)
 			animation_player.call_deferred("play", "large ore break")
 		elif health >= 1:
 			sound_effects.set_deferred("stream", Sounds.ore_hit[rng.randi_range(0, 2)])
@@ -83,12 +84,13 @@ func destroy(data):
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")
 		InstancedScenes.initiateOreHitEffect(variety, "small ore break", position)
-#		var amount = Stats.return_item_drop_quantity(tool_name, "small ore")
-#		Util.add_to_collection(variety, amount)
-#		if variety == "stone1" or variety == "stone2":
-#			InstancedScenes.intitiateItemDrop("stone", position, amount)
-#		else:
-#			InstancedScenes.intitiateItemDrop(variety, position, amount)
+		if data["player_id"] == Server.player_node.name:
+			var amount = Stats.return_item_drop_quantity(data["tool_name"], "small ore")
+			Util.add_to_collection(variety, amount)
+			if variety == "stone1" or variety == "stone2":
+				InstancedScenes.intitiateItemDrop("stone", position, amount)
+			else:
+				InstancedScenes.intitiateItemDrop(variety, position, amount)
 		animation_player.call_deferred("play", "small ore break")
 		await sound_effects.finished
 		await get_tree().create_timer(0.6).timeout

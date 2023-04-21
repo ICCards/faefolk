@@ -3,9 +3,9 @@ extends Node2D
 @rpc
 func weed_hit(id,loc): pass
 @rpc
-func front_tall_grass_hit(id,loc): pass
+func front_tall_grass_hit(player_id,id,loc): pass
 @rpc
-func back_tall_grass_hit(id,loc): pass
+func back_tall_grass_hit(player_id,id,loc): pass
 
 
 @rpc 

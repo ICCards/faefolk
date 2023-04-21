@@ -1,9 +1,11 @@
 extends Node2D
 
 
-@onready var sound_effects = $SoundEffects
-@onready var axe_pickaxe_swing = $AxePickaxeSwing
-@onready var sword_swing_area = $SwordSwing
+@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var sword_block: StaticBody2D = $SwordBlock
+@onready var axe_pickaxe_swing: Area2D = $AxePickaxeSwing
+@onready var sword_swing_area: Area2D = $SwordSwing
+@onready var scythe_swing: Area2D = $ScytheSwing
 @onready var watering_can_particles1 = $WateringCanParticles1
 @onready var watering_can_particles2 = $WateringCanParticles2
 
@@ -43,29 +45,20 @@ func sword_swing(item_name,attack_index):
 func whoAmISwordSwing(data):
 	call_deferred("sword_swing_deferred",data[0],data[1])
 
-
 func sword_swing_deferred(item_name,attack_index):
 	if get_parent().state != SWORD_SWINGING:
 		get_parent().state = SWORD_SWINGING
 		if attack_index == 1:
-			if get_node("../Magic").player_fire_buff:
-				sword_swing_area.special_ability = "fire"
-			else:
-				sword_swing_area.special_ability = ""
-			get_parent().animation = "sword_swing_" + get_parent().direction.to_lower()
-			sword_swing_area.tool_name = item_name
-			player_animation_player.play("sword_swing")
-			set_sword_swing_position(get_parent().direction)
-			sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
-			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-			sound_effects.play()
+			play_sword_swing_animation(item_name)
 		elif attack_index == 2:
-			get_parent().animation = "sword_block_" + get_parent().direction.to_lower()
-			player_animation_player.play(get_parent().animation)
+			play_sword_block_animation(item_name)
 		get_parent().tool_name = item_name
-		PlayerData.change_energy(-1)
-		get_parent().composite_sprites.set_player_animation(get_parent().character, get_parent().animation, item_name)
+		if get_parent().direction == "UP":
+			get_node("../CompositeSprites/ToolEquipped").show_behind_parent = true
+		else:
+			get_node("../CompositeSprites/ToolEquipped").show_behind_parent = false
 		await player_animation_player.animation_finished
+		PlayerData.change_energy(-1)
 		get_parent().state = MOVEMENT
 		if get_node("../Magic").mouse_left_down and attack_index == 1:
 			if valid_tool_health():
@@ -76,38 +69,55 @@ func sword_swing_deferred(item_name,attack_index):
 		elif get_node("../Magic").mouse_right_down and attack_index == 2:
 			sword_swing_deferred(item_name,2)
 			return
-		get_node("../Area2Ds/SwordBlock/CollisionShape2D").set_deferred("disabled", true)
+		sword_block.get_node("CollisionShape2D").set_deferred("disabled", true)
 		thread.wait_to_finish()
+
+
+func set_sword_block_position(direction):
+	match direction:
+		"DOWN":
+			sword_block.set_deferred("rotation_degrees", 0)
+			sword_block.set_deferred("position", Vector2(0,5))
+		"UP":
+			sword_block.set_deferred("rotation_degrees", 0)
+			sword_block.set_deferred("position", Vector2(0,-21))
+		"RIGHT":
+			sword_block.set_deferred("rotation_degrees", 90)
+			sword_block.set_deferred("position", Vector2(10,-8))
+		"LEFT":
+			sword_block.set_deferred("rotation_degrees", 90)
+			sword_block.set_deferred("position", Vector2(-02,-8))
+
 
 func set_sword_swing_position(direction):
 	match direction:
 		"DOWN":
-			$SwordSwing.set_deferred("rotation_degrees", 90)
-			$SwordSwing.set_deferred("position", Vector2(0,4))
+			sword_swing_area.set_deferred("rotation_degrees", 90)
+			sword_swing_area.set_deferred("position", Vector2(0,4))
 		"UP":
-			$SwordSwing.set_deferred("rotation_degrees", 90)
-			$SwordSwing.set_deferred("position", Vector2(0,-22))
+			sword_swing_area.set_deferred("rotation_degrees", 90)
+			sword_swing_area.set_deferred("position", Vector2(0,-22))
 		"RIGHT":
-			$SwordSwing.set_deferred("rotation_degrees", 0)
-			$SwordSwing.set_deferred("position", Vector2(12,-8))
+			sword_swing_area.set_deferred("rotation_degrees", 0)
+			sword_swing_area.set_deferred("position", Vector2(12,-8))
 		"LEFT":
-			$SwordSwing.set_deferred("rotation_degrees", 0)
-			$SwordSwing.set_deferred("position", Vector2(-12,-8))
+			sword_swing_area.set_deferred("rotation_degrees", 0)
+			sword_swing_area.set_deferred("position", Vector2(-12,-8))
 
 func set_scythe_swing_position(direction):
 	match direction:
 		"DOWN":
-			$ScytheSwing.set_deferred("rotation_degrees", 90)
-			$ScytheSwing.set_deferred("position", Vector2(0,8))
+			scythe_swing.set_deferred("rotation_degrees", 90)
+			scythe_swing.set_deferred("position", Vector2(0,8))
 		"UP":
-			$ScytheSwing.set_deferred("rotation_degrees", 90)
-			$ScytheSwing.set_deferred("position", Vector2(0,-26))
+			scythe_swing.set_deferred("rotation_degrees", 90)
+			scythe_swing.set_deferred("position", Vector2(0,-26))
 		"RIGHT":
-			$ScytheSwing.set_deferred("rotation_degrees", 0)
-			$ScytheSwing.set_deferred("position", Vector2(16,-8))
+			scythe_swing.set_deferred("rotation_degrees", 0)
+			scythe_swing.set_deferred("position", Vector2(16,-8))
 		"LEFT":
-			$ScytheSwing.set_deferred("rotation_degrees", 0)
-			$ScytheSwing.set_deferred("position", Vector2(-16,-8))
+			scythe_swing.set_deferred("rotation_degrees", 0)
+			scythe_swing.set_deferred("position", Vector2(-16,-8))
 
 func swing(item_name):
 	if not thread.is_started():
@@ -122,43 +132,31 @@ func swing_deferred(item_name):
 		get_node("../Sounds/FootstepsSound").stream_paused = true
 		get_parent().state = SWINGING
 		if item_name == "stone watering can" or item_name == "bronze watering can" or item_name == "gold watering can":
-			set_watered_tile()
-			get_parent().animation = "watering_" + get_parent().direction.to_lower()
-			player_animation_player.play("axe pickaxe swing")
+			play_watering_can_animation(item_name)
 		elif item_name == "scythe":
-			set_scythe_swing_position(get_parent().direction)
-			player_animation_player.play("scythe_swing")  #("scythe_swing_" + get_parent().direction.to_lower())
-			get_parent().animation = "sword_swing_" + get_parent().direction.to_lower()
-			sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
-			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-			sound_effects.play()
+			if get_parent().direction == "UP":
+				get_node("../CompositeSprites/ToolEquipped").show_behind_parent = true
+			else:
+				get_node("../CompositeSprites/ToolEquipped").show_behind_parent = false
+			play_scythe_swing_animation()
 		elif item_name == "arrow":
 			thread.wait_to_finish()
 			get_parent().state = MOVEMENT
 			return
 		elif item_name == null:
-			set_swing_collision_layer_and_position(item_name, get_parent().direction)
-			get_parent().animation = "punch_" + get_parent().direction.to_lower()
-			player_animation_player.play("punch")
+			play_punch_animation()
 		else:
 			if item_name == "hammer" and has_node("../MoveObject"):
 				thread.wait_to_finish()
 				get_parent().state = MOVEMENT
 				return
-			set_swing_collision_layer_and_position(item_name, get_parent().direction)
-			get_parent().animation = "swing_" + get_parent().direction.to_lower()
-			player_animation_player.play("axe pickaxe swing")
-		if item_name == null:
+			play_axe_pickaxe_swing_animation(item_name)
+		if item_name == null: # set for server
 			get_parent().tool_name = ""
 		else:
 			get_parent().tool_name = item_name
-		PlayerData.change_energy(-1)
-		composite_sprites.set_player_animation(get_parent().character, get_parent().animation, item_name)
-		await get_tree().create_timer(0.6).timeout
-		axe_pickaxe_swing.get_node("CollisionShape2D").set_deferred("disabled", false)
-		await get_tree().create_timer(0.1).timeout
-		axe_pickaxe_swing.get_node("CollisionShape2D").set_deferred("disabled", true)
 		await player_animation_player.animation_finished
+		PlayerData.change_energy(-1)
 		get_parent().state = MOVEMENT
 		if get_node("../Magic").mouse_left_down:
 			if valid_tool_health():
@@ -167,6 +165,72 @@ func swing_deferred(item_name):
 				swing_deferred(null)
 			return
 		thread.wait_to_finish()
+
+
+func play_sword_swing_animation(item_name):
+	if get_node("../Magic").player_fire_buff:
+		sword_swing_area.special_ability = "fire"
+	else:
+		sword_swing_area.special_ability = ""
+	get_parent().animation = "sword_swing_" + get_parent().direction.to_lower()
+	sword_swing_area.tool_name = item_name
+	composite_sprites.set_player_animation(get_parent().character, get_parent().animation, item_name)
+	player_animation_player.play("sword_swing")
+	set_sword_swing_position(get_parent().direction)
+	sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+	sound_effects.play()
+	await get_tree().create_timer(0.1).timeout
+	sword_swing_area.get_node("CollisionShape2D").set_deferred("disabled", false)
+	await get_tree().create_timer(0.2).timeout
+	sword_swing_area.get_node("CollisionShape2D").set_deferred("disabled", true)
+
+func play_sword_block_animation(item_name):
+	get_parent().animation = "sword_block_" + get_parent().direction.to_lower()
+	player_animation_player.play("sword_block")
+	set_sword_block_position(get_parent().direction)
+	composite_sprites.set_player_animation(get_parent().character, get_parent().animation, item_name)
+	sword_block.get_node("CollisionShape2D").set_deferred("disabled", false)
+
+func play_watering_can_animation(item_name):
+	set_watered_tile()
+	get_parent().animation = "watering_" + get_parent().direction.to_lower()
+	player_animation_player.play("axe pickaxe swing")
+	composite_sprites.set_player_animation(get_parent().character, get_parent().animation, item_name)
+
+func play_scythe_swing_animation(): 
+	set_scythe_swing_position(get_parent().direction)
+	player_animation_player.play("scythe_swing")  #("scythe_swing_" + get_parent().direction.to_lower())
+	get_parent().animation = "sword_swing_" + get_parent().direction.to_lower()
+	sound_effects.stream = Sounds.sword_whoosh[rng.randi_range(0, Sounds.sword_whoosh.size()-1)]
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+	sound_effects.play()
+	composite_sprites.set_player_animation(get_parent().character, get_parent().animation, "scythe")
+	await get_tree().create_timer(0.1).timeout
+	scythe_swing.get_node("CollisionShape2D").set_deferred("disabled", false)
+	await get_tree().create_timer(0.2).timeout
+	scythe_swing.get_node("CollisionShape2D").set_deferred("disabled", true)
+	
+func play_axe_pickaxe_swing_animation(item_name):
+	set_swing_collision_layer_and_position(item_name, get_parent().direction)
+	get_parent().animation = "swing_" + get_parent().direction.to_lower()
+	player_animation_player.play("axe pickaxe swing")
+	composite_sprites.set_player_animation(get_parent().character, get_parent().animation, item_name)
+	await get_tree().create_timer(0.6).timeout
+	axe_pickaxe_swing.get_node("CollisionShape2D").set_deferred("disabled", false)
+	await get_tree().create_timer(0.1).timeout
+	axe_pickaxe_swing.get_node("CollisionShape2D").set_deferred("disabled", true)
+	
+func play_punch_animation():
+	set_swing_collision_layer_and_position(null, get_parent().direction)
+	get_parent().animation = "punch_" + get_parent().direction.to_lower()
+	player_animation_player.play("punch")
+	composite_sprites.set_player_animation(get_parent().character, get_parent().animation, "")
+	await get_tree().create_timer(0.3).timeout
+	axe_pickaxe_swing.get_node("CollisionShape2D").set_deferred("disabled", false)
+	await get_tree().create_timer(0.1).timeout
+	axe_pickaxe_swing.get_node("CollisionShape2D").set_deferred("disabled", true)
+
 
 
 func set_swing_collision_layer_and_position(tool_name, direction):

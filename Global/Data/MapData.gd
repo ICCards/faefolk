@@ -82,7 +82,7 @@ func advance_crop():
 func add_object(type,id,data):
 	Server.world.world[MapData.get_chunk_from_location(data["l"])][type][id] = data
 	PlaceObject.place(type,id,data)
-	Server.world.get_node("PlaceableObjects").rpc_id(1,"player_place_object",Server.player_node.name,type,id,data)
+	get_node("/root/Main/PlaceableObjects").rpc_id(1,"player_place_object",Server.player_node.name,type,id,data)
 #	if Server.world.name == "Overworld":
 #	world[get_chunk_from_location(data["l"])][type][id] = data
 #	else:
@@ -3773,6 +3773,8 @@ func add_tile_to_chunk(type, tile):
 func get_chunk_from_location(loc):
 	var column
 	var row
+	var x = float(loc.x)
+	var y = float(loc.y)
 	if loc.x < 187.5:
 		column = 1
 	elif loc.x < 250:

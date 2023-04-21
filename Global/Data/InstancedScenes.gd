@@ -20,7 +20,7 @@ func _ready():
 
 func intitiateItemDrop(item_name: String, pos: Vector2, amount: int): 
 		for _i in range(amount):
-			Server.world.get_node("ItemDrops").rpc_id(1,"add_item_drop", [item_name,1,null], pos)
+			Server.world.get_node("ItemDrops").rpc_id(1,"add_item_drop", [item_name,1,null], pos+Vector2(rng.randf_range(-6, 6), rng.randf_range(-6, 6)))
 #		Server.world.get_node("ItemDrops").rpc_id(1,"")
 #		var itemDrop = ItemDrop.instantiate()
 #		itemDrop.initItemDropType(item_name)

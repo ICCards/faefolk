@@ -31,12 +31,13 @@ func _ready():
 		is_front_visible = false
 	destroy()
 
+
 func remove_from_world():
 	$Area2D.call_deferred("queue_free")
 	$BackArea2D.call_deferred("queue_free")
 	call_deferred("queue_free")
-	
-	
+
+
 func set_grass_texture():
 	var szn = Server.world.server_data["season"]
 	if biome == "cave1" or biome == "cave2" or biome == "cave3" or biome == "cave4":
@@ -117,7 +118,7 @@ func _on_BackArea2D_body_exited(body):
 	bodyEnteredFlag2 = false
 
 func _on_Area2D_area_entered(area):
-	get_parent().rpc_id(1,"front_tall_grass_hit",name,location)
+	get_parent().rpc_id(1,"front_tall_grass_hit",Server.player_node.name,name,location)
 	
 func front_hit(data):
 	front_health = data["fh"]
@@ -125,9 +126,10 @@ func front_hit(data):
 		$Area2D/CollisionShape2D.set_deferred("disabled", true)
 		$AnimationPlayer.call_deferred("play", "animate front")
 		await get_tree().create_timer(randf_range(0.0, 0.25)).timeout
-#		if Util.chance(50):
-#			PlayerData.player_data["collections"]["forage"][type] += 1
-#			InstancedScenes.intitiateItemDrop(type,position+Vector2(8,-6),1)
+		if data["player_id"] == Server.player_node.name:
+			if Util.chance(50):
+				PlayerData.player_data["collections"]["forage"][type] += 1
+				InstancedScenes.intitiateItemDrop(type,position+Vector2(8,-6),1)
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
 		$SoundEffects.call_deferred("play")
 		$AnimationPlayer.call_deferred("play", "front break")
@@ -141,7 +143,7 @@ func front_hit(data):
 		$SoundEffects.call_deferred("play")
 
 func _on_BackArea2D_area_entered(area):
-	get_parent().rpc_id(1,"back_tall_grass_hit",name,location)
+	get_parent().rpc_id(1,"back_tall_grass_hit",Server.player_node.name,name,location)
 
 func back_hit(data):
 	back_health = data["bh"]
@@ -149,9 +151,10 @@ func back_hit(data):
 		$BackArea2D/CollisionShape2D.set_deferred("disabled", true)
 		$AnimationPlayer2.call_deferred("play", "animate back")
 		await get_tree().create_timer(randf_range(0.0, 0.25)).timeout
-#		if Util.chance(50):
-#			PlayerData.player_data["collections"]["forage"][type] += 1
-#			InstancedScenes.intitiateItemDrop(type,position+Vector2(8,-10), 1)
+		if data["player_id"] == Server.player_node.name:
+			if Util.chance(50):
+				PlayerData.player_data["collections"]["forage"][type] += 1
+				InstancedScenes.intitiateItemDrop(type,position+Vector2(8,-10), 1)
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
 		$SoundEffects.call_deferred("play")
 		$AnimationPlayer2.call_deferred("play", "back break")

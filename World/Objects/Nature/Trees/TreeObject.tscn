@@ -12965,7 +12965,7 @@ offset = Vector2(2.08165e-12, -30)
 [node name="AnimatedTop" type="AnimatedSprite2D" parent="TreeSprites"]
 visible = false
 sprite_frames = ExtResource("5_cry28")
-animation = &"harvest"
+animation = &"empty"
 offset = Vector2(2.08165e-12, -28)
 
 [node name="TopBreakLeft" type="AnimatedSprite2D" parent="TreeSprites"]

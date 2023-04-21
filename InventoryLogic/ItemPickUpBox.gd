@@ -1,5 +1,6 @@
 extends Control
 
+@onready var sound_effects: AudioStreamPlayer = $AudioStreamPlayer
 
 var item_name = "strawberry seeds"
 var item_quantity
@@ -11,6 +12,9 @@ func _ready():
 	initialize()
 
 func initialize():
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/pick up item.mp3")
+	sound_effects.play()
 	$AnimationPlayer.call_deferred("stop")
 	set_deferred("modulate", Color("ffffff"))
 	if item_name != "Inventory full!":

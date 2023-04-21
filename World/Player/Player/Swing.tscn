@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbsqb6cw7rd7a"]
+[gd_scene load_steps=7 format=3 uid="uid://bbsqb6cw7rd7a"]
 
 [ext_resource type="Script" path="res://World/Player/Player/Swing.gd" id="1_3e7re"]
 [ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_t0hnv"]
@@ -13,6 +13,9 @@ height = 38.0
 [sub_resource type="CapsuleShape2D" id="28"]
 radius = 23.0
 height = 54.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jf0lk"]
+radius = 5.0
 
 [node name="Swing" type="Node2D"]
 script = ExtResource("1_3e7re")
@@ -68,3 +71,14 @@ emission_sphere_radius = 1.0
 gravity = Vector2(0, 70)
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+
+[node name="SwordBlock" type="StaticBody2D" parent="."]
+position = Vector2(10, -8)
+rotation = 1.5708
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordBlock"]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_jf0lk")
+disabled = true

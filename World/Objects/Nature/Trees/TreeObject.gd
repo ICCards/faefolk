@@ -76,7 +76,7 @@ func harvest():
 	if phase == "harvest" and health > 40:
 		$CollisionShape2D.set_deferred("disabled", true)
 		phase = "empty"
-		MapData.world["tree"][name]["p"] = "empty"
+		#MapData.world["tree"][name]["p"] = "empty"
 		refresh_tree_type()
 		fruit_fall.frame = 0
 		fruit_fall.show()
@@ -209,42 +209,7 @@ func hit(data):
 #				if health <= 0 and not destroyed:
 #					destroy("")
 				tree_fallen = true
-				call_deferred("disable_tree_top_collision_box")
-				sound_effects_stump.set_deferred("stream", Sounds.tree_hit[rng.randi_range(0,2)])
-				sound_effects_stump.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
-				sound_effects_stump.call_deferred("play")
-				sound_effects_tree.set_deferred("stream", Sounds.tree_break)
-				sound_effects_tree.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -14))
-				sound_effects_tree.call_deferred("play")
-				if Server.world.get_node("Players/"+str(data["player_id"])).get_position().x <= get_position().x:
-					animation_player_tree.call_deferred("play", "tree fall right")
-					await animation_player_tree.animation_finished
-					play_tree_break_animation("right")
-					if data["player_id"] == Server.player_node.name:
-						var amt = Stats.return_item_drop_quantity(data["tool_name"], "tree")
-						PlayerData.player_data["collections"]["resources"]["wood"] += amt
-						InstancedScenes.intitiateItemDrop("wood", position+Vector2(65, -8), amt)
-						if Util.chance(5):
-							InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(65, -8), 3)
-						elif Util.chance(15):
-							InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(65, -8), 2)
-						elif Util.chance(25):
-							InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(65, -8), 1)
-				
-				else:  
-					animation_player_tree.call_deferred("play", "tree fall left")
-					await animation_player_tree.animation_finished
-					play_tree_break_animation("left")
-					if data["player_id"] == Server.player_node.name:
-						var amt = Stats.return_item_drop_quantity(data["tool_name"], "tree")
-						PlayerData.player_data["collections"]["resources"]["wood"] += amt
-						InstancedScenes.intitiateItemDrop("wood", position+Vector2(-65, -8), amt)
-						if Util.chance(5):
-							InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-65, -8), 3)
-						elif Util.chance(15):
-							InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-65, -8), 2)
-						elif Util.chance(25):
-							InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-65, -8), 1)
+				tree_fall_break(data)
 			elif health >= 1:
 				sound_effects_stump.set_deferred("stream", Sounds.tree_hit[rng.randi_range(0,2)])
 				sound_effects_stump.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
@@ -260,10 +225,50 @@ func hit(data):
 #				call_deferred("destroy", tool_name)
 
 
+func tree_fall_break(data):
+	call_deferred("disable_tree_top_collision_box")
+	sound_effects_stump.set_deferred("stream", Sounds.tree_hit[rng.randi_range(0,2)])
+	sound_effects_stump.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
+	sound_effects_stump.call_deferred("play")
+	sound_effects_tree.set_deferred("stream", Sounds.tree_break)
+	sound_effects_tree.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -14))
+	sound_effects_tree.call_deferred("play")
+	if Server.world.get_node("Players/"+str(data["player_id"])).get_position().x <= get_position().x:
+		animation_player_tree.call_deferred("play", "tree fall right")
+		await animation_player_tree.animation_finished
+		play_tree_break_animation("right")
+		if data["player_id"] == Server.player_node.name:
+			var amt = Stats.return_item_drop_quantity(data["tool_name"], "tree")
+			PlayerData.player_data["collections"]["resources"]["wood"] += amt
+			InstancedScenes.intitiateItemDrop("wood", position+Vector2(65, -8), amt)
+			if Util.chance(5):
+				InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(65, -8), 3)
+			elif Util.chance(15):
+				InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(65, -8), 2)
+			elif Util.chance(25):
+				InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(65, -8), 1)
+	else:  
+			animation_player_tree.call_deferred("play", "tree fall left")
+			await animation_player_tree.animation_finished
+			play_tree_break_animation("left")
+			if data["player_id"] == Server.player_node.name:
+				var amt = Stats.return_item_drop_quantity(data["tool_name"], "tree")
+				PlayerData.player_data["collections"]["resources"]["wood"] += amt
+				InstancedScenes.intitiateItemDrop("wood", position+Vector2(-65, -8), amt)
+				if Util.chance(5):
+					InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-65, -8), 3)
+				elif Util.chance(15):
+					InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-65, -8), 2)
+				elif Util.chance(25):
+					InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-65, -8), 1)
+
+
 func destroy(data):
 	#MapData.remove_object("tree",name)
 	if not destroyed:
 		destroyed = true
+		if not tree_fallen:
+			play_tree_break_animation(data)
 		Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
 		if phase != "sapling" and phase != "1" and phase != "2" and phase != "3" and phase != "4":
 			play_stump_break_animation()
@@ -285,6 +290,7 @@ func destroy(data):
 
 ### Tree hurtbox
 func _on_Hurtbox_area_entered(_area):
+	print("TREE HURTBOX ENTERTED ")
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 #	if _area.special_ability == "fire buff" and phase == "5":

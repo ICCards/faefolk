@@ -16,7 +16,7 @@ var player = null
 var being_picked_up = false
 var being_added_to_inventory = false
 var randomInt
-var adjustedPosition = global_position
+var adjustedPosition
 var is_tree_harvest: bool = false
 
 
@@ -30,6 +30,9 @@ func _ready():
 		itemQuantity.text = str(item_quantity)
 #	randomInt = rng.randi_range(1, 6)
 #	animationPlayer.play("Animate " + str(randomInt))
+
+func _physics_process(delta):
+	$CollisionShape2D.position = $Sprite2D.position
 
 
 #func adjustPosition(animation):
@@ -75,6 +78,6 @@ func _ready():
 #		move_and_slide()
 
 func pick_up_item(body):
-	get_parent().rpc_id(1,"player_picked_up_item",{"id": name, "player_id":body.name})
+	get_parent().rpc_id(1,"player_picked_up_item",{"id": name, "player_id":body.name, "player_pos":body.position})
 #	player = body
 #	being_picked_up = true

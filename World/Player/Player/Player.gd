@@ -77,13 +77,16 @@ func _ready():
 
 
 func _physics_process(delta):
-	position = position
 	if not is_multiplayer_authority(): 
 		if footstep_stream_paused:
 			footsteps_sound.stream_paused = true
 		else:
 			footsteps_sound.volume_db = -10 #Sounds.return_adjusted_sound_db("footstep",-10)
 			footsteps_sound.stream_paused = false
+		if animation == "sword_swing_up" or animation == "sword_block_up" or animation == "scythe_swing_up":
+			composite_sprites.get_node("ToolEquipped").show_behind_parent = true
+		else:
+			composite_sprites.get_node("ToolEquipped").show_behind_parent = false
 		if holding_item_name == "":
 			holding_item.hide()
 			$HoldingTorch.set_inactive()

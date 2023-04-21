@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cu3r2d610eiwp"]
+[gd_scene load_steps=11 format=3 uid="uid://cu3r2d610eiwp"]
 
 [ext_resource type="Texture2D" uid="uid://baro7lf6rljlb" path="res://Assets/Images/User interface/ItemPickUpBox/right.png" id="1"]
 [ext_resource type="Script" path="res://InventoryLogic/ItemPickUpBox.gd" id="2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dqquydurtk0q" path="res://Assets/Images/User interface/ItemPickUpBox/left.png" id="5"]
 [ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="5_y5atq"]
 [ext_resource type="Texture2D" uid="uid://c87ug42a3k0vf" path="res://Assets/Images/inventory_icons/Placeable object/furnace.png" id="6_km4lv"]
+[ext_resource type="AudioStream" uid="uid://cpmbqua1xm4st" path="res://Assets/Sound/Sound effects/UI/pick up item.mp3" id="7_3h0w1"]
 
 [sub_resource type="Animation" id="2"]
 length = 0.001
@@ -126,5 +127,8 @@ wait_time = 5.0
 libraries = {
 "": SubResource("AnimationLibrary_u3kbd")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_3h0w1")
 
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_DestroyTimer_timeout"]
