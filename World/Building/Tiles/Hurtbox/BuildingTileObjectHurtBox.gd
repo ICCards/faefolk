@@ -167,7 +167,7 @@ func _on_HurtBox_area_entered(area):
 			return
 		if area.name == "AxePickaxeSwing":
 			Stats.decrease_tool_health()
-		#get_parent().rpc_id(1,"placeable_object_hit",Server.player_node.name,name,location,area.tool_name)
+		get_parent().rpc_id(1,"placeable_object_hit",Server.player_node.name,name,location,area.tool_name)
 			
 #		health -= Stats.return_tool_damage(area.tool_name)
 #		if health > 0:

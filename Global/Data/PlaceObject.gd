@@ -145,7 +145,7 @@ func place_building_object_in_world(id,item_name,direction,tier,location,health,
 	object.health = health
 	object.location = location
 	object.item_name = item_name
-	object.tier = "armored" #tier
+	object.tier = tier
 	PlaceableObjects.call_deferred("add_child", object, true)
 	object.global_position = Tiles.wall_tiles.map_to_local(location)
 	if item_name == "wood door" or item_name == "metal door" or item_name == "armored door":

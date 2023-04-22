@@ -168,10 +168,10 @@ func add_door_interactive_area_node(type):
 func _on_HurtBox_area_entered(area):
 	if area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	get_parent().rpc_id(1,"object_hit",name,location)
+	get_parent().rpc_id(1,"placeable_object_hit",Server.player_node.name,name,location,area.tool_name)
 
 
-func hit():
+func hit(data):
 	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Building/wood/wood hit.mp3"))
 	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound",0))
 	sound_effects.call_deferred("play")
@@ -179,7 +179,7 @@ func hit():
 	health -= 1
 	$ResetTempHealthTimer.call_deferred("start")
 
-func destroy():
+func destroy(data):
 	if not destroyed:
 		destroyed = true
 #		$PointLight2D.set_deferred("enabled", false)
@@ -190,19 +190,19 @@ func destroy():
 		hurt_box.set_deferred("disabled", true)
 		movement_collision.set_deferred("disabled", true)
 		if item_name == "chest" or item_name == "tool cabinet":
-			drop_items_in_chest()
+#			drop_items_in_chest()
 			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break wood.mp3"))
 		elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
-			drop_items_in_grain_mill()
+#			drop_items_in_grain_mill()
 			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break stone.mp3"))
 		elif item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
-			drop_items_in_stove()
+#			drop_items_in_stove()
 			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break stone.mp3"))
 		elif item_name == "furnace":
-			drop_items_in_furnace()
+#			drop_items_in_furnace()
 			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break stone.mp3"))
 		elif item_name == "campfire":
-			drop_items_in_campfire()
+#			drop_items_in_campfire()
 			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break stone.mp3"))
 		else: 
 			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break wood.mp3"))
@@ -214,8 +214,9 @@ func destroy():
 		else:
 			Tiles.add_valid_tiles(location, dimensions)
 		Tiles.object_tiles.erase_cell(0,location)
-		InstancedScenes.intitiateItemDrop(item_name, position, 1)
-#		MapData.remove_object("placeable",name,location)
+		if data["player_id"] == Server.player_node.name:
+			InstancedScenes.intitiateItemDrop(item_name, position, 1)
+		#MapData.remove_object("placeable",name,location)
 		await sound_effects.finished
 		call_deferred("queue_free")
 

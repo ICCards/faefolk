@@ -74,7 +74,8 @@ var object_atlas_tiles = {
 var autotile_object_atlas_tiles = {
 	"wood fence": 0,
 	"stone fence": 1,
-	"metal fence": 2
+	"metal fence": 2,
+	"display table": 3
 }
 
 var customizable_object_atlas_tiles = {

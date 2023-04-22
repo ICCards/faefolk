@@ -18,7 +18,6 @@ func initialize_locked_slots():
 		slots_in_barrel[i].slot_index = i
 		slots_in_barrel[i].slotType = SlotClass.SlotType.BARREL
 
-
 func initialize_slots():
 	var slots = self.get_children()
 	for i in range(slots.size()):

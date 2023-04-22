@@ -458,18 +458,20 @@ func add_item_to_empty_slot(item, slot, id = null):
 			player_data["combat_hotbar"][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.INVENTORY:
 			player_data["inventory"][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
-		SlotClass.SlotType.CHEST:
-			player_data["chests"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
-		SlotClass.SlotType.GRAIN_MILL:
-			player_data["grain_mills"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
-		SlotClass.SlotType.STOVE:
-			player_data["stoves"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
-		SlotClass.SlotType.FURNACE:
-			player_data["furnaces"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
-		SlotClass.SlotType.CAMPFIRE:
-			player_data["campfires"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
-		SlotClass.SlotType.BARREL:
-			player_data["barrels"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+		_:
+			Server.world.server_data["ui_slots"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+#		SlotClass.SlotType.CHEST:
+#			player_data["chests"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+#		SlotClass.SlotType.GRAIN_MILL:
+#			player_data["grain_mills"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+#		SlotClass.SlotType.STOVE:
+#			player_data["stoves"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+#		SlotClass.SlotType.FURNACE:
+#			player_data["furnaces"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+#		SlotClass.SlotType.CAMPFIRE:
+#			player_data["campfires"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+#		SlotClass.SlotType.BARREL:
+#			player_data["barrels"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
 
 
 func remove_item(slot, id = null):
