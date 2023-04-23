@@ -69,34 +69,30 @@ func advance_crop():
 #		Tiles.watered_tiles.clear()
 #	emit_signal("refresh_crops")
 
-#func set_hoed_tile(loc):
-#	world["tile"][loc] = "h"
-#
-#func set_watered_tile(loc):
-#	world["tile"][loc] = "w"
-#
-#func remove_hoed_tile(loc):
-#	world["tile"].erase(loc)
+func set_hoed_tile(loc):
+	Server.world.get_node("FarmingTiles").rpc_id(1,"set_hoed_tile",loc)
+	#.world[MapData.get_chunk_from_location(data["l"])]["tile"][loc] = "h"
+
+func set_watered_tile(loc):
+	Server.world.get_node("FarmingTiles").rpc_id(1,"set_watered_tile",loc)
+	#world["tile"][loc] = "w"
+
+func remove_hoed_tile(loc):
+	Server.world.get_node("FarmingTiles").rpc_id(1,"remove_hoed_tile",loc)
+	#world["tile"].erase(loc)
 
 
 func add_object(type,id,data):
 	Server.world.world[MapData.get_chunk_from_location(data["l"])][type][id] = data
 	PlaceObject.place(type,id,data)
-	get_node("/root/Main/PlaceableObjects").rpc_id(1,"player_place_object",Server.player_node.name,type,id,data)
-#	if Server.world.name == "Overworld":
-#	world[get_chunk_from_location(data["l"])][type][id] = data
-#	else:
-#		Server.caves[Server.world.name][type][id] = data
+	Server.world.get_node("PlaceableObjects").rpc_id(1,"player_place_object",Server.player_node.name,type,id,data)
+
 
 func remove_object(type,id,location):
 	Server.world.world[MapData.get_chunk_from_location(location)][type].erase(id)
-#	PlaceObject.place(type,id,data)
 	Server.world.get_node("PlaceableObjects").rpc_id(1,"player_remove_object",Server.player_node.name,type,id,location)
-	#if Server.world.name == "Overworld":
-#	world[type].erase(id)
-#	else:
-#		caves[Server.world.name][type].erase(id)
-	
+
+
 func update_object_health(type, id, new_health):
 	if Server.world.name == "Overworld":
 		if Server.world[type].has(id):

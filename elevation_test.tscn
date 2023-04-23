@@ -47,6 +47,8 @@ pattern_0 = SubResource("TileMapPattern_nngou")
 
 [node name="ElevationTest" type="Node2D"]
 script = ExtResource("1_n2im1")
+redraw = true
+world_seed = "sdsdffedff"
 noise_frequency = 0.01
 
 [node name="Plains" type="TileMap" parent="."]

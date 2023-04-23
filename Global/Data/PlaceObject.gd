@@ -33,10 +33,41 @@ func place(type,id,data):
 		var location = data["l"]
 		var variety = data["v"]
 		var direction = data["d"]
-		if item_name == "wall" or item_name == "foundation" or item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
-			place_building_object_in_world(id,item_name,direction,variety,location,data["h"])
+		var health = data["h"]
+		if item_name == "wall" or item_name == "foundation":
+			place_building_object_in_world(id,item_name,location,health,data["t"])
+#		elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
+#			place_door_in_world(id,item_name,location,)
 		else:
 			place_object_in_world(id,item_name,direction,location,variety)
+
+
+func place_building_object_in_world(id,item_name,location,health,tier):
+	PlaceableObjects = Server.world.get_node("PlaceableObjects")
+	var object = BuildingTileObjectHurtBox.instantiate()
+	object.name = id
+	object.health = health
+	object.location = location
+	object.item_name = item_name
+	object.tier = tier
+	PlaceableObjects.call_deferred("add_child", object, true)
+	object.global_position = Tiles.wall_tiles.map_to_local(location)
+
+
+func place_door_in_world(id,item_name,direction,tier,location,health,variety = null):
+	PlaceableObjects = Server.world.get_node("PlaceableObjects")
+	var object = BuildingTileObjectHurtBox.instantiate()
+	object.name = id
+	object.variety = variety
+	object.direction = direction
+	object.health = health
+	object.location = location
+	object.item_name = item_name
+	PlaceableObjects.call_deferred("add_child", object, true)
+	object.global_position = Tiles.wall_tiles.map_to_local(location)
+	Tiles.object_tiles.set_cell(0,location,0,Constants.customizable_rotatable_object_atlas_tiles[item_name][variety][direction])
+
+
 
 func place_tall_grass_in_world(id,biome,location,front_health,back_health):
 	GrassObjects = Server.world.get_node("GrassObjects")
@@ -135,21 +166,6 @@ func place_large_ore_in_world(id,variety,location,health):
 	object.position = Tiles.valid_tiles.map_to_local(location) + Vector2(-8,0)
 	NatureObjects.call_deferred("add_child",object,true)
 	
-
-func place_building_object_in_world(id,item_name,direction,tier,location,health,variety = null):
-	PlaceableObjects = Server.world.get_node("PlaceableObjects")
-	var object = BuildingTileObjectHurtBox.instantiate()
-	object.name = id
-	object.variety = variety
-	object.direction = direction
-	object.health = health
-	object.location = location
-	object.item_name = item_name
-	object.tier = tier
-	PlaceableObjects.call_deferred("add_child", object, true)
-	object.global_position = Tiles.wall_tiles.map_to_local(location)
-	if item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
-		Tiles.object_tiles.set_cell(0,location,0,Constants.customizable_rotatable_object_atlas_tiles[item_name][variety][direction])
 
 
 func remove_valid_tiles(item_name,direction, location):

@@ -1,3 +1,4 @@
+res://Assets/Tilesets/terrain
 res://InventoryLogic
 res://World/Player/Player/AttachedScenes
 res://World/Map
@@ -19,4 +20,3 @@ res://Assets/Images/Magic/wind
 res://Assets/Images/Animations/leaf break
 res://World/Building/Tiles/Attached nodes
 res://Assets/Images/tree_sets/wood breaks/logs
-res://Assets/Images/Animations/ore

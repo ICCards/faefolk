@@ -64,7 +64,7 @@ func _ready():
 		set_process_unhandled_input(false)
 		set_process(false)
 		return
-	position = Vector2(500*16,500*16)
+	position = Vector2(500*16,375*16)
 	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
 	Server.player_node = self
 #	if is_building_world:

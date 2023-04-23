@@ -28,7 +28,7 @@ func send_world_data(data):
 	$WorldMap.buildMap()
 #	await get_tree().create_timer(2).timeout
 #	MapData.add_world_data_to_chunks()
-	$WorldAmbience.initialize()
+	#$WorldAmbience.initialize()
 	$WorldBuilder.initialize()
 	$WorldBuilder/BuildTerrain.initialize()
 	$WorldBuilder/BuildNature.initialize()

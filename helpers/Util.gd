@@ -216,7 +216,7 @@ func isObjectPlaceableOnGround(item_name):
 
 
 func isStorageItem(item_name):
-	if item_name == "wood box" or item_name == "wood barrel" or item_name == "chest" or \
+	if item_name == "crate" or item_name == "barrel" or item_name == "chest" or \
 	item_name == "tool cabinet" or item_name == "furnace" or item_name == "stove #1" or \
 	item_name == "stove #2" or item_name == "stove #3" or item_name == "grain mill #1" or \
 	item_name == "grain mill #2" or item_name == "grain mill #3" or item_name == "campfire":

@@ -258,40 +258,40 @@ func set_swing_collision_layer_and_position(tool_name, direction):
 
 
 func set_hoed_tile(direction):
-	if Server.world.name == "Overworld":
+	if Server.world.name == "Main":
 		var pos = Util.set_swing_position(global_position, direction)
 		var location = Tiles.valid_tiles.local_to_map(pos)
 		if Tiles.valid_tiles.get_cell_atlas_coords(0,location) == Constants.VALID_TILE_ATLAS_CORD and \
 		Tiles.hoed_tiles.get_cell_atlas_coords(0,location) == Vector2i(-1,-1) and \
 		Tiles.isCenterBitmaskTile(location, Tiles.dirt_tiles) and \
 		Tiles.foundation_tiles.get_cell_atlas_coords(0,location) == Vector2i(-1,-1):
-			MapData.set_hoed_tile(location)
 			await get_tree().create_timer(0.6).timeout
+			MapData.set_hoed_tile(location)
 			InstancedScenes.play_hoed_dirt_effect(location)
 			Stats.decrease_tool_health()
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			sound_effects.play()
-			Tiles.hoed_tiles.set_cells_terrain_connect(0,[location],0,0)
+			#Tiles.hoed_tiles.set_cells_terrain_connect(0,[location],0,0)
 
 
 func remove_hoed_tile(direction):
-	if Server.world.name == "Overworld":
+	if Server.world.name == "Main":
 		var pos = Util.set_swing_position(global_position, direction)
 		var location = Tiles.hoed_tiles.local_to_map(pos)
 		if Tiles.hoed_tiles.get_cell_atlas_coords(0,location) != Vector2i(-1,-1):
-			MapData.remove_hoed_tile(location)
 			await get_tree().create_timer(0.6).timeout
+			MapData.remove_hoed_tile(location)
 			Stats.decrease_tool_health()
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/hoe.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			sound_effects.play()
-			Tiles.watered_tiles.set_cells_terrain_connect(0,[location],0,-1)
-			Tiles.hoed_tiles.set_cells_terrain_connect(0,[location],0,-1)
+#			Tiles.watered_tiles.set_cells_terrain_connect(0,[location],0,-1)
+#			Tiles.hoed_tiles.set_cells_terrain_connect(0,[location],0,-1)
 
 
 func set_watered_tile():
-	if Server.world.name == "Overworld":
+	if Server.world.name == "Main":
 		direction = get_parent().direction
 		var pos = Util.set_swing_position(global_position, direction)
 		var location = Tiles.valid_tiles.local_to_map(pos)
@@ -317,7 +317,7 @@ func set_watered_tile():
 			watering_can_particles2.emitting = false
 			if Tiles.hoed_tiles.get_cell_atlas_coords(0,location) != Vector2i(-1,-1):
 				MapData.set_watered_tile(location)
-				Tiles.watered_tiles.set_cells_terrain_connect(0,[location],0,0)
+				#Tiles.watered_tiles.set_cells_terrain_connect(0,[location],0,0)
 		else: 
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)

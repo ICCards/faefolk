@@ -360,16 +360,14 @@ func place_object(item_name, direction, location, type, variety = null):
 					$SoundEffects.stream = Sounds.place_object
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 					$SoundEffects.play()
-					MapData.add_object("placeable",id,{"n":item_name,"v":"twig","l":location,"h":Stats.MAX_TWIG_BUILDING,"d":null})
+					MapData.add_object("placeable",id,{"n":item_name,"l":location,"h":Stats.MAX_TWIG_BUILDING,"t":"twig"})
 					PlayerData.remove_material("wood", 5)
-#					PlaceObject.place_building_object_in_world(id,item_name,null,"twig",location,Stats.MAX_TWIG_BUILDING)
 				elif PlayerData.returnSufficentCraftingMaterial("wood", 2) and item_name == "foundation":
 					$SoundEffects.stream = Sounds.place_object
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 					$SoundEffects.play()
-					MapData.add_object("placeable",id, {"n":item_name,"v":"twig","l":location,"h":Stats.MAX_TWIG_BUILDING,"d":null})
+					MapData.add_object("placeable",id,{"n":item_name,"l":location,"h":Stats.MAX_TWIG_BUILDING,"t":"twig"})
 					PlayerData.remove_material("wood", 2)
-#					PlaceObject.place_building_object_in_world(id,item_name,null,"twig",location,Stats.MAX_TWIG_BUILDING)
 				else:
 					$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
@@ -379,21 +377,17 @@ func place_object(item_name, direction, location, type, variety = null):
 				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 				$SoundEffects.play()
 				if item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
-					MapData.add_object("placeable",id, {"n":item_name,"v":"twig","l":location,"h":Stats.return_starting_door_health(item_name),"d":direction})
-#					PlaceObject.place_building_object_in_world(id,item_name,direction,null,location,Stats.return_starting_door_health(item_name),variety)
+					MapData.add_object("placeable",id, {"n":item_name,"v":variety,"l":location,"h":Stats.return_starting_door_health(item_name),"d":direction})
 				elif moving_object:
 					MapData.add_object("placeable",previous_moving_object_data["id"],{"n":item_name,"d":direction,"l":location,"v":variety,"h":3})
-#					PlaceObject.place_object_in_world(previous_moving_object_data["id"], item_name, direction, location, variety)
 					Server.player_node.actions.destroy_moveable_object()
 				else:
 					MapData.add_object("placeable",id,{"n":item_name,"d":direction,"l":location,"v":variety,"h":3})
-#					PlaceObject.place_object_in_world(id, item_name, direction, location, variety)
 		elif type == "tree":
 			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
 			if Util.isNonFruitTree(item_name) or Util.isFruitTree(item_name):
-#				PlaceObject.place_tree_in_world(id,item_name,location+Vector2i(1,0),"forest",Stats.TREE_HEALTH,"sapling")
 				MapData.add_object("tree",id,{"l":location,"h":Stats.TREE_HEALTH,"b":"forest","v":item_name,"p":"sapling"})
 		elif type == "crop":
 			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
@@ -401,13 +395,10 @@ func place_object(item_name, direction, location, type, variety = null):
 			$SoundEffects.play()
 			var days_to_grow = JsonData.crop_data[item_name]["DaysToGrow"]
 			MapData.add_object("crop",id,{"n":item_name,"l":location,"dh":days_to_grow,"dww":0,"rp":false})
-			#PlaceObject.place_seed_in_world(id,item_name,location,days_to_grow,0,false)
 		elif type == "forage":
 			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
 			MapData.add_object("forage",id,{"n":item_name,"l":location,"f":false})
-			#MapData.add_object_to_chunk("forage",location,id)
-			#PlaceObject.place_forage_in_world(id,item_name,location,false)
 	if not PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 		Server.player_node.set_held_object()

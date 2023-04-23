@@ -63,11 +63,11 @@ func spawn_placeables():
 			var location = map["placeable"][id]["l"]
 			var variety = map["placeable"][id]["v"]
 			var direction = map["placeable"][id]["d"]
-			if not PlaceableObjects.has_node(id):
-				if item_name == "wall" or item_name == "foundation" or item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
-					PlaceObject.place_building_object_in_world(id,item_name,direction,variety,location,map["placeable"][id]["h"])
-				else:
-					PlaceObject.place_object_in_world(id,item_name,direction,location,variety)
+#			if not PlaceableObjects.has_node(id):
+#				if item_name == "wall" or item_name == "foundation" or item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
+#					PlaceObject.place_building_object_in_world(id,item_name,direction,variety,location,map["placeable"][id]["h"])
+#				else:
+#					PlaceObject.place_object_in_world(id,item_name,direction,location,variety)
 	placeable_thread.wait_to_finish()
 
 func spawn_crops():

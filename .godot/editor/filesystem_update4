@@ -1,9 +1,4 @@
 res://main.tscn
-res://Assets/Themes/text.tres
-res://Assets/Themes/LockedAsset.tres
-res://Assets/Themes/whiten.tres
-res://Assets/Tilesets/objects/objects.tres
-res://Assets/Tilesets/objects/crops.tres
 res://Assets/Tilesets/terrain/tres files/plains.tres
 res://Assets/Tilesets/terrain/tres files/deep ocean.tres
 res://Assets/Tilesets/terrain/tres files/dirt.tres
@@ -15,23 +10,31 @@ res://Assets/Tilesets/terrain/tres files/snow.tres
 res://Assets/Tilesets/terrain/tres files/wet sand.tres
 res://Assets/Tilesets/foundation/foundation.tres
 res://Assets/Tilesets/walls/walls.tres
+res://Assets/Tilesets/objects/objects.tres
 res://Assets/Themes/MiniMap.tres
 res://PlaceableObjects.gd
-res://World/Player/Player/Player.tscn
-res://InventoryLogic/ItemDrop.tscn
-res://World/Player/Player/Swing.tscn
-res://InventoryLogic/ItemPickUpBox.tscn
-res://World/Building/PlaceObjectPreview.tscn
-res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn
-res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.gd
-res://World/Objects/Nature/Trees/TreeObject.tscn
-res://Assets/Images/tree_sets/plum/mature/animated.tres
-res://World/Objects/Nature/Trees/TreeObject.gd
-res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
-res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd
-res://Global/Data/PlaceObject.gd
-res://World/Player/Player/UserInterface/Slots/BarrelSlots.gd
-res://Global/Data/Constants.gd
-res://World/Player/Player/UserInterface/Slots/CrateSlots.gd
-res://World/Player/Player/UserInterface/Slots/CrateSlots.tscn
+res://World/Player/Player/UserInterface/Crate/Crate.tscn
+res://Assets/Themes/text.tres
+res://World/Player/Player/UserInterface/Crate/Crate.gd
 res://Global/Data/PlayerData.gd
+res://World/Player/Player/UserInterface/UserInterface.tscn
+res://Assets/Themes/LockedAsset.tres
+res://World/Player/Player/UserInterface/UserInterface.gd
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
+res://World/Player/Player/UserInterface/Slots/CrateSlots.tscn
+res://helpers/Util.gd
+res://Global/Data/PlaceObject.gd
+res://World/Building/PlaceObjectPreview.gd
+res://World/Player/Player/Swing.tscn
+res://World/Player/Player/Swing.gd
+res://Global/Data/MapData.gd
+res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn
+res://FarmingTiles.gd
+res://World/World/BuildNature.gd
+res://World/Player/Player/Player.tscn
+res://Assets/Themes/whiten.tres
+res://World/Player/Player/Player.gd
+res://main.gd
+res://Assets/Tilesets/terrain/watered hoed.tres
+res://Assets/Tilesets/terrain/hoed.tres
+res://elevation_test.tscn
