@@ -22,10 +22,19 @@ var current_chunks = []
 
 
 func initialize():
-	pass
+	place_farming_tiles()
 #	placeable_thread.start(Callable(self,"whoAmIPlaceable").bind(null))
 #	crop_thread.start(Callable(self,"whoAmICrop").bind(null))
 	$SpawnNatureTimer.start()
+
+
+
+func place_farming_tiles():
+	for chunk in get_node("../../").world:
+		for loc in get_node("../../").world[chunk]["tile"].keys():
+			get_node("../../FarmingTiles/HoedTiles").set_cells_terrain_connect(0,[loc],0,0)
+			if get_node("../../").world[chunk]["tile"][loc] == "w":
+				get_node("../../FarmingTiles/WateredTiles").set_cells_terrain_connect(0,[loc],0,0)
 
 
 func whoAmIPlaceable(value):

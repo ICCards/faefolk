@@ -58,6 +58,7 @@ func destroy(data):
 
 func _on_SmallHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
+		Server.player_node.get_node("Camera2D").ore_hit_shake()
 		Stats.decrease_tool_health()
 	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
 		get_parent().rpc_id(1,"nature_object_hit",Server.player_node.name,"ore",name,location,_area.tool_name)

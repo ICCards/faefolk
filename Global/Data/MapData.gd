@@ -83,8 +83,8 @@ func remove_hoed_tile(loc):
 
 
 func add_object(type,id,data):
-	Server.world.world[MapData.get_chunk_from_location(data["l"])][type][id] = data
 	PlaceObject.place(type,id,data)
+	Server.world.world[MapData.get_chunk_from_location(data["l"])][type][id] = data
 	Server.world.get_node("PlaceableObjects").rpc_id(1,"player_place_object",Server.player_node.name,type,id,data)
 
 

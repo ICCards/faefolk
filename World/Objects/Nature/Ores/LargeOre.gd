@@ -100,6 +100,7 @@ func destroy(data):
 
 func _on_BigHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
+		Server.player_node.get_node("Camera2D").ore_hit_shake()
 		Stats.decrease_tool_health()
 	if _area.special_ability == "fire buff":
 		health -= Stats.FIRE_DEBUFF_DAMAGE

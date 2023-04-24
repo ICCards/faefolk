@@ -63,6 +63,13 @@ func start_small_shake():
 	timer_shake_length.start(time_of_player_hit_shake)
 	timer_wait_times.start(speed_of_shake)
 	
+func ore_hit_shake():
+	doing_shake = true
+	strength = strength_of_player_hit_shake / 2
+	reset_speed = speed_of_shake / 2
+	timer_shake_length.start(time_of_player_hit_shake/2)
+	timer_wait_times.start(speed_of_shake/2)
+	
 ##This is our flash tween, we tween up, then once we reach up, yield will fire, and we'll tween back down
 #func start_flash(speed,strength):
 #	tween_shake.interpolate_property(flash_image,"modulate:a",0,strength,speed,Tween.TRANS_SINE,Tween.EASE_OUT)

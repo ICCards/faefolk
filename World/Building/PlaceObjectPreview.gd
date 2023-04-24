@@ -387,8 +387,7 @@ func place_object(item_name, direction, location, type, variety = null):
 			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
-			if Util.isNonFruitTree(item_name) or Util.isFruitTree(item_name):
-				MapData.add_object("tree",id,{"l":location,"h":Stats.TREE_HEALTH,"b":"forest","v":item_name,"p":"sapling"})
+			MapData.add_object("tree",id,{"l":location,"h":Stats.TREE_HEALTH,"b":"forest","v":item_name,"p":"sapling"})
 		elif type == "crop":
 			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)

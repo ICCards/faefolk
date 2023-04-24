@@ -1,20 +1,21 @@
 fc8a56933c4b1c8d796fdb8f7a9f9475
-::res://::1682182303
+::res://::1682231799
 BetaLabel.tscn::PackedScene::1942189311565160859::1676939473::0::1::::<><>::uid://d3voewdqos1nj
 CHANGELOG.md::TextFile::-1::1665030472::0::1::::<><>::
 configuration.json::JSON::-1::1668891217::0::1::::<><>::
 default_bus_layout.tres::AudioBusLayout::-1::1676139738::0::1::::<><>::
 default_env.tres::Environment::-1::1676562591::0::1::::<><>::
 ElevationTest.gd::GDScript::-1::1681345575::0::1::::<>Node2D<>::
-elevation_test.tscn::PackedScene::4008764251732812688::1682137513::0::1::::<><>::res://ElevationTest.gd<>uid://b5vo0lawafpb5<>uid://de28nfavviio7<>uid://nxbfcsoot5tk<>uid://dja0b16fhgms6
+elevation_test.tscn::PackedScene::4008764251732812688::1682228934::0::1::::<><>::res://ElevationTest.gd<>uid://b5vo0lawafpb5<>uid://de28nfavviio7<>uid://nxbfcsoot5tk<>uid://dja0b16fhgms6
 export_presets.cfg::TextFile::-1::1679958567::0::1::::<><>::
+FarmingTiles.gd::GDScript::-1::1682198889::0::1::::<>Node2D<>::
 ForageObjects.gd::GDScript::-1::1681406928::0::1::::<>Node2D<>::
 GrassObjects.gd::GDScript::-1::1682048935::0::1::::<>Node2D<>::
 ItemDrops.gd::GDScript::-1::1682051389::0::1::::<>Node2D<>::
-main.gd::GDScript::-1::1681667299::0::1::::<>Node2D<>::
-main.tscn::PackedScene::2969105255930153690::1682137512::0::1::::<><>::res://main.gd<>uid://nxbfcsoot5tk<>res://World/World/WorldBuilder.gd<>res://World/World/WorldAmbience.gd<>uid://b5vo0lawafpb5<>res://World/World/SpawnAnimal.gd<>res://World/World/BuildNature.gd<>uid://bpd6si5cldst7<>uid://3x3xfgwqdrhm<>res://World/World/BuildTerrain.gd<>uid://de28nfavviio7<>res://Time.gd<>uid://ceprqmvmkacdl<>uid://dja0b16fhgms6<>uid://c0mxloskuawnh<>uid://d2u2dc22ifh2g<>uid://2bxso62kg8ee<>uid://33tw24vxmev3<>uid://cxyw1xxxhvjda<>uid://bmjc5ou5oyowx<>uid://ptjidk7r1daj<>uid://c66ktnntnkqrx<>res://NatureObjects.gd<>res://PlaceableObjects.gd<>res://ItemDrops.gd<>res://ForageObjects.gd<>res://GrassObjects.gd
+main.gd::GDScript::-1::1682199425::0::1::::<>Node2D<>::
+main.tscn::PackedScene::2969105255930153690::1682225855::0::1::::<><>::res://main.gd<>uid://nxbfcsoot5tk<>res://World/World/WorldBuilder.gd<>uid://b5vo0lawafpb5<>res://World/World/SpawnAnimal.gd<>res://World/World/BuildNature.gd<>uid://bpd6si5cldst7<>uid://3x3xfgwqdrhm<>res://World/World/BuildTerrain.gd<>uid://de28nfavviio7<>res://Time.gd<>uid://ceprqmvmkacdl<>uid://dja0b16fhgms6<>uid://c0mxloskuawnh<>uid://d2u2dc22ifh2g<>uid://2bxso62kg8ee<>uid://33tw24vxmev3<>uid://cxyw1xxxhvjda<>uid://bmjc5ou5oyowx<>uid://c66ktnntnkqrx<>res://NatureObjects.gd<>res://PlaceableObjects.gd<>res://FarmingTiles.gd<>uid://dnvo01hfnktxd<>uid://bctmvj3yosupc<>res://ItemDrops.gd<>res://ForageObjects.gd<>res://GrassObjects.gd
 NatureObjects.gd::GDScript::-1::1681877203::0::1::::<>Node2D<>::
-PlaceableObjects.gd::GDScript::-1::1682106280::0::1::::<>Node2D<>::
+PlaceableObjects.gd::GDScript::-1::1682190494::0::1::::<>Node2D<>::
 Time.gd::GDScript::-1::1681349597::0::1::::<>Node<>::
 ::res://Assets/::1679967401
 Ships.png::CompressedTexture2D::5737978111869575761::1679967400::1679967401::1::::<><>::
@@ -2090,18 +2091,18 @@ putDownItem.mp3::AudioStreamMP3::392999998161922402::1671422862::1679959325::1::
 ::res://Assets/Sound/Sound effects/UI/trash/::1679959325
 trashcan.mp3::AudioStreamMP3::8189502271362956139::1670559598::1679959325::1::::<><>::
 trashcanlid.mp3::AudioStreamMP3::215754345838567834::1670559600::1679959325::1::::<><>::
-::res://Assets/Themes/::1682137511
+::res://Assets/Themes/::1682225856
 button_theme.tres::Theme::3337690640232596902::1676934416::0::1::::<><>::
 Collections.gdshader::Shader::-1::1679473752::0::1::::<><>::
 Flash.tres::ShaderMaterial::4751646367133969636::1680115385::0::1::::<><>::
 HideCollection.tres::ShaderMaterial::9032135387315676702::1679367362::0::1::::<><>::res://Assets/Themes/Collections.gdshader
-LockedAsset.tres::ShaderMaterial::7484732980063694360::1682102059::0::1::::<><>::
+LockedAsset.tres::ShaderMaterial::7484732980063694360::1682199104::0::1::::<><>::
 MenuTitle.tres::Theme::5456183242202858698::1680203573::0::1::::<><>::
-MiniMap.tres::TileSet::2308728021810453948::1682102060::0::1::::<><>::uid://kmdvpv8xlgv1<>uid://dj0pvp8iwtaot<>uid://8nnm6mpejed4<>uid://bv2e37vy0s7h4<>uid://bo0nt2yeck3kj<>uid://bf0c18sd1j4bw<>uid://bqanfwsp0d074<>uid://dinf4yesj4pvt
-text.tres::Theme::9168759947748345179::1682102059::0::1::::<><>::uid://ci2dps48rt1wx
+MiniMap.tres::TileSet::2308728021810453948::1682185138::0::1::::<><>::uid://kmdvpv8xlgv1<>uid://dj0pvp8iwtaot<>uid://8nnm6mpejed4<>uid://bv2e37vy0s7h4<>uid://bo0nt2yeck3kj<>uid://bf0c18sd1j4bw<>uid://bqanfwsp0d074<>uid://dinf4yesj4pvt
+text.tres::Theme::9168759947748345179::1682187406::0::1::::<><>::uid://ci2dps48rt1wx
 waves.tres::TileSet::-1::1676562591::0::1::::<><>::res://Assets/Images/Animations/ocean/wave border/wave animation.tres
 whiten.gdshader::Shader::-1::1682063091::0::1::::<><>::
-whiten.tres::ShaderMaterial::8437657514816941110::1682137511::0::1::::<><>::res://Assets/Themes/whiten.gdshader
+whiten.tres::ShaderMaterial::8437657514816941110::1682225856::0::1::::<><>::res://Assets/Themes/whiten.gdshader
 world_fog.tres::Shader::1887696060233318535::1676921454::0::1::::<><>::
 ::res://Assets/Tilesets/::1678664731
 ::res://Assets/Tilesets/doors/::1677012892
@@ -2131,40 +2132,42 @@ open.png::CompressedTexture2D::6835208479841356072::1678249014::1679959325::1:::
 ::res://Assets/Tilesets/doors/hit effects/wood door/side/::1679959325
 closed.png::CompressedTexture2D::1237166384127767028::1678249031::1679959325::1::::<><>::
 open.png::CompressedTexture2D::481064405642400809::1678249040::1679959325::1::::<><>::
-::res://Assets/Tilesets/foundation/::1682102060
+::res://Assets/Tilesets/foundation/::1682185138
 armored.png::CompressedTexture2D::1375557200681583733::1677007436::1679959325::1::::<><>::
-foundation.tres::TileSet::2024284573222189606::1682102060::0::1::::<><>::uid://c70ujy2eelmmh<>uid://dwcmyk4067g54<>uid://m206stt0im7w<>uid://cya467v58h4cd<>uid://tulhxntm5hpl
+foundation.tres::TileSet::2024284573222189606::1682185138::0::1::::<><>::uid://c70ujy2eelmmh<>uid://dwcmyk4067g54<>uid://m206stt0im7w<>uid://cya467v58h4cd<>uid://tulhxntm5hpl
 metal.png::CompressedTexture2D::6459191481695826435::1677007475::1679959325::1::::<><>::
 stone.png::CompressedTexture2D::899578583114813302::1677007492::1679959325::1::::<><>::
 twig.png::CompressedTexture2D::7071725522112862503::1677007517::1679959325::1::::<><>::
 wood.png::CompressedTexture2D::8708317400802457473::1677007537::1679959325::1::::<><>::
-::res://Assets/Tilesets/objects/::1682102059
+::res://Assets/Tilesets/objects/::1682185138
 crops.tres::TileSet::6919601639695326616::1682102059::0::1::::<><>::uid://b07sxih7d5ic0
 objects.png::CompressedTexture2D::4766330203619572780::1681598296::1681598554::1::::<><>::
-objects.tres::TileSet::3247441982544429467::1682102059::0::1::::<><>::uid://b8530577mh6fo
+objects.tres::TileSet::3247441982544429467::1682185138::0::1::::<><>::uid://b8530577mh6fo
 ::res://Assets/Tilesets/ore/::1679959325
 CLM_Mining_Vegetables.png::CompressedTexture2D::2140583535175332573::1679255691::1679959325::1::::<><>::
-::res://Assets/Tilesets/terrain/::1682102060
+::res://Assets/Tilesets/terrain/::1682221540
 cave_walls.png::CompressedTexture2D::1389541352182091708::1679710247::1679959325::1::::<><>::
 CLM_MainLev.png::CompressedTexture2D::5936518584466634025::1677538133::1679959325::1::::<><>::
 CL_Crops_Mining.png::CompressedTexture2D::4208336274362995549::1677219790::1679959325::1::::<><>::
 CL_MainLev.png::CompressedTexture2D::960005435108853312::1678764975::1679959326::1::::<><>::
 CL_MainLev_winter.png::CompressedTexture2D::9078291430330481365::1678718358::1679959325::1::::<><>::
-elevated terrain.tres::TileSet::7497782764672385484::1682102060::0::1::::<><>::uid://eu3o3snb836a
+elevated terrain.tres::TileSet::7497782764672385484::1682185138::0::1::::<><>::uid://eu3o3snb836a
 hoed.png::CompressedTexture2D::1092616745679530101::1677200830::1679959325::1::::<><>::
+hoed.tres::TileSet::8115965010621032285::1682221540::0::1::::<><>::uid://ptjidk7r1daj
 terrain elevation.png::CompressedTexture2D::323769505599065414::1680148759::1680148762::1::::<><>::
-::res://Assets/Tilesets/terrain/tres files/::1682102060
+watered hoed.tres::TileSet::2566788170956066880::1682221384::0::1::::<><>::uid://ptjidk7r1daj
+::res://Assets/Tilesets/terrain/tres files/::1682185138
 cave walls.tres::TileSet::2021029588359550288::1680107467::0::1::::<><>::uid://t2dsp1jfm58s
-deep ocean.tres::TileSet::3447361309228458230::1682102060::0::1::::<><>::uid://nxbfcsoot5tk
-dirt.tres::TileSet::2014509732172230934::1682102060::0::1::::<><>::uid://nxbfcsoot5tk
-forest.tres::TileSet::5085623833108421849::1682102060::0::1::::<><>::uid://nxbfcsoot5tk
-freshwater.tres::TileSet::7792482768167483571::1682102060::0::1::::<><>::uid://nxbfcsoot5tk
-plains.tres::TileSet::4536333187172325604::1682102060::0::1::::<><>::uid://nxbfcsoot5tk
-snow.tres::TileSet::9097293248567854464::1682102060::0::1::::<><>::uid://d2lueslgjxclp
-waves.tres::TileSet::6553751889566799897::1682102060::0::1::::<><>::uid://nxbfcsoot5tk
-wet sand.tres::TileSet::1898592575561083776::1682102060::0::1::::<><>::uid://nxbfcsoot5tk
-::res://Assets/Tilesets/walls/::1682102060
-walls.tres::TileSet::6438113286263530946::1682102060::0::1::::<><>::uid://clrddbfwbnhfe<>uid://dypmq0h20tfa7<>uid://dyu5218vtbbyn<>uid://dh8yeb2dd8ak4<>uid://6yn3jmy5jo6e
+deep ocean.tres::TileSet::3447361309228458230::1682185138::0::1::::<><>::uid://nxbfcsoot5tk
+dirt.tres::TileSet::2014509732172230934::1682185138::0::1::::<><>::uid://nxbfcsoot5tk
+forest.tres::TileSet::5085623833108421849::1682185138::0::1::::<><>::uid://nxbfcsoot5tk
+freshwater.tres::TileSet::7792482768167483571::1682185138::0::1::::<><>::uid://nxbfcsoot5tk
+plains.tres::TileSet::4536333187172325604::1682185138::0::1::::<><>::uid://nxbfcsoot5tk
+snow.tres::TileSet::9097293248567854464::1682185138::0::1::::<><>::uid://d2lueslgjxclp
+waves.tres::TileSet::6553751889566799897::1682185138::0::1::::<><>::uid://nxbfcsoot5tk
+wet sand.tres::TileSet::1898592575561083776::1682185138::0::1::::<><>::uid://nxbfcsoot5tk
+::res://Assets/Tilesets/walls/::1682185138
+walls.tres::TileSet::6438113286263530946::1682185138::0::1::::<><>::uid://clrddbfwbnhfe<>uid://dypmq0h20tfa7<>uid://dyu5218vtbbyn<>uid://dh8yeb2dd8ak4<>uid://6yn3jmy5jo6e
 ::res://Assets/Tilesets/walls/hit effects/::1669152583
 ::res://Assets/Tilesets/walls/hit effects/armored/::1679959325
 1.png::CompressedTexture2D::8603216772726087618::1677007932::1679959325::1::::<><>::
@@ -3963,7 +3966,7 @@ right.png::CompressedTexture2D::1835834142140616042::1665030472::1676562591::1::
 ::res://Global/Characters/::1676562591
 Goblin.gd::GDScript::-1::1676139738::0::1::::<>Node<>::
 Human.gd::GDScript::-1::1676562591::0::1::::<>Node<>::
-::res://Global/Data/::1682137509
+::res://Global/Data/::1682199316
 BuildCaveLevel.gd::GDScript::-1::1680061329::0::1::::<>Node<>::
 Characters.gd::GDScript::-1::1676562591::0::1::::<>Node<>::
 Chat.gd::GDScript::-1::1680794088::0::1::::<>Node<>::
@@ -3973,9 +3976,9 @@ GameState.gd::GDScript::-1::1680228868::0::1::::GameState<>Resource<>::
 GenerateNewWorld.gd::GDScript::-1::1680665809::0::1::::<>Node<>::
 Images.gd::GDScript::-1::1678306468::0::1::::<>Node<>::
 InstancedScenes.gd::GDScript::-1::1682022787::0::1::::<>Node<>::
-MapData.gd::GDScript::-1::1682061963::0::1::::<>Node<>::
-PlaceObject.gd::GDScript::-1::1682106492::0::1::::<>Node<>::
-PlayerData.gd::GDScript::-1::1682137509::0::1::::<>Node<>::
+MapData.gd::GDScript::-1::1682198202::0::1::::<>Node<>::
+PlaceObject.gd::GDScript::-1::1682195634::0::1::::<>Node<>::
+PlayerData.gd::GDScript::-1::1682199316::0::1::::<>Node<>::
 PlayerDataHelpers.gd::GDScript::-1::1676139738::0::1::::<>Node<>::
 RustCalls.gd::GDScript::-1::1676658442::0::1::::<>Node<>::
 Sounds.gd::GDScript::-1::1680031601::0::1::::<>Node<>::
@@ -3990,10 +3993,10 @@ icon.jpg::CompressedTexture2D::1773801948518421703::1668904493::1676562591::1:::
 info.jpg::CompressedTexture2D::7192025300631223515::1668904493::1676562591::1::::<><>::
 LICENSE.md::TextFile::-1::1668904493::0::1::::<><>::
 README.md::TextFile::-1::1668904493::0::1::::<><>::
-::res://helpers/::1681970388
+::res://helpers/::1682190417
 IC.gd::GDScript::-1::1676562591::0::1::::<>Node<>::
 Tiles.gd::GDScript::-1::1681516912::0::1::::<>Node<>::
-Util.gd::GDScript::-1::1681970388::0::1::::<>Node<>::
+Util.gd::GDScript::-1::1682190417::0::1::::<>Node<>::
 UUID.gd::GDScript::-1::1676562591::0::1::::<>Node<>::
 ::res://InventoryLogic/::1682137511
 CollectionItemDescription.gd::GDScript::-1::1679246064::0::1::::<>Node2D<>::
@@ -4048,8 +4051,8 @@ Duck.gd::GDScript::-1::1679898238::0::1::::<>CharacterBody2D<>::
 Duck.tscn::PackedScene::3801854263560996964::1679898891::0::1::::<><>::res://World/Animals/Duck.gd<>uid://b8xy6lgm0q7vk<>uid://dr88n2qik0tat<>uid://clu6jmly275vs<>uid://bbybm4xho1nc8<>uid://cqt04hkompf5f<>uid://cvfur4ra58e75<>uid://dx8hix2epqruo
 Wolf.gd::GDScript::-1::1679898951::0::1::::<>CharacterBody2D<>::
 Wolf.tscn::PackedScene::1269635408451711873::1680113702::0::1::::<><>::res://World/Animals/Wolf.gd<>uid://b8xy6lgm0q7vk<>uid://dr88n2qik0tat<>uid://cqt04hkompf5f<>uid://cdfvq58aljcwd<>uid://cvfur4ra58e75<>uid://dx8hix2epqruo<>uid://do7vd3a7rt4q5<>uid://c7pbioiyoq5hg<>uid://swg0f7q8o7on
-::res://World/Building/::1682137511
-PlaceObjectPreview.gd::GDScript::-1::1681841935::0::1::::<>Node2D<>::
+::res://World/Building/::1682193794
+PlaceObjectPreview.gd::GDScript::-1::1682193794::0::1::::<>Node2D<>::
 PlaceObjectPreview.tscn::PackedScene::7618472639857171533::1682137511::0::1::::<><>::res://World/Building/PlaceObjectPreview.gd<>uid://bmjc5ou5oyowx<>uid://c5t53fhi1b7fg<>uid://cx276tgkqafh7<>uid://dktjb7tf2s1cg<>uid://et4a5mhdh22
 ::res://World/Building/Tiles/::1681581187
 Interactives.gd::GDScript::-1::1681581187::0::1::::<>Node<>::
@@ -4062,12 +4065,12 @@ campfire_interactive_area.tscn::PackedScene::3467330394611576359::1678555699::0:
 door_interactive_area.tscn::PackedScene::945324768749981968::1681605339::0::1::::<><>::res://World/Objects/Scripts/InteractiveArea.gd
 furnace_smoke.tscn::PackedScene::70885762687320755::1677925382::0::1::::<><>::
 interactive_area.tscn::PackedScene::3623625755526095429::1679355304::0::1::::<><>::res://World/Objects/Scripts/InteractiveArea.gd
-::res://World/Building/Tiles/Hurtbox/::1682137512
+::res://World/Building/Tiles/Hurtbox/::1682192252
 BuildingTileObjectHurtBox.gd::GDScript::-1::1682102627::0::1::::<>Node2D<>::
 BuildingTileObjectHurtBox.tscn::PackedScene::3356699388721692154::1682137512::0::1::::<><>::res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.gd<>uid://bv2e37vy0s7h4<>uid://ckal8dga4akml<>uid://byuw4rfvgiojf<>uid://6yn3jmy5jo6e<>uid://g4bcb578jx8t<>res://World/Building/Tiles/Hurtbox/DoorHit.gd<>uid://cxaswf3pbk831<>res://World/Building/Tiles/Hurtbox/WallHit.gd<>res://World/Building/Tiles/Interactives.gd
 DoorHit.gd::GDScript::-1::1678821861::0::1::::<>Sprite2D<>::
 TileObjectHurtBox.gd::GDScript::-1::1682116605::0::1::::<>Node2D<>::
-TileObjectHurtBox.tscn::PackedScene::4459693244953770897::1682137512::0::1::::<><>::res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd<>res://World/Building/Tiles/Interactives.gd<>uid://bmjc5ou5oyowx<>uid://bt8wejlwv77xj
+TileObjectHurtBox.tscn::PackedScene::4459693244953770897::1682192252::0::1::::<><>::res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd<>res://World/Building/Tiles/Interactives.gd<>uid://bmjc5ou5oyowx<>uid://bt8wejlwv77xj
 WallHit.gd::GDScript::-1::1678329764::0::1::::<>Sprite2D<>::
 ::res://World/Caves/::1680113702
 CaveAmbientLight.tscn::PackedScene::-1::1676139740::0::1::::<><>::
@@ -4243,7 +4246,7 @@ IcPuppy.gd::GDScript::-1::1676562591::0::1::::<>CharacterBody2D<>::
 IcPuppy.tscn::PackedScene::-1::1676562591::0::1::::<><>::res://Assets/Images/IC Kitties/SpriteFrames/White.tres<>res://World3D/Player/Pet/IcPuppy.gd
 PlayerPet.gd::GDScript::-1::1676562591::0::1::::<>CharacterBody2D<>::
 PlayerPet.tscn::PackedScene::-1::1676562591::0::1::::<><>::res://Assets/Images/IC Kitties/SpriteFrames/White.tres<>res://World3D/Player/Pet/PlayerPet.gd
-::res://World/Player/Player/::1682137511
+::res://World/Player/Player/::1682225855
 Actions.gd::GDScript::-1::1681528681::0::1::::<>Node2D<>::
 Actions.tscn::PackedScene::1829096482721768771::1680588353::0::1::::<><>::uid://bdedmyao5swjq<>res://World/Player/Player/Actions.gd
 Area2Ds.gd::GDScript::-1::1681975918::0::1::::<>Node2D<>::
@@ -4255,14 +4258,14 @@ Magic.gd::GDScript::-1::1680052343::0::1::::<>Node2D<>::
 Magic.tscn::PackedScene::2628924059925261776::1679900044::0::1::::<><>::res://World/Player/Player/Magic.gd<>uid://begcvb027o6mf<>uid://r6uf00en5o83
 MultiplayerSynchronizer.gd::GDScript::-1::1680541270::0::1::::<>MultiplayerSynchronizer<>::
 Networking.gd::GDScript::-1::1681974893::0::1::::<>Node<>::
-Player.gd::GDScript::-1::1682056697::0::1::::<>CharacterBody2D<>::
-Player.tscn::PackedScene::2647041962684964254::1682137511::0::1::::<><>::res://World/Player/Player/Player.gd<>uid://1ca7mk73gpp0<>res://World/Player/Player/Camera2D.gd<>res://World/Player/Player/AttachedScripts/CompositeSprites.gd<>uid://cffchl0ffi2hf<>uid://dshi8sn4j6jfa<>uid://3ik13tk6hyny<>uid://b2yqfp3r1tqa4<>uid://bdpp83on80ake<>uid://byxsajdug1vn5<>uid://bt8wejlwv77xj<>res://World/Player/Player/AttachedScripts/PickupZone.gd<>res://World/Player/Player/Area2Ds.gd<>res://World/Player/Player/AttachedScripts/HurtBox.gd<>uid://bbsqb6cw7rd7a<>res://World/Player/Player/AttachedScripts/FootstepsSound.gd<>uid://qqpxtamwd4do<>uid://bdedmyao5swjq<>res://World/Player/Player/AttachedScripts/BackgroundMusic.gd<>res://World/Player/Player/AttachedScripts/AmbientSound.gd<>res://World/Player/Player/HoldingTorch.gd<>uid://cu3vvh0ai0n56<>uid://h3sspgar8los<>uid://c1posnfc3ruce<>uid://bnfw57dme4x26<>uid://78sds5dnqh0c<>uid://bt3ysh31fm3pc<>uid://d3voewdqos1nj<>uid://bpcw4ag5bax2t
+Player.gd::GDScript::-1::1682199104::0::1::::<>CharacterBody2D<>::
+Player.tscn::PackedScene::2647041962684964254::1682225855::0::1::::<><>::res://World/Player/Player/Player.gd<>uid://1ca7mk73gpp0<>res://World/Player/Player/Camera2D.gd<>res://World/Player/Player/AttachedScripts/CompositeSprites.gd<>uid://cffchl0ffi2hf<>uid://dshi8sn4j6jfa<>uid://3ik13tk6hyny<>uid://b2yqfp3r1tqa4<>uid://bdpp83on80ake<>uid://byxsajdug1vn5<>uid://bt8wejlwv77xj<>res://World/Player/Player/AttachedScripts/PickupZone.gd<>res://World/Player/Player/Area2Ds.gd<>res://World/Player/Player/AttachedScripts/HurtBox.gd<>uid://bbsqb6cw7rd7a<>res://World/Player/Player/AttachedScripts/FootstepsSound.gd<>uid://qqpxtamwd4do<>uid://bdedmyao5swjq<>res://World/Player/Player/AttachedScripts/BackgroundMusic.gd<>res://World/Player/Player/AttachedScripts/AmbientSound.gd<>res://World/Player/Player/HoldingTorch.gd<>uid://cu3vvh0ai0n56<>uid://h3sspgar8los<>uid://c1posnfc3ruce<>uid://bnfw57dme4x26<>uid://78sds5dnqh0c<>uid://bt3ysh31fm3pc<>uid://d3voewdqos1nj<>uid://bpcw4ag5bax2t
 PoisonParticles.gd::GDScript::-1::1680223447::0::1::::<>Node2D<>::
 PoisonParticles.tscn::PackedScene::6235733782075872855::1678929242::0::1::::<><>::res://World/Player/Player/PoisonParticles.gd
 SpeedParticles.gd::GDScript::-1::1678929833::0::1::::<>Node2D<>::
 SpeedParticles.tscn::PackedScene::6629599841131512928::1678930406::0::1::::<><>::res://World/Player/Player/SpeedParticles.gd
-Swing.gd::GDScript::-1::1682056943::0::1::::<>Node2D<>::
-Swing.tscn::PackedScene::2494743216938855828::1682137511::0::1::::<><>::res://World/Player/Player/Swing.gd<>res://World/Objects/Scripts/Hitbox.gd
+Swing.gd::GDScript::-1::1682199278::0::1::::<>Node2D<>::
+Swing.tscn::PackedScene::2494743216938855828::1682225855::0::1::::<><>::res://World/Player/Player/Swing.gd<>res://World/Objects/Scripts/Hitbox.gd
 Throwing.gd::GDScript::-1::1676562591::0::1::::<>Node2D<>::
 Throwing.tscn::PackedScene::-1::1676562591::0::1::::<><>::res://World3D/Player/Player/Throwing.gd
 ::res://World/Player/Player/AttachedScenes/::1681069014
@@ -4292,10 +4295,10 @@ FishingMiniGame.gd::GDScript::-1::1680039247::0::1::::<>Node2D<>::
 FishingMiniGame.tscn::PackedScene::7318383277320739273::1680055161::0::1::::<><>::res://World/Player/Player/Fishing/FishingMiniGame.gd<>uid://csb4wdm6ni8qd<>uid://st2obkyg2ovu<>uid://e6xxjwxhsivr<>uid://iim4cg2lg800<>uid://b1h8kx7y246wb<>uid://b2n2k4dxs51c2
 RippleParticles.gd::GDScript::-1::1676139739::0::1::::<>CPUParticles2D<>::
 RippleParticles.tscn::PackedScene::1753697689402818670::1676601832::0::1::::<><>::res://World/Player/Player/Fishing/RippleParticles.gd
-::res://World/Player/Player/UserInterface/::1681975904
+::res://World/Player/Player/UserInterface/::1682192253
 InsideCaveEffect.gd::GDScript::-1::1676562591::0::1::::<>ColorRect<>::
-UserInterface.gd::GDScript::-1::1681975904::0::1::::<>CanvasLayer<>::
-UserInterface.tscn::PackedScene::5134242025500696783::1681597467::0::1::::<><>::res://World/Player/Player/UserInterface/UserInterface.gd<>uid://ctp3ra1cmv0de<>res://World/Player/Player/AttachedScripts/WeatherEffects.gd<>uid://3vr0ijbqi0bd<>uid://dkn2fivmq1v8o<>uid://dh7qoqj6wpcf8<>uid://c81fev363dte8<>uid://d3voewdqos1nj<>uid://bydhgjfsoxl8x<>uid://rf3gophkir0h<>uid://dvfrk41vachbj<>uid://u7b5ardk075b<>uid://dtv2tv7c6saxr<>uid://cw3x0n2n7j4t5<>uid://b72oxa6602dkg<>uid://bh0xuop77usp4<>uid://86w4gtnxusdy<>uid://40dmypwmoqg6<>uid://dw0g2r5gq0txa<>uid://2w2tr1rtk116<>uid://bhilgn3waubes<>uid://dd0n86ke85w5d<>uid://cm8c7p7g6ii7g<>uid://rpuaufnru6of
+UserInterface.gd::GDScript::-1::1682189477::0::1::::<>CanvasLayer<>::
+UserInterface.tscn::PackedScene::5134242025500696783::1682192253::0::1::::<><>::res://World/Player/Player/UserInterface/UserInterface.gd<>uid://ctp3ra1cmv0de<>res://World/Player/Player/AttachedScripts/WeatherEffects.gd<>uid://3vr0ijbqi0bd<>uid://dkn2fivmq1v8o<>uid://dh7qoqj6wpcf8<>uid://c81fev363dte8<>uid://d3voewdqos1nj<>uid://bydhgjfsoxl8x<>uid://rf3gophkir0h<>uid://dvfrk41vachbj<>uid://u7b5ardk075b<>uid://dtv2tv7c6saxr<>uid://cw3x0n2n7j4t5<>uid://b72oxa6602dkg<>uid://bh0xuop77usp4<>uid://86w4gtnxusdy<>uid://40dmypwmoqg6<>uid://dw0g2r5gq0txa<>uid://2w2tr1rtk116<>uid://bhilgn3waubes<>uid://dd0n86ke85w5d<>uid://cm8c7p7g6ii7g<>uid://rpuaufnru6of
 ::res://World/Player/Player/UserInterface/Barrel/::1680055344
 Barrel.gd::GDScript::-1::1680055344::0::1::::<>Control<>::
 Barrel.tscn::PackedScene::6174187299199919110::1677925193::0::1::::<><>::res://World/Player/Player/UserInterface/Barrel/Barrel.gd<>uid://ftl1013lhawe<>uid://drkywqy2aio0r<>uid://b4k542eq2r5ul<>uid://de3s80bo27kc<>uid://bnkbpvnlxltvj<>uid://ds2rfkt8gtgln<>uid://biplf01ydm2xw<>uid://c6wlm3ymf4sq6<>uid://cfhkpql8cboey<>uid://m20c61iainqg
@@ -4316,9 +4319,9 @@ Chest.tscn::PackedScene::5677156127806785279::1680059718::0::1::::<><>::res://Wo
 CombatHotbar.gd::GDScript::-1::1676562591::0::1::::<>Control<>::
 CombatHotbar.tscn::PackedScene::2894936939934108670::1679543032::0::1::::<><>::uid://h5xwa73koaw8<>res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.gd<>uid://cnfw25kf8wh4s<>uid://b6tl1o10h8ybn<>uid://do7p63j7fd8ug<>uid://b16f0gq1148xg<>uid://dvnykx0ktn32j<>uid://dmv6j3ojkndy3<>uid://0wk3ykd7s1tj<>uid://dpvnod2gp0wlu<>uid://o3wd8n5ou4bo
 SpellIconBtn.gd::GDScript::-1::1676139739::0::1::::<>TextureButton<>::
-::res://World/Player/Player/UserInterface/Crate/::1682137512
-Crate.gd::GDScript::-1::1680055365::0::1::::<>Control<>::
-Crate.tscn::PackedScene::1870242658698574599::1682137512::0::1::::<><>::res://World/Player/Player/UserInterface/Crate/Crate.gd<>uid://bl5ficiak4bvu<>uid://b4k542eq2r5ul<>uid://de3s80bo27kc<>uid://bnkbpvnlxltvj<>uid://m20c61iainqg<>uid://cfhkpql8cboey<>uid://c6wlm3ymf4sq6<>uid://dkrw4a2bn5vt8<>uid://ftl1013lhawe
+::res://World/Player/Player/UserInterface/Crate/::1682195634
+Crate.gd::GDScript::-1::1682187406::0::1::::<>Control<>::
+Crate.tscn::PackedScene::1870242658698574599::1682195634::0::1::::<><>::res://World/Player/Player/UserInterface/Crate/Crate.gd<>uid://bl5ficiak4bvu<>uid://4v3igpipcu6i<>uid://b4k542eq2r5ul<>uid://de3s80bo27kc<>uid://bnkbpvnlxltvj<>uid://m20c61iainqg<>uid://cfhkpql8cboey<>uid://c6wlm3ymf4sq6<>uid://dkrw4a2bn5vt8<>uid://ftl1013lhawe
 ::res://World/Player/Player/UserInterface/Furnace/::1680055335
 Furnace.gd::GDScript::-1::1680055335::0::1::::<>Control<>::
 Furnace.tscn::PackedScene::3027908386482745497::1678251314::0::1::::<><>::res://World/Player/Player/UserInterface/Furnace/Furnace.gd<>uid://dv1csemksrq4d<>uid://bhdmhl4omrdyy<>uid://ftl1013lhawe<>uid://b4k542eq2r5ul<>uid://4v3igpipcu6i<>uid://de3s80bo27kc<>uid://dtlmfnn2q88um<>uid://bnkbpvnlxltvj<>uid://nltba7be0pq3<>uid://cgt18sx008i3h<>uid://10g5pf2spr5h<>uid://bachr3xkjleuo<>uid://cr2j4e5ayayqn<>uid://m20c61iainqg<>uid://c6wlm3ymf4sq6<>uid://cvgubwd5t4f8t<>uid://cfhkpql8cboey<>uid://b0jf6eicb7hrc<>uid://h1d7iyd8ub08
@@ -4345,9 +4348,9 @@ FishCollection.gd::GDScript::-1::1676562591::0::1::::<>GridContainer<>::
 FoodCollection.gd::GDScript::-1::1676562591::0::1::::<>GridContainer<>::
 ForageCollection.gd::GDScript::-1::1676562591::0::1::::<>GridContainer<>::
 MobCollection.gd::GDScript::-1::1676562591::0::1::::<>GridContainer<>::
-::res://World/Player/Player/UserInterface/Menu/Crafting/::1681581269
+::res://World/Player/Player/UserInterface/Menu/Crafting/::1682196566
 Crafting.gd::GDScript::-1::1679243152::0::1::::<>Control<>::
-Crafting.tscn::PackedScene::4995105619236179023::1681581269::0::1::::<><>::uid://cefhq312qr2uq<>res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.gd<>uid://bsltdgi11pugj<>uid://btewrm02rhmnh<>uid://cvkxqo4ch3k81<>res://World/Player/Player/UserInterface/Menu/Crafting/CraftingMenu.gd<>uid://m20c61iainqg<>res://InventoryLogic/Slot.gd<>uid://cfhkpql8cboey
+Crafting.tscn::PackedScene::4995105619236179023::1682196566::0::1::::<><>::uid://cefhq312qr2uq<>res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.gd<>uid://bsltdgi11pugj<>uid://btewrm02rhmnh<>uid://cvkxqo4ch3k81<>res://World/Player/Player/UserInterface/Menu/Crafting/CraftingMenu.gd<>uid://m20c61iainqg<>res://InventoryLogic/Slot.gd<>uid://cfhkpql8cboey
 CraftingMenu.gd::GDScript::-1::1676671949::0::1::::<>ScrollContainer<>::
 ::res://World/Player/Player/UserInterface/Menu/Exit/::1676562591
 Exit.gd::GDScript::-1::1676139739::0::1::::<>Control<>::
@@ -4381,7 +4384,7 @@ radial_menu_item.tscn::PackedScene::2304688528403671892::1677065126::0::1::::<><
 ::res://World/Player/Player/UserInterface/SaveAndExit/::1680055356
 SaveAndExit.gd::GDScript::-1::1680055356::0::1::::<>Control<>::
 SaveAndExit.tscn::PackedScene::6754449314216924095::1679942548::0::1::::<><>::uid://de3s80bo27kc<>res://World/Player/Player/UserInterface/SaveAndExit/SaveAndExit.gd<>uid://bnkbpvnlxltvj<>uid://dymfr1m2gfhtf<>uid://cw1joux2ogqum<>uid://dit3tnpfnfauf<>uid://2w2tr1rtk116<>uid://d3voewdqos1nj
-::res://World/Player/Player/UserInterface/Slots/::1682137512
+::res://World/Player/Player/UserInterface/Slots/::1682192253
 BarrelSlots.gd::GDScript::-1::1682106902::0::1::::<>Control<>::
 BarrelSlots.tscn::PackedScene::2979575269341843616::1677361328::0::1::::<><>::res://World/Player/Player/UserInterface/Slots/BarrelSlots.gd<>res://InventoryLogic/Slot.gd
 BrewingTableSlots.gd::GDScript::-1::1676562591::0::1::::<>Control<>::
@@ -4393,7 +4396,7 @@ ChestSlots.tscn::PackedScene::3623734628674828498::1677356140::0::1::::<><>::res
 CombatHotbarSlots.gd::GDScript::-1::1676863024::0::1::::<>GridContainer<>::
 CombatHotbarSlots.tscn::PackedScene::6445100631283212369::1676863450::0::1::::<><>::res://InventoryLogic/Slot.gd<>res://World/Player/Player/UserInterface/Slots/CombatHotbarSlots.gd
 CrateSlots.gd::GDScript::-1::1682125104::0::1::::<>GridContainer<>::
-CrateSlots.tscn::PackedScene::7897632512916478491::1682137512::0::1::::<><>::res://InventoryLogic/Slot.gd<>res://World/Player/Player/UserInterface/Slots/CrateSlots.gd
+CrateSlots.tscn::PackedScene::7897632512916478491::1682192253::0::1::::<><>::res://InventoryLogic/Slot.gd<>res://World/Player/Player/UserInterface/Slots/CrateSlots.gd
 FurnaceSlots.gd::GDScript::-1::1677918087::0::1::::<>Control<>::
 FurnaceSlots.tscn::PackedScene::8516296472514781024::1676654036::0::1::::<><>::res://InventoryLogic/Slot.gd<>res://World/Player/Player/UserInterface/Slots/FurnaceSlots.gd
 GrainMillSlots.gd::GDScript::-1::1677922286::0::1::::<>Control<>::
@@ -4450,8 +4453,8 @@ InputControllerTemplate.gd::GDScript::-1::1676562591::0::1::::<>Node2D<>::
 InputControllerTemplate.tscn::PackedScene::-1::1676562591::0::1::::<><>::res://World3D/Player/Player/InputController.gd<>res://World3D/Player/PlayerTemplate/PlayerTemplate.tscn
 PlayerTemplate.gd::GDScript::-1::1676562591::0::1::::<>CharacterBody2D<>::
 PlayerTemplate.tscn::PackedScene::-1::1676562591::0::1::::<><>::res://World3D/Player/PlayerTemplate/PlayerTemplate.gd<>res://Assets/Themes/ChatBox.tres<>res://Assets/Images/Misc/chat bubble.png
-::res://World/World/::1682058068
-BuildNature.gd::GDScript::-1::1681722570::0::1::::<>Node<>::
+::res://World/World/::1682198932
+BuildNature.gd::GDScript::-1::1682198932::0::1::::<>Node<>::
 BuildTerrain.gd::GDScript::-1::1681230846::0::1::::<>Node<>::
 SpawnAnimal.gd::GDScript::-1::1681348370::0::1::::<>Node<>::
 WorldAmbience.gd::GDScript::-1::1681348817::0::1::::<>CanvasModulate<>::

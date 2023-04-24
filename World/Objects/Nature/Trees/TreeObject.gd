@@ -95,12 +95,14 @@ func harvest():
 
 
 func refresh_tree_type():
-	if MapData.world["tree"].has(name):
+	if Server.world.world[MapData.get_chunk_from_location(location)]["tree"].has(name):
 		if phase != "5" and Util.isNonFruitTree(variety):
-			phase = MapData.world["tree"][name]["p"]
+			#phase = MapData.world["tree"][name]["p"]
+			phase = Server.world.world[MapData.get_chunk_from_location(location)]["tree"][name]["p"]
 			set_tree()
 		elif phase != "harvest" and Util.isFruitTree(variety):
-			phase = MapData.world["tree"][name]["p"]
+			phase = Server.world.world[MapData.get_chunk_from_location(location)]["tree"][name]["p"]
+			#phase = MapData.world["tree"][name]["p"]
 			set_tree()
 
 func setGrownFruitTreeTexture():

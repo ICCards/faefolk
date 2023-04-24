@@ -1,8 +1,9 @@
-[gd_scene load_steps=42 format=3 uid="uid://bikiy2vasycja"]
+[gd_scene load_steps=43 format=3 uid="uid://bikiy2vasycja"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_miuy3"]
 [ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="2_jxniw"]
 [ext_resource type="Script" path="res://World/World/WorldBuilder.gd" id="2_mbtah"]
+[ext_resource type="Script" path="res://World/World/WorldAmbience.gd" id="2_or2su"]
 [ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/terrain/tres files/plains.tres" id="3_s3xh1"]
 [ext_resource type="Script" path="res://World/World/SpawnAnimal.gd" id="3_xbv0j"]
 [ext_resource type="Script" path="res://World/World/BuildNature.gd" id="4_lnadh"]
@@ -3603,6 +3604,9 @@ horizontal_alignment = 1
 [node name="JoinBtn" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Join"
+
+[node name="WorldAmbience" type="CanvasModulate" parent="."]
+script = ExtResource("2_or2su")
 
 [node name="WorldBuilder" type="Node" parent="."]
 script = ExtResource("2_mbtah")

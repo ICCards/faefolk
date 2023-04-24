@@ -26,8 +26,8 @@ func place(type,id,data):
 		place_forage_in_world(id,data["n"],data["l"],data["f"])
 #	elif type == "crop":
 #		PlaceObject.place_seed_in_world(id,data["n"],data["l"],data["d"],0,false)
-#	elif type == "tree":
-#		PlaceObject.place(id,item_name,location,days_to_grow,0,false)
+	elif type == "tree":
+		place_tree_in_world(id,data["v"],data["l"],data["b"],data["h"],data["p"])
 	elif type == "placeable":
 		var item_name = data["n"]
 		var location = data["l"]

@@ -1,3 +1,4 @@
+CanvasModulate
 AudioStreamPlayer
 Node
 CharacterBody2D
@@ -22,7 +23,6 @@ TileMap
 Timer
 CollisionShape2D
 Line2D
-CanvasModulate
 VisibleOnScreenNotifier2D
 NavigationRegion2D
 NavigationLink2D
@@ -30,4 +30,3 @@ CanvasGroup
 AnimationPlayer
 Sprite2D
 StaticBody2D
-Marker2D
