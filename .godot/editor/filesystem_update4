@@ -1,4 +1,4 @@
-res://main.tscn
+res://World/Player/Player/Player.tscn
 res://Assets/Tilesets/terrain/tres files/plains.tres
 res://Assets/Tilesets/terrain/tres files/deep ocean.tres
 res://Assets/Tilesets/terrain/tres files/dirt.tres
@@ -17,25 +17,25 @@ res://Assets/Tilesets/terrain/watered hoed.tres
 res://Assets/Themes/text.tres
 res://Assets/Themes/LockedAsset.tres
 res://Assets/Themes/whiten.tres
-res://World/Player/Player/Swing.tscn
-res://World/Player/Player/Player.tscn
-res://elevation_test.tscn
-res://ElevationTest.gd
-res://World/World/BuildNature.gd
-res://Global/Data/PlayerData.gd
-res://Global/Data/PlaceObject.gd
+res://World/Player/Player/Actions.gd
+res://World/Player/Player/UserInterface/UserInterface.gd
 res://PlaceableObjects.gd
-res://World/Building/PlaceObjectPreview.tscn
-res://Assets/Tilesets/objects/crops.tres
 res://World/Building/PlaceObjectPreview.gd
-res://Global/Data/MapData.gd
-res://Time.gd
-res://World/World/WorldAmbience.gd
+res://World/Building/Tiles/Attached nodes/door_interactive_area.tscn
+res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.gd
+res://World/Objects/Scripts/InteractiveArea.gd
+res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn
+res://World/Building/Tiles/Interactives.gd
+res://Global/Data/PlaceObject.gd
+res://main.tscn
+res://World/Player/Player/Swing.tscn
+res://Global/Data/PlayerData.gd
+res://World/Objects/Nature/Forage/ForageItem.tscn
+res://main.gd
 res://World/Objects/Nature/Trees/TreeObject.tscn
-res://Assets/Images/tree_sets/plum/mature/animated.tres
+res://Assets/Images/tree_sets/oak/mature/animated top.tres
 res://World/Objects/Nature/Trees/TreeObject.gd
-res://World/Objects/Nature/Ores/LargeOre.tscn
-res://World/Objects/Nature/Ores/LargeOre.gd
-res://World/Objects/Nature/Ores/SmallOre.tscn
-res://World/Objects/Nature/Ores/SmallOre.gd
-res://World/Player/Player/Camera2D.gd
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd
+res://World/Map/WorldMap.tscn
+res://World/Map/WorldMap.gd

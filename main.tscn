@@ -1,9 +1,8 @@
-[gd_scene load_steps=43 format=3 uid="uid://bikiy2vasycja"]
+[gd_scene load_steps=42 format=3 uid="uid://bikiy2vasycja"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_miuy3"]
 [ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="2_jxniw"]
 [ext_resource type="Script" path="res://World/World/WorldBuilder.gd" id="2_mbtah"]
-[ext_resource type="Script" path="res://World/World/WorldAmbience.gd" id="2_or2su"]
 [ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/terrain/tres files/plains.tres" id="3_s3xh1"]
 [ext_resource type="Script" path="res://World/World/SpawnAnimal.gd" id="3_xbv0j"]
 [ext_resource type="Script" path="res://World/World/BuildNature.gd" id="4_lnadh"]
@@ -3570,9 +3569,9 @@ fog_sun_scatter = 0.64
 y_sort_enabled = true
 script = ExtResource("1_miuy3")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Menu" type="CanvasLayer" parent="."]
 
-[node name="MainMenu" type="PanelContainer" parent="CanvasLayer"]
+[node name="MainMenu" type="PanelContainer" parent="Menu"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -3585,28 +3584,25 @@ offset_bottom = 74.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/MainMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="Menu/MainMenu"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
 theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MainMenu/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Main Menu"
 horizontal_alignment = 1
 
-[node name="JoinBtn" type="Button" parent="CanvasLayer/MainMenu/MarginContainer/VBoxContainer"]
+[node name="JoinBtn" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Join"
-
-[node name="WorldAmbience" type="CanvasModulate" parent="."]
-script = ExtResource("2_or2su")
 
 [node name="WorldBuilder" type="Node" parent="."]
 script = ExtResource("2_mbtah")
@@ -3803,7 +3799,7 @@ visible = false
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yn58q")
 
-[connection signal="pressed" from="CanvasLayer/MainMenu/MarginContainer/VBoxContainer/JoinBtn" to="." method="_on_join_btn_pressed"]
+[connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/JoinBtn" to="." method="_on_join_btn_pressed"]
 [connection signal="timeout" from="WorldBuilder/SpawnAnimal/SpawnAnimalTimer" to="WorldBuilder/SpawnAnimal" method="_on_spawn_animal_timer_timeout"]
 [connection signal="timeout" from="WorldBuilder/BuildNature/SpawnNatureTimer" to="WorldBuilder/BuildNature" method="_on_spawn_nature_timer_timeout"]
 [connection signal="timeout" from="WorldBuilder/BuildTerrain/BuildTerrainTimer" to="WorldBuilder/BuildTerrain" method="_on_build_terrain_timer_timeout"]

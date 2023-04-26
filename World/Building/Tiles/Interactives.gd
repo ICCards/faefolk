@@ -90,8 +90,6 @@ func toggle_lamp():
 
 func toggle_fireplace():
 	if Tiles.object_tiles.get_cell_atlas_coords(0,get_parent().location) == Constants.customizable_object_atlas_tiles[get_parent().item_name][get_parent().variety]:
-		Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_object_atlas_tiles[get_parent().item_name][get_parent().variety]+Vector2i(2,0))
-		get_node("../PointLight2D").set_deferred("enabled", true)
 		turn_on_fireplace()
 	else:
 		Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_object_atlas_tiles[get_parent().item_name][get_parent().variety])
@@ -148,46 +146,83 @@ func toggle_gate():
 
 
 func turn_on_fireplace():
+	Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_object_atlas_tiles[get_parent().item_name][get_parent().variety]+Vector2i(2,0))
+	get_node("../PointLight2D").set_deferred("enabled", true)
 	get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Fire/start.mp3")
 	get_parent().sound_effects.play()
 	await get_parent().sound_effects.finished
 	get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Fire/crackle.mp3")
 	get_parent().sound_effects.play()
 	
-	
-func toggle_door():
-	if not is_opening_door:
-		is_opening_door = true
-		if get_parent().direction == "down" or get_parent().direction == "up":
-			if Tiles.object_tiles.get_cell_atlas_coords(0,get_parent().location) == Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["down"]: # open door
-				get_parent().door_opened = true
-				get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
-				get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
-				get_parent().sound_effects.play()
-				get_parent().movement_collision.set_deferred("disabled", true)
-				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["down"]+Vector2i(2,0))
-			else: # close door
-				get_parent().door_opened = false
-				get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
-				get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
-				get_parent().sound_effects.play()
-				get_parent().movement_collision.set_deferred("disabled", false)
-				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["down"])
-		else:
-			if Tiles.object_tiles.get_cell_atlas_coords(0,get_parent().location) == Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["right"]: # open door
-				get_parent().door_opened = true
-				get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
-				get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
-				get_parent().sound_effects.play()
-				get_parent().movement_collision.set_deferred("disabled", true)
-				Tiles.object_tiles.set_cell(0,get_parent().location+Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["right"]+Vector2i(3,0))
-				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["right"]+Vector2i(1,0))
-			else:
-				get_parent().door_opened = false
-				get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
-				get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
-				get_parent().sound_effects.play()
-				get_parent().movement_collision.set_deferred("disabled", false)
-				Tiles.object_tiles.set_cell(0,get_parent().location+Vector2i(0,-1),0,Vector2i(-1,-1))
-				Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["right"])
-	is_opening_door = false
+
+
+
+func open_door(init):
+	if get_parent().direction == "down" or get_parent().direction == "up":
+		if not init:
+			get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
+			get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+			get_parent().sound_effects.play()
+		get_parent().movement_collision.set_deferred("disabled", true)
+		Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["down"]+Vector2i(2,0))
+	else:
+		if not init:
+			get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
+			get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+			get_parent().sound_effects.play()
+		get_parent().movement_collision.set_deferred("disabled", true)
+		Tiles.object_tiles.set_cell(0,get_parent().location+Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["right"]+Vector2i(3,0))
+		Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["right"]+Vector2i(1,0))
+
+
+func close_door():
+	if get_parent().direction == "down" or get_parent().direction == "up":
+		get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
+		get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+		get_parent().sound_effects.play()
+		get_parent().movement_collision.set_deferred("disabled", false)
+		Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["down"])
+	else:
+		get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
+		get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+		get_parent().sound_effects.play()
+		get_parent().movement_collision.set_deferred("disabled", false)
+		Tiles.object_tiles.set_cell(0,get_parent().location+Vector2i(0,-1),0,Vector2i(-1,-1))
+		Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["right"])
+
+
+
+
+#func toggle_door():
+#	if get_parent().direction == "down" or get_parent().direction == "up":
+#		if Tiles.object_tiles.get_cell_atlas_coords(0,get_parent().location) == Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["down"]: # open door
+#			get_parent().door_opened = true
+#			get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
+#			get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+#			get_parent().sound_effects.play()
+#			get_parent().movement_collision.set_deferred("disabled", true)
+#			Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["down"]+Vector2i(2,0))
+#		else: # close door
+#			get_parent().door_opened = false
+#			get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
+#			get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+#			get_parent().sound_effects.play()
+#			get_parent().movement_collision.set_deferred("disabled", false)
+#			Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["down"])
+#	else:
+#		if Tiles.object_tiles.get_cell_atlas_coords(0,get_parent().location) == Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["right"]: # open door
+#			get_parent().door_opened = true
+#			get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
+#			get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+#			get_parent().sound_effects.play()
+#			get_parent().movement_collision.set_deferred("disabled", true)
+#			Tiles.object_tiles.set_cell(0,get_parent().location+Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["right"]+Vector2i(3,0))
+#			Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["right"]+Vector2i(1,0))
+#		else:
+#			get_parent().door_opened = false
+#			get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
+#			get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+#			get_parent().sound_effects.play()
+#			get_parent().movement_collision.set_deferred("disabled", false)
+#			Tiles.object_tiles.set_cell(0,get_parent().location+Vector2i(0,-1),0,Vector2i(-1,-1))
+#			Tiles.object_tiles.set_cell(0,get_parent().location,0,Constants.customizable_rotatable_object_atlas_tiles[get_parent().item_name][get_parent().variety]["right"])

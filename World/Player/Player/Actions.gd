@@ -51,6 +51,8 @@ func _input(event):
 						elif current_interactive_node.object_name == "forage" and new_node.object_name == "forage" and get_parent().position.distance_to(new_node.position) < get_parent().position.distance_to(current_interactive_node.position):
 							current_interactive_node = new_node
 			if current_interactive_node:
+				var id = current_interactive_node.name
+				var location = current_interactive_node.location
 				match current_interactive_node.object_name:
 					"bed":
 						sleep(current_interactive_node.object_position)
@@ -60,42 +62,48 @@ func _input(event):
 						harvest_crop(current_interactive_node)
 					"forage":
 						harvest_forage(current_interactive_node)
-					"crate":
-						get_parent().user_interface.toggle_crate(current_interactive_node.name)
-					"barrel":
-						get_parent().user_interface.toggle_barrel(current_interactive_node.name)
-					"workbench":
-						get_parent().user_interface.toggle_workbench(current_interactive_node.object_level)
-					"grain mill":
-						get_parent().user_interface.toggle_grain_mill(current_interactive_node.name, current_interactive_node.object_level)
-					"stove":
-						get_parent().user_interface.toggle_stove(current_interactive_node.name, current_interactive_node.object_level)
-					"chest":
-						get_parent().user_interface.toggle_chest(current_interactive_node.name)
-					"furnace":
-						get_parent().user_interface.toggle_furnace(current_interactive_node.name)
-					"tool cabinet":
-						get_parent().user_interface.toggle_tc(current_interactive_node.name)
-					"campfire":
-						get_parent().user_interface.toggle_campfire(current_interactive_node.name)
-					"brewing table":
-						get_parent().user_interface.toggle_brewing_table(current_interactive_node.name, current_interactive_node.object_level)
+#					"crate":
+#						if Server.world.server_data["ui_slots"].has(id):
+#							if not Server.world.server_data["ui_slots"][id]["o"]:
+#								Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"n":"crate","player_id":Server.player_node.name,"id":id})
+#								#get_parent().user_interface.toggle_crate(current_interactive_node.name)
+#					"barrel":
+#						get_parent().user_interface.toggle_barrel(current_interactive_node.name)
+#					"workbench":
+#						get_parent().user_interface.toggle_workbench(current_interactive_node.object_level)
+#					"grain mill":
+#						get_parent().user_interface.toggle_grain_mill(current_interactive_node.name, current_interactive_node.object_level)
+#					"stove":
+#						get_parent().user_interface.toggle_stove(current_interactive_node.name, current_interactive_node.object_level)
+#					"chest":
+#						get_parent().user_interface.toggle_chest(current_interactive_node.name)
+#					"furnace":
+#						get_parent().user_interface.toggle_furnace(current_interactive_node.name)
+#					"tool cabinet":
+#						get_parent().user_interface.toggle_tc(current_interactive_node.name)
+#					"campfire":
+#						get_parent().user_interface.toggle_campfire(current_interactive_node.name)
+#					"brewing table":
+#						get_parent().user_interface.toggle_brewing_table(current_interactive_node.name, current_interactive_node.object_level)
 					"chair":
 						sit("chair",current_interactive_node.object_position,current_interactive_node.object_direction)
 					"armchair":
 						sit("armchair",current_interactive_node.object_position,current_interactive_node.object_direction)
 					"door":
-						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_door()
-					"gate":
-						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_gate()
-					"lamp":
-						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_lamp()
-					"fireplace":
-						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_fireplace()
+						Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"n":"door","id":id,"l":location})
+						#Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_door()
+#					"gate":
+#						Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"n":"gate","id":id,"l":location})
+#						#Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_gate()
+#					"lamp":
+#						Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"n":"lamp","id":id,"l":location})
+#						#Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_lamp()
+#					"fireplace":
+#						Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"n":"fireplace","id":id,"l":location})
+#						#Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_fireplace()
 			current_interactive_node = null
 	elif Server.player_node.state == SITTING and event.is_action_pressed("action"):
 		stand_up()
-
 
 
 func teleport(portal_position):

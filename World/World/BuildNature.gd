@@ -68,10 +68,12 @@ func spawn_placeables():
 			return
 		var map = get_node("../../").world[chunk]
 		for id in map["placeable"]:
-			var item_name = map["placeable"][id]["n"]
-			var location = map["placeable"][id]["l"]
-			var variety = map["placeable"][id]["v"]
-			var direction = map["placeable"][id]["d"]
+			if not PlaceableObjects.has_node(id):
+				PlaceObject.place("placeable",id,map["placeable"][id])
+#			var item_name = map["placeable"][id]["n"]
+#			var location = map["placeable"][id]["l"]
+#			var variety = map["placeable"][id]["v"]
+#			var direction = map["placeable"][id]["d"]
 #			if not PlaceableObjects.has_node(id):
 #				if item_name == "wall" or item_name == "foundation" or item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 #					PlaceObject.place_building_object_in_world(id,item_name,direction,variety,location,map["placeable"][id]["h"])
@@ -210,9 +212,9 @@ func spawn_trees():
 			return
 		var map = get_node("../../").world[chunk]  #MapData.return_chunk(chunk[0], chunk.substr(1,-1))
 		for id in map["tree"]:
-			var loc = map["tree"][id]["l"]+Vector2i(1,0)
+			var loc = map["tree"][id]["l"]
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
-				if not NatureObjects.has_node(id) and map["tree"].has(id):
+				if not NatureObjects.has_node(id): # and map["tree"].has(id):
 					var biome = map["tree"][id]["b"]
 					if biome == "desert":
 						pass
@@ -225,13 +227,13 @@ func spawn_trees():
 		for id in map["log"]:
 			var loc = map["log"][id]["l"]
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
-				if not NatureObjects.has_node(id) and map["log"].has(id):  #\#and MapData.world["log"].has(id):
+				if not NatureObjects.has_node(id): # and map["log"].has(id):  #\#and MapData.world["log"].has(id):
 					PlaceObject.place_log_in_world(id,map["log"][id]["v"],loc)
 					await get_tree().process_frame
 		for id in map["stump"]:
-			var loc = map["stump"][id]["l"] + Vector2i(1,0)
+			var loc = map["stump"][id]["l"]
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
-				if not NatureObjects.has_node(id) and map["stump"].has(id): # and MapData.world["stump"].has(id):
+				if not NatureObjects.has_node(id): # and map["stump"].has(id): # and MapData.world["stump"].has(id):
 					var variety= map["stump"][id]["v"]
 					var health = map["stump"][id]["h"]
 					PlaceObject.place_stump_in_world(id,variety,loc,health)
@@ -246,9 +248,9 @@ func spawn_ores():
 			return
 		var map = get_node("../../").world[chunk]
 		for id in map["ore_large"]:
-			var loc = map["ore_large"][id]["l"] + Vector2i(1,0)
+			var loc = map["ore_large"][id]["l"]
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
-				if not NatureObjects.has_node(id) and map["ore_large"].has(id): #  and MapData.world["ore_large"].has(id):
+				if not NatureObjects.has_node(id): # and map["ore_large"].has(id): #  and MapData.world["ore_large"].has(id):
 					var health = map["ore_large"][id]["h"]
 					var variety = map["ore_large"][id]["v"]
 					PlaceObject.place_large_ore_in_world(id,variety,loc,health)
@@ -256,7 +258,7 @@ func spawn_ores():
 		for id in map["ore"]:
 			var loc = map["ore"][id]["l"]
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
-				if not NatureObjects.has_node(id) and map["ore"].has(id): #  and MapData.world["ore"].has(id):
+				if not NatureObjects.has_node(id): # and map["ore"].has(id): #  and MapData.world["ore"].has(id):
 					var health = map["ore"][id]["h"]
 					var variety = map["ore"][id]["v"]
 					PlaceObject.place_small_ore_in_world(id,variety,loc,health)
@@ -275,7 +277,7 @@ func spawn_grass():
 			var type = map["tall_grass"][id]["n"]
 			var loc = map["tall_grass"][id]["l"]
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
-				if not GrassObjects.has_node(id) and map["tall_grass"].has(id): #  and MapData.world["tall_grass"].has(id):
+				if not GrassObjects.has_node(id): # and map["tall_grass"].has(id): #  and MapData.world["tall_grass"].has(id):
 					Tiles.add_navigation_tiles(loc)
 					count += 1
 					if type == "weed":

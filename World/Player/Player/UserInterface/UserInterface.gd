@@ -267,14 +267,14 @@ func toggle_barrel(id):
 
 
 func toggle_crate(id):
-	if not is_opening_chest and not Server.world.server_data["ui_slots"][id]["o"]:
+	if not is_opening_chest:
 		if not has_node("Crate"):
 			sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
 			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 			sound_effects.play()
 			PlayerData.interactive_screen_mode = true
 			is_opening_chest = true
-			Server.world.get_node("PlaceableObjects").rpc("open_crate",id)   #/"+id).interactives.open_crate()
+			#Server.world.get_node("PlaceableObjects").rpc("open_crate",id)   #/"+id).interactives.open_crate()
 			await get_tree().create_timer(0.2).timeout
 			is_opening_chest = false
 			var chest = Crate.instantiate()

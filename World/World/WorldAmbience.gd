@@ -10,7 +10,7 @@ func _ready():
 
 
 func initialize():
-	if get_node("../").server_data["time_housrs"] >= 22 or get_node("../").server_data["time_hours"] < 6: # night time
+	if get_node("../").server_data["time_hours"] >= 22 or get_node("../").server_data["time_hours"] < 6: # night time
 		color = Color("323237")
 
 func play_set_day():

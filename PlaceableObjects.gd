@@ -10,6 +10,9 @@ func player_place_object(player_id,type,id,data): pass
 func placeable_object_hit(peer_id,id,loc,tool_name):pass
 
 @rpc
+func player_interact_with_object(data): pass
+
+@rpc
 func update_placeable_health(data): 
 	if not get_node("../").world == {}:
 		get_node("../").world[data["chunk"]]["placeable"][data["id"]]["h"] = data["health"]
@@ -43,5 +46,14 @@ func add_new_object_to_world(player_id,type,id,data):
 
 
 @rpc
-func open_crate(id):
-	get_node("PlaceableObjects/"+str(id)).interactives.open_crate()   #/"+id).interactives.open_crate()
+func change_object_data(data): 
+	if not get_node("../").world == {}:
+		get_node("../").world[data["chunk"]]["placeable"][data["id"]]["o"] = data["o"]
+		for node in self.get_children():
+			if node.name == data["id"]:
+				node.change(data["o"])
+				return
+#	match data["n"]:
+#		"crate":
+#			get_node(id).toggle_crate()
+#	get_node("PlaceableObjects/"+str(id)).interactives.open_crate()   #/"+id).interactives.open_crate()

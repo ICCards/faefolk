@@ -41,7 +41,7 @@ func destroy():
 	set_physics_process(false)
 	if moving_object:
 		MapData.add_object("placeable",previous_moving_object_data["id"],{"n":previous_moving_object_data["n"],"d":previous_moving_object_data["d"],"l":previous_moving_object_data["l"],"v":previous_moving_object_data["v"]})
-		PlaceObject.place_object_in_world(previous_moving_object_data["id"], previous_moving_object_data["n"], previous_moving_object_data["d"], previous_moving_object_data["l"], previous_moving_object_data["v"])
+		PlaceObject.place_object_in_world(previous_moving_object_data["id"], previous_moving_object_data["n"], previous_moving_object_data["d"], previous_moving_object_data["l"], previous_moving_object_data["v"], false)
 	call_deferred("queue_free")
 
 func destroy_and_remove_previous_object():
@@ -377,7 +377,7 @@ func place_object(item_name, direction, location, type, variety = null):
 				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 				$SoundEffects.play()
 				if item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
-					MapData.add_object("placeable",id, {"n":item_name,"v":variety,"l":location,"h":Stats.return_starting_door_health(item_name),"d":direction})
+					MapData.add_object("placeable",id, {"n":item_name,"v":variety,"l":location,"h":Stats.return_starting_door_health(item_name),"d":direction,"o":false})
 				elif moving_object:
 					MapData.add_object("placeable",previous_moving_object_data["id"],{"n":item_name,"d":direction,"l":location,"v":variety,"h":3})
 					Server.player_node.actions.destroy_moveable_object()
@@ -387,7 +387,7 @@ func place_object(item_name, direction, location, type, variety = null):
 			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
-			MapData.add_object("tree",id,{"l":location,"h":Stats.TREE_HEALTH,"b":"forest","v":item_name,"p":"sapling"})
+			MapData.add_object("tree",id,{"l":location+Vector2i(1,0),"h":Stats.TREE_HEALTH,"b":"forest","v":item_name,"p":"sapling"})
 		elif type == "crop":
 			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)

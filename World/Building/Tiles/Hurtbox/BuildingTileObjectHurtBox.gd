@@ -38,7 +38,16 @@ func _ready():
 		$Marker2D/HurtBox.set_collision_mask(8+16)
 	else:
 		set_door_state()
-		
+
+
+func change(is_door_open):
+	door_opened = is_door_open
+	if is_door_open:
+		interactives.open_door(false)
+	else:
+		interactives.close_door()
+
+
 func set_door_state():
 	add_door_interactive_area_node("door")
 	$Marker2D/HurtBox.set_collision_mask(8+16+262144)
@@ -54,10 +63,13 @@ func set_door_state():
 		Tiles.remove_valid_tiles(location, Vector2(2,1))
 	else:
 		Tiles.remove_valid_tiles(location, Vector2(1,2))
+	if door_opened:
+		interactives.open_door(true)
 
 
 func add_door_interactive_area_node(type):
 	var doorInteractiveAreaNode = DoorInteractiveAreaNode.instantiate()
+	doorInteractiveAreaNode.location = location
 	doorInteractiveAreaNode.object_name = type
 	doorInteractiveAreaNode.name = name
 	$Marker2D.call_deferred("add_child", doorInteractiveAreaNode)
@@ -206,7 +218,6 @@ func destroy(data):
 		remove_wall()
 	else:
 		remove_door()
-
 
 
 func remove_door():

@@ -19,6 +19,8 @@ var item_name
 var direction
 var variety
 
+var opened_or_light_toggled: bool
+
 var destroyed: bool = false
 var is_player_sitting: bool = false
 
@@ -63,26 +65,36 @@ func set_dimensions():
 			$Marker2D.rotation_degrees = 270
 	if item_name == "chest":
 		add_interactive_area_node("chest")
+		if opened_or_light_toggled:
+			interactives.open_chest(true)
 #		if PlayerData.player_data["chests"].has(name):
 #			pass
 #		else:
 #			PlayerData.player_data["chests"][name] = {}
 	elif item_name == "crate":
 		add_campfire_interactive_area_node("crate")
+		if opened_or_light_toggled:
+			interactives.open_crate(true)
 #		if PlayerData.player_data["chests"].has(name):
 #			pass
 #		else:
 #			PlayerData.player_data["chests"][name] = {}
 	elif item_name == "barrel":
 		add_campfire_interactive_area_node("barrel")
+		if opened_or_light_toggled:
+			interactives.open_barrel(true)
 #		if PlayerData.player_data["barrels"].has(name):
 #			pass
 #		else:
 #			PlayerData.player_data["barrels"][name] = {}
 	elif item_name == "lamp":
 		add_campfire_interactive_area_node("lamp")
+		if opened_or_light_toggled:
+			interactives.turn_on_lamp(true)
 	elif item_name == "fireplace":
 		add_interactive_area_node("fireplace")
+		if opened_or_light_toggled:
+			interactives.turn_on_fireplace()
 	elif item_name == "torch":
 		$PointLight2D.set_deferred("enabled", true)
 	elif item_name == "campfire":
@@ -132,8 +144,8 @@ func set_dimensions():
 		movement_collision.set_deferred("disabled", true)
 	elif item_name == "wood gate" or item_name == "stone gate" or item_name == "metal gate":
 		add_door_interactive_area_node("gate")
-	elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
-		add_door_interactive_area_node("door")
+		if opened_or_light_toggled:
+			interactives.open_gate(true)
 
 
 func add_interactive_area_node(object_name,level = null,direction = null):

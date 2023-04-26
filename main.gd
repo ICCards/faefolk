@@ -12,7 +12,7 @@ var is_changing_scene = false
 
 
 func _on_join_btn_pressed():
-	$CanvasLayer.hide()
+	$Menu.hide()
 	enet_peer.create_client("localhost",PORT)
 	multiplayer.multiplayer_peer = enet_peer
 	build_world()

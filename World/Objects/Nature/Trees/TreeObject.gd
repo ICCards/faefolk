@@ -73,6 +73,7 @@ func set_tree():
 
 
 func harvest():
+	return
 	if phase == "harvest" and health > 40:
 		$CollisionShape2D.set_deferred("disabled", true)
 		phase = "empty"
@@ -141,7 +142,7 @@ func setGrownFruitTreeTexture():
 		$CollisionShape2D.set_deferred("disabled", false)
 	else:
 		$CollisionShape2D.set_deferred("disabled", true)
-	await get_tree().process_frame
+	await get_tree().create_timer(0.25).timeout
 	if biome == "snow":
 		animated_tree_top_sprite.play("snow")
 	else:
@@ -176,7 +177,7 @@ func setGrownTreeTexture():
 			animated_tree_top_sprite.set_deferred("offset", Vector2(-1,-23))
 		"pine":
 			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-37))
-	await get_tree().process_frame
+	await get_tree().create_timer(0.25).timeout
 	animated_tree_top_sprite.play("default")
 
 
@@ -184,13 +185,12 @@ func hit(data):
 	if not destroyed:
 		if not (phase == "5" and Util.isNonFruitTree(variety)) and not (phase == "mature1" or phase == "mature2" or phase == "harvest" or phase == "empty" and Util.isFruitTree(variety)):
 			animation_player_stump.call_deferred("play", "sapling hit")
-			$ResetTempHealthTimer.call_deferred("start")
 			temp_health -= 1
 			sound_effects_tree.set_deferred("stream", load("res://Assets/Sound/Sound effects/Building/wood/wood hit.mp3"))
 			sound_effects_tree.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 			sound_effects_tree.call_deferred("play")
-			if temp_health <= 0 and not destroyed: 
-				call_deferred("destroy", "sapling")
+			if data["player_id"] == Server.player_node.name:
+				$ResetTempHealthTimer.start()
 		else:
 			if health == 100:
 				InstancedScenes.initiateBirdEffect(position)
@@ -269,10 +269,10 @@ func destroy(data):
 	#MapData.remove_object("tree",name)
 	if not destroyed:
 		destroyed = true
-		if not tree_fallen:
-			play_tree_break_animation(data)
 		Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
 		if phase != "sapling" and phase != "1" and phase != "2" and phase != "3" and phase != "4":
+			if not tree_fallen:
+				play_tree_break_animation(data)
 			play_stump_break_animation()
 			animation_player_stump.call_deferred("play", "stump destroyed")
 			sound_effects_stump.set_deferred("stream", Sounds.stump_break)
