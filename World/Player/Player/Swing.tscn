@@ -21,7 +21,7 @@ radius = 5.0
 script = ExtResource("1_3e7re")
 
 [node name="AxePickaxeSwing" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 8
 collision_mask = 0
 script = ExtResource("2_t0hnv")
 

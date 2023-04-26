@@ -89,6 +89,7 @@ func place_weed_in_world(id,variety,location):
 	GrassObjects.call_deferred("add_child",object,true)
 
 func place_log_in_world(id,variety,location):
+	print("PLACE LOG")
 	NatureObjects = Server.world.get_node("NatureObjects")
 	var object = Log.instantiate()
 	object.name = id

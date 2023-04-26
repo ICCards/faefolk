@@ -292,6 +292,7 @@ func destroy(data):
 
 ### Tree hurtbox
 func _on_Hurtbox_area_entered(_area):
+	print("ENTERED TEEE HURTBOX")
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 #	if _area.special_ability == "fire buff" and phase == "5":

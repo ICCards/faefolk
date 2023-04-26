@@ -235,10 +235,10 @@ func play_punch_animation():
 
 func set_swing_collision_layer_and_position(tool_name, direction):
 	axe_pickaxe_swing.position = Util.set_swing_position(Vector2.ZERO, direction)
-	if get_node("../Magic").player_fire_buff:
-		axe_pickaxe_swing.special_ability = "fire"
-	else:
-		axe_pickaxe_swing.special_ability = ""
+#	if get_node("../Magic").player_fire_buff:
+#		axe_pickaxe_swing.special_ability = "fire"
+#	else:
+#		axe_pickaxe_swing.special_ability = ""
 	if tool_name == "wood axe" or tool_name == "stone axe" or tool_name == "iron axe" or tool_name == "bronze axe" or tool_name == "gold axe": 
 		axe_pickaxe_swing.tool_name = tool_name
 		axe_pickaxe_swing.set_collision_layer(8)
@@ -251,6 +251,7 @@ func set_swing_collision_layer_and_position(tool_name, direction):
 		axe_pickaxe_swing.set_collision_layer(0)
 		set_hoed_tile(direction)
 	elif tool_name == "hammer":
+		axe_pickaxe_swing.tool_name = tool_name
 		axe_pickaxe_swing.set_collision_layer(16384)
 	elif tool_name == null:
 		axe_pickaxe_swing.set_collision_layer(8)

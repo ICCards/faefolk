@@ -48,7 +48,7 @@ var active_item_slot_combat_hotbar = 0
 var starting_player_data = {
 	"current_save_location": null,
 	"current_save_scene" : "res://World/Overworld/Overworld.tscn",
-	"respawn_position": Vector2(500*16,500*16),
+	"respawn_location": Vector2(500*16,500*16),
 	"respawn_scene" : "res://World/Overworld/Overworld.tscn",
 	"health": 100,
 	"mana": 100,
@@ -61,7 +61,7 @@ var starting_player_data = {
 		"4": ["blueprint", 1, null],
 		"5": ["hammer", 1, null],
 #		"2": ["brewing table #1", 999, null],
-	#	"6": ["oak seeds", 10, null],
+		"6": ["oak seeds", 10, null],
 	#	"7": ["crate", 10, null],
 #		"5": ["furnace", 10, null],
 #		"7": ["grain mill #1", 100, null],
