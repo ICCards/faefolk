@@ -147,7 +147,7 @@ func swing_deferred(item_name):
 			play_punch_animation()
 		else:
 			if item_name == "hammer" and has_node("../MoveObject"):
-				thread.wait_to_finish()
+				var val = thread.wait_to_finish()
 				get_parent().state = MOVEMENT
 				return
 			play_axe_pickaxe_swing_animation(item_name)

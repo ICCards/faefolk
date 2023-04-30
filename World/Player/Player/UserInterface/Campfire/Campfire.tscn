@@ -164,6 +164,7 @@ offset_right = 516.0
 offset_bottom = 297.0
 
 [node name="InventorySlots" parent="." instance=ExtResource("18_cwk8p")]
+layout_mode = 0
 offset_left = 639.0
 offset_top = 315.0
 offset_right = 939.0
@@ -171,6 +172,7 @@ offset_bottom = 561.0
 metadata/_edit_lock_ = true
 
 [node name="HotbarInventorySlots" parent="." instance=ExtResource("19_ectkw")]
+layout_mode = 0
 offset_left = 639.0
 offset_top = 183.0
 offset_right = 939.0

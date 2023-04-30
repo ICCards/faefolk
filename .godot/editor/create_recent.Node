@@ -1,9 +1,9 @@
+Node2D
 CanvasModulate
 AudioStreamPlayer
 Node
 CharacterBody2D
 Area2D
-Node2D
 MultiplayerSynchronizer
 MultiplayerSpawner
 TextureProgressBar

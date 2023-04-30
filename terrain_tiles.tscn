@@ -1,38 +1,20 @@
-[gd_scene load_steps=40 format=3 uid="uid://cu53le5o0b1us"]
+[gd_scene load_steps=21 format=3 uid="uid://deedftrydqjoe"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_miuy3"]
-[ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="2_jxniw"]
-[ext_resource type="Script" path="res://World/World/WorldBuilder.gd" id="2_mbtah"]
-[ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/terrain/tres files/plains.tres" id="3_s3xh1"]
-[ext_resource type="Script" path="res://World/World/SpawnAnimal.gd" id="3_xbv0j"]
-[ext_resource type="Script" path="res://World/World/BuildNature.gd" id="4_lnadh"]
-[ext_resource type="TileSet" uid="uid://bpd6si5cldst7" path="res://Assets/Tilesets/terrain/tres files/deep ocean.tres" id="4_prix1"]
-[ext_resource type="TileSet" uid="uid://3x3xfgwqdrhm" path="res://Assets/Tilesets/terrain/tres files/dirt.tres" id="5_5eaio"]
-[ext_resource type="Script" path="res://World/World/BuildTerrain.gd" id="5_oye32"]
-[ext_resource type="TileSet" uid="uid://de28nfavviio7" path="res://Assets/Tilesets/terrain/elevated terrain.tres" id="6_1xuhk"]
-[ext_resource type="Script" path="res://Time.gd" id="6_j6htr"]
-[ext_resource type="TileSet" uid="uid://ceprqmvmkacdl" path="res://Assets/Tilesets/terrain/tres files/forest.tres" id="7_rcnxi"]
-[ext_resource type="TileSet" uid="uid://dja0b16fhgms6" path="res://Assets/Tilesets/terrain/tres files/freshwater.tres" id="8_4ak2k"]
-[ext_resource type="TileSet" uid="uid://c0mxloskuawnh" path="res://Assets/Tilesets/terrain/tres files/waves.tres" id="9_d86tr"]
-[ext_resource type="TileSet" uid="uid://d2u2dc22ifh2g" path="res://Assets/Tilesets/terrain/tres files/snow.tres" id="10_8wevp"]
-[ext_resource type="TileSet" uid="uid://2bxso62kg8ee" path="res://Assets/Tilesets/terrain/tres files/wet sand.tres" id="11_yth4k"]
-[ext_resource type="TileSet" uid="uid://33tw24vxmev3" path="res://Assets/Tilesets/foundation/foundation.tres" id="12_rvnjk"]
-[ext_resource type="TileSet" uid="uid://cxyw1xxxhvjda" path="res://Assets/Tilesets/walls/walls.tres" id="13_jebsi"]
-[ext_resource type="TileSet" uid="uid://bmjc5ou5oyowx" path="res://Assets/Tilesets/objects/objects.tres" id="14_b3xb4"]
-[ext_resource type="TileSet" uid="uid://cck8nnl37f05f" path="res://Assets/Tilesets/terrain/tres files/sand.tres" id="14_ogu2e"]
-[ext_resource type="PackedScene" uid="uid://c66ktnntnkqrx" path="res://World/Map/WorldMap.tscn" id="16_fydq0"]
-[ext_resource type="TileSet" uid="uid://bd1f000cjndwj" path="res://Assets/Tilesets/terrain/tres files/shallow ocean.tres" id="18_wb3fl"]
-[ext_resource type="Script" path="res://NatureObjects.gd" id="20_dvf2e"]
-[ext_resource type="Script" path="res://PlaceableObjects.gd" id="20_hue5x"]
-[ext_resource type="Script" path="res://FarmingTiles.gd" id="21_0dt81"]
-[ext_resource type="TileSet" uid="uid://dnvo01hfnktxd" path="res://Assets/Tilesets/terrain/tres files/hoed.tres" id="21_sck8f"]
-[ext_resource type="TileSet" uid="uid://bctmvj3yosupc" path="res://Assets/Tilesets/terrain/tres files/watered hoed.tres" id="22_mim6n"]
-[ext_resource type="Script" path="res://ItemDrops.gd" id="22_nrbfv"]
-[ext_resource type="Script" path="res://ForageObjects.gd" id="23_k1cnp"]
-[ext_resource type="Script" path="res://GrassObjects.gd" id="25_yatu0"]
+[ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="1_sowr5"]
+[ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/terrain/tres files/plains.tres" id="2_0tt48"]
+[ext_resource type="TileSet" uid="uid://bpd6si5cldst7" path="res://Assets/Tilesets/terrain/tres files/deep ocean.tres" id="3_1fj4v"]
+[ext_resource type="TileSet" uid="uid://3x3xfgwqdrhm" path="res://Assets/Tilesets/terrain/tres files/dirt.tres" id="4_2uaab"]
+[ext_resource type="TileSet" uid="uid://de28nfavviio7" path="res://Assets/Tilesets/terrain/elevated terrain.tres" id="5_hih37"]
+[ext_resource type="TileSet" uid="uid://ceprqmvmkacdl" path="res://Assets/Tilesets/terrain/tres files/forest.tres" id="6_c7g2c"]
+[ext_resource type="TileSet" uid="uid://dja0b16fhgms6" path="res://Assets/Tilesets/terrain/tres files/freshwater.tres" id="7_cxtqt"]
+[ext_resource type="TileSet" uid="uid://cck8nnl37f05f" path="res://Assets/Tilesets/terrain/tres files/sand.tres" id="8_cxo2x"]
+[ext_resource type="TileSet" uid="uid://c0mxloskuawnh" path="res://Assets/Tilesets/terrain/tres files/waves.tres" id="8_wcib2"]
+[ext_resource type="TileSet" uid="uid://d2u2dc22ifh2g" path="res://Assets/Tilesets/terrain/tres files/snow.tres" id="9_rue5k"]
+[ext_resource type="TileSet" uid="uid://2bxso62kg8ee" path="res://Assets/Tilesets/terrain/tres files/wet sand.tres" id="10_6baci"]
+[ext_resource type="TileSet" uid="uid://bd1f000cjndwj" path="res://Assets/Tilesets/terrain/tres files/shallow ocean.tres" id="12_tjek8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7b1tf"]
-texture = ExtResource("2_jxniw")
+texture = ExtResource("1_sowr5")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -3269,19 +3251,19 @@ texture = ExtResource("2_jxniw")
 14:61/0 = 0
 15:61/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_2neoj"]
+[sub_resource type="TileSet" id="TileSet_3mv4a"]
 sources/0 = SubResource("TileSetAtlasSource_7b1tf")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u3x8b"]
-texture = ExtResource("2_jxniw")
+texture = ExtResource("1_sowr5")
 0:0/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_0fs1y"]
+[sub_resource type="TileSet" id="TileSet_soh1e"]
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_u3x8b")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r7tvy"]
-texture = ExtResource("2_jxniw")
+texture = ExtResource("1_sowr5")
 50:24/0 = 0
 50:24/0/terrain_set = 0
 51:24/0 = 0
@@ -3301,12 +3283,12 @@ texture = ExtResource("2_jxniw")
 52:26/0 = 0
 52:26/0/terrain_set = 0
 
-[sub_resource type="TileSet" id="TileSet_ofn11"]
+[sub_resource type="TileSet" id="TileSet_ke52l"]
 terrain_set_0/mode = 0
 sources/0 = SubResource("TileSetAtlasSource_r7tvy")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dut5a"]
-texture = ExtResource("2_jxniw")
+texture = ExtResource("1_sowr5")
 24:56/animation_columns = 15
 24:56/animation_separation = Vector2i(3, 0)
 24:56/animation_speed = 5.0
@@ -3327,257 +3309,93 @@ texture = ExtResource("2_jxniw")
 24:56/animation_frame_14/duration = 1.0
 24:56/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_4evgj"]
+[sub_resource type="TileSet" id="TileSet_eun6q"]
 sources/0 = SubResource("TileSetAtlasSource_dut5a")
 
-[sub_resource type="Environment" id="Environment_yn58q"]
-background_mode = 3
-tonemap_mode = 3
-tonemap_exposure = 0.4
-tonemap_white = 0.94
-glow_enabled = true
-glow_intensity = 6.13
-glow_strength = 1.38
-glow_blend_mode = 0
-glow_hdr_threshold = 1.2
-fog_light_energy = 0.0
-fog_sun_scatter = 0.64
+[node name="TerrainTiles" type="Node2D"]
+z_index = -10
 
-[node name="Main" type="Node2D"]
-y_sort_enabled = true
-script = ExtResource("1_miuy3")
-
-[node name="Menu" type="CanvasLayer" parent="."]
-
-[node name="MainMenu" type="PanelContainer" parent="Menu"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -59.0
-offset_top = -74.0
-offset_right = 59.0
-offset_bottom = 74.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Menu/MainMenu"]
-layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MainMenu/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Label" type="Label" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Main Menu"
-horizontal_alignment = 1
-
-[node name="JoinBtn" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Join"
-
-[node name="WorldBuilder" type="Node" parent="."]
-script = ExtResource("2_mbtah")
-
-[node name="SpawnAnimal" type="Node" parent="WorldBuilder"]
-script = ExtResource("3_xbv0j")
-
-[node name="SpawnAnimalTimer" type="Timer" parent="WorldBuilder/SpawnAnimal"]
-wait_time = 3.3
-
-[node name="BuildNature" type="Node" parent="WorldBuilder"]
-script = ExtResource("4_lnadh")
-
-[node name="SpawnNatureTimer" type="Timer" parent="WorldBuilder/BuildNature"]
-wait_time = 2.1
-
-[node name="BuildTerrain" type="Node" parent="WorldBuilder"]
-script = ExtResource("5_oye32")
-
-[node name="BuildTerrainTimer" type="Timer" parent="WorldBuilder/BuildTerrain"]
-wait_time = 2.9
-
-[node name="WorldBuilderTimer" type="Timer" parent="WorldBuilder"]
-
-[node name="Time" type="Node" parent="."]
-script = ExtResource("6_j6htr")
-
-[node name="TerrainTiles" type="Node2D" parent="."]
-
-[node name="ValidTiles" type="TileMap" parent="TerrainTiles"]
+[node name="ValidTiles" type="TileMap" parent="."]
 visible = false
-tile_set = SubResource("TileSet_2neoj")
+tile_set = SubResource("TileSet_3mv4a")
 navigation_visibility_mode = 1
 format = 2
 
-[node name="NavigationTiles" type="TileMap" parent="TerrainTiles"]
+[node name="NavigationTiles" type="TileMap" parent="."]
 visible = false
-tile_set = SubResource("TileSet_0fs1y")
+tile_set = SubResource("TileSet_soh1e")
 format = 2
 
-[node name="Plains" type="TileMap" parent="TerrainTiles"]
+[node name="Plains" type="TileMap" parent="."]
 modulate = Color(1.4, 1.4, 1.4, 1)
-tile_set = ExtResource("3_s3xh1")
+tile_set = ExtResource("2_0tt48")
 cell_quadrant_size = 8
 format = 2
 
-[node name="DeepOcean" type="TileMap" parent="TerrainTiles"]
+[node name="DeepOcean" type="TileMap" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
 z_index = -2
-tile_set = ExtResource("4_prix1")
+tile_set = ExtResource("3_1fj4v")
 format = 2
 
-[node name="Dirt" type="TileMap" parent="TerrainTiles"]
+[node name="Dirt" type="TileMap" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
 z_index = -1
-tile_set = ExtResource("5_5eaio")
+tile_set = ExtResource("4_2uaab")
 format = 2
 
-[node name="Forest" type="TileMap" parent="TerrainTiles"]
+[node name="Elevation" type="TileMap" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
-tile_set = ExtResource("7_rcnxi")
+tile_set = ExtResource("5_hih37")
 format = 2
 
-[node name="Elevation" type="TileMap" parent="TerrainTiles"]
+[node name="Forest" type="TileMap" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
-tile_set = ExtResource("6_1xuhk")
+tile_set = ExtResource("6_c7g2c")
 format = 2
 
-[node name="Freshwater" type="TileMap" parent="TerrainTiles"]
+[node name="Freshwater" type="TileMap" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
-tile_set = ExtResource("8_4ak2k")
+tile_set = ExtResource("7_cxtqt")
 format = 2
 
-[node name="Sand" type="TileMap" parent="TerrainTiles"]
+[node name="Sand" type="TileMap" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
-tile_set = ExtResource("14_ogu2e")
+tile_set = ExtResource("8_cxo2x")
 format = 2
 
-[node name="Waves" type="TileMap" parent="TerrainTiles"]
+[node name="Waves" type="TileMap" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
 z_index = -2
-tile_set = ExtResource("9_d86tr")
+tile_set = ExtResource("8_wcib2")
 format = 2
 
-[node name="Snow" type="TileMap" parent="TerrainTiles"]
+[node name="Snow" type="TileMap" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
 z_index = -1
-tile_set = ExtResource("10_8wevp")
+tile_set = ExtResource("9_rue5k")
 format = 2
 
-[node name="WetSand" type="TileMap" parent="TerrainTiles"]
+[node name="WetSand" type="TileMap" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
 z_index = -3
-tile_set = ExtResource("11_yth4k")
+tile_set = ExtResource("10_6baci")
 format = 2
 
-[node name="ShallowOcean" type="TileMap" parent="TerrainTiles"]
+[node name="ShallowOcean" type="TileMap" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
 z_index = -3
-tile_set = ExtResource("18_wb3fl")
+tile_set = ExtResource("12_tjek8")
 format = 2
 
-[node name="Beach" type="TileMap" parent="TerrainTiles"]
+[node name="Beach" type="TileMap" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
 z_index = -4
-tile_set = SubResource("TileSet_ofn11")
+tile_set = SubResource("TileSet_ke52l")
 format = 2
 
-[node name="TopOcean" type="TileMap" parent="TerrainTiles"]
+[node name="TopOcean" type="TileMap" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
 z_index = -2
-tile_set = SubResource("TileSet_4evgj")
+tile_set = SubResource("TileSet_eun6q")
 format = 2
-
-[node name="BuildingTiles" type="Node2D" parent="."]
-y_sort_enabled = true
-
-[node name="FoundationTiles" type="TileMap" parent="BuildingTiles"]
-modulate = Color(1.2, 1.2, 1.2, 1)
-z_index = -1
-y_sort_enabled = true
-tile_set = ExtResource("12_rvnjk")
-format = 2
-
-[node name="WallTiles" type="TileMap" parent="BuildingTiles"]
-modulate = Color(1.2, 1.2, 1.2, 1)
-y_sort_enabled = true
-tile_set = ExtResource("13_jebsi")
-format = 2
-layer_0/y_sort_enabled = true
-
-[node name="ObjectTiles" type="TileMap" parent="BuildingTiles"]
-modulate = Color(1.3, 1.3, 1.3, 1)
-y_sort_enabled = true
-tile_set = ExtResource("14_b3xb4")
-format = 2
-layer_0/y_sort_enabled = true
-
-[node name="FarmingTiles" type="Node2D" parent="."]
-script = ExtResource("21_0dt81")
-
-[node name="HoedTiles" type="TileMap" parent="FarmingTiles"]
-modulate = Color(1.2, 1.2, 1.2, 1)
-tile_set = ExtResource("21_sck8f")
-format = 2
-
-[node name="WateredTiles" type="TileMap" parent="FarmingTiles"]
-modulate = Color(1.2, 1.2, 1.2, 1)
-tile_set = ExtResource("22_mim6n")
-format = 2
-
-[node name="Players" type="Node2D" parent="."]
-y_sort_enabled = true
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players"]
-_spawnable_scenes = PackedStringArray("res://World/Player/Player/Player.tscn")
-spawn_path = NodePath("..")
-
-[node name="ItemDrops" type="Node2D" parent="."]
-script = ExtResource("22_nrbfv")
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="ItemDrops"]
-_spawnable_scenes = PackedStringArray("res://InventoryLogic/ItemDrop.tscn")
-spawn_path = NodePath("..")
-
-[node name="Enemies" type="Node2D" parent="."]
-y_sort_enabled = true
-
-[node name="Projectiles" type="Node2D" parent="."]
-y_sort_enabled = true
-
-[node name="BuildingObjects" type="Node2D" parent="."]
-
-[node name="PlaceableObjects" type="Node2D" parent="."]
-y_sort_enabled = true
-script = ExtResource("20_hue5x")
-
-[node name="ForageObjects" type="Node2D" parent="."]
-y_sort_enabled = true
-script = ExtResource("23_k1cnp")
-
-[node name="NatureObjects" type="Node2D" parent="."]
-y_sort_enabled = true
-script = ExtResource("20_dvf2e")
-
-[node name="GrassObjects" type="Node2D" parent="."]
-y_sort_enabled = true
-script = ExtResource("25_yatu0")
-
-[node name="WorldMap" parent="." instance=ExtResource("16_fydq0")]
-visible = false
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_yn58q")
-
-[connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/JoinBtn" to="." method="_on_join_btn_pressed"]
-[connection signal="timeout" from="WorldBuilder/SpawnAnimal/SpawnAnimalTimer" to="WorldBuilder/SpawnAnimal" method="_on_spawn_animal_timer_timeout"]
-[connection signal="timeout" from="WorldBuilder/BuildNature/SpawnNatureTimer" to="WorldBuilder/BuildNature" method="_on_spawn_nature_timer_timeout"]
-[connection signal="timeout" from="WorldBuilder/BuildTerrain/BuildTerrainTimer" to="WorldBuilder/BuildTerrain" method="_on_build_terrain_timer_timeout"]
-[connection signal="timeout" from="WorldBuilder/WorldBuilderTimer" to="WorldBuilder" method="_on_world_build_timer_timeout"]

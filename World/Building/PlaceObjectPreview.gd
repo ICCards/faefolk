@@ -51,8 +51,8 @@ func destroy_and_remove_previous_object():
 	call_deferred("queue_free")
 
 func _physics_process(delta):
-	mousePos = (get_global_mouse_position() + Vector2(-8, -8)).snapped(Vector2(16,16))
-	set_global_position(mousePos)
+	mousePos = (get_global_mouse_position()+Vector2(-8,-8)).snapped(Vector2(16,16))
+	set_global_position(mousePos+Vector2(8,8))
 	match state:
 		ITEM:
 			place_item_state()

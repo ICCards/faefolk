@@ -18,7 +18,6 @@ func _on_join_btn_pressed():
 	build_world()
 
 
-
 @rpc
 func send_world_data(data):
 	print("GOT WORLD DATA")
@@ -38,7 +37,6 @@ func send_world_data(data):
 func build_world():
 	print("BUILD WORLD")
 	Server.world = self
-#	MapData.add_world_data_to_chunks()
 	set_map_tiles()
 	set_valid_tiles()
 #	$WorldBuilder.initialize()
@@ -66,5 +64,3 @@ func set_map_tiles():
 	Tiles.object_tiles = $BuildingTiles/ObjectTiles
 	Tiles.wet_sand_tiles = $TerrainTiles/WetSand
 	Tiles.forest_tiles = $TerrainTiles/Forest
-
-

@@ -162,7 +162,7 @@ func set_current_object(item_name):
 #		holding_item.hide()
 #		$HoldingTorch.set_inactive()
 	# Placable object
-	if item_category == "Placeable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg"):
+	if item_category == "Placeable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg" and item_name != "green grass" and item_name != "red grass" and item_name != "yellow grass" and item_name != "dark green grass"):
 		actions.show_placeable_object(item_name, item_category)
 		return
 	if item_name == "blueprint" and current_building_item != "":

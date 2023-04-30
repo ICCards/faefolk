@@ -70,11 +70,13 @@ offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0
 offset_bottom = 8.0
+mouse_filter = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_0okvp")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_pawgr")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_6fn2f")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_5pqk2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_sqj60")
+disabled = true
 flat = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
@@ -97,7 +99,6 @@ format = 2
 layer_0/y_sort_enabled = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 enabled = false
 color = Color(1, 0.85098, 0.717647, 1)
 blend_mode = 2

@@ -1,34 +1,59 @@
 res://main.tscn
+res://terrain_tiles.tscn
 res://Assets/Tilesets/terrain/tres files/plains.tres
 res://Assets/Tilesets/terrain/tres files/deep ocean.tres
 res://Assets/Tilesets/terrain/tres files/dirt.tres
 res://Assets/Tilesets/terrain/elevated terrain.tres
 res://Assets/Tilesets/terrain/tres files/forest.tres
 res://Assets/Tilesets/terrain/tres files/freshwater.tres
+res://Assets/Tilesets/terrain/tres files/sand.tres
 res://Assets/Tilesets/terrain/tres files/waves.tres
 res://Assets/Tilesets/terrain/tres files/snow.tres
 res://Assets/Tilesets/terrain/tres files/wet sand.tres
+res://Assets/Tilesets/terrain/tres files/shallow ocean.tres
+res://Assets/Tilesets/objects/objects.tres
 res://Assets/Tilesets/foundation/foundation.tres
 res://Assets/Tilesets/walls/walls.tres
-res://Assets/Tilesets/objects/objects.tres
 res://Assets/Themes/MiniMap.tres
-res://Assets/Tilesets/terrain/hoed.tres
-res://Assets/Tilesets/terrain/watered hoed.tres
+res://Assets/Tilesets/terrain/tres files/hoed.tres
+res://Assets/Tilesets/terrain/tres files/watered hoed.tres
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd
+res://Global/Data/PlayerData.gd
+res://World/Player/Player/Actions.gd
+res://World/Building/Tiles/Interactives.gd
+res://elevation_test.tscn
+res://World/Player/Player/Actions.tscn
+res://World/Player/Player/UserInterface/UserInterface.tscn
 res://Assets/Themes/text.tres
 res://Assets/Themes/LockedAsset.tres
-res://Assets/Themes/whiten.tres
-res://Assets/Images/tree_sets/oak/mature/animated top.tres
-res://World/Player/Player/Swing.tscn
-res://World/Player/Player/Player.tscn
-res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn
-res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
-res://World/Objects/Nature/Trees/TreeObject.tscn
-res://World/Map/WorldMap.tscn
-res://World/Building/PlaceObjectPreview.gd
-res://World/World/WorldBuilder.gd
-res://World/Player/Player/Swing.gd
-res://World/Objects/Nature/Trees/TreeObject.gd
-res://World/Player/Player/Actions.gd
-res://Global/Data/PlayerData.gd
-res://World/Objects/Nature/Trees/Log.tscn
-res://Global/Data/PlaceObject.gd
+res://World/Player/Player/UserInterface/UserInterface.gd
+res://World/Player/Player/UserInterface/Crate/Crate.tscn
+res://World/Building/Tiles/Attached nodes/campfire_interactive_area.tscn
+res://World/Player/Player/UserInterface/Crate/Crate.gd
+res://World/Player/Player/UserInterface/Chest/Chest.tscn
+res://World/Player/Player/UserInterface/Chest/Chest.gd
+res://main.gd
+res://World/Player/Player/UserInterface/Slots/InventorySlots.gd
+res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.gd
+res://World/Player/Player/UserInterface/Slots/ChestSlots.gd
+res://World/Player/Player/UserInterface/GrainMill/GrainMill.tscn
+res://World/Player/Player/UserInterface/GrainMill/GrainMill.gd
+res://World/Player/Player/UserInterface/Campfire/Campfire.tscn
+res://World/Player/Player/UserInterface/Campfire/Campfire.gd
+res://World/Player/Player/UserInterface/Stove/Stove.tscn
+res://World/Player/Player/UserInterface/Stove/Stove.gd
+res://World/Player/Player/UserInterface/Barrel/Barrel.tscn
+res://World/Player/Player/UserInterface/Barrel/Barrel.gd
+res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.tscn
+res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.gd
+res://World/Player/Player/UserInterface/Slots/GrainMillSlots.gd
+res://World/Player/Player/UserInterface/Slots/CampfireSlots.gd
+res://World/Player/Player/UserInterface/Slots/StoveSlots.gd
+res://World/Player/Player/UserInterface/Slots/BarrelSlots.gd
+res://World/Building/PlaceObjectPreview.tscn
+res://Assets/Tilesets/objects/crops.tres
+res://World/Player/Player/UserInterface/Furnace/Furnace.tscn
+res://World/Player/Player/UserInterface/Furnace/Furnace.gd
+res://helpers/Util.gd
+res://PlaceableObjects.gd

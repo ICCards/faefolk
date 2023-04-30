@@ -1,0 +1,30 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bd1f000cjndwj"]
+
+[ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="1_d8pug"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fcrb1"]
+texture = ExtResource("1_d8pug")
+26:58/animation_columns = 14
+26:58/animation_separation = Vector2i(3, 0)
+26:58/animation_speed = 5.0
+26:58/animation_frame_0/duration = 1.0
+26:58/animation_frame_1/duration = 1.0
+26:58/animation_frame_2/duration = 1.0
+26:58/animation_frame_3/duration = 1.0
+26:58/animation_frame_4/duration = 1.0
+26:58/animation_frame_5/duration = 1.0
+26:58/animation_frame_6/duration = 1.0
+26:58/animation_frame_7/duration = 1.0
+26:58/animation_frame_8/duration = 1.0
+26:58/animation_frame_9/duration = 1.0
+26:58/animation_frame_10/duration = 1.0
+26:58/animation_frame_11/duration = 1.0
+26:58/animation_frame_12/duration = 1.0
+26:58/animation_frame_13/duration = 1.0
+26:58/0 = 0
+26:58/0/terrain_set = 0
+26:57/0 = 0
+
+[resource]
+terrain_set_0/mode = 0
+sources/0 = SubResource("TileSetAtlasSource_fcrb1")

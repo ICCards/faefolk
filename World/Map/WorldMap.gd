@@ -28,16 +28,16 @@ enum Tiles {
 }
 
 
-#func _input(event):
-#	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and not PlayerData.chatMode and has_node("/root/Main"):
-#		if event.is_action_pressed("open map"):
-#			Server.player_node.actions.destroy_placeable_object()
-#			#Server.world.get_node("WorldAmbience").call_deferred("hide")
-#			initialize()
-#		if event.is_action_released("open map"):
-#			#Server.world.get_node("WorldAmbience").call_deferred("show")
-#			set_inactive()
-#			Server.player_node.call_deferred("set_held_object")
+func _input(event):
+	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and not PlayerData.chatMode and has_node("/root/Main"):
+		if event.is_action_pressed("open map"):
+			Server.player_node.actions.destroy_placeable_object()
+			#Server.world.get_node("WorldAmbience").call_deferred("hide")
+			initialize()
+		if event.is_action_released("open map"):
+			#Server.world.get_node("WorldAmbience").call_deferred("show")
+			set_inactive()
+			Server.player_node.call_deferred("set_held_object")
 
 func initialize():
 	show()
@@ -59,8 +59,8 @@ func add_player_icon(player_name):
 func set_inactive():
 	hide()
 	PlayerData.viewMapMode = false
-	$Camera2D.set_deferred("enabled", false)
-	Server.player_node.get_node("Camera2D").set_deferred("enabled", true)
+	$Camera2D.enabled = false
+	Server.player_node.get_node("Camera2D").enabled = true
 	if PlayerData.normal_hotbar_mode:
 		Server.player_node.user_interface.get_node("Hotbar").call_deferred("show") 
 	else:

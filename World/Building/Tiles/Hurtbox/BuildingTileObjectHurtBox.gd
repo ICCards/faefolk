@@ -117,7 +117,8 @@ func set_type():
 					Tiles.wall_tiles.set_cells_terrain_connect(0,[location],0,Tiers.ARMORED)
 					max_health = Stats.MAX_ARMORED_BUILDING
 				"demolish":
-					remove_wall()
+					get_parent().rpc_id(1,"player_remove_object",Server.player_node.name,"placeable",name,location)
+					#remove_wall()
 		"foundation":
 			match tier:
 				"twig":
@@ -136,7 +137,8 @@ func set_type():
 					Tiles.foundation_tiles.set_cells_terrain_connect(0,[location],0,Tiers.ARMORED)
 					max_health = Stats.MAX_ARMORED_BUILDING
 				"demolish":
-					remove_foundation()
+					get_parent().rpc_id(1,"player_remove_object",Server.player_node.name,"placeable",name,location)
+					#remove_foundation()
 	update_health_bar()
 
 

@@ -324,9 +324,9 @@ texture = ExtResource("7_u87cj")
 
 [node name="VarietyLabel" type="Label" parent="ChangeVariety"]
 layout_mode = 0
-offset_left = 691.0
+offset_left = 712.0
 offset_top = 570.0
-offset_right = 1653.0
+offset_right = 1579.0
 offset_bottom = 754.0
 scale = Vector2(0.22, 0.22)
 theme = ExtResource("6_rh7sc")

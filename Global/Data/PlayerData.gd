@@ -61,7 +61,8 @@ var starting_player_data = {
 		"4": ["blueprint", 1, null],
 		"5": ["hammer", 1, null],
 #		"2": ["brewing table #1", 999, null],
-		"6": ["oak seeds", 10, null],
+		"6": ["crate", 10, null],
+		"8": ["chest", 10, null],
 	#	"7": ["crate", 10, null],
 #		"5": ["furnace", 10, null],
 #		"7": ["grain mill #1", 100, null],
@@ -76,7 +77,7 @@ var starting_player_data = {
 	"inventory": {
 			"18": ["wood", 999, null],
 			"19": ["stone", 999, null],
-			"17": ["cloth", 999, null],
+			"17": ["grape", 999, null],
 			"5": ["cloth", 500, null],
 			"16": ["wood", 999, null],
 			"15": ["bronze ingot", 999, null],

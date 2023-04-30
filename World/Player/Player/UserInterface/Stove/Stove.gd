@@ -4,7 +4,7 @@ extends Control
 
 var id
 var level
-
+var location
 var hovered_item
 var ingredients = []
 
@@ -236,5 +236,9 @@ func check_3_ingredient_recipe():
 	return false
 
 
+func _input(event):
+	if event.is_action_pressed("action"):
+		get_parent().close_stove(id,location)
+
 func _on_ExitBtn_pressed():
-	get_parent().close_stove(id)
+	get_parent().close_stove(id,location)

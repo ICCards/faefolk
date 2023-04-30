@@ -224,6 +224,13 @@ func isStorageItem(item_name):
 	return false
 
 
+func isCookingItem(item_name):
+	if item_name == "furnace" or item_name == "stove #1" or item_name == "stove #2" \
+	or item_name == "stove #3" or item_name == "campfire" or item_name == "barrel":
+		return true
+	return false
+
+
 func isSword(item_name):
 	if item_name == "wood sword" or item_name == "stone sword" or item_name == "iron sword" or item_name == "bronze sword" or item_name == "gold sword":
 		return true
