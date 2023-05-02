@@ -1,27 +1,28 @@
-[gd_scene load_steps=41 format=3 uid="uid://bpxgic0nhjbf0"]
+[gd_scene load_steps=42 format=3 uid="uid://bpxgic0nhjbf0"]
 
-[ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="1_631cd"]
+[ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/Terrain/CL_MainLev.png" id="1_631cd"]
 [ext_resource type="Script" path="res://World/World/WorldAmbience.gd" id="1_gscqb"]
 [ext_resource type="Script" path="res://World/Overworld/Overworld.gd" id="1_jqwgc"]
 [ext_resource type="Script" path="res://World/World/BuildTerrain.gd" id="3_lsbjc"]
 [ext_resource type="Script" path="res://World/World/WorldBuilder.gd" id="3_wljwc"]
 [ext_resource type="TileSet" uid="uid://33tw24vxmev3" path="res://Assets/Tilesets/foundation/foundation.tres" id="4_1dlf2"]
-[ext_resource type="TileSet" uid="uid://de28nfavviio7" path="res://Assets/Tilesets/terrain/elevated terrain.tres" id="4_ivuyl"]
+[ext_resource type="TileSet" uid="uid://de28nfavviio7" path="res://Assets/Tilesets/Terrain/elevated terrain.tres" id="4_ivuyl"]
 [ext_resource type="Script" path="res://World/World/BuildNature.gd" id="4_t6ne8"]
 [ext_resource type="TileSet" uid="uid://cxyw1xxxhvjda" path="res://Assets/Tilesets/walls/walls.tres" id="5_ipx5t"]
 [ext_resource type="Script" path="res://World/World/SpawnAnimal.gd" id="5_rg3rs"]
-[ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/terrain/tres files/plains.tres" id="7_6dgdg"]
-[ext_resource type="TileSet" uid="uid://bpd6si5cldst7" path="res://Assets/Tilesets/terrain/tres files/deep ocean.tres" id="8_rxub7"]
-[ext_resource type="TileSet" uid="uid://3x3xfgwqdrhm" path="res://Assets/Tilesets/terrain/tres files/dirt.tres" id="9_oleut"]
-[ext_resource type="TileSet" uid="uid://ceprqmvmkacdl" path="res://Assets/Tilesets/terrain/tres files/forest.tres" id="11_tab0o"]
+[ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/Terrain/tres files/plains.tres" id="7_6dgdg"]
+[ext_resource type="TileSet" uid="uid://bpd6si5cldst7" path="res://Assets/Tilesets/Terrain/tres files/deep ocean.tres" id="8_rxub7"]
+[ext_resource type="TileSet" uid="uid://3x3xfgwqdrhm" path="res://Assets/Tilesets/Terrain/tres files/dirt.tres" id="9_oleut"]
+[ext_resource type="TileSet" uid="uid://ceprqmvmkacdl" path="res://Assets/Tilesets/Terrain/tres files/forest.tres" id="11_tab0o"]
 [ext_resource type="PackedScene" uid="uid://c66ktnntnkqrx" path="res://World/Map/WorldMap.tscn" id="12_dgvb4"]
-[ext_resource type="TileSet" uid="uid://dja0b16fhgms6" path="res://Assets/Tilesets/terrain/tres files/freshwater.tres" id="12_p8uc2"]
-[ext_resource type="TileSet" uid="uid://c0mxloskuawnh" path="res://Assets/Tilesets/terrain/tres files/waves.tres" id="13_0awxb"]
-[ext_resource type="Texture2D" uid="uid://ptjidk7r1daj" path="res://Assets/Tilesets/terrain/hoed.png" id="14_4u716"]
-[ext_resource type="TileSet" uid="uid://bmjc5ou5oyowx" path="res://Assets/Tilesets/objects/objects.tres" id="14_6ii0l"]
-[ext_resource type="TileSet" uid="uid://d2u2dc22ifh2g" path="res://Assets/Tilesets/terrain/tres files/snow.tres" id="15_1q6yy"]
-[ext_resource type="TileSet" uid="uid://2bxso62kg8ee" path="res://Assets/Tilesets/terrain/tres files/wet sand.tres" id="16_ckub1"]
+[ext_resource type="TileSet" uid="uid://dja0b16fhgms6" path="res://Assets/Tilesets/Terrain/tres files/freshwater.tres" id="12_p8uc2"]
+[ext_resource type="TileSet" uid="uid://c0mxloskuawnh" path="res://Assets/Tilesets/Terrain/tres files/waves.tres" id="13_0awxb"]
+[ext_resource type="Texture2D" uid="uid://ptjidk7r1daj" path="res://Assets/Tilesets/Terrain/hoed.png" id="14_4u716"]
+[ext_resource type="TileSet" uid="uid://bmjc5ou5oyowx" path="res://Assets/Tilesets/Objects/objects.tres" id="14_6ii0l"]
+[ext_resource type="TileSet" uid="uid://d2u2dc22ifh2g" path="res://Assets/Tilesets/Terrain/tres files/snow.tres" id="15_1q6yy"]
+[ext_resource type="TileSet" uid="uid://2bxso62kg8ee" path="res://Assets/Tilesets/Terrain/tres files/wet sand.tres" id="16_ckub1"]
 [ext_resource type="PackedScene" uid="uid://bkvw6820ue7ga" path="res://World/Objects/Nature/Particles/FullMapParticles.tscn" id="22_ht74h"]
+[ext_resource type="Script" path="res://World/Overworld/OverworldGenerator.gd" id="23_17and"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7b1tf"]
 texture = ExtResource("1_631cd")
@@ -4871,6 +4872,9 @@ fog_sun_scatter = 0.64
 y_sort_enabled = true
 script = ExtResource("1_jqwgc")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(10, 10)
+
 [node name="WorldAmbience" type="CanvasModulate" parent="."]
 script = ExtResource("1_gscqb")
 
@@ -4912,7 +4916,7 @@ tile_set = SubResource("TileSet_w85vx")
 format = 2
 
 [node name="Plains" type="TileMap" parent="TerrainTiles"]
-modulate = Color(1.4, 1.4, 1.4, 1)
+modulate = Color(1.3, 1.3, 1.3, 1)
 tile_set = ExtResource("7_6dgdg")
 cell_quadrant_size = 8
 format = 2
@@ -4930,7 +4934,7 @@ tile_set = ExtResource("9_oleut")
 format = 2
 
 [node name="Elevation" type="TileMap" parent="TerrainTiles"]
-modulate = Color(1.2, 1.2, 1.2, 1)
+modulate = Color(1.3, 1.3, 1.3, 1)
 tile_set = ExtResource("4_ivuyl")
 format = 2
 
@@ -5051,8 +5055,12 @@ visible = false
 environment = SubResource("Environment_2wssv")
 
 [node name="FullMapParticles" parent="." instance=ExtResource("22_ht74h")]
+visible = false
 position = Vector2(18540, 17495)
 rotation = 0.00747698
+
+[node name="OverworldGenerator" type="Node" parent="."]
+script = ExtResource("23_17and")
 
 [connection signal="timeout" from="WorldBuilder/SpawnAnimal/SpawnAnimalTimer" to="WorldBuilder/SpawnAnimal" method="_on_spawn_animal_timer_timeout"]
 [connection signal="timeout" from="WorldBuilder/BuildNature/SpawnNatureTimer" to="WorldBuilder/BuildNature" method="_on_spawn_nature_timer_timeout"]

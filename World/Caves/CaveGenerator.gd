@@ -19,6 +19,7 @@ var caves = []
 @export var noise_lacunarity: float = 0.1
 @export var noise_threshold: float = 0.1
 @export var min_cave_size: int = 400 
+@export var loc: Vector2i = Vector2i(100,100)
 
 var simplex_noise = FastNoiseLite.new()
 var wall_type
@@ -125,19 +126,20 @@ func place_cave_light(loc):
 	
 
 func redraw_walls(value = null) -> void:
-	wall_type = 1 #randi_range(0,3)
-	if walls == null:
-		return
-	clear()
-	generate()
-	add_boundary_tiles()
-	get_caves()
-	connect_caves()
-	fix_tiles_and_set_ladders_and_lights()
-	set_valid_tiles()
-	set_decorations()
-	set_resources()
-	set_mobs()
+	print(Util.return_chunk_from_location(loc))
+#	wall_type = 1 #randi_range(0,3)
+#	if walls == null:
+#		return
+#	clear()
+#	generate()
+#	add_boundary_tiles()
+#	get_caves()
+#	connect_caves()
+#	fix_tiles_and_set_ladders_and_lights()
+#	set_valid_tiles()
+#	set_decorations()
+#	set_resources()
+#	set_mobs()
 	
 func set_mobs():
 	var locs = valid_tiles.get_used_cells(0)

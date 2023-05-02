@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cffchl0ffi2hf"]
+[gd_scene load_steps=31 format=3 uid="uid://cffchl0ffi2hf"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/UserInterface.gd" id="1_pv3v8"]
 [ext_resource type="PackedScene" uid="uid://ctp3ra1cmv0de" path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" id="2_dv8vv"]
@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://dvfrk41vachbj" path="res://Assets/Images/Animations/loading/sprite_2.png" id="8_tq2d6"]
 [ext_resource type="Texture2D" uid="uid://u7b5ardk075b" path="res://Assets/Images/Animations/loading/sprite_1.png" id="9_ela15"]
 [ext_resource type="Texture2D" uid="uid://dtv2tv7c6saxr" path="res://Assets/Images/Animations/loading/sprite_3.png" id="10_k0pdh"]
-[ext_resource type="PackedScene" uid="uid://cw3x0n2n7j4t5" path="res://World/Player/Player/UserInterface/Chatbox/ChatBox.tscn" id="10_stju0"]
 [ext_resource type="Texture2D" uid="uid://b72oxa6602dkg" path="res://Assets/Images/Animations/loading/sprite_4.png" id="11_6e6cq"]
 [ext_resource type="Texture2D" uid="uid://bh0xuop77usp4" path="res://Assets/Images/Animations/loading/sprite_5.png" id="12_13luq"]
 [ext_resource type="AudioStream" uid="uid://86w4gtnxusdy" path="res://Assets/Sound/Sound effects/Ambience/thunder crack.mp3" id="13"]
@@ -347,11 +346,6 @@ scale = Vector2(0.25, 0.25)
 theme = ExtResource("6_rh7sc")
 text = "V"
 horizontal_alignment = 1
-
-[node name="ChatBox" parent="." instance=ExtResource("10_stju0")]
-visible = false
-offset_top = 520.0
-offset_bottom = 75.0
 
 [node name="LoadingIndicator" type="Panel" parent="."]
 visible = false

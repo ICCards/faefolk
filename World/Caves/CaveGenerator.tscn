@@ -4,3 +4,5 @@
 
 [node name="CaveGenerator" type="Node"]
 script = ExtResource("1_ncfw5")
+redraw = true
+loc = Vector2i(248, 248)

@@ -39,17 +39,13 @@ func create_or_load_world():
 		GenerateNewWorld.build()
 
 func build_world():
-	call_deferred("build_world_deferred")
-
-
-func build_world_deferred():
 	buildMap()
-	set_valid_tiles()
-	spawn_player()
-	$WorldBuilder.initialize()
+#	set_valid_tiles()
+#	spawn_player()
+#	$WorldBuilder.initialize()
 	$WorldBuilder/BuildTerrain.initialize()
-	$WorldBuilder/BuildNature.initialize()
-	$WorldBuilder/SpawnAnimal.initialize()
+#	$WorldBuilder/BuildNature.initialize()
+#	$WorldBuilder/SpawnAnimal.initialize()
 	$WorldMap.buildMap()
 	thread.wait_to_finish()
 
