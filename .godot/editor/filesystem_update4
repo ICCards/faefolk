@@ -57,3 +57,7 @@ res://World/Player/Player/UserInterface/Furnace/Furnace.tscn
 res://World/Player/Player/UserInterface/Furnace/Furnace.gd
 res://helpers/Util.gd
 res://PlaceableObjects.gd
+res://World/Objects/Nature/Trees/TreeObject.tscn
+res://Assets/Images/tree_sets/oak/mature/animated top.tres
+res://World/Objects/Nature/Trees/TreeObject.gd
+res://NatureObjects.gd

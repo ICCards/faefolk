@@ -5,6 +5,19 @@ extends Node2D
 func nature_object_hit(peer_id,type,id,loc,tool_name):pass
 
 @rpc
+func harvest_tree(data): pass
+
+
+@rpc 
+func play_tree_harvest(data):
+	if not get_node("../").world == {}:
+		get_node("../").world[data["chunk"]]["tree"][data["id"]]["p"] = "empty"
+		for node in self.get_children():
+			if node.name == data["id"]:
+				get_node(str(data["id"])).harvest(data)
+				return
+
+@rpc
 func update_nature_health(data):
 	if not get_node("../").world == {}:
 		get_node("../").world[data["chunk"]][data["type"]][data["id"]]["h"] = data["health"]

@@ -72,12 +72,12 @@ func set_tree():
 		$TreeSprites/TreeSapling.set_deferred( "texture", load("res://Assets/Images/tree_sets/"+ variety +"/growing/"+ phase +".png"))
 
 
-func harvest():
-	return
-	if phase == "harvest" and health > 40:
+func harvest(data):
+#	return
+#	if phase == "harvest" and health > 40:
 		$CollisionShape2D.set_deferred("disabled", true)
 		phase = "empty"
-		#MapData.world["tree"][name]["p"] = "empty"
+#		MapData.world["tree"][name]["p"] = "empty"
 		refresh_tree_type()
 		fruit_fall.frame = 0
 		fruit_fall.show()
@@ -87,24 +87,27 @@ func harvest():
 		sound_effects_stump.play()
 		await fruit_fall.animation_finished
 		fruit_fall.hide()
-		if Util.chance(25):
-			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,4), 3)
-		elif Util.chance(25):
-			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,4), 2)
-		else:
-			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,4), 1)
+		if data["player_id"] == Server.player_node.name:
+			if Util.chance(25):
+				InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,4), 3)
+			elif Util.chance(25):
+				InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,4), 2)
+			else:
+				InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,4), 1)
 
 
 func refresh_tree_type():
 	if Server.world.world[MapData.get_chunk_from_location(location)]["tree"].has(name):
-		if phase != "5" and Util.isNonFruitTree(variety):
-			#phase = MapData.world["tree"][name]["p"]
-			phase = Server.world.world[MapData.get_chunk_from_location(location)]["tree"][name]["p"]
-			set_tree()
-		elif phase != "harvest" and Util.isFruitTree(variety):
-			phase = Server.world.world[MapData.get_chunk_from_location(location)]["tree"][name]["p"]
-			#phase = MapData.world["tree"][name]["p"]
-			set_tree()
+		phase = Server.world.world[MapData.get_chunk_from_location(location)]["tree"][name]["p"]
+		set_tree()
+#		if phase != "5" and Util.isNonFruitTree(variety):
+#			#phase = MapData.world["tree"][name]["p"]
+#			#phase = Server.world.world[MapData.get_chunk_from_location(location)]["tree"][name]["p"]
+#			set_tree()
+#		elif phase != "harvest" and Util.isFruitTree(variety):
+#			#phase = Server.world.world[MapData.get_chunk_from_location(location)]["tree"][name]["p"]
+#			#phase = MapData.world["tree"][name]["p"]
+#			set_tree()
 
 func setGrownFruitTreeTexture():
 	random_leaves_falling_timer.set_deferred("wait_time", rng.randi_range(15.0, 60.0))

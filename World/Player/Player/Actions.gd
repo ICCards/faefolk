@@ -58,7 +58,8 @@ func _input(event):
 					"bed":
 						sleep(current_interactive_node.object_position)
 					"tree":
-						current_interactive_node.harvest()
+						Server.world.get_node("NatureObjects").rpc_id(1,"harvest_tree",{"id":id,"chunk":chunk,"player_id":Server.player_node.name})
+						#current_interactive_node.harvest()
 					"crop":
 						harvest_crop(current_interactive_node)
 					"forage":

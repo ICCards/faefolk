@@ -38,10 +38,19 @@ func _physics_process(delta):
 func initialize():
 	Server.player_node.actions.destroy_placeable_object()
 	var last_opened = Server.world.server_data["ui_slots"][id]["lo"]
+	var time_remaining = Server.world.server_data["ui_slots"][id]["lo"]
 	if last_opened == null:
-		print("FIRST OPEN")
+		return
 	else:
-		print("SECS SINCE LAST OPEN = " + str(int(Time.get_unix_time_from_system()) - last_opened))
+		set_elapsed_time_change(time_remaining,last_opened)
+
+
+func set_elapsed_time_change(time_remaining,last_opened):
+	var seconds_since_last_opened = int(Time.get_unix_time_from_system()) - last_opened
+	var num_times_cook = seconds_since_last_opened 
+	
+	#if time_remaining > seconds_since_last_opened:
+		
 
 
 func check_valid_recipe():
@@ -70,11 +79,13 @@ func stop_cooking():
 
 
 func _on_cook_timer_timeout():
+	cook()
+
+func cook():
 	if ingredient_slot.item.item_quantity >= 5 and Server.world.server_data["ui_slots"].has(id):
 		add_to_yield_slot()
 		remove_ingredients()
 		check_valid_recipe()
-
 
 func add_to_yield_slot():
 	PlayerData.player_data["collections"]["food"]["wine"] += 1
