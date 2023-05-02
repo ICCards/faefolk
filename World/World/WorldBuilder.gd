@@ -17,7 +17,7 @@ func _whoAmI():
 
 func get_chunks():
 	if Server.player_node:
-		var loc = Server.player_node.position  / 16
+		var loc = Server.player_node.position / 16
 		var columns
 		var rows
 		var new_chunks = []

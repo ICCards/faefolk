@@ -4,7 +4,7 @@ extends Control
 
 var id
 var level
-var location
+
 var hovered_item
 var ingredients = []
 
@@ -150,9 +150,7 @@ func check_1_ingredient_recipe():
 					return check_valid_yield_slot_and_fuel(item)
 	return false
 
-func _input(event):
-	if event.is_action_pressed("action"):
-		get_parent().close_campfire(id,location)
+
 
 func _on_ExitBtn_pressed():
-	get_parent().close_campfire(id,location)
+	get_parent().close_campfire(id)

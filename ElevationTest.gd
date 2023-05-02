@@ -31,16 +31,15 @@ func draw_elevation(value = null) -> void:
 			walker += Vector2i(1,0)
 			locations.append(walker)
 		if Util.chance(50):
-			for h in range(4):#randi_range(1,4)):
-				locations.append(walker+Vector2i(0,h+1))
-				walker += Vector2i(0,h+1)
+			locations.append(walker+Vector2i(0,1))
+			walker += Vector2i(1,1)
 		else:
 			locations.append(walker+Vector2i(0,-1))
 			walker += Vector2i(1,-1)
-		#locations.append(walker)
+		locations.append(walker)
 	for loc in locations:
 		var autotile_id = Tiles.return_elevation_autotile_id(loc,locations)
-		elevation.set_cell(0,loc,0,Vector2i(0,0)) #Tiles.return_elevation_atlas_tile(1,0))
+		elevation.set_cell(0,loc,0,Tiles.return_elevation_atlas_tile(1,autotile_id))
 	
 	
 #	var locs = elevation.get_used_cells(0)

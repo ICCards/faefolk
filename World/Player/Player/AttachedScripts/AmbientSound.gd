@@ -7,7 +7,7 @@ var storm2
 
 func _ready():
 	Sounds.connect("volume_change",Callable(self,"set_new_ambient_volume"))
-	if Server.world.name == "Main":
+	if Server.world.name == "Overworld":
 		stream = load("res://Assets/Sound/Sound effects/Ambience/spring_day.mp3")
 		volume_db = Sounds.return_adjusted_sound_db("ambient", -22)
 		play()
@@ -17,7 +17,7 @@ func _ready():
 		play()
 
 func set_new_ambient_volume():
-	if Server.world.name == "Main":
+	if Server.world.name == "Overworld":
 		if stream == load("res://Assets/Sound/Sound effects/Ambience/winter_day.mp3"):
 			volume_db = Sounds.return_adjusted_sound_db("ambient", 0)
 		else:

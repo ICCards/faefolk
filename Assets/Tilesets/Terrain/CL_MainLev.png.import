@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://nxbfcsoot5tk"
-path="res://.godot/imported/CL_MainLev.png-4541c6af8c3f14cde3a9afcc495c0d73.ctex"
+path="res://.godot/imported/CL_MainLev.png-8ec7f246bbf0a4d823d9383dd5286aac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilesets/terrain/CL_MainLev.png"
-dest_files=["res://.godot/imported/CL_MainLev.png-4541c6af8c3f14cde3a9afcc495c0d73.ctex"]
+source_file="res://Assets/Tilesets/Terrain/CL_MainLev.png"
+dest_files=["res://.godot/imported/CL_MainLev.png-8ec7f246bbf0a4d823d9383dd5286aac.ctex"]
 
 [params]
 

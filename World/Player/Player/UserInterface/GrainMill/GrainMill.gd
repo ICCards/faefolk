@@ -4,7 +4,6 @@ var hovered_item = null
 var dragging = false
 var id
 var level
-var location
 
 func _ready():
 	initialize()
@@ -66,9 +65,5 @@ func _physics_process(delta):
 		$ItemDescription.hide()
 
 
-func _input(event):
-	if event.is_action_pressed("action"):
-		get_parent().close_grain_mill(id,location)
-
 func _on_ExitBtn_pressed():
-	get_parent().close_grain_mill(id,location)
+	get_parent().close_grain_mill()

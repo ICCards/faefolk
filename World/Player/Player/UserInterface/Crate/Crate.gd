@@ -6,7 +6,6 @@ extends Control
 
 var id
 var hovered_item
-var location
 
 func _ready():
 	initialize()
@@ -23,6 +22,7 @@ func destroy():
 	queue_free()
 
 func _physics_process(delta):
+	return
 	if hovered_item and not find_parent("UserInterface").holding_item:
 		$ItemDescription.show()
 		$ItemDescription.item_category = JsonData.item_data[hovered_item]["ItemCategory"]
@@ -33,10 +33,5 @@ func _physics_process(delta):
 		$ItemDescription.hide()
 
 
-func _input(event):
-	if event.is_action_pressed("action"):
-		get_parent().close_crate(id,location)
-
-
 func _on_exit_btn_pressed():
-	get_parent().close_crate(id,location)
+	get_parent().close_crate(id)

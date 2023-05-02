@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://dpxefgxcei5dj"
-path="res://.godot/imported/gallop1.mp3-183f5874fe47bbf6289c076bd857077e.mp3str"
+path="res://.godot/imported/gallop1.mp3-4498f99cc135485d6326ca2ff000a3bd.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Sound effects/animals/boar/gallop1.mp3"
-dest_files=["res://.godot/imported/gallop1.mp3-183f5874fe47bbf6289c076bd857077e.mp3str"]
+source_file="res://Assets/Sound/Sound effects/Animals/boar/gallop1.mp3"
+dest_files=["res://.godot/imported/gallop1.mp3-4498f99cc135485d6326ca2ff000a3bd.mp3str"]
 
 [params]
 

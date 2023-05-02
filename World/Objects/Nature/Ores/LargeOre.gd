@@ -41,73 +41,64 @@ func setTexture():
 		Tiles.remove_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
 
 
-func hit(data):
-	if not destroyed:
-		health = data["health"]
-	#	MapData.update_object_health("ore_large", name, health)
-		if health > 40:
-			sound_effects.set_deferred("stream", Sounds.ore_hit[rng.randi_range(0, 2)])
-			sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
-			sound_effects.call_deferred("play")
-			InstancedScenes.initiateOreHitEffect(variety, "ore hit", position+Vector2(rng.randi_range(-12,12), rng.randi_range(-8,8)))
-			animation_player.call_deferred("play", "large ore hit")
-		elif not large_break:
-			Tiles.add_valid_tiles(location+Vector2i(-1,-1), Vector2(2,1))
-			large_break = true
-			sound_effects.set_deferred("stream", Sounds.ore_break[rng.randi_range(0, 2)])
-			sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
-			sound_effects.call_deferred("play")
-			InstancedScenes.initiateOreHitEffect(variety, "large ore break", position+Vector2(rng.randi_range(-6,6), rng.randi_range(-4,4)))
-			if data["player_id"] == Server.player_node.name:
-				var amount = Stats.return_item_drop_quantity(data["tool_name"], "large ore")
-				Util.add_to_collection(variety, amount)
-				if variety == "stone1" or variety == "stone2":
-					InstancedScenes.intitiateItemDrop("stone", position, amount)
-				else:
-					InstancedScenes.intitiateItemDrop(variety, position, amount)
-			animation_player.call_deferred("play", "large ore break")
-		elif health >= 1:
-			sound_effects.set_deferred("stream", Sounds.ore_hit[rng.randi_range(0, 2)])
-			sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
-			sound_effects.call_deferred("play")
-			InstancedScenes.initiateOreHitEffect(variety, "ore hit", position+Vector2(randf_range(-6,6), randf_range(-6,6)))
-			animation_player.call_deferred("play", "small ore hit")
-
-
-func destroy(data):
-	if not destroyed:
+func hit(tool_name):
+	rng.randomize()
+	health -= Stats.return_tool_damage(tool_name)
+	MapData.update_object_health("ore_large", name, health)
+	if health > 40:
+		sound_effects.set_deferred("stream", Sounds.ore_hit[rng.randi_range(0, 2)])
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
+		sound_effects.call_deferred("play")
+		InstancedScenes.initiateOreHitEffect(variety, "ore hit", position+Vector2(rng.randi_range(-12,12), rng.randi_range(-8,8)))
+		animation_player.call_deferred("play", "large ore hit")
+	elif not large_break:
+		Tiles.add_valid_tiles(location+Vector2i(-1,-1), Vector2(2,1))
+		large_break = true
+		sound_effects.set_deferred("stream", Sounds.ore_break[rng.randi_range(0, 2)])
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
+		sound_effects.call_deferred("play")
+		InstancedScenes.initiateOreHitEffect(variety, "large ore break", position+Vector2(rng.randi_range(-6,6), rng.randi_range(-4,4)))
+		var amount = Stats.return_item_drop_quantity(tool_name, "large ore")
+		Util.add_to_collection(variety, amount)
+		if variety == "stone1" or variety == "stone2":
+			InstancedScenes.intitiateItemDrop("stone", position, amount)
+		else:
+			InstancedScenes.intitiateItemDrop(variety, position, amount)
+		animation_player.call_deferred("play", "large ore break")
+	elif health >= 1:
+		sound_effects.set_deferred("stream", Sounds.ore_hit[rng.randi_range(0, 2)])
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
+		sound_effects.call_deferred("play")
+		InstancedScenes.initiateOreHitEffect(variety, "ore hit", position+Vector2(randf_range(-6,6), randf_range(-6,6)))
+		animation_player.call_deferred("play", "small ore hit")
+	elif health <= 0 and not destroyed:
 		destroyed = true
-#		PlayerData.player_data["skill_experience"]["mining"] += 1
-#		MapData.remove_object("ore_large",name)
+		PlayerData.player_data["skill_experience"]["mining"] += 1
+		MapData.remove_object("ore_large",name)
 		Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,1))
 		sound_effects.set_deferred("stream", Sounds.ore_break[rng.randi_range(0, 2)])
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")
 		InstancedScenes.initiateOreHitEffect(variety, "small ore break", position)
-		if data["player_id"] == Server.player_node.name:
-			var amount = Stats.return_item_drop_quantity(data["tool_name"], "small ore")
-			Util.add_to_collection(variety, amount)
-			if variety == "stone1" or variety == "stone2":
-				InstancedScenes.intitiateItemDrop("stone", position, amount)
-			else:
-				InstancedScenes.intitiateItemDrop(variety, position, amount)
+		var amount = Stats.return_item_drop_quantity(tool_name, "small ore")
+		Util.add_to_collection(variety, amount)
+		if variety == "stone1" or variety == "stone2":
+			InstancedScenes.intitiateItemDrop("stone", position, amount)
+		else:
+			InstancedScenes.intitiateItemDrop(variety, position, amount)
 		animation_player.call_deferred("play", "small ore break")
 		await sound_effects.finished
 		await get_tree().create_timer(0.6).timeout
 		call_deferred("queue_free")
 
-
-
 func _on_BigHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
-		#Server.player_node.get_node("Camera2D").ore_hit_shake()
 		Stats.decrease_tool_health()
 	if _area.special_ability == "fire buff":
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-8, 8), randf_range(8,24)))
 	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
-		get_parent().rpc_id(1,"nature_object_hit",Server.player_node.name,"ore_large",name,location,_area.tool_name)
-		#call_deferred("hit", _area.tool_name)
+		call_deferred("hit", _area.tool_name)
 
 
 func _on_small_hurt_box_area_entered(area):
@@ -117,5 +108,4 @@ func _on_small_hurt_box_area_entered(area):
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-20, 20), randf_range(-8,16)))
 	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
-		get_parent().rpc_id(1,"nature_object_hit",Server.player_node.name,"ore_large",name,location,area.tool_name)
-#		call_deferred("hit", area.tool_name)
+		call_deferred("hit", area.tool_name)

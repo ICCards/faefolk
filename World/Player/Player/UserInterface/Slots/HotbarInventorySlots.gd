@@ -115,12 +115,12 @@ func left_click_not_holding(slot):
 
 func left_click_not_holding_chest(slot):
 	for i in range(get_node("../ChestSlots").get_children().size()):
-		if Server.world.server_data["ui_slots"][get_parent().id].has(str(i)):
-			if Server.world.server_data["ui_slots"][get_parent().id][str(i)][0] == slot.item.item_name and not Server.world.server_data["ui_slots"][get_parent().id][str(i)][1] == int(JsonData.item_data[slot.item.item_name]["StackSize"]):
+		if PlayerData.player_data["chests"][get_parent().id].has(str(i)):
+			if PlayerData.player_data["chests"][get_parent().id][str(i)][0] == slot.item.item_name and not PlayerData.player_data["chests"][get_parent().id][str(i)][1] == int(JsonData.item_data[slot.item.item_name]["StackSize"]):
 				auto_add_to_chest_slot(slot,i)
 				return
 	for i in range(get_node("../ChestSlots").get_children().size()):
-		if not Server.world.server_data["ui_slots"][get_parent().id].has(str(i)):
+		if not PlayerData.player_data["chests"][get_parent().id].has(str(i)):
 			add_to_empty_chest_slot(slot,i)
 			return
 	left_click_not_holding(slot)
@@ -128,7 +128,7 @@ func left_click_not_holding_chest(slot):
 func auto_add_to_chest_slot(slot_clicked,i):
 	Sounds.play_auto_add_chest_sound()
 	var stack_size = int(JsonData.item_data[slot_clicked.item.item_name]["StackSize"])
-	var able_to_add = stack_size - Server.world.server_data["ui_slots"][get_parent().id][str(i)][1]
+	var able_to_add = stack_size - PlayerData.player_data["chests"][get_parent().id][str(i)][1]
 	if able_to_add >= slot_clicked.item.item_quantity:
 		PlayerData.remove_item(slot_clicked)
 		PlayerData.add_item_quantity(get_node("../ChestSlots").get_children()[i], slot_clicked.item.item_quantity, get_parent().id)

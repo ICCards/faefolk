@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://buy261lmvdhaa"
-path="res://.godot/imported/groan 2.mp3-327907a3230a8640922a08e06b69d813.mp3str"
+path="res://.godot/imported/groan 2.mp3-70879c388fd97909a2c3ba1f82393175.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Sound effects/animals/bear/groan/groan 2.mp3"
-dest_files=["res://.godot/imported/groan 2.mp3-327907a3230a8640922a08e06b69d813.mp3str"]
+source_file="res://Assets/Sound/Sound effects/Animals/Bear/Groan/groan 2.mp3"
+dest_files=["res://.godot/imported/groan 2.mp3-70879c388fd97909a2c3ba1f82393175.mp3str"]
 
 [params]
 

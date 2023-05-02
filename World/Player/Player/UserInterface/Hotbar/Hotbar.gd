@@ -8,7 +8,6 @@ var adjusted_pos = Vector2(0,0)
 
 
 func _ready():
-	PlayerData.HotbarSlots = hotbar_slots
 	for i in range(slots.size()):
 		PlayerData.connect("active_item_updated",Callable(slots[i],"refresh_style"))
 		slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i]))

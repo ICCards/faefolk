@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://dvm3vr64u5nm5"
-path="res://.godot/imported/retreat.mp3-d040b768483693e04845a671c044c42f.mp3str"
+path="res://.godot/imported/retreat.mp3-98c91894b65b78f02eb640f89fb2cee7.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Sound effects/animals/wolf/retreat.mp3"
-dest_files=["res://.godot/imported/retreat.mp3-d040b768483693e04845a671c044c42f.mp3str"]
+source_file="res://Assets/Sound/Sound effects/Animals/wolf/retreat.mp3"
+dest_files=["res://.godot/imported/retreat.mp3-98c91894b65b78f02eb640f89fb2cee7.mp3str"]
 
 [params]
 

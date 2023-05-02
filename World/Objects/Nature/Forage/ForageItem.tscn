@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dgtupng24b2k"]
+[gd_scene load_steps=36 format=3 uid="uid://dgtupng24b2k"]
 
 [ext_resource type="Script" path="res://World/Objects/Nature/Forage/ForageItem.gd" id="1_43ob6"]
 [ext_resource type="Texture2D" uid="uid://8dj2tnwugqc0" path="res://Assets/Images/Forage/clam/blue clam.png" id="2_4tgp7"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://0hcfpwhvx7a0" path="res://Assets/Images/Animations/Flowers/poppy flower.png" id="5_1ndop"]
 [ext_resource type="Texture2D" uid="uid://mqhubn3yemss" path="res://Assets/Images/Animations/Flowers/sunflower.png" id="6_l5ax3"]
 [ext_resource type="Texture2D" uid="uid://dlur3nqia2gjf" path="res://Assets/Images/Animations/Flowers/tulip.png" id="7_dejqu"]
-[ext_resource type="AudioStream" uid="uid://djfscsiaylqdo" path="res://Assets/Sound/Sound effects/Farming/harvest.mp3" id="8_nplen"]
 
 [sub_resource type="CircleShape2D" id="2"]
 radius = 8.0
@@ -244,5 +243,9 @@ animation = &"dandelion"
 frame = 1
 frame_progress = 0.29993
 
-[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("8_nplen")
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0.499994, 1.52588e-05)
+scale = Vector2(5.75, 5.25)
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

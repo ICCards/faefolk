@@ -61,3 +61,6 @@ res://World/Objects/Nature/Trees/TreeObject.tscn
 res://Assets/Images/tree_sets/oak/mature/animated top.tres
 res://World/Objects/Nature/Trees/TreeObject.gd
 res://NatureObjects.gd
+res://Assets/Themes/MenuTitle.tres
+res://MainMenu/MainMenu.tscn
+res://Assets/Themes/world_fog.tres

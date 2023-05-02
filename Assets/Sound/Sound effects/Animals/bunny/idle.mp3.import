@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://dejbqjru1ew4r"
-path="res://.godot/imported/idle.mp3-672a8fad78a565ba2ae66e8dba793520.mp3str"
+path="res://.godot/imported/idle.mp3-aaf1fb1f06bdb94645fc2d791a3ec0f4.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Sound effects/animals/bunny/idle.mp3"
-dest_files=["res://.godot/imported/idle.mp3-672a8fad78a565ba2ae66e8dba793520.mp3str"]
+source_file="res://Assets/Sound/Sound effects/Animals/bunny/idle.mp3"
+dest_files=["res://.godot/imported/idle.mp3-aaf1fb1f06bdb94645fc2d791a3ec0f4.mp3str"]
 
 [params]
 

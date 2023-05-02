@@ -4,7 +4,6 @@ var rng = RandomNumberGenerator.new()
 var current_song_index
 
 func _ready():
-	if not get_node("../../").is_multiplayer_authority(): queue_free()
 	rng.randomize()
 	Sounds.connect("volume_change",Callable(self,"set_new_music_volume"))
 	_play_background_music()

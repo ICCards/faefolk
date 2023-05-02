@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://dnjge7pbny0t4"
-path="res://.godot/imported/death.mp3-5ada5bcdf31775c0da323e11f73fcd93.mp3str"
+path="res://.godot/imported/death.mp3-040e207b42ebd2d6b62a2e5fa4747fe4.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Sound effects/animals/wolf/death.mp3"
-dest_files=["res://.godot/imported/death.mp3-5ada5bcdf31775c0da323e11f73fcd93.mp3str"]
+source_file="res://Assets/Sound/Sound effects/Animals/wolf/death.mp3"
+dest_files=["res://.godot/imported/death.mp3-040e207b42ebd2d6b62a2e5fa4747fe4.mp3str"]
 
 [params]
 

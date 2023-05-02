@@ -29,12 +29,10 @@ var current_interactive_node = null
 
 
 func _ready():
-	if not get_node("../").is_multiplayer_authority(): return
 	PlayerData.connect("health_depleted",Callable(self,"player_death"))
 
 
 func _input(event):
-	if not get_node("../").is_multiplayer_authority(): return
 	if Server.player_node.state == 0 and get_parent().user_interface.holding_item == null and not PlayerData.viewMapMode:
 		if event.is_action_pressed("action") and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode:
 			if $DetectInteractiveArea.get_overlapping_areas().size() > 0:
@@ -51,51 +49,33 @@ func _input(event):
 						elif current_interactive_node.object_name == "forage" and new_node.object_name == "forage" and get_parent().position.distance_to(new_node.position) < get_parent().position.distance_to(current_interactive_node.position):
 							current_interactive_node = new_node
 			if current_interactive_node:
-				var id = current_interactive_node.name
-				var location = current_interactive_node.location
-				var chunk = MapData.get_chunk_from_location(location)
 				match current_interactive_node.object_name:
 					"bed":
 						sleep(current_interactive_node.object_position)
 					"tree":
-						Server.world.get_node("NatureObjects").rpc_id(1,"harvest_tree",{"id":id,"chunk":chunk,"player_id":Server.player_node.name})
-						#current_interactive_node.harvest()
+						current_interactive_node.harvest()
 					"crop":
 						harvest_crop(current_interactive_node)
 					"forage":
 						harvest_forage(current_interactive_node)
 					"crate":
-						if Server.world.world[chunk]["placeable"].has(id):
-							if not Server.world.world[chunk]["placeable"][id]["o"]:
-								Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
-								get_parent().user_interface.open_crate(current_interactive_node.name,location)
+						get_parent().user_interface.toggle_crate(current_interactive_node.name)
 					"barrel":
-						if Server.world.world[chunk]["placeable"].has(id):
-							if not Server.world.world[chunk]["placeable"][id]["o"]:
-								Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
-								get_parent().user_interface.open_barrel(current_interactive_node.name,location)
+						get_parent().user_interface.toggle_barrel(current_interactive_node.name)
 					"workbench":
 						get_parent().user_interface.toggle_workbench(current_interactive_node.object_level)
 					"grain mill":
-						if Server.world.world[chunk]["placeable"].has(id):
-							if not Server.world.world[chunk]["placeable"][id]["o"]:
-								Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
-								get_parent().user_interface.open_grain_mill(current_interactive_node.name)
+						get_parent().user_interface.toggle_grain_mill(current_interactive_node.name, current_interactive_node.object_level)
 					"stove":
-						if Server.world.world[chunk]["placeable"].has(id):
-							if not Server.world.world[chunk]["placeable"][id]["o"]:
-								Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
-								get_parent().user_interface.open_stove(current_interactive_node.name, current_interactive_node.object_level)
+						get_parent().user_interface.toggle_stove(current_interactive_node.name, current_interactive_node.object_level)
 					"chest":
-						if Server.world.world[chunk]["placeable"].has(id):
-							if not Server.world.world[chunk]["placeable"][id]["o"]:
-								Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
-								get_parent().user_interface.open_chest(current_interactive_node.name,location)
+						get_parent().user_interface.toggle_chest(current_interactive_node.name)
+					"furnace":
+						get_parent().user_interface.toggle_furnace(current_interactive_node.name)
+					"tool cabinet":
+						get_parent().user_interface.toggle_tc(current_interactive_node.name)
 					"campfire":
-						if Server.world.world[chunk]["placeable"].has(id):
-							if not Server.world.world[chunk]["placeable"][id]["o"]:
-								Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location,})
-								get_parent().user_interface.open_campfire(current_interactive_node.name,location)
+						get_parent().user_interface.toggle_campfire(current_interactive_node.name)
 					"brewing table":
 						get_parent().user_interface.toggle_brewing_table(current_interactive_node.name, current_interactive_node.object_level)
 					"chair":
@@ -103,20 +83,17 @@ func _input(event):
 					"armchair":
 						sit("armchair",current_interactive_node.object_position,current_interactive_node.object_direction)
 					"door":
-						Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
-						#Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_door()
+						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_door()
 					"gate":
-						Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
-#						#Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_gate()
+						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_gate()
 					"lamp":
-						Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
-#						#Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_lamp()
+						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_lamp()
 					"fireplace":
-						Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
-#						#Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_fireplace()
+						Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_fireplace()
 			current_interactive_node = null
 	elif Server.player_node.state == SITTING and event.is_action_pressed("action"):
 		stand_up()
+
 
 
 func teleport(portal_position):
@@ -158,6 +135,7 @@ func harvest_crop(crop_node):
 		crop_node.harvest()
 		get_parent().state = HARVESTING
 		PlayerData.player_data["skill_experience"]["farming"] += 1
+		Sounds.play_harvest_sound()
 		var anim = "harvest_" + get_parent().direction.to_lower()
 		get_parent().holding_item.texture = load("res://Assets/Images/inventory_icons/Crop/" + crop_node.crop_name + ".png")
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, anim)
@@ -165,33 +143,32 @@ func harvest_crop(crop_node):
 		await get_parent().animation_player.animation_finished
 		get_parent().state = get_parent().MOVEMENT
 
-#
-#func remove_forage_from_world():
-#	Server.world.rpc()
 
 func harvest_forage(forage_node):
 	if get_parent().state != HARVESTING:
-		var item_name = forage_node.item_name
-		var location = forage_node.location
 		get_node("../Sounds/FootstepsSound").stream_paused = true
-		forage_node.harvest()
+		forage_node.hide()
 		get_parent().state = HARVESTING
 		if forage_node.first_placement:
-			PlayerData.player_data["collections"]["forage"][item_name] += 1
+			PlayerData.player_data["collections"]["forage"][forage_node.item_name] += 1
 			PlayerData.player_data["skill_experience"]["foraging"] += 1
+		if forage_node.item_name != "raw egg":
+			Tiles.add_valid_tiles(forage_node.location)
+			MapData.remove_object("forage",forage_node.name)
+		Sounds.play_harvest_sound()
 		get_parent().state = get_parent().HARVESTING
-		get_parent().animation = "harvest_" + get_parent().direction.to_lower()
-		get_parent().holding_item_name = item_name
-		get_parent().holding_item.texture =load("res://Assets/Images/inventory_icons/Forage/"+item_name+".png")
-		get_parent().composite_sprites.set_player_animation(Server.player_node.character, get_parent().animation)
-		get_parent().animation_player.play(get_parent().animation)
+		var anim = "harvest_" + get_parent().direction.to_lower()
+		get_parent().holding_item.texture =load("res://Assets/Images/inventory_icons/Forage/"+forage_node.item_name+".png")
+		get_parent().composite_sprites.set_player_animation(Server.player_node.character, anim)
+		get_parent().animation_player.play(anim)
 		await get_parent().animation_player.animation_finished
-		if PlayerDataHelpers.can_item_be_added_to_inventory(item_name, 1):
-			Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(item_name, 1)
-			PlayerData.pick_up_item(item_name, 1, null)
+		if PlayerDataHelpers.can_item_be_added_to_inventory(forage_node.item_name, 1):
+			Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up(forage_node.item_name, 1)
+			PlayerData.pick_up_item(forage_node.item_name, 1, null)
 		else:
 			Server.player_node.user_interface.get_node("ItemPickUpDialogue").item_picked_up("Inventory full!", 1)
-			InstancedScenes.initiateInventoryItemDrop([item_name, 1, null], position)
+			InstancedScenes.initiateInventoryItemDrop([forage_node.item_name, 1, null], forage_node.position)
+		forage_node.call_deferred("queue_free")
 		get_parent().state = get_parent().MOVEMENT
 
 
@@ -351,7 +328,7 @@ func move_placeable_object(data):
 	get_node("../").add_child(placeObject)
 
 func show_placeable_object(item_name, item_category):
-	if Server.world.name == "Main":
+	if Server.world.name == "Overworld":
 		if not has_node("../PlaceObject"): # does not exist yet, add to scene tree
 			var placeObject = PlaceObjectScene.instantiate()
 			placeObject.name = "PlaceObject"
@@ -361,7 +338,6 @@ func show_placeable_object(item_name, item_category):
 			get_node("../").add_child(placeObject)
 		else:
 			if get_node("../PlaceObject").item_name != item_name and not has_node("../MoveObject"): # exists but item changed
-				get_node("../PlaceObject").variety = 1
 				get_node("../PlaceObject").item_name = item_name
 				get_node("../PlaceObject").item_category = item_category
 				get_node("../PlaceObject").initialize()

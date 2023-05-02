@@ -13,8 +13,8 @@ extends Area2D
 
 var rng = RandomNumberGenerator.new()
 
-@export var location: Vector2i
-@export var variety: String
+var location = Vector2i(0,0)
+var variety = "oak"
 var hit_dir
 var health = 40
 var adjusted_leaves_falling_pos 
@@ -31,14 +31,10 @@ var temp_health: int = 3
 func _ready():
 	rng.randomize()
 	Tiles.remove_valid_tiles(location+Vector2i(-1,0), Vector2i(2,2))
-	#MapData.connect("refresh_crops",Callable(self,"refresh_tree_type"))
+	MapData.connect("refresh_crops",Callable(self,"refresh_tree_type"))
 	call_deferred("set_tree")
 	random_leaves_falling_timer.set_deferred("wait_time", rng.randi_range(15.0, 60.0))
 	random_leaves_falling_timer.call_deferred("start")
-
-
-#func _enter_tree():
-#	set_multiplayer_authority(str(name).to_int())
 
 
 func remove_from_world():
@@ -72,12 +68,13 @@ func set_tree():
 		$TreeSprites/TreeSapling.set_deferred( "texture", load("res://Assets/Images/tree_sets/"+ variety +"/growing/"+ phase +".png"))
 
 
-func harvest(data):
-#	return
-#	if phase == "harvest" and health > 40:
+func harvest():
+	if phase == "harvest" and health > 40:
 		$CollisionShape2D.set_deferred("disabled", true)
 		phase = "empty"
-#		MapData.world["tree"][name]["p"] = "empty"
+		### FIX
+		MapData.world["tree"][name]["p"] = "empty"
+		await get_tree().process_frame
 		refresh_tree_type()
 		fruit_fall.frame = 0
 		fruit_fall.show()
@@ -87,27 +84,22 @@ func harvest(data):
 		sound_effects_stump.play()
 		await fruit_fall.animation_finished
 		fruit_fall.hide()
-		if data["player_id"] == Server.player_node.name:
-			if Util.chance(25):
-				InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,4), 3)
-			elif Util.chance(25):
-				InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,4), 2)
-			else:
-				InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,4), 1)
+		if Util.chance(25):
+			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,4), 3)
+		elif Util.chance(25):
+			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,4), 2)
+		else:
+			InstancedScenes.intitiateItemDrop(variety, position+Vector2(0,4), 1)
 
 
 func refresh_tree_type():
-	if Server.world.world[MapData.get_chunk_from_location(location)]["tree"].has(name):
-		phase = Server.world.world[MapData.get_chunk_from_location(location)]["tree"][name]["p"]
-		set_tree()
-#		if phase != "5" and Util.isNonFruitTree(variety):
-#			#phase = MapData.world["tree"][name]["p"]
-#			#phase = Server.world.world[MapData.get_chunk_from_location(location)]["tree"][name]["p"]
-#			set_tree()
-#		elif phase != "harvest" and Util.isFruitTree(variety):
-#			#phase = Server.world.world[MapData.get_chunk_from_location(location)]["tree"][name]["p"]
-#			#phase = MapData.world["tree"][name]["p"]
-#			set_tree()
+	if MapData.world["tree"].has(name):
+		if phase != "5" and Util.isNonFruitTree(variety):
+			phase = MapData.world["tree"][name]["p"]
+			set_tree()
+		elif phase != "harvest" and Util.isFruitTree(variety):
+			phase = MapData.world["tree"][name]["p"]
+			set_tree()
 
 func setGrownFruitTreeTexture():
 	random_leaves_falling_timer.set_deferred("wait_time", rng.randi_range(15.0, 60.0))
@@ -145,7 +137,7 @@ func setGrownFruitTreeTexture():
 		$CollisionShape2D.set_deferred("disabled", false)
 	else:
 		$CollisionShape2D.set_deferred("disabled", true)
-	await get_tree().create_timer(0.25).timeout
+	await get_tree().process_frame
 	if biome == "snow":
 		animated_tree_top_sprite.play("snow")
 	else:
@@ -180,129 +172,121 @@ func setGrownTreeTexture():
 			animated_tree_top_sprite.set_deferred("offset", Vector2(-1,-23))
 		"pine":
 			animated_tree_top_sprite.set_deferred("offset", Vector2(0,-37))
-	await get_tree().create_timer(0.25).timeout
+	await get_tree().process_frame
 	animated_tree_top_sprite.play("default")
 
-
-func hit(data):
+func hit(tool_name):
 	if not destroyed:
 		if not (phase == "5" and Util.isNonFruitTree(variety)) and not (phase == "mature1" or phase == "mature2" or phase == "harvest" or phase == "empty" and Util.isFruitTree(variety)):
 			animation_player_stump.call_deferred("play", "sapling hit")
+			$ResetTempHealthTimer.call_deferred("start")
 			temp_health -= 1
 			sound_effects_tree.set_deferred("stream", load("res://Assets/Sound/Sound effects/Building/wood/wood hit.mp3"))
 			sound_effects_tree.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 			sound_effects_tree.call_deferred("play")
-			if data["player_id"] == Server.player_node.name:
-				$ResetTempHealthTimer.start()
+			if temp_health <= 0 and not destroyed: 
+				call_deferred("destroy", "sapling")
 		else:
 			if health == 100:
 				InstancedScenes.initiateBirdEffect(position)
-			health = data["health"]
+			health -= Stats.return_tool_damage(tool_name)
+			if MapData.world["tree"].has(name):
+				MapData.world["tree"][name]["h"] = health
 			if health >= Stats.STUMP_HEALTH:
 				InstancedScenes.initiateLeavesFallingEffect(variety, position)
 				sound_effects_tree.set_deferred("stream", Sounds.tree_hit[rng.randi_range(0,2)])
 				sound_effects_tree.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 				sound_effects_tree.call_deferred("play") 
 				animation_player_tree.call_deferred("stop")
-				if Server.world.get_node("Players/"+str(data["player_id"])).get_position().x <= get_position().x:
+				if Server.player_node.get_position().x <= get_position().x:
 					InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position)
 					animation_player_tree.call_deferred("play", "tree hit right")
 				else: 
 					InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position)
 					animation_player_tree.call_deferred("play", "tree hit left")
 			elif not tree_fallen:
-#				if health <= 0 and not destroyed:
-#					destroy("")
+				if health <= 0 and not destroyed:
+					call_deferred("play", tool_name)
 				tree_fallen = true
-				tree_fall_break(data)
+				call_deferred("disable_tree_top_collision_box")
+				sound_effects_stump.set_deferred("stream", Sounds.tree_hit[rng.randi_range(0,2)])
+				sound_effects_stump.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
+				sound_effects_stump.call_deferred("play")
+				sound_effects_tree.set_deferred("stream", Sounds.tree_break)
+				sound_effects_tree.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -14))
+				sound_effects_tree.call_deferred("play")
+				if Server.player_node.get_position().x <= get_position().x:
+					animation_player_tree.call_deferred("play", "tree fall right")
+					await animation_player_tree.animation_finished
+					play_tree_break_animation("right")
+					var amt = Stats.return_item_drop_quantity(tool_name, "tree")
+					PlayerData.player_data["collections"]["resources"]["wood"] += amt
+					InstancedScenes.intitiateItemDrop("wood", position+Vector2(65, -8), amt)
+					if Util.chance(5):
+						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(65, -8), 3)
+					elif Util.chance(15):
+						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(65, -8), 2)
+					elif Util.chance(25):
+						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(65, -8), 1)
+				
+				else:  
+					animation_player_tree.call_deferred("play", "tree fall left")
+					await animation_player_tree.animation_finished
+					play_tree_break_animation("left")
+					var amt = Stats.return_item_drop_quantity(tool_name, "tree")
+					PlayerData.player_data["collections"]["resources"]["wood"] += amt
+					InstancedScenes.intitiateItemDrop("wood", position+Vector2(-65, -8), amt)
+					if Util.chance(5):
+						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-65, -8), 3)
+					elif Util.chance(15):
+						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-65, -8), 2)
+					elif Util.chance(25):
+						InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-65, -8), 1)
 			elif health >= 1:
 				sound_effects_stump.set_deferred("stream", Sounds.tree_hit[rng.randi_range(0,2)])
 				sound_effects_stump.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 				sound_effects_stump.call_deferred("play")
 				animation_player_stump.call_deferred("stop")
-				if Server.world.get_node("Players/"+str(data["player_id"])).get_position().x <= get_position().x:
+				if Server.player_node.get_position().x <= get_position().x:
 					animation_player_stump.call_deferred("play", "stump hit right")
 					InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position)
 				else: 
 					InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position)
 					animation_player_stump.call_deferred("play", "stump hit right")
-#			if health <= 0 and not destroyed: 
-#				call_deferred("destroy", tool_name)
+			if health <= 0 and not destroyed: 
+				call_deferred("destroy", tool_name)
 
 
-func tree_fall_break(data):
-	call_deferred("disable_tree_top_collision_box")
-	sound_effects_stump.set_deferred("stream", Sounds.tree_hit[rng.randi_range(0,2)])
-	sound_effects_stump.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
-	sound_effects_stump.call_deferred("play")
-	sound_effects_tree.set_deferred("stream", Sounds.tree_break)
-	sound_effects_tree.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -14))
-	sound_effects_tree.call_deferred("play")
-	if Server.world.get_node("Players/"+str(data["player_id"])).get_position().x <= get_position().x:
-		animation_player_tree.call_deferred("play", "tree fall right")
-		await animation_player_tree.animation_finished
-		play_tree_break_animation("right")
-		if data["player_id"] == Server.player_node.name:
-			var amt = Stats.return_item_drop_quantity(data["tool_name"], "tree")
-			PlayerData.player_data["collections"]["resources"]["wood"] += amt
-			InstancedScenes.intitiateItemDrop("wood", position+Vector2(65, -8), amt)
-			if Util.chance(5):
-				InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(65, -8), 3)
-			elif Util.chance(15):
-				InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(65, -8), 2)
-			elif Util.chance(25):
-				InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(65, -8), 1)
-	else:  
-			animation_player_tree.call_deferred("play", "tree fall left")
-			await animation_player_tree.animation_finished
-			play_tree_break_animation("left")
-			if data["player_id"] == Server.player_node.name:
-				var amt = Stats.return_item_drop_quantity(data["tool_name"], "tree")
-				PlayerData.player_data["collections"]["resources"]["wood"] += amt
-				InstancedScenes.intitiateItemDrop("wood", position+Vector2(-65, -8), amt)
-				if Util.chance(5):
-					InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-65, -8), 3)
-				elif Util.chance(15):
-					InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-65, -8), 2)
-				elif Util.chance(25):
-					InstancedScenes.intitiateItemDrop(variety+" seeds", position+Vector2(-65, -8), 1)
-
-
-func destroy(data):
-	#MapData.remove_object("tree",name)
-	if not destroyed:
-		destroyed = true
-		Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
-		if phase != "sapling" and phase != "1" and phase != "2" and phase != "3" and phase != "4":
-			if not tree_fallen:
-				play_tree_break_animation(data)
-			play_stump_break_animation()
-			animation_player_stump.call_deferred("play", "stump destroyed")
-			sound_effects_stump.set_deferred("stream", Sounds.stump_break)
-			sound_effects_stump.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
-			sound_effects_stump.call_deferred("play")
-			if data["player_id"] == Server.player_node.name:
-				var amt = Stats.return_item_drop_quantity(data["tool_name"], "stump")
-				PlayerData.player_data["collections"]["resources"]["wood"] += amt
-				InstancedScenes.intitiateItemDrop("wood",position,amt)
-		else:
-			animation_player_stump.call_deferred("play", "sapling destroyed")
-			sound_effects_stump.set_deferred("stream", load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3"))
-			sound_effects_stump.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
-			sound_effects_stump.call_deferred("play")
-		await get_tree().create_timer(3.0).timeout
-		call_deferred("queue_free")
+func destroy(tool_name):
+	MapData.remove_object("tree",name)
+	destroyed = true
+	Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
+	if not tool_name == "sapling":
+		play_stump_break_animation()
+		animation_player_stump.call_deferred("play", "stump destroyed")
+		sound_effects_stump.set_deferred("stream", Sounds.stump_break)
+		sound_effects_stump.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
+		sound_effects_stump.call_deferred("play")
+		var amt = Stats.return_item_drop_quantity(tool_name, "stump")
+		PlayerData.player_data["collections"]["resources"]["wood"] += amt
+		InstancedScenes.intitiateItemDrop("wood",position,amt)
+	else:
+		animation_player_stump.call_deferred("play", "sapling destroyed")
+		sound_effects_stump.set_deferred("stream", load("res://Assets/Sound/Sound effects/Building/wood/wood break.mp3"))
+		sound_effects_stump.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+		sound_effects_stump.call_deferred("play")
+	await get_tree().create_timer(3.0).timeout
+	call_deferred("queue_free")
 
 ### Tree hurtbox
 func _on_Hurtbox_area_entered(_area):
-	print("ENTERED TEEE HURTBOX")
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-#	if _area.special_ability == "fire buff" and phase == "5":
-#		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-16,16), randf_range(-10,22)))
-#		health -= Stats.FIRE_DEBUFF_DAMAGE
+	if _area.special_ability == "fire buff" and phase == "5":
+		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-16,16), randf_range(-10,22)))
+		health -= Stats.FIRE_DEBUFF_DAMAGE
 	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
-		get_parent().rpc_id(1,"nature_object_hit",Server.player_node.name,"tree",name,location,_area.tool_name)
+		call_deferred("hit", _area.tool_name)
 
 
 ### Tree modulate functions
@@ -501,7 +485,7 @@ func _on_TreeTopArea_area_exited(_area):
 
 func _on_RandomLeavesFallingTimer_timeout():
 	random_leaves_falling_timer.set_deferred("wait_time", rng.randi_range(15.0, 60.0))
-	if str(phase) == "5" and health > 40:
+	if str(phase) == "5":
 		InstancedScenes.initiateLeavesFallingEffect(variety, position)
 
 func _on_ResetTempHealthTimer_timeout():

@@ -52,15 +52,10 @@ func _on_Area2D_body_exited(_body):
 	bodyEnteredFlag = false
 
 func _on_Area2D_area_entered(area):
-	print("WEED HIT")
-	get_parent().rpc_id(1,"weed_hit",name,location)
-	
-
-func destroy(data):
 	if not destroyed:
 		destroyed = true
 		Tiles.add_valid_tiles(location)
-#		MapData.remove_object("tall_grass",name) 
+		MapData.remove_object("tall_grass",name) 
 		$Area2D/CollisionShape2D.set_deferred("disabled",true)
 		$Weed/TileMap.call_deferred("hide")
 		$LeafBreak.call_deferred("show")
@@ -69,3 +64,4 @@ func destroy(data):
 		$LeafBreak.call_deferred("play", "break")
 		await $LeafBreak.animation_finished
 		call_deferred("queue_free")
+

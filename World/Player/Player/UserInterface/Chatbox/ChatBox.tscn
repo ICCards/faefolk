@@ -1,84 +1,75 @@
-[gd_scene load_steps=5 format=3 uid="uid://cw3x0n2n7j4t5"]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Chatbox/ChatBox.gd" id="1_8uiwe"]
-[ext_resource type="Texture2D" uid="uid://n35tgtnx36vt" path="res://Assets/Images/User interface/chat/chats/chat-wide-long.png" id="2_kux27"]
-[ext_resource type="Texture2D" uid="uid://d232u3qfvtt7d" path="res://Assets/Images/User interface/chat/chats/Bg/image2.png" id="3_qv4gt"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="4_lvths"]
+[ext_resource path="res://Assets/Images/Misc/left arrow.png" type="Texture2D" id=1]
+[ext_resource path="res://World3D/Player/Player/UserInterface/Chatbox/ChatBox.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Themes/ChatBox.tres" type="Theme" id=3]
+
+[sub_resource type="Theme" id=1]
 
 [node name="ChatBox" type="Control"]
-layout_mode = 3
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 33.0
 offset_right = -798.0
-offset_bottom = -445.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_bottom = -412.0
 mouse_filter = 2
-script = ExtResource("1_8uiwe")
+script = ExtResource( 2 )
 
-[node name="Bg" type="TextureRect" parent="."]
-layout_mode = 0
-offset_right = 108.0
-offset_bottom = 65.0
-scale = Vector2(3, 3)
-texture = ExtResource("2_kux27")
-stretch_mode = 4
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme = SubResource( 1 )
+color = Color( 0.027451, 0.0901961, 0.192157, 0.529412 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = 17.0
-offset_right = 2644.0
-offset_bottom = 1512.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.1, 0.1)
+offset_left = 2.0
+offset_right = -2.0
+offset_bottom = -2.0
 mouse_filter = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
-layout_mode = 2
+offset_right = 222.0
+offset_bottom = 117.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-mouse_filter = 2
-theme = ExtResource("4_lvths")
+theme = ExtResource( 3 )
 bbcode_enabled = true
 scroll_following = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
+offset_top = 121.0
+offset_right = 222.0
+offset_bottom = 153.0
 mouse_filter = 2
-theme_override_constants/separation = 40
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("4_lvths")
+visible = false
+offset_top = 5.0
+offset_right = 66.0
+offset_bottom = 28.0
+theme = ExtResource( 3 )
 text = "[WORLD]"
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
-layout_mode = 2
+offset_right = 222.0
+offset_bottom = 32.0
 size_flags_horizontal = 3
-theme = ExtResource("4_lvths")
+theme = ExtResource( 3 )
 placeholder_text = "Press ENT to enter / ESC to exit"
-flat = true
 
-[node name="Overlay" type="TextureRect" parent="."]
-layout_mode = 0
-offset_top = 18.0
-offset_right = 108.0
-offset_bottom = 71.0
-scale = Vector2(3, 3)
-texture = ExtResource("3_qv4gt")
-
-[node name="ToggleChatBox" type="Button" parent="."]
-layout_mode = 0
-offset_top = 3.0
-offset_right = 324.0
-offset_bottom = 17.0
-flat = true
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_top = -33.0
+offset_right = 33.0
+size_flags_vertical = 3
+texture_normal = ExtResource( 1 )
+expand = true
 
 [connection signal="focus_entered" from="VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_LineEdit_focus_entered"]
 [connection signal="focus_exited" from="VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_LineEdit_focus_exited"]
+[connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

@@ -2,7 +2,6 @@ extends Control
 
 var hovered_item
 var id
-var location
 
 
 @onready var sound_effects: AudioStreamPlayer = $SoundEffects

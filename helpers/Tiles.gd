@@ -259,7 +259,7 @@ func validate_forest_tiles(location):
 
 func validate_tiles(location, dimensions):
 	var active = false
-	if Server.world.name == "Main":
+	if Server.world.name == "Overworld":
 		if not active:
 			active = true
 			for x in range(dimensions.x):
@@ -295,7 +295,7 @@ func validate_foundation_tiles(location, dimensions):
 
 
 func isValidNavigationTile(loc) -> bool:
-	if Server.world.name == "Main":
+	if Server.world.name == "Overworld":
 		if wet_sand_tiles.get_cell_atlas_coords(0,loc) != Vector2i(-1,-1) and deep_ocean_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
 			return true
 		elif valid_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):

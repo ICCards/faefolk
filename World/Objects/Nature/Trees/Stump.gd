@@ -47,36 +47,33 @@ func setTexture(tree):
 	
 
 
-func hit(data):
-#	health -= Stats.return_tool_damage(tool_name)
-#	if MapData.world["stump"].has(name):
-#		MapData.world["stump"][name]["h"] = health
-	if not destroyed:
+func hit(tool_name):
+	health -= Stats.return_tool_damage(tool_name)
+	if MapData.world["stump"].has(name):
+		MapData.world["stump"][name]["h"] = health
+	if health > 0:
 		sound_effects.set_deferred("stream", Sounds.tree_hit[rng.randi_range(0,2)])
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")
 		animation_player.call_deferred("stop")
-		if Server.world.get_node("Players/"+str(data["player_id"])).get_position().x <= get_position().x:
+		if Server.player_node.get_position().x <= get_position().x:
 			animation_player.call_deferred("play", "stump hit right")
 			InstancedScenes.initiateTreeHitEffect(variety, "tree hit right", position)
 		else: 
 			InstancedScenes.initiateTreeHitEffect(variety, "tree hit left", position)
 			animation_player.call_deferred("play", "stump hit right")
-
-func destroy(data):
-	if not destroyed:
+	elif not destroyed:
 		destroyed = true
-#		if MapData.world["stump"].has(name):
-#			MapData.world["stump"].erase(name)
+		if MapData.world["stump"].has(name):
+			MapData.world["stump"].erase(name)
 		Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
 		sound_effects.set_deferred("stream", Sounds.stump_break)
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")
 		animation_player.call_deferred("play", "stump destroyed")
-		if data["player_id"] == Server.player_node.name:
-			var amt = Stats.return_item_drop_quantity(data["tool_name"], "stump")
-			PlayerData.player_data["collections"]["resources"]["wood"] += amt
-			InstancedScenes.intitiateItemDrop("wood", position, amt)
+		var amt = Stats.return_item_drop_quantity(tool_name, "stump")
+		PlayerData.player_data["collections"]["resources"]["wood"] += amt
+		InstancedScenes.intitiateItemDrop("wood", position, amt)
 		stump_break.play(variety)
 		$TreeSprites/Break.play(variety)
 		await sound_effects.finished
@@ -90,8 +87,7 @@ func _on_tree_hurtbox_area_entered(area):
 		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-16,16), randf_range(-18,12)))
 		health -= Stats.FIRE_DEBUFF_DAMAGE
 	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
-		get_parent().rpc_id(1,"nature_object_hit",Server.player_node.name,"stump",name,location,area.tool_name)
-		#call_deferred("hit", area.tool_name)
+		call_deferred("hit", area.tool_name)
 
 
 func _on_VisibilityNotifier2D_screen_entered():

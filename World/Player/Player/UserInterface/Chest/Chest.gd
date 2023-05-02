@@ -5,7 +5,6 @@ extends Control
 
 var id
 var hovered_item
-var location
 
 func _ready():
 	initialize()
@@ -30,9 +29,5 @@ func _physics_process(delta):
 	else:
 		$ItemDescription.hide()
 
-func _input(event):
-	if event.is_action_pressed("action"):
-		get_parent().close_chest(id,location)
-
 func _on_ExitBtn_pressed():
-	get_parent().close_chest(id,location)
+	get_parent().close_chest(id)

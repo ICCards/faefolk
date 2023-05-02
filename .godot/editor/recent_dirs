@@ -1,3 +1,4 @@
+res://MainMenu
 res://Assets/Tilesets/terrain/tres files
 res://
 res://Assets/Tilesets/terrain
@@ -19,4 +20,3 @@ res://Assets/Images/Animals
 res://Assets/Images/Magic/wind
 res://Assets/Images/Animations/leaf break
 res://World/Building/Tiles/Attached nodes
-res://Assets/Images/tree_sets/wood breaks/logs

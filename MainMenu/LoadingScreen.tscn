@@ -1,71 +1,171 @@
-[gd_scene load_steps=12 format=3 uid="uid://3vr0ijbqi0bd"]
+[gd_scene load_steps=8 format=3 uid="uid://3vr0ijbqi0bd"]
 
-[ext_resource type="Texture2D" uid="uid://bnowosfcnkely" path="res://Assets/Images/Animations/loading screen/frame_0_delay-0.2s.png" id="2_a06at"]
+[ext_resource type="Texture2D" uid="uid://dfg84dm5mo03a" path="res://Assets/Images/Misc/MainMenu/logo.png" id="2"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="2_0m5v1"]
 [ext_resource type="Script" path="res://MainMenu/LoadingScreen.gd" id="3"]
-[ext_resource type="Texture2D" uid="uid://oulkwg35t8wf" path="res://Assets/Images/Animations/loading screen/frame_1_delay-0.2s.png" id="3_jsidy"]
-[ext_resource type="Texture2D" uid="uid://dbuwi4c20ylvo" path="res://Assets/Images/Animations/loading screen/frame_2_delay-0.2s.png" id="4_s6wgy"]
-[ext_resource type="Texture2D" uid="uid://besiu4wl7fcfl" path="res://Assets/Images/Animations/loading screen/frame_3_delay-0.2s.png" id="5_vb60x"]
-[ext_resource type="Texture2D" uid="uid://cxd8r1q1ra6sx" path="res://Assets/Images/Animations/loading screen/frame_4_delay-0.2s.png" id="6_44ycd"]
-[ext_resource type="Texture2D" uid="uid://b54tq55jolfr3" path="res://Assets/Images/Animations/loading screen/frame_5_delay-0.2s.png" id="7_ovsl4"]
-[ext_resource type="Texture2D" uid="uid://cttg1yr1vf4xd" path="res://Assets/Images/Animations/loading screen/frame_6_delay-0.2s.png" id="8_gqf0h"]
-[ext_resource type="Texture2D" uid="uid://b0sgo6f21ampn" path="res://Assets/Images/Animations/loading screen/frame_7_delay-0.2s.png" id="9_0crer"]
-[ext_resource type="Texture2D" uid="uid://bv2e37vy0s7h4" path="res://Assets/Images/mini map/snow.png" id="10_ywbv7"]
+[ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://BetaLabel.tscn" id="4"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_yiymi"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_a06at")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_jsidy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_s6wgy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_vb60x")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_44ycd")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_ovsl4")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_gqf0h")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_0crer")
-}],
-"loop": true,
-"name": &"play",
-"speed": 3.0
-}]
+[sub_resource type="Animation" id="Animation_n86qp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Dot2:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Dot3:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/Dot1:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.001),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
-[node name="LoadingScreen" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[sub_resource type="Animation" id="Animation_6kxxv"]
+resource_name = "animate"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Dot1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Dot2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Control/Dot3:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.9, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_si2n6"]
+_data = {
+"RESET": SubResource("Animation_n86qp"),
+"animate": SubResource("Animation_6kxxv")
+}
+
+[node name="LoadingScreen" type="Node2D"]
+z_index = 3
 script = ExtResource("3")
 
-[node name="Bg" type="AnimatedSprite2D" parent="."]
-position = Vector2(640, 360)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_yiymi")
-animation = &"play"
-frame_progress = 0.753012
-metadata/_edit_lock_ = true
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 1)
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 773.0
+offset_top = 417.0
+offset_right = 813.0
+offset_bottom = 457.0
+scale = Vector2(0.5, 0.5)
+
+[node name="BuildingWorld" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 424.0
-offset_top = 434.0
-offset_right = 4744.0
-offset_bottom = 534.0
-scale = Vector2(0.1, 0.1)
-nine_patch_stretch = true
-texture_progress = ExtResource("10_ywbv7")
+offset_left = 298.0
+offset_top = 502.0
+offset_right = 1566.0
+offset_bottom = 686.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_0m5v1")
+text = "Building world"
+horizontal_alignment = 2
+
+[node name="Dot1" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 940.0
+offset_top = 500.0
+offset_right = 956.0
+offset_bottom = 594.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_0m5v1")
+text = "."
+
+[node name="Dot2" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 958.0
+offset_top = 500.0
+offset_right = 974.0
+offset_bottom = 594.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_0m5v1")
+text = "."
+
+[node name="Dot3" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 976.0
+offset_top = 500.0
+offset_right = 992.0
+offset_bottom = 594.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("2_0m5v1")
+text = "."
+
+[node name="BetaLabel" parent="." instance=ExtResource("4")]
+
+[node name="Logo" type="TextureRect" parent="."]
+modulate = Color(1.18, 1.18, 1.18, 1)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("2")
+expand_mode = 3
+stretch_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_si2n6")
+}

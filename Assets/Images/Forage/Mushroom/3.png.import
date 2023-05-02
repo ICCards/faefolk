@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ex2ksyvtaamh"
-path="res://.godot/imported/3.png-20ccc490aeabb84960be87242260aa1d.ctex"
+path="res://.godot/imported/3.png-902d9a6259fa434a8691180c0349c641.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/Forage/mushroom/3.png"
-dest_files=["res://.godot/imported/3.png-20ccc490aeabb84960be87242260aa1d.ctex"]
+source_file="res://Assets/Images/Forage/Mushroom/3.png"
+dest_files=["res://.godot/imported/3.png-902d9a6259fa434a8691180c0349c641.ctex"]
 
 [params]
 

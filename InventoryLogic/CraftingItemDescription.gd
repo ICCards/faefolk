@@ -83,6 +83,7 @@ func returnIfValidMaterial(item, amount):
 
 func set_description_text(item):
 	if item:
+		print(item)
 		var category = JsonData.item_data[item]["ItemCategory"]
 		var description = JsonData.item_data[item]["Description"]
 		$Body/ItemName.set_text(Util.capitalizeFirstLetter(item))
