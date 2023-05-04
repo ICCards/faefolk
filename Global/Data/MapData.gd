@@ -62,24 +62,14 @@ func remove_hoed_tile(loc):
 	world["tile"].erase(loc)
 
 func add_object(type,id,data):
-	if Server.world.name == "Overworld":
-		world[type][id] = data
-	else:
-		caves[Server.world.name][type][id] = data
+	world[Util.return_chunk_from_location(data["l"])][type][id] = data
 
 func remove_object(type,id,location):
-	if Server.world.name == "Overworld":
-		world[Util.return_chunk_from_location(location)][type].erase(id)
-	else:
-		caves[Server.world.name][type].erase(id)
+	world[Util.return_chunk_from_location(location)][type].erase(id)
 	
 func update_object_health(type, id, new_health):
-	if Server.world.name == "Overworld":
-		if world[type].has(id):
-			world[type][id]["h"] = new_health
-	else:
-		if caves[Server.world.name].has(id):
-			caves[Server.world.name][id]["h"] = new_health
+	if world[type].has(id):
+		world[type][id]["h"] = new_health
 
 func return_cave_data(cave_name):
 	match cave_name:
