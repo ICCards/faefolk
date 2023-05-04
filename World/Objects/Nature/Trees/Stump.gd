@@ -49,8 +49,8 @@ func setTexture(tree):
 
 func hit(tool_name):
 	health -= Stats.return_tool_damage(tool_name)
-	if MapData.world["stump"].has(name):
-		MapData.world["stump"][name]["h"] = health
+	if MapData.world[Util.return_chunk_from_location(location)]["stump"].has(name):
+		MapData.world[Util.return_chunk_from_location(location)]["stump"][name]["h"] = health
 	if health > 0:
 		sound_effects.set_deferred("stream", Sounds.tree_hit[rng.randi_range(0,2)])
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
@@ -64,8 +64,8 @@ func hit(tool_name):
 			animation_player.call_deferred("play", "stump hit right")
 	elif not destroyed:
 		destroyed = true
-		if MapData.world["stump"].has(name):
-			MapData.world["stump"].erase(name)
+		if MapData.world[Util.return_chunk_from_location(location)]["stump"].has(name):
+			MapData.world[Util.return_chunk_from_location(location)]["stump"].erase(name)
 		Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
 		sound_effects.set_deferred("stream", Sounds.stump_break)
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))

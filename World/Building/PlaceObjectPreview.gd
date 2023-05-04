@@ -13,6 +13,8 @@ var previous_moving_object_data
 var state
 var variety = 1
 
+
+
 enum {
 	ITEM,
 	SEED,
@@ -22,7 +24,8 @@ enum {
 	ROTATABLE,
 	CUSTOMIZABLE,
 	CUSTOMIZABLE_ROTATABLE,
-	FORAGE
+	FORAGE,
+	WALL_ART
 }
 
 var _uuid = load("res://helpers/UUID.gd")
@@ -36,9 +39,9 @@ func destroy():
 	name = "removing"
 	hide()
 	set_physics_process(false)
-	if moving_object:
-		MapData.add_object("placeable",previous_moving_object_data["id"],{"n":previous_moving_object_data["n"],"d":previous_moving_object_data["d"],"l":previous_moving_object_data["l"],"v":previous_moving_object_data["v"]})
-		PlaceObject.place_object_in_world(previous_moving_object_data["id"], previous_moving_object_data["n"], previous_moving_object_data["d"], previous_moving_object_data["l"], previous_moving_object_data["v"])
+#	if moving_object:
+#		MapData.add_object("placeable",previous_moving_object_data["id"],{"n":previous_moving_object_data["n"],"d":previous_moving_object_data["d"],"l":previous_moving_object_data["l"],"v":previous_moving_object_data["v"]})
+#		PlaceObject.place_object_in_world(previous_moving_object_data["id"], previous_moving_object_data["n"], previous_moving_object_data["d"], previous_moving_object_data["l"], previous_moving_object_data["v"], false)
 	call_deferred("queue_free")
 
 func destroy_and_remove_previous_object():
@@ -48,8 +51,8 @@ func destroy_and_remove_previous_object():
 	call_deferred("queue_free")
 
 func _physics_process(delta):
-	mousePos = (get_global_mouse_position() + Vector2(-8, -8)).snapped(Vector2(16,16))
-	set_global_position(mousePos)
+	mousePos = (get_global_mouse_position()+Vector2(-8,-8)).snapped(Vector2(16,16))
+	set_global_position(mousePos+Vector2(8,8))
 	match state:
 		ITEM:
 			place_item_state()
@@ -67,6 +70,8 @@ func _physics_process(delta):
 			place_customizable_state()
 		FORAGE:
 			place_forage_state()
+		WALL_ART:
+			place_wall_art_state()
 
 
 func initialize():
@@ -75,7 +80,9 @@ func initialize():
 		direction_index = directions.find(previous_moving_object_data["d"])
 	if item_name != "foundation" and item_name != "wall":
 		item_category = JsonData.item_data[item_name]["ItemCategory"]
-	if Constants.rotatable_object_atlas_tiles.keys().has(item_name):
+	if item_name == "wall art":
+		state = WALL_ART
+	elif Constants.rotatable_object_atlas_tiles.keys().has(item_name):
 		state = ROTATABLE
 	elif Constants.customizable_rotatable_object_atlas_tiles.keys().has(item_name):
 		state = CUSTOMIZABLE_ROTATABLE
@@ -107,6 +114,10 @@ func set_dimensions():
 			$Objects.set_cell(0,Vector2i(0,0),0,Constants.object_atlas_tiles[item_name])
 			var dimensions = Constants.dimensions_dict[item_name]
 			$ColorIndicator.tile_size = dimensions
+		WALL_ART:
+			Server.player_node.user_interface.get_node("ChangeRotation").hide()
+			Server.player_node.user_interface.get_node("ChangeVariety").show()
+			$Objects.show()
 		SEED:
 			Server.player_node.user_interface.get_node("ChangeRotation").hide()
 			Server.player_node.user_interface.get_node("ChangeVariety").hide()
@@ -149,6 +160,21 @@ func set_dimensions():
 			$ForageItemToPlace.show()
 			$ForageItemToPlace.texture = load("res://Assets/Images/inventory_icons/Forage/"+item_name+".png")
 
+
+func place_wall_art_state():
+	var location = Tiles.valid_tiles.local_to_map(mousePos)
+	var dimensions = Vector2(1,1)
+	$ColorIndicator.tile_size = dimensions
+	get_variety_index(Constants.customizable_object_atlas_tiles[item_name].keys().size())
+	$Objects.set_cell(0,Vector2i(0,0),0,Constants.customizable_object_atlas_tiles[item_name][variety])
+	if not Tiles.object_tiles.get_cell_atlas_coords(0,location) == Vector2i(-1,-1) or Tiles.wall_tiles.get_cell_atlas_coords(0,location) == Vector2i(-1,-1):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+	else:
+		$ColorIndicator.indicator_color = "Green"
+		$ColorIndicator.set_indicator_color()
+		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use tool")):
+			place_object(item_name, null, location, "placeable", variety)
 
 
 func place_forage_state():
@@ -242,7 +268,7 @@ func place_rotatable_state():
 
 
 func place_foundation_state():
-	if Server.world.name == "Overworld":
+	if Server.world.name == "Main":
 		var location = Tiles.valid_tiles.local_to_map(mousePos)
 		if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.foundation_tiles.get_cell_atlas_coords(0,location)==Vector2i(-1,-1):
 			$ColorIndicator.indicator_color = "Red"
@@ -255,7 +281,7 @@ func place_foundation_state():
 
 
 func place_wall_state():
-	if Server.world.name == "Overworld":
+	if Server.world.name == "Main":
 		$ColorIndicator.visible = true
 		var location = Tiles.valid_tiles.local_to_map(mousePos)
 		if not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or not Tiles.validate_foundation_tiles(location,Vector2(1,1)) or not Tiles.validate_tiles(location, Vector2(1,1)):
@@ -298,7 +324,7 @@ func place_item_state():
 			place_object(item_name, null, location, "placeable")
 
 func place_seed_state():
-	if Server.world.name == "Overworld":
+	if Server.world.name == "Main":
 		var location = Tiles.valid_tiles.local_to_map(mousePos)
 		if Util.isNonFruitTree(item_name) or Util.isFruitTree(item_name):
 			if not Tiles.validate_forest_tiles(location) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:
@@ -308,7 +334,7 @@ func place_seed_state():
 				$ColorIndicator.indicator_color = "Green"
 				$ColorIndicator.set_indicator_color()
 				if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use tool")):
-					place_object(item_name, null, location, "seed")
+					place_object(item_name, null, location, "tree")
 		else: # crops
 			if Tiles.hoed_tiles.get_cell_atlas_coords(0,location) == Vector2i(-1,-1) or Tiles.valid_tiles.get_cell_atlas_coords(0,location) == Vector2i(-1,-1) or Server.player_node.position.distance_to((location+Vector2i(1,1))*16) > Constants.MIN_PLACE_OBJECT_DISTANCE:
 				$ColorIndicator.indicator_color = "Red"
@@ -317,7 +343,7 @@ func place_seed_state():
 				$ColorIndicator.indicator_color = "Green"
 				$ColorIndicator.set_indicator_color()
 				if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use tool")):
-					place_object(item_name, null, location, "seed")	
+					place_object(item_name, null, location, "crop")
 	else:
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
@@ -334,16 +360,14 @@ func place_object(item_name, direction, location, type, variety = null):
 					$SoundEffects.stream = Sounds.place_object
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 					$SoundEffects.play()
-					MapData.add_object("placeable",id,{"n":item_name,"v":"twig","l":location,"h":Stats.MAX_TWIG_BUILDING,"d":null})
+					MapData.add_object("placeable",id,{"n":item_name,"l":location,"h":Stats.MAX_TWIG_BUILDING,"t":"twig"})
 					PlayerData.remove_material("wood", 5)
-					PlaceObject.place_building_object_in_world(id,item_name,null,"twig",location,Stats.MAX_TWIG_BUILDING)
 				elif PlayerData.returnSufficentCraftingMaterial("wood", 2) and item_name == "foundation":
 					$SoundEffects.stream = Sounds.place_object
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 					$SoundEffects.play()
-					MapData.add_object("placeable",id, {"n":item_name,"v":"twig","l":location,"h":Stats.MAX_TWIG_BUILDING,"d":null})
+					MapData.add_object("placeable",id,{"n":item_name,"l":location,"h":Stats.MAX_TWIG_BUILDING,"t":"twig"})
 					PlayerData.remove_material("wood", 2)
-					PlaceObject.place_building_object_in_world(id,item_name,null,"twig",location,Stats.MAX_TWIG_BUILDING)
 				else:
 					$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
@@ -353,33 +377,27 @@ func place_object(item_name, direction, location, type, variety = null):
 				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 				$SoundEffects.play()
 				if item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
-					MapData.add_object("placeable",id, {"n":item_name,"v":"twig","l":location,"h":Stats.return_starting_door_health(item_name),"d":direction})
-					PlaceObject.place_building_object_in_world(id,item_name,direction,null,location,Stats.return_starting_door_health(item_name))
+					MapData.add_object("placeable",id, {"n":item_name,"v":variety,"l":location,"h":Stats.return_starting_door_health(item_name),"d":direction,"o":false})
 				elif moving_object:
-					MapData.add_object("placeable",previous_moving_object_data["id"],{"n":item_name,"d":direction,"l":location,"v":variety})
-					PlaceObject.place_object_in_world(previous_moving_object_data["id"], item_name, direction, location, variety)
+					MapData.add_object("placeable",previous_moving_object_data["id"],{"n":item_name,"d":direction,"l":location,"v":variety,"h":3,"o":false})
 					Server.player_node.actions.destroy_moveable_object()
 				else:
-					MapData.add_object("placeable",id,{"n":item_name,"d":direction,"l":location,"v":variety})
-					PlaceObject.place_object_in_world(id, item_name, direction, location, variety)
-		elif type == "seed":
+					MapData.add_object("placeable",id,{"n":item_name,"d":direction,"l":location,"v":variety,"h":3,"o":false})
+		elif type == "tree":
 			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
-			if Util.isNonFruitTree(item_name) or Util.isFruitTree(item_name):
-				PlaceObject.place_tree_in_world(id,item_name,location+Vector2i(1,0),"forest",Stats.TREE_HEALTH,"sapling")
-				MapData.add_object("tree",id,{"l":location,"h":Stats.TREE_HEALTH,"b":"forest","v":item_name,"p":"sapling"})
-				MapData.add_object_to_chunk("tree",location,id)
-			else:
-				var days_to_grow = JsonData.crop_data[item_name]["DaysToGrow"]
-				MapData.add_object("crop",id,{"n":item_name,"l":location,"dh":days_to_grow,"dww":0,"rp":false})
-				PlaceObject.place_seed_in_world(id,item_name,location,days_to_grow,0,false)
+			MapData.add_object("tree",id,{"l":location+Vector2i(1,0),"h":Stats.TREE_HEALTH,"b":"forest","v":item_name,"p":"sapling"})
+		elif type == "crop":
+			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
+			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
+			$SoundEffects.play()
+			var days_to_grow = JsonData.crop_data[item_name]["DaysToGrow"]
+			MapData.add_object("crop",id,{"n":item_name,"l":location,"dh":days_to_grow,"dww":0,"rp":false})
 		elif type == "forage":
 			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")
 			$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 			$SoundEffects.play()
 			MapData.add_object("forage",id,{"n":item_name,"l":location,"f":false})
-			MapData.add_object_to_chunk("forage",location,id)
-			PlaceObject.place_forage_in_world(id,item_name,location,false)
 	if not PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 		Server.player_node.set_held_object()

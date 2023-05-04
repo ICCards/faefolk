@@ -251,59 +251,58 @@ func is_border_tile(_loc, _tiles):
 
 var rows = ["A","B","C","D","E","F","G","H","I","J","K","L"]
 func return_chunk_from_location(loc):
-	var column = min(12,(int(loc.x-125) / 62) + 1)
-	var row = rows[min(11,int(loc.y-125) / 62)]
-	return row+str(column)
-
-#	if loc.x < 187.5:
-#		column = 1
-#	elif loc.x < 250:
-#		column = 2
-#	elif loc.x < 312.5:
-#		column = 3
-#	elif loc.x < 375:
-#		column = 4
-#	elif loc.x < 437.5:
-#		column = 5
-#	elif loc.x < 500:
-#		column = 6
-#	elif loc.x < 562.5:
-#		column = 7
-#	elif loc.x < 625:
-#		column = 8
-#	elif loc.x < 687.5:
-#		column = 9
-#	elif loc.x < 750:
-#		column = 10
-#	elif loc.x < 812.5:
-#		column = 11
-#	else:
-#		column = 12
-#	if loc.y < 187.5:
-#		row = "A"
-#	elif loc.y < 250:
-#		row = "B"
-#	elif loc.y < 312.5:
-#		row = "C"
-#	elif loc.y < 375:
-#		row = "D"
-#	elif loc.y < 437.5:
-#		row = "E"
-#	elif loc.y < 500:
-#		row = "F"
-#	elif loc.y < 562.5:
-#		row = "G"
-#	elif loc.y < 625:
-#		row = "H"
-#	elif loc.y < 687.5:
-#		row = "I"
-#	elif loc.y < 750:
-#		row = "J"
-#	elif loc.y < 812.5:
-#		row = "K"
-#	else:
-#		row = "L"
+	var column #= min(12,(int(loc.x-125) / 62) + 1)
+	var row #= rows[min(11,int(loc.y-125) / 62)]
 #	return row+str(column)
+	if loc.x < 187.5:
+		column = 1
+	elif loc.x < 250:
+		column = 2
+	elif loc.x < 312.5:
+		column = 3
+	elif loc.x < 375:
+		column = 4
+	elif loc.x < 437.5:
+		column = 5
+	elif loc.x < 500:
+		column = 6
+	elif loc.x < 562.5:
+		column = 7
+	elif loc.x < 625:
+		column = 8
+	elif loc.x < 687.5:
+		column = 9
+	elif loc.x < 750:
+		column = 10
+	elif loc.x < 812.5:
+		column = 11
+	else:
+		column = 12
+	if loc.y < 187.5:
+		row = "A"
+	elif loc.y < 250:
+		row = "B"
+	elif loc.y < 312.5:
+		row = "C"
+	elif loc.y < 375:
+		row = "D"
+	elif loc.y < 437.5:
+		row = "E"
+	elif loc.y < 500:
+		row = "F"
+	elif loc.y < 562.5:
+		row = "G"
+	elif loc.y < 625:
+		row = "H"
+	elif loc.y < 687.5:
+		row = "I"
+	elif loc.y < 750:
+		row = "J"
+	elif loc.y < 812.5:
+		row = "K"
+	else:
+		row = "L"
+	return row+str(column)
 
 
 

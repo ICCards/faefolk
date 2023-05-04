@@ -73,7 +73,7 @@ func harvest():
 		$CollisionShape2D.set_deferred("disabled", true)
 		phase = "empty"
 		### FIX
-		MapData.world["tree"][name]["p"] = "empty"
+		MapData.world[Util.return_chunk_from_location(location)]["tree"][name]["p"] = "empty"
 		await get_tree().process_frame
 		refresh_tree_type()
 		fruit_fall.frame = 0
@@ -93,12 +93,12 @@ func harvest():
 
 
 func refresh_tree_type():
-	if MapData.world["tree"].has(name):
+	if MapData.world[Util.return_chunk_from_location(location)]["tree"].has(name):
 		if phase != "5" and Util.isNonFruitTree(variety):
-			phase = MapData.world["tree"][name]["p"]
+			phase = MapData.world[Util.return_chunk_from_location(location)]["tree"][name]["p"]
 			set_tree()
 		elif phase != "harvest" and Util.isFruitTree(variety):
-			phase = MapData.world["tree"][name]["p"]
+			phase = MapData.world[Util.return_chunk_from_location(location)]["tree"][name]["p"]
 			set_tree()
 
 func setGrownFruitTreeTexture():
@@ -190,8 +190,8 @@ func hit(tool_name):
 			if health == 100:
 				InstancedScenes.initiateBirdEffect(position)
 			health -= Stats.return_tool_damage(tool_name)
-			if MapData.world["tree"].has(name):
-				MapData.world["tree"][name]["h"] = health
+			if MapData.world[Util.return_chunk_from_location(location)]["tree"].has(name):
+				MapData.world[Util.return_chunk_from_location(location)]["tree"][name]["h"] = health
 			if health >= Stats.STUMP_HEALTH:
 				InstancedScenes.initiateLeavesFallingEffect(variety, position)
 				sound_effects_tree.set_deferred("stream", Sounds.tree_hit[rng.randi_range(0,2)])
@@ -258,7 +258,7 @@ func hit(tool_name):
 
 
 func destroy(tool_name):
-	MapData.remove_object("tree",name)
+	MapData.remove_object("tree",name,location)
 	destroyed = true
 	Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
 	if not tool_name == "sapling":

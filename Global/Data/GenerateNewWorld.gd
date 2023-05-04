@@ -11,8 +11,8 @@ var dirt: Array = []
 var ocean: Array = []
 var desert: Array = []
 var wet_sand: Array = []
-var tile_array_names: Array = ["plains","forest","snow","dirt","wet_sand","deep_ocean1","ocean"]
-#var tile_arrays_to_fix: Array = [plains, forest, snow, dirt] #deep_ocean1, deep_ocean2, deep_ocean3, deep_ocean4]
+var tile_array_names: Array = ["plains","forest","snow","dirt"]#"wet_sand","deep_ocean1","ocean"]
+var tile_arrays_to_fix: Array = [plains, forest, snow, dirt] #deep_ocean1, deep_ocean2, deep_ocean3, deep_ocean4]
 #var tile_arrays: Array = [plains, forest, snow, dirt, deep_ocean]
 
 var decoration_locations = []
@@ -51,10 +51,8 @@ var altittude = {}
 var temperature = {}
 var moisture = {}
 
-var file_name = "res://JSONData/world.json"
-
 var world = {}
-
+#
 #func _ready() -> void:
 #	build()
 
@@ -157,9 +155,7 @@ func build_world():
 	print("building world")
 	uuid = _uuid.new()
 	build_terrian()
-	save_tiles_to_chunks()
 	fix_tiles()
-	assign_autotiles()
 	generate_trees(snow,"snow")
 	generate_trees(forest,"forest")
 	generate_trees(desert,"desert")
@@ -173,7 +169,7 @@ func build_world():
 	generate_weeds(forest,"forest")
 	generate_weeds(plains,"plains")
 	generate_beach_forage(beach)
-	#generate_animals()
+	generate_animals()
 	##################
 
 
@@ -214,6 +210,7 @@ func build_terrian():
 					dirt.append(Vector2i(x,y))
 			else:
 				dirt.append(Vector2i(x,y))
+	print("BUILT")
 
 
 func add_ocean_tiles():
@@ -272,6 +269,7 @@ func add_ocean_tiles():
 			ocean.erase(loc)
 	for loc in ocean:
 		wet_sand.append(loc)
+	assign_autotiles()
 
 
 func assign_autotiles():
@@ -284,47 +282,69 @@ func assign_autotiles():
 
 func assign_autotile_id(tile_array_name):
 	print("assigning autotiles")
-#	var locations = return_tile_array(tile_array_name)
-##	var locations = tiles
-#	for loc in locations:
-#		MapData.world[tile_array_name].append([loc,Tiles.return_autotile_id(loc,locations)])
+	var tile_array = return_tile_array(tile_array_name)
+	var locations = tile_array.duplicate()
+	var new_array = []
+	for loc in locations:
+		new_array.append([loc,Tiles.return_autotile_id(loc,locations)])
 		#await get_tree().process_frame
-#		tiles[tiles.find(loc)] = [loc,return_tile_id(loc,locations)]
+		#tile_array[tile_array.find(loc)] = [loc,Tiles.return_tile_id(loc,tile_array)]
+	tile_array = new_array
 	if thread_tile_counter == tile_array_names.size():
 		print("assigned all")
 		#call_deferred("build_world")
 		thread_tile_counter = 1
-		save_starting_world_data()
+		save_tiles_to_chunks()
 	else:	
 		thread_tile_counter += 1
 		print("assigned: "+str(thread_tile_counter) + tile_array_name)
 
+func return_tile_array(tile_name):
+	match tile_name:
+		"plains":
+			return plains
+		"forest":
+			return forest
+		"snow":
+			return snow
+		"dirt":
+			return dirt
 
 func save_tiles_to_chunks():
+	print("SAVING TILES TO CHUNKS")
+	print(forest)
 	for loc in beach:
 		var chunk = Util.return_chunk_from_location(loc)
 		world[chunk]["beach"].append(loc)
+	print("HER")
 	for loc in deep_ocean:
 		var chunk = Util.return_chunk_from_location(loc)
 		world[chunk]["deep_ocean"].append(loc)
+	print("HERE")
 	for loc in ocean:
 		var chunk = Util.return_chunk_from_location(loc)
 		world[chunk]["ocean"].append(loc)
+	print("HERE1")
 	for loc in forest:
 		var chunk = Util.return_chunk_from_location(loc)
 		world[chunk]["forest"].append(loc)
+	print("HERE2")
 	for loc in plains:
 		var chunk = Util.return_chunk_from_location(loc)
 		world[chunk]["plains"].append(loc)
+	print("HERE3")
 	for loc in desert:
 		var chunk = Util.return_chunk_from_location(loc)
 		world[chunk]["desert"].append(loc)
+	print("HERE4")
 	for loc in snow:
 		var chunk = Util.return_chunk_from_location(loc)
 		world[chunk]["snow"].append(loc)
+	print("HERE5")
 	for loc in wet_sand:
 		var chunk = Util.return_chunk_from_location(loc)
 		world[chunk]["wet_sand"].append(loc)
+	print("HERE6")
 	for loc in dirt:
 		var chunk = Util.return_chunk_from_location(loc)
 		world[chunk]["dirt"].append(loc)
@@ -333,39 +353,39 @@ func save_tiles_to_chunks():
 
 func fix_tiles():
 	print("FIXING")
-	for tile_array in tile_array_names: 
+	for tile_array in tile_arrays_to_fix: 
 		var tileThread = Thread.new()
 		threads.append(tileThread)
 		tileThread.start(Callable(self,"_fix_tiles").bind(tile_array))
 
 
-func _fix_tiles(tile_array_name):
+func _fix_tiles(value):
 	print("start fixing")
-	var current_tiles = []
+	var border_tiles = []
 #	for i in range(2):
 #	border_tiles = []
-	for chunk in world:
-		current_tiles = world[chunk][tile_array_name]
-#	for loc in value:
-#		if Util.is_border_tile(loc, value):
-#			border_tiles.append(loc)
-#	for loc in border_tiles:
-#		if not value.has(loc+Vector2i(1,0)):
-#			value.append(loc+Vector2i(1,0))
-#		if not value.has(loc+Vector2i(-1,0)):
-#			value.append(loc+Vector2i(-1,0))
-#		if not value.has(loc+Vector2i(0,1)):
-#			value.append(loc+Vector2i(0,1))
-#		if not value.has(loc+Vector2i(0,-1)):
-#			value.append(loc+Vector2i(0,-1))
-#		if not value.has(loc+Vector2i(1,1)):
-#			value.append(loc+Vector2i(1,1))
-#		if not value.has(loc+Vector2i(-1,1)):
-#			value.append(loc+Vector2i(-1,1))
-#		if not value.has(loc+Vector2i(1,-1)):
-#			value.append(loc+Vector2i(1,-1))
-#		if not value.has(loc+Vector2i(-1,-1)):
-#			value.append(loc+Vector2i(-1,-1))
+#	for chunk in world:
+#		current_tiles = world[chunk][tile_array_name]
+	for loc in value:
+		if Util.is_border_tile(loc, value):
+			border_tiles.append(loc)
+	for loc in border_tiles:
+		if not value.has(loc+Vector2i(1,0)):
+			value.append(loc+Vector2i(1,0))
+		if not value.has(loc+Vector2i(-1,0)):
+			value.append(loc+Vector2i(-1,0))
+		if not value.has(loc+Vector2i(0,1)):
+			value.append(loc+Vector2i(0,1))
+		if not value.has(loc+Vector2i(0,-1)):
+			value.append(loc+Vector2i(0,-1))
+		if not value.has(loc+Vector2i(1,1)):
+			value.append(loc+Vector2i(1,1))
+		if not value.has(loc+Vector2i(-1,1)):
+			value.append(loc+Vector2i(-1,1))
+		if not value.has(loc+Vector2i(1,-1)):
+			value.append(loc+Vector2i(1,-1))
+		if not value.has(loc+Vector2i(-1,-1)):
+			value.append(loc+Vector2i(-1,-1))
 	if thread_tile_counter == tile_array_names.size():
 		print("fixed")
 		#call_deferred("build_world")
@@ -377,66 +397,78 @@ func _fix_tiles(tile_array_name):
 
 
 func save_starting_world_data():
+	#var file = FileAccess.new()
+	print("SAVING WORLD DATA")
+#	var file = FileAccess.open("res://JSONData/NewWorld.json", FileAccess.WRITE)
+#	file.store_string(world)
+	#file.close()
 	game_state = GameState.new()
 	game_state.world_state = world
 	game_state.player_state = PlayerData.starting_player_data
 	game_state.save_state()
+	print("SAVED FINAL")
 
-#func generate_animals():
-#	print("Building animals")
-#	var locations = plains + forest + snow + dirt + desert
-#	var NUM_BUNNY = int(locations.size() / 1200)
-#	print("NUM BUNNIES " + str(NUM_BUNNY))
-#	for _i in range(NUM_BUNNY):
-#		var index = rng.randi_range(0, locations.size() - 1)
-#		var location = locations[index]
-#		if isValidPosition(location):
-#			var id = uuid.v4()
-#			MapData.world["animal"][id] = {"l":location,"n":"bunny","v":rng.randi_range(1,3),"h":Stats.BUNNY_HEALTH}
-#			decoration_locations.append(location)
-#	for _i in range(NUM_BUNNY):
-#		var index = rng.randi_range(0, locations.size() - 1)
-#		var location = locations[index]
-#		if isValidPosition(location):
-#			var id = uuid.v4()
-#			MapData.world["animal"][id] = {"l":location,"n":"duck","v":rng.randi_range(1,3),"h":Stats.DUCK_HEALTH}
-#			decoration_locations.append(location)
-#	var NUM_BEAR = (locations.size() / 4000)
-#	print("NUM BEARS " + str(NUM_BEAR))
-#	for _i in range(NUM_BEAR):
-#		var index = rng.randi_range(0, locations.size() - 1)
-#		var location = locations[index]
-#		if isValidPosition(location):
-#			var id = uuid.v4()
-#			MapData.world["animal"][id] = {"l":location,"n":"bear","h":Stats.BEAR_HEALTH}
-#			decoration_locations.append(location)
-#	var NUM_BOAR = (locations.size() / 4000)
-#	print("NUM BEARS " + str(NUM_BOAR))
-#	for _i in range(NUM_BOAR):
-#		var index = rng.randi_range(0, locations.size() - 1)
-#		var location = locations[index]
-#		if isValidPosition(location):
-#			var id = uuid.v4()
-#			MapData.world["animal"][id] = {"l":location,"n":"boar","h":Stats.BOAR_HEALTH}
-#			decoration_locations.append(location)
-#	var NUM_DEER = (locations.size() / 3000)
-#	print("NUM DEER " + str(NUM_DEER))
-#	for _i in range(NUM_DEER):
-#		var index = rng.randi_range(0, locations.size() - 1)
-#		var location = locations[index]
-#		if isValidPosition(location):
-#			var id = uuid.v4()
-#			MapData.world["animal"][id] = {"l":location,"n":"deer","h":Stats.DEER_HEALTH}
-#			decoration_locations.append(location)
-#	var NUM_WOLF = (locations.size() / 4000)
-#	print("NUM WOLF " + str(NUM_WOLF))
-#	for _i in range(NUM_WOLF):
-#		var index = rng.randi_range(0, locations.size() - 1)
-#		var location = locations[index]
-#		if isValidPosition(location):
-#			var id = uuid.v4()
-#			MapData.world["animal"][id] = {"l":location,"n":"wolf","h":Stats.WOLF_HEALTH}
-#			decoration_locations.append(location)
+func generate_animals():
+	print("Building animals")
+	var locations = plains + forest + snow + dirt + desert
+	var NUM_BUNNY = int(locations.size() / 1200)
+	print("NUM BUNNIES " + str(NUM_BUNNY))
+	for _i in range(NUM_BUNNY):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var chunk = Util.return_chunk_from_location(location)
+			var id = uuid.v4()
+			world[chunk]["animal"][id] = {"l":location,"n":"bunny","v":rng.randi_range(1,3),"h":Stats.BUNNY_HEALTH}
+			decoration_locations.append(location)
+	for _i in range(NUM_BUNNY):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var chunk = Util.return_chunk_from_location(location)
+			var id = uuid.v4()
+			world[chunk]["animal"][id] = {"l":location,"n":"duck","v":rng.randi_range(1,3),"h":Stats.DUCK_HEALTH}
+			decoration_locations.append(location)
+	var NUM_BEAR = (locations.size() / 4000)
+	print("NUM BEARS " + str(NUM_BEAR))
+	for _i in range(NUM_BEAR):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var chunk = Util.return_chunk_from_location(location)
+			var id = uuid.v4()
+			world[chunk]["animal"][id] = {"l":location,"n":"bear","h":Stats.BEAR_HEALTH}
+			decoration_locations.append(location)
+	var NUM_BOAR = (locations.size() / 4000)
+	print("NUM BEARS " + str(NUM_BOAR))
+	for _i in range(NUM_BOAR):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var chunk = Util.return_chunk_from_location(location)
+			var id = uuid.v4()
+			world[chunk]["animal"][id] = {"l":location,"n":"boar","h":Stats.BOAR_HEALTH}
+			decoration_locations.append(location)
+	var NUM_DEER = (locations.size() / 3000)
+	print("NUM DEER " + str(NUM_DEER))
+	for _i in range(NUM_DEER):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var chunk = Util.return_chunk_from_location(location)
+			var id = uuid.v4()
+			world[chunk]["animal"][id] = {"l":location,"n":"deer","h":Stats.DEER_HEALTH}
+			decoration_locations.append(location)
+	var NUM_WOLF = (locations.size() / 4000)
+	print("NUM WOLF " + str(NUM_WOLF))
+	for _i in range(NUM_WOLF):
+		var index = rng.randi_range(0, locations.size() - 1)
+		var location = locations[index]
+		if isValidPosition(location):
+			var chunk = Util.return_chunk_from_location(location)
+			var id = uuid.v4()
+			world[chunk]["animal"][id] = {"l":location,"n":"wolf","h":Stats.WOLF_HEALTH}
+			decoration_locations.append(location)
 	
 
 func generate_beach_forage(locations):

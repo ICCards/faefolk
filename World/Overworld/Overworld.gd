@@ -16,9 +16,10 @@ var game_state: GameState
 
 func _ready():
 	Server.world = self
+	build_world()
 	#build_world_deferred()
-	create_or_load_world()
-	#spawn_player()ds
+#	create_or_load_world()
+	spawn_player()
 #	set_valid_tiles()
 
 
@@ -27,27 +28,26 @@ func set_valid_tiles():
 		for y in range(1000):
 			$TerrainTiles/ValidTiles.set_cell(0,Vector2(x,y),0,Constants.VALID_TILE_ATLAS_CORD,0)
 
-func create_or_load_world():
-	if MapData.world["is_built"]: # Load world
-		MapData.add_world_data_to_chunks()
-		thread.start(Callable(self, "build_world"))
-		#build_world()
-	else: # Initial launch
-		var loadingScreen = GenerateWorldLoadingScreen.instantiate()
-		loadingScreen.name = "Loading"
-		add_child(loadingScreen)
-		GenerateNewWorld.build()
+#func create_or_load_world():
+#	if MapData.world["is_built"]: # Load world
+#		MapData.add_world_data_to_chunks()
+#		thread.start(Callable(self, "build_world"))
+#		#build_world()
+#	else: # Initial launch
+#		var loadingScreen = GenerateWorldLoadingScreen.instantiate()
+#		loadingScreen.name = "Loading"
+#		add_child(loadingScreen)
+#		GenerateNewWorld.build()
 
 func build_world():
 	buildMap()
 #	set_valid_tiles()
 #	spawn_player()
-#	$WorldBuilder.initialize()
+	$WorldBuilder.initialize()
 	$WorldBuilder/BuildTerrain.initialize()
-#	$WorldBuilder/BuildNature.initialize()
-#	$WorldBuilder/SpawnAnimal.initialize()
+	$WorldBuilder/BuildNature.initialize()
+	#$WorldBuilder/SpawnAnimal.initialize()
 	$WorldMap.buildMap()
-	thread.wait_to_finish()
 
 
 func spawn_player():
@@ -55,25 +55,26 @@ func spawn_player():
 	player.is_building_world = true
 	player.name = str("PLAYER")
 	$Players.add_child(player)
-	if PlayerData.spawn_at_respawn_location:
-		spawn_loc = PlayerData.player_data["respawn_location"]
-	elif PlayerData.spawn_at_cave_exit:
-		spawn_loc = MapData.world["cave_entrance_location"]
-	elif PlayerData.spawn_at_last_saved_location:
-		spawn_loc = PlayerData.player_data["current_save_location"]
-	if spawn_loc == null: # initial random spawn
-		var tiles = MapData.world["beach"]
-		tiles.shuffle()
-		spawn_loc = tiles[0]
-		PlayerData.player_data["current_save_location"] =  spawn_loc
-		PlayerData.player_data["current_save_scene"] = "res://World/Overworld/Overworld.tscn"
-		PlayerData.player_data["respawn_scene"] = "res://World/Overworld/Overworld.tscn"
-		PlayerData.player_data["respawn_location"] = spawn_loc
-		var game_state = GameState.new()
-		game_state.player_state = PlayerData.player_data
-		game_state.world_state = MapData.world
-		game_state.cave_state = MapData.caves
-		game_state.save_state()
+	spawn_loc = Vector2i(500,500)
+#	if PlayerData.spawn_at_respawn_location:
+#		spawn_loc = PlayerData.player_data["respawn_location"]
+#	elif PlayerData.spawn_at_cave_exit:
+#		spawn_loc = MapData.world["cave_entrance_location"]
+#	elif PlayerData.spawn_at_last_saved_location:
+#		spawn_loc = PlayerData.player_data["current_save_location"]
+#	if spawn_loc == null: # initial random spawn
+#		var tiles = MapData.world["beach"]
+#		tiles.shuffle()
+#		spawn_loc = tiles[0]
+#		PlayerData.player_data["current_save_location"] =  spawn_loc
+#		PlayerData.player_data["current_save_scene"] = "res://World/Overworld/Overworld.tscn"
+#		PlayerData.player_data["respawn_scene"] = "res://World/Overworld/Overworld.tscn"
+#		PlayerData.player_data["respawn_location"] = spawn_loc
+#		var game_state = GameState.new()
+#		game_state.player_state = PlayerData.player_data
+#		game_state.world_state = MapData.world
+#		game_state.cave_state = MapData.caves
+#		game_state.save_state()
 	player.position = spawn_loc*16
 	PlayerData.spawn_at_respawn_location = false
 	PlayerData.spawn_at_cave_exit = false

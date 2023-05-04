@@ -4872,9 +4872,6 @@ fog_sun_scatter = 0.64
 y_sort_enabled = true
 script = ExtResource("1_jqwgc")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(10, 10)
-
 [node name="WorldAmbience" type="CanvasModulate" parent="."]
 script = ExtResource("1_gscqb")
 
@@ -4917,6 +4914,7 @@ format = 2
 
 [node name="Plains" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.3, 1.3, 1.3, 1)
+z_index = -9
 tile_set = ExtResource("7_6dgdg")
 cell_quadrant_size = 8
 format = 2

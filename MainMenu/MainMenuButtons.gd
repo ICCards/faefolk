@@ -98,10 +98,10 @@ func _on_PlayBtn_pressed():
 		PlayerData.spawn_at_last_saved_location = true
 		if has_node("../PLAYER"):
 			get_node("../PLAYER").destroy()
-		if MapData.world["is_built"]:
-			SceneChanger.goto_scene(PlayerData.player_data["current_save_scene"])
-		else:
-			SceneChanger.goto_scene("res://World/Overworld/Overworld.tscn")
+#		if MapData.world["is_built"]:
+#			SceneChanger.goto_scene(PlayerData.player_data["current_save_scene"])
+#		else:
+		SceneChanger.goto_scene("res://World/Overworld/Overworld.tscn")
 
 
 func _on_ShopBtn_mouse_entered():

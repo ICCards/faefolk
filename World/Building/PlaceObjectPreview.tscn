@@ -1,41 +1,49 @@
 [gd_scene load_steps=7 format=3 uid="uid://dgspep13qs4jx"]
 
 [ext_resource type="Script" path="res://World/Building/PlaceObjectPreview.gd" id="1_q80yc"]
-[ext_resource type="TileSet" uid="uid://bmjc5ou5oyowx" path="res://Assets/Tilesets/objects/objects.tres" id="2_4p5xs"]
-[ext_resource type="TileSet" uid="uid://c5t53fhi1b7fg" path="res://Assets/Tilesets/objects/crops.tres" id="3_malvc"]
+[ext_resource type="TileSet" uid="uid://bmjc5ou5oyowx" path="res://Assets/Tilesets/Objects/objects.tres" id="2_4p5xs"]
+[ext_resource type="TileSet" uid="uid://c5t53fhi1b7fg" path="res://Assets/Tilesets/Objects/crops.tres" id="3_malvc"]
 [ext_resource type="PackedScene" uid="uid://cx276tgkqafh7" path="res://World/Objects/Misc/ColorIndicator.tscn" id="3_xahct"]
 [ext_resource type="Texture2D" uid="uid://dktjb7tf2s1cg" path="res://Assets/Images/tree_sets/birch/growing/sapling.png" id="4_exfva"]
 [ext_resource type="Texture2D" uid="uid://et4a5mhdh22" path="res://Assets/Images/Forage/flower/sunflower.png" id="5_rwhoj"]
 
 [node name="PlaceObject" type="Node2D"]
+y_sort_enabled = true
 script = ExtResource("1_q80yc")
 
 [node name="Objects" type="TileMap" parent="."]
+y_sort_enabled = true
+position = Vector2(-8, -8)
 tile_set = ExtResource("2_4p5xs")
 format = 2
+layer_0/y_sort_enabled = true
 
 [node name="Seeds" type="TileMap" parent="."]
+position = Vector2(-8, -8)
 tile_set = ExtResource("3_malvc")
 format = 2
 
 [node name="ColorIndicator" parent="." instance=ExtResource("3_xahct")]
 z_index = 2
+position = Vector2(-8, -8)
 
 [node name="TreeSeedToPlace" type="TextureRect" parent="."]
 visible = false
 modulate = Color(1, 1, 1, 0.627451)
-offset_left = -17.0
-offset_top = -113.0
-offset_right = 31.0
-offset_bottom = -21.0
+offset_left = -25.0
+offset_top = -121.0
+offset_right = 23.0
+offset_bottom = -29.0
 scale = Vector2(1.35, 1.35)
 mouse_filter = 2
 texture = ExtResource("4_exfva")
 
 [node name="ForageItemToPlace" type="TextureRect" parent="."]
 visible = false
-offset_right = 16.0
-offset_bottom = 16.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
 texture = ExtResource("5_rwhoj")
 expand_mode = 1
 

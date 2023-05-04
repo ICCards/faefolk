@@ -33,38 +33,37 @@ func initialize():
 #	$BuildTerrainTimer.start()
 
 func _on_build_terrain_timer_timeout():
-	return
 	build_terrain()
 
-#func _whoAmI(chunk):
-#	call_deferred("spawn_chunk", chunk)
+func _whoAmI(chunk):
+	call_deferred("spawn_chunk", chunk)
 #
 func build_terrain():
-	for column in range(12):
-		for row in ["A","B","C","D","E","F","G","H","I","J","K","L"]:
-			spawn_chunk(row+str(column))
-#	for new_chunk in get_parent().built_chunks:
-#		if not built_chunks.has(new_chunk) and not terrain_thread.is_started():
-#			built_chunks.append(new_chunk)
-#			terrain_thread.start(Callable(self,"_whoAmI").bind(new_chunk))
+#	for column in range(12):
+#		for row in ["A","B","C","D","E","F","G","H","I","J","K","L"]:
+#			spawn_chunk(row+str(column+1))
+	for new_chunk in get_parent().built_chunks:
+		if not built_chunks.has(new_chunk) and not terrain_thread.is_started():
+			built_chunks.append(new_chunk)
+			terrain_thread.start(Callable(self,"_whoAmI").bind(new_chunk))
 
 func spawn_chunk(chunk_name):
 	print("SPAWN CHUNK " + str(chunk_name))
 	var _chunk = MapData.world[chunk_name]
 	if _chunk["plains"].size() > 0:
 		for tile in _chunk["plains"]:
-			var atlas_cord = Tiles.return_atlas_tile_cord("plains",tile[1])
-			plains.set_cell(0,tile[0],0,atlas_cord)
+			var atlas_cord = Tiles.return_atlas_tile_cord("plains",0)#tile[1])
+			plains.set_cell(0,tile,0,atlas_cord)
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["snow"].size() > 0:
 		for tile in _chunk["snow"]:
-			var atlas_cord = Tiles.return_atlas_tile_cord("snow",tile[1])
-			snow.set_cell(0,tile[0],0,atlas_cord)
+			var atlas_cord = Tiles.return_atlas_tile_cord("snow",0)#tile[1])
+			snow.set_cell(0,tile,0,atlas_cord)
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["forest"].size() > 0:
 		for tile in _chunk["forest"]:
-			var atlas_cord = Tiles.return_atlas_tile_cord("forest",tile[1])
-			forest.set_cell(0,tile[0],0,atlas_cord)
+			var atlas_cord = Tiles.return_atlas_tile_cord("forest",0)#tile[1])
+			forest.set_cell(0,tile,0,atlas_cord)
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["beach"].size() > 0:
 		for tile in _chunk["beach"]:
@@ -76,8 +75,8 @@ func spawn_chunk(chunk_name):
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["dirt"].size() > 0:
 		for tile in _chunk["dirt"]:
-			var atlas_cord = Tiles.return_atlas_tile_cord("dirt",tile[1])
-			dirt.set_cell(0,tile[0],0,atlas_cord)
+			var atlas_cord = Tiles.return_atlas_tile_cord("dirt",0)#tile[1])
+			dirt.set_cell(0,tile,0,atlas_cord)
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["wet_sand"].size() > 0:
 		for tile in _chunk["wet_sand"]:

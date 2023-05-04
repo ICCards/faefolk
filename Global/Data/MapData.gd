@@ -12,37 +12,8 @@ var tile_types = ["beach", "ocean", "wet_sand", "deep_ocean1","deep_ocean2","dee
 var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "forage"]
 var is_world_data_in_chunks = false
 
-var world = {
-	"is_built": false,
-	"ocean": [],
-	"deep_ocean": [],
-	"plains": [],
-	"elevated_plains": [],
-	"forest": [],
-	"elevated_forest": [],
-	"desert": [],
-	"dirt": [],
-	"elevated_dirt": [],
-	"snow": [],
-	"elevated_snow": [],
-	"beach":[],
-	"wet_sand":[],
-	"tree": {},
-	"stump": {},
-	"log": {},
-	"ore_large": {},
-	"ore": {},
-	"tall_grass": {},
-	"forage": {},
-	"animal": {},
-	"crop": {},
-	"tile": {},
-	"placeable": {},
-}
-#var starting_caves_data = {
-#"Cave 1-1":{"is_built":false,"forage":{},"ore":{},"ore_large":{},"placable":{},"tall_grass":{}},
-
-var caves = {} #= starting_caves_data
+var world = {}
+var caves = {} 
 
 func _ready() -> void:
 	PlayerData.connect("season_changed",Callable(self,"reset_cave_data"))
@@ -96,9 +67,9 @@ func add_object(type,id,data):
 	else:
 		caves[Server.world.name][type][id] = data
 
-func remove_object(type,id):
+func remove_object(type,id,location):
 	if Server.world.name == "Overworld":
-		world[type].erase(id)
+		world[Util.return_chunk_from_location(location)][type].erase(id)
 	else:
 		caves[Server.world.name][type].erase(id)
 	
