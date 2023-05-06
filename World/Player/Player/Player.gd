@@ -56,21 +56,26 @@ var is_building_world = false
 @onready var _character = load("res://Global/Data/Characters.gd")
 
 func _ready():
+	composite_sprites.hide()
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
 	$Camera2D.enabled = is_multiplayer_authority()
+	$AttachedText/Username.text = str(name)
 	if not is_multiplayer_authority(): 
 		set_process_input(false)
 		set_process_unhandled_input(false)
 		set_process(false)
+		await get_tree().create_timer(8.0).timeout
+		composite_sprites.show()
 		return
-	position = Vector2(500*16,375*16)
+	position = Vector2(500*16,500*16)
 	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
 	Server.player_node = self
 #	if is_building_world:
 	state = DYING
 	$Camera2D/UserInterface/LoadingScreen.initialize(8)
 	await get_tree().create_timer(8.0).timeout
+	composite_sprites.show()
 	state = MOVEMENT
 	set_held_object()
 	Server.isLoaded = true

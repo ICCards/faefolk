@@ -11,12 +11,17 @@ var connected_peer_ids = []
 var is_changing_scene = false
 
 
-func _on_join_btn_pressed():
-	$Menu.hide()
+#func _on_join_btn_pressed():
+#	$Menu.hide()
+#	enet_peer.create_client("localhost",PORT)
+#	multiplayer.multiplayer_peer = enet_peer
+#	build_world()
+
+
+func _ready():
 	enet_peer.create_client("localhost",PORT)
 	multiplayer.multiplayer_peer = enet_peer
 	build_world()
-
 
 @rpc
 func send_world_data(data):
@@ -64,3 +69,10 @@ func set_map_tiles():
 	Tiles.object_tiles = $BuildingTiles/ObjectTiles
 	Tiles.wet_sand_tiles = $TerrainTiles/WetSand
 	Tiles.forest_tiles = $TerrainTiles/Forest
+
+@rpc
+func send_message(data): pass
+
+@rpc 
+func receive_message(data): 
+	Server.player_node.user_interface.get_node("ChatBox").add_message(data)

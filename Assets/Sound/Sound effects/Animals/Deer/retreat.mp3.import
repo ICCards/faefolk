@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://i8hvthvv1cvb"
-path="res://.godot/imported/retreat.mp3-e90e6dd20211bafd0a55729506ff772f.mp3str"
+path="res://.godot/imported/retreat.mp3-07eed000ec617998387f64d088dbc9be.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Sound effects/animals/deer/retreat.mp3"
-dest_files=["res://.godot/imported/retreat.mp3-e90e6dd20211bafd0a55729506ff772f.mp3str"]
+source_file="res://Assets/Sound/Sound effects/Animals/Deer/retreat.mp3"
+dest_files=["res://.godot/imported/retreat.mp3-07eed000ec617998387f64d088dbc9be.mp3str"]
 
 [params]
 

@@ -17,9 +17,6 @@ particles_anim_h_frames = 9
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="CircleShape2D" id="22"]
-radius = 8.0
-
 [sub_resource type="CapsuleShape2D" id="2"]
 radius = 15.0
 height = 36.0
@@ -241,18 +238,6 @@ tracks/12/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("CollisionShape2D:disabled")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="10"]
 resource_name = "bite"
@@ -349,31 +334,31 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("CollisionShape2D:disabled")
+tracks/5/path = NodePath("KnockbackParticles:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("KnockbackParticles:visible")
+tracks/6/path = NodePath("Marker2D/BearClaw/CollisionShape2D:disabled")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [true, true]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Marker2D/BearClaw/CollisionShape2D:disabled")
+tracks/7/path = NodePath("Marker2D/BearBite/CollisionShape2D:disabled")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -385,19 +370,19 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Marker2D/BearBite/CollisionShape2D:disabled")
+tracks/8/path = NodePath("EnemyPoisonState/PoisonParticles/Parts1:emitting")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 2.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true, true]
+"values": [false]
 }
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("EnemyPoisonState/PoisonParticles/Parts1:emitting")
+tracks/9/path = NodePath("EnemyPoisonState/PoisonParticles/Parts2:emitting")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -409,7 +394,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("EnemyPoisonState/PoisonParticles/Parts2:emitting")
+tracks/10/path = NodePath("EnemyPoisonState/PoisonParticles/Parts3:emitting")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -421,22 +406,10 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("EnemyPoisonState/PoisonParticles/Parts3:emitting")
+tracks/11/path = NodePath("Body:material")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("Body:material")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -644,10 +617,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Bear" type="CharacterBody2D"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_34al6"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+
+[node name="Bear" type="Node2D"]
 modulate = Color(1.22, 1.22, 1.22, 1)
-collision_mask = 67
-motion_mode = 1
 script = ExtResource("2_j0bup")
 
 [node name="EnemyTornadoState" parent="." instance=ExtResource("3_7dcao")]
@@ -686,11 +662,6 @@ visible = false
 use_parent_material = true
 position = Vector2(2.08165e-12, -20)
 hframes = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -8)
-rotation = 1.5708
-shape = SubResource("22")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, -21)
@@ -784,8 +755,7 @@ one_shot = true
 wait_time = 0.3
 one_shot = true
 
-[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="timeout" from="Timers/EndChaseState" to="." method="_on_EndChaseState_timeout"]
-[connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_34al6")
 
 [editable path="EnemyPoisonState"]

@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ptjidk7r1daj"
-path="res://.godot/imported/hoed.png-fa509037296c1db8ac63a97cecda40a2.ctex"
+path="res://.godot/imported/hoed.png-250609f694b979ea6a9e17a9dc98b68c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Tilesets/terrain/hoed.png"
-dest_files=["res://.godot/imported/hoed.png-fa509037296c1db8ac63a97cecda40a2.ctex"]
+source_file="res://Assets/Tilesets/Terrain/hoed.png"
+dest_files=["res://.godot/imported/hoed.png-250609f694b979ea6a9e17a9dc98b68c.ctex"]
 
 [params]
 

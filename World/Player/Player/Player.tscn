@@ -3574,6 +3574,7 @@ libraries = {
 [node name="Magic" parent="." instance=ExtResource("8_wf6cw")]
 
 [node name="Area2Ds" type="Node2D" parent="."]
+visible = false
 script = ExtResource("11_wgncx")
 
 [node name="PickupZone" type="Area2D" parent="Area2Ds"]
@@ -3619,6 +3620,7 @@ wait_time = 2.0
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="Area2Ds/HurtBox"]
 
 [node name="Swing" parent="." instance=ExtResource("12_s0e2n")]
+visible = false
 
 [node name="Sounds" type="Node2D" parent="."]
 
@@ -3646,9 +3648,11 @@ rotation = -1.5708
 shape = SubResource("11")
 
 [node name="PoisonParticles" parent="." instance=ExtResource("19_ejmhd")]
+visible = false
 position = Vector2(0, -16)
 
 [node name="SpeedParticles" parent="." instance=ExtResource("20_bb87a")]
+visible = false
 
 [node name="HoldingTorch" type="Node2D" parent="."]
 script = ExtResource("18_56nxn")
@@ -3669,17 +3673,14 @@ animation = &"new_animation"
 frame_progress = 0.579862
 
 [node name="AttachedText" type="Node2D" parent="."]
-visible = false
 
 [node name="MessageBubble" parent="AttachedText" instance=ExtResource("28_dc8ci")]
-offset_left = 8.0
-offset_top = -17.0
-offset_right = 8.0
-offset_bottom = -17.0
+offset_top = -31.0
+offset_bottom = -31.0
 
 [node name="Username" type="Label" parent="AttachedText"]
-offset_left = -36.0
-offset_right = 993.0
+offset_left = -62.0
+offset_right = 1709.0
 offset_bottom = 162.0
 scale = Vector2(0.07, 0.07)
 theme = ExtResource("28_3r6uk")

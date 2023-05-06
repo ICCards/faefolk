@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://dhunkm3bydiic"
-path="res://.godot/imported/quack.mp3-e9b2acc2811b2f8f2b043e0beccacdac.mp3str"
+path="res://.godot/imported/quack.mp3-637825eb8de6534725e8b1ab12604158.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Sound effects/animals/duck/quack.mp3"
-dest_files=["res://.godot/imported/quack.mp3-e9b2acc2811b2f8f2b043e0beccacdac.mp3str"]
+source_file="res://Assets/Sound/Sound effects/Animals/duck/quack.mp3"
+dest_files=["res://.godot/imported/quack.mp3-637825eb8de6534725e8b1ab12604158.mp3str"]
 
 [params]
 

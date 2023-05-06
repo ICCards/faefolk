@@ -1,11 +1,15 @@
+CenterContainer
+MarginContainer
+NinePatchRect
+MultiplayerSynchronizer
 Node2D
+MultiplayerSpawner
+CollisionPolygon2D
+Area2D
 CanvasModulate
 AudioStreamPlayer
 Node
 CharacterBody2D
-Area2D
-MultiplayerSynchronizer
-MultiplayerSpawner
 TextureProgressBar
 ProgressBar
 Control
@@ -15,7 +19,6 @@ Label
 Button
 TextureRect
 AudioStreamPlayer2D
-MarginContainer
 VBoxContainer
 PanelContainer
 CanvasLayer
@@ -28,5 +31,3 @@ NavigationRegion2D
 NavigationLink2D
 CanvasGroup
 AnimationPlayer
-Sprite2D
-StaticBody2D

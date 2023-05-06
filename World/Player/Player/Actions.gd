@@ -53,6 +53,7 @@ func _input(event):
 			if current_interactive_node:
 				var id = current_interactive_node.name
 				var location = current_interactive_node.location
+				get_parent().current_interactice_area_location = current_interactive_node.location
 				var chunk = MapData.get_chunk_from_location(location)
 				match current_interactive_node.object_name:
 					"bed":
@@ -68,7 +69,7 @@ func _input(event):
 						if Server.world.world[chunk]["placeable"].has(id):
 							if not Server.world.world[chunk]["placeable"][id]["o"]:
 								Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
-								get_parent().user_interface.open_crate(current_interactive_node.name,location)
+								get_parent().user_interface.open_crate(current_interactive_node.name)
 					"barrel":
 						if Server.world.world[chunk]["placeable"].has(id):
 							if not Server.world.world[chunk]["placeable"][id]["o"]:
@@ -90,12 +91,12 @@ func _input(event):
 						if Server.world.world[chunk]["placeable"].has(id):
 							if not Server.world.world[chunk]["placeable"][id]["o"]:
 								Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
-								get_parent().user_interface.open_chest(current_interactive_node.name,location)
+								get_parent().user_interface.open_chest(current_interactive_node.name)
 					"campfire":
 						if Server.world.world[chunk]["placeable"].has(id):
 							if not Server.world.world[chunk]["placeable"][id]["o"]:
 								Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location,})
-								get_parent().user_interface.open_campfire(current_interactive_node.name,location)
+								get_parent().user_interface.open_campfire(current_interactive_node.name)
 					"brewing table":
 						get_parent().user_interface.toggle_brewing_table(current_interactive_node.name, current_interactive_node.object_level)
 					"chair":

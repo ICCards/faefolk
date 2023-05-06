@@ -12,12 +12,12 @@ func _ready():
 	initialize()
 
 func initialize():
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/pick up item.mp3")
-	sound_effects.play()
 	$AnimationPlayer.call_deferred("stop")
 	set_deferred("modulate", Color("ffffff"))
 	if item_name != "Inventory full!":
+		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/pick up item.mp3")
+		sound_effects.play()
 		$Icon.set_deferred("texture", load("res://Assets/Images/inventory_icons/" + JsonData.item_data[item_name]["ItemCategory"] + "/" + item_name + ".png"))
 		$ItemName.set_deferred("text", Util.capitalizeFirstLetter(item_name))
 		await get_tree().process_frame

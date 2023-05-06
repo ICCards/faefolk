@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://c1cvfv3r8apmv"
-path="res://.godot/imported/egg break.mp3-117068a0ff50ab5ea7b0b228dc091cb5.mp3str"
+path="res://.godot/imported/egg break.mp3-a2dc02a4c0aad0585b7da169b2b77d5d.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Sound effects/animals/duck/egg break.mp3"
-dest_files=["res://.godot/imported/egg break.mp3-117068a0ff50ab5ea7b0b228dc091cb5.mp3str"]
+source_file="res://Assets/Sound/Sound effects/Animals/duck/egg break.mp3"
+dest_files=["res://.godot/imported/egg break.mp3-a2dc02a4c0aad0585b7da169b2b77d5d.mp3str"]
 
 [params]
 

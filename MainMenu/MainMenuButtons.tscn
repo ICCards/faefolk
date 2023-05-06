@@ -38,40 +38,11 @@ theme_override_constants/outline_size = 38
 text = "JOIN"
 horizontal_alignment = 1
 
-[node name="Host" type="Sprite2D" parent="PlayShopQuit"]
-position = Vector2(0, 162)
-
-[node name="PlaySprite" type="Sprite2D" parent="PlayShopQuit/Host"]
-scale = Vector2(6, 6)
-texture = ExtResource("2_bagk8")
-
-[node name="PlayLabel" type="Label" parent="PlayShopQuit/Host"]
-offset_left = -150.0
-offset_top = -67.0
-offset_right = 532.0
-offset_bottom = 95.0
-scale = Vector2(0.5, 0.5)
-theme = ExtResource("3_0bwq0")
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 8
-theme_override_constants/shadow_offset_y = 8
-theme_override_constants/outline_size = 38
-text = "HOST"
-horizontal_alignment = 1
-
 [node name="PlayBtn" type="Button" parent="PlayShopQuit"]
 offset_left = -264.0
 offset_top = -74.0
 offset_right = 266.0
 offset_bottom = 72.0
-focus_mode = 0
-flat = true
-
-[node name="HostBtn" type="Button" parent="PlayShopQuit"]
-offset_left = -266.0
-offset_top = 89.0
-offset_right = 264.0
-offset_bottom = 235.0
 focus_mode = 0
 flat = true
 
@@ -81,6 +52,3 @@ volume_db = -28.0
 [connection signal="mouse_entered" from="PlayShopQuit/PlayBtn" to="." method="_on_PlayBtn_mouse_entered"]
 [connection signal="mouse_exited" from="PlayShopQuit/PlayBtn" to="." method="_on_PlayBtn_mouse_exited"]
 [connection signal="pressed" from="PlayShopQuit/PlayBtn" to="." method="_on_PlayBtn_pressed"]
-[connection signal="mouse_entered" from="PlayShopQuit/HostBtn" to="." method="_on_host_btn_mouse_entered"]
-[connection signal="mouse_exited" from="PlayShopQuit/HostBtn" to="." method="_on_host_btn_mouse_exited"]
-[connection signal="pressed" from="PlayShopQuit/HostBtn" to="." method="_on_host_btn_pressed"]

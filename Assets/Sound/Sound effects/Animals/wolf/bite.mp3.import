@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://c2thybc2ucbv5"
-path="res://.godot/imported/bite.mp3-f08203e13975bdc65dd77eace02c39ec.mp3str"
+path="res://.godot/imported/bite.mp3-797c305de5b707cc0a813de6a4c79e74.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Sound effects/animals/wolf/bite.mp3"
-dest_files=["res://.godot/imported/bite.mp3-f08203e13975bdc65dd77eace02c39ec.mp3str"]
+source_file="res://Assets/Sound/Sound effects/Animals/wolf/bite.mp3"
+dest_files=["res://.godot/imported/bite.mp3-797c305de5b707cc0a813de6a4c79e74.mp3str"]
 
 [params]
 

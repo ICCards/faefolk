@@ -1,32 +1,32 @@
 [gd_scene load_steps=40 format=3 uid="uid://cu53le5o0b1us"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_miuy3"]
-[ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="2_jxniw"]
+[ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/Terrain/CL_MainLev.png" id="2_jxniw"]
 [ext_resource type="Script" path="res://World/World/WorldBuilder.gd" id="2_mbtah"]
-[ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/terrain/tres files/plains.tres" id="3_s3xh1"]
+[ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/Terrain/tres files/plains.tres" id="3_s3xh1"]
 [ext_resource type="Script" path="res://World/World/SpawnAnimal.gd" id="3_xbv0j"]
 [ext_resource type="Script" path="res://World/World/BuildNature.gd" id="4_lnadh"]
-[ext_resource type="TileSet" uid="uid://bpd6si5cldst7" path="res://Assets/Tilesets/terrain/tres files/deep ocean.tres" id="4_prix1"]
-[ext_resource type="TileSet" uid="uid://3x3xfgwqdrhm" path="res://Assets/Tilesets/terrain/tres files/dirt.tres" id="5_5eaio"]
+[ext_resource type="TileSet" uid="uid://bpd6si5cldst7" path="res://Assets/Tilesets/Terrain/tres files/deep ocean.tres" id="4_prix1"]
+[ext_resource type="TileSet" uid="uid://3x3xfgwqdrhm" path="res://Assets/Tilesets/Terrain/tres files/dirt.tres" id="5_5eaio"]
 [ext_resource type="Script" path="res://World/World/BuildTerrain.gd" id="5_oye32"]
-[ext_resource type="TileSet" uid="uid://de28nfavviio7" path="res://Assets/Tilesets/terrain/elevated terrain.tres" id="6_1xuhk"]
+[ext_resource type="TileSet" uid="uid://de28nfavviio7" path="res://Assets/Tilesets/Terrain/elevated terrain.tres" id="6_1xuhk"]
 [ext_resource type="Script" path="res://Time.gd" id="6_j6htr"]
-[ext_resource type="TileSet" uid="uid://ceprqmvmkacdl" path="res://Assets/Tilesets/terrain/tres files/forest.tres" id="7_rcnxi"]
-[ext_resource type="TileSet" uid="uid://dja0b16fhgms6" path="res://Assets/Tilesets/terrain/tres files/freshwater.tres" id="8_4ak2k"]
-[ext_resource type="TileSet" uid="uid://c0mxloskuawnh" path="res://Assets/Tilesets/terrain/tres files/waves.tres" id="9_d86tr"]
-[ext_resource type="TileSet" uid="uid://d2u2dc22ifh2g" path="res://Assets/Tilesets/terrain/tres files/snow.tres" id="10_8wevp"]
-[ext_resource type="TileSet" uid="uid://2bxso62kg8ee" path="res://Assets/Tilesets/terrain/tres files/wet sand.tres" id="11_yth4k"]
+[ext_resource type="TileSet" uid="uid://ceprqmvmkacdl" path="res://Assets/Tilesets/Terrain/tres files/forest.tres" id="7_rcnxi"]
+[ext_resource type="TileSet" uid="uid://dja0b16fhgms6" path="res://Assets/Tilesets/Terrain/tres files/freshwater.tres" id="8_4ak2k"]
+[ext_resource type="TileSet" uid="uid://c0mxloskuawnh" path="res://Assets/Tilesets/Terrain/tres files/waves.tres" id="9_d86tr"]
+[ext_resource type="TileSet" uid="uid://d2u2dc22ifh2g" path="res://Assets/Tilesets/Terrain/tres files/snow.tres" id="10_8wevp"]
+[ext_resource type="TileSet" uid="uid://2bxso62kg8ee" path="res://Assets/Tilesets/Terrain/tres files/wet sand.tres" id="11_yth4k"]
 [ext_resource type="TileSet" uid="uid://33tw24vxmev3" path="res://Assets/Tilesets/foundation/foundation.tres" id="12_rvnjk"]
 [ext_resource type="TileSet" uid="uid://cxyw1xxxhvjda" path="res://Assets/Tilesets/walls/walls.tres" id="13_jebsi"]
-[ext_resource type="TileSet" uid="uid://bmjc5ou5oyowx" path="res://Assets/Tilesets/objects/objects.tres" id="14_b3xb4"]
-[ext_resource type="TileSet" uid="uid://cck8nnl37f05f" path="res://Assets/Tilesets/terrain/tres files/sand.tres" id="14_ogu2e"]
+[ext_resource type="TileSet" uid="uid://bmjc5ou5oyowx" path="res://Assets/Tilesets/Objects/objects.tres" id="14_b3xb4"]
+[ext_resource type="TileSet" uid="uid://cck8nnl37f05f" path="res://Assets/Tilesets/Terrain/tres files/sand.tres" id="14_ogu2e"]
 [ext_resource type="PackedScene" uid="uid://c66ktnntnkqrx" path="res://World/Map/WorldMap.tscn" id="16_fydq0"]
-[ext_resource type="TileSet" uid="uid://bd1f000cjndwj" path="res://Assets/Tilesets/terrain/tres files/shallow ocean.tres" id="18_wb3fl"]
+[ext_resource type="TileSet" uid="uid://bd1f000cjndwj" path="res://Assets/Tilesets/Terrain/tres files/shallow ocean.tres" id="18_wb3fl"]
 [ext_resource type="Script" path="res://NatureObjects.gd" id="20_dvf2e"]
 [ext_resource type="Script" path="res://PlaceableObjects.gd" id="20_hue5x"]
 [ext_resource type="Script" path="res://FarmingTiles.gd" id="21_0dt81"]
-[ext_resource type="TileSet" uid="uid://dnvo01hfnktxd" path="res://Assets/Tilesets/terrain/tres files/hoed.tres" id="21_sck8f"]
-[ext_resource type="TileSet" uid="uid://bctmvj3yosupc" path="res://Assets/Tilesets/terrain/tres files/watered hoed.tres" id="22_mim6n"]
+[ext_resource type="TileSet" uid="uid://dnvo01hfnktxd" path="res://Assets/Tilesets/Terrain/tres files/hoed.tres" id="21_sck8f"]
+[ext_resource type="TileSet" uid="uid://bctmvj3yosupc" path="res://Assets/Tilesets/Terrain/tres files/watered hoed.tres" id="22_mim6n"]
 [ext_resource type="Script" path="res://ItemDrops.gd" id="22_nrbfv"]
 [ext_resource type="Script" path="res://ForageObjects.gd" id="23_k1cnp"]
 [ext_resource type="Script" path="res://GrassObjects.gd" id="25_yatu0"]
@@ -3347,41 +3347,6 @@ fog_sun_scatter = 0.64
 y_sort_enabled = true
 script = ExtResource("1_miuy3")
 
-[node name="Menu" type="CanvasLayer" parent="."]
-
-[node name="MainMenu" type="PanelContainer" parent="Menu"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -59.0
-offset_top = -74.0
-offset_right = 59.0
-offset_bottom = 74.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Menu/MainMenu"]
-layout_mode = 2
-theme_override_constants/margin_left = 15
-theme_override_constants/margin_top = 15
-theme_override_constants/margin_right = 15
-theme_override_constants/margin_bottom = 15
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MainMenu/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 15
-
-[node name="Label" type="Label" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Main Menu"
-horizontal_alignment = 1
-
-[node name="JoinBtn" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Join"
-
 [node name="WorldBuilder" type="Node" parent="."]
 script = ExtResource("2_mbtah")
 
@@ -3426,6 +3391,7 @@ modulate = Color(1.4, 1.4, 1.4, 1)
 tile_set = ExtResource("3_s3xh1")
 cell_quadrant_size = 8
 format = 2
+layer_0/z_index = -4
 
 [node name="DeepOcean" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
@@ -3443,6 +3409,7 @@ format = 2
 modulate = Color(1.2, 1.2, 1.2, 1)
 tile_set = ExtResource("7_rcnxi")
 format = 2
+layer_0/z_index = -4
 
 [node name="Elevation" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
@@ -3546,8 +3513,12 @@ script = ExtResource("22_nrbfv")
 _spawnable_scenes = PackedStringArray("res://InventoryLogic/ItemDrop.tscn")
 spawn_path = NodePath("..")
 
-[node name="Enemies" type="Node2D" parent="."]
+[node name="Mobs" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Mobs"]
+_spawnable_scenes = PackedStringArray("res://World/Animals/Bear.tscn")
+spawn_path = NodePath("..")
 
 [node name="Projectiles" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -3576,7 +3547,6 @@ visible = false
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yn58q")
 
-[connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/JoinBtn" to="." method="_on_join_btn_pressed"]
 [connection signal="timeout" from="WorldBuilder/SpawnAnimal/SpawnAnimalTimer" to="WorldBuilder/SpawnAnimal" method="_on_spawn_animal_timer_timeout"]
 [connection signal="timeout" from="WorldBuilder/BuildNature/SpawnNatureTimer" to="WorldBuilder/BuildNature" method="_on_spawn_nature_timer_timeout"]
 [connection signal="timeout" from="WorldBuilder/BuildTerrain/BuildTerrainTimer" to="WorldBuilder/BuildTerrain" method="_on_build_terrain_timer_timeout"]

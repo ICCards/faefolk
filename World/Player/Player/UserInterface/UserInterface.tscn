@@ -349,7 +349,6 @@ text = "V"
 horizontal_alignment = 1
 
 [node name="ChatBox" parent="." instance=ExtResource("10_stju0")]
-visible = false
 offset_top = 520.0
 offset_bottom = 75.0
 
