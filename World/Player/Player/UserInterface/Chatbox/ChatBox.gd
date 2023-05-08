@@ -29,7 +29,7 @@ func ReceiveMessage(player_id, message):
 func add_message(data):
 	var player_id = data["player_id"]
 	var message = data["m"]
-	if player_id == Server.player_id:
+	if player_id == Server.player_node.name:
 		display_message(player_id, message, '#00e7ff')
 	else:
 		display_message(player_id, message, '#ffffff')
@@ -58,9 +58,12 @@ func display_message(username, text, color):
 
 
 func _on_LineEdit_focus_entered():
+	inputField.placeholder_text = ""
 	PlayerData.chatMode = true
 
 func _on_LineEdit_focus_exited():
+	inputField.text = ""
+	inputField.placeholder_text ="Press ENT to enter / ESC to exit"
 	PlayerData.chatMode = false
 
 

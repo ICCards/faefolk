@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://bdyinn6aswyx7"]
+[gd_scene load_steps=72 format=3 uid="uid://bdyinn6aswyx7"]
 
 [ext_resource type="Script" path="res://World/Player/Player/Player.gd" id="1_hovno"]
 [ext_resource type="PackedScene" uid="uid://1ca7mk73gpp0" path="res://World/Player/Player/Actions.tscn" id="2_dmkl7"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bdpp83on80ake" path="res://World/Player/Player/Magic.tscn" id="8_wf6cw"]
 [ext_resource type="Texture2D" uid="uid://byxsajdug1vn5" path="res://Characters/Weapon swings/scythe sword swing/scythe/down.png" id="9_0sqbd"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://utxboaqigwsd" path="res://Assets/Images/inventory_icons/Resource/wood.png" id="10_7rpna"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/PickupZone.gd" id="11_vhk27"]
 [ext_resource type="Script" path="res://World/Player/Player/Area2Ds.gd" id="11_wgncx"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/HurtBox.gd" id="12_7dou1"]
@@ -3556,8 +3557,11 @@ hframes = 4
 
 [node name="HoldingItem" type="TextureRect" parent="CompositeSprites"]
 visible = false
-offset_top = -16.0
-offset_right = 16.0
+offset_left = -8.0
+offset_top = -42.0
+offset_right = 8.0
+offset_bottom = -26.0
+texture = ExtResource("10_7rpna")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
 root_node = NodePath("../..")
@@ -3658,10 +3662,10 @@ visible = false
 script = ExtResource("18_56nxn")
 
 [node name="Light" type="PointLight2D" parent="HoldingTorch"]
-visible = false
 position = Vector2(0, -32)
 enabled = false
 energy = 1.05
+blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("10")
 
@@ -3670,20 +3674,24 @@ visible = false
 position = Vector2(0, -40)
 sprite_frames = SubResource("117")
 animation = &"new_animation"
-frame_progress = 0.579862
+autoplay = "new_animation"
+frame_progress = 0.350395
 
 [node name="AttachedText" type="Node2D" parent="."]
+visible = false
 
 [node name="MessageBubble" parent="AttachedText" instance=ExtResource("28_dc8ci")]
-offset_top = -31.0
-offset_bottom = -31.0
+offset_top = -32.0
+offset_bottom = -32.0
 
 [node name="Username" type="Label" parent="AttachedText"]
 offset_left = -62.0
-offset_right = 1709.0
-offset_bottom = 162.0
-scale = Vector2(0.07, 0.07)
+offset_right = 2418.0
+offset_bottom = 196.0
+scale = Vector2(0.05, 0.05)
 theme = ExtResource("28_3r6uk")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 32
 text = "chuse.icp"
 horizontal_alignment = 1
 

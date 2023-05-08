@@ -1,3 +1,7 @@
+CanvasLayer
+CanvasModulate
+Camera2D
+AnimationPlayer
 CenterContainer
 MarginContainer
 NinePatchRect
@@ -6,7 +10,6 @@ Node2D
 MultiplayerSpawner
 CollisionPolygon2D
 Area2D
-CanvasModulate
 AudioStreamPlayer
 Node
 CharacterBody2D
@@ -14,14 +17,12 @@ TextureProgressBar
 ProgressBar
 Control
 AnimatedSprite2D
-Camera2D
 Label
 Button
 TextureRect
 AudioStreamPlayer2D
 VBoxContainer
 PanelContainer
-CanvasLayer
 TileMap
 Timer
 CollisionShape2D
@@ -29,5 +30,3 @@ Line2D
 VisibleOnScreenNotifier2D
 NavigationRegion2D
 NavigationLink2D
-CanvasGroup
-AnimationPlayer

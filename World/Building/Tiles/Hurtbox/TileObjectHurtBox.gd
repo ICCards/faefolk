@@ -119,6 +119,7 @@ func set_dimensions():
 		if opened_or_light_toggled:
 			interactives.turn_on_fireplace(true)
 	elif item_name == "torch":
+		movement_collision.set_deferred("disabled", true)
 		$PointLight2D.set_deferred("enabled", true)
 	elif item_name == "campfire":
 		add_campfire_interactive_area_node("campfire")
@@ -194,6 +195,9 @@ func hit(data):
 	health -= 1
 	$ResetTempHealthTimer.call_deferred("start")
 
+
+
+
 func destroy(data):
 	if not destroyed:
 		destroyed = true
@@ -222,38 +226,31 @@ func destroy(data):
 		call_deferred("queue_free")
 
 
-func _on_ResetTempHealthTimer_timeout():
-	health = 3
-
 func _physics_process(delta):
-	pass
-#	if PlayerData.normal_hotbar_mode:
-#		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
-#			var selected_hotbar_item = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
-#			if selected_hotbar_item == "hammer":
-#				if $Marker2D/Btn.is_hovered():
-#					Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/grabber.png"))
-
+	#if PlayerData.normal_hotbar_mode:
+		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+			var selected_hotbar_item = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
+			if selected_hotbar_item == "hammer":
+				if $Marker2D/Btn.is_hovered():
+					Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/grabber.png"))
 
 func _on_btn_pressed():
-	pass
-#	if PlayerData.normal_hotbar_mode:
-#		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
-#			var selected_hotbar_item = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
-#			if selected_hotbar_item == "hammer" and not Server.player_node.has_node("PlaceObject") and not Server.player_node.has_node("MoveObject"):
-#				var dimensions = Constants.dimensions_dict[item_name]
-#				if direction == "left" or direction == "right":
-#					Tiles.add_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
-#				else:
-#					Tiles.add_valid_tiles(location, dimensions)
-#				Tiles.object_tiles.erase_cell(0,location)
-#				MapData.remove_object("placeable",name,location)
-#				Server.player_node.actions.move_placeable_object({"id":name,"n":item_name,"d":direction,"v":variety,"l":location,"h":health})
-#				Sounds.play_pick_up_placeable_object()
-#				queue_free()
-	
+	print("BTN PRESSED")
+	if PlayerData.normal_hotbar_mode:
+		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
+			var selected_hotbar_item = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
+			if selected_hotbar_item == "hammer" and not Server.player_node.has_node("PlaceObject") and not Server.player_node.has_node("MoveObject"):
+				var dimensions = Constants.dimensions_dict[item_name]
+				if direction == "left" or direction == "right":
+					Tiles.add_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
+				else:
+					Tiles.add_valid_tiles(location, dimensions)
+				Tiles.object_tiles.erase_cell(0,location)
+				MapData.remove_object("placeable",name,location)
+				Server.player_node.actions.move_placeable_object({"id":name,"n":item_name,"d":direction,"v":variety,"l":location,"h":health})
+				Sounds.play_pick_up_placeable_object()
+				queue_free()
 
 func _on_btn_mouse_exited():
-	pass
-#	if not Server.player_node.has_node("PlaceObject") and not Server.player_node.has_node("MoveObject"):
-#		Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/cursor.png"))
+	if not Server.player_node.has_node("PlaceObject") and not Server.player_node.has_node("MoveObject"):
+		Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/cursor.png"))

@@ -87,6 +87,38 @@ _data = {
 "lightning day": SubResource("19")
 }
 
+[sub_resource type="SpriteFrames" id="22"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_wlu5k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tq2d6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ela15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_k0pdh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6e6cq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_13luq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_y8wut")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_0pw86")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
 [sub_resource type="Animation" id="20"]
 length = 0.001
 tracks/0/type = "value"
@@ -172,38 +204,6 @@ _data = {
 "sleep": SubResource("21")
 }
 
-[sub_resource type="SpriteFrames" id="22"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_wlu5k")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_tq2d6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_ela15")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_k0pdh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_6e6cq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_13luq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_y8wut")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_0pw86")
-}],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
-}]
-
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource("1_pv3v8")
 
@@ -230,30 +230,6 @@ offset_right = 1280.0
 offset_bottom = 720.0
 mouse_filter = 2
 color = Color(1, 0, 0, 0)
-
-[node name="SleepEffect" type="ColorRect" parent="."]
-visible = false
-offset_right = 1280.0
-offset_bottom = 720.0
-mouse_filter = 2
-color = Color(0, 0, 0, 0.552941)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="SleepEffect"]
-libraries = {
-"": SubResource("AnimationLibrary_ll8n3")
-}
-
-[node name="SavingProgress" type="RichTextLabel" parent="SleepEffect"]
-visible = false
-layout_mode = 0
-offset_left = 20.0
-offset_top = 640.0
-offset_right = 1217.0
-offset_bottom = 863.0
-scale = Vector2(0.35, 0.35)
-theme = ExtResource("6_rh7sc")
-bbcode_enabled = true
-text = "Saving progress"
 
 [node name="RadialUpgradeMenu" parent="." instance=ExtResource("4_nwvkq")]
 visible = false
@@ -324,10 +300,10 @@ texture = ExtResource("7_u87cj")
 
 [node name="VarietyLabel" type="Label" parent="ChangeVariety"]
 layout_mode = 0
-offset_left = 712.0
+offset_left = 675.0
 offset_top = 570.0
-offset_right = 1579.0
-offset_bottom = 754.0
+offset_right = 1663.0
+offset_bottom = 766.0
 scale = Vector2(0.22, 0.22)
 theme = ExtResource("6_rh7sc")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -347,10 +323,6 @@ scale = Vector2(0.25, 0.25)
 theme = ExtResource("6_rh7sc")
 text = "V"
 horizontal_alignment = 1
-
-[node name="ChatBox" parent="." instance=ExtResource("10_stju0")]
-offset_top = 520.0
-offset_bottom = 75.0
 
 [node name="LoadingIndicator" type="Panel" parent="."]
 visible = false
@@ -392,6 +364,10 @@ text = "[wave amp=75]Saving progress..."
 
 [node name="ItemPickUpDialogue" parent="." instance=ExtResource("19_n03k2")]
 
+[node name="ChatBox" parent="." instance=ExtResource("10_stju0")]
+offset_top = 520.0
+offset_bottom = 75.0
+
 [node name="CombatHotbar" parent="." instance=ExtResource("16_cnrm0")]
 visible = false
 
@@ -402,6 +378,30 @@ visible = false
 
 [node name="LoadingScreen" parent="." instance=ExtResource("4")]
 visible = false
+
+[node name="SleepEffect" type="ColorRect" parent="."]
+visible = false
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.552941)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SleepEffect"]
+libraries = {
+"": SubResource("AnimationLibrary_ll8n3")
+}
+
+[node name="SavingProgress" type="RichTextLabel" parent="SleepEffect"]
+visible = false
+layout_mode = 0
+offset_left = 20.0
+offset_top = 640.0
+offset_right = 1860.0
+offset_bottom = 863.0
+scale = Vector2(0.35, 0.35)
+theme = ExtResource("6_rh7sc")
+bbcode_enabled = true
+text = "[wave freq=2]Saving respawn location..."
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 

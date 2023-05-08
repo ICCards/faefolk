@@ -1,8 +1,10 @@
-[gd_scene load_steps=40 format=3 uid="uid://cu53le5o0b1us"]
+[gd_scene load_steps=42 format=3 uid="uid://cu53le5o0b1us"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_miuy3"]
 [ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/Terrain/CL_MainLev.png" id="2_jxniw"]
 [ext_resource type="Script" path="res://World/World/WorldBuilder.gd" id="2_mbtah"]
+[ext_resource type="PackedScene" uid="uid://3vr0ijbqi0bd" path="res://MainMenu/LoadingScreen.tscn" id="2_yrny3"]
+[ext_resource type="Script" path="res://World/World/WorldAmbience.gd" id="3_136d5"]
 [ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/Terrain/tres files/plains.tres" id="3_s3xh1"]
 [ext_resource type="Script" path="res://World/World/SpawnAnimal.gd" id="3_xbv0j"]
 [ext_resource type="Script" path="res://World/World/BuildNature.gd" id="4_lnadh"]
@@ -3346,6 +3348,14 @@ fog_sun_scatter = 0.64
 [node name="Main" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_miuy3")
+
+[node name="InitLoadScreen" type="CanvasLayer" parent="."]
+
+[node name="LoadingScreen" parent="InitLoadScreen" instance=ExtResource("2_yrny3")]
+
+[node name="WorldAmbience" type="CanvasModulate" parent="."]
+color = Color(0.196078, 0.196078, 0.215686, 1)
+script = ExtResource("3_136d5")
 
 [node name="WorldBuilder" type="Node" parent="."]
 script = ExtResource("2_mbtah")

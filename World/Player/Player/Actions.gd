@@ -35,8 +35,8 @@ func _ready():
 
 func _input(event):
 	if not get_node("../").is_multiplayer_authority(): return
-	if Server.player_node.state == 0 and get_parent().user_interface.holding_item == null and not PlayerData.viewMapMode:
-		if event.is_action_pressed("action") and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode:
+	if Server.player_node.state == 0 and get_parent().user_interface.holding_item == null and not PlayerData.viewMapMode and not PlayerData.chatMode and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode:
+		if event.is_action_pressed("action"):
 			if $DetectInteractiveArea.get_overlapping_areas().size() > 0:
 				for new_node in $DetectInteractiveArea.get_overlapping_areas():
 					if is_instance_valid(new_node):
@@ -53,7 +53,7 @@ func _input(event):
 			if current_interactive_node:
 				var id = current_interactive_node.name
 				var location = current_interactive_node.location
-				get_parent().current_interactice_area_location = current_interactive_node.location
+				get_parent().user_interface.current_interactice_area_location = current_interactive_node.location
 				var chunk = MapData.get_chunk_from_location(location)
 				match current_interactive_node.object_name:
 					"bed":
@@ -268,7 +268,8 @@ func player_death():
 		get_node("../Sounds/FootstepsSound").stream_paused = true
 		get_node("../PoisonParticles").stop_poison_state()
 		get_node("../SpeedParticles").stop_speed_buff()
-		get_parent().composite_sprites.set_player_animation(Server.player_node.character, "death_" + get_parent().direction.to_lower(), null)
+		get_parent().animation = "death_" + get_parent().direction.to_lower()
+		get_parent().composite_sprites.set_player_animation(Server.player_node.character, get_parent().animation, null)
 		get_parent().animation_player.play("death")
 		get_node("../Camera2D/UserInterface").death()
 		get_node("../Area2Ds/PickupZone/CollisionShape2D").set_deferred("disabled", true) 
@@ -320,22 +321,15 @@ func sleep(sleeping_bag_pos):
 		get_parent().state = get_parent().SLEEPING
 		get_parent().position = sleeping_bag_pos + Vector2i(16,8)
 		get_parent().animation_player.play("sleep")
+		get_parent().animation = "sleep_down"
 		get_parent().composite_sprites.set_player_animation(get_parent().character, "sleep_down")
 		get_parent().user_interface.get_node("SleepEffect/AnimationPlayer").play("sleep")
 		await get_parent().user_interface.get_node("SleepEffect/AnimationPlayer").animation_finished
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
-		PlayerData.player_data["current_save_location"] = player_enter_position/16
-		PlayerData.player_data["current_save_scene"] = "res://World/Overworld/Overworld.tscn"
-		PlayerData.player_data["respawn_scene"] = "res://World/Overworld/Overworld.tscn"
 		PlayerData.player_data["respawn_location"] = player_enter_position/16
 		await get_tree().process_frame
-		game_state = GameState.new()
-		game_state.world_state = MapData.world
-		game_state.cave_state = MapData.caves
-		game_state.player_state = PlayerData.player_data
-		game_state.save_state()
 		get_parent().position = player_enter_position
 		get_parent().z_index = 0
 		get_parent().composite_sprites.rotation_degrees = 0

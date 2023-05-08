@@ -17,6 +17,14 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_8uiwe")
 
+[node name="Overlay" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = 18.0
+offset_right = 108.0
+offset_bottom = 71.0
+scale = Vector2(3, 3)
+texture = ExtResource("3_qv4gt")
+
 [node name="Bg" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 108.0
@@ -32,8 +40,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 6.0
 offset_top = 17.0
-offset_right = 2644.0
-offset_bottom = 1512.0
+offset_right = 2664.0
+offset_bottom = 1502.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.1, 0.1)
@@ -54,6 +62,7 @@ mouse_filter = 2
 theme_override_constants/separation = 40
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("4_lvths")
 text = "[WORLD]"
@@ -63,21 +72,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_lvths")
 placeholder_text = "Press ENT to enter / ESC to exit"
-flat = true
-
-[node name="Overlay" type="TextureRect" parent="."]
-layout_mode = 0
-offset_top = 18.0
-offset_right = 108.0
-offset_bottom = 71.0
-scale = Vector2(3, 3)
-texture = ExtResource("3_qv4gt")
-
-[node name="ToggleChatBox" type="Button" parent="."]
-layout_mode = 0
-offset_top = 3.0
-offset_right = 324.0
-offset_bottom = 17.0
 flat = true
 
 [connection signal="focus_entered" from="VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_LineEdit_focus_entered"]

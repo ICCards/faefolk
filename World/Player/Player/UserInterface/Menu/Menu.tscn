@@ -110,6 +110,7 @@ offset_left = 846.0
 offset_top = 117.0
 offset_right = 867.0
 offset_bottom = 130.0
+disabled = true
 texture_normal = ExtResource("4")
 texture_pressed = ExtResource("11")
 metadata/_edit_lock_ = true

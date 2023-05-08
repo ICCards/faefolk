@@ -67,6 +67,7 @@ func _ready():
 		set_process(false)
 		await get_tree().create_timer(8.0).timeout
 		composite_sprites.show()
+		$AttachedText.show()
 		return
 	position = Vector2(500*16,500*16)
 	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
@@ -76,6 +77,7 @@ func _ready():
 	$Camera2D/UserInterface/LoadingScreen.initialize(8)
 	await get_tree().create_timer(8.0).timeout
 	composite_sprites.show()
+	$AttachedText.show()
 	state = MOVEMENT
 	set_held_object()
 	Server.isLoaded = true
@@ -154,19 +156,6 @@ func set_current_object(item_name):
 		item_category = JsonData.item_data[item_name]["ItemCategory"]
 	else:
 		item_category = null
-#	holding_item_name = item_name
-	# Holding item
-#	if Util.valid_holding_item_category(item_category):
-#		holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
-#		holding_item.show()
-#		$HoldingTorch.set_inactive()
-#	elif item_name == "torch":
-#		holding_item.hide()
-#		$HoldingTorch.set_active()
-#	else:
-#		holding_item.hide()
-#		$HoldingTorch.set_inactive()
-	# Placable object
 	if item_category == "Placeable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg" and item_name != "green grass" and item_name != "red grass" and item_name != "yellow grass" and item_name != "dark green grass"):
 		actions.show_placeable_object(item_name, item_category)
 		return
@@ -214,7 +203,7 @@ func set_movement_speed_change():
 
 func _unhandled_input(event):
 	#if not syncronizer.is_multiplayer_authority(): return
-	if not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and not PlayerData.interactive_screen_mode and not PlayerData.viewMapMode and state == MOVEMENT and Sounds.current_footsteps_sound != Sounds.swimming: 
+	if not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and not PlayerData.interactive_screen_mode and not PlayerData.viewMapMode and not PlayerData.chatMode and state == MOVEMENT and Sounds.current_footsteps_sound != Sounds.swimming: 
 		if PlayerData.normal_hotbar_mode:
 			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
@@ -327,7 +316,7 @@ func magic_casting_movement_state(_delta):
 
 
 func movement_state(delta):
-	if not PlayerData.viewInventoryMode and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
+	if not PlayerData.viewInventoryMode and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode and not PlayerData.chatMode:
 		set_movement_speed_change()
 		input_vector = Vector2.ZERO
 		if Input.is_action_pressed("move up"):
@@ -433,7 +422,7 @@ func walk_state(_direction):
 			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and PlayerData.normal_hotbar_mode:
 				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
-				if Util.valid_holding_item_category(item_category) or item_name == "torch":
+				if Util.valid_holding_item_category(item_category):
 					holding_item_name = item_name
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 					holding_item.show()

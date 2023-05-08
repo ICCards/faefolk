@@ -95,6 +95,7 @@ script = ExtResource("1")
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="SwitchHotbarBtn" type="TextureButton" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 954.0
 offset_top = 666.0

@@ -92,4 +92,5 @@ func slot_gui_input(event: InputEvent, slot):
 
 
 func _on_SwitchHotbarBtn_pressed():
+	return
 	get_parent().switch_hotbar()

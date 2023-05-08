@@ -43,35 +43,34 @@ enum {
 }
 
 func _ready():
-	if not get_node("../../").is_multiplayer_authority(): queue_free()
 	await get_tree().create_timer(0.25).timeout
 	$Menu.hide()
 	add_hotbar_clock_and_stats()
-
-func save_player_data(exit_to_main_menu):
-	$LoadingIndicator.show()
-	$Hotbar.hide()
-	$CombatHotbar.hide()
-	$PlayerDataUI.hide()
-	PlayerData.player_data["current_save_location"] = Server.player_node.position/16
-	game_state = GameState.new()
-	game_state.world_state = MapData.world
-	game_state.cave_state = MapData.caves
-	game_state.player_state = PlayerData.player_data
-	game_state.save_state()
-	await get_tree().create_timer(2.0).timeout
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-	sound_effects.play()
-	$LoadingIndicator.hide()
-	if exit_to_main_menu:
-		SceneChanger.goto_scene("res://MainMenu/MainMenu.tscn")
-	else:
-		$PlayerDataUI.show()
-		if PlayerData.normal_hotbar_mode:
-			$Hotbar.show()
-		else:
-			$CombatHotbar.show()
+#
+#func save_player_data(exit_to_main_menu):
+#	$LoadingIndicator.show()
+#	$Hotbar.hide()
+#	$CombatHotbar.hide()
+#	$PlayerDataUI.hide()
+#	PlayerData.player_data["current_save_location"] = Server.player_node.position/16
+#	game_state = GameState.new()
+#	game_state.world_state = MapData.world
+#	game_state.cave_state = MapData.caves
+#	game_state.player_state = PlayerData.player_data
+#	game_state.save_state()
+#	await get_tree().create_timer(2.0).timeout
+#	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
+#	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+#	sound_effects.play()
+#	$LoadingIndicator.hide()
+#	if exit_to_main_menu:
+#		SceneChanger.goto_scene("res://MainMenu/MainMenu.tscn")
+#	else:
+#		$PlayerDataUI.show()
+#		if PlayerData.normal_hotbar_mode:
+#			$Hotbar.show()
+#		else:
+#			$CombatHotbar.show()
 
 
 func switch_hotbar():
@@ -92,13 +91,13 @@ func switch_hotbar():
 
 func _input(event):
 	if not is_multiplayer_authority(): return
-	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode and not Server.world.is_changing_scene:
-		if event.is_action_pressed("exit") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode:
-			toggle_save_and_exit()
-		elif event.is_action_pressed("open menu") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
+	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode and not PlayerData.chatMode and not Server.world.is_changing_scene:
+#		if event.is_action_pressed("exit") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode:
+#			toggle_save_and_exit()
+		if event.is_action_pressed("open menu") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
 			toggle_menu()
-		elif event.is_action_pressed("switch hotbar") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode and not PlayerData.viewInventoryMode:
-			switch_hotbar()
+#		elif event.is_action_pressed("switch hotbar") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode and not PlayerData.viewInventoryMode:
+#			switch_hotbar()
 		elif Input.is_action_just_released("scroll_up") and not PlayerData.viewMapMode:
 			PlayerData.active_item_scroll_up()
 		elif Input.is_action_just_released("scroll_down") and not PlayerData.viewMapMode:
