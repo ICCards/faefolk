@@ -2,7 +2,6 @@ extends Control
 
 var id
 var hovered_item
-var location
 var time_last_opened
 var time_remaining
 
@@ -107,7 +106,7 @@ func remove_ingredients():
 
 func _input(event):
 	if event.is_action_pressed("action"):
-		get_parent().close_barrel(id,location,$CookTimer.time_left)
+		get_parent().close_barrel(id,$CookTimer.time_left)
 
 func _on_exit_btn_pressed():
-	get_parent().close_barrel(id,location,$CookTimer.time_left)
+	get_parent().close_barrel(id,$CookTimer.time_left)

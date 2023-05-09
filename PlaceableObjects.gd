@@ -15,10 +15,41 @@ func player_interact_with_object(data): pass
 @rpc
 func send_updated_ui_slots(id,dict): pass
 
+@rpc 
+func player_move_object(player_id,id,data): pass
+
+#@rpc
+#func set_new_object_tier(player_id,id,location,tier): pass
+
+@rpc 
+func place_object_in_new_location(player_id,id,prev_object_data,data):
+	if not get_node("../").world == {} and not player_id == Server.player_node.name:
+		var old_chunk = MapData.get_chunk_from_location(prev_object_data["l"])
+		get_node("../").world[old_chunk]["placeable"].erase(id)
+		var chunk = MapData.get_chunk_from_location(data["l"])
+		get_node("../").world[chunk]["placeable"][id] = data
+		get_node("../").world[chunk]["placeable"][id]["o"] = false
+		for node in self.get_children():
+			if node.name == str(id):
+				var dimensions = Constants.dimensions_dict[data["n"]]
+				if prev_object_data["d"] == "left" or prev_object_data["d"] == "right":
+					Tiles.add_valid_tiles(prev_object_data["l"], Vector2(dimensions.y, dimensions.x))
+				else:
+					Tiles.add_valid_tiles(prev_object_data["l"], dimensions)
+				Tiles.object_tiles.erase_cell(0,prev_object_data["l"])
+				get_node(str(id)).global_position = Tiles.valid_tiles.map_to_local(data["l"])
+				get_node(str(id)).variety = data["v"]
+				get_node(str(id)).direction = data["d"]
+				get_node(str(id)).location = data["l"]
+				get_node(str(id)).opened_or_light_toggled = false
+				get_node(str(id)).initialize()
+				return
+			
+
 @rpc
-func update_ui_slots(data): 
+func update_ui_slots(id,data): 
 	if not get_node("../").server_data == {}:
-		get_node("../").server_data["ui_slots"][data["id"]] = data["dict"]
+		get_node("../").server_data["ui_slots"][id] = data
 
 
 @rpc

@@ -88,8 +88,11 @@ func _input(event):
 								Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
 								get_parent().user_interface.open_stove(current_interactive_node.name, current_interactive_node.object_level)
 					"chest":
+						print("YUP")
 						if Server.world.world[chunk]["placeable"].has(id):
+							print("HERE")
 							if not Server.world.world[chunk]["placeable"][id]["o"]:
+								print("HERE2")
 								Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
 								get_parent().user_interface.open_chest(current_interactive_node.name)
 					"campfire":
@@ -340,7 +343,6 @@ func move_placeable_object(data):
 	var placeObject = PlaceObjectScene.instantiate()
 	placeObject.name = "MoveObject"
 	placeObject.previous_moving_object_data = data
-	placeObject.item_name = data["n"]
 	placeObject.moving_object = true
 	placeObject.position = (get_global_mouse_position() + Vector2(-16, -16)).snapped(Vector2(16,16))
 	get_node("../").add_child(placeObject)

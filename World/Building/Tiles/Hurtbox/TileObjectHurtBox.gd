@@ -12,7 +12,6 @@ extends Node2D
 @onready var object_tiles: TileMap = $ObjectTiles
 
 var rng := RandomNumberGenerator.new()
-var thread := Thread.new()
 
 var location
 var item_name
@@ -27,20 +26,32 @@ var is_player_sitting: bool = false
 var health = 3
 
 func _ready():
+	initialize()
+	initialize_interactive_area()
+	
+func initialize():
 	if Constants.object_atlas_tiles.keys().has(item_name):
 		if Util.isStorageItem(item_name):
 			object_tiles.set_cell(0,Vector2i(0,-1),0,Constants.object_atlas_tiles[item_name])
+		else:
+			Tiles.object_tiles.set_cell(0,location,0,Constants.object_atlas_tiles[item_name])
 	elif Constants.autotile_object_atlas_tiles.keys().has(item_name):
-		pass
+		Tiles.object_tiles.set_cells_terrain_connect(0,[location],0,Constants.autotile_object_atlas_tiles[item_name])
 	elif Constants.customizable_rotatable_object_atlas_tiles.keys().has(item_name):
 		if Util.isStorageItem(item_name):
 			object_tiles.set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles[item_name][variety][direction])
+		else:
+			Tiles.object_tiles.set_cell(0,location,0,Constants.customizable_rotatable_object_atlas_tiles[item_name][variety][direction])
 	elif Constants.customizable_object_atlas_tiles.keys().has(item_name):
 		if Util.isStorageItem(item_name):
 			object_tiles.set_cell(0,location,0,Constants.customizable_object_atlas_tiles[item_name][variety])
+		else:
+			Tiles.object_tiles.set_cell(0,location,0,Constants.customizable_object_atlas_tiles[item_name][variety])
 	else:
 		if Util.isStorageItem(item_name):
 			object_tiles.set_cell(0,Vector2i(0,-1),0,Constants.rotatable_object_atlas_tiles[item_name][direction])
+		else:
+			Tiles.object_tiles.set_cell(0,location,0,Constants.rotatable_object_atlas_tiles[item_name][direction])
 	set_dimensions()
 
 
@@ -98,6 +109,10 @@ func set_dimensions():
 			$Marker2D.rotation_degrees = 180
 		"right":
 			$Marker2D.rotation_degrees = 270
+		"down":
+			$Marker2D.rotation_degrees = 0
+
+func initialize_interactive_area():
 	if item_name == "chest":
 		add_interactive_area_node("chest")
 		if opened_or_light_toggled:
@@ -197,9 +212,14 @@ func hit(data):
 
 
 
-
 func destroy(data):
 	if not destroyed:
+		var dimensions = Constants.dimensions_dict[item_name]
+		if direction == "left" or direction == "right":
+			Tiles.add_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
+		else:
+			Tiles.add_valid_tiles(location, dimensions)
+		Tiles.object_tiles.erase_cell(0,location)
 		destroyed = true
 		$PointLight2D.set_deferred("enabled", false)
 #		$FurnaceSmoke.call_deferred("hide")
@@ -214,20 +234,15 @@ func destroy(data):
 			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break wood.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -16))
 		sound_effects.call_deferred("play")
-		var dimensions = Constants.dimensions_dict[item_name]
-		if direction == "left" or direction == "right":
-			Tiles.add_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
-		else:
-			Tiles.add_valid_tiles(location, dimensions)
-		Tiles.object_tiles.erase_cell(0,location)
 		if data["player_id"] == Server.player_node.name:
 			InstancedScenes.intitiateItemDrop(item_name, position, 1)
 		await sound_effects.finished
 		call_deferred("queue_free")
 
 
+
 func _physics_process(delta):
-	#if PlayerData.normal_hotbar_mode:
+	if PlayerData.normal_hotbar_mode:
 		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 			var selected_hotbar_item = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 			if selected_hotbar_item == "hammer":
@@ -235,21 +250,23 @@ func _physics_process(delta):
 					Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/grabber.png"))
 
 func _on_btn_pressed():
-	print("BTN PRESSED")
 	if PlayerData.normal_hotbar_mode:
 		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 			var selected_hotbar_item = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 			if selected_hotbar_item == "hammer" and not Server.player_node.has_node("PlaceObject") and not Server.player_node.has_node("MoveObject"):
+				if Util.isStorageItem(item_name) and Server.world.world[MapData.get_chunk_from_location(location)]["placeable"][name]["o"]:
+					return
 				var dimensions = Constants.dimensions_dict[item_name]
 				if direction == "left" or direction == "right":
 					Tiles.add_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
 				else:
 					Tiles.add_valid_tiles(location, dimensions)
 				Tiles.object_tiles.erase_cell(0,location)
-				MapData.remove_object("placeable",name,location)
-				Server.player_node.actions.move_placeable_object({"id":name,"n":item_name,"d":direction,"v":variety,"l":location,"h":health})
+				#MapData.remove_object("placeable",name,location)
+				Server.world.world[MapData.get_chunk_from_location(location)]["placeable"].erase(name)
+				Server.player_node.actions.move_placeable_object({"id":name,"n":item_name,"d":direction,"v":variety,"l":location,"h":health,"o":opened_or_light_toggled})
 				Sounds.play_pick_up_placeable_object()
-				queue_free()
+				call_deferred("queue_free")
 
 func _on_btn_mouse_exited():
 	if not Server.player_node.has_node("PlaceObject") and not Server.player_node.has_node("MoveObject"):

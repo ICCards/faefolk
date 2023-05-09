@@ -347,6 +347,7 @@ offset_right = 162.0
 offset_bottom = 94.0
 grow_horizontal = 1
 grow_vertical = 1
+mouse_filter = 2
 
 [node name="SavingProgress" type="RichTextLabel" parent="LoadingIndicator"]
 layout_mode = 0

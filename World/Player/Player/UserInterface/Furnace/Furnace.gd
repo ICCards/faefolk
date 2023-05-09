@@ -184,6 +184,9 @@ func valid_fuel():
 			return true
 	return false
 
+func _input(event):
+	if event.is_action_pressed("action"):
+		get_parent().close_furnace(id)
 
 func _on_ExitBtn_pressed():
 	get_parent().close_furnace(id)

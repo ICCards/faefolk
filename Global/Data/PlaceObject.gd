@@ -185,17 +185,3 @@ func place_object_in_world(id, item_name, direction, location, variety, opened_o
 	tileObjectHurtBox.opened_or_light_toggled = opened_or_light_toggled
 	PlaceableObjects.call_deferred("add_child", tileObjectHurtBox, true)
 	tileObjectHurtBox.global_position = Tiles.valid_tiles.map_to_local(location)
-	if Constants.autotile_object_atlas_tiles.keys().has(item_name):
-		Tiles.object_tiles.set_cells_terrain_connect(0,[location],0,Constants.autotile_object_atlas_tiles[item_name])
-	elif Constants.object_atlas_tiles.keys().has(item_name):
-		if not Util.isStorageItem(item_name):
-			Tiles.object_tiles.set_cell(0,location,0,Constants.object_atlas_tiles[item_name])
-	elif Constants.customizable_rotatable_object_atlas_tiles.keys().has(item_name):
-		if not Util.isStorageItem(item_name):
-			Tiles.object_tiles.set_cell(0,location,0,Constants.customizable_rotatable_object_atlas_tiles[item_name][variety][direction])
-	elif Constants.customizable_object_atlas_tiles.keys().has(item_name):
-		if not Util.isStorageItem(item_name):
-			Tiles.object_tiles.set_cell(0,location,0,Constants.customizable_object_atlas_tiles[item_name][variety])
-	else:
-		if not Util.isStorageItem(item_name):
-			Tiles.object_tiles.set_cell(0,location,0,Constants.rotatable_object_atlas_tiles[item_name][direction])

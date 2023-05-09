@@ -91,7 +91,8 @@ func tile_upgraded():
 	
 func set_type():
 #	if tier != "demolish":
-#		MapData.world["placeable"][str(name)]["v"] = tier
+#		get_parent().rpc_id(1,"set_new_object_tier",Server.player_node.name,name,location,tier)
+		#MapData.world["placeable"][str(name)]["v"] = tier
 	match item_name:
 		"wood door":
 			max_health = Stats.MAX_WOOD_DOOR
@@ -201,7 +202,8 @@ func _on_HurtBox_area_entered(area):
 #				remove_wall()
 #			else:
 #				remove_door()
-				
+
+
 func hit(data):
 	if not destroyed:
 		health = data["health"]

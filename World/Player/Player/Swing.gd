@@ -64,7 +64,7 @@ func sword_swing_deferred(item_name,attack_index):
 			if valid_tool_health():
 				sword_swing_deferred(item_name,1)
 			else:
-				swing_deferred(null)
+				swing(null)
 			return
 		elif get_node("../Magic").mouse_right_down and attack_index == 2:
 			sword_swing_deferred(item_name,2)
@@ -120,14 +120,14 @@ func set_scythe_swing_position(direction):
 			scythe_swing.set_deferred("position", Vector2(-16,-8))
 
 func swing(item_name):
-	if not thread.is_started():
-		thread.start(Callable(self,"whoAmISwing").bind(item_name))
+#	if not thread.is_started():
+#		thread.start(Callable(self,"whoAmISwing").bind(item_name))
 
-func whoAmISwing(item_name):
-	swing_deferred(item_name)
-	
-
-func swing_deferred(item_name):
+#func whoAmISwing(item_name):
+##	swing_deferred(item_name)
+#
+#
+#func swing_deferred(item_name):
 	if get_parent().state != SWINGING:
 		get_node("../Sounds/FootstepsSound").stream_paused = true
 		get_parent().state = SWINGING
@@ -140,14 +140,14 @@ func swing_deferred(item_name):
 				get_node("../CompositeSprites/ToolEquipped").show_behind_parent = false
 			play_scythe_swing_animation()
 		elif item_name == "arrow":
-			thread.wait_to_finish()
+			#thread.wait_to_finish()
 			get_parent().state = MOVEMENT
 			return
 		elif item_name == null:
 			play_punch_animation()
 		else:
 			if item_name == "hammer" and has_node("../MoveObject"):
-				var val = thread.wait_to_finish()
+			#	thread.wait_to_finish()
 				get_parent().state = MOVEMENT
 				return
 			play_axe_pickaxe_swing_animation(item_name)
@@ -160,11 +160,11 @@ func swing_deferred(item_name):
 		get_parent().state = MOVEMENT
 		if get_node("../Magic").mouse_left_down:
 			if valid_tool_health():
-				swing_deferred(item_name)
+				swing(item_name)
 			else:
-				swing_deferred(null)
+				swing(null)
 			return
-		thread.wait_to_finish()
+		#thread.wait_to_finish()
 
 
 func play_sword_swing_animation(item_name):

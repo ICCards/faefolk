@@ -14,7 +14,6 @@ func _ready():
 		PlayerData.player_data = game_state.player_state
 		#PlayerData.player_data = PlayerData.starting_player_data
 		MapData.world = game_state.world_state
-		MapData.caves = game_state.cave_state
 	else: # Initial launch
 		game_state = GameState.new()
 		game_state.player_state = PlayerData.starting_player_data 

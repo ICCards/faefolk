@@ -70,7 +70,6 @@ offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0
 offset_bottom = 8.0
-mouse_filter = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_0okvp")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_pawgr")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_6fn2f")

@@ -40,8 +40,10 @@ func destroy():
 	hide()
 	set_physics_process(false)
 	if moving_object:
-		MapData.add_object("placeable",previous_moving_object_data["id"],{"n":previous_moving_object_data["n"],"d":previous_moving_object_data["d"],"l":previous_moving_object_data["l"],"v":previous_moving_object_data["v"]})
-		PlaceObject.place_object_in_world(previous_moving_object_data["id"], previous_moving_object_data["n"], previous_moving_object_data["d"], previous_moving_object_data["l"], previous_moving_object_data["v"], false)
+		Server.world.world[MapData.get_chunk_from_location(previous_moving_object_data["l"])]["placeable"][previous_moving_object_data["id"]] = previous_moving_object_data
+		PlaceObject.place("placeable",previous_moving_object_data["id"],previous_moving_object_data)
+#		MapData.add_object("placeable",previous_moving_object_data["id"],{"n":previous_moving_object_data["n"],"d":previous_moving_object_data["d"],"l":previous_moving_object_data["l"],"v":previous_moving_object_data["v"],"h":3,"o":false})
+#		PlaceObject.place_object_in_world(previous_moving_object_data["id"], previous_moving_object_data["n"], previous_moving_object_data["d"], previous_moving_object_data["l"], previous_moving_object_data["v"], false)
 	call_deferred("queue_free")
 
 func destroy_and_remove_previous_object():
@@ -76,6 +78,7 @@ func _physics_process(delta):
 
 func initialize():
 	if moving_object:
+		item_name = previous_moving_object_data["n"]
 		variety = previous_moving_object_data["v"]
 		direction_index = directions.find(previous_moving_object_data["d"])
 	if item_name != "foundation" and item_name != "wall":
@@ -379,7 +382,7 @@ func place_object(item_name, direction, location, type, variety = null):
 				if item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
 					MapData.add_object("placeable",id, {"n":item_name,"v":variety,"l":location,"h":Stats.return_starting_door_health(item_name),"d":direction,"o":false})
 				elif moving_object:
-					MapData.add_object("placeable",previous_moving_object_data["id"],{"n":item_name,"d":direction,"l":location,"v":variety,"h":3,"o":false})
+					MapData.move_placeable_object(Server.player_node.name,previous_moving_object_data["id"],{"l":previous_moving_object_data["l"],"d":previous_moving_object_data["d"]},{"n":item_name,"d":direction,"l":location,"v":variety,"h":3,"o":false})
 					Server.player_node.actions.destroy_moveable_object()
 				else:
 					MapData.add_object("placeable",id,{"n":item_name,"d":direction,"l":location,"v":variety,"h":3,"o":false})

@@ -168,7 +168,7 @@ func respawn():
 	add_hotbar_clock_and_stats()
 
 
-func open_chest(id,location):
+func open_chest(id):
 	PlayerData.interactive_screen_mode = true
 	is_opening_chest = true
 	await get_tree().create_timer(0.5).timeout
@@ -235,7 +235,7 @@ func open_furnace(id):
 	add_child(furnace)
 	close_hotbar_clock_and_stats()
 
-func close_furnace(id,location):
+func close_furnace(id):
 	if not holding_item and has_node(str(id)):
 		Sounds.play_deselect_sound()
 		add_hotbar_clock_and_stats()
