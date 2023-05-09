@@ -1,10 +1,8 @@
-[gd_scene load_steps=42 format=3 uid="uid://cu53le5o0b1us"]
+[gd_scene load_steps=42 format=3 uid="uid://bikiy2vasycja"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_miuy3"]
 [ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/Terrain/CL_MainLev.png" id="2_jxniw"]
 [ext_resource type="Script" path="res://World/World/WorldBuilder.gd" id="2_mbtah"]
-[ext_resource type="PackedScene" uid="uid://3vr0ijbqi0bd" path="res://MainMenu/LoadingScreen.tscn" id="2_yrny3"]
-[ext_resource type="Script" path="res://World/World/WorldAmbience.gd" id="3_136d5"]
 [ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/Terrain/tres files/plains.tres" id="3_s3xh1"]
 [ext_resource type="Script" path="res://World/World/SpawnAnimal.gd" id="3_xbv0j"]
 [ext_resource type="Script" path="res://World/World/BuildNature.gd" id="4_lnadh"]
@@ -21,14 +19,12 @@
 [ext_resource type="TileSet" uid="uid://33tw24vxmev3" path="res://Assets/Tilesets/foundation/foundation.tres" id="12_rvnjk"]
 [ext_resource type="TileSet" uid="uid://cxyw1xxxhvjda" path="res://Assets/Tilesets/walls/walls.tres" id="13_jebsi"]
 [ext_resource type="TileSet" uid="uid://bmjc5ou5oyowx" path="res://Assets/Tilesets/Objects/objects.tres" id="14_b3xb4"]
-[ext_resource type="TileSet" uid="uid://cck8nnl37f05f" path="res://Assets/Tilesets/Terrain/tres files/sand.tres" id="14_ogu2e"]
 [ext_resource type="PackedScene" uid="uid://c66ktnntnkqrx" path="res://World/Map/WorldMap.tscn" id="16_fydq0"]
-[ext_resource type="TileSet" uid="uid://bd1f000cjndwj" path="res://Assets/Tilesets/Terrain/tres files/shallow ocean.tres" id="18_wb3fl"]
 [ext_resource type="Script" path="res://NatureObjects.gd" id="20_dvf2e"]
 [ext_resource type="Script" path="res://PlaceableObjects.gd" id="20_hue5x"]
 [ext_resource type="Script" path="res://FarmingTiles.gd" id="21_0dt81"]
-[ext_resource type="TileSet" uid="uid://dnvo01hfnktxd" path="res://Assets/Tilesets/Terrain/tres files/hoed.tres" id="21_sck8f"]
-[ext_resource type="TileSet" uid="uid://bctmvj3yosupc" path="res://Assets/Tilesets/Terrain/tres files/watered hoed.tres" id="22_mim6n"]
+[ext_resource type="TileSet" uid="uid://dnvo01hfnktxd" path="res://Assets/Tilesets/Terrain/hoed.tres" id="21_sck8f"]
+[ext_resource type="TileSet" uid="uid://bctmvj3yosupc" path="res://Assets/Tilesets/Terrain/watered hoed.tres" id="22_mim6n"]
 [ext_resource type="Script" path="res://ItemDrops.gd" id="22_nrbfv"]
 [ext_resource type="Script" path="res://ForageObjects.gd" id="23_k1cnp"]
 [ext_resource type="Script" path="res://GrassObjects.gd" id="25_yatu0"]
@@ -3271,16 +3267,240 @@ texture = ExtResource("2_jxniw")
 14:61/0 = 0
 15:61/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_2neoj"]
+[sub_resource type="TileSet" id="TileSet_3mv4a"]
 sources/0 = SubResource("TileSetAtlasSource_7b1tf")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u3x8b"]
 texture = ExtResource("2_jxniw")
 0:0/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_0fs1y"]
+[sub_resource type="TileSet" id="TileSet_soh1e"]
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_u3x8b")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m5i1h"]
+texture = ExtResource("2_jxniw")
+49:36/0 = 0
+49:36/0/terrain_set = 0
+50:36/0 = 0
+50:36/0/terrain_set = 0
+51:36/0 = 0
+51:36/0/terrain_set = 0
+52:36/0 = 0
+52:36/0/terrain_set = 0
+53:36/0 = 0
+53:36/0/terrain_set = 0
+54:36/0 = 0
+54:36/0/terrain_set = 0
+55:36/0 = 0
+55:36/0/terrain_set = 0
+55:37/0 = 0
+55:37/0/terrain_set = 0
+55:38/0 = 0
+55:38/0/terrain_set = 0
+55:39/0 = 0
+55:39/0/terrain_set = 0
+55:40/0 = 0
+55:40/0/terrain_set = 0
+55:41/0 = 0
+55:41/0/terrain_set = 0
+55:42/0 = 0
+55:42/0/terrain_set = 0
+55:43/0 = 0
+55:43/0/terrain_set = 0
+54:43/0 = 0
+54:43/0/terrain_set = 0
+53:43/0 = 0
+53:43/0/terrain_set = 0
+52:43/0 = 0
+52:43/0/terrain_set = 0
+51:43/0 = 0
+51:43/0/terrain_set = 0
+50:43/0 = 0
+50:43/0/terrain_set = 0
+49:43/0 = 0
+49:43/0/terrain_set = 0
+48:43/0 = 0
+48:43/0/terrain_set = 0
+48:42/0 = 0
+48:42/0/terrain_set = 0
+48:41/0 = 0
+48:41/0/terrain_set = 0
+48:40/0 = 0
+48:40/0/terrain_set = 0
+48:39/0 = 0
+48:39/0/terrain_set = 0
+48:38/0 = 0
+48:38/0/terrain_set = 0
+48:37/0 = 0
+48:37/0/terrain_set = 0
+48:36/0 = 0
+48:36/0/terrain_set = 0
+49:37/0 = 0
+49:37/0/terrain_set = 0
+49:38/0 = 0
+49:38/0/terrain_set = 0
+49:39/0 = 0
+49:39/0/terrain_set = 0
+49:40/0 = 0
+49:40/0/terrain_set = 0
+49:41/0 = 0
+49:41/0/terrain_set = 0
+49:42/0 = 0
+49:42/0/terrain_set = 0
+50:42/0 = 0
+50:42/0/terrain_set = 0
+51:42/0 = 0
+51:42/0/terrain_set = 0
+52:42/0 = 0
+52:42/0/terrain_set = 0
+53:42/0 = 0
+53:42/0/terrain_set = 0
+54:42/0 = 0
+54:42/0/terrain_set = 0
+54:41/0 = 0
+54:41/0/terrain_set = 0
+54:40/0 = 0
+54:40/0/terrain_set = 0
+54:39/0 = 0
+54:39/0/terrain_set = 0
+54:38/0 = 0
+54:38/0/terrain_set = 0
+54:37/0 = 0
+54:37/0/terrain_set = 0
+53:37/0 = 0
+53:37/0/terrain_set = 0
+52:37/0 = 0
+52:37/0/terrain_set = 0
+51:37/0 = 0
+51:37/0/terrain_set = 0
+51:38/0 = 0
+51:38/0/terrain_set = 0
+51:39/0 = 0
+51:39/0/terrain_set = 0
+51:40/0 = 0
+51:40/0/terrain_set = 0
+51:41/0 = 0
+51:41/0/terrain_set = 0
+50:40/0 = 0
+50:40/0/terrain_set = 0
+50:39/0 = 0
+50:39/0/terrain_set = 0
+50:38/0 = 0
+50:38/0/terrain_set = 0
+50:37/0 = 0
+50:37/0/terrain_set = 0
+50:41/0 = 0
+50:41/0/terrain_set = 0
+52:41/0 = 0
+52:41/0/terrain_set = 0
+53:41/0 = 0
+53:41/0/terrain_set = 0
+53:40/0 = 0
+53:40/0/terrain_set = 0
+53:39/0 = 0
+53:39/0/terrain_set = 0
+53:38/0 = 0
+53:38/0/terrain_set = 0
+52:39/0 = 0
+52:39/0/terrain_set = 0
+52:40/0 = 0
+52:40/0/terrain_set = 0
+52:38/0 = 0
+52:38/0/terrain_set = 0
+45:17/0 = 0
+45:17/0/terrain_set = 0
+46:17/0 = 0
+46:17/0/terrain_set = 0
+47:17/0 = 0
+47:17/0/terrain_set = 0
+47:18/0 = 0
+47:18/0/terrain_set = 0
+46:19/0 = 0
+46:19/0/terrain_set = 0
+45:18/0 = 0
+45:18/0/terrain_set = 0
+46:18/0 = 0
+46:18/0/terrain_set = 0
+45:19/0 = 0
+45:19/0/terrain_set = 0
+47:19/0 = 0
+47:19/0/terrain_set = 0
+55:17/0 = 0
+55:17/0/terrain_set = 0
+55:18/0 = 0
+55:18/0/terrain_set = 0
+55:19/0 = 0
+55:19/0/terrain_set = 0
+56:19/0 = 0
+56:19/0/terrain_set = 0
+57:18/0 = 0
+57:18/0/terrain_set = 0
+56:17/0 = 0
+56:17/0/terrain_set = 0
+56:18/0 = 0
+56:18/0/terrain_set = 0
+57:17/0 = 0
+57:17/0/terrain_set = 0
+57:19/0 = 0
+57:19/0/terrain_set = 0
+51:24/0 = 0
+51:24/0/terrain_set = 0
+50:24/0 = 0
+50:24/0/terrain_set = 0
+50:26/0 = 0
+50:26/0/terrain_set = 0
+51:26/0 = 0
+51:26/0/terrain_set = 0
+51:25/0 = 0
+51:25/0/terrain_set = 0
+50:25/0 = 0
+50:25/0/terrain_set = 0
+52:25/0 = 0
+52:25/0/terrain_set = 0
+52:24/0 = 0
+52:24/0/terrain_set = 0
+52:26/0 = 0
+52:26/0/terrain_set = 0
+55:25/0 = 0
+55:25/0/terrain_set = 0
+56:25/0 = 0
+56:25/0/terrain_set = 0
+56:26/0 = 0
+56:26/0/terrain_set = 0
+55:26/0 = 0
+55:26/0/terrain_set = 0
+
+[sub_resource type="TileSet" id="TileSet_6flss"]
+terrain_set_0/mode = 0
+sources/0 = SubResource("TileSetAtlasSource_m5i1h")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fcrb1"]
+texture = ExtResource("2_jxniw")
+26:58/animation_columns = 14
+26:58/animation_separation = Vector2i(3, 0)
+26:58/animation_speed = 5.0
+26:58/animation_frame_0/duration = 1.0
+26:58/animation_frame_1/duration = 1.0
+26:58/animation_frame_2/duration = 1.0
+26:58/animation_frame_3/duration = 1.0
+26:58/animation_frame_4/duration = 1.0
+26:58/animation_frame_5/duration = 1.0
+26:58/animation_frame_6/duration = 1.0
+26:58/animation_frame_7/duration = 1.0
+26:58/animation_frame_8/duration = 1.0
+26:58/animation_frame_9/duration = 1.0
+26:58/animation_frame_10/duration = 1.0
+26:58/animation_frame_11/duration = 1.0
+26:58/animation_frame_12/duration = 1.0
+26:58/animation_frame_13/duration = 1.0
+26:58/0 = 0
+26:58/0/terrain_set = 0
+26:57/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_5nnch"]
+terrain_set_0/mode = 0
+sources/0 = SubResource("TileSetAtlasSource_fcrb1")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r7tvy"]
 texture = ExtResource("2_jxniw")
@@ -3303,7 +3523,7 @@ texture = ExtResource("2_jxniw")
 52:26/0 = 0
 52:26/0/terrain_set = 0
 
-[sub_resource type="TileSet" id="TileSet_ofn11"]
+[sub_resource type="TileSet" id="TileSet_ke52l"]
 terrain_set_0/mode = 0
 sources/0 = SubResource("TileSetAtlasSource_r7tvy")
 
@@ -3329,7 +3549,7 @@ texture = ExtResource("2_jxniw")
 24:56/animation_frame_14/duration = 1.0
 24:56/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_4evgj"]
+[sub_resource type="TileSet" id="TileSet_eun6q"]
 sources/0 = SubResource("TileSetAtlasSource_dut5a")
 
 [sub_resource type="Environment" id="Environment_yn58q"]
@@ -3349,12 +3569,40 @@ fog_sun_scatter = 0.64
 y_sort_enabled = true
 script = ExtResource("1_miuy3")
 
-[node name="InitLoadScreen" type="CanvasLayer" parent="."]
+[node name="Menu" type="CanvasLayer" parent="."]
 
-[node name="LoadingScreen" parent="InitLoadScreen" instance=ExtResource("2_yrny3")]
+[node name="MainMenu" type="PanelContainer" parent="Menu"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -59.0
+offset_top = -74.0
+offset_right = 59.0
+offset_bottom = 74.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="WorldAmbience" type="CanvasModulate" parent="."]
-script = ExtResource("3_136d5")
+[node name="MarginContainer" type="MarginContainer" parent="Menu/MainMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/MainMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+horizontal_alignment = 1
+
+[node name="JoinBtn" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join"
 
 [node name="WorldBuilder" type="Node" parent="."]
 script = ExtResource("2_mbtah")
@@ -3383,16 +3631,17 @@ wait_time = 2.9
 script = ExtResource("6_j6htr")
 
 [node name="TerrainTiles" type="Node2D" parent="."]
+z_index = -10
 
 [node name="ValidTiles" type="TileMap" parent="TerrainTiles"]
 visible = false
-tile_set = SubResource("TileSet_2neoj")
+tile_set = SubResource("TileSet_3mv4a")
 navigation_visibility_mode = 1
 format = 2
 
 [node name="NavigationTiles" type="TileMap" parent="TerrainTiles"]
 visible = false
-tile_set = SubResource("TileSet_0fs1y")
+tile_set = SubResource("TileSet_soh1e")
 format = 2
 
 [node name="Plains" type="TileMap" parent="TerrainTiles"]
@@ -3400,7 +3649,6 @@ modulate = Color(1.4, 1.4, 1.4, 1)
 tile_set = ExtResource("3_s3xh1")
 cell_quadrant_size = 8
 format = 2
-layer_0/z_index = -4
 
 [node name="DeepOcean" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
@@ -3414,15 +3662,14 @@ z_index = -1
 tile_set = ExtResource("5_5eaio")
 format = 2
 
-[node name="Forest" type="TileMap" parent="TerrainTiles"]
-modulate = Color(1.2, 1.2, 1.2, 1)
-tile_set = ExtResource("7_rcnxi")
-format = 2
-layer_0/z_index = -4
-
 [node name="Elevation" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
 tile_set = ExtResource("6_1xuhk")
+format = 2
+
+[node name="Forest" type="TileMap" parent="TerrainTiles"]
+modulate = Color(1.2, 1.2, 1.2, 1)
+tile_set = ExtResource("7_rcnxi")
 format = 2
 
 [node name="Freshwater" type="TileMap" parent="TerrainTiles"]
@@ -3432,7 +3679,7 @@ format = 2
 
 [node name="Sand" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
-tile_set = ExtResource("14_ogu2e")
+tile_set = SubResource("TileSet_6flss")
 format = 2
 
 [node name="Waves" type="TileMap" parent="TerrainTiles"]
@@ -3456,19 +3703,19 @@ format = 2
 [node name="ShallowOcean" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
 z_index = -3
-tile_set = ExtResource("18_wb3fl")
+tile_set = SubResource("TileSet_5nnch")
 format = 2
 
 [node name="Beach" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
 z_index = -4
-tile_set = SubResource("TileSet_ofn11")
+tile_set = SubResource("TileSet_ke52l")
 format = 2
 
 [node name="TopOcean" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
 z_index = -2
-tile_set = SubResource("TileSet_4evgj")
+tile_set = SubResource("TileSet_eun6q")
 format = 2
 
 [node name="BuildingTiles" type="Node2D" parent="."]
@@ -3522,12 +3769,8 @@ script = ExtResource("22_nrbfv")
 _spawnable_scenes = PackedStringArray("res://InventoryLogic/ItemDrop.tscn")
 spawn_path = NodePath("..")
 
-[node name="Mobs" type="Node2D" parent="."]
+[node name="Enemies" type="Node2D" parent="."]
 y_sort_enabled = true
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Mobs"]
-_spawnable_scenes = PackedStringArray("res://World/Animals/Bear.tscn")
-spawn_path = NodePath("..")
 
 [node name="Projectiles" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -3556,6 +3799,7 @@ visible = false
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yn58q")
 
+[connection signal="pressed" from="Menu/MainMenu/MarginContainer/VBoxContainer/JoinBtn" to="." method="_on_join_btn_pressed"]
 [connection signal="timeout" from="WorldBuilder/SpawnAnimal/SpawnAnimalTimer" to="WorldBuilder/SpawnAnimal" method="_on_spawn_animal_timer_timeout"]
 [connection signal="timeout" from="WorldBuilder/BuildNature/SpawnNatureTimer" to="WorldBuilder/BuildNature" method="_on_spawn_nature_timer_timeout"]
 [connection signal="timeout" from="WorldBuilder/BuildTerrain/BuildTerrainTimer" to="WorldBuilder/BuildTerrain" method="_on_build_terrain_timer_timeout"]

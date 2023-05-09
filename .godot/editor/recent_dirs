@@ -1,7 +1,8 @@
+res://helpers
+res://
 res://World/Animals
 res://MainMenu
 res://Assets/Tilesets/terrain/tres files
-res://
 res://Assets/Tilesets/terrain
 res://InventoryLogic
 res://World/Player/Player/AttachedScenes
@@ -19,4 +20,3 @@ res://Assets/Themes
 res://World/Enemies
 res://Assets/Images/Animals
 res://Assets/Images/Magic/wind
-res://Assets/Images/Animations/leaf break
