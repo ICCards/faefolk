@@ -188,6 +188,7 @@ scale = Vector2(1.2, 1.441)
 [node name="Border" type="TextureRect" parent="HealthBar"]
 offset_right = 16.0
 offset_bottom = 3.0
+mouse_filter = 2
 texture = ExtResource("3")
 
 [node name="Progress" type="TextureProgressBar" parent="HealthBar"]
@@ -196,6 +197,7 @@ offset_left = 0.800002
 offset_top = 0.666664
 offset_right = 14.8
 offset_bottom = 1.66666
+mouse_filter = 2
 max_value = 50.0
 value = 44.0
 nine_patch_stretch = true

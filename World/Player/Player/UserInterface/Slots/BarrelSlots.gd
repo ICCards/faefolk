@@ -18,14 +18,13 @@ func initialize_locked_slots():
 		slots_in_barrel[i].slot_index = i
 		slots_in_barrel[i].slotType = SlotClass.SlotType.BARREL
 
-
 func initialize_slots():
 	var slots = self.get_children()
 	for i in range(slots.size()):
 		if slots[i].item:
 			slots[i].removeFromSlot()
-		if PlayerData.player_data["barrels"][get_parent().id].has(str(i)):
-			slots[i].initialize_item(PlayerData.player_data["barrels"][get_parent().id][str(i)][0], PlayerData.player_data["barrels"][get_parent().id][str(i)][1], PlayerData.player_data["barrels"][get_parent().id][str(i)][2])
+		if Server.world.server_data["ui_slots"][get_parent().id].has(str(i)):
+			slots[i].initialize_item(Server.world.server_data["ui_slots"][get_parent().id][str(i)][0], Server.world.server_data["ui_slots"][get_parent().id][str(i)][1], Server.world.server_data["ui_slots"][get_parent().id][str(i)][2])
 
 func able_to_put_into_slot(slot):
 	var holding_item = find_parent("UserInterface").holding_item

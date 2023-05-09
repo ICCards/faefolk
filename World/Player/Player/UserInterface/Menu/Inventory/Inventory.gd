@@ -5,8 +5,9 @@ extends Control
 var hovered_item = null
 
 func _ready():
-	PlayerData.connect("set_day",Callable(self,"set_day_bg"))
-	PlayerData.connect("set_night",Callable(self,"set_night_bg"))
+	PlayerData.InventorySlots = $InventorySlots
+	PlayerData.connect("set_sunrise",Callable(self,"set_day_bg"))
+	PlayerData.connect("set_sunset",Callable(self,"set_night_bg"))
 	$CompositeSprites/AnimationPlayer.play("loop")
 
 func initialize():
@@ -18,7 +19,7 @@ func initialize():
 	PlayerData.InventorySlots = $InventorySlots
 	hovered_item = null
 	$EnergyManaHealth.initialize()
-	if PlayerData.player_data["time_hours"] >= 22 or PlayerData.player_data["time_hours"] < 6:
+	if Server.world.server_data["time_hours"] >= 22 or Server.world.server_data["time_hours"] < 6:
 		set_night_bg()
 	else:
 		set_day_bg()

@@ -188,23 +188,25 @@ script = ExtResource("1_ttivv")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ProgressBackground" type="TextureRect" parent="CanvasLayer"]
-offset_left = 582.0
+offset_left = 592.0
 offset_top = 240.0
-offset_right = 630.0
+offset_right = 640.0
 offset_bottom = 256.0
+scale = Vector2(2, 2)
 texture = ExtResource("2_ywe2l")
 
 [node name="CastingProgress" type="TextureProgressBar" parent="CanvasLayer"]
-offset_left = 582.0
+offset_left = 592.0
 offset_top = 240.0
-offset_right = 630.0
+offset_right = 640.0
 offset_bottom = 256.0
+scale = Vector2(2, 2)
 value = 100.0
 texture_progress = ExtResource("3_leplc")
 
 [node name="FishingMiniGame" parent="CanvasLayer" instance=ExtResource("4_8e1cl")]
 visible = false
-position = Vector2(458, 200)
+position = Vector2(471, 226)
 scale = Vector2(3, 3)
 
 [node name="ExclamationPoint" type="Sprite2D" parent="."]
@@ -252,7 +254,6 @@ autostart = true
 
 [node name="CaughtFish" type="Sprite2D" parent="."]
 visible = false
-scale = Vector2(2, 2)
 texture = ExtResource("2")
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]

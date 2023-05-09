@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cffchl0ffi2hf"]
+[gd_scene load_steps=32 format=3 uid="uid://cffchl0ffi2hf"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/UserInterface.gd" id="1_pv3v8"]
 [ext_resource type="PackedScene" uid="uid://ctp3ra1cmv0de" path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" id="2_dv8vv"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dvfrk41vachbj" path="res://Assets/Images/Animations/loading/sprite_2.png" id="8_tq2d6"]
 [ext_resource type="Texture2D" uid="uid://u7b5ardk075b" path="res://Assets/Images/Animations/loading/sprite_1.png" id="9_ela15"]
 [ext_resource type="Texture2D" uid="uid://dtv2tv7c6saxr" path="res://Assets/Images/Animations/loading/sprite_3.png" id="10_k0pdh"]
+[ext_resource type="PackedScene" uid="uid://cw3x0n2n7j4t5" path="res://World/Player/Player/UserInterface/Chatbox/ChatBox.tscn" id="10_stju0"]
 [ext_resource type="Texture2D" uid="uid://b72oxa6602dkg" path="res://Assets/Images/Animations/loading/sprite_4.png" id="11_6e6cq"]
 [ext_resource type="Texture2D" uid="uid://bh0xuop77usp4" path="res://Assets/Images/Animations/loading/sprite_5.png" id="12_13luq"]
 [ext_resource type="AudioStream" uid="uid://86w4gtnxusdy" path="res://Assets/Sound/Sound effects/Ambience/thunder crack.mp3" id="13"]
@@ -85,6 +86,38 @@ _data = {
 "RESET": SubResource("18"),
 "lightning day": SubResource("19")
 }
+
+[sub_resource type="SpriteFrames" id="22"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_wlu5k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tq2d6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ela15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_k0pdh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_6e6cq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_13luq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_y8wut")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_0pw86")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="20"]
 length = 0.001
@@ -171,38 +204,6 @@ _data = {
 "sleep": SubResource("21")
 }
 
-[sub_resource type="SpriteFrames" id="22"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_wlu5k")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_tq2d6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_ela15")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_k0pdh")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_6e6cq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_13luq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_y8wut")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_0pw86")
-}],
-"loop": true,
-"name": &"new_animation",
-"speed": 5.0
-}]
-
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource("1_pv3v8")
 
@@ -229,30 +230,6 @@ offset_right = 1280.0
 offset_bottom = 720.0
 mouse_filter = 2
 color = Color(1, 0, 0, 0)
-
-[node name="SleepEffect" type="ColorRect" parent="."]
-visible = false
-offset_right = 1280.0
-offset_bottom = 720.0
-mouse_filter = 2
-color = Color(0, 0, 0, 0.552941)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="SleepEffect"]
-libraries = {
-"": SubResource("AnimationLibrary_ll8n3")
-}
-
-[node name="SavingProgress" type="RichTextLabel" parent="SleepEffect"]
-visible = false
-layout_mode = 0
-offset_left = 20.0
-offset_top = 640.0
-offset_right = 1217.0
-offset_bottom = 863.0
-scale = Vector2(0.35, 0.35)
-theme = ExtResource("6_rh7sc")
-bbcode_enabled = true
-text = "Saving progress"
 
 [node name="RadialUpgradeMenu" parent="." instance=ExtResource("4_nwvkq")]
 visible = false
@@ -323,10 +300,10 @@ texture = ExtResource("7_u87cj")
 
 [node name="VarietyLabel" type="Label" parent="ChangeVariety"]
 layout_mode = 0
-offset_left = 691.0
+offset_left = 675.0
 offset_top = 570.0
-offset_right = 1653.0
-offset_bottom = 754.0
+offset_right = 1663.0
+offset_bottom = 766.0
 scale = Vector2(0.22, 0.22)
 theme = ExtResource("6_rh7sc")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -370,6 +347,7 @@ offset_right = 162.0
 offset_bottom = 94.0
 grow_horizontal = 1
 grow_vertical = 1
+mouse_filter = 2
 
 [node name="SavingProgress" type="RichTextLabel" parent="LoadingIndicator"]
 layout_mode = 0
@@ -387,17 +365,44 @@ text = "[wave amp=75]Saving progress..."
 
 [node name="ItemPickUpDialogue" parent="." instance=ExtResource("19_n03k2")]
 
+[node name="ChatBox" parent="." instance=ExtResource("10_stju0")]
+offset_top = 520.0
+offset_bottom = 75.0
+
 [node name="CombatHotbar" parent="." instance=ExtResource("16_cnrm0")]
 visible = false
 
 [node name="Hotbar" parent="." instance=ExtResource("17_n0y8n")]
-visible = false
 
 [node name="PlayerDataUI" parent="." instance=ExtResource("18_gbc14")]
 visible = false
 
 [node name="LoadingScreen" parent="." instance=ExtResource("4")]
 visible = false
+
+[node name="SleepEffect" type="ColorRect" parent="."]
+visible = false
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.552941)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SleepEffect"]
+libraries = {
+"": SubResource("AnimationLibrary_ll8n3")
+}
+
+[node name="SavingProgress" type="RichTextLabel" parent="SleepEffect"]
+visible = false
+layout_mode = 0
+offset_left = 20.0
+offset_top = 640.0
+offset_right = 1860.0
+offset_bottom = 863.0
+scale = Vector2(0.35, 0.35)
+theme = ExtResource("6_rh7sc")
+bbcode_enabled = true
+text = "[wave freq=2]Saving respawn location..."
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 

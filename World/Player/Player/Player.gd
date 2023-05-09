@@ -7,6 +7,9 @@ extends CharacterBody2D
 @onready var actions = $Actions
 @onready var user_interface = $Camera2D/UserInterface
 @onready var sound_effects = $Sounds/SoundEffects
+@onready var synchronizer = $MultiplayerSynchronizer
+#@onready var networking = $Networking
+@onready var footsteps_sound: AudioStreamPlayer2D = $Sounds/FootstepsSound
 
 var running = false
 var character
@@ -25,13 +28,19 @@ enum {
 	SITTING,
 	MAGIC_CASTING,
 	BOW_ARROW_SHOOTING,
-	SWORD_SWINGING
+	SWORD_SWINGING,
+	SCYTHE_SWINGING,
 }
 
 var cast_movement_direction = ""
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
-var animation = "idle_down"
+#@export var position: Vector2
+@export var current_footsteps_sound: String = ""
+@export var animation: String = "idle_down"
+@export var tool_name: String = ""
+@export var footstep_stream_paused: bool
+@export var holding_item_name: String = ""
 var MAX_SPEED_DIRT := 8
 var MAX_SPEED_PATH := 9
 var DASH_SPEED := 25
@@ -47,23 +56,68 @@ var is_building_world = false
 @onready var _character = load("res://Global/Data/Characters.gd")
 
 func _ready():
+	composite_sprites.hide()
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
+	$Camera2D.enabled = is_multiplayer_authority()
+	$AttachedText/Username.text = str(name)
+	if not is_multiplayer_authority(): 
+		set_process_input(false)
+		set_process_unhandled_input(false)
+		set_process(false)
+		await get_tree().create_timer(8.0).timeout
+		composite_sprites.show()
+		$AttachedText.show()
+		return
+	position = Vector2(500*16,500*16)
 	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
 	Server.player_node = self
-	if is_building_world:
-		state = DYING
-		$Camera2D/UserInterface/LoadingScreen.show()
-		await get_tree().create_timer(5.0).timeout
+#	if is_building_world:
+	state = DYING
+	$Camera2D/UserInterface/LoadingScreen.initialize(8)
+	await get_tree().create_timer(8.0).timeout
+	composite_sprites.show()
+	$AttachedText.show()
 	state = MOVEMENT
-	$Camera2D/UserInterface/LoadingScreen.hide()
-	await get_tree().process_frame
 	set_held_object()
-	await get_tree().create_timer(0.25).timeout
 	Server.isLoaded = true
 
 
+func _physics_process(delta):
+	if not is_multiplayer_authority(): 
+		if footstep_stream_paused:
+			footsteps_sound.stream_paused = true
+		else:
+			footsteps_sound.volume_db = -10 #Sounds.return_adjusted_sound_db("footstep",-10)
+			footsteps_sound.stream_paused = false
+		if animation == "sword_swing_up" or animation == "sword_block_up" or animation == "scythe_swing_up":
+			composite_sprites.get_node("ToolEquipped").show_behind_parent = true
+		else:
+			composite_sprites.get_node("ToolEquipped").show_behind_parent = false
+		if holding_item_name == "":
+			holding_item.hide()
+			$HoldingTorch.set_inactive()
+		elif holding_item_name == "torch":
+			holding_item.hide()
+			$HoldingTorch.set_active()
+		else:
+			holding_item.show()
+			$CompositeSprites/HoldingItem.texture = load("res://Assets/Images/inventory_icons/"+JsonData.item_data[holding_item_name]["ItemCategory"] +"/"+ holding_item_name +".png")
+		composite_sprites.set_player_animation(character,animation,tool_name)
+		animation_player.play(animation_player.current_animation)
+#		position = Util.string_to_vector2(pos)
+#	else: 
+#		pos = str(position)
+#		print(pos)
+#		syncronizer.position = global_position
+
+
+func _enter_tree():
+	set_multiplayer_authority(str(name).to_int())
+
+
 func _input( event ):
+	#if not syncronizer.is_multiplayer_authority(): return
 	if event is InputEvent:
 		if event.is_action_pressed("sprint"):
 			running = true
@@ -97,33 +151,24 @@ func set_held_object():
 
 
 func set_current_object(item_name):
-	print("SET CURRENT OBJECT")
 	var item_category
 	if item_name:
 		item_category = JsonData.item_data[item_name]["ItemCategory"]
 	else:
 		item_category = null
-	# Placable object
-	if item_category == "Placeable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg"):
-		actions.show_placable_object(item_name, item_category)
+	if item_category == "Placeable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg" and item_name != "green grass" and item_name != "red grass" and item_name != "yellow grass" and item_name != "dark green grass"):
+		actions.show_placeable_object(item_name, item_category)
 		return
 	if item_name == "blueprint" and current_building_item != "":
-		actions.show_placable_object(current_building_item, "BUILDING")
+		actions.show_placeable_object(current_building_item, "BUILDING")
 		return
-	actions.destroy_placable_object()
-	# Holding item
-	if Util.valid_holding_item_category(item_category):
-		holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
-		holding_item.show()
-		$HoldingTorch.set_inactive()
-	elif item_name == "torch":
-		holding_item.hide()
-		$HoldingTorch.set_active()
-	else:
-		holding_item.hide()
-		$HoldingTorch.set_inactive()
+	elif item_name == "hammer" and has_node("MoveObject"):
+		return
+	actions.destroy_placeable_object()
+
 
 func _process(_delta) -> void:
+	if not is_multiplayer_authority(): return
 	if $Area2Ds/PickupZone.items_in_range.size() > 0:
 		var pickup_item = $Area2Ds/PickupZone.items_in_range.values()[0]
 		pickup_item.pick_up_item(self)
@@ -132,6 +177,9 @@ func _process(_delta) -> void:
 		movement_state(_delta)
 	elif state == MAGIC_CASTING or state == BOW_ARROW_SHOOTING or state == SWORD_SWINGING:
 		magic_casting_movement_state(_delta)
+	else:
+		footsteps_sound.stream_paused = true
+		footstep_stream_paused = true
 
 
 func set_movement_speed_change():
@@ -154,7 +202,8 @@ func set_movement_speed_change():
 
 
 func _unhandled_input(event):
-	if not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and not PlayerData.interactive_screen_mode and not PlayerData.viewMapMode and state == MOVEMENT and Sounds.current_footsteps_sound != Sounds.swimming: 
+	#if not syncronizer.is_multiplayer_authority(): return
+	if not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and not PlayerData.interactive_screen_mode and not PlayerData.viewMapMode and not PlayerData.chatMode and state == MOVEMENT and Sounds.current_footsteps_sound != Sounds.swimming: 
 		if PlayerData.normal_hotbar_mode:
 			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
@@ -267,7 +316,7 @@ func magic_casting_movement_state(_delta):
 
 
 func movement_state(delta):
-	if not PlayerData.viewInventoryMode and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
+	if not PlayerData.viewInventoryMode and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode and not PlayerData.chatMode:
 		set_movement_speed_change()
 		input_vector = Vector2.ZERO
 		if Input.is_action_pressed("move up"):
@@ -313,6 +362,7 @@ func movement_state(delta):
 
 func idle_state(_direction):
 	if state == MOVEMENT:
+		footstep_stream_paused = true
 		$Sounds/FootstepsSound.stream_paused = true
 		animation_player.play("idle loop")
 		if Sounds.current_footsteps_sound != Sounds.swimming:
@@ -320,15 +370,18 @@ func idle_state(_direction):
 				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
 				if Util.valid_holding_item_category(item_category):
+					holding_item_name = item_name
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 					holding_item.show()
 					$HoldingTorch.set_inactive()
 					animation = "holding_idle_" + _direction.to_lower()
 				elif item_name == "torch":
+					holding_item_name = item_name
 					holding_item.hide()
 					$HoldingTorch.set_active()
 					animation = "holding_idle_" + _direction.to_lower()
 				else:
+					holding_item_name = ""
 					holding_item.hide()
 					$HoldingTorch.set_inactive()
 					animation = "idle_" + _direction.to_lower()
@@ -336,20 +389,24 @@ func idle_state(_direction):
 				var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
 				if Util.valid_holding_item_category(item_category):
+					holding_item_name = item_name
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 					holding_item.show()
 					$HoldingTorch.set_inactive()
 					animation = "holding_idle_" + _direction.to_lower()
 				else:
+					holding_item_name = ""
 					holding_item.hide()
 					$HoldingTorch.set_inactive()
 					animation = "idle_" + _direction.to_lower()
 			else:
+				holding_item_name = ""
 				holding_item.hide()
 				$HoldingTorch.set_inactive()
 				animation = "idle_" + _direction.to_lower()
 			composite_sprites.set_player_animation(character, animation, null)
 		else:
+			holding_item_name = ""
 			holding_item.hide()
 			$HoldingTorch.set_inactive()
 			$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
@@ -359,21 +416,25 @@ func idle_state(_direction):
 func walk_state(_direction):
 	if state == MOVEMENT:
 		animation_player.play("walk loop")
+		footstep_stream_paused = false
 		$Sounds/FootstepsSound.stream_paused = false
 		if Sounds.current_footsteps_sound != Sounds.swimming and not running:
 			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and PlayerData.normal_hotbar_mode:
 				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
-				if Util.valid_holding_item_category(item_category) or item_name == "torch":
+				if Util.valid_holding_item_category(item_category):
+					holding_item_name = item_name
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 					holding_item.show()
 					$HoldingTorch.set_inactive()
 					animation = "holding_walk_" + _direction.to_lower()
 				elif item_name == "torch":
+					holding_item_name = "torch"
 					holding_item.hide()
 					$HoldingTorch.set_active()
 					animation = "holding_walk_" + _direction.to_lower()
 				else:
+					holding_item_name = ""
 					holding_item.hide()
 					$HoldingTorch.set_inactive()
 					animation = "walk_" + _direction.to_lower()
@@ -381,27 +442,32 @@ func walk_state(_direction):
 				var item_name = PlayerData.player_data["combat_hotbar"][str(PlayerData.active_item_slot_combat_hotbar)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
 				if Util.valid_holding_item_category(item_category):
+					holding_item_name = item_name
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 					holding_item.show()
 					$HoldingTorch.set_inactive()
 					animation = "holding_walk_" + _direction.to_lower()
 				else:
+					holding_item_name = ""
 					holding_item.hide()
 					$HoldingTorch.set_inactive()
 					animation = "walk_" + _direction.to_lower()
 			else:
+				holding_item_name = ""
 				holding_item.hide()
 				$HoldingTorch.set_inactive()
 				animation = "walk_" + _direction.to_lower()
 			composite_sprites.set_player_animation(character, animation, null)
 		elif running and Sounds.current_footsteps_sound != Sounds.swimming:
 			if state != DYING:
+				holding_item_name = ""
 				holding_item.hide()
 				$HoldingTorch.set_inactive()
 				$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
 				animation = "run_" + _direction.to_lower()
 				composite_sprites.set_player_animation(character, animation, null)
 		elif Sounds.current_footsteps_sound == Sounds.swimming:
+			holding_item_name = ""
 			$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
 			composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
 			holding_item.hide()

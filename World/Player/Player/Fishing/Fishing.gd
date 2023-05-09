@@ -134,7 +134,7 @@ func change_start_point_pos():
 		"DOWN":
 			start_point = Vector2(-6,-16)
 		_:
-			start_point += Vector2(0,-4)
+			start_point += Vector2(0,-9)
 
 func start():
 	line.hide()
@@ -190,17 +190,17 @@ func draw_cast_line():
 	var percent = progress.value/progress.max_value
 	match direction:
 		"RIGHT":
-			start_point = Vector2(11,-15)
+			start_point = Vector2(13,-15)
 			end_point = Vector2( 90*percent+18, -8 )
 			mid_point = Vector2(-(end_point.x-start_point.x)/2, 0)
 			cast_distance = abs(start_point.x - end_point.x)
 		"LEFT":
-			start_point = Vector2(-11,-15)
+			start_point = Vector2(-13,-15)
 			end_point = Vector2( -90*percent - 18, 0 )
 			mid_point = Vector2(-(end_point.x-start_point.x)/2, 0)
 			cast_distance = start_point.x - end_point.x
 		"DOWN":
-			start_point = Vector2(1,-2)
+			start_point = Vector2(0,-1)
 			end_point = Vector2( 2, 80*percent + 4)
 			mid_point = Vector2(-(end_point.x-start_point.x)/2, 0)
 			cast_distance = abs(start_point.y - end_point.y) - 12
@@ -211,10 +211,10 @@ func draw_cast_line():
 			cast_distance = start_point.y - end_point.y - 12
 	line.show()
 	hook.show()
-	hook.position = end_point + Vector2(2,2)
+	hook.position = end_point + Vector2(4,4)
 	setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, end_point )
 	var location = Tiles.ocean_tiles.local_to_map(hook.position + Server.player_node.position)
-	if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles): # valid cast
+	if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles) or Tiles.deep_ocean_tiles.get_cell_atlas_coords(0,location) != Vector2i(-1,-1): # valid cast
 		play_ripple_effect()
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/dropItemInWater.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)

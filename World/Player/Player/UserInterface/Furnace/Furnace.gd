@@ -2,6 +2,7 @@ extends Control
 
 var hovered_item
 var id
+var location
 
 
 @onready var sound_effects: AudioStreamPlayer = $SoundEffects
@@ -16,7 +17,7 @@ func _ready():
 	initialize()
 
 func initialize():
-	Server.player_node.actions.destroy_placable_object()
+	Server.player_node.actions.destroy_placeable_object()
 	hovered_item = null
 	show()
 	$InventorySlots.initialize_slots()
@@ -183,6 +184,9 @@ func valid_fuel():
 			return true
 	return false
 
+func _input(event):
+	if event.is_action_pressed("action"):
+		get_parent().close_furnace(id)
 
 func _on_ExitBtn_pressed():
 	get_parent().close_furnace(id)

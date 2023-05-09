@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://br573c61liq8n"]
+[gd_scene load_steps=15 format=3 uid="uid://br573c61liq8n"]
 
 [ext_resource type="Script" path="res://InventoryLogic/ItemDrop.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bbduu3gxlbfp6" path="res://Assets/Images/inventory_icons/Placeable object/workbench #2.png" id="2_0fpab"]
@@ -156,7 +156,7 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.6, 0.8, 1),
-"transitions": PackedFloat32Array(0.659754, 1.51572, 0.378929, 2, 1),
+"transitions": PackedFloat32Array(0.574349, 1.86, 0.378929, 2, 1),
 "update": 0,
 "values": [0.0, -14.0, -8.0, -12.0, -8.0]
 }
@@ -314,7 +314,7 @@ tracks/3/keys = {
 "values": [0.0, -4.0, 2.0, 2.08165e-12, 4.0]
 }
 
-[sub_resource type="Animation" id="3"]
+[sub_resource type="Animation" id="Animation_qa4qr"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -371,13 +371,29 @@ _data = {
 "Animate 4": SubResource("Animation_7cqmi"),
 "Animate 5": SubResource("Animation_seehj"),
 "Animate 6": SubResource("Animation_20nbe"),
-"RESET": SubResource("3")
+"RESET": SubResource("Animation_qa4qr")
 }
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pk45m"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:item_name")
+properties/1/spawn = true
+properties/1/sync = false
+properties/2/path = NodePath(".:item_quantity")
+properties/2/spawn = true
+properties/2/sync = false
+properties/3/path = NodePath("CollisionShape2D:disabled")
+properties/3/spawn = true
+properties/3/sync = true
+properties/4/path = NodePath("Sprite2D:position")
+properties/4/spawn = true
+properties/4/sync = true
 
 [node name="ItemDrop" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 0
-motion_mode = 1
 script = ExtResource("2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -424,3 +440,6 @@ libraries = {
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_pk45m")

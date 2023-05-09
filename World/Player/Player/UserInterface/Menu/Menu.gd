@@ -7,7 +7,7 @@ var item
 
 func initialize():
 	show()
-	Server.player_node.actions.destroy_placable_object()
+	Server.player_node.actions.destroy_placeable_object()
 	change_inventory_tab("inventory")
 
 func _physics_process(delta):

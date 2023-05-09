@@ -4,7 +4,6 @@ extends Control
 
 var id
 var level
-
 var hovered_item
 var ingredients = []
 
@@ -40,7 +39,7 @@ func _physics_process(delta):
 
 func initialize():
 	show()
-	Server.player_node.actions.destroy_placable_object()
+	Server.player_node.actions.destroy_placeable_object()
 	$InventorySlots.initialize_slots()
 	$HotbarInventorySlots.initialize_slots()
 
@@ -150,7 +149,9 @@ func check_1_ingredient_recipe():
 					return check_valid_yield_slot_and_fuel(item)
 	return false
 
-
+func _input(event):
+	if event.is_action_pressed("action"):
+		get_parent().close_campfire(id)
 
 func _on_ExitBtn_pressed():
 	get_parent().close_campfire(id)

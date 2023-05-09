@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://304yika52xay"
-path="res://.godot/imported/death.mp3-1a522b64ad91033e221d9d7aec2f2453.mp3str"
+path="res://.godot/imported/death.mp3-c38caa278ec0c2fdc66c07e88b9d529c.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Sound effects/animals/bear/death.mp3"
-dest_files=["res://.godot/imported/death.mp3-1a522b64ad91033e221d9d7aec2f2453.mp3str"]
+source_file="res://Assets/Sound/Sound effects/Animals/Bear/death.mp3"
+dest_files=["res://.godot/imported/death.mp3-c38caa278ec0c2fdc66c07e88b9d529c.mp3str"]
 
 [params]
 

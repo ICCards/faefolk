@@ -27,4 +27,4 @@ func load_state():
 			world_state = game_State.world_state
 			cave_state = game_State.cave_state
 		PlayerData.player_data = player_state
-		MapData.world = world_state
+#		MapData.world = world_state

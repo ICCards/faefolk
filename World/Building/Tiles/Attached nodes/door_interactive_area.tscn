@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://World/Objects/Scripts/InteractiveArea.gd" id="1_v3aio"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_db6eo"]
-size = Vector2(14, 20)
+size = Vector2(14, 24)
 
 [node name="DoorInteractiveArea" type="Area2D"]
 collision_layer = 131072

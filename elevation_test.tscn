@@ -1,0 +1,74 @@
+[gd_scene load_steps=9 format=3 uid="uid://bxd405lq8ng3i"]
+
+[ext_resource type="Script" path="res://ElevationTest.gd" id="1_n2im1"]
+[ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/terrain/tres files/plains.tres" id="2_hhdg0"]
+[ext_resource type="TileSet" uid="uid://de28nfavviio7" path="res://Assets/Tilesets/terrain/elevated terrain.tres" id="2_pf863"]
+[ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="4_ewu00"]
+[ext_resource type="TileSet" uid="uid://dja0b16fhgms6" path="res://Assets/Tilesets/terrain/tres files/freshwater.tres" id="4_rs0y7"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_nngou"]
+tile_data = PackedInt32Array(0, 1048576, 57, 65536, 1048576, 57, 131072, 1048576, 57, 196608, 1048576, 59, 1, 1048576, 57, 65537, 1048576, 57, 131073, 1048576, 57, 196609, 1048576, 59, 2, 1048576, 57, 65538, 1048576, 57, 131074, 1048576, 57, 196610, 1048576, 59)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v5kb0"]
+texture = ExtResource("4_ewu00")
+23:57/size_in_atlas = Vector2i(2, 3)
+23:57/0 = 0
+23:57/0/texture_origin = Vector2i(-8, 16)
+16:57/size_in_atlas = Vector2i(1, 2)
+16:57/animation_columns = 6
+16:57/animation_speed = 4.0
+16:57/animation_frame_0/duration = 1.0
+16:57/animation_frame_1/duration = 1.0
+16:57/animation_frame_2/duration = 1.0
+16:57/animation_frame_3/duration = 1.0
+16:57/animation_frame_4/duration = 1.0
+16:57/animation_frame_5/duration = 1.0
+16:57/0 = 0
+16:57/0/texture_origin = Vector2i(0, 8)
+16:59/animation_columns = 6
+16:59/animation_speed = 4.0
+16:59/animation_frame_0/duration = 1.0
+16:59/animation_frame_1/duration = 1.0
+16:59/animation_frame_2/duration = 1.0
+16:59/animation_frame_3/duration = 1.0
+16:59/animation_frame_4/duration = 1.0
+16:59/animation_frame_5/duration = 1.0
+16:59/0 = 0
+22:29/size_in_atlas = Vector2i(2, 2)
+22:29/0 = 0
+22:29/0/texture_origin = Vector2i(-8, 8)
+22:26/size_in_atlas = Vector2i(2, 1)
+22:26/0 = 0
+22:26/0/texture_origin = Vector2i(-8, 0)
+
+[sub_resource type="TileSet" id="TileSet_regpm"]
+sources/0 = SubResource("TileSetAtlasSource_v5kb0")
+pattern_0 = SubResource("TileMapPattern_nngou")
+
+[node name="ElevationTest" type="Node2D"]
+script = ExtResource("1_n2im1")
+redraw = true
+world_seed = "sddfsdafds"
+noise_frequency = 0.01
+
+[node name="Plains" type="TileMap" parent="."]
+modulate = Color(1.2, 1.2, 1.2, 1)
+tile_set = ExtResource("2_hhdg0")
+cell_quadrant_size = 8
+format = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(599, 399)
+
+[node name="Freshwater" type="TileMap" parent="."]
+modulate = Color(1.2, 1.2, 1.2, 1)
+tile_set = ExtResource("4_rs0y7")
+format = 2
+
+[node name="Decoration" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_regpm")
+format = 2
+
+[node name="Elevation" type="TileMap" parent="."]
+tile_set = ExtResource("2_pf863")
+format = 2

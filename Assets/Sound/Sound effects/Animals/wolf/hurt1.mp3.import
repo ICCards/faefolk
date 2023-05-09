@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://c4ximupsewfl3"
-path="res://.godot/imported/hurt1.mp3-a996bd502e2b3c2cf3ae2a8746823b49.mp3str"
+path="res://.godot/imported/hurt1.mp3-9b869d3fa37e026a3a244710a91f4fe1.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Sound effects/animals/wolf/hurt1.mp3"
-dest_files=["res://.godot/imported/hurt1.mp3-a996bd502e2b3c2cf3ae2a8746823b49.mp3str"]
+source_file="res://Assets/Sound/Sound effects/Animals/wolf/hurt1.mp3"
+dest_files=["res://.godot/imported/hurt1.mp3-9b869d3fa37e026a3a244710a91f4fe1.mp3str"]
 
 [params]
 

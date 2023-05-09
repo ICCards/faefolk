@@ -13,6 +13,13 @@ script = ExtResource("1_444dw")
 [node name="FallingLeaf" parent="." instance=ExtResource("2_e3ejq")]
 
 [node name="LargeClouds" parent="." instance=ExtResource("2_p31e2")]
-modulate = Color(0.101961, 0.203922, 0.231373, 0.745098)
+modulate = Color(0.109804, 0.109804, 0.117647, 0.745098)
+amount = 800
+initial_velocity_min = 4.0
+initial_velocity_max = 10.0
 
 [node name="Clouds" parent="." instance=ExtResource("3_3pnyr")]
+modulate = Color(0.109804, 0.109804, 0.117647, 0.745098)
+amount = 2000
+initial_velocity_min = 4.0
+initial_velocity_max = 10.0

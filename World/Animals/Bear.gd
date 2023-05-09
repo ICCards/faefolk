@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Node2D
 
 @onready var bear_sprite: Node2D = $Body
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -50,7 +50,6 @@ enum {
 
 func _ready():
 	randomize()
-	visible = false
 	_idle_timer.set_deferred("wait_time", randf_range(5.0, 10.0))
 	_idle_timer.connect("timeout",Callable(self,"_update_pathfinding_idle"))
 	_chase_timer.connect("timeout",Callable(self,"_update_pathfinding_chase"))
@@ -87,60 +86,60 @@ func _update_pathfinding_retreat():
 	if not thread.is_started() and visible and not destroyed:
 		thread.start(Callable(self,"_get_path").bind(self.position+target))
 
-func _physics_process(delta):
-	if not visible or destroyed or stunned: 
-		return
-	$LineOfSight.look_at(player.global_position)
-	if knocking_back:
-		velocity = velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
-		set_velocity(velocity)
-		move_and_slide()
-		return
-	set_texture()
-	if navigation_agent.is_navigation_finished() and state == WALK:
-		state = IDLE
-		velocity = Vector2.ZERO
-		return
-	if (player.state == 5 or player.get_node("Magic").invisibility_active) and chasing:
-		end_chase_state()
-	elif not (player.state == 5 or player.get_node("Magic").invisibility_active) and $DetectPlayer.get_overlapping_areas().size() >= 1 and not chasing and state != RETREAT:
-		start_chase_state()
-	if chasing and (position + Vector2(0,-18)).distance_to(player.position) < 35:
-		state = ATTACK
-		swing()
-	var target = navigation_agent.get_next_path_position()
-	var move_direction = position.direction_to(target)
-	var desired_velocity = move_direction * navigation_agent.max_speed
-	var steering = (desired_velocity - velocity) * delta * 4.0
-	velocity += steering
-	navigation_agent.set_velocity(velocity)
+#func _physics_process(delta):
+#	if not visible or destroyed or stunned: 
+#		return
+#	$LineOfSight.look_at(player.global_position)
+#	if knocking_back:
+#		velocity = velocity.move_toward(knockback * KNOCKBACK_SPEED * 7, ACCELERATION * delta * 8)
+#		set_velocity(velocity)
+#		move_and_slide()
+#		return
+#	set_texture()
+#	if navigation_agent.is_navigation_finished() and state == WALK:
+#		state = IDLE
+#		velocity = Vector2.ZERO
+#		return
+#	if (player.state == 5 or player.get_node("Magic").invisibility_active) and chasing:
+#		end_chase_state()
+#	elif not (player.state == 5 or player.get_node("Magic").invisibility_active) and $DetectPlayer.get_overlapping_areas().size() >= 1 and not chasing and state != RETREAT:
+#		start_chase_state()
+#	if chasing and (position + Vector2(0,-18)).distance_to(player.position) < 35:
+#		state = ATTACK
+#		swing()
+#	var target = navigation_agent.get_next_path_position()
+#	var move_direction = position.direction_to(target)
+#	var desired_velocity = move_direction * navigation_agent.max_speed
+#	var steering = (desired_velocity - velocity) * delta * 4.0
+#	velocity += steering
+#	navigation_agent.set_velocity(velocity)
 
 
-func move_deferred(_velocity: Vector2) -> void:
-	call_deferred("move", _velocity)
+#func move_deferred(_velocity: Vector2) -> void:
+#	call_deferred("move", _velocity)
 
-func move(_velocity: Vector2) -> void:
-	if not visible or tornado_node or stunned or attacking or destroyed or state == IDLE:
-		return
-	if frozen:
-		set_velocity(_velocity*0.75)
-		move_and_slide()
-		velocity = velocity
-		bear_sprite.modulate = Color("00c9ff")
-	elif poisoned:
-		set_velocity(_velocity*0.9)
-		move_and_slide()
-		velocity = velocity
-		bear_sprite.modulate = Color("009000")
-	else:
-		set_velocity(_velocity)
-		move_and_slide()
-		velocity = velocity
-		bear_sprite.modulate = Color("ffffff")
+#func move(_velocity: Vector2) -> void:
+#	if not visible or tornado_node or stunned or attacking or destroyed or state == IDLE:
+#		return
+#	if frozen:
+#		set_velocity(_velocity*0.75)
+#		move_and_slide()
+#		velocity = velocity
+#		bear_sprite.modulate = Color("00c9ff")
+#	elif poisoned:
+#		set_velocity(_velocity*0.9)
+#		move_and_slide()
+#		velocity = velocity
+#		bear_sprite.modulate = Color("009000")
+#	else:
+#		set_velocity(_velocity)
+#		move_and_slide()
+#		velocity = velocity
+#		bear_sprite.modulate = Color("ffffff")
 
 
 func play_groan_sound_effect():
-	sound_effects.set_deferred("stream", Sounds.bear_grown[rng.randi_range(0, 2)])
+	sound_effects.set_deferred("stream", "res://Assets/Sound/Sound effects/animals/bear/groan/groan "+ str(rng.randi_range(1,3)) +".mp3")
 	sound_effects.set_deferred("volume_db",  Sounds.return_adjusted_sound_db("sound", -12))
 	sound_effects.call_deferred("play")
 	await sound_effects.finished
@@ -239,9 +238,8 @@ func destroy(killed_by_player):
 	_idle_timer.call_deferred("stop")
 	set_physics_process(false)
 	destroyed = true
-	bear_sprite.material = null
 	if killed_by_player:
-		MapData.remove_object("animal",name)
+		#MapData.remove_object("animal",name)
 		PlayerData.player_data["collections"]["mobs"]["bear"] += 1
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bear/death.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
@@ -259,43 +257,44 @@ func destroy(killed_by_player):
 	get_parent().call_deferred("queue_free")
 
 func _on_HurtBox_area_entered(area):
-	if not hit_projectiles.has(area.id):
-		if area.id != "":
-			hit_projectiles.append(area.id)
-		if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
-			bear_sprite.set_deferred("modulate", Color("009000"))
-			$HurtBox/AnimationPlayer.call_deferred("play", "hit")
-			$EnemyPoisonState.call_deferred("start", area.tool_name)
-			return
-		if area.name == "SwordSwing":
-			PlayerData.player_data["skill_experience"]["sword"] += 1
-			Stats.decrease_tool_health()
-		else:
-			PlayerDataHelpers.add_skill_experience(area.tool_name)
-		if area.knockback_vector != Vector2.ZERO:
-			$KnockbackParticles.set_deferred("emitting", true)
-			knocking_back = true
-			$Timers/KnockbackTimer.call_deferred("start")
-			knockback = area.knockback_vector
-			velocity = knockback * 200
-		if area.tool_name == "lingering tornado":
-			$EnemyTornadoState.set_deferred("orbit_radius", randf_range(0,20))
-			tornado_node = area
-		if area.special_ability == "fire":
-			var randomPos = Vector2(randf_range(-8,8), randf_range(-8,8))
-			InstancedScenes.initiateExplosionParticles(position+randomPos)
-			InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
-			health -= Stats.FIRE_DEBUFF_DAMAGE
-		elif area.special_ability == "ice":
-			bear_sprite.set_deferred("modulate", Color("00c9ff"))
-			$EnemyFrozenState.call_deferred("start", 3)
-		elif area.special_ability == "poison":
-			bear_sprite.set_deferred("modulate", Color("009000"))
-			$EnemyPoisonState.call_deferred("start", "posion arrow") 
-		if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
-			call_deferred("hit", area.tool_name)
-		await get_tree().create_timer(0.25).timeout
-		$KnockbackParticles.set_deferred("emitting", false)
+	pass
+#	if not hit_projectiles.has(area.id):
+#		if area.id != "":
+#			hit_projectiles.append(area.id)
+#		if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
+#			bear_sprite.set_deferred("modulate", Color("009000"))
+#			$HurtBox/AnimationPlayer.call_deferred("play", "hit")
+#			$EnemyPoisonState.call_deferred("start", area.tool_name)
+#			return
+#		if area.name == "SwordSwing":
+#			PlayerData.player_data["skill_experience"]["sword"] += 1
+#			Stats.decrease_tool_health()
+#		else:
+#			PlayerDataHelpers.add_skill_experience(area.tool_name)
+#		if area.knockback_vector != Vector2.ZERO:
+#			$KnockbackParticles.set_deferred("emitting", true)
+#			knocking_back = true
+#			$Timers/KnockbackTimer.call_deferred("start")
+#			knockback = area.knockback_vector
+#			velocity = knockback * 200
+#		if area.tool_name == "lingering tornado":
+#			$EnemyTornadoState.set_deferred("orbit_radius", randf_range(0,20))
+#			tornado_node = area
+#		if area.special_ability == "fire":
+#			var randomPos = Vector2(randf_range(-8,8), randf_range(-8,8))
+#			InstancedScenes.initiateExplosionParticles(position+randomPos)
+#			InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
+#			health -= Stats.FIRE_DEBUFF_DAMAGE
+#		elif area.special_ability == "ice":
+#			bear_sprite.set_deferred("modulate", Color("00c9ff"))
+#			$EnemyFrozenState.call_deferred("start", 3)
+#		elif area.special_ability == "poison":
+#			bear_sprite.set_deferred("modulate", Color("009000"))
+#			$EnemyPoisonState.call_deferred("start", "posion arrow") 
+#		if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
+#			call_deferred("hit", area.tool_name)
+#		await get_tree().create_timer(0.25).timeout
+#		$KnockbackParticles.set_deferred("emitting", false)
 
 func _on_KnockbackTimer_timeout():
 	knocking_back = false

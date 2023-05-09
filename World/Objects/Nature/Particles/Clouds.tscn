@@ -12,8 +12,8 @@ particles_anim_loop = false
 offsets = PackedFloat32Array(0, 0.187097, 0.836431, 1)
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
 
-[node name="s" type="CPUParticles2D"]
-modulate = Color(0, 0, 0, 1)
+[node name="Clouds" type="CPUParticles2D"]
+modulate = Color(0.101961, 0.203922, 0.231373, 0.745098)
 material = SubResource("1")
 amount = 2500
 speed_scale = 0.1

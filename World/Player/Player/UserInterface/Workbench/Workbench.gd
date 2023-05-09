@@ -18,7 +18,7 @@ func _ready():
 
 func initialize():
 	initialize_crafting()
-	Server.player_node.actions.destroy_placable_object()
+	Server.player_node.actions.destroy_placeable_object()
 	hovered_item = null
 	crafting_item = null
 	$MenuTitle/Label.text = "Workbench #" + str(level) + ":"

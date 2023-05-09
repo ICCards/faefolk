@@ -18,19 +18,21 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	rng.randomize()
 
-func intitiateItemDrop(item_name: String, pos: Vector2, amount: int):
-	for _i in range(amount):
-		rng.randomize()
-		var itemDrop = ItemDrop.instantiate()
-		itemDrop.initItemDropType(item_name)
-		Server.world.call_deferred("add_child", itemDrop)
-		itemDrop.global_position = pos + Vector2(rng.randi_range(-6, 6), rng.randi_range(-6, 6))
+func intitiateItemDrop(item_name: String, pos: Vector2, amount: int): 
+		for _i in range(amount):
+			Server.world.get_node("ItemDrops").rpc_id(1,"add_item_drop", [item_name,1,null], pos+Vector2(rng.randf_range(-6, 6), rng.randf_range(-6, 6)))
+#		Server.world.get_node("ItemDrops").rpc_id(1,"")
+#		var itemDrop = ItemDrop.instantiate()
+#		itemDrop.initItemDropType(item_name)
+#		Server.world.get_node("ItemDrops").call_deferred("add_child", itemDrop)
+#		itemDrop.global_position = pos + Vector2(rng.randi_range(-6, 6), rng.randi_range(-6, 6))
 
-func initiateInventoryItemDrop(item: Array, pos: Vector2):
-	var itemDrop = ItemDrop.instantiate()
-	itemDrop.initItemDropType(item[0], item[1], item[2])
-	Server.world.call_deferred("add_child", itemDrop)
-	itemDrop.global_position = pos + Vector2(rng.randi_range(-6, 6), rng.randi_range(-6, 6))
+func initiateInventoryItemDrop(item: Array, pos: Vector2): 
+	Server.world.get_node("ItemDrops").rpc_id(1,"add_item_drop",item,pos)
+#	var itemDrop = ItemDrop.instantiate()
+#	itemDrop.initItemDropType(item[0], item[1], item[2])
+#	Server.world.get_node("ItemDrops").call_deferred("add_child", itemDrop)
+#	itemDrop.global_position = pos + Vector2(rng.randi_range(-6, 6), rng.randi_range(-6, 6))
 
 
 ### Trees ###

@@ -1,24 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://bm025jompo1fh"]
 
-[ext_resource path="res://Assets/Images/GPUParticles3D/RainOnFloor.png" type="Texture2D" id=1]
+[ext_resource type="Texture2D" uid="uid://dqosx81sjcg2l" path="res://Assets/Images/Particles/RainOnFloor.png" id="1_4qg74"]
 
-[sub_resource type="CanvasItemMaterial" id=1]
+[sub_resource type="CanvasItemMaterial" id="1"]
 particles_animation = true
 particles_anim_h_frames = 3
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [node name="RainOnFloor" type="CPUParticles2D"]
-material = SubResource( 1 )
+material = SubResource("1")
 amount = 1500
 speed_scale = 2.0
-texture = ExtResource( 1 )
+texture = ExtResource("1_4qg74")
 emission_shape = 1
 emission_sphere_radius = 2000.0
-direction = Vector2( -0.5, 1 )
-gravity = Vector2( 0, 0 )
-scale_amount = 2.0
-scale_amount_random = 0.25
-color = Color( 0.12549, 0, 1, 1 )
-anim_offset = 1.0
-anim_offset_random = 1.0
+direction = Vector2(-0.5, 1)
+gravity = Vector2(0, 0)
+color = Color(0.12549, 0, 1, 1)
+anim_speed_min = 0.25
+anim_speed_max = 0.25

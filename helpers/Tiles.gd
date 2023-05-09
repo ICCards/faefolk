@@ -182,6 +182,8 @@ func return_atlas_tile_cord(tile_name,id):
 					return Vector2i(61,27)
 				12:
 					return Vector2i(58,27)
+				null:
+					return Vector2i(rng.randi_range(50,52),rng.randi_range(24,26))
 		"ocean":
 			match id:
 				0:
@@ -215,9 +217,9 @@ func return_atlas_tile_cord(tile_name,id):
 				0:
 					return Vector2i(26,56)
 				1:
-					return Vector2i(28,58)
-				2:
 					return Vector2i(25,58)
+				2:
+					return Vector2i(25,56)
 				3:
 					return Vector2i(27,56)
 				4:
@@ -231,6 +233,7 @@ func return_atlas_tile_cord(tile_name,id):
 				8:
 					return Vector2i(27,rng.randi_range(58,59))
 			return Vector2i(26,58)
+	return Vector2i(-1,-1)
 #				9:
 #					return Vector2i(25,60)
 #				10:
@@ -256,7 +259,7 @@ func validate_forest_tiles(location):
 
 func validate_tiles(location, dimensions):
 	var active = false
-	if Server.world.name == "Overworld":
+	if Server.world.name == "Main":
 		if not active:
 			active = true
 			for x in range(dimensions.x):
@@ -292,7 +295,7 @@ func validate_foundation_tiles(location, dimensions):
 
 
 func isValidNavigationTile(loc) -> bool:
-	if Server.world.name == "Overworld":
+	if Server.world.name == "Main":
 		if wet_sand_tiles.get_cell_atlas_coords(0,loc) != Vector2i(-1,-1) and deep_ocean_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
 			return true
 		elif valid_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
@@ -442,7 +445,8 @@ func is_well_tile(loc, direction):
 #			if object_tiles.get_cellv(loc) == 75 or object_tiles.get_cellv(loc+Vector2(0,1)) == 75:
 #				return true
 	return false
-
+	
+#var array
 func return_autotile_id(loc,tiles):
 	var array = [0,0,0,0,0,0,0,0]
 	if tiles.has(loc+Vector2i(-1,-1)):
@@ -453,8 +457,6 @@ func return_autotile_id(loc,tiles):
 		array[2] = 1
 	if tiles.has(loc+Vector2i(-1,1)):
 		array[3] = 1
-	if array[0] == 1 and array[1] == 1 and array[2] == 1 and array[3] == 1:
-		return 0 
 	if tiles.has(loc+Vector2i(0,-1)):
 		array[4] = 1
 	if tiles.has(loc+Vector2i(1,0)):
@@ -463,9 +465,11 @@ func return_autotile_id(loc,tiles):
 		array[6] = 1
 	if tiles.has(loc+Vector2i(-1,0)):
 		array[7] = 1
-	if array == [1,1,0,1,1,1,1,1]: # corners
+	if array == [1,1,1,1,1,1,1,1]:
+		return 0 
+	elif array == [1,1,0,1,1,1,1,1]: # corners
 		return 1
-	if array == [1,1,1,0,1,1,1,1]:
+	elif array == [1,1,1,0,1,1,1,1]:
 		return 2 
 	elif array == [0,1,1,1,1,1,1,1]:
 		return 3  
@@ -488,3 +492,40 @@ func return_autotile_id(loc,tiles):
 	elif array[1] == 1 and array[4] == 1 and array[5] == 1: # bottom right
 		return 12
 	return null #INVALID
+
+
+func return_elevation_autotile_id(loc,locations):
+	if locations.has(loc+Vector2i(1,0)) and locations.has(loc+Vector2i(0,1)): # bottom left
+		return 0 
+	elif locations.has(loc+Vector2i(1,0)) and locations.has(loc+Vector2i(-1,0)): # bottom middle
+		return 1
+	elif locations.has(loc+Vector2i(-1,0)) and locations.has(loc+Vector2i(0,1)): # bottom right
+		return 2
+	elif locations.has(loc+Vector2i(-1,0)) and locations.has(loc+Vector2i(0,-1)): # top left
+		return 3
+	elif locations.has(loc+Vector2i(1,0)) and locations.has(loc+Vector2i(0,-1)): # top right
+		return 4
+	elif locations.has(loc+Vector2i(1,0)): # start left
+		return 5
+	elif locations.has(loc+Vector2i(-1,0)): # start right
+		return 6
+	
+func return_elevation_atlas_tile(elevation,id):
+	if id == 5:
+		return Vector2i(3,22)
+	elif id == 6:
+		return Vector2i(2,22)
+	match elevation:
+		1:
+			match id:
+				0:
+					return Vector2i(0,15)
+				1:
+					return Vector2i(5,15)
+				2:
+					return Vector2i(randi_range(1,4),15)
+				3:
+					return Vector2i(15,15)
+				4:
+					return Vector2i(16,15)
+	return Vector2i(0,0)

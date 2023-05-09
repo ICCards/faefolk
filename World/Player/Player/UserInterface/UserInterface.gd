@@ -25,8 +25,10 @@ var rng = RandomNumberGenerator.new()
 var object_name
 var object_level
 var object_id
+var object_location
 
 var is_opening_chest: bool = false
+var current_interactice_area_location: Vector2
 
 var game_state: GameState
 
@@ -43,64 +45,32 @@ enum {
 func _ready():
 	await get_tree().create_timer(0.25).timeout
 	$Menu.hide()
-	initialize_furnaces_campfires_and_stoves()
 	add_hotbar_clock_and_stats()
-
-func initialize_furnaces_campfires_and_stoves():
-	for id in PlayerData.player_data["furnaces"]:
-		var furnace = Furnace.instantiate()
-		furnace.name = str(id)
-		furnace.id = id
-		add_child(furnace)
-		furnace.check_if_furnace_active()
-		furnace.hide()
-	for id in PlayerData.player_data["stoves"]:
-		var stove = Stove.instantiate()
-		stove.name = str(id)
-		stove.id = id
-		add_child(stove)
-		stove.check_valid_recipe()
-		stove.hide()
-	for id in PlayerData.player_data["campfires"]:
-		var campfire = Campfire.instantiate()
-		campfire.name = str(id)
-		campfire.id = id
-		add_child(campfire)
-		campfire.check_valid_recipe()
-		campfire.hide()
-	for id in PlayerData.player_data["barrels"]:
-		var barrel = Barrel.instantiate()
-		barrel.name = str(id)
-		barrel.id = id
-		add_child(barrel)
-		barrel.check_valid_recipe()
-		barrel.hide()
-
-
-func save_player_data(exit_to_main_menu):
-	$LoadingIndicator.show()
-	$Hotbar.hide()
-	$CombatHotbar.hide()
-	$PlayerDataUI.hide()
-	PlayerData.player_data["current_save_location"] = Server.player_node.position/16
-	game_state = GameState.new()
-	game_state.world_state = MapData.world
-	game_state.cave_state = MapData.caves
-	game_state.player_state = PlayerData.player_data
-	game_state.save_state()
-	await get_tree().create_timer(2.0).timeout
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-	sound_effects.play()
-	$LoadingIndicator.hide()
-	if exit_to_main_menu:
-		SceneChanger.goto_scene("res://MainMenu/MainMenu.tscn")
-	else:
-		$PlayerDataUI.show()
-		if PlayerData.normal_hotbar_mode:
-			$Hotbar.show()
-		else:
-			$CombatHotbar.show()
+#
+#func save_player_data(exit_to_main_menu):
+#	$LoadingIndicator.show()
+#	$Hotbar.hide()
+#	$CombatHotbar.hide()
+#	$PlayerDataUI.hide()
+#	PlayerData.player_data["current_save_location"] = Server.player_node.position/16
+#	game_state = GameState.new()
+#	game_state.world_state = MapData.world
+#	game_state.cave_state = MapData.caves
+#	game_state.player_state = PlayerData.player_data
+#	game_state.save_state()
+#	await get_tree().create_timer(2.0).timeout
+#	sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
+#	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+#	sound_effects.play()
+#	$LoadingIndicator.hide()
+#	if exit_to_main_menu:
+#		SceneChanger.goto_scene("res://MainMenu/MainMenu.tscn")
+#	else:
+#		$PlayerDataUI.show()
+#		if PlayerData.normal_hotbar_mode:
+#			$Hotbar.show()
+#		else:
+#			$CombatHotbar.show()
 
 
 func switch_hotbar():
@@ -120,13 +90,14 @@ func switch_hotbar():
 
 
 func _input(event):
-	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode and not Server.world.is_changing_scene:
-		if event.is_action_pressed("exit") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode:
-			toggle_save_and_exit()
-		elif event.is_action_pressed("open menu") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
+	if not is_multiplayer_authority(): return
+	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode and not PlayerData.chatMode and not Server.world.is_changing_scene:
+#		if event.is_action_pressed("exit") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode:
+#			toggle_save_and_exit()
+		if event.is_action_pressed("open menu") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
 			toggle_menu()
-		elif event.is_action_pressed("switch hotbar") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode and not PlayerData.viewInventoryMode:
-			switch_hotbar()
+#		elif event.is_action_pressed("switch hotbar") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode and not PlayerData.viewInventoryMode:
+#			switch_hotbar()
 		elif Input.is_action_just_released("scroll_up") and not PlayerData.viewMapMode:
 			PlayerData.active_item_scroll_up()
 		elif Input.is_action_just_released("scroll_down") and not PlayerData.viewMapMode:
@@ -153,30 +124,144 @@ func _input(event):
 			PlayerData.slot_selected(9)
 
 
-func death():
-	if $Menu.visible:
-		hide_menu()
+#func death():
+#	if $Menu.visible:
+#		hide_menu()
+#	else:
+#		match object_name:
+#			"workbench":
+#				close_workbench()
+#			"grain mill":
+#				close_grain_mill()
+#			"stove":
+#				close_stove(object_id)
+#			"chest":
+#				close_chest(object_id)
+#			"furnace":
+#				close_furnace(object_id)
+#			"campfire":
+#				close_campfire(object_id)
+#			"brewing table":
+#				close_brewing_table(object_id)
+#	close_hotbar_clock_and_stats()
+#	if holding_item:
+#		InstancedScenes.initiateInventoryItemDrop([holding_item.item_name, holding_item.item_quantity, holding_item.item_health], Server.player_node.position)
+#		holding_item.queue_free()
+#		holding_item = null
+
+
+
+
+func toggle_save_and_exit():
+	if has_node("SaveAndExit"):
+		Sounds.play_deselect_sound()
+		PlayerData.viewSaveAndExitMode = false
+		get_node("SaveAndExit").queue_free()
 	else:
-		match object_name:
-			"workbench":
-				close_workbench()
-			"grain mill":
-				close_grain_mill()
-			"stove":
-				close_stove(object_id)
-			"chest":
-				close_chest(object_id)
-			"furnace":
-				close_furnace(object_id)
-			"campfire":
-				close_campfire(object_id)
-			"brewing table":
-				close_brewing_table(object_id)
+		Sounds.play_big_select_sound()
+		var saveAndExit = SaveAndExitDialogue.instantiate()
+		add_child(saveAndExit)
+		PlayerData.viewSaveAndExitMode = true
+
+
+func respawn():
+	add_hotbar_clock_and_stats()
+
+
+func open_chest(id):
+	PlayerData.interactive_screen_mode = true
+	is_opening_chest = true
+	await get_tree().create_timer(0.5).timeout
+	is_opening_chest = false
+	var chest = Chest.instantiate()
+	chest.id = id
+	add_child(chest)
 	close_hotbar_clock_and_stats()
-	if holding_item:
-		InstancedScenes.initiateInventoryItemDrop([holding_item.item_name, holding_item.item_quantity, holding_item.item_health], Server.player_node.position)
-		holding_item.queue_free()
-		holding_item = null
+
+func close_chest(id):
+	if not holding_item and has_node("Chest"):
+		add_hotbar_clock_and_stats()
+		get_node("Chest").destroy()
+		drop_items()
+		Server.world.get_node("PlaceableObjects").rpc_id(1,"send_updated_ui_slots", id, Server.world.server_data["ui_slots"][id])
+		Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":current_interactice_area_location})
+
+
+func open_crate(id):
+	PlayerData.interactive_screen_mode = true
+	is_opening_chest = true
+	await get_tree().create_timer(0.2).timeout
+	is_opening_chest = false
+	var crate = Crate.instantiate()
+	crate.id = id
+	add_child(crate)
+	close_hotbar_clock_and_stats()
+
+func close_crate(id):
+	if not holding_item and has_node("Crate"):
+		add_hotbar_clock_and_stats()
+		get_node("Crate").destroy()
+		drop_items()
+		await get_tree().create_timer(0.2).timeout
+		Server.world.get_node("PlaceableObjects").rpc_id(1,"send_updated_ui_slots", id, Server.world.server_data["ui_slots"][id])
+		Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":current_interactice_area_location})
+
+
+func open_barrel(id):
+	is_opening_chest = true
+	await get_tree().create_timer(0.2).timeout
+	is_opening_chest = false
+	var barrel = Barrel.instantiate()
+	barrel.id = id
+	add_child(barrel)
+	close_hotbar_clock_and_stats()
+
+func close_barrel(id,time_remaining):
+	if not holding_item and has_node("Barrel"):
+		add_hotbar_clock_and_stats()
+		get_node("Barrel").destroy()
+		drop_items()
+		await get_tree().create_timer(0.2).timeout
+		Server.world.server_data["ui_slots"][id]["tr"] = time_remaining
+		Server.world.server_data["ui_slots"][id]["lo"] = int(Time.get_unix_time_from_system())
+		Server.world.get_node("PlaceableObjects").rpc_id(1,"send_updated_ui_slots",{"id":id, "dict":Server.world.server_data["ui_slots"][id]})
+		Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":current_interactice_area_location})
+
+func open_furnace(id):
+	play_open_menu_sound()
+	var furnace = Furnace.instantiate()
+	furnace.name = str(id)
+	furnace.id = id
+	add_child(furnace)
+	close_hotbar_clock_and_stats()
+
+func close_furnace(id):
+	if not holding_item and has_node(str(id)):
+		Sounds.play_deselect_sound()
+		add_hotbar_clock_and_stats()
+		get_node(id).hide()
+		drop_items()
+		Server.world.get_node("PlaceableObjects").rpc_id(1,"send_updated_ui_slots", id, Server.world.server_data["ui_slots"][id])
+		Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":current_interactice_area_location})
+
+
+func open_grain_mill(id, level):
+	play_open_menu_sound()
+	var grainMill = GrainMill.instantiate()
+	grainMill.level = level
+	grainMill.id = id
+	add_child(grainMill)
+	close_hotbar_clock_and_stats()
+
+
+func close_grain_mill(id):
+	if not holding_item and has_node("GrainMill"):
+		Sounds.play_deselect_sound()
+		add_hotbar_clock_and_stats()
+		get_node("GrainMill").destroy()
+		drop_items()
+		Server.world.rpc_id(1,"send_updated_ui_slots", id, Server.world.server_data["ui_slots"][id])
+		Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":current_interactice_area_location})
 
 
 func toggle_brewing_table(id,level):
@@ -195,92 +280,6 @@ func toggle_brewing_table(id,level):
 	else:
 		close_brewing_table(id)
 
-
-func toggle_save_and_exit():
-	if has_node("SaveAndExit"):
-		Sounds.play_deselect_sound()
-		PlayerData.viewSaveAndExitMode = false
-		get_node("SaveAndExit").queue_free()
-	else:
-		Sounds.play_big_select_sound()
-		var saveAndExit = SaveAndExitDialogue.instantiate()
-		add_child(saveAndExit)
-		PlayerData.viewSaveAndExitMode = true
-
-
-func respawn():
-	add_hotbar_clock_and_stats()
-
-func toggle_tc(id):
-	if not has_node("Tool cabinet"):
-		play_open_menu_sound()
-		var tc = Tool_cabinet.instantiate()
-		tc.id = id
-		add_child(tc)
-		close_hotbar_clock_and_stats()
-	else:
-		close_tc(id)
-
-func toggle_chest(id):
-	if not is_opening_chest:
-		if not has_node("Chest"):
-			sound_effects.stream = load("res://Assets/Sound/Sound effects/chest/open.mp3")
-			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-			sound_effects.play()
-			PlayerData.interactive_screen_mode = true
-			is_opening_chest = true
-			Server.world.get_node("PlaceableObjects/"+id).interactives.open_chest()
-			await get_tree().create_timer(0.5).timeout
-			is_opening_chest = false
-			var chest = Chest.instantiate()
-			chest.id = id
-			add_child(chest)
-			close_hotbar_clock_and_stats()
-		else:
-			close_chest(id)
-
-
-func toggle_barrel(id):
-	if not has_node(str(id)):
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/gate/open.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-		sound_effects.play()
-		Server.world.get_node("PlaceableObjects/"+id).interactives.open_barrel()
-		await get_tree().create_timer(0.2).timeout
-		var barrel = Barrel.instantiate()
-		barrel.name = str(id)
-		barrel.id = id
-		add_child(barrel)
-		close_hotbar_clock_and_stats()
-	elif has_node(str(id)) and not get_node(str(id)).visible:
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/gate/open.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-		sound_effects.play()
-		Server.world.get_node("PlaceableObjects/"+id).interactives.open_barrel()
-		await get_tree().create_timer(0.2).timeout
-		get_node(str(id)).initialize()
-		close_hotbar_clock_and_stats()
-	else:
-		close_barrel(id)
-
-
-func toggle_crate(id):
-	if not is_opening_chest:
-		if not has_node("Crate"):
-			sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorOpen.mp3")
-			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-			sound_effects.play()
-			PlayerData.interactive_screen_mode = true
-			is_opening_chest = true
-			Server.world.get_node("PlaceableObjects/"+id).interactives.open_crate()
-			await get_tree().create_timer(0.2).timeout
-			is_opening_chest = false
-			var chest = Crate.instantiate()
-			chest.id = id
-			add_child(chest)
-			close_hotbar_clock_and_stats()
-		else:
-			close_crate(id)
 
 
 func close_hotbar_clock_and_stats():
@@ -307,6 +306,7 @@ func add_hotbar_clock_and_stats():
 		$PlayerDataUI/EnergyBars.hide()
 		PlayerData.InventorySlots = $Menu/Pages/inventory/InventorySlots
 
+
 func toggle_menu():
 	if not $Menu.visible:
 		Sounds.play_big_select_sound()
@@ -323,6 +323,7 @@ func show_menu():
 	PlayerData.viewInventoryMode = true
 	$Menu.initialize()
 
+
 func hide_menu():
 	PlayerData.viewInventoryMode = false
 	if PlayerData.normal_hotbar_mode:
@@ -338,17 +339,6 @@ func hide_menu():
 	drop_items()
 	get_node("../../").set_held_object()
 
-func toggle_grain_mill(id, level):
-	if not has_node("GrainMill"):
-		play_open_menu_sound()
-		var grainMill = GrainMill.instantiate()
-		grainMill.level = level
-		grainMill.id = id
-		add_child(grainMill)
-		close_hotbar_clock_and_stats()
-	else:
-		close_grain_mill()
-
 
 func toggle_workbench(level):
 	if not has_node("Workbench"):
@@ -361,104 +351,28 @@ func toggle_workbench(level):
 		close_workbench()
 
 
-func toggle_furnace(id):
-	if not has_node(str(id)):
-		play_open_menu_sound()
-		var furnace = Furnace.instantiate()
-		furnace.name = str(id)
-		furnace.id = id
-		add_child(furnace)
-		close_hotbar_clock_and_stats()
-	elif has_node(str(id)) and not get_node(str(id)).visible:
-		play_open_menu_sound()
-		get_node(str(id)).initialize()
-		close_hotbar_clock_and_stats()
-	else:
-		close_furnace(str(id))
-
-
-func toggle_stove(id, level):
-	if not has_node(str(id)):
-		play_open_menu_sound()
-		var stove = Stove.instantiate()
-		stove.name = str(id)
-		stove.level = level
-		stove.id = id
-		add_child(stove)
-		close_hotbar_clock_and_stats()
-	elif has_node(str(id)) and not get_node(str(id)).visible:
-		play_open_menu_sound()
-		get_node(str(id)).level = level
-		get_node(str(id)).initialize()
-		close_hotbar_clock_and_stats()
-	else:
-		close_stove(id)
-
-
-func toggle_campfire(id):
-	if not has_node(str(id)):
+func open_campfire(id):
+	if not has_node("Campfire"):
 		play_open_menu_sound()
 		var stove = Campfire.instantiate()
-		stove.name = str(id)
 		stove.id = id
 		add_child(stove)
 		close_hotbar_clock_and_stats()
-	elif has_node(str(id)) and not get_node(str(id)).visible:
-		play_open_menu_sound()
-		get_node(str(id)).initialize()
-		close_hotbar_clock_and_stats()
-	else:
-		close_campfire(id)
-
-
-func close_crate(id):
-	if not holding_item and has_node("Crate"):
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/Door/doorClose.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-		sound_effects.play()
-		add_hotbar_clock_and_stats()
-		get_node("Crate").destroy()
-		drop_items()
-		await get_tree().create_timer(0.2).timeout
-		Server.world.get_node("PlaceableObjects/"+id).interactives.close_crate()
-
-func close_barrel(id):
-	if not holding_item and has_node(str(id)):
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/gate/close.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-		sound_effects.play()
-		add_hotbar_clock_and_stats()
-		get_node(str(id)).hide()
-		drop_items()
-		await get_tree().create_timer(0.2).timeout
-		Server.world.get_node("PlaceableObjects/"+id).interactives.close_barrel()
 
 func close_campfire(id):
-	if not holding_item and has_node(str(id)):
+	if not holding_item and has_node("Campfire"):
 		Sounds.play_deselect_sound()
 		add_hotbar_clock_and_stats()
 		get_node(str(id)).hide()
 		drop_items()
+		Server.world.rpc_id(1,"send_updated_ui_slots", id, Server.world.server_data["ui_slots"][id])
+		Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":current_interactice_area_location})
 		
 func close_brewing_table(id):
 	if not holding_item and has_node(str(id)):
 		Sounds.play_deselect_sound()
 		add_hotbar_clock_and_stats()
 		get_node(str(id)).hide()
-		drop_items()
-
-func close_furnace(id):
-	if not holding_item and has_node(str(id)):
-		Sounds.play_deselect_sound()
-		add_hotbar_clock_and_stats()
-		get_node(id).hide()
-		drop_items()
-
-func close_grain_mill():
-	if not holding_item and has_node("GrainMill"):
-		Sounds.play_deselect_sound()
-		add_hotbar_clock_and_stats()
-		get_node("GrainMill").destroy()
 		drop_items()
 
 func close_workbench():
@@ -468,22 +382,32 @@ func close_workbench():
 		get_node("Workbench").destroy()
 		drop_items()
 
+
+func open_stove(id, level):
+	if not has_node("Stove"):
+		play_open_menu_sound()
+		var stove = Stove.instantiate()
+		stove.level = level
+		stove.id = id
+		add_child(stove)
+		close_hotbar_clock_and_stats()
+
 func close_stove(id):
-	if not holding_item and has_node(str(id)):
+	if not holding_item and has_node("Stove"):
 		Sounds.play_deselect_sound()
 		add_hotbar_clock_and_stats()
-		get_node(str(id)).hide()
+		get_node(str(id)).destroy()
 		drop_items()
+		Server.world.rpc_id(1,"send_updated_ui_slots", id, Server.world.server_data["ui_slots"][id])
+		Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":current_interactice_area_location})
 
-func close_chest(id):
-	if not holding_item and has_node("Chest"):
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/chest/closed.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-		sound_effects.play()
-		Server.world.get_node("PlaceableObjects/"+id).interactives.close_chest()
-		add_hotbar_clock_and_stats()
-		get_node("Chest").destroy()
-		drop_items()
+func open_tc(id):
+	if not has_node("Tool cabinet"):
+		play_open_menu_sound()
+		var tc = Tool_cabinet.instantiate()
+		tc.id = id
+		add_child(tc)
+		close_hotbar_clock_and_stats()
 
 func close_tc(id):
 	if not holding_item and has_node("Tool cabinet"):
@@ -491,6 +415,9 @@ func close_tc(id):
 		add_hotbar_clock_and_stats()
 		get_node("Tool cabinet").destroy()
 		drop_items()
+		Server.world.rpc_id(1,"send_updated_ui_slots", id, Server.world.server_data["ui_slots"][id])
+		Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":current_interactice_area_location})
+
 
 func drop_items():
 	await get_tree().create_timer(0.25).timeout

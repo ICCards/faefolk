@@ -35,11 +35,11 @@ func setTreeBranchType():
 		$Break.offset = Vector2i(-5,-5)
 		
 
-func hit(tool_name, special_ability = ""):
+func destroy(data):
 	if not destroyed:
 		destroyed = true
-		if MapData.world["log"].has(name):
-			MapData.world["log"].erase(name)
+#		if MapData.world["log"].has(name):
+#			MapData.world["log"].erase(name)
 		$Log.call_deferred("hide")
 		$Break.call_deferred("show")
 		$Break.call_deferred("play",str(variety))
@@ -48,19 +48,20 @@ func hit(tool_name, special_ability = ""):
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12)) 
 		sound_effects.call_deferred("play")
 		animation_player.call_deferred("play", "break")
-		var amt = Stats.return_item_drop_quantity(tool_name, "branch")
-		PlayerData.player_data["collections"]["resources"]["wood"] += amt
-		InstancedScenes.intitiateItemDrop("wood",position,amt)
+		if data["player_id"] == Server.player_node.name:
+			var amt = Stats.return_item_drop_quantity(data["tool_name"], "branch")
+			PlayerData.player_data["collections"]["resources"]["wood"] += amt
+			InstancedScenes.intitiateItemDrop("wood",position,amt)
 		await get_tree().create_timer(1.2).timeout
 		call_deferred("queue_free")
 
 func _on_BranchHurtBox_area_entered(_area):
-	print(_area.name)
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	if _area.special_ability == "fire buff":
 		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-16,16), randf_range(-16,16)))
 	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
-		call_deferred("hit", _area.tool_name)
+		get_parent().rpc_id(1,"nature_object_hit",Server.player_node.name,"log",name,location,_area.tool_name)
+		#call_deferred("hit", _area.tool_name)
 
 

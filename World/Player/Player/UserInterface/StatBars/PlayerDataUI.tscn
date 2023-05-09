@@ -109,10 +109,6 @@ text = "12:00 a.m."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AdvanceTime" type="Timer" parent="DateTime"]
-wait_time = 3.0
-autostart = true
-
 [node name="ClockIcon" type="TextureRect" parent="DateTime"]
 layout_mode = 0
 offset_left = 851.667
@@ -131,4 +127,3 @@ offset_bottom = 31.0
 scale = Vector2(3, 3)
 
 [connection signal="timeout" from="EnergyBars/ManaTimer" to="." method="_on_mana_timer_timeout"]
-[connection signal="timeout" from="DateTime/AdvanceTime" to="." method="_on_advance_time_timeout"]

@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://rci2wcfc28u4"
-path="res://.godot/imported/egg drop.mp3-593a8330ef64a257fcecba61f1b78004.mp3str"
+path="res://.godot/imported/egg drop.mp3-93bb6b469404ed3cc00e2eda8f0c54a2.mp3str"
 
 [deps]
 
-source_file="res://Assets/Sound/Sound effects/animals/duck/egg drop.mp3"
-dest_files=["res://.godot/imported/egg drop.mp3-593a8330ef64a257fcecba61f1b78004.mp3str"]
+source_file="res://Assets/Sound/Sound effects/Animals/duck/egg drop.mp3"
+dest_files=["res://.godot/imported/egg drop.mp3-93bb6b469404ed3cc00e2eda8f0c54a2.mp3str"]
 
 [params]
 

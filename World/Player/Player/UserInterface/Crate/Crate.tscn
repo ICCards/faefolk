@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://1v7vgt4swot0"]
+[gd_scene load_steps=12 format=3 uid="uid://1v7vgt4swot0"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Crate/Crate.gd" id="1_kkncy"]
 [ext_resource type="Texture2D" uid="uid://bl5ficiak4bvu" path="res://Assets/Images/User interface/Crate/crate-tab.png" id="1_wjbjh"]
+[ext_resource type="PackedScene" uid="uid://4v3igpipcu6i" path="res://InventoryLogic/ItemDescription.tscn" id="2_bhfcm"]
 [ext_resource type="PackedScene" uid="uid://b4k542eq2r5ul" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="2_x3bwj"]
 [ext_resource type="Texture2D" uid="uid://de3s80bo27kc" path="res://Assets/Images/User interface/buttons-icons/x-button.png" id="3_wmajl"]
 [ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="4_80dw1"]
@@ -19,6 +20,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kkncy")
+
+[node name="ItemDescription" parent="." instance=ExtResource("2_bhfcm")]
+visible = false
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0

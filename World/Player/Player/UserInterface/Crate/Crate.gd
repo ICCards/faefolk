@@ -11,7 +11,7 @@ func _ready():
 	initialize()
 
 func initialize():
-	Server.player_node.actions.destroy_placable_object()
+	Server.player_node.actions.destroy_placeable_object()
 	$InventorySlots.initialize_slots()
 	$HotbarInventorySlots.initialize_slots()
 	$ChestSlots.initialize_slots()
@@ -22,7 +22,6 @@ func destroy():
 	queue_free()
 
 func _physics_process(delta):
-	return
 	if hovered_item and not find_parent("UserInterface").holding_item:
 		$ItemDescription.show()
 		$ItemDescription.item_category = JsonData.item_data[hovered_item]["ItemCategory"]
@@ -31,6 +30,11 @@ func _physics_process(delta):
 		$ItemDescription.initialize()
 	else:
 		$ItemDescription.hide()
+
+
+func _input(event):
+	if event.is_action_pressed("action"):
+		get_parent().close_crate(id)
 
 
 func _on_exit_btn_pressed():

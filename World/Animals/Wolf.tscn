@@ -144,6 +144,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [true]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("WolfSprite:material")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2")]
+}
 
 [sub_resource type="Animation" id="53"]
 resource_name = "bite"
@@ -325,6 +337,18 @@ tracks/9/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("WolfSprite:material")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [null]
+}
 
 [sub_resource type="Animation" id="49"]
 resource_name = "loop"
@@ -495,6 +519,7 @@ position = Vector2(0, -8)
 [node name="SetEnemyDirection" parent="." instance=ExtResource("6_ckc8f")]
 
 [node name="KnockbackParticles" type="CPUParticles2D" parent="."]
+visible = false
 material = SubResource("54")
 emitting = false
 amount = 3
