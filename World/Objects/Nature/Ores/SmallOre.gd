@@ -27,11 +27,12 @@ func setTexture():
 func hit(tool_name):
 	rng.randomize()
 	health -= Stats.return_tool_damage(tool_name)
-	MapData.update_object_health("ore", name, health)
+	if MapData.world[Util.return_chunk_from_location(location)]["ore"].has(name):
+		MapData.world[Util.return_chunk_from_location(location)]["ore"][name]["h"] = health
 	if health <= 0 and not destroyed:
 		destroyed = true
 		PlayerData.player_data["skill_experience"]["mining"] += 1
-		MapData.remove_object("ore", name)
+		MapData.remove_object("ore",name,location)
 		Tiles.add_valid_tiles(location)
 		sound_effects.set_deferred("stream", Sounds.ore_break[rng.randi_range(0, 2)])
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))

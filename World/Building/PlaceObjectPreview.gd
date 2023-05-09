@@ -268,7 +268,7 @@ func place_rotatable_state():
 
 
 func place_foundation_state():
-	if Server.world.name == "Main":
+	if Server.world.name == "Overworld":
 		var location = Tiles.valid_tiles.local_to_map(mousePos)
 		if not Tiles.validate_tiles(location, Vector2(1,1)) or not Tiles.foundation_tiles.get_cell_atlas_coords(0,location)==Vector2i(-1,-1):
 			$ColorIndicator.indicator_color = "Red"
@@ -281,7 +281,7 @@ func place_foundation_state():
 
 
 func place_wall_state():
-	if Server.world.name == "Main":
+	if Server.world.name == "Overworld":
 		$ColorIndicator.visible = true
 		var location = Tiles.valid_tiles.local_to_map(mousePos)
 		if not Tiles.return_if_valid_wall_cell(location, Tiles.wall_tiles) or not Tiles.validate_foundation_tiles(location,Vector2(1,1)) or not Tiles.validate_tiles(location, Vector2(1,1)):
@@ -324,7 +324,7 @@ func place_item_state():
 			place_object(item_name, null, location, "placeable")
 
 func place_seed_state():
-	if Server.world.name == "Main":
+	if Server.world.name == "Overworld":
 		var location = Tiles.valid_tiles.local_to_map(mousePos)
 		if Util.isNonFruitTree(item_name) or Util.isFruitTree(item_name):
 			if not Tiles.validate_forest_tiles(location) or Server.player_node.position.distance_to(mousePos) > Constants.MIN_PLACE_OBJECT_DISTANCE:

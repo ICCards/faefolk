@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://bdyinn6aswyx7"]
+[gd_scene load_steps=75 format=3 uid="uid://bdyinn6aswyx7"]
 
 [ext_resource type="Script" path="res://World/Player/Player/Player.gd" id="1_hovno"]
 [ext_resource type="Texture2D" uid="uid://dybsd7fv08hlv" path="res://Assets/Images/inventory_icons/Fish/goldfish.png" id="2"]
@@ -27,7 +27,6 @@
 [ext_resource type="Texture2D" uid="uid://bnfw57dme4x26" path="res://Assets/Images/Animations/objects/torch/2.png" id="21_c3ki0"]
 [ext_resource type="Texture2D" uid="uid://78sds5dnqh0c" path="res://Assets/Images/Animations/objects/torch/3.png" id="22_grgdf"]
 [ext_resource type="Texture2D" uid="uid://bt3ysh31fm3pc" path="res://Assets/Images/Animations/objects/torch/4.png" id="23_i22ks"]
-[ext_resource type="Texture2D" uid="uid://dy0twecogksrh" path="res://Characters/Weapon swings/fishing rod cast/fish hook.png" id="28_ppjmv"]
 
 [sub_resource type="Animation" id="3"]
 length = 0.001
@@ -4470,9 +4469,6 @@ script = ExtResource("2_gk7ji")
 [node name="DeathEffect" parent="Camera2D/UserInterface" index="1"]
 visible = true
 
-[node name="Hotbar" parent="Camera2D/UserInterface" index="11"]
-visible = true
-
 [node name="timer_shake_length" type="Timer" parent="Camera2D"]
 one_shot = true
 
@@ -4675,10 +4671,6 @@ position = Vector2(0, -40)
 sprite_frames = SubResource("117")
 animation = &"new_animation"
 frame_progress = 0.579862
-
-[node name="FishHook" type="Sprite2D" parent="."]
-position = Vector2(13, -24)
-texture = ExtResource("28_ppjmv")
 
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_exited"]

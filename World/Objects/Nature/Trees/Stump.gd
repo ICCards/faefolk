@@ -64,8 +64,7 @@ func hit(tool_name):
 			animation_player.call_deferred("play", "stump hit right")
 	elif not destroyed:
 		destroyed = true
-		if MapData.world[Util.return_chunk_from_location(location)]["stump"].has(name):
-			MapData.world[Util.return_chunk_from_location(location)]["stump"].erase(name)
+		MapData.remove_object("stump",name,location)
 		Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
 		sound_effects.set_deferred("stream", Sounds.stump_break)
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))

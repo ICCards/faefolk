@@ -1,243 +1,242 @@
-res://Assets/Images/Animals/Bird/bird1.tres::cc614ab391593d734829dac5c159bfd7::1677706463::res://.godot/exported/133200997/export-94366a29096e136f51328b2f73817fae-bird1.res
-res://Assets/Images/Animals/Bird/bird2.tres::69db3023912bf050167c0c2db68c5625::1676562591::res://.godot/exported/133200997/export-f5cc8eb261e8310ef9701ca0cce86616-bird2.res
-res://Assets/Images/Animals/Bunny/brownBunny.tres::7c9809fd54d3afce7ef303768e5317a4::1678983844::res://.godot/exported/133200997/export-dfdbcc1dd94977506907af1029e31e9c-brownBunny.res
-res://Assets/Images/Animals/Bunny/whiteBunny.tres::26416a84912bfb5c0bc4730ecc805191::1678984834::res://.godot/exported/133200997/export-4090e05f2bdec888d9dd09ef33504c63-whiteBunny.res
-res://Assets/Images/Animals/Bunny/yellowBunny.tres::0e4ae6f85e14ba77e7a3b8347681dbbf::1680030556::res://.godot/exported/133200997/export-c79f3db6f8bcb0b4a360f3422272ec90-yellowBunny.res
-res://Assets/Images/Animals/Duck/duck1.tres::8c03ce5513c5a0fba0b43cfd8c95e562::1678986334::res://.godot/exported/133200997/export-b21bcf9bf0de75f5612e6b67428d4e72-duck1.res
-res://Assets/Images/Animals/Duck/duck2.tres::a2b89c186f0856acfdb365cc12d0196e::1678986334::res://.godot/exported/133200997/export-aa0a4c38dc0c6c8f942ae1ca03fdcb6a-duck2.res
-res://Assets/Images/Animals/Duck/duck3.tres::a25ebe31418281f1304de61f2406024b::1679897367::res://.godot/exported/133200997/export-bc2254059ce2ab4da708321d1f9194c7-duck3.res
-res://Assets/Images/Animations/campfire/campfire.tres::229b897d9b51a8b33603777a5dfb1eff::1676562591::res://.godot/exported/133200997/export-931b761c69b35d55f16e18791a603e3c-campfire.res
-res://Assets/Images/Animations/freshwater/freshwater.tres::a586813067f3545b7f3d11cadc6b3505::1676562591::res://.godot/exported/133200997/export-e45e964fa8af32dedea0f38aa20affd8-freshwater.res
-res://Assets/Images/Animations/ocean/Water/ocean_bottom.tres::ce7bf66de5ec443325e66f8e5d159d6e::1676562591::res://.godot/exported/133200997/export-ac5c121f74dff1f901c972705eb19537-ocean_bottom.res
-res://Assets/Images/Animations/ocean/Water/ocean_top.tres::903dd69b8fc7db7db5dbde29b820d623::1676562591::res://.godot/exported/133200997/export-47c18149c29075d0b418fd25427353aa-ocean_top.res
-res://Assets/Images/Animations/ocean/water_sheet (6)/divide.tres::c90de81c00a90968ed063e2b6b6cb384::1676562591::res://.godot/exported/133200997/export-88a28df1fa7f0970d81c59acbf670f1e-divide.res
-res://Assets/Images/Animations/ocean/water_sheet new/divide.tres::d8a45bf0531a830a0ef935fcc2ca3b17::1676562591::res://.godot/exported/133200997/export-2773227f801f4d69cfe77993d557a6c3-divide.res
-res://Assets/Images/Animations/ocean/wave border/wave animation.tres::fc115751daad11c375eb63e9a0b1884d::1676562591::res://.godot/exported/133200997/export-d0c8089bf0407bae7b7f48a25ea5959a-wave animation.res
-res://Assets/Images/IC Kitties/SpriteFrames/Blue.tres::3ced14d73ea74aa3a38b244cf2fda1e8::1676562591::res://.godot/exported/133200997/export-9275b443c4cc01b23b62a3d611c5b76c-Blue.res
-res://Assets/Images/IC Kitties/SpriteFrames/Green.tres::b780acd4eb3d5ed3e49e3eddc13d55f9::1676562591::res://.godot/exported/133200997/export-d8f6082ce6a54efc41e01bb55b2443d4-Green.res
-res://Assets/Images/IC Kitties/SpriteFrames/Orange.tres::c2c4e7f8ed14dafdf36a26de04d360af::1676562591::res://.godot/exported/133200997/export-018932d395ec425723956f2a53821160-Orange.res
-res://Assets/Images/IC Kitties/SpriteFrames/Pink.tres::387aa75f1905fa930d090d57e09b89c5::1676562591::res://.godot/exported/133200997/export-b89c7e2a5d227fc8ef11d61074867395-Pink.res
-res://Assets/Images/IC Kitties/SpriteFrames/Purple.tres::dc2790fd09fde476158aa957cbe90bd6::1676562591::res://.godot/exported/133200997/export-830eba966a063d404cbc26f3c9018241-Purple.res
-res://Assets/Images/IC Kitties/SpriteFrames/Red.tres::0daabd5e1335bcf1df22e3cf643e96d4::1676562591::res://.godot/exported/133200997/export-37c8c22b2d545f2ba0d239fe0ae03a91-Red.res
-res://Assets/Images/IC Kitties/SpriteFrames/White.tres::473c077190b653f8f0f168270f6ad329::1678718964::res://.godot/exported/133200997/export-a6840414a613629bebb7e9c07d030896-White.res
-res://Assets/Images/tree_sets/apple/mature/animated.tres::7635369dc214d2e19df92abef87f9e23::1678053785::res://.godot/exported/133200997/export-14b5bba8d7c1fdb5fc3d9a48acc20ee2-animated.res
-res://Assets/Images/tree_sets/birch/mature/animated top winter.tres::85a9bd91b54441354cc4a5906d00a3b9::1676562591::res://.godot/exported/133200997/export-2c06d4cb165d7b97a4b56d87454bf009-animated top winter.res
-res://Assets/Images/tree_sets/birch/mature/animated top.tres::72feb8e3fdc99d7399b257b91d90007d::1676562591::res://.godot/exported/133200997/export-597721d98824c229ba554c423a9f75fc-animated top.res
-res://Assets/Images/tree_sets/cherry/mature/animated.tres::3fa54d2d12fb98977dcf48285869c7ed::1678053785::res://.godot/exported/133200997/export-37d6c7d46da2a11375e414b2221a76fc-animated.res
-res://Assets/Images/tree_sets/evergreen/mature/animated top winter.tres::4631d933b9df11d11dc8e20ce1a0017f::1676562591::res://.godot/exported/133200997/export-758d02108d2140d7e24e70382261f97f-animated top winter.res
-res://Assets/Images/tree_sets/evergreen/mature/animated top.tres::d147711068cfe765a21196eefd18439e::1677609571::res://.godot/exported/133200997/export-90daeb6f1ff7b5e14bc64202b01617fe-animated top.res
-res://Assets/Images/tree_sets/oak/mature/animated top winter.tres::58fd3f4d739090dfe8bda3c7f08c5273::1678025275::res://.godot/exported/133200997/export-d04e954a488b2329ad427ce3894c010d-animated top winter.res
-res://Assets/Images/tree_sets/oak/mature/animated top.tres::56fb9443b24a02d9fc8f54d86935b12a::1678025275::res://.godot/exported/133200997/export-2a6eab3c188510e4a576a58c5be370b9-animated top.res
-res://Assets/Images/tree_sets/pear/mature/animated.tres::1aceb365c46d708928f74aa5ecff8a4c::1678047745::res://.godot/exported/133200997/export-e8023e7d336a109f1f01e520d811ecea-animated.res
-res://Assets/Images/tree_sets/pine/mature/animated top winter.tres::a12b3a90246e336a2bdb4b1b0830cfbc::1676562591::res://.godot/exported/133200997/export-0269316b49a2add4f1e9d6e6062efdaa-animated top winter.res
-res://Assets/Images/tree_sets/pine/mature/animated top.tres::dd43bc21b6b7814780f6feff4062ddfe::1676562591::res://.godot/exported/133200997/export-8a07df331c8f18cea693620652b0ee45-animated top.res
-res://Assets/Images/tree_sets/plum/mature/animated.tres::94bce0872ba1a59c9c12d0be718f55ca::1679859905::res://.godot/exported/133200997/export-dc0589ceb05fd6c416154de5ca8f995c-animated.res
-res://Assets/Images/tree_sets/spruce/mature/animated top winter.tres::032e380be96fb908f8a055cd2da6d5e8::1676562591::res://.godot/exported/133200997/export-8d1469d5f8793f8f3f27886bdc480807-animated top winter.res
-res://Assets/Images/tree_sets/spruce/mature/animated top.tres::5ca0b995a9b7f5aa42fbee9db393ae2e::1676562591::res://.godot/exported/133200997/export-12ee983706be0257349f913f1d00eb2b-animated top.res
-res://Assets/Themes/button_theme.tres::2590dba504421a7cce2a9f1e5e11089b::1676934416::res://.godot/exported/133200997/export-e94b9e1415a68712e34fc62c4bdf6bc3-button_theme.res
-res://Assets/Themes/Flash.tres::5bbdc6709b03fd29df27426d2750b432::1680032177::res://.godot/exported/133200997/export-0d2053997637bd932953827e6fb42e3f-Flash.res
-res://Assets/Themes/HideCollection.tres::d39389677dac84183c88d23481fa7cc6::1679367362::res://.godot/exported/133200997/export-09547a016e37d6f735abd44b1db6acd4-HideCollection.res
-res://Assets/Themes/LockedAsset.tres::1f50d77b9ba86203f6ee5472f4f296b3::1679959556::res://.godot/exported/133200997/export-0a78cd2c0ebe79bdfd037377b810f5c7-LockedAsset.res
-res://Assets/Themes/MenuTitle.tres::759542b2fcd53b34d40ff7b141ed6f54::1680031679::res://.godot/exported/133200997/export-c26284b3a97e508a57694c68b9f91840-MenuTitle.res
-res://Assets/Themes/MiniMap.tres::785b23b701b6382640c9c39db4ad907e::1679959555::res://.godot/exported/133200997/export-39660408b19d77093b3ef0878c9a3200-MiniMap.res
-res://Assets/Themes/text.tres::b34579ba6a494b8a98192d767e23fc48::1679959556::res://.godot/exported/133200997/export-e0aede1a8d1e04c6f13a3a6129ad9903-text.res
-res://Assets/Themes/waves.tres::f799e73e26af149cb6653455a4280975::1676562591::res://.godot/exported/133200997/export-447e79ffcdb76496c5f425250dda242d-waves.res
-res://Assets/Themes/whiten.tres::0da9465724a8895924ab666d1acb169f::1679959556::res://.godot/exported/133200997/export-de1c6c2b1982b033d5202924f8d9833d-whiten.res
-res://Assets/Themes/world_fog.tres::5d8f203f0b7524ad3630344ae7e7aefd::1676921454::res://.godot/exported/133200997/export-79f2cbe44a368e996365afcbe8628c76-world_fog.res
-res://Assets/Tilesets/foundation/foundation.tres::70321c2bd89901dd9cb0418c8395611b::1679959555::res://.godot/exported/133200997/export-c1ba80661ce66d2ec981b43b492a9f4c-foundation.res
-res://Assets/Tilesets/objects/crops.tres::3ed2b0c6152bc8d0f672e345ccae45e9::1679579589::res://.godot/exported/133200997/export-2d96364f109f65eafd963184a3840a42-crops.res
-res://Assets/Tilesets/objects/objects.tres::340be033d32a4e236105a4086fcae944::1679959556::res://.godot/exported/133200997/export-a1fba531b80402220732cde7cf32b7be-objects.res
-res://Assets/Tilesets/terrain/tres files/cave walls.tres::8fc26fb07fbb21930dc92ba40131b96b::1679959705::res://.godot/exported/133200997/export-9b6fe395dcf2831152e56e6fa9bf3a30-cave walls.res
-res://Assets/Tilesets/terrain/tres files/deep ocean.tres::a7e240008083a55b7646fb9713a601d4::1679959555::res://.godot/exported/133200997/export-a31a2567a42069e0706a87a949f55481-deep ocean.res
-res://Assets/Tilesets/terrain/tres files/dirt.tres::0aa4e5ce50084992fd5f183c83d93ee1::1679959555::res://.godot/exported/133200997/export-96b0b265da9b97c8cfe8c56ad6181313-dirt.res
-res://Assets/Tilesets/terrain/tres files/forest.tres::f08ce5843415d36340bac52fae02da56::1679959555::res://.godot/exported/133200997/export-b5ae9e36e9d5280902802d849e26537e-forest.res
-res://Assets/Tilesets/terrain/tres files/freshwater.tres::39d9c5c2242dbebfb1f3fe85b489e8a2::1679959555::res://.godot/exported/133200997/export-19eb0f2e8e6e9678a34ba52b7cbf7d1b-freshwater.res
-res://Assets/Tilesets/terrain/tres files/plains.tres::70b224585493ffbf1d2d87e47d252231::1679959555::res://.godot/exported/133200997/export-bb3ee292757c207a8bca5161aaaa5677-plains.res
-res://Assets/Tilesets/terrain/tres files/snow.tres::bf9d8578ab89d2dd7c7873be528e6d96::1679959556::res://.godot/exported/133200997/export-16fc53235c467b3006513316a99ad8b9-snow.res
-res://Assets/Tilesets/terrain/tres files/waves.tres::fdef6dab4cc49828485135cf034395ea::1679959555::res://.godot/exported/133200997/export-2dbe216f7da07acb985a4f03fb478371-waves.res
-res://Assets/Tilesets/terrain/tres files/wet sand.tres::ceb1fa8f4964c7de6fa20938f2fa01db::1679959556::res://.godot/exported/133200997/export-0f5b38bff19ca02f5a2b98450bf34466-wet sand.res
-res://Assets/Tilesets/terrain/elevated terrain.tres::6e3c51f90b4dafa37ad775ed02ef5d04::1679959555::res://.godot/exported/133200997/export-474865a05ea38052c1a7f414c97936c8-elevated terrain.res
-res://Assets/Tilesets/walls/walls.tres::e7e5ec64d13fedae1a2879fe9fa7614a::1679959555::res://.godot/exported/133200997/export-3b904f7d34102e760348c05711be350e-walls.res
-res://Global/Functions/maujoe.custom_gradient_texture/example.tres::efbeb776d8c63dade049da82ed5addda::1676562591::res://.godot/exported/133200997/export-5715ff5fe974e0aca9746844d399f9cd-example.res
-res://Global/Functions/SceneChanger.tscn::5c51093be2d27b16938ff8c110530b1b::1678751673::res://.godot/exported/133200997/export-392b2a75d9af75ec3e7a85bf5cc68fa6-SceneChanger.scn
-res://InventoryLogic/CollectionItemDescription.tscn::6e47c5cd95c46ccffcd95e2d2fa9ced7::1679247087::res://.godot/exported/133200997/export-e5f44a62e1ca929bdcdfb5e1587c6ffe-CollectionItemDescription.scn
-res://InventoryLogic/CraftingItemDescription.tscn::541769ae9bfc95bd71a60955e8d358fb::1679362603::res://.godot/exported/133200997/export-90086408d0fdded58e4b069c5b985d4e-CraftingItemDescription.scn
-res://InventoryLogic/Ingredient.tscn::28e88b1589eb5c1051113516a979e493::1679247087::res://.godot/exported/133200997/export-87fa700153d9fae1df67f8724ec3ceec-Ingredient.scn
-res://InventoryLogic/InventoryItem.tscn::65f365ea63f84a4b766d489eb2637fb3::1677449695::res://.godot/exported/133200997/export-6b817579406b30f655b4bd4aa9c81e23-InventoryItem.scn
-res://InventoryLogic/ItemDescription.tscn::76960bc6ea2a400c4097609179b29375::1679613355::res://.godot/exported/133200997/export-b84ec3c775ae2f7f8df1868a50109a1b-ItemDescription.scn
-res://InventoryLogic/ItemDrop.tscn::1efdf182d2849f8bc61418f87dfeab92::1678218330::res://.godot/exported/133200997/export-6d5d82824b89a565b93a48c943156f64-ItemDrop.scn
-res://InventoryLogic/ItemNameBox.tscn::6ca0b435cbf428c556eeea3326d523ff::1679899960::res://.godot/exported/133200997/export-2b9bb68df4d6d55b98d28e9d7e51fd87-ItemNameBox.scn
-res://InventoryLogic/ItemPickUpBox.tscn::e9ff8a133140e3fd6dff534f6ce3d49c::1679355317::res://.godot/exported/133200997/export-230fc2d2fd9c7cdb9d45ba2e23c06a19-ItemPickUpBox.scn
-res://InventoryLogic/sound_bar.tscn::218fd2a9238f732476e666b22d7b0826::1676940251::res://.godot/exported/133200997/export-60dffa952af8c65f6f88899859825d5a-sound_bar.scn
-res://InventoryLogic/text.tscn::d075bcbfd50984173fb8cb4a8f378034::1676919291::res://.godot/exported/133200997/export-9febff692a5f9c5e5329379e22c649b3-text.scn
-res://MainMenu/GenerateWorldLoadingScreen.tscn::9b6fa4735aac7773611c98a5e986198d::1679892792::res://.godot/exported/133200997/export-da74ec0a01820f7b54ec7a2f4587dde6-GenerateWorldLoadingScreen.scn
-res://MainMenu/LoadingScreen.tscn::91388f73b232d55f3a1a4dd2a3fdd2e6::1679892792::res://.godot/exported/133200997/export-1e704e9c2489245f02cb85d1c817168e-LoadingScreen.scn
-res://MainMenu/MainMenu.tscn::b8e58a6a80ab36107168ad2cf1cd9075::1680032177::res://.godot/exported/133200997/export-bc43d44b4a3cb1e05881b15b869d237a-MainMenu.scn
-res://MainMenu/MainMenuButtons.tscn::e0e3658d6ddabb942ff9028613fc0bb4::1679862195::res://.godot/exported/133200997/export-12e28c29784a2dd8308e64d6bc1461a0-MainMenuButtons.scn
-res://server/server.tscn::a4fbfbcb15cbe0fd9eade86df29aa824::1676139738::res://.godot/exported/133200997/export-399d989b856dec99c2e8a5ad508ee24f-server.scn
-res://World/Animals/Bear.tscn::0fd614a2fc60122d5c6f1749bbfd323f::1680032177::res://.godot/exported/133200997/export-7524fcdb2bcf0a8822fc74a1a8b2f5e5-Bear.scn
-res://World/Animals/BirdFlyingFromTree.tscn::96967ed99d5d5e25239e87f7ed50f5d8::1677711233::res://.godot/exported/133200997/export-0c3af02cae632fdecd94caff6128f02e-BirdFlyingFromTree.scn
-res://World/Animals/Boar.tscn::8a3363f43d500bf985dbc920944ce93a::1679943524::res://.godot/exported/133200997/export-9b37db295ced5c9d779423a1e23b2ce1-Boar.scn
-res://World/Animals/Bunny.tscn::804e721f72142b1c2dc5ace630c46a52::1680030556::res://.godot/exported/133200997/export-8353d8098e98ed935b28ce0d4a175915-Bunny.scn
-res://World/Animals/Deer.tscn::5b4aab6ce57dc27a1fbf0bb5235f8cba::1679942702::res://.godot/exported/133200997/export-75f5ab1c902e821985b3125aafb997f1-Deer.scn
-res://World/Animals/Duck.tscn::79557b07f7cd62efe477d3df2676131b::1679898891::res://.godot/exported/133200997/export-ab83e0120f36a4264dae8f8b363b9d77-Duck.scn
-res://World/Animals/Wolf.tscn::6911afb3f7ebcb4bcfe751165dc79172::1679942739::res://.godot/exported/133200997/export-228743ac7bb63365c30989060d9193a9-Wolf.scn
-res://World/Building/Tiles/Attached nodes/bed_interactive_area.tscn::3d61a6f415769bf13b9db3ca2602996d::1678556902::res://.godot/exported/133200997/export-def88be615b7e7560fc7cccc9b99992b-bed_interactive_area.scn
-res://World/Building/Tiles/Attached nodes/campfire_interactive_area.tscn::f70cb4d5d324c9fe414c22b8485e40ef::1678555699::res://.godot/exported/133200997/export-6a1f2c9845864ee17fbb8e2bf350a906-campfire_interactive_area.scn
-res://World/Building/Tiles/Attached nodes/door_interactive_area.tscn::bbe640fbd639120f3c862f4fcc5a4bdd::1678226667::res://.godot/exported/133200997/export-6b4da10f256352c5688f8cf3686f9f98-door_interactive_area.scn
-res://World/Building/Tiles/Attached nodes/furnace_smoke.tscn::f7692702b3696524c839fa137fdfb06d::1677925382::res://.godot/exported/133200997/export-f766fe57f605f6c685fc1ddd828fc648-furnace_smoke.scn
-res://World/Building/Tiles/Attached nodes/interactive_area.tscn::2ebcb663cfc667c847672316a56d28cb::1679355304::res://.godot/exported/133200997/export-3302af40397085ca03357c0a21beb75f-interactive_area.scn
-res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn::c41aa2db97d81efb7181c48ad3f6fbeb::1679795233::res://.godot/exported/133200997/export-6f297f8a079ca2328865b2f2a71d8640-BuildingTileObjectHurtBox.scn
-res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn::d25e0b1b453ca0a73a9c9f5fca389c7b::1679607233::res://.godot/exported/133200997/export-8fc6583309e8c745f590765990fe1235-TileObjectHurtBox.scn
-res://World/Building/Tiles/GateFront.tscn::58a1e51a84335a646c30b03d3888ebfb::1677911924::res://.godot/exported/133200997/export-07587d8879462072a77f1ce9a2e2128d-GateFront.scn
-res://World/Building/Tiles/WallHitEffect.tscn::7f709b27218fd15ad952e769e38c7811::1677919971::res://.godot/exported/133200997/export-cc853d1559ed76173d15978dbbe7f403-WallHitEffect.scn
-res://World/Building/Tiles/WoodGate.tres::92c57046305e1f5662f278d5e0113d13::1676562591::res://.godot/exported/133200997/export-b5ff34cb69f086a0de8cf763dc8efb9f-WoodGate.res
-res://World/Building/PlaceObjectPreview.tscn::d118cef65f11fd98b4a0323285f1b0de::1679626528::res://.godot/exported/133200997/export-92e56d0e60321668fed7f39aca032d2f-PlaceObjectPreview.scn
-res://World/Caves/Bosses/FireBoss.tscn::cfff09d3b107bbe66109022c82d6cc64::1679959707::res://.godot/exported/133200997/export-a871a149fe53b42aed3521eb0ef9f713-FireBoss.scn
-res://World/Caves/Bosses/WindBoss.tscn::2a40f706332e1843d452632fa21cfa05::1679959705::res://.godot/exported/133200997/export-97d17701f7a97ec680d67939bb1e675b-WindBoss.scn
-res://World/Caves/Objects/CaveLadder.tscn::241a07459fc3e18b8257bab9ee7084c6::1676562591::res://.godot/exported/133200997/export-3800874164a55defda347d80444ec636-CaveLadder.scn
-res://World/Caves/Objects/CaveLight.tscn::b0a550658ed950c43151bd750a4270ba::1679820402::res://.godot/exported/133200997/export-e1f7def0f35278e3cc2113e9498479d5-CaveLight.scn
-res://World/Caves/CaveAmbientLight.tscn::eab993d7f68ca3da9f5cc8d064e1324c::1676139740::res://.godot/exported/133200997/export-82ae64f54171f96db509459aabadc0a3-CaveAmbientLight.scn
-res://World/Caves/CaveGenerator.tscn::05d4f99f5ede304a4ef0adfc01cd45be::1679820401::res://.godot/exported/133200997/export-feacbad3a975a6c7546feab149840b95-CaveGenerator.scn
-res://World/Caves/random_cave.tscn::a7486e30dfba0fdfb37d2b72e99bb52f::1679820595::res://.godot/exported/133200997/export-190f2019875973e5e59cb2f3db0ebf77-random_cave.scn
-res://World/Enemies/AttachedStates/EnemyFrozenState.tscn::400d8cd2cf335630ca731986e8e9b90d::1678902225::res://.godot/exported/133200997/export-406c92e4634d2ef21f1cb187bb9b8169-EnemyFrozenState.scn
-res://World/Enemies/AttachedStates/EnemyPoisonState.tscn::89ce98413a06b2964ca664f6deca92b7::1679008550::res://.godot/exported/133200997/export-6a452a6e250ff1968b98f9f481cf9016-EnemyPoisonState.scn
-res://World/Enemies/AttachedStates/EnemyStunnedState.tscn::4f87398d6371ab2ec7e7689e93e479b8::1678903206::res://.godot/exported/133200997/export-f5e45120da765b8bda76c136c708dccb-EnemyStunnedState.scn
-res://World/Enemies/AttachedStates/EnemyTornadoState.tscn::ebcafa4e7e15560f63c59c15c9a10ed3::1678903204::res://.godot/exported/133200997/export-1577724ad20d01e64dfd99f79b086e01-EnemyTornadoState.scn
-res://World/Enemies/AttachedStates/SetEnemyDirection.tscn::6f4c0ded0848de06601a3477c65811d3::1678902208::res://.godot/exported/133200997/export-d83d9274da13978b129ad51748197aa3-SetEnemyDirection.scn
-res://World/Enemies/Slime/Bat.tscn::2c2a83a0762d6b58815235c68e475ebf::1676562591::res://.godot/exported/133200997/export-e9389d5992ce6d0666b6a6d7b4d38d92-Bat.scn
-res://World/Enemies/Slime/Slime.tscn::772078949ec0e49a2d27ae31694fd314::1679820402::res://.godot/exported/133200997/export-b77da39316817d058404885ca4b982b6-Slime.scn
-res://World/Enemies/BabyBirdBoss.tscn::86ef0ee5c6bab79113a3731be3cb3a13::1676562591::res://.godot/exported/133200997/export-cd21aae4e71889e8fef3084540d92546-BabyBirdBoss.scn
-res://World/Enemies/mob.tscn::9278130047488978a8c7b85fe5dc1161::1679270409::res://.godot/exported/133200997/export-940b2ca805d98b92a814d61f81785717-mob.scn
-res://World/Enemies/Skeleton.tscn::65a3daccb4b54d9e2e2860db827e447a::1679820402::res://.godot/exported/133200997/export-c245e647c6ec4a45e57923066f5e53d2-Skeleton.scn
-res://World/Enemies/Spider.tscn::b6b49dcb0734a93eb37dbcd2ea352ab1::1679820402::res://.godot/exported/133200997/export-56524efa5bc43bb629df53fa87ef5c66-Spider.scn
-res://World/Map/GridSquareLabel.tscn::9cd5458175b70e2f3d0730c126462ff5::1679299574::res://.godot/exported/133200997/export-c90f458c4f3c8759d1a80256c451a685-GridSquareLabel.scn
-res://World/Map/WorldMap.tscn::97c24997e67d13bb23471f3229c23ec8::1679607232::res://.godot/exported/133200997/export-bfcea2fd1b606edb545b60563065c816-WorldMap.scn
-res://World/Objects/Farm/PlantedCrop.tscn::8c68930a7a25450e388641c1d65b7fea::1679631300::res://.godot/exported/133200997/export-20d8be0f947381170a722ea10509743f-PlantedCrop.scn
-res://World/Objects/Magic/Dark/DemonMage.tscn::f65069b92d87d170d56255a11d7980f9::1676674587::res://.godot/exported/133200997/export-070cd140fedf4832445f050ffef2f58f-DemonMage.scn
-res://World/Objects/Magic/Dark/Portal.tscn::6603aca66fa23d6ca060bd628be85fd0::1676562591::res://.godot/exported/133200997/export-42c2665f017271c80d6f3a046839416c-Portal.scn
-res://World/Objects/Magic/Earth/EarthGolem.tscn::1db4c2a12d08c910af6b0c3d5c9e4eec::1676673684::res://.godot/exported/133200997/export-ed221363b97e682333de44ac762b972b-EarthGolem.scn
-res://World/Objects/Magic/Earth/Earthquake.tscn::b2781dc1e71e6670250eaa6d3c3bae74::1676674536::res://.godot/exported/133200997/export-c6a6d88a8b68081aeb9f5b33af0177d6-Earthquake.scn
-res://World/Objects/Magic/Earth/EarthStrike.tscn::6ba9d135b99ac5a7e6b55f83b1cb14af::1676673671::res://.godot/exported/133200997/export-eeba4e3f9e012a8cce8e7bf291cb1090-EarthStrike.scn
-res://World/Objects/Magic/Earth/EarthStrikeDebuff.tscn::047db556007395ea1c9a2d7fdfb0eff4::1676562591::res://.godot/exported/133200997/export-9eb177d59885e0f21e6c8984b06a39a3-EarthStrikeDebuff.scn
-res://World/Objects/Magic/Fire/AttachedFlameBehind.tscn::41338f79fcdcac2a92b9e5505b3d9900::1676562591::res://.godot/exported/133200997/export-a2586ef1985df736c463877d50901ffc-AttachedFlameBehind.scn
-res://World/Objects/Magic/Fire/AttachedFlameFront.tscn::b4fc757b47b3f41560645e79511dbff0::1676562591::res://.godot/exported/133200997/export-e636882f202791f101ed2750aa08c62f-AttachedFlameFront.scn
-res://World/Objects/Magic/Fire/FireProjectile.tscn::975e85092a81478b582e1f2faf0c3c86::1677263098::res://.godot/exported/133200997/export-fc1ca04b048827e99fb45f1ed11921ba-FireProjectile.scn
-res://World/Objects/Magic/Fire/Flamethrower.tscn::27774a5549e95dda20830460a3b0e5b8::1676674512::res://.godot/exported/133200997/export-46d8204f4466b0032ac053a3a42e235d-Flamethrower.scn
-res://World/Objects/Magic/Ice/BlizzardFog.tscn::afc3dda45b40378de5feb9fd25826449::1676675153::res://.godot/exported/133200997/export-ab934a3ecc8e2cc79e3f1e6e8f448856-BlizzardFog.scn
-res://World/Objects/Magic/Ice/IceDefense.tscn::0a0b5e8a6634d0693561673c656426b9::1676562591::res://.godot/exported/133200997/export-720f0fd4a5a76e1209b97457343f787b-IceDefense.scn
-res://World/Objects/Magic/Ice/IceProjectile.tscn::5e87025f1a275e79eba35f7f9093b6c7::1676674551::res://.godot/exported/133200997/export-3b942e8831ad42d869602f38eacf33b0-IceProjectile.scn
-res://World/Objects/Magic/Lightning/FlashStep.tscn::d1ea0cfbe61f2b14ba3e15e0d442140c::1676562591::res://.godot/exported/133200997/export-2d2505c08142ad1cc8e5ee3215a17c04-FlashStep.scn
-res://World/Objects/Magic/Lightning/LightningProjectile.tscn::d83e2d022c1a5b1b278104b65a29e1ff::1676673281::res://.godot/exported/133200997/export-3955d739f9e36a13f85ed88dee389d90-LightningProjectile.scn
-res://World/Objects/Magic/Lightning/LightningStrike.tscn::b175d12cd8557475163594afb80381cf::1676673294::res://.godot/exported/133200997/export-c87bc7f94dbdbb3567cfe620191f776e-LightningStrike.scn
-res://World/Objects/Magic/Wind/DashGhost.tscn::d9df949a3a3f0b6d4e79825dee33aff7::1679854024::res://.godot/exported/133200997/export-4e35dfef39dcfdb2aa48f8642cb7e8d9-DashGhost.scn
-res://World/Objects/Magic/Wind/LingeringTornado.tscn::c29bd517bb43f6097e3c531948289045::1678982620::res://.godot/exported/133200997/export-e8f5634b183df7d3e0a78c0b887f62ed-LingeringTornado.scn
-res://World/Objects/Magic/Wind/TornadoProjectile.tscn::f81ca0a088a055c68f27e8d3f8b05a65::1679862928::res://.godot/exported/133200997/export-af58aa1e67d2827d4725eff276bec7fe-TornadoProjectile.scn
-res://World/Objects/Magic/Wind/Whirlwind.tscn::87299a4ee2369bc201a647037207d18a::1679892792::res://.godot/exported/133200997/export-7e4ee23100ba0337559778f7e97c8cea-Whirlwind.scn
-res://World/Objects/Misc/ColorIndicator.tscn::0a9b7929a92f6b4ff7104016bc866738::1677006623::res://.godot/exported/133200997/export-5245ba21b90ef6e0152bdec69096776c-ColorIndicator.scn
-res://World/Objects/Misc/LightningLine.tscn::4f986d3af91b8f9c1aa615d3af6c41f5::1676562591::res://.godot/exported/133200997/export-9ec04a8d0500305a36b74a3dddc04ec9-LightningLine.scn
-res://World/Objects/Nature/Effects/ExplosionParticles.tscn::a81acfde4b4b3ad5aae3b955a30765b3::1676741956::res://.godot/exported/133200997/export-51ec40b138b677cd73592c36578e1e9b-ExplosionParticles.scn
-res://World/Objects/Nature/Effects/HoedDirt.tscn::3a6cebc6c2a0b34425dcd67eb8cde917::1677195955::res://.godot/exported/133200997/export-ecea26f9267572efc0b9143d0e3da9cc-HoedDirt.scn
-res://World/Objects/Nature/Effects/LeavesFallingEffect.tscn::8f324f85c95ed0beae461bf5eddbc362::1678080128::res://.godot/exported/133200997/export-45b5a59ffdd42360c2ce177b4fe1a95e-LeavesFallingEffect.scn
-res://World/Objects/Nature/Effects/OreHitEffect.tscn::cbd6e6a4b08608399de1520a4abf104e::1678323417::res://.godot/exported/133200997/export-5167aeefa98a0c421e8c2b008ef71da9-OreHitEffect.scn
-res://World/Objects/Nature/Effects/RemoveBuilding.tscn::0a903cd8154e5e90ec4154ac88f29e13::1677105745::res://.godot/exported/133200997/export-2159f30725accd6bf295acb108598d4a-RemoveBuilding.scn
-res://World/Objects/Nature/Effects/TrunkHitEffect.tscn::aa50d7abdb8a22009cf8ba6fbdb3a54f::1678075133::res://.godot/exported/133200997/export-926f31a5d6a9ab2fd7e2d6d1d3126e3b-TrunkHitEffect.scn
-res://World/Objects/Nature/Effects/UpgradeBuilding.tscn::62cb72793e9a2c914870f7a9652ffcb4::1677105503::res://.godot/exported/133200997/export-fa70a658888107199f92fa47e9853900-UpgradeBuilding.scn
-res://World/Objects/Nature/Effects/WateringCan.tscn::23834b2e01134a48571c82fe5875c3a3::1679603159::res://.godot/exported/133200997/export-a580aad39a4b83ad2607b2036606eaf6-WateringCan.scn
-res://World/Objects/Nature/Forage/ForageItem.tscn::e7f142a4ce609d7f0dca0bb0c4623944::1679898561::res://.godot/exported/133200997/export-8746933af1c6f383bdce706c372ece00-ForageItem.scn
-res://World/Objects/Nature/Grasses/TallGrass.tscn::a265aba3a6d8d1e51577d968a201349a::1679820402::res://.godot/exported/133200997/export-e18ec52d89f633631eda05f6361baaa2-TallGrass.scn
-res://World/Objects/Nature/Grasses/Weed.tscn::5a2bcbb075849dba5939d179a7f82aee::1679269667::res://.godot/exported/133200997/export-7fe51a4f21d681554f8b037edfb3352c-Weed.scn
-res://World/Objects/Nature/Ores/LargeOre.tscn::052bd91c1a7f935b9a209a5a6c2e8094::1679820402::res://.godot/exported/133200997/export-3683c39c4ec91329e225876b51224e0d-LargeOre.scn
-res://World/Objects/Nature/Ores/SmallOre.tscn::93d293054a28d018b257ca6d208cab13::1679820402::res://.godot/exported/133200997/export-17be9d1ec007e9c068ef822917310b49-SmallOre.scn
-res://World/Objects/Nature/Particles/Clouds.tscn::00e7423c77883dcbb80ec55515397b21::1679958453::res://.godot/exported/133200997/export-e199b3a951a43bbd5a14586b14f89d91-Clouds.scn
-res://World/Objects/Nature/Particles/FallingLeaf.tscn::3521e4822bc4559595de3247e9b150f6::1680029487::res://.godot/exported/133200997/export-a970b77d5a371cbf273674d932c72041-FallingLeaf.scn
-res://World/Objects/Nature/Particles/FullMapParticles.tscn::dea60cbcf262daf0117ef3bcc8e9750e::1680029487::res://.godot/exported/133200997/export-584ae5c9c2c59f617c336ed771cbd4bd-FullMapParticles.scn
-res://World/Objects/Nature/Particles/LargeClouds.tscn::1877b682066dc2cbbf3755706986cb93::1679958453::res://.godot/exported/133200997/export-67d3448a605f9d00a344c7249b007a9d-LargeClouds.scn
-res://World/Objects/Nature/Particles/Rain.tscn::7f293b98c837799474e1da4c8f4e9362::1680029487::res://.godot/exported/133200997/export-aa32141245fc2dc3e6a12aa779c6942c-Rain.scn
-res://World/Objects/Nature/Particles/RainOnFloor.tscn::0d7ec87b336399fc17d2aea45cac54ae::1680025843::res://.godot/exported/133200997/export-6b928d525a2d1db4edd5c26cd56cd87c-RainOnFloor.scn
-res://World/Objects/Nature/Particles/RainStorm.tscn::842b970071f5e2f98dde25b05d51ee00::1680025845::res://.godot/exported/133200997/export-c0a456e582bf601f9ce02e56f3ee63d5-RainStorm.scn
-res://World/Objects/Nature/Particles/RoamingStorm.tscn::ad92d165b9e4231834eaf85be0c18774::1679961422::res://.godot/exported/133200997/export-36dfc8fcb62954212dd35e6fae030c39-RoamingStorm.scn
-res://World/Objects/Nature/Particles/Snow.tscn::3fa123c24c6ec6be909c48e15a85a680::1676562591::res://.godot/exported/133200997/export-502ae68d3bb19c4d79d5bba4b8a865f7-Snow.scn
-res://World/Objects/Nature/Trees/Log.tscn::1cfbe41c2f84dd0aafb643846ceb3f50::1678814496::res://.godot/exported/133200997/export-ab5a4c0362373405b8ec9ae6f5482bfa-Log.scn
-res://World/Objects/Nature/Trees/Stump.tscn::b0e20dfc1668452b2c54a5043bfb3920::1679505042::res://.godot/exported/133200997/export-bf45932417000075aa066b8cc76d7970-Stump.scn
-res://World/Objects/Nature/Trees/TreeObject.tscn::0c7d935c04d22c6438e40637a411b664::1679862194::res://.godot/exported/133200997/export-f0a42ade60044768e6862d1e07e1083e-TreeObject.scn
-res://World/Objects/Projectiles/ArrowProjectile.tscn::242bbd2bbeff2ddd0905b657344d5a8c::1679067472::res://.godot/exported/133200997/export-8a1a3f1056fb1a7e380457256baec385-ArrowProjectile.scn
-res://World/Objects/Projectiles/PotionProjectile.tscn::26b4e7ab144ca772428d8f1dbcbe3359::1679898873::res://.godot/exported/133200997/export-d5560f169d0ae10740f60a335c5d9961-PotionProjectile.scn
-res://World/Overworld/Overworld.tscn::2f5b76e2ae69620e0d86a783edcd5654::1680032177::res://.godot/exported/133200997/export-4524715577802de1690c54979986a677-Overworld.scn
-res://World/Player/Pet/IcPuppy.tscn::23105205603b26a2419527ab8bed9221::1676562591::res://.godot/exported/133200997/export-8a194b0fe749320719ab74e5e91965f7-IcPuppy.scn
-res://World/Player/Pet/PlayerPet.tscn::0825026e75cfe1277252b7dfd20673a3::1676562591::res://.godot/exported/133200997/export-746124fc571aa94bda34c075947bc934-PlayerPet.scn
-res://World/Player/Player/AttachedScenes/AimDownSightLine.tscn::3e8dff052d6f4f98dcc11e0dca40645a::1676139739::res://.godot/exported/133200997/export-cad85db1f7553de36d3460edb7d06e96-AimDownSightLine.scn
-res://World/Player/Player/AttachedScenes/EatingParticles.tscn::df962798d5a8ed84c32fb206e4ecac4e::1679164545::res://.godot/exported/133200997/export-36941638e33c51c3be2a837ffda1c4cc-EatingParticles.scn
-res://World/Player/Player/AttachedScenes/PlayerHitEffect.tscn::4e1ce970628ec725911f84ba6c7cb878::1679631300::res://.godot/exported/133200997/export-233affb17153bd6682936f93a67c8c16-PlayerHitEffect.scn
-res://World/Player/Player/Fishing/Fish.tscn::55e64a47e83451fd4c34ec194c212844::1679852793::res://.godot/exported/133200997/export-521fe61cfb0e2dcbc09678222bba60c4-Fish.scn
-res://World/Player/Player/Fishing/Fishing.tscn::2593aca405d5dcb6de6615f5adddbe86::1679959556::res://.godot/exported/133200997/export-033272994ff6d68e8adac76e9732903d-Fishing.scn
-res://World/Player/Player/Fishing/FishingMiniGame.tscn::51ed85079066e0e26c7331b9f658c396::1679959556::res://.godot/exported/133200997/export-2c086e1da9ace609496d5972837cbb4c-FishingMiniGame.scn
-res://World/Player/Player/Fishing/RippleParticles.tscn::de1438a986f54600ab78d07eff54a071::1676601832::res://.godot/exported/133200997/export-1b7ee78efa131ea055ed8476d36d35f2-RippleParticles.scn
-res://World/Player/Player/UserInterface/Barrel/Barrel.tscn::8269cff5e19d63aa15cccc431ec38926::1677925193::res://.godot/exported/133200997/export-2ed69200eaf4454c2eb5fbba0758b9e0-Barrel.scn
-res://World/Player/Player/UserInterface/BrewingTable/BrewingTable.tscn::5b9228fbbc4a551ace9f2cbd58f9cd5c::1677925193::res://.godot/exported/133200997/export-166365eb0509e20378cb89e05044f771-BrewingTable.scn
-res://World/Player/Player/UserInterface/Campfire/Campfire.tscn::549e1c0f13187ef59db225ac7a465aba::1677915774::res://.godot/exported/133200997/export-1cf59ae0020f143f404ab28c956ffb84-Campfire.scn
-res://World/Player/Player/UserInterface/Chatbox/ChatBox.tscn::478e24a640a8e44e683568884ce4c928::1676562591::res://.godot/exported/133200997/export-d8abad01ebfec50f3a71e0d72d1b0d71-ChatBox.scn
-res://World/Player/Player/UserInterface/Chest/Chest.tscn::89cd884c02f4153fd999e7f7dce98726::1677356140::res://.godot/exported/133200997/export-07a6866fb331e6866224661e23bddd36-Chest.scn
-res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.tscn::92b1d5d289ae810b4436ee2c11613272::1679543032::res://.godot/exported/133200997/export-8329cac31e51e3a898a2cc34a2ca0f41-CombatHotbar.scn
-res://World/Player/Player/UserInterface/Crate/Crate.tscn::92cfbd1952fcdd843c791cceac3d2ede::1677385323::res://.godot/exported/133200997/export-173312755f2bfa871e1a3cb9bc7a5d92-Crate.scn
-res://World/Player/Player/UserInterface/Furnace/Furnace.tscn::b8a2989794de530e7ff0b6a14cfef16d::1678251314::res://.godot/exported/133200997/export-03690ec6dff303cdbe7503c61b8a5049-Furnace.scn
-res://World/Player/Player/UserInterface/GrainMill/GrainMill.tscn::6456254bced64838610ed66c4cb43b3a::1677925193::res://.godot/exported/133200997/export-66c9d263c93199bc22902aaa3a3cce1d-GrainMill.scn
-res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn::b680283f0d8bbd0b9988471a96673650::1679613355::res://.godot/exported/133200997/export-43029cd8a20b4906e0ce552eb3e4b5f2-Hotbar.scn
-res://World/Player/Player/UserInterface/ItemPickUpDialogue/ItemPickUpDialogue.tscn::257cc1bfb308b861822c9de11b8df104::1679355305::res://.godot/exported/133200997/export-ec6074a9ec5e10efd9a39df6b302a483-ItemPickUpDialogue.scn
-res://World/Player/Player/UserInterface/Menu/Collections/Collections.tscn::cc1fe70b22fef5b473ff4190d97a3431::1679253076::res://.godot/exported/133200997/export-1f3702b52e95c3c6e1431e63f01dd270-Collections.scn
-res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn::9f92b5549695d978ab929d827d66cb88::1679253076::res://.godot/exported/133200997/export-9f9225913bc92e021380409655062fe5-Crafting.scn
-res://World/Player/Player/UserInterface/Menu/Exit/Exit.tscn::198bbef25101166c62208ca48b6b3a04::1676562591::res://.godot/exported/133200997/export-6b14272d5111666305e9ecf627c4af9b-Exit.scn
-res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.tscn::ec22419dfc222faeffa2eb845dd71df8::1679156073::res://.godot/exported/133200997/export-e821ae8fd1feb2b745aa2e67f928b1ed-Inventory.scn
-res://World/Player/Player/UserInterface/Menu/Inventory/inventory_tab_btn.tscn::978cefc76d5bf419309b83fc4c682fac::1676919713::res://.godot/exported/133200997/export-f20052929af77f001323a725071ddea5-inventory_tab_btn.scn
-res://World/Player/Player/UserInterface/Menu/Options/EnterNewKey.tscn::5a7795b1b1a64b4207a28cad0038fcc0::1679636262::res://.godot/exported/133200997/export-7e885969f2bec530e88f850ebdf4cac2-EnterNewKey.scn
-res://World/Player/Player/UserInterface/Menu/Options/KeyBindingBtn.tscn::4c103a589be829aca064fa908516c1c0::1679636577::res://.godot/exported/133200997/export-925853b4bae19cdb3e8ee22c87dee680-KeyBindingBtn.scn
-res://World/Player/Player/UserInterface/Menu/Options/key_binding.tscn::587c0b6de32eb8d79d0718322f357970::1679636577::res://.godot/exported/133200997/export-48da7ba06dba2d1d303d5ac6f8075a68-key_binding.scn
-res://World/Player/Player/UserInterface/Menu/Options/Options.tscn::1d633844c1c6af81ae433e0517fb5e0f::1679636577::res://.godot/exported/133200997/export-05e3b0d28f8e6e84715e36ac56bbd308-Options.scn
-res://World/Player/Player/UserInterface/Menu/Skills/skill.tscn::728dc1eadb7b44e39ed03983e87427e6::1676562591::res://.godot/exported/133200997/export-fb0323d7a57b1c6f13e38d7e8cad69ee-skill.scn
-res://World/Player/Player/UserInterface/Menu/Skills/Skills.tscn::3a52211a45be421df64f9c28529fdf2b::1679252819::res://.godot/exported/133200997/export-8aa62c981ddac3c8f912fcbf1ccefe29-Skills.scn
-res://World/Player/Player/UserInterface/Menu/Menu.tscn::d9bdaec1a1f5cfce9b27bb8a439bbf0e::1679156073::res://.godot/exported/133200997/export-212c260ae07d3f26b4efe9d5c59dfafe-Menu.scn
-res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn::b70a5f4fedab70d2997d907d1a7c3e7a::1679636333::res://.godot/exported/133200997/export-93b3bed62196ba0be0288bd624af4383-MenuTitle.scn
-res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.tscn::e392415248326a50e91744b0ab5262dd::1679607233::res://.godot/exported/133200997/export-00f60c9b7b7e2feaf1061141a1bae564-RadialBuildingMenu.scn
-res://World/Player/Player/UserInterface/RadialBuildingMenu/radial_menu_item.tscn::44af92d51b3a69e7578b81447b05a363::1677065126::res://.godot/exported/133200997/export-7420e3dcd4fe15950263e6a48000142f-radial_menu_item.scn
-res://World/Player/Player/UserInterface/SaveAndExit/SaveAndExit.tscn::07ea4d52b24dc626548e7487423317d0::1679942548::res://.godot/exported/133200997/export-94de37ac2148a15f7583e1912167bfbd-SaveAndExit.scn
-res://World/Player/Player/UserInterface/Slots/BarrelSlots.tscn::c55aedd0dbdc133875f08555329eacf9::1677361328::res://.godot/exported/133200997/export-77726b7d23083a8ee422476419baaebb-BarrelSlots.scn
-res://World/Player/Player/UserInterface/Slots/BrewingTableSlots.tscn::bef6e60cdda11d66844f5403f42555ed::1676562591::res://.godot/exported/133200997/export-1f1247609f48bbd1b1b25bc776595d80-BrewingTableSlots.scn
-res://World/Player/Player/UserInterface/Slots/CampfireSlots.tscn::76a9179f3c2836420ef765f27112286f::1676668746::res://.godot/exported/133200997/export-bcb70eae1611bfda0e16f72fa8cbcaf8-CampfireSlots.scn
-res://World/Player/Player/UserInterface/Slots/ChestSlots.tscn::957a9c7c11cd767f7a1d094c939bf1ef::1677356140::res://.godot/exported/133200997/export-6fabdd28ec4d0d0703523fd88ec5ae69-ChestSlots.scn
-res://World/Player/Player/UserInterface/Slots/CombatHotbarSlots.tscn::cae53fd518f5e1a8794c0787b9211518::1676863450::res://.godot/exported/133200997/export-d2dba409ee1195c620be9328345d1620-CombatHotbarSlots.scn
-res://World/Player/Player/UserInterface/Slots/CrateSlots.tscn::efd88d88aefb62d1700ec220dc97ab59::1677385248::res://.godot/exported/133200997/export-cc936ec69d53b1d3f71acafb5c018b4b-CrateSlots.scn
-res://World/Player/Player/UserInterface/Slots/FurnaceSlots.tscn::5fa9e2ba47f57ecb4d78a0b3c40ae036::1676654036::res://.godot/exported/133200997/export-b1b5ea3517f981c1e9168213d743b74d-FurnaceSlots.scn
-res://World/Player/Player/UserInterface/Slots/GrainMillSlots.tscn::0213d1c43a0551965b699c08cc01836f::1676653165::res://.godot/exported/133200997/export-e135da76c942f8588e0aef45e3268a67-GrainMillSlots.scn
-res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn::b195c0e57b3b4fd409581b6d5cba9ea7::1677385248::res://.godot/exported/133200997/export-b6d0520d6cd199883e0b606b158354b3-HotbarInventorySlots.scn
-res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn::27cf6ed9f67fba2d8363a5de6d9a083d::1679543083::res://.godot/exported/133200997/export-ec064e9eb6c5d1020d63b9ad6a4e0011-InventorySlots.scn
-res://World/Player/Player/UserInterface/Slots/ItemSlots.tscn::ccebb317e33c0d445625bd6f85352545::1676584739::res://.godot/exported/133200997/export-6a0034f49d8d1523e8a5e92b1e8d8967-ItemSlots.scn
-res://World/Player/Player/UserInterface/Slots/MagicSlots.tscn::fd57d71c55eebd5d224e789213e95e2e::1676941899::res://.godot/exported/133200997/export-0d64ce2d0706510afa41711c342e7d22-MagicSlots.scn
-res://World/Player/Player/UserInterface/Slots/StoveSlots.tscn::2b6d7b3a56e4a5c009ae5402c94956d1::1676653256::res://.godot/exported/133200997/export-5247d86cf2211b375510a093b6914f47-StoveSlots.scn
-res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.tscn::5aa3e911cee2b14d97e81be4fd337bca::1679631300::res://.godot/exported/133200997/export-9a1f615f272afb020ed96e6349a43609-PlayerDataUI.scn
-res://World/Player/Player/UserInterface/Stove/item_button.tscn::318879663ef468d305f76c10f4ba627d::1679429814::res://.godot/exported/133200997/export-69549eb94e0184512323bbd79f15e0af-item_button.scn
-res://World/Player/Player/UserInterface/Stove/staff_button.tscn::15a8d4fb4169edf69232d669c4862ccd::1679429813::res://.godot/exported/133200997/export-67d5ab46469ad06b0f0643e857e6286b-staff_button.scn
-res://World/Player/Player/UserInterface/Stove/Stove.tscn::fe10ddfde30d2db0b50c20b40f107ab4::1677915496::res://.godot/exported/133200997/export-654295e9a6f7ac676e50d938c5bad8cc-Stove.scn
-res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.tscn::824918e3f85b5bb4403f02d9f339cd91::1679613542::res://.godot/exported/133200997/export-d89f69dffaea9eb52908c9ceb034df7d-Tool cabinet.scn
-res://World/Player/Player/UserInterface/TrashCan/Trash.tscn::f88d87bac0c0748800674ba36103fdb9::1676664821::res://.godot/exported/133200997/export-340a019365256afb3db4703a61fc249c-Trash.scn
-res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn::6870a36cd6598351829b4fa884e9e0bc::1677105672::res://.godot/exported/133200997/export-0b8d8b6b15381aed808e1bbd8a06fec8-RadialUpgradeMenu.scn
-res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_0.tscn::30ac50e82601282b2ecf4e2d8dc1b9eb::1677065634::res://.godot/exported/133200997/export-e7230dc38a91169eb3466b21a14e1b51-radial_hammer_menu_item_0.scn
-res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_1.tscn::5cd631713387ec188a4216370630999b::1677065668::res://.godot/exported/133200997/export-21658d8591853f76a282f6cfcb39c7c3-radial_hammer_menu_item_1.scn
-res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_2.tscn::8828aa6e30747c6e2f28b252626ce323::1677065685::res://.godot/exported/133200997/export-fc313a42029467700b30494f0ee42d80-radial_hammer_menu_item_2.scn
-res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_3.tscn::aa41b6c102c21b4d6308bbea47f89379::1677065873::res://.godot/exported/133200997/export-3fdb19b5e1a19212b287de9f78d89959-radial_hammer_menu_item_3.scn
-res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_4.tscn::9a1a77d8593ae0984f7e478340a4be22::1677065732::res://.godot/exported/133200997/export-6749893e89ee8508487b7aa6decb38f0-radial_hammer_menu_item_4.scn
-res://World/Player/Player/UserInterface/Workbench/Workbench.tscn::acbde80a27ba02e22d9e473f57b70880::1679429813::res://.godot/exported/133200997/export-8ae95fa68791980452840cf0163de94e-Workbench.scn
-res://World/Player/Player/UserInterface/UserInterface.tscn::51a9debd0965557e993c8fe21565a267::1679949865::res://.godot/exported/133200997/export-58ef1e879eb8ef9b18c47511e90948bb-UserInterface.scn
-res://World/Player/Player/Actions.tscn::4f7476a264fab26ddb6473042d4d2890::1679631300::res://.godot/exported/133200997/export-ce8463f2989d72723aff8cc0610f998a-Actions.scn
-res://World/Player/Player/InputController.tscn::aee3101f8e913bc6ba139059cc7b399b::1676562591::res://.godot/exported/133200997/export-dc2cb545dc5f03f82681942f381a7429-InputController.scn
-res://World/Player/Player/Magic.tscn::c5c6187f6a7c8b9f8d5426bc3225f23a::1679900044::res://.godot/exported/133200997/export-465472ffecc1ac3b8473a9d82c5d11ca-Magic.scn
-res://World/Player/Player/Player.tscn::3467ef3bcfc7bab6a7873345dd366f5a::1679959556::res://.godot/exported/133200997/export-3e60daa68f93261591400268c09036fa-Player.scn
-res://World/Player/Player/PoisonParticles.tscn::93746633ddf91756e6b9f009c5aaa5dd::1678929242::res://.godot/exported/133200997/export-5a042ff5664cba39aea043c758fccc4a-PoisonParticles.scn
-res://World/Player/Player/SpeedParticles.tscn::f35438f264dec338a94aa196970d5fd9::1678930406::res://.godot/exported/133200997/export-978ad3965e8793cf1927f5075ac8750f-SpeedParticles.scn
-res://World/Player/Player/Swing.tscn::5637457be338dcba7e4e98c53077192b::1678224583::res://.godot/exported/133200997/export-f72ee4762c7410702464656b56d296ba-Swing.scn
-res://World/Player/Player/Throwing.tscn::85b99f86894101f16e577244b1ee546c::1676562591::res://.godot/exported/133200997/export-2a1a0eaff675c55b51338b2058851858-Throwing.scn
-res://World/Player/PlayerInMenu/PlayerMenuState.tscn::6cf6a5c929b72ca0bd44e40ce6e3e6aa::1677808592::res://.godot/exported/133200997/export-7cbaf21e40a19d6afa4d23f2d6a12f76-PlayerMenuState.scn
-res://World/Player/PlayerTemplate/InputControllerTemplate.tscn::2d329bd9e1915cd0c6df7759dcf1c3e2::1676562591::res://.godot/exported/133200997/export-dcdff784bdb825b4a9cae5c50383042d-InputControllerTemplate.scn
-res://World/Player/PlayerTemplate/PlayerTemplate.tscn::82e0b968ec2503b300e09b68f1b23a7e::1676562591::res://.godot/exported/133200997/export-28e3cb26c12dfbcca6713010018a471a-PlayerTemplate.scn
-res://BetaLabel.tscn::cfcd935abf25dfbe669d6dd8e8ea4c80::1676939473::res://.godot/exported/133200997/export-0ccd3e4cc2734fa906ab5cbefe3dc9bb-BetaLabel.scn
-res://default_bus_layout.tres::b046fc27dc2e0db6155d37cdee7ffa71::1676139738::res://.godot/exported/133200997/export-19246414aa9fb561ced4b8dce477acec-default_bus_layout.res
-res://default_env.tres::a52129f071fffbd20a6013a6c0edec1e::1676562591::res://.godot/exported/133200997/export-7cf3fd67ad9f55210191d77b582b8209-default_env.res
+res://Assets/Images/Animals/Bird/bird1.tres::cc614ab391593d734829dac5c159bfd7::1680157497::res://.godot/exported/133200997/export-94366a29096e136f51328b2f73817fae-bird1.res
+res://Assets/Images/Animals/Bird/bird2.tres::69db3023912bf050167c0c2db68c5625::1680157497::res://.godot/exported/133200997/export-f5cc8eb261e8310ef9701ca0cce86616-bird2.res
+res://Assets/Images/Animals/Bunny/brownBunny.tres::7c9809fd54d3afce7ef303768e5317a4::1680157497::res://.godot/exported/133200997/export-dfdbcc1dd94977506907af1029e31e9c-brownBunny.res
+res://Assets/Images/Animals/Bunny/whiteBunny.tres::26416a84912bfb5c0bc4730ecc805191::1680157497::res://.godot/exported/133200997/export-4090e05f2bdec888d9dd09ef33504c63-whiteBunny.res
+res://Assets/Images/Animals/Bunny/yellowBunny.tres::0e4ae6f85e14ba77e7a3b8347681dbbf::1680157497::res://.godot/exported/133200997/export-c79f3db6f8bcb0b4a360f3422272ec90-yellowBunny.res
+res://Assets/Images/Animals/Duck/duck1.tres::8c03ce5513c5a0fba0b43cfd8c95e562::1680157497::res://.godot/exported/133200997/export-b21bcf9bf0de75f5612e6b67428d4e72-duck1.res
+res://Assets/Images/Animals/Duck/duck2.tres::a2b89c186f0856acfdb365cc12d0196e::1680157497::res://.godot/exported/133200997/export-aa0a4c38dc0c6c8f942ae1ca03fdcb6a-duck2.res
+res://Assets/Images/Animals/Duck/duck3.tres::a25ebe31418281f1304de61f2406024b::1680157497::res://.godot/exported/133200997/export-bc2254059ce2ab4da708321d1f9194c7-duck3.res
+res://Assets/Images/Animations/campfire/campfire.tres::229b897d9b51a8b33603777a5dfb1eff::1680157497::res://.godot/exported/133200997/export-931b761c69b35d55f16e18791a603e3c-campfire.res
+res://Assets/Images/Animations/freshwater/freshwater.tres::a586813067f3545b7f3d11cadc6b3505::1680157497::res://.godot/exported/133200997/export-e45e964fa8af32dedea0f38aa20affd8-freshwater.res
+res://Assets/Images/Animations/ocean/Water/ocean_bottom.tres::ce7bf66de5ec443325e66f8e5d159d6e::1680157497::res://.godot/exported/133200997/export-ac5c121f74dff1f901c972705eb19537-ocean_bottom.res
+res://Assets/Images/Animations/ocean/Water/ocean_top.tres::903dd69b8fc7db7db5dbde29b820d623::1680157497::res://.godot/exported/133200997/export-47c18149c29075d0b418fd25427353aa-ocean_top.res
+res://Assets/Images/Animations/ocean/water_sheet (6)/divide.tres::c90de81c00a90968ed063e2b6b6cb384::1680157497::res://.godot/exported/133200997/export-88a28df1fa7f0970d81c59acbf670f1e-divide.res
+res://Assets/Images/Animations/ocean/water_sheet new/divide.tres::d8a45bf0531a830a0ef935fcc2ca3b17::1680157497::res://.godot/exported/133200997/export-2773227f801f4d69cfe77993d557a6c3-divide.res
+res://Assets/Images/Animations/ocean/wave border/wave animation.tres::fc115751daad11c375eb63e9a0b1884d::1680157497::res://.godot/exported/133200997/export-d0c8089bf0407bae7b7f48a25ea5959a-wave animation.res
+res://Assets/Images/IC Kitties/SpriteFrames/Blue.tres::3ced14d73ea74aa3a38b244cf2fda1e8::1680157497::res://.godot/exported/133200997/export-9275b443c4cc01b23b62a3d611c5b76c-Blue.res
+res://Assets/Images/IC Kitties/SpriteFrames/Green.tres::b780acd4eb3d5ed3e49e3eddc13d55f9::1680157497::res://.godot/exported/133200997/export-d8f6082ce6a54efc41e01bb55b2443d4-Green.res
+res://Assets/Images/IC Kitties/SpriteFrames/Orange.tres::c2c4e7f8ed14dafdf36a26de04d360af::1680157497::res://.godot/exported/133200997/export-018932d395ec425723956f2a53821160-Orange.res
+res://Assets/Images/IC Kitties/SpriteFrames/Pink.tres::387aa75f1905fa930d090d57e09b89c5::1680157497::res://.godot/exported/133200997/export-b89c7e2a5d227fc8ef11d61074867395-Pink.res
+res://Assets/Images/IC Kitties/SpriteFrames/Purple.tres::dc2790fd09fde476158aa957cbe90bd6::1680157497::res://.godot/exported/133200997/export-830eba966a063d404cbc26f3c9018241-Purple.res
+res://Assets/Images/IC Kitties/SpriteFrames/Red.tres::0daabd5e1335bcf1df22e3cf643e96d4::1680157497::res://.godot/exported/133200997/export-37c8c22b2d545f2ba0d239fe0ae03a91-Red.res
+res://Assets/Images/IC Kitties/SpriteFrames/White.tres::473c077190b653f8f0f168270f6ad329::1680157497::res://.godot/exported/133200997/export-a6840414a613629bebb7e9c07d030896-White.res
+res://Assets/Images/tree_sets/apple/mature/animated.tres::7635369dc214d2e19df92abef87f9e23::1680157497::res://.godot/exported/133200997/export-14b5bba8d7c1fdb5fc3d9a48acc20ee2-animated.res
+res://Assets/Images/tree_sets/birch/mature/animated top winter.tres::85a9bd91b54441354cc4a5906d00a3b9::1680157497::res://.godot/exported/133200997/export-2c06d4cb165d7b97a4b56d87454bf009-animated top winter.res
+res://Assets/Images/tree_sets/birch/mature/animated top.tres::72feb8e3fdc99d7399b257b91d90007d::1680157497::res://.godot/exported/133200997/export-597721d98824c229ba554c423a9f75fc-animated top.res
+res://Assets/Images/tree_sets/cherry/mature/animated.tres::3fa54d2d12fb98977dcf48285869c7ed::1680157497::res://.godot/exported/133200997/export-37d6c7d46da2a11375e414b2221a76fc-animated.res
+res://Assets/Images/tree_sets/evergreen/mature/animated top winter.tres::4631d933b9df11d11dc8e20ce1a0017f::1680157497::res://.godot/exported/133200997/export-758d02108d2140d7e24e70382261f97f-animated top winter.res
+res://Assets/Images/tree_sets/evergreen/mature/animated top.tres::d147711068cfe765a21196eefd18439e::1680157497::res://.godot/exported/133200997/export-90daeb6f1ff7b5e14bc64202b01617fe-animated top.res
+res://Assets/Images/tree_sets/oak/mature/animated top winter.tres::58fd3f4d739090dfe8bda3c7f08c5273::1680157497::res://.godot/exported/133200997/export-d04e954a488b2329ad427ce3894c010d-animated top winter.res
+res://Assets/Images/tree_sets/oak/mature/animated top.tres::56fb9443b24a02d9fc8f54d86935b12a::1683589242::res://.godot/exported/133200997/export-2a6eab3c188510e4a576a58c5be370b9-animated top.res
+res://Assets/Images/tree_sets/pear/mature/animated.tres::1aceb365c46d708928f74aa5ecff8a4c::1680157497::res://.godot/exported/133200997/export-e8023e7d336a109f1f01e520d811ecea-animated.res
+res://Assets/Images/tree_sets/pine/mature/animated top winter.tres::a12b3a90246e336a2bdb4b1b0830cfbc::1680157497::res://.godot/exported/133200997/export-0269316b49a2add4f1e9d6e6062efdaa-animated top winter.res
+res://Assets/Images/tree_sets/pine/mature/animated top.tres::dd43bc21b6b7814780f6feff4062ddfe::1680157497::res://.godot/exported/133200997/export-8a07df331c8f18cea693620652b0ee45-animated top.res
+res://Assets/Images/tree_sets/plum/mature/animated.tres::94bce0872ba1a59c9c12d0be718f55ca::1680157497::res://.godot/exported/133200997/export-dc0589ceb05fd6c416154de5ca8f995c-animated.res
+res://Assets/Images/tree_sets/spruce/mature/animated top winter.tres::032e380be96fb908f8a055cd2da6d5e8::1680157497::res://.godot/exported/133200997/export-8d1469d5f8793f8f3f27886bdc480807-animated top winter.res
+res://Assets/Images/tree_sets/spruce/mature/animated top.tres::5ca0b995a9b7f5aa42fbee9db393ae2e::1680157497::res://.godot/exported/133200997/export-12ee983706be0257349f913f1d00eb2b-animated top.res
+res://Assets/Themes/button_theme.tres::2590dba504421a7cce2a9f1e5e11089b::1680157497::res://.godot/exported/133200997/export-e94b9e1415a68712e34fc62c4bdf6bc3-button_theme.res
+res://Assets/Themes/Flash.tres::5bbdc6709b03fd29df27426d2750b432::1683582759::res://.godot/exported/133200997/export-0d2053997637bd932953827e6fb42e3f-Flash.res
+res://Assets/Themes/HideCollection.tres::d39389677dac84183c88d23481fa7cc6::1680157497::res://.godot/exported/133200997/export-09547a016e37d6f735abd44b1db6acd4-HideCollection.res
+res://Assets/Themes/LockedAsset.tres::1f50d77b9ba86203f6ee5472f4f296b3::1683589241::res://.godot/exported/133200997/export-0a78cd2c0ebe79bdfd037377b810f5c7-LockedAsset.res
+res://Assets/Themes/MenuTitle.tres::215cfab18b9476ead083266c4e08b381::1683589241::res://.godot/exported/133200997/export-c26284b3a97e508a57694c68b9f91840-MenuTitle.res
+res://Assets/Themes/MiniMap.tres::785b23b701b6382640c9c39db4ad907e::1683589242::res://.godot/exported/133200997/export-39660408b19d77093b3ef0878c9a3200-MiniMap.res
+res://Assets/Themes/text.tres::b34579ba6a494b8a98192d767e23fc48::1683589241::res://.godot/exported/133200997/export-e0aede1a8d1e04c6f13a3a6129ad9903-text.res
+res://Assets/Themes/waves.tres::f799e73e26af149cb6653455a4280975::1680157497::res://.godot/exported/133200997/export-447e79ffcdb76496c5f425250dda242d-waves.res
+res://Assets/Themes/whiten.tres::0da9465724a8895924ab666d1acb169f::1683589884::res://.godot/exported/133200997/export-de1c6c2b1982b033d5202924f8d9833d-whiten.res
+res://Assets/Themes/world_fog.tres::5d8f203f0b7524ad3630344ae7e7aefd::1682996396::res://.godot/exported/133200997/export-79f2cbe44a368e996365afcbe8628c76-world_fog.res
+res://Assets/Tilesets/foundation/foundation.tres::70321c2bd89901dd9cb0418c8395611b::1683589241::res://.godot/exported/133200997/export-c1ba80661ce66d2ec981b43b492a9f4c-foundation.res
+res://Assets/Tilesets/walls/walls.tres::e7e5ec64d13fedae1a2879fe9fa7614a::1683589241::res://.godot/exported/133200997/export-3b904f7d34102e760348c05711be350e-walls.res
+res://Global/Functions/maujoe.custom_gradient_texture/example.tres::efbeb776d8c63dade049da82ed5addda::1680157497::res://.godot/exported/133200997/export-5715ff5fe974e0aca9746844d399f9cd-example.res
+res://Global/Functions/SceneChanger.tscn::5c51093be2d27b16938ff8c110530b1b::1680157497::res://.godot/exported/133200997/export-392b2a75d9af75ec3e7a85bf5cc68fa6-SceneChanger.scn
+res://InventoryLogic/CollectionItemDescription.tscn::041d394778e16c9bc963bf84c46042f0::1680157497::res://.godot/exported/133200997/export-e5f44a62e1ca929bdcdfb5e1587c6ffe-CollectionItemDescription.scn
+res://InventoryLogic/CraftingItemDescription.tscn::541769ae9bfc95bd71a60955e8d358fb::1680157497::res://.godot/exported/133200997/export-90086408d0fdded58e4b069c5b985d4e-CraftingItemDescription.scn
+res://InventoryLogic/Ingredient.tscn::28e88b1589eb5c1051113516a979e493::1680157497::res://.godot/exported/133200997/export-87fa700153d9fae1df67f8724ec3ceec-Ingredient.scn
+res://InventoryLogic/InventoryItem.tscn::65f365ea63f84a4b766d489eb2637fb3::1680157497::res://.godot/exported/133200997/export-6b817579406b30f655b4bd4aa9c81e23-InventoryItem.scn
+res://InventoryLogic/ItemDescription.tscn::76960bc6ea2a400c4097609179b29375::1680157497::res://.godot/exported/133200997/export-b84ec3c775ae2f7f8df1868a50109a1b-ItemDescription.scn
+res://InventoryLogic/ItemDrop.tscn::1efdf182d2849f8bc61418f87dfeab92::1683589884::res://.godot/exported/133200997/export-6d5d82824b89a565b93a48c943156f64-ItemDrop.scn
+res://InventoryLogic/ItemNameBox.tscn::6ca0b435cbf428c556eeea3326d523ff::1680157497::res://.godot/exported/133200997/export-2b9bb68df4d6d55b98d28e9d7e51fd87-ItemNameBox.scn
+res://InventoryLogic/ItemPickUpBox.tscn::e9ff8a133140e3fd6dff534f6ce3d49c::1683584716::res://.godot/exported/133200997/export-230fc2d2fd9c7cdb9d45ba2e23c06a19-ItemPickUpBox.scn
+res://InventoryLogic/sound_bar.tscn::218fd2a9238f732476e666b22d7b0826::1680157497::res://.godot/exported/133200997/export-60dffa952af8c65f6f88899859825d5a-sound_bar.scn
+res://InventoryLogic/text.tscn::d075bcbfd50984173fb8cb4a8f378034::1680157497::res://.godot/exported/133200997/export-9febff692a5f9c5e5329379e22c649b3-text.scn
+res://MainMenu/MainMenu.tscn::b8e58a6a80ab36107168ad2cf1cd9075::1683589883::res://.godot/exported/133200997/export-bc43d44b4a3cb1e05881b15b869d237a-MainMenu.scn
+res://MainMenu/MainMenuButtons.tscn::fc97a81730ff74baaab9bb608e8b6164::1683584716::res://.godot/exported/133200997/export-12e28c29784a2dd8308e64d6bc1461a0-MainMenuButtons.scn
+res://server/server.tscn::a4fbfbcb15cbe0fd9eade86df29aa824::1683584716::res://.godot/exported/133200997/export-399d989b856dec99c2e8a5ad508ee24f-server.scn
+res://World/Animals/Bear.tscn::0fd614a2fc60122d5c6f1749bbfd323f::1683584716::res://.godot/exported/133200997/export-7524fcdb2bcf0a8822fc74a1a8b2f5e5-Bear.scn
+res://World/Animals/BirdFlyingFromTree.tscn::96967ed99d5d5e25239e87f7ed50f5d8::1680157497::res://.godot/exported/133200997/export-0c3af02cae632fdecd94caff6128f02e-BirdFlyingFromTree.scn
+res://World/Animals/Boar.tscn::8a3363f43d500bf985dbc920944ce93a::1680157497::res://.godot/exported/133200997/export-9b37db295ced5c9d779423a1e23b2ce1-Boar.scn
+res://World/Animals/Bunny.tscn::804e721f72142b1c2dc5ace630c46a52::1680157497::res://.godot/exported/133200997/export-8353d8098e98ed935b28ce0d4a175915-Bunny.scn
+res://World/Animals/Deer.tscn::5b4aab6ce57dc27a1fbf0bb5235f8cba::1680157497::res://.godot/exported/133200997/export-75f5ab1c902e821985b3125aafb997f1-Deer.scn
+res://World/Animals/Duck.tscn::79557b07f7cd62efe477d3df2676131b::1680157497::res://.godot/exported/133200997/export-ab83e0120f36a4264dae8f8b363b9d77-Duck.scn
+res://World/Animals/Wolf.tscn::6911afb3f7ebcb4bcfe751165dc79172::1680157497::res://.godot/exported/133200997/export-228743ac7bb63365c30989060d9193a9-Wolf.scn
+res://World/Building/Tiles/Attached nodes/bed_interactive_area.tscn::3d61a6f415769bf13b9db3ca2602996d::1680157497::res://.godot/exported/133200997/export-def88be615b7e7560fc7cccc9b99992b-bed_interactive_area.scn
+res://World/Building/Tiles/Attached nodes/campfire_interactive_area.tscn::f70cb4d5d324c9fe414c22b8485e40ef::1680157497::res://.godot/exported/133200997/export-6a1f2c9845864ee17fbb8e2bf350a906-campfire_interactive_area.scn
+res://World/Building/Tiles/Attached nodes/door_interactive_area.tscn::bbe640fbd639120f3c862f4fcc5a4bdd::1683584716::res://.godot/exported/133200997/export-6b4da10f256352c5688f8cf3686f9f98-door_interactive_area.scn
+res://World/Building/Tiles/Attached nodes/furnace_smoke.tscn::f7692702b3696524c839fa137fdfb06d::1680157497::res://.godot/exported/133200997/export-f766fe57f605f6c685fc1ddd828fc648-furnace_smoke.scn
+res://World/Building/Tiles/Attached nodes/interactive_area.tscn::2ebcb663cfc667c847672316a56d28cb::1680157497::res://.godot/exported/133200997/export-3302af40397085ca03357c0a21beb75f-interactive_area.scn
+res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn::c41aa2db97d81efb7181c48ad3f6fbeb::1683589884::res://.godot/exported/133200997/export-6f297f8a079ca2328865b2f2a71d8640-BuildingTileObjectHurtBox.scn
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn::77b5fd2a3abeffaf0db493d975430a66::1683589885::res://.godot/exported/133200997/export-8fc6583309e8c745f590765990fe1235-TileObjectHurtBox.scn
+res://World/Building/Tiles/WallHitEffect.tscn::7f709b27218fd15ad952e769e38c7811::1680157497::res://.godot/exported/133200997/export-cc853d1559ed76173d15978dbbe7f403-WallHitEffect.scn
+res://World/Building/Tiles/WoodGate.tres::92c57046305e1f5662f278d5e0113d13::1680157497::res://.godot/exported/133200997/export-b5ff34cb69f086a0de8cf763dc8efb9f-WoodGate.res
+res://World/Building/PlaceObjectPreview.tscn::8c58ff3a8961ec37a40bc21114272055::1683589884::res://.godot/exported/133200997/export-92e56d0e60321668fed7f39aca032d2f-PlaceObjectPreview.scn
+res://World/Caves/Bosses/FireBoss.tscn::cfff09d3b107bbe66109022c82d6cc64::1680157497::res://.godot/exported/133200997/export-a871a149fe53b42aed3521eb0ef9f713-FireBoss.scn
+res://World/Caves/Bosses/WindBoss.tscn::2a40f706332e1843d452632fa21cfa05::1680157497::res://.godot/exported/133200997/export-97d17701f7a97ec680d67939bb1e675b-WindBoss.scn
+res://World/Caves/Objects/CaveLadder.tscn::241a07459fc3e18b8257bab9ee7084c6::1680157497::res://.godot/exported/133200997/export-3800874164a55defda347d80444ec636-CaveLadder.scn
+res://World/Caves/Objects/CaveLight.tscn::b0a550658ed950c43151bd750a4270ba::1680157497::res://.godot/exported/133200997/export-e1f7def0f35278e3cc2113e9498479d5-CaveLight.scn
+res://World/Caves/CaveAmbientLight.tscn::eab993d7f68ca3da9f5cc8d064e1324c::1680157497::res://.godot/exported/133200997/export-82ae64f54171f96db509459aabadc0a3-CaveAmbientLight.scn
+res://World/Caves/CaveGenerator.tscn::2e8568cb957221f26c79f2ec222bdbf3::1683584716::res://.godot/exported/133200997/export-feacbad3a975a6c7546feab149840b95-CaveGenerator.scn
+res://World/Caves/random_cave.tscn::a7486e30dfba0fdfb37d2b72e99bb52f::1680157497::res://.godot/exported/133200997/export-190f2019875973e5e59cb2f3db0ebf77-random_cave.scn
+res://World/Enemies/AttachedStates/EnemyFrozenState.tscn::400d8cd2cf335630ca731986e8e9b90d::1680157497::res://.godot/exported/133200997/export-406c92e4634d2ef21f1cb187bb9b8169-EnemyFrozenState.scn
+res://World/Enemies/AttachedStates/EnemyPoisonState.tscn::89ce98413a06b2964ca664f6deca92b7::1680157497::res://.godot/exported/133200997/export-6a452a6e250ff1968b98f9f481cf9016-EnemyPoisonState.scn
+res://World/Enemies/AttachedStates/EnemyStunnedState.tscn::4f87398d6371ab2ec7e7689e93e479b8::1680157497::res://.godot/exported/133200997/export-f5e45120da765b8bda76c136c708dccb-EnemyStunnedState.scn
+res://World/Enemies/AttachedStates/EnemyTornadoState.tscn::ebcafa4e7e15560f63c59c15c9a10ed3::1680157497::res://.godot/exported/133200997/export-1577724ad20d01e64dfd99f79b086e01-EnemyTornadoState.scn
+res://World/Enemies/AttachedStates/SetEnemyDirection.tscn::6f4c0ded0848de06601a3477c65811d3::1680157497::res://.godot/exported/133200997/export-d83d9274da13978b129ad51748197aa3-SetEnemyDirection.scn
+res://World/Enemies/Slime/Bat.tscn::2c2a83a0762d6b58815235c68e475ebf::1680157497::res://.godot/exported/133200997/export-e9389d5992ce6d0666b6a6d7b4d38d92-Bat.scn
+res://World/Enemies/Slime/Slime.tscn::772078949ec0e49a2d27ae31694fd314::1680157497::res://.godot/exported/133200997/export-b77da39316817d058404885ca4b982b6-Slime.scn
+res://World/Enemies/BabyBirdBoss.tscn::86ef0ee5c6bab79113a3731be3cb3a13::1680157497::res://.godot/exported/133200997/export-cd21aae4e71889e8fef3084540d92546-BabyBirdBoss.scn
+res://World/Enemies/mob.tscn::9278130047488978a8c7b85fe5dc1161::1680157497::res://.godot/exported/133200997/export-940b2ca805d98b92a814d61f81785717-mob.scn
+res://World/Enemies/Skeleton.tscn::65a3daccb4b54d9e2e2860db827e447a::1680157497::res://.godot/exported/133200997/export-c245e647c6ec4a45e57923066f5e53d2-Skeleton.scn
+res://World/Enemies/Spider.tscn::b6b49dcb0734a93eb37dbcd2ea352ab1::1680157497::res://.godot/exported/133200997/export-56524efa5bc43bb629df53fa87ef5c66-Spider.scn
+res://World/Map/GridSquareLabel.tscn::9cd5458175b70e2f3d0730c126462ff5::1680157497::res://.godot/exported/133200997/export-c90f458c4f3c8759d1a80256c451a685-GridSquareLabel.scn
+res://World/Map/WorldMap.tscn::97c24997e67d13bb23471f3229c23ec8::1683584716::res://.godot/exported/133200997/export-bfcea2fd1b606edb545b60563065c816-WorldMap.scn
+res://World/Objects/Farm/PlantedCrop.tscn::0985cf25c417ff43c4f5d9228bb93fda::1680157497::res://.godot/exported/133200997/export-20d8be0f947381170a722ea10509743f-PlantedCrop.scn
+res://World/Objects/Magic/Dark/DemonMage.tscn::f65069b92d87d170d56255a11d7980f9::1680157497::res://.godot/exported/133200997/export-070cd140fedf4832445f050ffef2f58f-DemonMage.scn
+res://World/Objects/Magic/Dark/Portal.tscn::6603aca66fa23d6ca060bd628be85fd0::1680157497::res://.godot/exported/133200997/export-42c2665f017271c80d6f3a046839416c-Portal.scn
+res://World/Objects/Magic/Earth/EarthGolem.tscn::1db4c2a12d08c910af6b0c3d5c9e4eec::1680157497::res://.godot/exported/133200997/export-ed221363b97e682333de44ac762b972b-EarthGolem.scn
+res://World/Objects/Magic/Earth/Earthquake.tscn::b2781dc1e71e6670250eaa6d3c3bae74::1680157497::res://.godot/exported/133200997/export-c6a6d88a8b68081aeb9f5b33af0177d6-Earthquake.scn
+res://World/Objects/Magic/Earth/EarthStrike.tscn::6ba9d135b99ac5a7e6b55f83b1cb14af::1680157497::res://.godot/exported/133200997/export-eeba4e3f9e012a8cce8e7bf291cb1090-EarthStrike.scn
+res://World/Objects/Magic/Earth/EarthStrikeDebuff.tscn::047db556007395ea1c9a2d7fdfb0eff4::1680157497::res://.godot/exported/133200997/export-9eb177d59885e0f21e6c8984b06a39a3-EarthStrikeDebuff.scn
+res://World/Objects/Magic/Fire/AttachedFlameBehind.tscn::41338f79fcdcac2a92b9e5505b3d9900::1680157497::res://.godot/exported/133200997/export-a2586ef1985df736c463877d50901ffc-AttachedFlameBehind.scn
+res://World/Objects/Magic/Fire/AttachedFlameFront.tscn::b4fc757b47b3f41560645e79511dbff0::1680157497::res://.godot/exported/133200997/export-e636882f202791f101ed2750aa08c62f-AttachedFlameFront.scn
+res://World/Objects/Magic/Fire/FireProjectile.tscn::975e85092a81478b582e1f2faf0c3c86::1680157497::res://.godot/exported/133200997/export-fc1ca04b048827e99fb45f1ed11921ba-FireProjectile.scn
+res://World/Objects/Magic/Fire/Flamethrower.tscn::27774a5549e95dda20830460a3b0e5b8::1680157497::res://.godot/exported/133200997/export-46d8204f4466b0032ac053a3a42e235d-Flamethrower.scn
+res://World/Objects/Magic/Ice/BlizzardFog.tscn::afc3dda45b40378de5feb9fd25826449::1680157497::res://.godot/exported/133200997/export-ab934a3ecc8e2cc79e3f1e6e8f448856-BlizzardFog.scn
+res://World/Objects/Magic/Ice/IceDefense.tscn::0a0b5e8a6634d0693561673c656426b9::1680157497::res://.godot/exported/133200997/export-720f0fd4a5a76e1209b97457343f787b-IceDefense.scn
+res://World/Objects/Magic/Ice/IceProjectile.tscn::5e87025f1a275e79eba35f7f9093b6c7::1680157497::res://.godot/exported/133200997/export-3b942e8831ad42d869602f38eacf33b0-IceProjectile.scn
+res://World/Objects/Magic/Lightning/FlashStep.tscn::d1ea0cfbe61f2b14ba3e15e0d442140c::1680157497::res://.godot/exported/133200997/export-2d2505c08142ad1cc8e5ee3215a17c04-FlashStep.scn
+res://World/Objects/Magic/Lightning/LightningProjectile.tscn::d83e2d022c1a5b1b278104b65a29e1ff::1680157497::res://.godot/exported/133200997/export-3955d739f9e36a13f85ed88dee389d90-LightningProjectile.scn
+res://World/Objects/Magic/Lightning/LightningStrike.tscn::b175d12cd8557475163594afb80381cf::1680157497::res://.godot/exported/133200997/export-c87bc7f94dbdbb3567cfe620191f776e-LightningStrike.scn
+res://World/Objects/Magic/Wind/DashGhost.tscn::d9df949a3a3f0b6d4e79825dee33aff7::1680157497::res://.godot/exported/133200997/export-4e35dfef39dcfdb2aa48f8642cb7e8d9-DashGhost.scn
+res://World/Objects/Magic/Wind/LingeringTornado.tscn::c29bd517bb43f6097e3c531948289045::1680157497::res://.godot/exported/133200997/export-e8f5634b183df7d3e0a78c0b887f62ed-LingeringTornado.scn
+res://World/Objects/Magic/Wind/TornadoProjectile.tscn::f81ca0a088a055c68f27e8d3f8b05a65::1680157497::res://.godot/exported/133200997/export-af58aa1e67d2827d4725eff276bec7fe-TornadoProjectile.scn
+res://World/Objects/Magic/Wind/Whirlwind.tscn::87299a4ee2369bc201a647037207d18a::1680157497::res://.godot/exported/133200997/export-7e4ee23100ba0337559778f7e97c8cea-Whirlwind.scn
+res://World/Objects/Misc/ColorIndicator.tscn::0a9b7929a92f6b4ff7104016bc866738::1680157497::res://.godot/exported/133200997/export-5245ba21b90ef6e0152bdec69096776c-ColorIndicator.scn
+res://World/Objects/Misc/LightningLine.tscn::4f986d3af91b8f9c1aa615d3af6c41f5::1680157497::res://.godot/exported/133200997/export-9ec04a8d0500305a36b74a3dddc04ec9-LightningLine.scn
+res://World/Objects/Nature/Effects/ExplosionParticles.tscn::a81acfde4b4b3ad5aae3b955a30765b3::1680157497::res://.godot/exported/133200997/export-51ec40b138b677cd73592c36578e1e9b-ExplosionParticles.scn
+res://World/Objects/Nature/Effects/HoedDirt.tscn::3a6cebc6c2a0b34425dcd67eb8cde917::1680157497::res://.godot/exported/133200997/export-ecea26f9267572efc0b9143d0e3da9cc-HoedDirt.scn
+res://World/Objects/Nature/Effects/LeavesFallingEffect.tscn::8f324f85c95ed0beae461bf5eddbc362::1680157497::res://.godot/exported/133200997/export-45b5a59ffdd42360c2ce177b4fe1a95e-LeavesFallingEffect.scn
+res://World/Objects/Nature/Effects/OreHitEffect.tscn::cbd6e6a4b08608399de1520a4abf104e::1680157497::res://.godot/exported/133200997/export-5167aeefa98a0c421e8c2b008ef71da9-OreHitEffect.scn
+res://World/Objects/Nature/Effects/RemoveBuilding.tscn::0a903cd8154e5e90ec4154ac88f29e13::1680157497::res://.godot/exported/133200997/export-2159f30725accd6bf295acb108598d4a-RemoveBuilding.scn
+res://World/Objects/Nature/Effects/TrunkHitEffect.tscn::aa50d7abdb8a22009cf8ba6fbdb3a54f::1680157497::res://.godot/exported/133200997/export-926f31a5d6a9ab2fd7e2d6d1d3126e3b-TrunkHitEffect.scn
+res://World/Objects/Nature/Effects/UpgradeBuilding.tscn::62cb72793e9a2c914870f7a9652ffcb4::1680157497::res://.godot/exported/133200997/export-fa70a658888107199f92fa47e9853900-UpgradeBuilding.scn
+res://World/Objects/Nature/Effects/WateringCan.tscn::23834b2e01134a48571c82fe5875c3a3::1680157497::res://.godot/exported/133200997/export-a580aad39a4b83ad2607b2036606eaf6-WateringCan.scn
+res://World/Objects/Nature/Forage/ForageItem.tscn::e7f142a4ce609d7f0dca0bb0c4623944::1683584716::res://.godot/exported/133200997/export-8746933af1c6f383bdce706c372ece00-ForageItem.scn
+res://World/Objects/Nature/Grasses/TallGrass.tscn::a265aba3a6d8d1e51577d968a201349a::1680157497::res://.godot/exported/133200997/export-e18ec52d89f633631eda05f6361baaa2-TallGrass.scn
+res://World/Objects/Nature/Grasses/Weed.tscn::5a2bcbb075849dba5939d179a7f82aee::1680157497::res://.godot/exported/133200997/export-7fe51a4f21d681554f8b037edfb3352c-Weed.scn
+res://World/Objects/Nature/Ores/LargeOre.tscn::052bd91c1a7f935b9a209a5a6c2e8094::1683589884::res://.godot/exported/133200997/export-3683c39c4ec91329e225876b51224e0d-LargeOre.scn
+res://World/Objects/Nature/Ores/SmallOre.tscn::93d293054a28d018b257ca6d208cab13::1683589884::res://.godot/exported/133200997/export-17be9d1ec007e9c068ef822917310b49-SmallOre.scn
+res://World/Objects/Nature/Particles/Clouds.tscn::00e7423c77883dcbb80ec55515397b21::1680157497::res://.godot/exported/133200997/export-e199b3a951a43bbd5a14586b14f89d91-Clouds.scn
+res://World/Objects/Nature/Particles/FallingLeaf.tscn::3521e4822bc4559595de3247e9b150f6::1680157497::res://.godot/exported/133200997/export-a970b77d5a371cbf273674d932c72041-FallingLeaf.scn
+res://World/Objects/Nature/Particles/FullMapParticles.tscn::dea60cbcf262daf0117ef3bcc8e9750e::1680157497::res://.godot/exported/133200997/export-584ae5c9c2c59f617c336ed771cbd4bd-FullMapParticles.scn
+res://World/Objects/Nature/Particles/LargeClouds.tscn::1877b682066dc2cbbf3755706986cb93::1680157497::res://.godot/exported/133200997/export-67d3448a605f9d00a344c7249b007a9d-LargeClouds.scn
+res://World/Objects/Nature/Particles/Rain.tscn::7f293b98c837799474e1da4c8f4e9362::1680157497::res://.godot/exported/133200997/export-aa32141245fc2dc3e6a12aa779c6942c-Rain.scn
+res://World/Objects/Nature/Particles/RainOnFloor.tscn::0d7ec87b336399fc17d2aea45cac54ae::1680157497::res://.godot/exported/133200997/export-6b928d525a2d1db4edd5c26cd56cd87c-RainOnFloor.scn
+res://World/Objects/Nature/Particles/RainStorm.tscn::842b970071f5e2f98dde25b05d51ee00::1680157497::res://.godot/exported/133200997/export-c0a456e582bf601f9ce02e56f3ee63d5-RainStorm.scn
+res://World/Objects/Nature/Particles/RoamingStorm.tscn::ad92d165b9e4231834eaf85be0c18774::1680157497::res://.godot/exported/133200997/export-36dfc8fcb62954212dd35e6fae030c39-RoamingStorm.scn
+res://World/Objects/Nature/Particles/Snow.tscn::3fa123c24c6ec6be909c48e15a85a680::1680157497::res://.godot/exported/133200997/export-502ae68d3bb19c4d79d5bba4b8a865f7-Snow.scn
+res://World/Objects/Nature/Trees/Log.tscn::1cfbe41c2f84dd0aafb643846ceb3f50::1683584716::res://.godot/exported/133200997/export-ab5a4c0362373405b8ec9ae6f5482bfa-Log.scn
+res://World/Objects/Nature/Trees/Stump.tscn::b0e20dfc1668452b2c54a5043bfb3920::1683589884::res://.godot/exported/133200997/export-bf45932417000075aa066b8cc76d7970-Stump.scn
+res://World/Objects/Nature/Trees/TreeObject.tscn::8402d0381fe9a65938d045a22fb428f8::1683589884::res://.godot/exported/133200997/export-f0a42ade60044768e6862d1e07e1083e-TreeObject.scn
+res://World/Objects/Projectiles/ArrowProjectile.tscn::242bbd2bbeff2ddd0905b657344d5a8c::1680157497::res://.godot/exported/133200997/export-8a1a3f1056fb1a7e380457256baec385-ArrowProjectile.scn
+res://World/Objects/Projectiles/PotionProjectile.tscn::26b4e7ab144ca772428d8f1dbcbe3359::1680157497::res://.godot/exported/133200997/export-d5560f169d0ae10740f60a335c5d9961-PotionProjectile.scn
+res://World/Overworld/Overworld.tscn::d42676dfe25e672b604041ca23040cbb::1683589884::res://.godot/exported/133200997/export-4524715577802de1690c54979986a677-Overworld.scn
+res://World/Player/Pet/IcPuppy.tscn::23105205603b26a2419527ab8bed9221::1680157497::res://.godot/exported/133200997/export-8a194b0fe749320719ab74e5e91965f7-IcPuppy.scn
+res://World/Player/Pet/PlayerPet.tscn::0825026e75cfe1277252b7dfd20673a3::1680157497::res://.godot/exported/133200997/export-746124fc571aa94bda34c075947bc934-PlayerPet.scn
+res://World/Player/Player/AttachedScenes/AimDownSightLine.tscn::3e8dff052d6f4f98dcc11e0dca40645a::1680157497::res://.godot/exported/133200997/export-cad85db1f7553de36d3460edb7d06e96-AimDownSightLine.scn
+res://World/Player/Player/AttachedScenes/EatingParticles.tscn::df962798d5a8ed84c32fb206e4ecac4e::1680157497::res://.godot/exported/133200997/export-36941638e33c51c3be2a837ffda1c4cc-EatingParticles.scn
+res://World/Player/Player/AttachedScenes/PlayerHitEffect.tscn::4e1ce970628ec725911f84ba6c7cb878::1680157497::res://.godot/exported/133200997/export-233affb17153bd6682936f93a67c8c16-PlayerHitEffect.scn
+res://World/Player/Player/Fishing/Fish.tscn::55e64a47e83451fd4c34ec194c212844::1680157497::res://.godot/exported/133200997/export-521fe61cfb0e2dcbc09678222bba60c4-Fish.scn
+res://World/Player/Player/Fishing/Fishing.tscn::07eb9cec590e71584893e4161c9456f6::1680157497::res://.godot/exported/133200997/export-033272994ff6d68e8adac76e9732903d-Fishing.scn
+res://World/Player/Player/Fishing/FishingMiniGame.tscn::6f6fe5264a63d0191952217b6d66f3da::1680157497::res://.godot/exported/133200997/export-2c086e1da9ace609496d5972837cbb4c-FishingMiniGame.scn
+res://World/Player/Player/Fishing/RippleParticles.tscn::de1438a986f54600ab78d07eff54a071::1680157497::res://.godot/exported/133200997/export-1b7ee78efa131ea055ed8476d36d35f2-RippleParticles.scn
+res://World/Player/Player/UserInterface/Barrel/Barrel.tscn::2aac5384e5924451911f114f5d043c42::1682996362::res://.godot/exported/133200997/export-2ed69200eaf4454c2eb5fbba0758b9e0-Barrel.scn
+res://World/Player/Player/UserInterface/BrewingTable/BrewingTable.tscn::5b9228fbbc4a551ace9f2cbd58f9cd5c::1680157497::res://.godot/exported/133200997/export-166365eb0509e20378cb89e05044f771-BrewingTable.scn
+res://World/Player/Player/UserInterface/Campfire/Campfire.tscn::ff24abe2c12971dc91e8e5afdb8c2a9e::1682996362::res://.godot/exported/133200997/export-1cf59ae0020f143f404ab28c956ffb84-Campfire.scn
+res://World/Player/Player/UserInterface/Chatbox/ChatBox.tscn::478e24a640a8e44e683568884ce4c928::1683584716::res://.godot/exported/133200997/export-d8abad01ebfec50f3a71e0d72d1b0d71-ChatBox.scn
+res://World/Player/Player/UserInterface/Chest/Chest.tscn::89cd884c02f4153fd999e7f7dce98726::1682996362::res://.godot/exported/133200997/export-07a6866fb331e6866224661e23bddd36-Chest.scn
+res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.tscn::92b1d5d289ae810b4436ee2c11613272::1680157497::res://.godot/exported/133200997/export-8329cac31e51e3a898a2cc34a2ca0f41-CombatHotbar.scn
+res://World/Player/Player/UserInterface/Crate/Crate.tscn::6fff7535733f01006e7e0cac452fde88::1682996361::res://.godot/exported/133200997/export-173312755f2bfa871e1a3cb9bc7a5d92-Crate.scn
+res://World/Player/Player/UserInterface/Furnace/Furnace.tscn::b8a2989794de530e7ff0b6a14cfef16d::1682996362::res://.godot/exported/133200997/export-03690ec6dff303cdbe7503c61b8a5049-Furnace.scn
+res://World/Player/Player/UserInterface/GrainMill/GrainMill.tscn::6456254bced64838610ed66c4cb43b3a::1682996362::res://.godot/exported/133200997/export-66c9d263c93199bc22902aaa3a3cce1d-GrainMill.scn
+res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn::b680283f0d8bbd0b9988471a96673650::1683584716::res://.godot/exported/133200997/export-43029cd8a20b4906e0ce552eb3e4b5f2-Hotbar.scn
+res://World/Player/Player/UserInterface/ItemPickUpDialogue/ItemPickUpDialogue.tscn::257cc1bfb308b861822c9de11b8df104::1680157497::res://.godot/exported/133200997/export-ec6074a9ec5e10efd9a39df6b302a483-ItemPickUpDialogue.scn
+res://World/Player/Player/UserInterface/Menu/Collections/Collections.tscn::cc1fe70b22fef5b473ff4190d97a3431::1680157497::res://.godot/exported/133200997/export-1f3702b52e95c3c6e1431e63f01dd270-Collections.scn
+res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn::9f92b5549695d978ab929d827d66cb88::1683584716::res://.godot/exported/133200997/export-9f9225913bc92e021380409655062fe5-Crafting.scn
+res://World/Player/Player/UserInterface/Menu/Exit/Exit.tscn::198bbef25101166c62208ca48b6b3a04::1680157497::res://.godot/exported/133200997/export-6b14272d5111666305e9ecf627c4af9b-Exit.scn
+res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.tscn::ec22419dfc222faeffa2eb845dd71df8::1680157497::res://.godot/exported/133200997/export-e821ae8fd1feb2b745aa2e67f928b1ed-Inventory.scn
+res://World/Player/Player/UserInterface/Menu/Inventory/inventory_tab_btn.tscn::978cefc76d5bf419309b83fc4c682fac::1680157497::res://.godot/exported/133200997/export-f20052929af77f001323a725071ddea5-inventory_tab_btn.scn
+res://World/Player/Player/UserInterface/Menu/Options/EnterNewKey.tscn::5a7795b1b1a64b4207a28cad0038fcc0::1680157497::res://.godot/exported/133200997/export-7e885969f2bec530e88f850ebdf4cac2-EnterNewKey.scn
+res://World/Player/Player/UserInterface/Menu/Options/KeyBindingBtn.tscn::4c103a589be829aca064fa908516c1c0::1680157497::res://.godot/exported/133200997/export-925853b4bae19cdb3e8ee22c87dee680-KeyBindingBtn.scn
+res://World/Player/Player/UserInterface/Menu/Options/key_binding.tscn::587c0b6de32eb8d79d0718322f357970::1680157497::res://.godot/exported/133200997/export-48da7ba06dba2d1d303d5ac6f8075a68-key_binding.scn
+res://World/Player/Player/UserInterface/Menu/Options/Options.tscn::1d633844c1c6af81ae433e0517fb5e0f::1680157497::res://.godot/exported/133200997/export-05e3b0d28f8e6e84715e36ac56bbd308-Options.scn
+res://World/Player/Player/UserInterface/Menu/Skills/skill.tscn::728dc1eadb7b44e39ed03983e87427e6::1680157497::res://.godot/exported/133200997/export-fb0323d7a57b1c6f13e38d7e8cad69ee-skill.scn
+res://World/Player/Player/UserInterface/Menu/Skills/Skills.tscn::3a52211a45be421df64f9c28529fdf2b::1680157497::res://.godot/exported/133200997/export-8aa62c981ddac3c8f912fcbf1ccefe29-Skills.scn
+res://World/Player/Player/UserInterface/Menu/Menu.tscn::d9bdaec1a1f5cfce9b27bb8a439bbf0e::1683584716::res://.godot/exported/133200997/export-212c260ae07d3f26b4efe9d5c59dfafe-Menu.scn
+res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn::b70a5f4fedab70d2997d907d1a7c3e7a::1680157497::res://.godot/exported/133200997/export-93b3bed62196ba0be0288bd624af4383-MenuTitle.scn
+res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.tscn::e392415248326a50e91744b0ab5262dd::1680157497::res://.godot/exported/133200997/export-00f60c9b7b7e2feaf1061141a1bae564-RadialBuildingMenu.scn
+res://World/Player/Player/UserInterface/RadialBuildingMenu/radial_menu_item.tscn::44af92d51b3a69e7578b81447b05a363::1680157497::res://.godot/exported/133200997/export-7420e3dcd4fe15950263e6a48000142f-radial_menu_item.scn
+res://World/Player/Player/UserInterface/SaveAndExit/SaveAndExit.tscn::07ea4d52b24dc626548e7487423317d0::1680157497::res://.godot/exported/133200997/export-94de37ac2148a15f7583e1912167bfbd-SaveAndExit.scn
+res://World/Player/Player/UserInterface/Slots/BarrelSlots.tscn::c55aedd0dbdc133875f08555329eacf9::1680157497::res://.godot/exported/133200997/export-77726b7d23083a8ee422476419baaebb-BarrelSlots.scn
+res://World/Player/Player/UserInterface/Slots/BrewingTableSlots.tscn::bef6e60cdda11d66844f5403f42555ed::1680157497::res://.godot/exported/133200997/export-1f1247609f48bbd1b1b25bc776595d80-BrewingTableSlots.scn
+res://World/Player/Player/UserInterface/Slots/CampfireSlots.tscn::76a9179f3c2836420ef765f27112286f::1680157497::res://.godot/exported/133200997/export-bcb70eae1611bfda0e16f72fa8cbcaf8-CampfireSlots.scn
+res://World/Player/Player/UserInterface/Slots/ChestSlots.tscn::957a9c7c11cd767f7a1d094c939bf1ef::1680157497::res://.godot/exported/133200997/export-6fabdd28ec4d0d0703523fd88ec5ae69-ChestSlots.scn
+res://World/Player/Player/UserInterface/Slots/CombatHotbarSlots.tscn::cae53fd518f5e1a8794c0787b9211518::1680157497::res://.godot/exported/133200997/export-d2dba409ee1195c620be9328345d1620-CombatHotbarSlots.scn
+res://World/Player/Player/UserInterface/Slots/CrateSlots.tscn::efd88d88aefb62d1700ec220dc97ab59::1680157497::res://.godot/exported/133200997/export-cc936ec69d53b1d3f71acafb5c018b4b-CrateSlots.scn
+res://World/Player/Player/UserInterface/Slots/FurnaceSlots.tscn::5fa9e2ba47f57ecb4d78a0b3c40ae036::1680157497::res://.godot/exported/133200997/export-b1b5ea3517f981c1e9168213d743b74d-FurnaceSlots.scn
+res://World/Player/Player/UserInterface/Slots/GrainMillSlots.tscn::0213d1c43a0551965b699c08cc01836f::1680157497::res://.godot/exported/133200997/export-e135da76c942f8588e0aef45e3268a67-GrainMillSlots.scn
+res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn::b195c0e57b3b4fd409581b6d5cba9ea7::1680157497::res://.godot/exported/133200997/export-b6d0520d6cd199883e0b606b158354b3-HotbarInventorySlots.scn
+res://World/Player/Player/UserInterface/Slots/InventorySlots.tscn::27cf6ed9f67fba2d8363a5de6d9a083d::1680157497::res://.godot/exported/133200997/export-ec064e9eb6c5d1020d63b9ad6a4e0011-InventorySlots.scn
+res://World/Player/Player/UserInterface/Slots/ItemSlots.tscn::ccebb317e33c0d445625bd6f85352545::1680157497::res://.godot/exported/133200997/export-6a0034f49d8d1523e8a5e92b1e8d8967-ItemSlots.scn
+res://World/Player/Player/UserInterface/Slots/MagicSlots.tscn::fd57d71c55eebd5d224e789213e95e2e::1680157497::res://.godot/exported/133200997/export-0d64ce2d0706510afa41711c342e7d22-MagicSlots.scn
+res://World/Player/Player/UserInterface/Slots/StoveSlots.tscn::2b6d7b3a56e4a5c009ae5402c94956d1::1680157497::res://.godot/exported/133200997/export-5247d86cf2211b375510a093b6914f47-StoveSlots.scn
+res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.tscn::5aa3e911cee2b14d97e81be4fd337bca::1683584716::res://.godot/exported/133200997/export-9a1f615f272afb020ed96e6349a43609-PlayerDataUI.scn
+res://World/Player/Player/UserInterface/Stove/item_button.tscn::318879663ef468d305f76c10f4ba627d::1680157497::res://.godot/exported/133200997/export-69549eb94e0184512323bbd79f15e0af-item_button.scn
+res://World/Player/Player/UserInterface/Stove/staff_button.tscn::15a8d4fb4169edf69232d669c4862ccd::1680157497::res://.godot/exported/133200997/export-67d5ab46469ad06b0f0643e857e6286b-staff_button.scn
+res://World/Player/Player/UserInterface/Stove/Stove.tscn::fe10ddfde30d2db0b50c20b40f107ab4::1682996362::res://.godot/exported/133200997/export-654295e9a6f7ac676e50d938c5bad8cc-Stove.scn
+res://World/Player/Player/UserInterface/Tool cabinet/Tool cabinet.tscn::824918e3f85b5bb4403f02d9f339cd91::1682996362::res://.godot/exported/133200997/export-d89f69dffaea9eb52908c9ceb034df7d-Tool cabinet.scn
+res://World/Player/Player/UserInterface/TrashCan/Trash.tscn::f88d87bac0c0748800674ba36103fdb9::1680157497::res://.godot/exported/133200997/export-340a019365256afb3db4703a61fc249c-Trash.scn
+res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn::6870a36cd6598351829b4fa884e9e0bc::1680157497::res://.godot/exported/133200997/export-0b8d8b6b15381aed808e1bbd8a06fec8-RadialUpgradeMenu.scn
+res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_0.tscn::30ac50e82601282b2ecf4e2d8dc1b9eb::1680157497::res://.godot/exported/133200997/export-e7230dc38a91169eb3466b21a14e1b51-radial_hammer_menu_item_0.scn
+res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_1.tscn::5cd631713387ec188a4216370630999b::1680157497::res://.godot/exported/133200997/export-21658d8591853f76a282f6cfcb39c7c3-radial_hammer_menu_item_1.scn
+res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_2.tscn::8828aa6e30747c6e2f28b252626ce323::1680157497::res://.godot/exported/133200997/export-fc313a42029467700b30494f0ee42d80-radial_hammer_menu_item_2.scn
+res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_3.tscn::aa41b6c102c21b4d6308bbea47f89379::1680157497::res://.godot/exported/133200997/export-3fdb19b5e1a19212b287de9f78d89959-radial_hammer_menu_item_3.scn
+res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_4.tscn::9a1a77d8593ae0984f7e478340a4be22::1680157497::res://.godot/exported/133200997/export-6749893e89ee8508487b7aa6decb38f0-radial_hammer_menu_item_4.scn
+res://World/Player/Player/UserInterface/Workbench/Workbench.tscn::acbde80a27ba02e22d9e473f57b70880::1680157497::res://.godot/exported/133200997/export-8ae95fa68791980452840cf0163de94e-Workbench.scn
+res://World/Player/Player/UserInterface/UserInterface.tscn::97a2d64067acf881bc842938fbd22ac6::1683589883::res://.godot/exported/133200997/export-58ef1e879eb8ef9b18c47511e90948bb-UserInterface.scn
+res://World/Player/Player/Actions.tscn::4f7476a264fab26ddb6473042d4d2890::1682996361::res://.godot/exported/133200997/export-ce8463f2989d72723aff8cc0610f998a-Actions.scn
+res://World/Player/Player/InputController.tscn::aee3101f8e913bc6ba139059cc7b399b::1680157497::res://.godot/exported/133200997/export-dc2cb545dc5f03f82681942f381a7429-InputController.scn
+res://World/Player/Player/Magic.tscn::c5c6187f6a7c8b9f8d5426bc3225f23a::1680157497::res://.godot/exported/133200997/export-465472ffecc1ac3b8473a9d82c5d11ca-Magic.scn
+res://World/Player/Player/Player.tscn::769b8420c4e6830a29a7a3a376a472b9::1683589884::res://.godot/exported/133200997/export-3e60daa68f93261591400268c09036fa-Player.scn
+res://World/Player/Player/PoisonParticles.tscn::93746633ddf91756e6b9f009c5aaa5dd::1680157497::res://.godot/exported/133200997/export-5a042ff5664cba39aea043c758fccc4a-PoisonParticles.scn
+res://World/Player/Player/SpeedParticles.tscn::f35438f264dec338a94aa196970d5fd9::1680157497::res://.godot/exported/133200997/export-978ad3965e8793cf1927f5075ac8750f-SpeedParticles.scn
+res://World/Player/Player/Swing.tscn::5637457be338dcba7e4e98c53077192b::1683584716::res://.godot/exported/133200997/export-f72ee4762c7410702464656b56d296ba-Swing.scn
+res://World/Player/Player/Throwing.tscn::85b99f86894101f16e577244b1ee546c::1680157497::res://.godot/exported/133200997/export-2a1a0eaff675c55b51338b2058851858-Throwing.scn
+res://World/Player/PlayerInMenu/PlayerMenuState.tscn::6cf6a5c929b72ca0bd44e40ce6e3e6aa::1680157497::res://.godot/exported/133200997/export-7cbaf21e40a19d6afa4d23f2d6a12f76-PlayerMenuState.scn
+res://World/Player/PlayerTemplate/InputControllerTemplate.tscn::2d329bd9e1915cd0c6df7759dcf1c3e2::1680157497::res://.godot/exported/133200997/export-dcdff784bdb825b4a9cae5c50383042d-InputControllerTemplate.scn
+res://World/Player/PlayerTemplate/PlayerTemplate.tscn::82e0b968ec2503b300e09b68f1b23a7e::1680157497::res://.godot/exported/133200997/export-28e3cb26c12dfbcca6713010018a471a-PlayerTemplate.scn
+res://BetaLabel.tscn::cfcd935abf25dfbe669d6dd8e8ea4c80::1680157497::res://.godot/exported/133200997/export-0ccd3e4cc2734fa906ab5cbefe3dc9bb-BetaLabel.scn
+res://default_bus_layout.tres::b046fc27dc2e0db6155d37cdee7ffa71::1680157497::res://.godot/exported/133200997/export-19246414aa9fb561ced4b8dce477acec-default_bus_layout.res
+res://default_env.tres::a52129f071fffbd20a6013a6c0edec1e::1680157497::res://.godot/exported/133200997/export-7cf3fd67ad9f55210191d77b582b8209-default_env.res
+res://Assets/Tilesets/Objects/crops.tres::c0e76d67b38d8abbb0a0859a3b37194b::1683589242::res://.godot/exported/133200997/export-4773b15db56b094e4f81f1eaaeb397c8-crops.res
+res://Assets/Tilesets/Objects/objects.tres::f027f536c74029459d867f4dd6ce8b21::1683589242::res://.godot/exported/133200997/export-6b93e3658cfd48d39b85a2c6a1add24b-objects.res
+res://Assets/Tilesets/Terrain/tres files/cave walls.tres::8fc26fb07fbb21930dc92ba40131b96b::1680157497::res://.godot/exported/133200997/export-be9d04e015b86bddc45a20deee1e8d15-cave walls.res
+res://Assets/Tilesets/Terrain/tres files/deep ocean.tres::f6c8ff186555eb4d4f0070fe35d9783f::1683589241::res://.godot/exported/133200997/export-49cb8f00ab7e067c2eea3510850d12d4-deep ocean.res
+res://Assets/Tilesets/Terrain/tres files/dirt.tres::c5df6e880f78cf0d7967e19148b3cdc4::1683589242::res://.godot/exported/133200997/export-3ba6d1f1acc55516033df04c07ad402b-dirt.res
+res://Assets/Tilesets/Terrain/tres files/forest.tres::de3c17a14da3c46ad92db20fcbc0c199::1683589242::res://.godot/exported/133200997/export-705ce28bb809a295ccf04f3e1c98c2b6-forest.res
+res://Assets/Tilesets/Terrain/tres files/freshwater.tres::0eb05adffcc8f4cc5a53591b5ab33937::1683589242::res://.godot/exported/133200997/export-13d26b47a9006c0f9932a9e21fd58c65-freshwater.res
+res://Assets/Tilesets/Terrain/tres files/plains.tres::bf6d99666117c957120e328625fa8dd9::1683589241::res://.godot/exported/133200997/export-059064e1dc1e545479ecbf96dfed64de-plains.res
+res://Assets/Tilesets/Terrain/tres files/snow.tres::589340f09d2f5a384eac791ca023e921::1683589242::res://.godot/exported/133200997/export-052af0011d30fb1bc0c74287a15a68dc-snow.res
+res://Assets/Tilesets/Terrain/tres files/waves.tres::6a374c2e14145c36734edb5a5a7e09a9::1683589242::res://.godot/exported/133200997/export-043360b6570f4ccf0fff5d4fde1ca51f-waves.res
+res://Assets/Tilesets/Terrain/tres files/wet sand.tres::96036b38b46209f82d1794c7783d6fae::1683589242::res://.godot/exported/133200997/export-7539bc6d2dcfcd4c481d933fee8b6068-wet sand.res
+res://Assets/Tilesets/Terrain/elevated terrain.tres::9b02ed4f0fce8685fbb04080b55402af::1683589241::res://.godot/exported/133200997/export-52a6a345a42a4f0f8c9c5acd14442140-elevated terrain.res
+res://elevation_test.tscn::0d0bfc9a9967dc9943468fbd5a98406e::1683584716::res://.godot/exported/133200997/export-84e0015f244879f5bd301d83b3593d4a-elevation_test.scn
+res://Assets/Images/User interface/loading screen/LoadingScreen.tscn::efae14422a1dbee614f0e215f5a26ccd::1683589884::res://.godot/exported/133200997/export-10a5efc6e37d721035de5db2483a7d09-LoadingScreen.scn

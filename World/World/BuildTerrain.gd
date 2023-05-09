@@ -30,14 +30,14 @@ var game_state: GameState
 
 func initialize():
 	build_terrain()
-#	$BuildTerrainTimer.start()
+	$BuildTerrainTimer.start()
 
 func _on_build_terrain_timer_timeout():
 	build_terrain()
 
 func _whoAmI(chunk):
 	call_deferred("spawn_chunk", chunk)
-#
+
 func build_terrain():
 #	for column in range(12):
 #		for row in ["A","B","C","D","E","F","G","H","I","J","K","L"]:

@@ -38,8 +38,7 @@ func setTreeBranchType():
 func hit(tool_name, special_ability = ""):
 	if not destroyed:
 		destroyed = true
-		if MapData.world["log"].has(name):
-			MapData.world["log"].erase(name)
+		MapData.remove_object("log",name,location)
 		$Log.call_deferred("hide")
 		$Break.call_deferred("show")
 		$Break.call_deferred("play",str(variety))
@@ -55,7 +54,6 @@ func hit(tool_name, special_ability = ""):
 		call_deferred("queue_free")
 
 func _on_BranchHurtBox_area_entered(_area):
-	print(_area.name)
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
 	if _area.special_ability == "fire buff":

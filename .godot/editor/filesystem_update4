@@ -1,4 +1,4 @@
-res://World/Player/Player/UserInterface/UserInterface.tscn
+res://World/Overworld/Overworld.tscn
 res://Assets/Themes/text.tres
 res://Assets/Themes/LockedAsset.tres
 res://Assets/Themes/MenuTitle.tres
@@ -15,26 +15,21 @@ res://Assets/Tilesets/Terrain/tres files/waves.tres
 res://Assets/Tilesets/Objects/objects.tres
 res://Assets/Tilesets/Terrain/tres files/snow.tres
 res://Assets/Tilesets/Terrain/tres files/wet sand.tres
-res://Global/Data/GenerateNewWorld.gd
-res://MainMenu/MainMenu.tscn
-res://World/Overworld/Overworld.tscn
-res://World/Caves/CaveGenerator.tscn
-res://helpers/Util.gd
-res://World/Map/WorldMap.gd
-res://MainMenu/MainMenu.gd
-res://World/Overworld/Overworld.gd
-res://MainMenu/MainMenuButtons.gd
-res://Global/Data/MapData.gd
-res://Global/Data/PlayerData.gd
-res://JSONData/JSONData.gd
-res://World/Objects/Nature/Trees/TreeObject.tscn
-res://Assets/Images/tree_sets/oak/mature/animated top.tres
-res://JSONData/NewWorld.json
-res://World/World/BuildTerrain.gd
-res://World/Building/PlaceObjectPreview.tscn
 res://Assets/Tilesets/Objects/crops.tres
+res://Assets/Images/tree_sets/oak/mature/animated top.tres
+res://Assets/Themes/whiten.tres
+res://World/Overworld/Overworld.gd
+res://World/Player/Player/UserInterface/UserInterface.tscn
+res://MainMenu/MainMenu.tscn
+res://World/Building/PlaceObjectPreview.tscn
+res://World/Objects/Nature/Trees/TreeObject.tscn
+res://World/Objects/Nature/Ores/LargeOre.tscn
+res://World/Objects/Nature/Ores/SmallOre.tscn
+res://World/Objects/Nature/Trees/Stump.tscn
+res://Assets/Images/User interface/loading screen/LoadingScreen.tscn
+res://World/Player/Player/Player.tscn
+res://InventoryLogic/ItemDrop.tscn
 res://Global/Data/PlaceObject.gd
-res://World/World/BuildNature.gd
-res://World/Building/PlaceObjectPreview.gd
-res://World/Objects/Nature/Trees/Stump.gd
-res://World/Objects/Nature/Trees/TreeObject.gd
+res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn
+res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.gd
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn

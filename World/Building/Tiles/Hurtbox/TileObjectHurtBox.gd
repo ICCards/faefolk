@@ -210,7 +210,7 @@ func _on_HurtBox_area_entered(area):
 			Tiles.add_valid_tiles(location, dimensions)
 		Tiles.object_tiles.erase_cell(0,location)
 		InstancedScenes.intitiateItemDrop(item_name, position, 1)
-		MapData.remove_object("placeable",name)
+		MapData.remove_object("placeable",name,location)
 		await sound_effects.finished
 		queue_free()
 
@@ -280,7 +280,7 @@ func _on_btn_pressed():
 				else:
 					Tiles.add_valid_tiles(location, dimensions)
 				Tiles.object_tiles.erase_cell(0,location)
-				MapData.remove_object("placeable",name)
+				MapData.remove_object("placeable",name,location)
 				Server.player_node.actions.move_placeable_object({"id":name,"n":item_name,"d":direction,"v":variety,"l":location})
 				Sounds.play_pick_up_placeable_object()
 				queue_free()

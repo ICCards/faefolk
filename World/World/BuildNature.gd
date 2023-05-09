@@ -21,7 +21,6 @@ var current_chunks = []
 
 
 func initialize():
-	await get_tree().process_frame
 	placeable_thread.start(Callable(self,"whoAmIPlaceable").bind(null))
 #	crop_thread.start(Callable(self,"whoAmICrop").bind(null))
 	$SpawnNatureTimer.start()
@@ -166,7 +165,7 @@ func spawn_trees():
 			return
 		var map = MapData.world[chunk]
 		for id in map["tree"]:
-			var loc = map["tree"][id]["l"]+Vector2i(1,0)
+			var loc = map["tree"][id]["l"]
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id):
 					var biome = map["tree"][id]["b"]
@@ -185,7 +184,7 @@ func spawn_trees():
 					PlaceObject.place_log_in_world(id,MapData.world[chunk]["log"][id]["v"],loc)
 					await get_tree().process_frame
 		for id in map["stump"]:
-			var loc = map["stump"][id]["l"] + Vector2i(1,0)
+			var loc = map["stump"][id]["l"]
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id):
 					var variety= map["stump"][id]["v"]

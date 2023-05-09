@@ -1,7 +1,6 @@
 extends Node2D
 
 @onready var CaveLadder = load("res://World/Caves/Objects/CaveLadder.tscn")
-@onready var GenerateWorldLoadingScreen = load("res://MainMenu/GenerateWorldLoadingScreen.tscn")
 @onready var Player = load("res://World/Player/Player/Player.tscn")
 
 var rng := RandomNumberGenerator.new()
@@ -41,7 +40,7 @@ func set_valid_tiles():
 
 func build_world():
 	buildMap()
-#	set_valid_tiles()
+	set_valid_tiles()
 #	spawn_player()
 	$WorldBuilder.initialize()
 	$WorldBuilder/BuildTerrain.initialize()

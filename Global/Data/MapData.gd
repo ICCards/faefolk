@@ -62,14 +62,16 @@ func remove_hoed_tile(loc):
 	world["tile"].erase(loc)
 
 func add_object(type,id,data):
+	PlaceObject.place(type,id,data)
 	world[Util.return_chunk_from_location(data["l"])][type][id] = data
 
 func remove_object(type,id,location):
 	world[Util.return_chunk_from_location(location)][type].erase(id)
 	
-func update_object_health(type, id, new_health):
-	if world[type].has(id):
-		world[type][id]["h"] = new_health
+func update_object_health(type, id,new_health):
+	pass
+#	if world[Util.return_chunk_from_location(location)][type].has(id):
+#		world[Util.return_chunk_from_location(location)][type][id]["h"] = new_health
 
 func return_cave_data(cave_name):
 	match cave_name:

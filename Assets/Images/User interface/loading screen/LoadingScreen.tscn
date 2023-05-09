@@ -1,0 +1,71 @@
+[gd_scene load_steps=12 format=3 uid="uid://3vr0ijbqi0bd"]
+
+[ext_resource type="Script" path="res://Assets/Images/User interface/loading screen/LoadingScreen.gd" id="1_bai6h"]
+[ext_resource type="Texture2D" uid="uid://bnowosfcnkely" path="res://Assets/Images/Animations/loading screen/frame_0_delay-0.2s.png" id="2_a06at"]
+[ext_resource type="Texture2D" uid="uid://oulkwg35t8wf" path="res://Assets/Images/Animations/loading screen/frame_1_delay-0.2s.png" id="3_jsidy"]
+[ext_resource type="Texture2D" uid="uid://dbuwi4c20ylvo" path="res://Assets/Images/Animations/loading screen/frame_2_delay-0.2s.png" id="4_s6wgy"]
+[ext_resource type="Texture2D" uid="uid://besiu4wl7fcfl" path="res://Assets/Images/Animations/loading screen/frame_3_delay-0.2s.png" id="5_vb60x"]
+[ext_resource type="Texture2D" uid="uid://cxd8r1q1ra6sx" path="res://Assets/Images/Animations/loading screen/frame_4_delay-0.2s.png" id="6_44ycd"]
+[ext_resource type="Texture2D" uid="uid://b54tq55jolfr3" path="res://Assets/Images/Animations/loading screen/frame_5_delay-0.2s.png" id="7_ovsl4"]
+[ext_resource type="Texture2D" uid="uid://cttg1yr1vf4xd" path="res://Assets/Images/Animations/loading screen/frame_6_delay-0.2s.png" id="8_gqf0h"]
+[ext_resource type="Texture2D" uid="uid://b0sgo6f21ampn" path="res://Assets/Images/Animations/loading screen/frame_7_delay-0.2s.png" id="9_0crer"]
+[ext_resource type="Texture2D" uid="uid://bv2e37vy0s7h4" path="res://Assets/Images/mini map/snow.png" id="10_ywbv7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yiymi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_a06at")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jsidy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_s6wgy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vb60x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_44ycd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ovsl4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_gqf0h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_0crer")
+}],
+"loop": true,
+"name": &"play",
+"speed": 3.0
+}]
+
+[node name="LoadingScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bai6h")
+
+[node name="Bg" type="AnimatedSprite2D" parent="."]
+position = Vector2(640, 360)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_yiymi")
+animation = &"play"
+frame_progress = 0.753012
+metadata/_edit_lock_ = true
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 434.0
+offset_right = 4744.0
+offset_bottom = 534.0
+scale = Vector2(0.1, 0.1)
+nine_patch_stretch = true
+texture_progress = ExtResource("10_ywbv7")

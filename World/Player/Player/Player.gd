@@ -53,8 +53,8 @@ func _ready():
 	Server.player_node = self
 	if is_building_world:
 		state = DYING
-		$Camera2D/UserInterface/LoadingScreen.show()
-		await get_tree().create_timer(5.0).timeout
+		$Camera2D/UserInterface/LoadingScreen.initialize(8)
+		await get_tree().create_timer(8.0).timeout
 	state = MOVEMENT
 	$Camera2D/UserInterface/LoadingScreen.hide()
 	await get_tree().process_frame

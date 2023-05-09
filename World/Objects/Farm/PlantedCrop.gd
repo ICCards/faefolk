@@ -123,7 +123,7 @@ func _on_PlayAnimBox_body_exited(body):
 
 func _on_HurtBox_area_entered(area):
 	Tiles.add_valid_tiles(location)
-	MapData.remove_object("crop",name)
+	MapData.remove_object("crop",name,location)
 	call_deferred("queue_free")
 
 

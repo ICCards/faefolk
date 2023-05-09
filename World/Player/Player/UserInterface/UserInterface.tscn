@@ -1,9 +1,9 @@
 [gd_scene load_steps=31 format=3 uid="uid://cffchl0ffi2hf"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/UserInterface.gd" id="1_pv3v8"]
+[ext_resource type="PackedScene" uid="uid://3vr0ijbqi0bd" path="res://Assets/Images/User interface/loading screen/LoadingScreen.tscn" id="2_ai2q6"]
 [ext_resource type="PackedScene" uid="uid://ctp3ra1cmv0de" path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" id="2_dv8vv"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/WeatherEffects.gd" id="2_rl35f"]
-[ext_resource type="PackedScene" uid="uid://3vr0ijbqi0bd" path="res://MainMenu/LoadingScreen.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://dkn2fivmq1v8o" path="res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn" id="4_nwvkq"]
 [ext_resource type="PackedScene" uid="uid://dh7qoqj6wpcf8" path="res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.tscn" id="5_mppsu"]
 [ext_resource type="Texture2D" uid="uid://c81fev363dte8" path="res://Assets/Images/User interface/PlaceObject/RotationUI1.png" id="5_yyu54"]
@@ -395,7 +395,7 @@ visible = false
 [node name="PlayerDataUI" parent="." instance=ExtResource("18_gbc14")]
 visible = false
 
-[node name="LoadingScreen" parent="." instance=ExtResource("4")]
+[node name="LoadingScreen" parent="." instance=ExtResource("2_ai2q6")]
 visible = false
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]

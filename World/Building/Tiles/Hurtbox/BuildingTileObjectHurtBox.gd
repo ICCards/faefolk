@@ -11,6 +11,7 @@ extends Node2D
 
 var tier
 var health
+var variety
 var max_health
 var item_name
 var location
@@ -141,7 +142,7 @@ func remove_wall():
 		hurt_box.set_deferred("disabled", true)
 		movement_collision.set_deferred("disabled", true)
 		hammer_repair_box.set_deferred("disabled", true)
-		MapData.remove_object("placeable",name)
+		MapData.remove_object("placeable",name,location)
 		Tiles.add_valid_tiles(location)
 		Tiles.wall_tiles.set_cells_terrain_connect(0,[location],0,-1)
 		play_break_sound_effect()
@@ -155,7 +156,7 @@ func remove_foundation():
 		$HealthBar.call_deferred("hide")
 		hurt_box.set_deferred("disabled", true)
 		hammer_repair_box.set_deferred("disabled", true)
-		MapData.remove_object("placeable",name)
+		MapData.remove_object("placeable",name,location)
 		play_break_sound_effect()
 		await get_tree().create_timer(1.0).timeout
 		queue_free()
@@ -196,7 +197,7 @@ func remove_door():
 		hurt_box.set_deferred("disabled", true)
 		movement_collision.set_deferred("disabled", true)
 		hammer_repair_box.set_deferred("disabled", true)
-		MapData.remove_object("placeable",name)
+		MapData.remove_object("placeable",name,location)
 		play_break_sound_effect()
 		await get_tree().create_timer(1.5).timeout
 		queue_free()

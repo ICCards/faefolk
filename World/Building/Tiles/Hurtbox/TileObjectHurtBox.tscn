@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd" id="1_n8wg3"]
 [ext_resource type="Script" path="res://World/Building/Tiles/Interactives.gd" id="2_i881y"]
-[ext_resource type="TileSet" uid="uid://bmjc5ou5oyowx" path="res://Assets/Tilesets/objects/objects.tres" id="2_tvff0"]
+[ext_resource type="TileSet" uid="uid://bmjc5ou5oyowx" path="res://Assets/Tilesets/Objects/objects.tres" id="2_tvff0"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="3_74bdu"]
 
 [sub_resource type="RectangleShape2D" id="1"]
@@ -76,7 +76,6 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_pawgr")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_6fn2f")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_5pqk2")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_sqj60")
-disabled = true
 flat = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]

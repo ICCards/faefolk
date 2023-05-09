@@ -4903,9 +4903,11 @@ z_index = -10
 
 [node name="ValidTiles" type="TileMap" parent="TerrainTiles"]
 visible = false
+top_level = true
 tile_set = SubResource("TileSet_po1uq")
 navigation_visibility_mode = 1
 format = 2
+layer_0/z_index = 10
 
 [node name="NavigationTiles" type="TileMap" parent="TerrainTiles"]
 visible = false
