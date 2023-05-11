@@ -3691,7 +3691,7 @@ offset_bottom = 196.0
 scale = Vector2(0.05, 0.05)
 theme = ExtResource("28_3r6uk")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 32
+theme_override_constants/outline_size = 42
 text = "chuse.icp"
 horizontal_alignment = 1
 

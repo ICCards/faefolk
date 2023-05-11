@@ -3,6 +3,7 @@ extends Control
 
 @onready var Row = load("res://MainMenu/join server ui/row/row.tscn")
 
+
 func _ready():
 	for i in range(50):
 		var row = Row.instantiate()
