@@ -16,6 +16,7 @@ extends Node
 @onready var shallow_ocean: TileMap = get_node("../../TerrainTiles/ShallowOcean")
 @onready var deep_ocean: TileMap = get_node("../../TerrainTiles/DeepOcean")
 @onready var top_ocean: TileMap = get_node("../../TerrainTiles/TopOcean")
+@onready var top_ocean2: TileMap = get_node("../../TerrainTiles/TopOcean2")
 
 
 var terrain_thread := Thread.new()
@@ -84,13 +85,18 @@ func spawn_chunk(chunk_name):
 		for loc in _chunk["deep_ocean"]:
 			var atlas_cord = Tiles.return_atlas_tile_cord("deep_ocean",0)#_chunk["deep_ocean"][loc])
 			deep_ocean.set_cell(0,loc,0,atlas_cord)
+			for adjTile in Constants.randomAdjacentTiles:
+				if not _chunk["deep_ocean"].has(loc+adjTile):
+					deep_ocean.set_cell(0,loc+adjTile,0,atlas_cord)
+					top_ocean2.set_cell(0,loc+adjTile,0,Vector2i(24,56))
+					validTiles.set_cell(0,loc+adjTile,0,Vector2i(-1,-1))
 			validTiles.set_cell(0,loc,0,Vector2i(-1,-1))
-			if _chunk["deep_ocean"][loc] == 0:
-				top_ocean.set_cell(0,loc,0,Vector2i(24,56))
+			#if _chunk["deep_ocean"][loc] == 0:
+			top_ocean2.set_cell(0,loc,0,Vector2i(24,56))
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["ocean"].keys().size() > 0:
 		for loc in _chunk["ocean"].keys():
-			var atlas_cord = Tiles.return_atlas_tile_cord("deep_ocean",_chunk["ocean"][loc])
+			var atlas_cord = Tiles.return_atlas_tile_cord("ocean",_chunk["ocean"][loc])
 			validTiles.set_cell(0,loc,0,Constants.NAVIGATION_TILE_ATLAS_CORD)
 			waves.set_cell(0,loc,0,atlas_cord)
 			shallow_ocean.set_cell(0,loc,0,Vector2i(26,58))
