@@ -1,3 +1,7 @@
+res://MainMenu/join server ui/JoinServerUi
+res://MainMenu/join server ui/row
+res://World/Objects/Nature/Cactus
+res://Assets/Images/cacti
 res://World/Animals
 res://MainMenu
 res://Assets/Tilesets/terrain/tres files
@@ -16,7 +20,3 @@ res://Assets/Images/Enemies/slime
 res://World/Caves
 res://Assets/Tilesets/objects
 res://Assets/Themes
-res://World/Enemies
-res://Assets/Images/Animals
-res://Assets/Images/Magic/wind
-res://Assets/Images/Animations/leaf break

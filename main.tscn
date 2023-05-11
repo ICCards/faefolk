@@ -3350,10 +3350,12 @@ y_sort_enabled = true
 script = ExtResource("1_miuy3")
 
 [node name="InitLoadScreen" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="LoadingScreen" parent="InitLoadScreen" instance=ExtResource("2_yrny3")]
 
 [node name="WorldAmbience" type="CanvasModulate" parent="."]
+visible = false
 script = ExtResource("3_136d5")
 
 [node name="WorldBuilder" type="Node" parent="."]
@@ -3404,7 +3406,7 @@ layer_0/z_index = -4
 
 [node name="DeepOcean" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
-z_index = -2
+z_index = -5
 tile_set = ExtResource("4_prix1")
 format = 2
 
@@ -3432,12 +3434,13 @@ format = 2
 
 [node name="Sand" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
+z_index = -6
 tile_set = ExtResource("14_ogu2e")
 format = 2
 
 [node name="Waves" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
-z_index = -2
+z_index = -1
 tile_set = ExtResource("9_d86tr")
 format = 2
 
@@ -3461,7 +3464,7 @@ format = 2
 
 [node name="Beach" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
-z_index = -4
+z_index = -6
 tile_set = SubResource("TileSet_ofn11")
 format = 2
 
