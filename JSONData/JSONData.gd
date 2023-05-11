@@ -8,7 +8,6 @@ var player_data: Dictionary
 func _ready():
 	item_data = LoadData("res://JSONData/ItemData.json")
 	crop_data = LoadData("res://JSONData/CropData.json")
-	starting_world_data = LoadData("res://JSONData/STARTING WORLD.json")
 
 func LoadData(file_path):
 	var file_data = FileAccess.open(file_path, FileAccess.READ)
