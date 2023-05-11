@@ -28,3 +28,4 @@ res://MainMenu/join server ui/row/row.tscn
 res://MainMenu/join server ui/JoinServerUi/join_server_ui.tscn
 res://MainMenu/join server ui/JoinServerUi/join_server_ui.gd
 res://helpers/Tiles.gd
+res://JSONData/JSONData.gd
