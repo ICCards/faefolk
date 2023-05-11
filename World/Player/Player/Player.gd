@@ -8,7 +8,6 @@ extends CharacterBody2D
 @onready var user_interface = $Camera2D/UserInterface
 @onready var sound_effects = $Sounds/SoundEffects
 @onready var synchronizer = $MultiplayerSynchronizer
-#@onready var networking = $Networking
 @onready var footsteps_sound: AudioStreamPlayer2D = $Sounds/FootstepsSound
 
 var running = false
