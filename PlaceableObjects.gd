@@ -18,6 +18,9 @@ func send_updated_ui_slots(id,dict): pass
 @rpc 
 func player_move_object(player_id,id,data): pass
 
+#@rpc 
+#func player_repair_object(id,location): pass
+
 #@rpc
 #func set_new_object_tier(player_id,id,location,tier): pass
 

@@ -3414,12 +3414,11 @@ y_sort_enabled = true
 script = ExtResource("1_miuy3")
 
 [node name="InitLoadScreen" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="LoadingScreen" parent="InitLoadScreen" instance=ExtResource("2_yrny3")]
 
 [node name="WorldAmbience" type="CanvasModulate" parent="."]
-visible = false
+color = Color(0.196078, 0.196078, 0.215686, 1)
 script = ExtResource("3_136d5")
 
 [node name="WorldBuilder" type="Node" parent="."]
