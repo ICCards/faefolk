@@ -1,3 +1,6 @@
+CollisionShape2D
+Area2D
+AudioStreamPlayer
 Button
 Control
 VBoxContainer
@@ -17,8 +20,6 @@ MultiplayerSynchronizer
 Node2D
 MultiplayerSpawner
 CollisionPolygon2D
-Area2D
-AudioStreamPlayer
 Node
 CharacterBody2D
 TextureProgressBar
@@ -27,6 +28,5 @@ TextureRect
 AudioStreamPlayer2D
 TileMap
 Timer
-CollisionShape2D
 Line2D
 VisibleOnScreenNotifier2D

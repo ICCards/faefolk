@@ -32,13 +32,13 @@ enum Tiles {
 func _input(event):
 	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and not PlayerData.chatMode and has_node("/root/Main"):
 		if event.is_action_pressed("open map"):
-			#Server.player_node.actions.destroy_placeable_object()
-			#Server.world.get_node("WorldAmbience").call_deferred("hide")
+			Server.player_node.actions.destroy_placeable_object()
+			Server.world.get_node("WorldAmbience").call_deferred("hide")
 			initialize()
 		if event.is_action_released("open map"):
-			#Server.world.get_node("WorldAmbience").call_deferred("show")
+			Server.world.get_node("WorldAmbience").call_deferred("show")
 			set_inactive()
-			#Server.player_node.call_deferred("set_held_object")
+			Server.player_node.call_deferred("set_held_object")
 
 func initialize():
 	show()
@@ -91,7 +91,7 @@ func _physics_process(delta):
 		playerIcon.position = Server.player_node.position*2
 ##		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
 #		for player in $Map/Players.get_children():
-#			#player.rotation_degrees = return_player_direction(get_node("../Players/"+player.name).direction)
+		playerIcon.rotation_degrees = return_player_direction(Server.player_node.direction)
 #			player.position = get_node("../Players/"+player.name).position
 			#player.scale = adjustedPlayerIconScale($Camera2D.zoom)
 #		roamingStorm = get_node("/root/Overworld/RoamingStorm")

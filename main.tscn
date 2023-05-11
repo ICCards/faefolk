@@ -3418,7 +3418,6 @@ script = ExtResource("1_miuy3")
 [node name="LoadingScreen" parent="InitLoadScreen" instance=ExtResource("2_yrny3")]
 
 [node name="WorldAmbience" type="CanvasModulate" parent="."]
-color = Color(0.196078, 0.196078, 0.215686, 1)
 script = ExtResource("3_136d5")
 
 [node name="WorldBuilder" type="Node" parent="."]

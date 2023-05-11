@@ -243,7 +243,6 @@ func destroy(data):
 		call_deferred("queue_free")
 
 
-
 func _physics_process(delta):
 	if PlayerData.normal_hotbar_mode:
 		if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):

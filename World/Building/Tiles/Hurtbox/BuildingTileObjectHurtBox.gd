@@ -74,73 +74,77 @@ func add_door_interactive_area_node(type):
 	doorInteractiveAreaNode.name = name
 	$Marker2D.call_deferred("add_child", doorInteractiveAreaNode)
 
+#func upgrade():
+#	sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/crafting.mp3")
+#	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+#	sound_effects.play()
 
 
-func tile_upgraded():
-	if tier != "demolish":
-		match tier:
-			"wood":
-				health = Stats.MAX_WOOD_BUILDING
-			"stone":
-				health = Stats.MAX_STONE_BUILDING
-			"metal":
-				health = Stats.MAX_METAL_BUILDING
-			"armored":
-				health = Stats.MAX_ARMORED_BUILDING
+func upgrade(new_tier):
+	match new_tier:
+		"wood":
+			health = Stats.MAX_WOOD_BUILDING
+		"stone":
+			health = Stats.MAX_STONE_BUILDING
+		"metal":
+			health = Stats.MAX_METAL_BUILDING
+		"armored":
+			health = Stats.MAX_ARMORED_BUILDING
 	set_type()
 	
 func set_type():
-#	if tier != "demolish":
-#		get_parent().rpc_id(1,"set_new_object_tier",Server.player_node.name,name,location,tier)
+##	if tier == "demolish":
+##		get_parent().rpc_id(1,"player_remove_object",Server.player_node.name,"placeable",name,location)
+#	else:
 		#MapData.world["placeable"][str(name)]["v"] = tier
-	match item_name:
-		"wood door":
-			max_health = Stats.MAX_WOOD_DOOR
-		"metal door":
-			max_health = Stats.MAX_METAL_DOOR
-		"armored door":
-			max_health = Stats.MAX_ARMORED_DOOR
-		"wall":
-			match tier:
-				"twig":
-					Tiles.wall_tiles.set_cells_terrain_connect(0,[location],0,Tiers.TWIG)
-					max_health = Stats.MAX_TWIG_BUILDING
-				"wood":
-					Tiles.wall_tiles.set_cells_terrain_connect(0,[location],0,Tiers.WOOD)
-					max_health = Stats.MAX_WOOD_BUILDING
-				"stone":
-					Tiles.wall_tiles.set_cells_terrain_connect(0,[location],0,Tiers.STONE)
-					max_health = Stats.MAX_STONE_BUILDING
-				"metal":
-					Tiles.wall_tiles.set_cells_terrain_connect(0,[location],0,Tiers.METAL)
-					max_health = Stats.MAX_METAL_BUILDING
-				"armored":
-					Tiles.wall_tiles.set_cells_terrain_connect(0,[location],0,Tiers.ARMORED)
-					max_health = Stats.MAX_ARMORED_BUILDING
-				"demolish":
-					get_parent().rpc_id(1,"player_remove_object",Server.player_node.name,"placeable",name,location)
-					#remove_wall()
-		"foundation":
-			match tier:
-				"twig":
-					Tiles.foundation_tiles.set_cells_terrain_connect(0,[location],0,Tiers.TWIG)
-					max_health = Stats.MAX_TWIG_BUILDING
-				"wood":
-					Tiles.foundation_tiles.set_cells_terrain_connect(0,[location],0,Tiers.WOOD)
-					max_health = Stats.MAX_WOOD_BUILDING
-				"stone":
-					Tiles.foundation_tiles.set_cells_terrain_connect(0,[location],0,Tiers.STONE)
-					max_health = Stats.MAX_STONE_BUILDING
-				"metal":
-					Tiles.foundation_tiles.set_cells_terrain_connect(0,[location],0,Tiers.METAL)
-					max_health = Stats.MAX_METAL_BUILDING
-				"armored":
-					Tiles.foundation_tiles.set_cells_terrain_connect(0,[location],0,Tiers.ARMORED)
-					max_health = Stats.MAX_ARMORED_BUILDING
-				"demolish":
-					get_parent().rpc_id(1,"player_remove_object",Server.player_node.name,"placeable",name,location)
-					#remove_foundation()
-	update_health_bar()
+		match item_name:
+			"wood door":
+				max_health = Stats.MAX_WOOD_DOOR
+			"metal door":
+				max_health = Stats.MAX_METAL_DOOR
+			"armored door":
+				max_health = Stats.MAX_ARMORED_DOOR
+			"wall":
+				match tier:
+					"twig":
+						Tiles.wall_tiles.set_cells_terrain_connect(0,[location],0,Tiers.TWIG)
+						max_health = Stats.MAX_TWIG_BUILDING
+					"wood":
+						Tiles.wall_tiles.set_cells_terrain_connect(0,[location],0,Tiers.WOOD)
+						max_health = Stats.MAX_WOOD_BUILDING
+					"stone":
+						Tiles.wall_tiles.set_cells_terrain_connect(0,[location],0,Tiers.STONE)
+						max_health = Stats.MAX_STONE_BUILDING
+					"metal":
+						Tiles.wall_tiles.set_cells_terrain_connect(0,[location],0,Tiers.METAL)
+						max_health = Stats.MAX_METAL_BUILDING
+					"armored":
+						Tiles.wall_tiles.set_cells_terrain_connect(0,[location],0,Tiers.ARMORED)
+						max_health = Stats.MAX_ARMORED_BUILDING
+					"demolish":
+						get_parent().rpc_id(1,"player_remove_object",Server.player_node.name,"placeable",name,location)
+						#remove_wall()
+			"foundation":
+				match tier:
+					"twig":
+						Tiles.foundation_tiles.set_cells_terrain_connect(0,[location],0,Tiers.TWIG)
+						max_health = Stats.MAX_TWIG_BUILDING
+					"wood":
+						Tiles.foundation_tiles.set_cells_terrain_connect(0,[location],0,Tiers.WOOD)
+						max_health = Stats.MAX_WOOD_BUILDING
+					"stone":
+						Tiles.foundation_tiles.set_cells_terrain_connect(0,[location],0,Tiers.STONE)
+						max_health = Stats.MAX_STONE_BUILDING
+					"metal":
+						Tiles.foundation_tiles.set_cells_terrain_connect(0,[location],0,Tiers.METAL)
+						max_health = Stats.MAX_METAL_BUILDING
+					"armored":
+						Tiles.foundation_tiles.set_cells_terrain_connect(0,[location],0,Tiers.ARMORED)
+						max_health = Stats.MAX_ARMORED_BUILDING
+					"demolish":
+						get_parent().rpc_id(1,"player_remove_object",Server.player_node.name,"placeable",name,location)
+						#remove_foundation()
+		update_health_bar()
 
 
 func update_health_bar():
@@ -256,7 +260,7 @@ func _on_HurtBox_input_event(viewport, event, shape_idx):
 func _on_HammerRepairBox_area_entered(area):
 	if item_name == "foundation" and not Tiles.valid_tiles.get_cell_atlas_coords(0,location) == Constants.VALID_TILE_ATLAS_CORD:
 		return
-#	get_parent().rpc_id(1,"player_repair_object",name,location)
+	get_parent().rpc_id(1,"player_repair_object",{"id":name,"l":location})
 
 func repair():
 	health = max_health

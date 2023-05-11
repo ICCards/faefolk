@@ -11,6 +11,7 @@ extends Node
 @onready var BuildingTileObjectHurtBox = load("res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn")
 @onready var LargeOre = load("res://World/Objects/Nature/Ores/LargeOre.tscn")
 @onready var SmallOre = load("res://World/Objects/Nature/Ores/SmallOre.tscn")
+@onready var Cactus = load("res://World/Objects/Nature/Cactus/cactus.tscn")
 
 var rng = RandomNumberGenerator.new()
 
@@ -97,6 +98,15 @@ func place_log_in_world(id,variety,location):
 	object.position = Tiles.valid_tiles.map_to_local(location) #+ Vector2(8,-8)
 	NatureObjects.call_deferred("add_child",object,true)
 
+func place_cactus_in_world(id,variety,location):
+	NatureObjects = Server.world.get_node("NatureObjects")
+	var object = Cactus.instantiate()
+	object.name = id
+	object.variety = variety
+	object.location = location
+	object.position = Tiles.valid_tiles.map_to_local(location) #+ Vector2(8,-8)
+	NatureObjects.call_deferred("add_child",object,true)
+	
 func place_forage_in_world(id,item_name,location,first_placement):
 	ForageObjects = Server.world.get_node("ForageObjects")
 	var forageItem = ForageItem.instantiate()

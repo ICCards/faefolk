@@ -41,7 +41,7 @@ var rng = RandomNumberGenerator.new()
 @export var tool_name: String = ""
 @export var footstep_stream_paused: bool
 @export var holding_item_name: String = ""
-var MAX_SPEED_DIRT := 8
+var MAX_SPEED_DIRT := 16# 8
 var MAX_SPEED_PATH := 9
 var DASH_SPEED := 25
 var MAX_SPEED_SWIMMING := 6

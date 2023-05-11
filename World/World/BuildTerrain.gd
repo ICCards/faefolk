@@ -65,11 +65,11 @@ func spawn_chunk(chunk_name):
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["beach"].size() > 0:
 		for tile in _chunk["beach"]:
-			beach.set_cell(0,tile,0,Vector2i(rng.randi_range(50,52),rng.randi_range(24,26)))
+			beach.set_cell(0,tile,0,Tiles.return_atlas_tile_cord("beach",null))
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["desert"].size() > 0:
 		for tile in _chunk["desert"]:
-			beach.set_cell(0,tile,0,Vector2i(rng.randi_range(50,52),rng.randi_range(24,26)))
+			beach.set_cell(0,tile,0,Tiles.return_atlas_tile_cord("desert",null))
 		await get_tree().create_timer(0.05).timeout
 	if _chunk["dirt"].keys().size() > 0:
 		for loc in _chunk["dirt"].keys():
