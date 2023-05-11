@@ -47,3 +47,4 @@ res://MainMenu/MainMenuButtons.tscn
 res://MainMenu/MainMenuButtons.gd
 res://Global/Data/InstancedScenes.gd
 res://World/Player/Player/AttachedScenes/Actions/Actions.gd
+res://World/Player/Player/Player.gd
