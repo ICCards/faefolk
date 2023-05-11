@@ -98,6 +98,7 @@ func _on_area_entered(area):
 				health_to_subtract = 0
 			$AnimationPlayer.play("hit")
 			PlayerData.change_health(-health_to_subtract)
+			play_sound_effect()
 			get_node("../../Camera2D").player_hit_screen_shake()
 			InstancedScenes.player_hit_effect(-health_to_subtract, get_node("../../").position, true)
 			await $AnimationPlayer.animation_finished

@@ -260,7 +260,7 @@ func _on_HurtBox_input_event(viewport, event, shape_idx):
 func _on_HammerRepairBox_area_entered(area):
 	if item_name == "foundation" and not Tiles.valid_tiles.get_cell_atlas_coords(0,location) == Constants.VALID_TILE_ATLAS_CORD:
 		return
-	get_parent().rpc_id(1,"player_repair_object",{"id":name,"l":location})
+#	get_parent().rpc_id(1,"player_repair_object",{"id":name,"l":location})
 
 func repair():
 	health = max_health

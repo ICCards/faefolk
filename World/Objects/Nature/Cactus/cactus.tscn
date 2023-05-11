@@ -380,7 +380,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wdmr5"]
-size = Vector2(10, 10)
+size = Vector2(10, 9)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xlt3m"]
 radius = 7.0
@@ -391,13 +391,13 @@ script = ExtResource("1_d051j")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -17)
 sprite_frames = SubResource("SpriteFrames_chldb")
-animation = &"1"
-frame_progress = 0.829392
+animation = &"4"
 
 [node name="MovementCollisionBox" type="StaticBody2D" parent="."]
 collision_layer = 3
 
 [node name="movementCollisionBox" type="CollisionShape2D" parent="MovementCollisionBox"]
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_wdmr5")
 
 [node name="Hitbox" type="Area2D" parent="."]

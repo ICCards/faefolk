@@ -103,7 +103,7 @@ func place_cactus_in_world(id,variety,location):
 	var object = Cactus.instantiate()
 	object.name = id
 	object.variety = variety
-	object.location = location
+	#object.location = location
 	object.position = Tiles.valid_tiles.map_to_local(location) #+ Vector2(8,-8)
 	NatureObjects.call_deferred("add_child",object,true)
 	
