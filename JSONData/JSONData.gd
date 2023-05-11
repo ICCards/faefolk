@@ -2,12 +2,13 @@ extends Node
 
 var item_data: Dictionary
 var crop_data: Dictionary
-var world_data: Dictionary
+var starting_world_data: Dictionary
 var player_data: Dictionary
 
 func _ready():
 	item_data = LoadData("res://JSONData/ItemData.json")
 	crop_data = LoadData("res://JSONData/CropData.json")
+	starting_world_data = LoadData("res://JSONData/STARTING WORLD.json")
 
 func LoadData(file_path):
 	var file_data = FileAccess.open(file_path, FileAccess.READ)

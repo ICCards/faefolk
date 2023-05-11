@@ -16,10 +16,10 @@ func reset_sound():
 	set_footsteps_sound()
 
 func set_footsteps_sound():
-	stop()
 	stream = Sounds.current_footsteps_sound
 	set_new_music_volume()
 	play()
+	stop()
 	if Sounds.current_footsteps_sound == Sounds.dirt_footsteps:
 		get_node("../../").is_walking_on_dirt = true
 	else:

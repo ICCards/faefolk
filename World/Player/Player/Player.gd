@@ -41,7 +41,7 @@ var rng = RandomNumberGenerator.new()
 @export var tool_name: String = ""
 @export var footstep_stream_paused: bool
 @export var holding_item_name: String = ""
-var MAX_SPEED_DIRT := 8
+var MAX_SPEED_DIRT := 20 #8
 var MAX_SPEED_PATH := 9
 var DASH_SPEED := 25
 var MAX_SPEED_SWIMMING := 6
@@ -105,19 +105,12 @@ func _physics_process(delta):
 			$CompositeSprites/HoldingItem.texture = load("res://Assets/Images/inventory_icons/"+JsonData.item_data[holding_item_name]["ItemCategory"] +"/"+ holding_item_name +".png")
 		composite_sprites.set_player_animation(character,animation,tool_name)
 		animation_player.play(animation_player.current_animation)
-#		position = Util.string_to_vector2(pos)
-#	else: 
-#		pos = str(position)
-#		print(pos)
-#		syncronizer.position = global_position
 
 
 func _enter_tree():
 	set_multiplayer_authority(str(name).to_int())
 
-
 func _input( event ):
-	#if not syncronizer.is_multiplayer_authority(): return
 	if event is InputEvent:
 		if event.is_action_pressed("sprint"):
 			running = true

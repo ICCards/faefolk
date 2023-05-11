@@ -3477,7 +3477,7 @@ script = ExtResource("1_hovno")
 [node name="Actions" parent="." instance=ExtResource("2_dmkl7")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2.75, 2.75)
+zoom = Vector2(2.25, 2.25)
 position_smoothing_enabled = true
 position_smoothing_speed = 40.0
 script = ExtResource("2_gk7ji")

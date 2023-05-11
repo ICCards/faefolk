@@ -40,9 +40,13 @@ PlayerDataHelpers="*res://Global/Data/PlayerDataHelpers.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/stretch/mode="viewport"
 window/handheld/orientation=1
 mouse_cursor/custom_image="res://Assets/mouse cursors/cursor.png"
-window/stretch/mode="viewport"
+
+[dotnet]
+
+project/assembly_name="faefolk"
 
 [global]
 

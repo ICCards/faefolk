@@ -1,0 +1,52 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxjhqr8m8573g"]
+
+[ext_resource type="Script" path="res://MainMenu/join server ui/row/row.gd" id="1_go6yx"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="2_e5c2h"]
+
+[node name="row" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2205.0
+offset_bottom = -519.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_go6yx")
+
+[node name="Padding" type="Control" parent="."]
+custom_minimum_size = Vector2(20, 2.08165e-12)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_e5c2h")
+text = "Name"
+
+[node name="Players" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_e5c2h")
+text = "Players"
+
+[node name="PvP" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_e5c2h")
+text = "PvP"
+
+[node name="Ping" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_e5c2h")
+text = "PvP"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_e5c2h")
+text = "    Join    "
