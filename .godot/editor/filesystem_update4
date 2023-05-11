@@ -30,3 +30,9 @@ res://MainMenu/join server ui/JoinServerUi/join_server_ui.gd
 res://helpers/Tiles.gd
 res://JSONData/JSONData.gd
 res://Global/Data/Constants.gd
+res://World/Player/Player/Player.gd
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd
+res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn
+res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.gd
+res://main.gd
+res://PlaceableObjects.gd

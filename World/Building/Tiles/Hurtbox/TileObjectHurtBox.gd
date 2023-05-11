@@ -53,7 +53,12 @@ func initialize():
 		else:
 			Tiles.object_tiles.set_cell(0,location,0,Constants.rotatable_object_atlas_tiles[item_name][direction])
 	set_dimensions()
-
+	if item_name == "fireplace":
+		if not opened_or_light_toggled:
+			interactives.turn_off_fireplace()
+	elif item_name == "lamp":
+		if not opened_or_light_toggled:
+			interactives.turn_off_lamp()
 
 func change(_opened_or_light_toggled):
 	opened_or_light_toggled = _opened_or_light_toggled
@@ -111,6 +116,7 @@ func set_dimensions():
 			$Marker2D.rotation_degrees = 270
 		"down":
 			$Marker2D.rotation_degrees = 0
+
 
 func initialize_interactive_area():
 	if item_name == "chest":
@@ -207,9 +213,6 @@ func hit(data):
 	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound",0))
 	sound_effects.call_deferred("play")
 	$AnimationPlayer.call_deferred("play","shake")
-	health -= 1
-	$ResetTempHealthTimer.call_deferred("start")
-
 
 
 func destroy(data):
