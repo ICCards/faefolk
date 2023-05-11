@@ -18,11 +18,29 @@ func send_updated_ui_slots(id,dict): pass
 @rpc 
 func player_move_object(player_id,id,data): pass
 
-#@rpc 
-#func player_repair_object(id,location): pass
+@rpc 
+func player_repair_object(data): pass
+@rpc
+func player_upgrade_object(data): pass
 
-#@rpc
-#func set_new_object_tier(player_id,id,location,tier): pass
+@rpc
+func upgrade(data):
+	if not get_node("../").world == {}:
+		var new_tier = data["t"]
+		get_node("../").world[data["c"]]["placeable"][data["id"]]["t"] = new_tier
+		get_node("../").world[data["c"]]["placeable"][data["id"]]["h"] = Stats.return_max_building_health(new_tier) 
+		for node in self.get_children():
+			if node.name == data["id"]:
+				node.upgrade(new_tier)
+				return
+@rpc
+func repair(data):
+	if not get_node("../").world == {}:
+		get_node("../").world[data["c"]]["placeable"][data["id"]]["h"] = Stats.return_max_building_health(data["t"])
+		for node in self.get_children():
+			if node.name == data["id"]:
+				node.repair()
+				return
 
 @rpc 
 func place_object_in_new_location(player_id,id,prev_object_data,data):

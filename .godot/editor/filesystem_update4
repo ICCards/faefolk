@@ -36,3 +36,14 @@ res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn
 res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.gd
 res://main.gd
 res://PlaceableObjects.gd
+res://World/Map/WorldMap.gd
+res://Global/Data/Stats.gd
+res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn
+res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.gd
+res://Global/Data/PlaceObject.gd
+res://World/World/BuildNature.gd
+res://World/Objects/Nature/Cactus/cactus.tscn
+res://World/Objects/Nature/Cactus/cactus.gd
+res://Assets/Themes/Flash.tres
+res://World/Enemies/Skeleton.tscn
+res://World/Player/Player/Actions.gd

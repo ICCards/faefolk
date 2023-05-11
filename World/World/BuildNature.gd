@@ -216,19 +216,21 @@ func spawn_trees():
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id) and get_node("../../").world[chunk]["tree"].has(id):
 					var biome = map["tree"][id]["b"]
-					if biome == "desert":
-						pass
-					else:
-						var phase = map["tree"][id]["p"]
-						var health = map["tree"][id]["h"]
-						var variety = map["tree"][id]["v"]
-						PlaceObject.place_tree_in_world(id,variety,loc,biome,health,phase)
-						await get_tree().process_frame
+					var phase = map["tree"][id]["p"]
+					var health = map["tree"][id]["h"]
+					var variety = map["tree"][id]["v"]
+					PlaceObject.place_tree_in_world(id,variety,loc,biome,health,phase)
+					await get_tree().process_frame
 		for id in map["log"]:
 			var loc = map["log"][id]["l"]
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id) and get_node("../../").world[chunk]["log"].has(id):
-					PlaceObject.place_log_in_world(id,map["log"][id]["v"],loc)
+					var biome = map["tree"][id]["b"]
+					var variety = map["log"][id]["v"]
+					if biome == "desert":
+						PlaceObject.place_cactus_in_world(id,variety,loc)
+					else:
+						PlaceObject.place_log_in_world(id,variety,loc)
 					await get_tree().process_frame
 		for id in map["stump"]:
 			var loc = map["stump"][id]["l"]

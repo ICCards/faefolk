@@ -143,8 +143,9 @@ func eat(item_name):
 		PlayerData.remove_single_object_from_hotbar()
 		var eating_paricles = Eating_particles.instantiate()
 		eating_paricles.item_name = item_name
+		get_parent().animation = "eat"
 		get_parent().add_child(eating_paricles)
-		get_parent().composite_sprites.set_player_animation(Server.player_node.character, "eat", null)
+		get_parent().composite_sprites.set_player_animation(Server.player_node.character, get_parent().animation, null)
 		get_parent().animation_player.play("eat")
 		await get_parent().animation_player.animation_finished
 		get_parent().composite_sprites.get_node("Body").hframes = 4
@@ -205,7 +206,8 @@ func sit(chair_name,chair_position,chair_direction):
 	sitting = true
 	get_parent().state = get_parent().SITTING
 	get_parent().position = return_adjusted_chair_position(chair_name,chair_position,chair_direction)
-	get_parent().composite_sprites.set_player_animation(Server.player_node.character, "sit_"+chair_direction, null)
+	get_parent().animation = "sit_"+chair_direction
+	get_parent().composite_sprites.set_player_animation(Server.player_node.character, get_parent().animation, null)
 	get_parent().animation_player.play("sit_"+chair_direction)
 	await get_parent().animation_player.animation_finished
 	await get_tree().process_frame
@@ -216,7 +218,8 @@ func sit(chair_name,chair_position,chair_direction):
 
 func stand_up():
 	if not sitting:
-		get_parent().composite_sprites.set_player_animation(Server.player_node.character, "sit_"+direction_of_current_chair, null)
+		get_parent().animation = "sit_"+direction_of_current_chair
+		get_parent().composite_sprites.set_player_animation(Server.player_node.character, get_parent().animation, null)
 		get_parent().animation_player.play_backwards("sit_"+direction_of_current_chair)
 		await get_parent().animation_player.animation_finished
 		get_parent().state = get_parent().MOVEMENT
@@ -325,7 +328,7 @@ func sleep(sleeping_bag_pos):
 		get_parent().position = sleeping_bag_pos + Vector2i(16,8)
 		get_parent().animation_player.play("sleep")
 		get_parent().animation = "sleep_down"
-		get_parent().composite_sprites.set_player_animation(get_parent().character, "sleep_down")
+		get_parent().composite_sprites.set_player_animation(get_parent().character, get_parent().animation)
 		get_parent().user_interface.get_node("SleepEffect/AnimationPlayer").play("sleep")
 		await get_parent().user_interface.get_node("SleepEffect/AnimationPlayer").animation_finished
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
