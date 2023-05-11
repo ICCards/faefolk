@@ -13,6 +13,11 @@ config_version=5
 config/name="faefolk"
 run/main_scene="res://MainMenu/MainMenu.tscn"
 config/features=PackedStringArray("4.0")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+
+[audio]
+
+buses/default_bus_layout=""
 
 [autoload]
 
@@ -22,7 +27,6 @@ SceneChanger="*res://Global/Functions/SceneChanger.tscn"
 Sounds="*res://Global/Data/Sounds.gd"
 Util="*res://helpers/Util.gd"
 Uuid="*res://helpers/UUID.gd"
-Server="*res://server/server.gd"
 PlaceObject="*res://Global/Data/PlaceObject.gd"
 Tiles="*res://helpers/Tiles.gd"
 Human="*res://Global/Characters/Human.gd"
@@ -32,9 +36,9 @@ InstancedScenes="*res://Global/Data/InstancedScenes.gd"
 Constants="*res://Global/Data/Constants.gd"
 BuildCaveLevel="*res://Global/Data/BuildCaveLevel.gd"
 MapData="*res://Global/Data/MapData.gd"
-GenerateNewWorld="*res://Global/Data/GenerateNewWorld.gd"
 PlayerData="*res://Global/Data/PlayerData.gd"
 PlayerDataHelpers="*res://Global/Data/PlayerDataHelpers.gd"
+Server="*res://Global/Data/server.gd"
 
 [display]
 

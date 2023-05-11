@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://blc6g37rg80qc"]
+[gd_scene load_steps=30 format=3]
 
 [ext_resource type="Texture2D" uid="uid://ds11f4jtks5ik" path="res://Assets/Images/Misc/MainMenu/background.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://bbb43rymu58fb" path="res://Assets/Images/Misc/settings icon.png" id="3"]
@@ -23,7 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://ftl1013lhawe" path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" id="18_lxpui"]
 [ext_resource type="PackedScene" uid="uid://b3vdyc3n310f7" path="res://MainMenu/MainMenuButtons.tscn" id="19_22cmn"]
 [ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="21"]
-[ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://BetaLabel.tscn" id="23"]
+[ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://World/Player/Player/UserInterface/Misc/BetaLabel.tscn" id="23"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(101, 228)

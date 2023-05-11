@@ -4,9 +4,6 @@ var changing_scene_active = false
 var hovered_button = ""
 
 
-const PORT = 9999
-var enet_peer = ENetMultiplayerPeer.new()
-
 func _on_PlayBtn_mouse_entered():
 	var tween = get_tree().create_tween()
 	tween.tween_property($PlayShopQuit/Play, "scale", Vector2(1.03, 1.03), 0.15)
@@ -27,7 +24,7 @@ func _on_PlayBtn_pressed():
 		PlayerData.spawn_at_last_saved_location = true
 		if has_node("../PLAYER"):
 			get_node("../PLAYER").destroy()
-		SceneChanger.goto_scene("res://main.tscn")
+		SceneChanger.goto_scene("res://World/World/main.tscn")
 
 
 func _on_host_btn_mouse_entered():

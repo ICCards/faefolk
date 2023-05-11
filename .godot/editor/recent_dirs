@@ -1,3 +1,5 @@
+res://World/Player/Player
+res://Global/Data
 res://MainMenu/join server ui/JoinServerUi
 res://MainMenu/join server ui/row
 res://World/Objects/Nature/Cactus
@@ -11,8 +13,6 @@ res://InventoryLogic
 res://World/Player/Player/AttachedScenes
 res://World/Map
 res://World/Objects/Nature/Trees
-res://World/Player/Player
-res://World/Overworld
 res://Assets/Images/Enemies/skeleton
 res://Assets/Images/Magic/lightning
 res://Assets/Images/Enemies/Spider

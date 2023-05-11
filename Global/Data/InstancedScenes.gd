@@ -5,7 +5,7 @@ extends Node
 @onready var LeavesFallEffect = load("res://World/Objects/Nature/Effects/LeavesFallingEffect.tscn")
 @onready var TrunkHitEffect = load("res://World/Objects/Nature/Effects/TrunkHitEffect.tscn")
 @onready var OreHitEffect = load("res://World/Objects/Nature/Effects/OreHitEffect.tscn")
-@onready var PlayerHitEffect = load("res://World/Player/Player/AttachedScenes/PlayerHitEffect.tscn")
+@onready var PlayerHitEffect = load("res://World/Player/Player/AttachedScenes/PlayerHitEffect/PlayerHitEffect.tscn")
 @onready var ItemDrop = load("res://InventoryLogic/ItemDrop.tscn")
 @onready var WateringCanEffect = load("res://World/Objects/Nature/Effects/WateringCan.tscn")
 @onready var HoedDirtEffect = load("res://World/Objects/Nature/Effects/HoedDirt.tscn") 

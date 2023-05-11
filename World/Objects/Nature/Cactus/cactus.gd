@@ -1,6 +1,6 @@
 extends Node2D
 
-
+var destroyed: bool = false
 var variety
 
 func _ready():

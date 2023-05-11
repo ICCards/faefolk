@@ -1,5 +1,5 @@
-[gd_scene format=2]
+[gd_scene format=3 uid="uid://7eejlvuugw70"]
 
 [node name="AimDownSightLine" type="Line2D"]
 width = 2.0
-default_color = Color( 0.4, 0.501961, 1, 1 )
+default_color = Color(0.4, 0.501961, 1, 1)

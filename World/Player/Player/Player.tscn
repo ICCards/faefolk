@@ -1,35 +1,33 @@
-[gd_scene load_steps=72 format=3 uid="uid://bdyinn6aswyx7"]
+[gd_scene load_steps=70 format=3 uid="uid://coi1140g0nrrc"]
 
 [ext_resource type="Script" path="res://World/Player/Player/Player.gd" id="1_hovno"]
-[ext_resource type="PackedScene" uid="uid://1ca7mk73gpp0" path="res://World/Player/Player/Actions.tscn" id="2_dmkl7"]
-[ext_resource type="Script" path="res://World/Player/Player/Camera2D.gd" id="2_gk7ji"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/AttachedScenes/Actions/Actions.tscn" id="2_dmkl7"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" id="3_8lsbn"]
-[ext_resource type="PackedScene" uid="uid://cffchl0ffi2hf" path="res://World/Player/Player/UserInterface/UserInterface.tscn" id="3_w02x5"]
+[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/Camera2D.gd" id="3_jyj42"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/UserInterface.tscn" id="3_w02x5"]
 [ext_resource type="Material" uid="uid://dshi8sn4j6jfa" path="res://Assets/Themes/whiten.tres" id="5_3of15"]
 [ext_resource type="Texture2D" uid="uid://3ik13tk6hyny" path="res://Characters/Human/male/HOLDING WALK/body/down/body.png" id="5_yvg8i"]
 [ext_resource type="Texture2D" uid="uid://b2yqfp3r1tqa4" path="res://Characters/Human/male/HOLDING WALK/body/down/arms.png" id="6_lbf3e"]
-[ext_resource type="PackedScene" uid="uid://bdpp83on80ake" path="res://World/Player/Player/Magic.tscn" id="8_wf6cw"]
+[ext_resource type="PackedScene" uid="uid://o2meckfxvk0f" path="res://World/Player/Player/AttachedScenes/Magic/Magic.tscn" id="8_wf6cw"]
 [ext_resource type="Texture2D" uid="uid://byxsajdug1vn5" path="res://Characters/Weapon swings/scythe sword swing/scythe/down.png" id="9_0sqbd"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="10"]
 [ext_resource type="Texture2D" uid="uid://utxboaqigwsd" path="res://Assets/Images/inventory_icons/Resource/wood.png" id="10_7rpna"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/PickupZone.gd" id="11_vhk27"]
-[ext_resource type="Script" path="res://World/Player/Player/Area2Ds.gd" id="11_wgncx"]
+[ext_resource type="PackedScene" uid="uid://cvexubtunfdsa" path="res://World/Player/Player/AttachedScenes/Swing/Swing.tscn" id="12_3ewbu"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/HurtBox.gd" id="12_7dou1"]
-[ext_resource type="PackedScene" uid="uid://bbsqb6cw7rd7a" path="res://World/Player/Player/Swing.tscn" id="12_s0e2n"]
-[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/FootstepsSound.gd" id="15_a8swc"]
+[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/Area2Ds.gd" id="13_ct6k0"]
 [ext_resource type="AudioStream" uid="uid://qqpxtamwd4do" path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" id="15_w1myp"]
 [ext_resource type="AudioStream" uid="uid://bdedmyao5swjq" path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" id="16"]
-[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/BackgroundMusic.gd" id="16_d5bcc"]
-[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/AmbientSound.gd" id="17_8vtdb"]
-[ext_resource type="Script" path="res://World/Player/Player/HoldingTorch.gd" id="18_56nxn"]
-[ext_resource type="PackedScene" uid="uid://cu3vvh0ai0n56" path="res://World/Player/Player/PoisonParticles.tscn" id="19_ejmhd"]
+[ext_resource type="Script" path="res://World/Player/Player/AttachedScenes/Sound/FootstepsSound.gd" id="17_287lq"]
+[ext_resource type="Script" path="res://World/Player/Player/AttachedScenes/Sound/BackgroundMusic.gd" id="18_yqyf1"]
+[ext_resource type="Script" path="res://World/Player/Player/AttachedScenes/Sound/AmbientSound.gd" id="19_ouxgk"]
 [ext_resource type="Texture2D" uid="uid://h3sspgar8los" path="res://Assets/Images/Animations/objects/torch/1.png" id="20_8w7pl"]
-[ext_resource type="PackedScene" uid="uid://c1posnfc3ruce" path="res://World/Player/Player/SpeedParticles.tscn" id="20_bb87a"]
 [ext_resource type="Texture2D" uid="uid://bnfw57dme4x26" path="res://Assets/Images/Animations/objects/torch/2.png" id="21_c3ki0"]
+[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/HoldingTorch.gd" id="21_t3m88"]
 [ext_resource type="Texture2D" uid="uid://78sds5dnqh0c" path="res://Assets/Images/Animations/objects/torch/3.png" id="22_grgdf"]
 [ext_resource type="Texture2D" uid="uid://bt3ysh31fm3pc" path="res://Assets/Images/Animations/objects/torch/4.png" id="23_i22ks"]
 [ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="28_3r6uk"]
-[ext_resource type="PackedScene" uid="uid://bpcw4ag5bax2t" path="res://World/Player/Player/AttachedScenes/message_bubble.tscn" id="28_dc8ci"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/AttachedScenes/MessageBubble/message_bubble.tscn" id="28_dc8ci"]
 
 [sub_resource type="Animation" id="3"]
 length = 0.001
@@ -3480,7 +3478,7 @@ script = ExtResource("1_hovno")
 zoom = Vector2(2.25, 2.25)
 position_smoothing_enabled = true
 position_smoothing_speed = 40.0
-script = ExtResource("2_gk7ji")
+script = ExtResource("3_jyj42")
 
 [node name="UserInterface" parent="Camera2D" instance=ExtResource("3_w02x5")]
 
@@ -3577,9 +3575,12 @@ libraries = {
 
 [node name="Magic" parent="." instance=ExtResource("8_wf6cw")]
 
+[node name="Swing" parent="." instance=ExtResource("12_3ewbu")]
+visible = false
+
 [node name="Area2Ds" type="Node2D" parent="."]
 visible = false
-script = ExtResource("11_wgncx")
+script = ExtResource("13_ct6k0")
 
 [node name="PickupZone" type="Area2D" parent="Area2Ds"]
 visible = false
@@ -3623,9 +3624,6 @@ wait_time = 2.0
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="Area2Ds/HurtBox"]
 
-[node name="Swing" parent="." instance=ExtResource("12_s0e2n")]
-visible = false
-
 [node name="Sounds" type="Node2D" parent="."]
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="Sounds"]
@@ -3634,15 +3632,15 @@ volume_db = -16.0
 
 [node name="FootstepsSound" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("15_w1myp")
+volume_db = -80.0
 autoplay = true
-bus = &"Bus1"
-script = ExtResource("15_a8swc")
+script = ExtResource("17_287lq")
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="Sounds"]
-script = ExtResource("16_d5bcc")
+script = ExtResource("18_yqyf1")
 
 [node name="AmbientSound" type="AudioStreamPlayer" parent="Sounds"]
-script = ExtResource("17_8vtdb")
+script = ExtResource("19_ouxgk")
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
 visible = false
@@ -3651,15 +3649,8 @@ position = Vector2(0, 9.91821e-05)
 rotation = -1.5708
 shape = SubResource("11")
 
-[node name="PoisonParticles" parent="." instance=ExtResource("19_ejmhd")]
-visible = false
-position = Vector2(0, -16)
-
-[node name="SpeedParticles" parent="." instance=ExtResource("20_bb87a")]
-visible = false
-
 [node name="HoldingTorch" type="Node2D" parent="."]
-script = ExtResource("18_56nxn")
+script = ExtResource("21_t3m88")
 
 [node name="Light" type="PointLight2D" parent="HoldingTorch"]
 position = Vector2(0, -32)

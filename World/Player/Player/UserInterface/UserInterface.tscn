@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cffchl0ffi2hf"]
+[gd_scene load_steps=32 format=3]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/UserInterface.gd" id="1_pv3v8"]
 [ext_resource type="PackedScene" uid="uid://ctp3ra1cmv0de" path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" id="2_dv8vv"]
@@ -19,7 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://86w4gtnxusdy" path="res://Assets/Sound/Sound effects/Ambience/thunder crack.mp3" id="13"]
 [ext_resource type="Texture2D" uid="uid://40dmypwmoqg6" path="res://Assets/Images/Animations/loading/sprite_6.png" id="13_y8wut"]
 [ext_resource type="Texture2D" uid="uid://dw0g2r5gq0txa" path="res://Assets/Images/Animations/loading/sprite_7.png" id="14_0pw86"]
-[ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://BetaLabel.tscn" id="15_tm6fr"]
+[ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://World/Player/Player/UserInterface/Misc/BetaLabel.tscn" id="15_tm6fr"]
 [ext_resource type="PackedScene" uid="uid://bhilgn3waubes" path="res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.tscn" id="16_cnrm0"]
 [ext_resource type="PackedScene" uid="uid://dd0n86ke85w5d" path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn" id="17_n0y8n"]
 [ext_resource type="PackedScene" uid="uid://cm8c7p7g6ii7g" path="res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.tscn" id="18_gbc14"]
