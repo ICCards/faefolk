@@ -1,0 +1,7 @@
+res://MainMenu/MainMenu.tscn
+res://MainMenu/MainMenu.gd
+res://helpers/Wallet.cs
+res://MainMenu/join server ui/row/row.tscn
+res://MainMenu/join server ui/JoinServerUi/join_server_ui.gd
+res://MainMenu/join server ui/row/row.gd
+res://MainMenu/join server ui/JoinServerUi/join_server_ui.tscn

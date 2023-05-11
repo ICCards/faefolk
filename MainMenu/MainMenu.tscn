@@ -1,7 +1,6 @@
-[gd_scene load_steps=30 format=3 uid="uid://blc6g37rg80qc"]
+[gd_scene load_steps=29 format=3 uid="uid://blc6g37rg80qc"]
 
 [ext_resource type="Texture2D" uid="uid://ds11f4jtks5ik" path="res://Assets/Images/Misc/MainMenu/background.png" id="1"]
-[ext_resource type="Texture2D" uid="uid://bbb43rymu58fb" path="res://Assets/Images/Misc/settings icon.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://cvv5y3ir233ea" path="res://Assets/Images/Animations/water main menu/1.png" id="3_4n707"]
 [ext_resource type="Texture2D" uid="uid://bv2e37vy0s7h4" path="res://Assets/Images/mini map/snow.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://i8gajcq2vlkl" path="res://Assets/Images/Animations/water main menu/2.png" id="4_41lbt"]
@@ -234,7 +233,6 @@ offset_top = 648.0
 offset_right = 1481.0
 offset_bottom = 921.0
 scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("3")
 
 [node name="TitleMusic" type="AudioStreamPlayer" parent="."]
 

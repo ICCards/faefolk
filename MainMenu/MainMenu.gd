@@ -10,8 +10,8 @@ var game_state: GameState
 
 func _ready():
 	var wallet = Wallet.new()
-	var principal = wallet.createWallet()
-	OS.shell_open("https://godotengine.org/"+principal)
+#	var principal = wallet.createWallet()
+#	OS.shell_open("https://godotengine.org/"+principal)
 	#get_tree().get_root().set_min_size(Vector2(1280, 720))
 	if GameState.save_exists(): # Load world
 		game_state = GameState.new()
