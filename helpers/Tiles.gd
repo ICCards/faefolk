@@ -106,7 +106,7 @@ func return_atlas_tile_cord(tile_name,id):
 				4:
 					return Vector2i(34,15)
 				5:
-					return Vector2i(rng.randi_range(40,42),23)
+					return Vector2i(rng.randi_range(40,42),16)
 				6:
 					return Vector2i(43,rng.randi_range(17,19))
 				7:
@@ -139,7 +139,7 @@ func return_atlas_tile_cord(tile_name,id):
 				4:
 					return Vector2i(34,15)
 				5:
-					return Vector2i(rng.randi_range(40,42),23)
+					return Vector2i(rng.randi_range(40,42),16)
 				6:
 					return Vector2i(43,rng.randi_range(17,19))
 				7:

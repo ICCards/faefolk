@@ -4,6 +4,7 @@ extends Node2D
 @onready var GridSquareLabel = load("res://World/Map/GridSquareLabel.tscn")
 @onready var stormIcon = $Map/StormIcon
 @onready var stormIcon2 = $Map/StormIcon2
+@onready var playerIcon = $Map/PlayerIcon
 @onready var miniMap = $Map
 var player 
 var roamingStorm
@@ -50,11 +51,11 @@ func initialize():
 #		if player.name != "MultiplayerSpawner":
 #			add_player_icon(player.name)
 	
-func add_player_icon(player_name):
-	if not $Map/Players.has_node(str(player_name)):
-		var playerIcon = PlayerIcon.instantiate()
-		playerIcon.name = player_name
-		$Map/Players.add_child(playerIcon)
+#func add_player_icon(player_name):
+#	if not $Map/Players.has_node(str(player_name)):
+#		var playerIcon = PlayerIcon.instantiate()
+#		playerIcon.name = player_name
+#		$Map/Players.add_child(playerIcon)
 
 func set_inactive():
 	hide()
@@ -85,9 +86,9 @@ func draw_grid_labels():
 			gridSquareLabel.position = Vector2(x*200, y*200) + Vector2(2, 2)
 			add_child(gridSquareLabel)
 	
-#func _physics_process(delta):
-#	if is_instance_valid(Server.player_node):
-##		playerIcon.position = Server.player_node.position*2
+func _physics_process(delta):
+	if is_instance_valid(Server.player_node):
+		playerIcon.position = Server.player_node.position*2
 ##		playerIcon.scale = adjustedPlayerIconScale($Camera2D.zoom)
 #		for player in $Map/Players.get_children():
 #			#player.rotation_degrees = return_player_direction(get_node("../Players/"+player.name).direction)
@@ -121,6 +122,7 @@ func return_player_direction(dir):
 
 func buildMap():
 	var map = get_parent().world
+#	var map = JsonData.starting_world_data
 	for chunk in map:
 		for loc in map[chunk]["dirt"]:
 			miniMap.set_cell(0,loc,Tiles.DIRT,Vector2i(0,0))

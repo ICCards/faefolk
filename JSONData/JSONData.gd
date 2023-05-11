@@ -2,7 +2,7 @@ extends Node
 
 var item_data: Dictionary
 var crop_data: Dictionary
-var world_data: Dictionary
+var starting_world_data: Dictionary
 var player_data: Dictionary
 
 func _ready():

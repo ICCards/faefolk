@@ -33,7 +33,7 @@ func setTreeBranchType():
 		$Break.offset = Vector2i(-6,-4)
 	elif variety == 5 or variety == 10 or variety == 11 or variety == 12:
 		$Break.offset = Vector2i(-5,-5)
-		
+
 
 func destroy(data):
 	if not destroyed:

@@ -3569,7 +3569,12 @@ fog_sun_scatter = 0.64
 y_sort_enabled = true
 script = ExtResource("1_miuy3")
 
+<<<<<<< HEAD
 [node name="Menu" type="CanvasLayer" parent="."]
+=======
+[node name="InitLoadScreen" type="CanvasLayer" parent="."]
+visible = false
+>>>>>>> 7bb3f6bee6e46c6c1924e61186e7ccc4ae144e6f
 
 [node name="MainMenu" type="PanelContainer" parent="Menu"]
 anchors_preset = 8
@@ -3584,6 +3589,7 @@ offset_bottom = 74.0
 grow_horizontal = 2
 grow_vertical = 2
 
+<<<<<<< HEAD
 [node name="MarginContainer" type="MarginContainer" parent="Menu/MainMenu"]
 layout_mode = 2
 theme_override_constants/margin_left = 15
@@ -3603,6 +3609,11 @@ horizontal_alignment = 1
 [node name="JoinBtn" type="Button" parent="Menu/MainMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Join"
+=======
+[node name="WorldAmbience" type="CanvasModulate" parent="."]
+visible = false
+script = ExtResource("3_136d5")
+>>>>>>> 7bb3f6bee6e46c6c1924e61186e7ccc4ae144e6f
 
 [node name="WorldBuilder" type="Node" parent="."]
 script = ExtResource("2_mbtah")
@@ -3652,7 +3663,7 @@ format = 2
 
 [node name="DeepOcean" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
-z_index = -2
+z_index = -5
 tile_set = ExtResource("4_prix1")
 format = 2
 
@@ -3679,12 +3690,17 @@ format = 2
 
 [node name="Sand" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
+<<<<<<< HEAD
 tile_set = SubResource("TileSet_6flss")
+=======
+z_index = -6
+tile_set = ExtResource("14_ogu2e")
+>>>>>>> 7bb3f6bee6e46c6c1924e61186e7ccc4ae144e6f
 format = 2
 
 [node name="Waves" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
-z_index = -2
+z_index = -1
 tile_set = ExtResource("9_d86tr")
 format = 2
 
@@ -3708,8 +3724,13 @@ format = 2
 
 [node name="Beach" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
+<<<<<<< HEAD
 z_index = -4
 tile_set = SubResource("TileSet_ke52l")
+=======
+z_index = -6
+tile_set = SubResource("TileSet_ofn11")
+>>>>>>> 7bb3f6bee6e46c6c1924e61186e7ccc4ae144e6f
 format = 2
 
 [node name="TopOcean" type="TileMap" parent="TerrainTiles"]

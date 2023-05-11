@@ -1,2 +1,0 @@
-﻿53972
-/Users/jonathangreen/Documents/Godot_mono.app/Contents/MacOS/Godot
