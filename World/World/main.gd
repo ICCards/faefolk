@@ -4,7 +4,17 @@ extends Node2D
 const PORT = 9999
 var enet_peer = ENetMultiplayerPeer.new()
 
-var terrain = {}
+var terrain = {
+	"ocean": [],
+	"deep_ocean": [],
+	"plains": [],
+	"forest": [],
+	"desert": [],
+	"dirt": [],
+	"snow": [],
+	"beach":[],
+	"wet_sand":[],
+}
 var world = {}
 var server_data = {}
 
@@ -24,21 +34,31 @@ func _ready():
 	multiplayer.multiplayer_peer = enet_peer
 	build_world()
 
+var counter = 0
+
 @rpc
-func send_world_data(data):
-	$InitLoadScreen.queue_free()
-	print("GOT WORLD DATA")
-	world = data["world"]
-	server_data = data["server_data"]
-	terrain = data["terrain"]
-#	MapData.world = _world
-	$WorldMap.buildMap()
-#	await get_tree().create_timer(2).timeout
-#	MapData.add_world_data_to_chunks()
-	#$WorldAmbience.initialize()
-	$WorldBuilder.initialize()
-	$WorldBuilder/BuildTerrain.initialize()
-	$WorldBuilder/BuildNature.initialize()
+func send_world_data(type,data):
+	counter += 1
+	if type == "server_data":
+		server_data = data
+	elif terrain.has(type):
+		terrain[type] = data
+	else:
+		world[type] = data
+	if counter == 154:
+		$InitLoadScreen.queue_free()
+		print("GOT WORLD DATA")
+#	world = data["world"]
+#	server_data = data["server_data"]
+#	terrain = data["terrain"]
+##	MapData.world = _world
+		$WorldMap.buildMap()
+##	await get_tree().create_timer(2).timeout
+##	MapData.add_world_data_to_chunks()
+#	#$WorldAmbience.initialize()
+		$WorldBuilder.initialize()
+		$WorldBuilder/BuildTerrain.initialize()
+		$WorldBuilder/BuildNature.initialize()
 #	$WorldBuilder/SpawnAnimal.initialize()
 
 

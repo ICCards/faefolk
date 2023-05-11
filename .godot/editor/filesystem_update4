@@ -48,3 +48,6 @@ res://MainMenu/MainMenuButtons.gd
 res://Global/Data/InstancedScenes.gd
 res://World/Player/Player/AttachedScenes/Actions/Actions.gd
 res://World/Player/Player/Player.gd
+res://Assets/Tilesets/Objects/crops.tres
+res://World/World/main.gd
+res://World/Building/PlaceObjectPreview.tscn
