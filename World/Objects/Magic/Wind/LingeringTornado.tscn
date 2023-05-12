@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b3b0l5e2kh7mc"]
+[gd_scene load_steps=30 format=3]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Wind/LingeringTornado.gd" id="1_v7phb"]
 [ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_kl0jm"]

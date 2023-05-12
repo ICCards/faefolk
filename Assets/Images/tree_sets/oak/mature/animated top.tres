@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=22 format=3 uid="uid://dmy2e4v4r5rva"]
+[gd_resource type="SpriteFrames" load_steps=22 format=3]
 
 [ext_resource type="Texture2D" uid="uid://cjbb2hqb38k42" path="res://Assets/Images/tree_sets/oak/mature/top animated.png" id="1"]
 

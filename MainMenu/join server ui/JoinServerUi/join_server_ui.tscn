@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://s7sfer76fryj"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://MainMenu/join server ui/JoinServerUi/join_server_ui.gd" id="1_pd6q5"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="2_u8ec6"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="2_u8ec6"]
 
 [node name="JoinServerUi" type="Control"]
 layout_mode = 3

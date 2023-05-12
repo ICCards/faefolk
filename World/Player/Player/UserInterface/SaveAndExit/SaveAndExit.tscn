@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dymfr1m2gfhtf" path="res://Assets/Images/User interface/inventory/save/save-tab.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://cw1joux2ogqum" path="res://Assets/Images/User interface/buttons-icons/nameplate2.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://dit3tnpfnfauf" path="res://Assets/Images/User interface/buttons-icons/nameplate2-seleceted.png" id="6"]
-[ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://World/Player/Player/UserInterface/Misc/BetaLabel.tscn" id="8"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="8_ukmko"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Misc/BetaLabel.tscn" id="8"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="8_ukmko"]
 
 [node name="SaveAndExit" type="Control"]
 layout_mode = 3

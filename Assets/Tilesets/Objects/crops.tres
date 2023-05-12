@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://c5t53fhi1b7fg"]
+[gd_resource type="TileSet" load_steps=3 format=3]
 
 [ext_resource type="Texture2D" uid="uid://b07sxih7d5ic0" path="res://Assets/Tilesets/Terrain/CL_Crops_Mining.png" id="1_meecx"]
 

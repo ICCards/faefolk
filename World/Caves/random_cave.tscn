@@ -1,11 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://dq4qjufb7kvxl"]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="PackedScene" uid="uid://dvmsm12osyn5r" path="res://World/Caves/CaveGenerator.tscn" id="1_72qd8"]
 [ext_resource type="Script" path="res://World/Caves/random_cave.gd" id="1_mpt1j"]
-[ext_resource type="TileSet" uid="uid://32acdyt343vo" path="res://Assets/Tilesets/terrain/tres files/cave walls.tres" id="2_bgu55"]
+[ext_resource type="TileSet" path="res://Assets/Tilesets/Terrain/tres files/cave walls.tres" id="2_bgu55"]
 [ext_resource type="PackedScene" path="res://World/Caves/CaveAmbientLight.tscn" id="3_44og5"]
-[ext_resource type="Texture2D" uid="uid://cqtxugm0or5mr" path="res://Assets/Tilesets/terrain/CLM_MainLev.png" id="4_mp61e"]
-[ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="6_77qpy"]
+[ext_resource type="Texture2D" uid="uid://cqtxugm0or5mr" path="res://Assets/Tilesets/Terrain/CLM_MainLev.png" id="4_mp61e"]
+[ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/Terrain/CL_MainLev.png" id="6_77qpy"]
 
 [sub_resource type="Environment" id="Environment_3ua0i"]
 background_mode = 3

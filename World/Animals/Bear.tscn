@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cpos5lnpx7t40"]
+[gd_scene load_steps=35 format=3]
 
 [ext_resource type="Script" path="res://World/Animals/Bear.gd" id="2_j0bup"]
 [ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="3"]

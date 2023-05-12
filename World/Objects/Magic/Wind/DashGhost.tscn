@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://do4gle4isempv"]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Texture2D" uid="uid://dfenj13wr6f5b" path="res://Assets/Images/Misc/white_square.png" id="2"]
 [ext_resource type="Script" path="res://World/Objects/Magic/Wind/DashGhost.gd" id="2_y3ad5"]

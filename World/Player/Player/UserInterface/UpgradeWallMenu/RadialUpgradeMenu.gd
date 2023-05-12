@@ -4,15 +4,13 @@ extends Control
 @onready var sound_effects: AudioStreamPlayer = $SoundEffects
 var buttons = ["wood", "stone", "metal", "armored", "demolish"]
 var current_index = -1
-var location
 var tile_node
 
 func _ready():
 	hide()
 
-func initialize(_loc, _node):
+func initialize(_node):
 	current_index = -1
-	location = _loc
 	tile_node = _node
 	set_active_buttons()
 	show()
@@ -149,14 +147,13 @@ func change_tile():
 	if return_valid_building_upgrade(current_index):
 		var new_tier = buttons[current_index]
 		tile_node.tier = new_tier
-		tile_node.tile_upgraded()
 		remove_materials(current_index)
 		if new_tier != "demolish":
 			tile_node.upgrade()
-			InstancedScenes.play_upgrade_building_effect(location)
+			Server.world.get_node("PlaceableObjects").rpc_id(1,"player_upgrade_object",{"id":tile_node.name,"l":tile_node.location,"t":new_tier})
+			InstancedScenes.play_upgrade_building_effect(tile_node.location)
 		else:
-			tile_node.remove()
-			InstancedScenes.play_remove_building_effect(location)
+			Server.world.get_node("PlaceableObjects").rpc_id(1,"player_remove_object",Server.player_node.name,"placeable",tile_node.name,tile_node.location)
 	else:
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)

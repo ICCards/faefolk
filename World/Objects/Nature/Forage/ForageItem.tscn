@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://dgtupng24b2k"]
+[gd_scene load_steps=37 format=3]
 
 [ext_resource type="Script" path="res://World/Objects/Nature/Forage/ForageItem.gd" id="1_43ob6"]
 [ext_resource type="Texture2D" uid="uid://8dj2tnwugqc0" path="res://Assets/Images/Forage/clam/blue clam.png" id="2_4tgp7"]

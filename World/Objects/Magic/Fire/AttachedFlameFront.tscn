@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bf6c800nwx3sq"]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Fire/AttachedFlameFront.gd" id="1_22hgp"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="3"]

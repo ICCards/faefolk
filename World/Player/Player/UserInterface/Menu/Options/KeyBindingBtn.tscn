@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://0gr52jd1t8ta"]
+[gd_scene load_steps=7 format=3]
 
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="1_f6ghu"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="1_f6ghu"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Options/KeyBindingBtn.gd" id="2_twyro"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gv7qt"]

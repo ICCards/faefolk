@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cx276tgkqafh7"]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="Texture2D" uid="uid://eoc4t8k8xuqt" path="res://Assets/Images/Misc/Color Indicator/Green/middle left.png" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Misc/ColorIndicator.gd" id="1_7vkdo"]

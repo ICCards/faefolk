@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cukqslkketf3m"]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Earth/EarthStrikeDebuff.gd" id="1_c3jkv"]
 [ext_resource type="AudioStream" uid="uid://c8kml5g6af2pt" path="res://Assets/Sound/Sound effects/Magic/Earth/spawn.mp3" id="3"]

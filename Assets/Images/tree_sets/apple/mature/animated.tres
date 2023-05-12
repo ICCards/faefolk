@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=106 format=3 uid="uid://beqy7x2lfx7xs"]
+[gd_resource type="SpriteFrames" load_steps=106 format=3]
 
 [ext_resource type="Texture2D" uid="uid://deqsmhfoxs4uq" path="res://Assets/Images/tree_sets/apple/mature/sheets/empty.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://qdw2qf8qjx7q" path="res://Assets/Images/tree_sets/apple/mature/sheets/harvest.png" id="2"]

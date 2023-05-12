@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bmjc5ou5oyowx"]
+[gd_resource type="TileSet" load_steps=3 format=3]
 
 [ext_resource type="Texture2D" uid="uid://b8530577mh6fo" path="res://Assets/Tilesets/Objects/objects.png" id="1_wpm8m"]
 

@@ -51,7 +51,7 @@ func spawn_forage():
 		var map = get_node("../../").world[chunk] #MapData.return_chunk(chunk[0], chunk.substr(1,-1))
 		for id in map["forage"]:
 			var player_loc = Server.player_node.position / 16
-			var location = map["forage"][id]["l"]
+			var location = Util.string_to_vector2(map["forage"][id]["l"])
 			var type = map["forage"][id]["n"]
 			var variety = map["forage"][id]["n"]
 			var first_placement =  map["forage"][id]["f"]
@@ -90,7 +90,7 @@ func spawn_crops():
 		for id in map["crop"]:
 			if not PlaceableObjects.has_node(id) and get_node("../../").world[chunk]["crop"].has(id):
 				var item_name = map["crop"][id]["n"]
-				var location = map["crop"][id]["l"]
+				var location = Util.string_to_vector2(map["crop"][id]["l"])
 				var days_until_harvest = map["crop"][id]["dh"]
 				var days_without_water = map["crop"][id]["dww"]
 				var regrowth_phase = map["crop"][id]["rp"]
@@ -212,7 +212,7 @@ func spawn_trees():
 			return
 		var map = get_node("../../").world[chunk]  #MapData.return_chunk(chunk[0], chunk.substr(1,-1))
 		for id in map["tree"]:
-			var loc = map["tree"][id]["l"]
+			var loc = Util.string_to_vector2(map["tree"][id]["l"])
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id) and get_node("../../").world[chunk]["tree"].has(id):
 					var biome = map["tree"][id]["b"]
@@ -222,7 +222,7 @@ func spawn_trees():
 					PlaceObject.place_tree_in_world(id,variety,loc,biome,health,phase)
 					await get_tree().process_frame
 		for id in map["log"]:
-			var loc = map["log"][id]["l"]
+			var loc = Util.string_to_vector2(map["log"][id]["l"])
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id) and get_node("../../").world[chunk]["log"].has(id):
 					var biome = map["log"][id]["b"]
@@ -233,7 +233,7 @@ func spawn_trees():
 						PlaceObject.place_log_in_world(id,variety,loc)
 					await get_tree().process_frame
 		for id in map["stump"]:
-			var loc = map["stump"][id]["l"]
+			var loc = Util.string_to_vector2(map["stump"][id]["l"])
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id) and get_node("../../").world[chunk]["stump"].has(id):
 					var variety= map["stump"][id]["v"]
@@ -250,7 +250,7 @@ func spawn_ores():
 			return
 		var map = get_node("../../").world[chunk]
 		for id in map["ore_large"]:
-			var loc = map["ore_large"][id]["l"]
+			var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id) and get_node("../../").world[chunk]["ore_large"].has(id):
 					var health = map["ore_large"][id]["h"]
@@ -258,7 +258,7 @@ func spawn_ores():
 					PlaceObject.place_large_ore_in_world(id,variety,loc,health)
 					await get_tree().process_frame
 		for id in map["ore"]:
-			var loc = map["ore"][id]["l"]
+			var loc = Util.string_to_vector2(map["ore"][id]["l"])
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not NatureObjects.has_node(id) and get_node("../../").world[chunk]["ore"].has(id):
 					var health = map["ore"][id]["h"]
@@ -277,7 +277,7 @@ func spawn_grass():
 				var value = grass_thread.wait_to_finish()
 				return
 			var type = map["tall_grass"][id]["n"]
-			var loc = map["tall_grass"][id]["l"]
+			var loc = Util.string_to_vector2(map["tall_grass"][id]["l"])
 			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
 				if not GrassObjects.has_node(id) and get_node("../../").world[chunk]["tall_grass"].has(id):
 					Tiles.add_navigation_tiles(loc)

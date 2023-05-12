@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d356h6wsunvq8"]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Texture2D" uid="uid://b3cb5cn4j4xyt" path="res://Assets/Images/Animations/wood break/wood break.png" id="1_8yv8e"]
 [ext_resource type="Script" path="res://World/Objects/Nature/Effects/HoedDirt.gd" id="1_it5lv"]

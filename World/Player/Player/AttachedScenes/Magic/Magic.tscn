@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://o2meckfxvk0f"]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScenes/Magic/Magic.gd" id="1_ptejg"]
 [ext_resource type="Texture2D" uid="uid://begcvb027o6mf" path="res://Assets/Images/Magic/wind/dust.png" id="2_k5452"]

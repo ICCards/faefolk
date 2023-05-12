@@ -1,9 +1,9 @@
-[gd_scene load_steps=98 format=3 uid="uid://b3ad8jm57r5at"]
+[gd_scene load_steps=98 format=3]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/Collections.gd" id="1_co4t8"]
 [ext_resource type="Texture2D" uid="uid://xdnb6a0u2yhl" path="res://Assets/Images/User interface/inventory/collections/crops-tab.png" id="2_apuhn"]
-[ext_resource type="PackedScene" uid="uid://dvx8ynrvmjy27" path="res://InventoryLogic/CollectionItemDescription.tscn" id="2_bgdpv"]
-[ext_resource type="PackedScene" uid="uid://dpuy0xoq4am3w" path="res://InventoryLogic/ItemNameBox.tscn" id="3_dd2yt"]
+[ext_resource type="PackedScene" path="res://InventoryLogic/CollectionItemDescription.tscn" id="2_bgdpv"]
+[ext_resource type="PackedScene" path="res://InventoryLogic/ItemNameBox.tscn" id="3_dd2yt"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/CropCollection.gd" id="5_pwxe3"]
 [ext_resource type="Texture2D" uid="uid://by5u0b077vfy6" path="res://Assets/Images/inventory_icons/Crop/carrot.png" id="6_ddxck"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Collections/collection_item.gd" id="7_du1gv"]

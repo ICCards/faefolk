@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cbb71ie0vtv44"]
+[gd_scene load_steps=24 format=3]
 
 [ext_resource type="Texture2D" uid="uid://dg84nxwxelhhr" path="res://Assets/Images/tall grass sets/yellow back.png" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Nature/Grasses/TallGrass.gd" id="1_u2u05"]

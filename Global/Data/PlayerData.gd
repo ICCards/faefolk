@@ -47,9 +47,7 @@ var active_item_slot_combat_hotbar = 0
 
 var starting_player_data = {
 	"current_save_location": null,
-	"current_save_scene" : "res://World/Overworld/Overworld.tscn",
 	"respawn_location": Vector2(500*16,500*16),
-	"respawn_scene" : "res://World/Overworld/Overworld.tscn",
 	"health": 100,
 	"mana": 100,
 	"energy": 100,

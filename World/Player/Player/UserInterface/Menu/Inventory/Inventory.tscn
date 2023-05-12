@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://drxqi2l1pd8af"]
+[gd_scene load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.gd" id="1_ecmi3"]
 [ext_resource type="Texture2D" uid="uid://ctrqx2ip8xuv6" path="res://Assets/Images/User interface/buttons-icons/locked slot.png" id="3"]
@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://r6w3mbmfa6ms" path="res://Assets/Images/User interface/inventory/inventory/inventory-tab.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://cs5el5bbtdavb" path="res://Characters/Human/male/IDLE/body/down/arms.png" id="11"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Inventory/EnergyManaHealth.gd" id="12_ipi64"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="14_0oqb8"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="14_0oqb8"]
 [ext_resource type="PackedScene" uid="uid://cx3b4o2xigr66" path="res://World/Player/Player/UserInterface/Slots/CombatHotbarSlots.tscn" id="15_ehd48"]
 [ext_resource type="Texture2D" uid="uid://dr7rxljxkqsao" path="res://Characters/Human/male/IDLE/assets/down/head_attribute/hair.png" id="16"]
 [ext_resource type="PackedScene" uid="uid://m20c61iainqg" path="res://World/Player/Player/UserInterface/Slots/HotbarInventorySlots.tscn" id="16_kdmwg"]

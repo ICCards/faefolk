@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dht0s8englbwd"]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Lightning/LightningStrike.gd" id="1_qdls7"]
 [ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_ph44w"]

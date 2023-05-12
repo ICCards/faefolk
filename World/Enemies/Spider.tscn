@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://biuhgq4tgyqn0"]
+[gd_scene load_steps=65 format=3]
 
 [ext_resource type="Script" path="res://World/Enemies/Spider.gd" id="1_l1td4"]
 [ext_resource type="PackedScene" uid="uid://do7vd3a7rt4q5" path="res://World/Enemies/AttachedStates/SetEnemyDirection.tscn" id="2_dj35k"]

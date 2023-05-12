@@ -2,7 +2,7 @@ extends Node2D
 
 
 const PORT = 65124
-const URL = "157.245.88.190"
+const URL = "localhost" #"157.245.88.190"
 var enet_peer = ENetMultiplayerPeer.new()
 
 var terrain = {
@@ -70,10 +70,10 @@ func get_world_data(result, response_code, headers, body):
 	$WorldMap.buildMap()
 ##	await get_tree().create_timer(2).timeout
 ##	MapData.add_world_data_to_chunks()
-#	#$WorldAmbience.initialize()
+	$WorldAmbience.initialize()
 	$WorldBuilder.initialize()
 	$WorldBuilder/BuildTerrain.initialize()
-	#$WorldBuilder/BuildNature.initialize()
+	$WorldBuilder/BuildNature.initialize()
 #	$WorldBuilder/SpawnAnimal.initialize()
 
 

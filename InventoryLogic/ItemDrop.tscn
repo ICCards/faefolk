@@ -1,9 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://br573c61liq8n"]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://InventoryLogic/ItemDrop.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bbduu3gxlbfp6" path="res://Assets/Images/inventory_icons/Placeable object/workbench #2.png" id="2_0fpab"]
 [ext_resource type="AudioStream" uid="uid://cpmbqua1xm4st" path="res://Assets/Sound/Sound effects/UI/pick up item.mp3" id="3"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="3_w17hp"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="3_w17hp"]
 
 [sub_resource type="CircleShape2D" id="9"]
 radius = 5.0

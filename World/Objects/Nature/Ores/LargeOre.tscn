@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://vwyolb6yw5cr"]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://World/Objects/Nature/Ores/LargeOre.gd" id="1_vyocn"]
 [ext_resource type="Texture2D" uid="uid://5q6dlm8nrnm0" path="res://Assets/Tilesets/ore/CLM_Mining_Vegetables.png" id="3_mx8d5"]

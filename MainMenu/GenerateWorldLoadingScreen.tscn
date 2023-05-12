@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dfg84dm5mo03a" path="res://Assets/Images/Misc/MainMenu/logo.png" id="1"]
 [ext_resource type="Script" path="res://MainMenu/GenerateWorldLoadingScreen.gd" id="3"]
-[ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://World/Player/Player/UserInterface/Misc/BetaLabel.tscn" id="4"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="5_jlhkq"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Misc/BetaLabel.tscn" id="4"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="5_jlhkq"]
 
 [sub_resource type="Animation" id="Animation_n86qp"]
 length = 0.001

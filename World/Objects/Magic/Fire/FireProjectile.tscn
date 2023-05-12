@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cl1iqoctluyqc"]
+[gd_scene load_steps=30 format=3]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Fire/FireProjectile.gd" id="1_molg8"]
 [ext_resource type="Texture2D" uid="uid://nv5ikxh71jqx" path="res://Assets/Images/Magic/fire/projectile.png" id="2_le5f1"]

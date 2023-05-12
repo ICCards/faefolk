@@ -34,27 +34,11 @@ func jsonParse(body):
 func toMessage(name, data):
 	data["n"] = name
 	return JSON.stringify(data).to_utf8_buffer()
-	
-#func string_to_vector2(string := "") -> Vector2:
-#	if string:
-#		var new_string: String = string
-#		new_string.erase(0, 1)
-#		new_string.erase(new_string.length() - 1, 1)
-#		var array: Array = new_string.split(", ")
-#
-#		return Vector2(array[0], array[1])
-#
-#	return Vector2.ZERO
+
 
 func string_to_vector2(string) -> Vector2:
 	if string is String:
-		var new_string: String = string
-		new_string.left(1)
-		new_string.left(-1)
-		var array: Array = new_string.split(", ")
-
-		return Vector2(array[0], array[1])
-
+		return str_to_var("Vector2i" + string)
 	return string
 
 

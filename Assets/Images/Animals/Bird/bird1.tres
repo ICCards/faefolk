@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=26 format=3 uid="uid://032anb4l0yon"]
+[gd_resource type="SpriteFrames" load_steps=26 format=3]
 
 [ext_resource type="Texture2D" uid="uid://biimfo6eli6n1" path="res://Assets/Images/Animals/spritesheet.png" id="1"]
 

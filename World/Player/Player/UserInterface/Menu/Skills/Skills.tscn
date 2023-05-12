@@ -1,10 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2x0kacdfasux"]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Texture2D" uid="uid://i5yl7stgqwwe" path="res://Assets/Images/User interface/inventory/skills/bow-tab.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Skills/Skills.gd" id="1_hpdih"]
-[ext_resource type="PackedScene" uid="uid://dpuy0xoq4am3w" path="res://InventoryLogic/ItemNameBox.tscn" id="2_h6goq"]
+[ext_resource type="PackedScene" path="res://InventoryLogic/ItemNameBox.tscn" id="2_h6goq"]
 [ext_resource type="Texture2D" uid="uid://bkhq1r7wlc0aj" path="res://Assets/Images/Spell icons/sword/1.png" id="3"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="3_rvxbf"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="3_rvxbf"]
 [ext_resource type="Texture2D" uid="uid://j46qk3r1jujb" path="res://Assets/Images/Spell icons/sword/front.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://3r26rnotsh06" path="res://Assets/Images/Spell icons/sword/back.png" id="5"]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://d1mytnrwsljra"]
+[gd_scene load_steps=40 format=3]
 
 [ext_resource type="Texture2D" uid="uid://45ogtv15f7bd" path="res://Assets/Images/Animals/Boar/attack/right/body.png" id="1"]
 [ext_resource type="Script" path="res://World/Animals/Boar.gd" id="1_pcgcp"]

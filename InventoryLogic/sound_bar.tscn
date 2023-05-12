@@ -1,7 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://btd1x6vesdiat"]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://InventoryLogic/sound_bar.gd" id="1_13jjq"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="1_pvrqn"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="1_pvrqn"]
 [ext_resource type="Texture2D" uid="uid://by0j7cyii2tf1" path="res://Assets/Images/User interface/sliders/h-slider3-boundary.png" id="2_kwo1v"]
 [ext_resource type="Texture2D" uid="uid://bmp7vq3jmy1y" path="res://Assets/Images/User interface/sliders/h-slider3-progress.png" id="3_6de2p"]
 [ext_resource type="Texture2D" uid="uid://c0pxp1yu6mnk1" path="res://Assets/Images/User interface/sliders/h-slider3.png" id="4_pntec"]

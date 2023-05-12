@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5pao38l8rac1"]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://World/Caves/Objects/CaveLadder.gd" id="1_7kvw5"]
 [ext_resource type="Texture2D" uid="uid://ckal8dga4akml" path="res://Assets/Images/Misc/watering can progress indicator.png" id="2"]

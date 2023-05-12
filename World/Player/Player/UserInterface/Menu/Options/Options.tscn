@@ -1,10 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://boujb4h3xtdhe"]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Options/Options.gd" id="1_g2f3b"]
 [ext_resource type="Texture2D" uid="uid://b5nk73t3wo6qv" path="res://Assets/Images/User interface/inventory/options/options-tab.png" id="2_g56ap"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="3_s1ql7"]
-[ext_resource type="PackedScene" uid="uid://btd1x6vesdiat" path="res://InventoryLogic/sound_bar.tscn" id="4_41gqa"]
-[ext_resource type="PackedScene" uid="uid://curdf0q5apwnx" path="res://World/Player/Player/UserInterface/Menu/Options/key_binding.tscn" id="5_prqkd"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="3_s1ql7"]
+[ext_resource type="PackedScene" path="res://InventoryLogic/sound_bar.tscn" id="4_41gqa"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Menu/Options/key_binding.tscn" id="5_prqkd"]
 [ext_resource type="Texture2D" uid="uid://dpykywq37kvad" path="res://Assets/Images/User interface/sliders/v-slider-bar.png" id="10"]
 [ext_resource type="Texture2D" uid="uid://bev78o7ib7th1" path="res://Assets/Images/User interface/sliders/v-slider.png" id="11"]
 

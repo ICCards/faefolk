@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://tmb31hqkc2gh"]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Texture2D" uid="uid://d1p8aidne6ccn" path="res://Assets/Images/User interface/radial menus/5-segment-menu/selected/selected-segment-2.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://bwq4r5uxm0gqf" path="res://Assets/Images/User interface/radial menus/5-segment-menu/unselected/unselected-segment-2.png" id="1_oynh7"]

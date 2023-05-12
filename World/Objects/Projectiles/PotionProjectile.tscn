@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dl3qyg8hwupxv"]
+[gd_scene load_steps=31 format=3]
 
 [ext_resource type="Texture2D" uid="uid://cigfphdnphb86" path="res://Assets/Images/Forage/animal/raw egg.png" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Projectiles/PotionProjectile.gd" id="1_4tjvv"]

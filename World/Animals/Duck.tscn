@@ -1,9 +1,9 @@
-[gd_scene load_steps=30 format=3 uid="uid://bufv8p2qcjx0o"]
+[gd_scene load_steps=30 format=3]
 
 [ext_resource type="Script" path="res://World/Animals/Duck.gd" id="2_je0mu"]
 [ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="3"]
 [ext_resource type="PackedScene" uid="uid://dr88n2qik0tat" path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" id="3_tlvvh"]
-[ext_resource type="SpriteFrames" uid="uid://clu6jmly275vs" path="res://Assets/Images/Animals/Duck/duck3.tres" id="3_whwqy"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Animals/Duck/duck3.tres" id="3_whwqy"]
 [ext_resource type="Texture2D" uid="uid://bbybm4xho1nc8" path="res://Assets/Images/Magic/lightning/Shock_Small.png" id="4_goxp2"]
 [ext_resource type="PackedScene" uid="uid://cqt04hkompf5f" path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" id="4_wj08i"]
 [ext_resource type="PackedScene" uid="uid://cvfur4ra58e75" path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" id="5_jm3e4"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ho564p4gdyqj"]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Earth/EarthStrike.gd" id="1_vjekj"]
 [ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_poh7p"]

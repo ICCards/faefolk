@@ -1,10 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpuy0xoq4am3w"]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Texture2D" uid="uid://brxwsxhtb23pb" path="res://Assets/Images/User interface/ItemNameBox/left.png" id="2_8ry1e"]
 [ext_resource type="Texture2D" uid="uid://nb3pigpl6sq4" path="res://Assets/Images/User interface/ItemNameBox/middle.png" id="4_tkwdf"]
 [ext_resource type="Script" path="res://InventoryLogic/ItemNameBox.gd" id="5"]
 [ext_resource type="Texture2D" uid="uid://cn0m5ayth6f8j" path="res://Assets/Images/User interface/ItemNameBox/right.png" id="5_6rgmb"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="5_wpj2h"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="5_wpj2h"]
 
 [node name="ItemNameBox" type="Node2D"]
 z_index = 2

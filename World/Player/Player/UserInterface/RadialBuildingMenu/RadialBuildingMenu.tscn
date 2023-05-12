@@ -1,13 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://dh7qoqj6wpcf8"]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.gd" id="1_2qhwh"]
-[ext_resource type="PackedScene" uid="uid://73n5be64a2bw" path="res://World/Player/Player/UserInterface/RadialBuildingMenu/radial_menu_item.tscn" id="3_hiluw"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/RadialBuildingMenu/radial_menu_item.tscn" id="3_hiluw"]
 [ext_resource type="Texture2D" uid="uid://dljv33ye80fsp" path="res://Assets/Images/User interface/radial menus/icons/ceiling.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://bcc0o8i6a6ka4" path="res://Assets/Images/User interface/radial menus/icons/wall.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://hb7xol3bk3t5" path="res://Assets/Images/User interface/radial menus/middle-circle.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://caqscjpd5joa6" path="res://Assets/Images/User interface/radial menus/icons/stairs.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://drfl865l0khrd" path="res://Assets/Images/User interface/radial menus/icons/foundation.png" id="8"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="8_lj53a"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="8_lj53a"]
 
 [sub_resource type="Animation" id="3"]
 resource_name = "set active"

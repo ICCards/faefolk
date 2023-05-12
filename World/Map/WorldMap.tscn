@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c66ktnntnkqrx"]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://World/Map/WorldMap.gd" id="1_1tori"]
-[ext_resource type="TileSet" uid="uid://75mobw2f7ncu" path="res://Assets/Themes/MiniMap.tres" id="2"]
+[ext_resource type="TileSet" path="res://Assets/Themes/MiniMap.tres" id="2"]
 [ext_resource type="Texture2D" uid="uid://deic1ed35diif" path="res://Assets/Images/Particles/Clouds.png" id="3_nnvqm"]
 [ext_resource type="Texture2D" uid="uid://cejx0b2rnkjnh" path="res://Assets/Images/mini map/black.png" id="4"]
-[ext_resource type="PackedScene" uid="uid://balcmsv8dqct2" path="res://World/Map/player_icon.tscn" id="4_cx424"]
+[ext_resource type="PackedScene" path="res://World/Map/player_icon.tscn" id="4_cx424"]
 [ext_resource type="Script" path="res://World/Map/Camera2D.gd" id="6_c88ao"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_63ton"]

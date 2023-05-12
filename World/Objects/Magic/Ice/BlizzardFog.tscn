@@ -1,11 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dolftm58nspvr"]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Texture2D" uid="uid://bv2e37vy0s7h4" path="res://Assets/Images/mini map/snow.png" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Magic/Ice/BlizzardFog.gd" id="1_tn0si"]
 [ext_resource type="Shader" uid="uid://15ocwse0uu5l" path="res://Assets/Themes/world_fog.tres" id="2"]
 [ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="4_m3i2n"]
 [ext_resource type="AudioStream" uid="uid://c6qvkq5pv88oy" path="res://Assets/Sound/Sound effects/Magic/Ice/blizzard.mp3" id="6"]
-[ext_resource type="PackedScene" uid="uid://c4uflfowyfnu4" path="res://World/Objects/Nature/Particles/Snow.tscn" id="6_tecjt"]
+[ext_resource type="PackedScene" path="res://World/Objects/Nature/Particles/Snow.tscn" id="6_tecjt"]
 
 [sub_resource type="ShaderMaterial" id="6"]
 shader = ExtResource("2")

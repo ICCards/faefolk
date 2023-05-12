@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b2hdl4jl8stfj"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="1"]
 [ext_resource type="Script" path="res://World/Caves/Objects/CaveLight.gd" id="1_5gc40"]

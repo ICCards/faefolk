@@ -1,4 +1,4 @@
-[gd_scene load_steps=338 format=3 uid="uid://di1mdgce3k6nr"]
+[gd_scene load_steps=338 format=3]
 
 [ext_resource type="Script" path="res://World/Objects/Nature/Trees/Stump.gd" id="1_skvyr"]
 [ext_resource type="Texture2D" uid="uid://dqqo8qmvfgvjv" path="res://Assets/Images/tree_sets/cherry/large stump.png" id="2_mvjiw"]

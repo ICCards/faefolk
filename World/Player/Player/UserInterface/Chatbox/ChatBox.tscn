@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cw3x0n2n7j4t5"]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Chatbox/ChatBox.gd" id="1_8uiwe"]
 [ext_resource type="Texture2D" uid="uid://n35tgtnx36vt" path="res://Assets/Images/User interface/chat/chats/chat-wide-long.png" id="2_kux27"]
 [ext_resource type="Texture2D" uid="uid://d232u3qfvtt7d" path="res://Assets/Images/User interface/chat/chats/Bg/image2.png" id="3_qv4gt"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="4_lvths"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="4_lvths"]
 
 [node name="ChatBox" type="Control"]
 layout_mode = 3

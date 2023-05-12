@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://tgdg3hrajiuq"]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Texture2D" uid="uid://u0eh8dy4jr5h" path="res://Assets/Images/Particles/rain particles.png" id="1_j7mup"]
 

@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxjhqr8m8573g"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://MainMenu/join server ui/row/row.gd" id="1_go6yx"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="2_e5c2h"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="2_e5c2h"]
 
 [node name="row" type="HBoxContainer"]
 anchors_preset = 15

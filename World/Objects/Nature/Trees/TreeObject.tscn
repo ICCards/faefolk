@@ -1,11 +1,11 @@
-[gd_scene load_steps=1808 format=3 uid="uid://cit3o5mjf225w"]
+[gd_scene load_steps=1808 format=3]
 
 [ext_resource type="Script" path="res://World/Objects/Nature/Trees/TreeObject.gd" id="1_yvhp8"]
 [ext_resource type="Texture2D" uid="uid://bvtbx74i1gnl7" path="res://Assets/Images/tree_sets/pear/mature/stump.png" id="2_1j3kv"]
 [ext_resource type="Texture2D" uid="uid://8vky6r2t5jc6" path="res://Assets/Images/tree_sets/oak/mature/bottom.png" id="3_dfmrg"]
 [ext_resource type="Texture2D" uid="uid://clda2ms3nwvjn" path="res://Assets/Images/tree_sets/cherry/mature/tops/empty.png" id="4_j64mt"]
 [ext_resource type="Texture2D" uid="uid://dwnernbjstsvs" path="res://Assets/Images/tree_sets/apple/growing/4.png" id="5"]
-[ext_resource type="SpriteFrames" uid="uid://dmy2e4v4r5rva" path="res://Assets/Images/tree_sets/oak/mature/animated top.tres" id="5_goq62"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/tree_sets/oak/mature/animated top.tres" id="5_goq62"]
 [ext_resource type="Texture2D" uid="uid://f638ccx4n1kd" path="res://Assets/Images/tree_sets/wood breaks/trees/apple/left_apple.png" id="6_1bshq"]
 [ext_resource type="Texture2D" uid="uid://csbk8fbe6t0lt" path="res://Assets/Images/tree_sets/wood breaks/trees/evergreen/left_evergreen.png" id="6_nd1bs"]
 [ext_resource type="Texture2D" uid="uid://cwom5cbcq5xi3" path="res://Assets/Images/tree_sets/wood breaks/trees/apple/left_winter_apple.png" id="7_1dlo0"]

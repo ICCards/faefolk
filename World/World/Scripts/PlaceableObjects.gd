@@ -18,8 +18,8 @@ func send_updated_ui_slots(id,dict): pass
 @rpc 
 func player_move_object(player_id,id,data): pass
 
-#@rpc 
-#func player_repair_object(data): pass
+@rpc 
+func player_repair_object(data): pass
 #@rpc
 #func player_upgrade_object(data): pass
 #
@@ -33,14 +33,20 @@ func player_move_object(player_id,id,data): pass
 #			if node.name == data["id"]:
 #				node.upgrade(new_tier)
 #				return
-#@rpc
-#func repair(data):
-#	if not get_node("../").world == {}:
-#		get_node("../").world[data["c"]]["placeable"][data["id"]]["h"] = Stats.return_max_building_health(data["t"])
-#		for node in self.get_children():
-#			if node.name == data["id"]:
-#				node.repair()
-#				return
+@rpc
+func repair(data):
+	if not get_node("../").world == {}:
+		var chunk = MapData.get_chunk_from_location(data["l"])
+		var item_name = get_node("../").world[chunk]["placeable"][data["id"]]["n"]
+		if item_name == "foundation" or item_name == "wall": 
+			var current_tier = get_node("../").world[chunk]["placeable"][data["id"]]["t"]
+			get_node("../").world[chunk]["placeable"][data["id"]]["h"] = Stats.return_max_building_health(current_tier)
+		else:
+			get_node("../").world[chunk]["placeable"][data["id"]]["h"] = Stats.return_max_door_health(item_name)
+		for node in self.get_children():
+			if node.name == data["id"]:
+				node.repair()
+				return
 
 @rpc 
 func place_object_in_new_location(player_id,id,prev_object_data,data):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmkocepi7gf3b"]
+[gd_scene load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://World/Enemies/BabyBirdBoss.gd" id="1_k3gut"]
 [ext_resource type="Texture2D" uid="uid://dhju2q15xsooj" path="res://Assets/Images/Enemies/shadow sprite.png" id="6"]

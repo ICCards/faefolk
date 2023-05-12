@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dvx8ynrvmjy27"]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Texture2D" uid="uid://cd2bktiiba0je" path="res://Assets/Images/User interface/ItemDescription/top left.png" id="2_tpejx"]
 [ext_resource type="Texture2D" uid="uid://cb73f85qmedbc" path="res://Assets/Images/User interface/ItemDescription/top middle.png" id="3_s3wb8"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://bg87pb5sopgdj" path="res://Assets/Images/User interface/ItemDescription/bottom middle.png" id="9_yatcl"]
 [ext_resource type="Texture2D" uid="uid://dvvmfhcou6gfm" path="res://Assets/Images/User interface/ItemDescription/bottom right.png" id="10_f5mjf"]
 [ext_resource type="Script" path="res://InventoryLogic/CollectionItemDescription.gd" id="11"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="11_8kyi1"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="11_8kyi1"]
 
 [node name="CollectionItemDescription" type="Node2D"]
 z_index = 1
