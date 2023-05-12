@@ -1,7 +1,7 @@
 extends Node2D
 
 
-const PORT = 9999
+const PORT = 65124
 var enet_peer = ENetMultiplayerPeer.new()
 
 var terrain = {
@@ -30,35 +30,49 @@ var is_changing_scene = false
 
 
 func _ready():
-	enet_peer.create_client("localhost",PORT)
-	multiplayer.multiplayer_peer = enet_peer
 	build_world()
 
 var counter = 0
 
-@rpc
-func send_world_data(type,data):
-	counter += 1
-	if type == "server_data":
-		server_data = data
-	elif terrain.has(type):
-		terrain[type] = data
-	else:
-		world[type] = data
-	if counter == 154:
-		$InitLoadScreen.queue_free()
-		print("GOT WORLD DATA")
+func convertArrayToVector(value):
+	var newArray = [];
+	for loc in value:
+		var vec = str_to_var("Vector2i" + loc)
+		newArray.append(vec)
+	return newArray	
+
+func get_world_data(result, response_code, headers, body):
+	var data = JSON.parse_string(body.get_string_from_utf8())
+	
+	server_data = data.server_data
+	
+	terrain.snow = convertArrayToVector(data.terrain.snow)
+	terrain.desert  = convertArrayToVector(data.terrain.desert)
+	terrain.forest = convertArrayToVector(data.terrain.forest)
+	terrain.plains = convertArrayToVector(data.terrain.plains)
+	terrain.dirt = convertArrayToVector(data.terrain.dirt)
+	terrain.wet_sand = convertArrayToVector(data.terrain.wet_sand)
+	terrain.ocean = convertArrayToVector(data.terrain.ocean)
+	terrain.deep_ocean = convertArrayToVector(data.terrain.deep_ocean)
+	terrain.beach = convertArrayToVector(data.terrain.beach)
+	
+	world = data.world
+	
+	enet_peer.create_client("localhost",PORT)
+	multiplayer.multiplayer_peer = enet_peer
+	$InitLoadScreen.queue_free()
+	print("GOT WORLD DATA")
 #	world = data["world"]
 #	server_data = data["server_data"]
 #	terrain = data["terrain"]
 ##	MapData.world = _world
-		$WorldMap.buildMap()
+	$WorldMap.buildMap()
 ##	await get_tree().create_timer(2).timeout
 ##	MapData.add_world_data_to_chunks()
 #	#$WorldAmbience.initialize()
-		$WorldBuilder.initialize()
-		$WorldBuilder/BuildTerrain.initialize()
-		$WorldBuilder/BuildNature.initialize()
+	$WorldBuilder.initialize()
+	$WorldBuilder/BuildTerrain.initialize()
+	#$WorldBuilder/BuildNature.initialize()
 #	$WorldBuilder/SpawnAnimal.initialize()
 
 
@@ -67,6 +81,8 @@ func build_world():
 	Server.world = self
 	set_map_tiles()
 	set_valid_tiles()
+	$HTTPRequest.request_completed.connect(get_world_data)
+	$HTTPRequest.request("http://localhost:8080/getData")
 #	$WorldBuilder.initialize()
 #	$WorldBuilder/BuildTerrain.initialize()
 #	$WorldBuilder/BuildNature.initialize()

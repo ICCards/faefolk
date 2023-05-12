@@ -1,53 +1,30 @@
-res://main.tscn
+res://World/World/main.tscn
 res://Assets/Tilesets/Terrain/tres files/plains.tres
 res://Assets/Tilesets/Terrain/tres files/deep ocean.tres
 res://Assets/Tilesets/Terrain/tres files/dirt.tres
-res://Assets/Tilesets/Terrain/elevated terrain.tres
 res://Assets/Tilesets/Terrain/tres files/forest.tres
+res://Assets/Tilesets/Terrain/elevated terrain.tres
 res://Assets/Tilesets/Terrain/tres files/freshwater.tres
+res://Assets/Tilesets/Terrain/tres files/sand.tres
 res://Assets/Tilesets/Terrain/tres files/waves.tres
 res://Assets/Tilesets/Terrain/tres files/snow.tres
 res://Assets/Tilesets/Terrain/tres files/wet sand.tres
+res://Assets/Tilesets/Terrain/tres files/shallow ocean.tres
 res://Assets/Tilesets/foundation/foundation.tres
 res://Assets/Tilesets/walls/walls.tres
 res://Assets/Tilesets/Objects/objects.tres
-res://Assets/Tilesets/Terrain/tres files/sand.tres
-res://Assets/Themes/MiniMap.tres
-res://Assets/Tilesets/Terrain/tres files/shallow ocean.tres
 res://Assets/Tilesets/Terrain/tres files/hoed.tres
 res://Assets/Tilesets/Terrain/tres files/watered hoed.tres
+res://Assets/Themes/MiniMap.tres
 res://Assets/Themes/text.tres
 res://Assets/Themes/LockedAsset.tres
 res://Assets/Themes/whiten.tres
-res://World/Map/WorldMap.tscn
-res://World/Player/Player/Player.tscn
-res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
-res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn
-res://main.gd
-res://World/Map/WorldMap.gd
-res://World/World/BuildNature.gd
-res://Global/Data/PlaceObject.gd
-res://World/World/BuildTerrain.gd
-res://World/Objects/Nature/Cactus/cactus.tscn
-res://World/Objects/Nature/Cactus/cactus.gd
-res://World/Objects/Nature/Trees/Stump.tscn
-res://PlaceableObjects.gd
-res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.gd
-res://World/Player/Player/AttachedScripts/HurtBox.gd
-res://World/Player/Player/AttachedScenes/Sound/FootstepsSound.gd
-res://World/World/main.tscn
-res://World/Player/Player/UserInterface/Misc/BetaLabel.tscn
-res://World/Player/Player/AttachedScenes/PlayerHitEffect/PlayerHitEffect.tscn
-res://World/Player/Player/AttachedScenes/AimDownSightLine.tscn
-res://World/Player/Player/AttachedScenes/Magic/Magic.tscn
-res://World/Player/Player/AttachedScenes/Swing/Swing.tscn
-res://Global/Data/server.gd
-res://Global/Functions/SceneChanger.gd
-res://MainMenu/MainMenuButtons.tscn
-res://MainMenu/MainMenuButtons.gd
-res://Global/Data/InstancedScenes.gd
-res://World/Player/Player/AttachedScenes/Actions/Actions.gd
-res://World/Player/Player/Player.gd
 res://Assets/Tilesets/Objects/crops.tres
-res://World/World/main.gd
+res://World/Player/Player/Player.tscn
 res://World/Building/PlaceObjectPreview.tscn
+res://World/World/main.gd
+res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.gd
+res://World/Player/Player/AttachedScenes/Sound/AmbientSound.gd
+res://World/Map/WorldMap.gd
+res://World/World/Builder/BuildTerrain.gd
+res://World/World/Builder/BuildNature.gd

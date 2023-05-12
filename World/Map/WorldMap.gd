@@ -123,7 +123,7 @@ func return_player_direction(dir):
 func buildMap():
 	var map = get_parent().terrain
 	for loc in map["dirt"]:
-		miniMap.set_cell(0,loc,Tiles.DIRT,Vector2i(0,0))
+		miniMap.set_cell(0,loc ,Tiles.DIRT,Vector2i(0,0))
 	for loc in map["forest"]:
 		miniMap.set_cell(0,loc,Tiles.FOREST,Vector2i(0,0))
 	for loc in map["plains"]:

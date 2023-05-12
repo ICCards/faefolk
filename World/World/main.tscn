@@ -3633,6 +3633,8 @@ visible = false
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yn58q")
 
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
 [connection signal="timeout" from="WorldBuilder/SpawnAnimal/SpawnAnimalTimer" to="WorldBuilder/SpawnAnimal" method="_on_spawn_animal_timer_timeout"]
 [connection signal="timeout" from="WorldBuilder/BuildNature/SpawnNatureTimer" to="WorldBuilder/BuildNature" method="_on_spawn_nature_timer_timeout"]
 [connection signal="timeout" from="WorldBuilder/BuildTerrain/BuildTerrainTimer" to="WorldBuilder/BuildTerrain" method="_on_build_terrain_timer_timeout"]

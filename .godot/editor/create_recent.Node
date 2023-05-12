@@ -1,3 +1,5 @@
+HTTPRequest
+Node
 CollisionShape2D
 Area2D
 AudioStreamPlayer
@@ -20,7 +22,6 @@ MultiplayerSynchronizer
 Node2D
 MultiplayerSpawner
 CollisionPolygon2D
-Node
 CharacterBody2D
 TextureProgressBar
 ProgressBar
@@ -29,4 +30,3 @@ AudioStreamPlayer2D
 TileMap
 Timer
 Line2D
-VisibleOnScreenNotifier2D
