@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=125 format=3]
+[gd_resource type="SpriteFrames" load_steps=125 format=3 uid="uid://50ldeabynskx"]
 
 [ext_resource type="Texture2D" uid="uid://ch7k0m8k6dhr1" path="res://Assets/Images/IC Kitties/Idle/Side/PA_Animation_Kitty_Idle2_8fps_white.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://dyxehvm4j58w4" path="res://Assets/Images/IC Kitties/Walk/Down/PA_Animation_Kitty_Walk_down_10fps_white.png" id="2"]

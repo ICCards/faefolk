@@ -1,1 +1,28 @@
 res://MainMenu/MainMenu.tscn
+res://World/World/main.tscn
+res://Assets/Themes/Flash.tres
+res://Assets/Images/Animals/Bird/bird1.tres
+res://Assets/Images/Animals/Bunny/yellowBunny.tres
+res://Assets/Images/Animals/Duck/duck3.tres
+res://Assets/Tilesets/Objects/objects.tres
+res://Assets/Tilesets/Objects/crops.tres
+res://Assets/Tilesets/Terrain/tres files/cave walls.tres
+res://Assets/Themes/MiniMap.tres
+res://Assets/Images/tree_sets/oak/mature/animated top.tres
+res://Assets/Images/IC Kitties/SpriteFrames/White.tres
+res://Assets/Tilesets/Terrain/tres files/plains.tres
+res://Assets/Tilesets/Terrain/tres files/deep ocean.tres
+res://Assets/Tilesets/Terrain/tres files/dirt.tres
+res://Assets/Tilesets/Terrain/tres files/forest.tres
+res://Assets/Tilesets/Terrain/elevated terrain.tres
+res://Assets/Tilesets/Terrain/tres files/freshwater.tres
+res://Assets/Tilesets/Terrain/tres files/sand.tres
+res://Assets/Tilesets/Terrain/tres files/waves.tres
+res://Assets/Tilesets/Terrain/tres files/snow.tres
+res://Assets/Tilesets/Terrain/tres files/wet sand.tres
+res://Assets/Tilesets/Terrain/tres files/shallow ocean.tres
+res://Assets/Tilesets/foundation/foundation.tres
+res://Assets/Tilesets/walls/walls.tres
+res://Assets/Tilesets/Terrain/tres files/hoed.tres
+res://Assets/Tilesets/Terrain/tres files/watered hoed.tres
+res://World/World/main.gd

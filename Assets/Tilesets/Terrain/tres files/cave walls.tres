@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3]
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dvlbpldkgmaxq"]
 
 [ext_resource type="Texture2D" uid="uid://t2dsp1jfm58s" path="res://Assets/Tilesets/Terrain/cave_walls.png" id="1_epyrl"]
 
