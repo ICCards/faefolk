@@ -2,6 +2,7 @@ extends Node2D
 
 
 const PORT = 65124
+const URL = "157.245.88.190"
 var enet_peer = ENetMultiplayerPeer.new()
 
 var terrain = {
@@ -58,7 +59,7 @@ func get_world_data(result, response_code, headers, body):
 	
 	world = data.world
 	
-	enet_peer.create_client("localhost",PORT)
+	enet_peer.create_client(URL,PORT)
 	multiplayer.multiplayer_peer = enet_peer
 	$InitLoadScreen.queue_free()
 	print("GOT WORLD DATA")
@@ -82,7 +83,7 @@ func build_world():
 	set_map_tiles()
 	set_valid_tiles()
 	$HTTPRequest.request_completed.connect(get_world_data)
-	$HTTPRequest.request("http://localhost:8080/getData")
+	$HTTPRequest.request("http://"+URL+":8080/getData")
 #	$WorldBuilder.initialize()
 #	$WorldBuilder/BuildTerrain.initialize()
 #	$WorldBuilder/BuildNature.initialize()
