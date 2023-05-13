@@ -10,7 +10,7 @@ func harvest_tree(data): pass
 
 @rpc 
 func play_tree_harvest(data):
-	if not get_node("../").world == {}:
+	if get_node("../").world[data["chunk"]]["tree"].has(data["id"]):
 		get_node("../").world[data["chunk"]]["tree"][data["id"]]["p"] = "empty"
 		for node in self.get_children():
 			if node.name == data["id"]:
@@ -19,7 +19,7 @@ func play_tree_harvest(data):
 
 @rpc
 func update_nature_health(data):
-	if not get_node("../").world == {}:
+	if get_node("../").world[data["chunk"]][data["type"]].has(data["id"]):
 		get_node("../").world[data["chunk"]][data["type"]][data["id"]]["h"] = data["health"]
 		for node in self.get_children():
 			if node.name == data["id"]:
@@ -28,7 +28,7 @@ func update_nature_health(data):
 
 @rpc
 func destroy_nature_object(data):
-	if not get_node("../").world == {}:
+	if get_node("../").world[data["chunk"]][data["type"]].has(data["id"]):
 		get_node("../").world[data["chunk"]][data["type"]].erase(data["id"])
 		for node in self.get_children():
 			if node.name == data["id"]:

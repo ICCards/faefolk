@@ -10,12 +10,12 @@ func back_tall_grass_hit(player_id,id,loc): pass
 
 @rpc 
 func erase_tall_grass(data):
-	if not get_node("../").world == {}:
-		get_node("../").world[data["chunk"]]["tall_grass"].erase([data["id"]])
+	if get_node("../").world[data["chunk"]]["tall_grass"].has(data["id"]):
+		get_node("../").world[data["chunk"]]["tall_grass"].erase(data["id"])
 
 @rpc
 func destroy_weed(data): 
-	if not get_node("../").world == {}:
+	if get_node("../").world[data["chunk"]]["tall_grass"].has(data["id"]):
 		get_node("../").world[data["chunk"]]["tall_grass"].erase(data["id"])
 		for node in self.get_children():
 			if node.name == data["id"]:
@@ -24,7 +24,7 @@ func destroy_weed(data):
 
 @rpc
 func update_back_tall_grass(data): 
-	if not get_node("../").world == {}:
+	if get_node("../").world[data["chunk"]]["tall_grass"].has(data["id"]):
 		get_node("../").world[data["chunk"]]["tall_grass"][data["id"]]["bh"] = data["bh"]
 		for node in self.get_children():
 			if node.name == data["id"]:
@@ -33,7 +33,7 @@ func update_back_tall_grass(data):
 
 @rpc
 func update_front_tall_grass(data): 
-	if not get_node("../").world == {}:
+	if get_node("../").world[data["chunk"]]["tall_grass"].has(data["id"]):
 		get_node("../").world[data["chunk"]]["tall_grass"][data["id"]]["fh"] = data["fh"]
 		for node in self.get_children():
 			if node.name == data["id"]:

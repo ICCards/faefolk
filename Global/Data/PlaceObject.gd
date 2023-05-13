@@ -187,7 +187,7 @@ func place_large_ore_in_world(id,variety,location,health):
 func place_object_in_world(id, item_name, direction, location, variety, opened_or_light_toggled):
 	PlaceableObjects = Server.world.get_node("PlaceableObjects")
 	var tileObjectHurtBox = TileObjectHurtBox.instantiate()
-	tileObjectHurtBox.variety = int(variety)
+	tileObjectHurtBox.variety = variety
 	tileObjectHurtBox.name = id
 	tileObjectHurtBox.item_name = item_name
 	tileObjectHurtBox.location = Vector2i(location)

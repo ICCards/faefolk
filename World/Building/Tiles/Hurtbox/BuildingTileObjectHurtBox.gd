@@ -74,14 +74,12 @@ func add_door_interactive_area_node(type):
 	doorInteractiveAreaNode.name = name
 	$Marker2D.call_deferred("add_child", doorInteractiveAreaNode)
 
-#func upgrade():
-#	sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/crafting.mp3")
-#	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-#	sound_effects.play()
-
-
 func upgrade(new_tier):
-	match new_tier:
+	tier = new_tier
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Building/crafting.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
+	match tier:
 		"wood":
 			health = Stats.MAX_WOOD_BUILDING
 		"stone":

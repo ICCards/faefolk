@@ -2,7 +2,7 @@ extends Node2D
 
 
 const PORT = 65124
-const URL = "157.245.88.190"
+const URL = "localhost" #"157.245.88.190"
 var enet_peer = ENetMultiplayerPeer.new()
 
 var terrain = {
@@ -23,15 +23,8 @@ var connected_peer_ids = []
 var is_changing_scene = false
 
 
-#func _on_join_btn_pressed():
-#	$Menu.hide()
-#	enet_peer.create_client("localhost",PORT)
-#	multiplayer.multiplayer_peer = enet_peer
-#	build_world()
-
-
 func _ready():
-	build_world()
+	init_world()
 
 var counter = 0
 
@@ -40,13 +33,11 @@ func convertArrayToVector(value):
 	for loc in value:
 		var vec = str_to_var("Vector2i" + loc)
 		newArray.append(vec)
-	return newArray	
+	return newArray
 
 func get_world_data(result, response_code, headers, body):
+	print("GOT TERRAIN DATA FROM HTTP")
 	var data = JSON.parse_string(body.get_string_from_utf8())
-	
-	server_data = data.server_data
-	
 	terrain.snow = convertArrayToVector(data.terrain.snow)
 	terrain.desert  = convertArrayToVector(data.terrain.desert)
 	terrain.forest = convertArrayToVector(data.terrain.forest)
@@ -56,39 +47,44 @@ func get_world_data(result, response_code, headers, body):
 	terrain.ocean = convertArrayToVector(data.terrain.ocean)
 	terrain.deep_ocean = convertArrayToVector(data.terrain.deep_ocean)
 	terrain.beach = convertArrayToVector(data.terrain.beach)
-	
-	world = data.world
-	
+
 	enet_peer.create_client(URL,PORT)
 	multiplayer.multiplayer_peer = enet_peer
-	$InitLoadScreen.queue_free()
-	print("GOT WORLD DATA")
-#	world = data["world"]
-#	server_data = data["server_data"]
-#	terrain = data["terrain"]
-##	MapData.world = _world
+	
 	$WorldMap.buildMap()
-##	await get_tree().create_timer(2).timeout
-##	MapData.add_world_data_to_chunks()
-	$WorldAmbience.initialize()
-	$WorldBuilder.initialize()
 	$WorldBuilder/BuildTerrain.initialize()
-	$WorldBuilder/BuildNature.initialize()
+	
 #	$WorldBuilder/SpawnAnimal.initialize()
 
+@rpc
+func send_server_data(data): 
+	print("GOT SERVER DATA")
+	server_data = data["server_data"]
 
-func build_world():
-	print("BUILD WORLD")
+func init_world():
+	print("INIT WORLD")
 	Server.world = self
 	set_map_tiles()
 	set_valid_tiles()
+	initialize_empty_world_data()
 	$HTTPRequest.request_completed.connect(get_world_data)
 	$HTTPRequest.request("http://"+URL+":8080/getData")
-#	$WorldBuilder.initialize()
-#	$WorldBuilder/BuildTerrain.initialize()
-#	$WorldBuilder/BuildNature.initialize()
-#	$WorldBuilder/SpawnAnimal.initialize()
-	#$WorldMap.buildMap()
+
+func initialize_empty_world_data():
+	for column in range(12):
+		for row in ["A","B","C","D","E","F","G","H","I","J","K","L"]:
+			world[row+str(column+1)] = {
+				"tree": {},
+				"stump": {},
+				"log": {},
+				"ore_large": {},
+				"ore": {},
+				"tall_grass": {},
+				"forage": {},
+				"animal": {},
+				"crop": {},
+				"tile": {},
+				"placeable": {}}
 
 
 func set_valid_tiles():
@@ -109,6 +105,13 @@ func set_map_tiles():
 	Tiles.object_tiles = $BuildingTiles/ObjectTiles
 	Tiles.wet_sand_tiles = $TerrainTiles/WetSand
 	Tiles.forest_tiles = $TerrainTiles/Forest
+
+@rpc
+func get_chunk_data(peer_id,chunks): pass
+
+@rpc 
+func receive_chunk_data(chunk_name,data): 
+	world[chunk_name] = data
 
 @rpc
 func send_message(data): pass

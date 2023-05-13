@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=12 format=3 uid="uid://bkq17vop8u2tj"]
 
 [ext_resource type="Texture2D" uid="uid://bnowosfcnkely" path="res://Assets/Images/Animations/loading screen/frame_0_delay-0.2s.png" id="2_a06at"]
 [ext_resource type="Script" path="res://MainMenu/LoadingScreen.gd" id="3"]

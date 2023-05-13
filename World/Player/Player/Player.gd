@@ -71,7 +71,7 @@ func _ready():
 	position = Vector2(500*16,500*16)
 	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
 	Server.player_node = self
-#	if is_building_world:
+	Server.world.get_node("WorldBuilder").initialize()
 	state = DYING
 	$Camera2D/UserInterface/LoadingScreen.initialize(8)
 	await get_tree().create_timer(8.0).timeout

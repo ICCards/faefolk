@@ -149,9 +149,7 @@ func change_tile():
 		tile_node.tier = new_tier
 		remove_materials(current_index)
 		if new_tier != "demolish":
-			tile_node.upgrade()
 			Server.world.get_node("PlaceableObjects").rpc_id(1,"player_upgrade_object",{"id":tile_node.name,"l":tile_node.location,"t":new_tier})
-			InstancedScenes.play_upgrade_building_effect(tile_node.location)
 		else:
 			Server.world.get_node("PlaceableObjects").rpc_id(1,"player_remove_object",Server.player_node.name,"placeable",tile_node.name,tile_node.location)
 	else:

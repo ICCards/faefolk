@@ -20,7 +20,7 @@
 [ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Menu/Options/Options.tscn" id="17_6k084"]
 [ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="17_utbmg"]
 [ext_resource type="Texture2D" uid="uid://ftl1013lhawe" path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" id="18_lxpui"]
-[ext_resource type="PackedScene" path="res://MainMenu/MainMenuButtons.tscn" id="19_22cmn"]
+[ext_resource type="PackedScene" uid="uid://b0eswpj3camh0" path="res://MainMenu/MainMenuButtons.tscn" id="19_22cmn"]
 [ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="21"]
 [ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Misc/BetaLabel.tscn" id="23"]
 [ext_resource type="Texture2D" uid="uid://4nuofeynpers" path="res://Assets/Images/Misc/settings_icon.png" id="24_mdgm3"]

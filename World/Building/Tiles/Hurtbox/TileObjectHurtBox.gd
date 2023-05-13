@@ -26,6 +26,8 @@ var is_player_sitting: bool = false
 var health = 3
 
 func _ready():
+	if variety:
+		variety = int(variety)
 	initialize()
 	initialize_interactive_area()
 	
