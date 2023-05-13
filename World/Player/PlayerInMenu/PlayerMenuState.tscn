@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d32x43u47sd5w"]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="AudioStream" uid="uid://qqpxtamwd4do" path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" id="1"]
 [ext_resource type="Script" path="res://World/Player/PlayerInMenu/PlayerMenuState.gd" id="1_ru3io"]

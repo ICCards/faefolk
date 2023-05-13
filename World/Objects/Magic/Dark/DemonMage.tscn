@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://3s87poep0d0b"]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Dark/DemonMage.gd" id="1_purek"]
 [ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="3_b0bjg"]

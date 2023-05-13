@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=22 format=3 uid="uid://bb04nnt28ei5l"]
+[gd_resource type="SpriteFrames" load_steps=22 format=3]
 
 [ext_resource type="Texture2D" uid="uid://bmhiaasb07vuq" path="res://Assets/Images/tree_sets/oak/mature/top animated winter.png" id="1"]
 

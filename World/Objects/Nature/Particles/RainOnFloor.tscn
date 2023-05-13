@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bm025jompo1fh"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Texture2D" uid="uid://dqosx81sjcg2l" path="res://Assets/Images/Particles/RainOnFloor.png" id="1_4qg74"]
 

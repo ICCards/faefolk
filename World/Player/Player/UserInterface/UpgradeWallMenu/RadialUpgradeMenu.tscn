@@ -2,17 +2,17 @@
 
 [ext_resource type="Texture2D" uid="uid://fw288h0634cw" path="res://Assets/Images/User interface/radial menus/icons/armored.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.gd" id="1_kdjpi"]
-[ext_resource type="PackedScene" uid="uid://dmd7l563t11f4" path="res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_0.tscn" id="2_mhk1e"]
-[ext_resource type="PackedScene" uid="uid://tmb31hqkc2gh" path="res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_1.tscn" id="3_7dcwk"]
-[ext_resource type="PackedScene" uid="uid://c0nbaswk4ga3h" path="res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_2.tscn" id="4_pqx8h"]
-[ext_resource type="PackedScene" uid="uid://ckdtmbwwnwp6l" path="res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_3.tscn" id="5_saefy"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_0.tscn" id="2_mhk1e"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_1.tscn" id="3_7dcwk"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_2.tscn" id="4_pqx8h"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_3.tscn" id="5_saefy"]
 [ext_resource type="Texture2D" uid="uid://bwuav7xhsibi7" path="res://Assets/Images/User interface/radial menus/icons/metal.png" id="6"]
-[ext_resource type="PackedScene" uid="uid://bkkhqpcmc33bo" path="res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_4.tscn" id="6_5qbiq"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/UpgradeWallMenu/radial_hammer_menu_item_4.tscn" id="6_5qbiq"]
 [ext_resource type="Texture2D" uid="uid://lfjxx4vsf66n" path="res://Assets/Images/User interface/radial menus/icons/wood.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://ctoegdovab38" path="res://Assets/Images/User interface/radial menus/icons/stone.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://dxkwoseg2d78u" path="res://Assets/Images/User interface/radial menus/icons/demolish.png" id="9"]
 [ext_resource type="Texture2D" uid="uid://hb7xol3bk3t5" path="res://Assets/Images/User interface/radial menus/middle-circle.png" id="11"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="13_yel4h"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="13_yel4h"]
 
 [sub_resource type="Animation" id="2"]
 resource_name = "set active"

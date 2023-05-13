@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0ehi6pdv08eu"]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Texture2D" uid="uid://cpuye4igeab7q" path="res://Assets/Images/Animations/Upgrade/upgrade effect.png" id="1_j7dns"]
 [ext_resource type="Script" path="res://World/Objects/Nature/Effects/RemoveBuilding.gd" id="1_t1dbq"]

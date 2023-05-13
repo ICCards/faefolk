@@ -18,7 +18,6 @@ func _ready():
 		game_state = GameState.new()
 		game_state.player_state = PlayerData.starting_player_data 
 		game_state.world_state = MapData.world
-		game_state.cave_state = MapData.caves
 		game_state.save_state()
 	$TitleMusic.stream = Sounds.title_music
 	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)

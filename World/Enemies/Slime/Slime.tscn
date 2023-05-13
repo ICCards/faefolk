@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://l7ak1ldss5ex"]
+[gd_scene load_steps=38 format=3]
 
 [ext_resource type="Script" path="res://World/Enemies/Slime/Slime.gd" id="1_kv3qs"]
 [ext_resource type="Texture2D" uid="uid://o0g2lde5dopc" path="res://Assets/Images/Enemies/enemy break.png" id="4"]

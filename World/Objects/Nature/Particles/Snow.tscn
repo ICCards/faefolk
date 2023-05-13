@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4uflfowyfnu4"]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Texture2D" uid="uid://bfwsdt4m5xh4r" path="res://Assets/Images/Particles/Snow.png" id="1_e0hmu"]
 

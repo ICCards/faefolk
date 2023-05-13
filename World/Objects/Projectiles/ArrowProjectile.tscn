@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c24mw76rb6tmv"]
+[gd_scene load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://World/Objects/Projectiles/ArrowProjectile.gd" id="1_orj32"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="2"]

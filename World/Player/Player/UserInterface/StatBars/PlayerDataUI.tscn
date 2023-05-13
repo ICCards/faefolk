@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cm8c7p7g6ii7g"]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.gd" id="1_7jgre"]
 [ext_resource type="Texture2D" uid="uid://c2s3ln6njit5j" path="res://Assets/Images/User interface/Player stats/health.png" id="3"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bwixgp0gdb6w" path="res://Assets/Images/User interface/Player stats/mana.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://cue6dirqviwjb" path="res://Assets/Images/User interface/Player stats/stats-bars-x2.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://c8tatrry8q7w5" path="res://Assets/Images/User interface/DateTime/clock.png" id="7"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="7_dgns7"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="7_dgns7"]
 [ext_resource type="Texture2D" uid="uid://bgbnkakxjttww" path="res://Assets/Images/User interface/DateTime/clock icons/1.png" id="8"]
 
 [node name="PlayerDataUI" type="Control"]

@@ -1,9 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dd0n86ke85w5d"]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://InventoryLogic/Slot.gd" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.gd" id="1_nqccw"]
 [ext_resource type="Texture2D" uid="uid://fmfyvumoluu0" path="res://Assets/Images/User interface/hotbars/hotbar-new.png" id="3"]
-[ext_resource type="PackedScene" uid="uid://4v3igpipcu6i" path="res://InventoryLogic/ItemDescription.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://InventoryLogic/ItemDescription.tscn" id="4"]
 [ext_resource type="Texture2D" uid="uid://dmv6j3ojkndy3" path="res://Assets/Images/User interface/combat hotbar/switch_btn2.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://dpvnod2gp0wlu" path="res://Assets/Images/User interface/combat hotbar/switch_btn1.png" id="6"]
 

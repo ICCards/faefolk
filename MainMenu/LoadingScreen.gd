@@ -1,15 +1,9 @@
 extends Control
 
-#func _ready():
-#	$AnimationPlayer.play("animate")
-#
-#func set_phase(phase):
-#	$Control/BuildingWorld.text = phase
-#	$AnimationPlayer.play("animate")
-
 
 func initialize(time):
-	print("INIT LOADING SCREEN")
+	if Server.world.has_node("InitLoadScreen"):
+		Server.world.get_node("InitLoadScreen").queue_free()
 	show()
 	$Bg.play("play")
 	var tween = get_tree().create_tween()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dje32y3llil5f"]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://World/Objects/Nature/Effects/TrunkHitEffect.gd" id="1_2fekx"]
 [ext_resource type="Texture2D" uid="uid://csak5mpbat13u" path="res://Assets/Images/tree_sets/evergreen/effects/chip.png" id="2_xdd3v"]

@@ -8,13 +8,13 @@ extends Node2D
 var rng = RandomNumberGenerator.new()
 
 var tree_object
-var location = Vector2i(0,0)
+var location
 var health 
 var variety 
 var destroyed: bool = false
 
 func _ready():
-	Tiles.remove_valid_tiles(location+Vector2i(-1,0), Vector2i(2,2))
+	Tiles.remove_valid_tiles(Vector2i(location)+Vector2i(-1,0), Vector2i(2,2))
 	call_deferred("setTexture", tree_object)
 
 func remove_from_world():
@@ -68,7 +68,7 @@ func destroy(data):
 		destroyed = true
 #		if MapData.world["stump"].has(name):
 #			MapData.world["stump"].erase(name)
-		Tiles.add_valid_tiles(location+Vector2i(-1,0), Vector2(2,2))
+		Tiles.add_valid_tiles(Vector2i(location)+Vector2i(-1,0), Vector2(2,2))
 		sound_effects.set_deferred("stream", Sounds.stump_break)
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -12))
 		sound_effects.call_deferred("play")

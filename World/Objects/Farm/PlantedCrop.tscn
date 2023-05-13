@@ -1,9 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://8urgulfeikba"]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="AudioStream" uid="uid://2u73yye23mpv" path="res://Assets/Sound/Sound effects/Tree/rustle.mp3" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Farm/PlantedCrop.gd" id="1_37wdp"]
 [ext_resource type="Texture2D" uid="uid://b2foho3vp0sfm" path="res://Assets/Images/Animations/plant/plant break.png" id="2_l6djf"]
-[ext_resource type="TileSet" uid="uid://c5t53fhi1b7fg" path="res://Assets/Tilesets/objects/crops.tres" id="4_kq05n"]
+[ext_resource type="TileSet" path="res://Assets/Tilesets/Objects/crops.tres" id="4_kq05n"]
 
 [sub_resource type="CircleShape2D" id="13"]
 radius = 30.0

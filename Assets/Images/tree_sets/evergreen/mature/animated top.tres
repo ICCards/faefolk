@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=22 format=3 uid="uid://detyjlgw1q0jg"]
+[gd_resource type="SpriteFrames" load_steps=22 format=3]
 
 [ext_resource type="Texture2D" uid="uid://bbomq52ehlvuj" path="res://Assets/Images/tree_sets/evergreen/mature/animated top.png" id="1"]
 

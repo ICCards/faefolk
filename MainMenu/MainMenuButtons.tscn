@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3vdyc3n310f7"]
+[gd_scene load_steps=4 format=3 uid="uid://b0eswpj3camh0"]
 
 [ext_resource type="Script" path="res://MainMenu/MainMenuButtons.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://dfvwmx10y6j7o" path="res://Assets/Images/Misc/MainMenu/play_button.png" id="2_bagk8"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="3_0bwq0"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="3_0bwq0"]
 
 [node name="MainMenuButtons" type="Control"]
 layout_mode = 3

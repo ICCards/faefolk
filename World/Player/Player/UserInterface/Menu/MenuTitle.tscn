@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4k542eq2r5ul"]
+[gd_scene load_steps=3 format=3]
 
 [ext_resource type="Texture2D" uid="uid://b0vx4w8ptu4i6" path="res://Assets/Images/User interface/buttons-icons/nameplate-wide.png" id="1"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="2_7mxy2"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="2_7mxy2"]
 
 [node name="MenuTitle" type="Control"]
 layout_mode = 3

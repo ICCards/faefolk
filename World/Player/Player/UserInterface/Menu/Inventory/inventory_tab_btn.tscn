@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtyobd2b5oj0i"]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="Texture2D" uid="uid://bai8b7wtamcjs" path="res://Assets/Images/User interface/buttons-icons/nameplate.png" id="1"]
 [ext_resource type="Texture2D" uid="uid://bhyc44ufjmueg" path="res://Assets/Images/User interface/buttons-icons/nameplate-selected.png" id="2"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Inventory/inventory_tab_btn.gd" id="3_ikxr7"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="4_m87vt"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="4_m87vt"]
 
 [node name="inventory_tab_btn" type="TextureButton"]
 offset_right = 31.0

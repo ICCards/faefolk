@@ -380,7 +380,7 @@ func place_object(item_name, direction, location, type, variety = null):
 				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 				$SoundEffects.play()
 				if item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
-					MapData.add_object("placeable",id, {"n":item_name,"v":variety,"l":location,"h":Stats.return_starting_door_health(item_name),"d":direction,"o":false})
+					MapData.add_object("placeable",id, {"n":item_name,"v":variety,"l":location,"h":Stats.return_max_door_health(item_name),"d":direction,"o":false})
 				elif moving_object:
 					MapData.move_placeable_object(Server.player_node.name,previous_moving_object_data["id"],{"l":previous_moving_object_data["l"],"d":previous_moving_object_data["d"]},{"n":item_name,"d":direction,"l":location,"v":variety,"h":3,"o":false})
 					Server.player_node.actions.destroy_moveable_object()

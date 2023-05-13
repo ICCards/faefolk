@@ -31,7 +31,7 @@ func place(type,id,data):
 		place_tree_in_world(id,data["v"],data["l"],data["b"],data["h"],data["p"])
 	elif type == "placeable":
 		var item_name = data["n"]
-		var location = data["l"]
+		var location = Util.string_to_vector2(data["l"])
 		var health = data["h"]
 		if item_name == "wall" or item_name == "foundation":
 			place_building_object_in_world(id,item_name,location,health,data["t"])
@@ -57,15 +57,15 @@ func place_door_in_world(id,item_name,direction,location,health,variety,door_ope
 	PlaceableObjects = Server.world.get_node("PlaceableObjects")
 	var object = BuildingTileObjectHurtBox.instantiate()
 	object.name = id
-	object.variety = variety
+	object.variety = int(variety)
 	object.direction = direction
 	object.health = health
-	object.location = location
+	object.location = Vector2i(location)
 	object.item_name = item_name
 	object.door_opened = door_opened
 	PlaceableObjects.call_deferred("add_child", object, true)
 	object.global_position = Tiles.wall_tiles.map_to_local(location)
-	Tiles.object_tiles.set_cell(0,location,0,Constants.customizable_rotatable_object_atlas_tiles[item_name][variety][direction])
+	Tiles.object_tiles.set_cell(0,location,0,Constants.customizable_rotatable_object_atlas_tiles[item_name][int(variety)][direction])
 
 
 
@@ -190,7 +190,7 @@ func place_object_in_world(id, item_name, direction, location, variety, opened_o
 	tileObjectHurtBox.variety = variety
 	tileObjectHurtBox.name = id
 	tileObjectHurtBox.item_name = item_name
-	tileObjectHurtBox.location = location
+	tileObjectHurtBox.location = Vector2i(location)
 	tileObjectHurtBox.direction = direction
 	tileObjectHurtBox.opened_or_light_toggled = opened_or_light_toggled
 	PlaceableObjects.call_deferred("add_child", tileObjectHurtBox, true)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bbtaxixw52a8"]
+[gd_scene load_steps=22 format=3]
 
 [ext_resource type="Texture2D" uid="uid://bv2e37vy0s7h4" path="res://Assets/Images/mini map/snow.png" id="1"]
 [ext_resource type="Script" path="res://World/Caves/Bosses/FireBoss.gd" id="1_qt2u5"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b4hruimdv6j78"]
+[gd_scene load_steps=16 format=3]
 
 [ext_resource type="Script" path="res://World/Enemies/Slime/Bat.gd" id="1_ts0lx"]
 [ext_resource type="Texture2D" uid="uid://dhju2q15xsooj" path="res://Assets/Images/Enemies/shadow sprite.png" id="4"]

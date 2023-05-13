@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dvnl2j0u3v17n"]
+[gd_scene load_steps=23 format=3]
 
 [ext_resource type="Texture2D" uid="uid://bktodylgrgdkv" path="res://Assets/Images/Enemies/Bird Boss/idle/down/body.png" id="1"]
 [ext_resource type="Script" path="res://World/Caves/Bosses/WindBoss.gd" id="1_a63k8"]

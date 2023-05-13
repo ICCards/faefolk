@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bjaw8dw0tc2qv"]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Stove/item_button.gd" id="1_lj34b"]
 [ext_resource type="Texture2D" uid="uid://d30i5wlgacql1" path="res://Assets/Images/inventory_icons/Food/baked catfish.png" id="2"]

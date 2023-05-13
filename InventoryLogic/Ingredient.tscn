@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7ai8vbcyvkti"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="1_g5wq4"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="1_g5wq4"]
 [ext_resource type="Texture2D" uid="uid://utxboaqigwsd" path="res://Assets/Images/inventory_icons/Resource/wood.png" id="2_bfwx3"]
 
 [node name="Ingredient" type="Control"]

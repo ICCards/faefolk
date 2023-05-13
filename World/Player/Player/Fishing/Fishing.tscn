@@ -1,13 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://bq61lhws3vl1j"]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="Script" path="res://World/Player/Player/Fishing/Fishing.gd" id="1_ttivv"]
 [ext_resource type="Texture2D" uid="uid://b1ju2e10selvc" path="res://Assets/Images/inventory_icons/Fish/albacore.png" id="2"]
 [ext_resource type="Texture2D" uid="uid://b4shw26kcaudu" path="res://Assets/Images/Misc/Fishing/progress bar/fishing_bar-frame.png" id="2_ywe2l"]
 [ext_resource type="Texture2D" uid="uid://cj0u0f7vk43lp" path="res://Assets/Images/Misc/exclamation icon.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://c6pnwo0uollui" path="res://Assets/Images/Misc/Fishing/progress bar/fishing_bar.png" id="3_leplc"]
-[ext_resource type="PackedScene" uid="uid://dcjcx6cnv8dnl" path="res://World/Player/Player/Fishing/FishingMiniGame.tscn" id="4_8e1cl"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/Fishing/FishingMiniGame.tscn" id="4_8e1cl"]
 [ext_resource type="Texture2D" uid="uid://dy0twecogksrh" path="res://Characters/Weapon swings/fishing rod cast/fish hook.png" id="5"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="6_51gg3"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="6_51gg3"]
 
 [sub_resource type="Animation" id="45"]
 length = 0.001

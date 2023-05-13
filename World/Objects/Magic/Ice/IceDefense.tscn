@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://uwbk11n5obhy"]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Ice/IceDefense.gd" id="1_utxwh"]
 [ext_resource type="AudioStream" uid="uid://dinwfiff0wbos" path="res://Assets/Sound/Sound effects/Magic/Ice/ice defense.mp3" id="5"]

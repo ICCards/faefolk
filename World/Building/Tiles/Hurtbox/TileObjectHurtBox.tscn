@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd" id="1_n8wg3"]
 [ext_resource type="Script" path="res://World/Building/Tiles/Interactives.gd" id="2_i881y"]
-[ext_resource type="TileSet" uid="uid://bmjc5ou5oyowx" path="res://Assets/Tilesets/Objects/objects.tres" id="2_tvff0"]
+[ext_resource type="TileSet" uid="uid://duqx46eplxoey" path="res://Assets/Tilesets/Objects/objects.tres" id="2_tvff0"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="3_74bdu"]
 
 [sub_resource type="RectangleShape2D" id="1"]

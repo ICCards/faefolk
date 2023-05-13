@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://curdf0q5apwnx"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="1_t8fsq"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="1_t8fsq"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Options/key_binding.gd" id="1_wjcbf"]
-[ext_resource type="PackedScene" uid="uid://0gr52jd1t8ta" path="res://World/Player/Player/UserInterface/Menu/Options/KeyBindingBtn.tscn" id="2_0nqhb"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Menu/Options/KeyBindingBtn.tscn" id="2_0nqhb"]
 
 [node name="KeyBinding" type="Control"]
 custom_minimum_size = Vector2(2.08165e-12, 56)

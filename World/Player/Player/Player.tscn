@@ -8,7 +8,7 @@
 [ext_resource type="Material" uid="uid://dshi8sn4j6jfa" path="res://Assets/Themes/whiten.tres" id="5_3of15"]
 [ext_resource type="Texture2D" uid="uid://3ik13tk6hyny" path="res://Characters/Human/male/HOLDING WALK/body/down/body.png" id="5_yvg8i"]
 [ext_resource type="Texture2D" uid="uid://b2yqfp3r1tqa4" path="res://Characters/Human/male/HOLDING WALK/body/down/arms.png" id="6_lbf3e"]
-[ext_resource type="PackedScene" uid="uid://o2meckfxvk0f" path="res://World/Player/Player/AttachedScenes/Magic/Magic.tscn" id="8_wf6cw"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/AttachedScenes/Magic/Magic.tscn" id="8_wf6cw"]
 [ext_resource type="Texture2D" uid="uid://byxsajdug1vn5" path="res://Characters/Weapon swings/scythe sword swing/scythe/down.png" id="9_0sqbd"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="10"]
 [ext_resource type="Texture2D" uid="uid://utxboaqigwsd" path="res://Assets/Images/inventory_icons/Resource/wood.png" id="10_7rpna"]
@@ -26,7 +26,7 @@
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/HoldingTorch.gd" id="21_t3m88"]
 [ext_resource type="Texture2D" uid="uid://78sds5dnqh0c" path="res://Assets/Images/Animations/objects/torch/3.png" id="22_grgdf"]
 [ext_resource type="Texture2D" uid="uid://bt3ysh31fm3pc" path="res://Assets/Images/Animations/objects/torch/4.png" id="23_i22ks"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="28_3r6uk"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="28_3r6uk"]
 [ext_resource type="PackedScene" path="res://World/Player/Player/AttachedScenes/MessageBubble/message_bubble.tscn" id="28_dc8ci"]
 
 [sub_resource type="Animation" id="3"]
@@ -3576,7 +3576,6 @@ libraries = {
 [node name="Magic" parent="." instance=ExtResource("8_wf6cw")]
 
 [node name="Swing" parent="." instance=ExtResource("12_3ewbu")]
-visible = false
 
 [node name="Area2Ds" type="Node2D" parent="."]
 visible = false

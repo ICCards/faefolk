@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c6wlm3ymf4sq6"]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/TrashCan/Trash.gd" id="1_i6hr6"]
 [ext_resource type="Texture2D" uid="uid://cp6pgwxrxyp6l" path="res://Assets/Images/User interface/trash/trash bottom.png" id="2_w6owo"]

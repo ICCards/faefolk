@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://4gsjwvh2fwq7"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="1_kj33m"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="1_kj33m"]
 [ext_resource type="Script" path="res://World/Map/GridSquareLabel.gd" id="2_th0qu"]
 
 [node name="GridSquareLabel" type="Label" groups=["grid labels"]]

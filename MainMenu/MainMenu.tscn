@@ -1,7 +1,6 @@
-[gd_scene load_steps=30 format=3]
+[gd_scene load_steps=30 format=3 uid="uid://b6yepu8bcojch"]
 
 [ext_resource type="Texture2D" uid="uid://ds11f4jtks5ik" path="res://Assets/Images/Misc/MainMenu/background.png" id="1"]
-[ext_resource type="Texture2D" uid="uid://bbb43rymu58fb" path="res://Assets/Images/Misc/settings icon.png" id="3"]
 [ext_resource type="Texture2D" uid="uid://cvv5y3ir233ea" path="res://Assets/Images/Animations/water main menu/1.png" id="3_4n707"]
 [ext_resource type="Texture2D" uid="uid://bv2e37vy0s7h4" path="res://Assets/Images/mini map/snow.png" id="4"]
 [ext_resource type="Texture2D" uid="uid://i8gajcq2vlkl" path="res://Assets/Images/Animations/water main menu/2.png" id="4_41lbt"]
@@ -18,12 +17,13 @@
 [ext_resource type="Texture2D" uid="uid://ddd2o5o6mmly0" path="res://Assets/Images/Animations/water main menu/3b.png" id="10_1u1lm"]
 [ext_resource type="Texture2D" uid="uid://d4dk67jrqiqm" path="res://Assets/Images/Animations/water main menu/4b.png" id="11_f44t1"]
 [ext_resource type="Texture2D" uid="uid://dncukd0ceeiwo" path="res://Assets/Images/Animations/water main menu/5b.png" id="12_xq0bx"]
-[ext_resource type="PackedScene" uid="uid://boujb4h3xtdhe" path="res://World/Player/Player/UserInterface/Menu/Options/Options.tscn" id="17_6k084"]
-[ext_resource type="PackedScene" uid="uid://b4k542eq2r5ul" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="17_utbmg"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Menu/Options/Options.tscn" id="17_6k084"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Menu/MenuTitle.tscn" id="17_utbmg"]
 [ext_resource type="Texture2D" uid="uid://ftl1013lhawe" path="res://Assets/Images/User interface/inventory/frames/wood-frame.png" id="18_lxpui"]
-[ext_resource type="PackedScene" uid="uid://b3vdyc3n310f7" path="res://MainMenu/MainMenuButtons.tscn" id="19_22cmn"]
+[ext_resource type="PackedScene" uid="uid://b0eswpj3camh0" path="res://MainMenu/MainMenuButtons.tscn" id="19_22cmn"]
 [ext_resource type="Texture2D" uid="uid://bnkbpvnlxltvj" path="res://Assets/Images/User interface/buttons-icons/x-button-pressed.png" id="21"]
-[ext_resource type="PackedScene" uid="uid://2w2tr1rtk116" path="res://World/Player/Player/UserInterface/Misc/BetaLabel.tscn" id="23"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Misc/BetaLabel.tscn" id="23"]
+[ext_resource type="Texture2D" uid="uid://4nuofeynpers" path="res://Assets/Images/Misc/settings_icon.png" id="24_mdgm3"]
 
 [sub_resource type="RectangleShape2D" id="1"]
 size = Vector2(101, 228)
@@ -234,7 +234,7 @@ offset_top = 648.0
 offset_right = 1481.0
 offset_bottom = 921.0
 scale = Vector2(0.25, 0.25)
-texture_normal = ExtResource("3")
+texture_normal = ExtResource("24_mdgm3")
 
 [node name="TitleMusic" type="AudioStreamPlayer" parent="."]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8m0slq32tqqp"]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Texture2D" uid="uid://daknmja0t5w8u" path="res://Assets/Images/inventory_icons/Fish/clownfish.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/Fishing/Fish.gd" id="1_8qyvm"]

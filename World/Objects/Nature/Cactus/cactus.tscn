@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=3 uid="uid://dnn0ie7cuvkxu"]
+[gd_scene load_steps=60 format=3]
 
 [ext_resource type="Script" path="res://World/Objects/Nature/Cactus/cactus.gd" id="1_d051j"]
 [ext_resource type="Texture2D" uid="uid://bk8sfnwa8aiqf" path="res://Assets/Images/cacti/cactus1-idle.png" id="1_x2pxv"]

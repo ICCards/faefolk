@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dcjcx6cnv8dnl"]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Script" path="res://World/Player/Player/Fishing/FishingMiniGame.gd" id="1_q5frc"]
 [ext_resource type="Texture2D" uid="uid://csb4wdm6ni8qd" path="res://Assets/Images/Misc/Fishing/Hook.png" id="2"]

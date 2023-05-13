@@ -38,7 +38,11 @@ BuildCaveLevel="*res://Global/Data/BuildCaveLevel.gd"
 MapData="*res://Global/Data/MapData.gd"
 PlayerData="*res://Global/Data/PlayerData.gd"
 PlayerDataHelpers="*res://Global/Data/PlayerDataHelpers.gd"
-Server="*res://Global/Data/server.gd"
+Server="*res://Global/Data/Server.gd"
+
+[debug]
+
+file_logging/enable_file_logging=true
 
 [display]
 

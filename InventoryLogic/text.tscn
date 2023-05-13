@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://co00lep6a88kp"]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="1_1d2mi"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="1_1d2mi"]
 
 [node name="Text" type="Control"]
 layout_mode = 3

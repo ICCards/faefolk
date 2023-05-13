@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dd0o4cupm3yb0" path="res://Assets/Images/User interface/chat/chatbubble/bot-mid2.png" id="9_brktr"]
 [ext_resource type="Texture2D" uid="uid://d00jgwl7xnw0u" path="res://Assets/Images/User interface/chat/chatbubble/bot-mid3.png" id="10_fdrhp"]
 [ext_resource type="Texture2D" uid="uid://dbndgnxcvgpkl" path="res://Assets/Images/User interface/chat/chatbubble/bot-right.png" id="11_w6syh"]
-[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="12_vtqn7"]
+[ext_resource type="Theme" path="res://Assets/Themes/text.tres" id="12_vtqn7"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_y5070"]
 

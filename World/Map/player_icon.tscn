@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://balcmsv8dqct2"]
+[gd_scene load_steps=2 format=3]
 
 [ext_resource type="Texture2D" uid="uid://ctfn0kqsd2hhf" path="res://Assets/Images/mini map/player mini map icon.png" id="1_x7agy"]
 

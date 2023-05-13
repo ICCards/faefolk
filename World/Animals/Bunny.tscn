@@ -1,9 +1,9 @@
-[gd_scene load_steps=31 format=3 uid="uid://c8qca66q6syo4"]
+[gd_scene load_steps=31 format=3]
 
 [ext_resource type="Script" path="res://World/Animals/Bunny.gd" id="2_bon8t"]
 [ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="3"]
 [ext_resource type="PackedScene" uid="uid://dr88n2qik0tat" path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" id="3_8k70x"]
-[ext_resource type="SpriteFrames" uid="uid://nxdmav8lhx5m" path="res://Assets/Images/Animals/Bunny/yellowBunny.tres" id="3_djxbj"]
+[ext_resource type="SpriteFrames" path="res://Assets/Images/Animals/Bunny/yellowBunny.tres" id="3_djxbj"]
 [ext_resource type="PackedScene" uid="uid://cqt04hkompf5f" path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" id="4_lm4gw"]
 [ext_resource type="Texture2D" uid="uid://bbybm4xho1nc8" path="res://Assets/Images/Magic/lightning/Shock_Small.png" id="4_nh64w"]
 [ext_resource type="PackedScene" uid="uid://cvfur4ra58e75" path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" id="5_6f3da"]

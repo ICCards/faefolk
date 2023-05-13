@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bhilgn3waubes"]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="Texture2D" uid="uid://h5xwa73koaw8" path="res://Assets/Images/User interface/combat hotbar/hotbar23.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.gd" id="1_hue8c"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b6tl1o10h8ybn" path="res://Assets/Images/User interface/combat hotbar/hotbar23_bar-small.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://do7p63j7fd8ug" path="res://Assets/Images/User interface/combat hotbar/hotbar23_glass.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://b16f0gq1148xg" path="res://Assets/Images/User interface/combat hotbar/hotbar23_glass-small.png" id="8"]
-[ext_resource type="PackedScene" uid="uid://dvnykx0ktn32j" path="res://World/Player/Player/UserInterface/Slots/MagicSlots.tscn" id="11_is21i"]
+[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Slots/MagicSlots.tscn" id="11_is21i"]
 [ext_resource type="Texture2D" uid="uid://dmv6j3ojkndy3" path="res://Assets/Images/User interface/combat hotbar/switch_btn2.png" id="12"]
 [ext_resource type="PackedScene" uid="uid://0wk3ykd7s1tj" path="res://World/Player/Player/UserInterface/Slots/ItemSlots.tscn" id="12_jw3p1"]
 [ext_resource type="Texture2D" uid="uid://dpvnod2gp0wlu" path="res://Assets/Images/User interface/combat hotbar/switch_btn1.png" id="13"]

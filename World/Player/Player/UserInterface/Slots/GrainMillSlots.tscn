@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cguj34yegyfxx"]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Texture2D" uid="uid://c3bloivytxxcj" path="res://Assets/Images/inventory_icons/Crop/corn.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Slots/GrainMillSlots.gd" id="1_xw4ql"]

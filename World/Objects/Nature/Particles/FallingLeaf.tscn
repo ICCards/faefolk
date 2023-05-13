@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bt148nvyjn7hm"]
+[gd_scene load_steps=4 format=3]
 
 [ext_resource type="Texture2D" uid="uid://bcyoouuc8rlf5" path="res://Assets/Images/Particles/falling leaf.png" id="1_ggf75"]
 

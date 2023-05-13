@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_t0hnv"]
 
 [sub_resource type="RectangleShape2D" id="2"]
-size = Vector2(2, 2)
+size = Vector2(1, 1)
 
 [sub_resource type="CapsuleShape2D" id="69"]
 radius = 15.0

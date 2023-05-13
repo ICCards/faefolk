@@ -103,7 +103,7 @@ func return_max_building_health(tier):
 		"armored":
 			return MAX_ARMORED_BUILDING
 
-func return_starting_door_health(item_name):
+func return_max_door_health(item_name):
 	match item_name:
 		"wood door":
 			return MAX_WOOD_DOOR

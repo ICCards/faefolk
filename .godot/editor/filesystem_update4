@@ -1,4 +1,15 @@
+res://MainMenu/MainMenu.tscn
 res://World/World/main.tscn
+res://Assets/Themes/Flash.tres
+res://Assets/Images/Animals/Bird/bird1.tres
+res://Assets/Images/Animals/Bunny/yellowBunny.tres
+res://Assets/Images/Animals/Duck/duck3.tres
+res://Assets/Tilesets/Objects/objects.tres
+res://Assets/Tilesets/Objects/crops.tres
+res://Assets/Tilesets/Terrain/tres files/cave walls.tres
+res://Assets/Themes/MiniMap.tres
+res://Assets/Images/tree_sets/oak/mature/animated top.tres
+res://Assets/Images/IC Kitties/SpriteFrames/White.tres
 res://Assets/Tilesets/Terrain/tres files/plains.tres
 res://Assets/Tilesets/Terrain/tres files/deep ocean.tres
 res://Assets/Tilesets/Terrain/tres files/dirt.tres
@@ -12,19 +23,26 @@ res://Assets/Tilesets/Terrain/tres files/wet sand.tres
 res://Assets/Tilesets/Terrain/tres files/shallow ocean.tres
 res://Assets/Tilesets/foundation/foundation.tres
 res://Assets/Tilesets/walls/walls.tres
-res://Assets/Tilesets/Objects/objects.tres
 res://Assets/Tilesets/Terrain/tres files/hoed.tres
 res://Assets/Tilesets/Terrain/tres files/watered hoed.tres
-res://Assets/Themes/MiniMap.tres
-res://Assets/Themes/text.tres
-res://Assets/Themes/LockedAsset.tres
-res://Assets/Themes/whiten.tres
-res://Assets/Tilesets/Objects/crops.tres
-res://World/Player/Player/Player.tscn
-res://World/Building/PlaceObjectPreview.tscn
 res://World/World/main.gd
-res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.gd
-res://World/Player/Player/AttachedScenes/Sound/AmbientSound.gd
-res://World/Map/WorldMap.gd
-res://World/World/Builder/BuildTerrain.gd
-res://World/World/Builder/BuildNature.gd
+res://MainMenu/MainMenuButtons.tscn
+res://MainMenu/MainMenu.gd
+res://World/World/Scripts/PlaceableObjects.gd
+res://Global/Data/PlaceObject.gd
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd
+res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn
+res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn
+res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.gd
+res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.gd
+res://World/World/Builder/WorldBuilder.gd
+res://World/Player/Player/Player.tscn
+res://Assets/Themes/whiten.tres
+res://MainMenu/LoadingScreen.gd
+res://World/Player/Player/Player.gd
+res://MainMenu/LoadingScreen.tscn
+res://World/World/Scripts/FarmingTiles.gd
+res://World/World/Scripts/NatureObjects.gd
+res://World/World/Scripts/ForageObjects.gd
+res://World/World/Scripts/GrassObjects.gd
