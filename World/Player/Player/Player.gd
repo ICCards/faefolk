@@ -34,11 +34,11 @@ enum {
 var cast_movement_direction = ""
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
-#@export var position: Vector2
 @export var current_footsteps_sound: String = ""
 @export var animation: String = "idle_down"
 @export var tool_name: String = ""
 @export var footstep_stream_paused: bool
+@export var play_animation_backwards: bool = false
 @export var holding_item_name: String = ""
 var MAX_SPEED_DIRT := 8
 var MAX_SPEED_PATH := 9
@@ -58,17 +58,14 @@ func _ready():
 	composite_sprites.hide()
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
-	$Camera2D.enabled = is_multiplayer_authority()
 	$AttachedText/Username.text = str(name)
 	if not is_multiplayer_authority(): 
-		set_process_input(false)
-		set_process_unhandled_input(false)
-		set_process(false)
-		await get_tree().create_timer(8.0).timeout
-		composite_sprites.show()
-		$AttachedText.show()
+		initialize_player_template()
 		return
-	position = Vector2(500*16,500*16)
+	$Camera2D.enabled = true
+	#var spawn_locs = Server.world.get_node("TerrainTiles/Desert").get_used_cells(0)
+	#spawn_locs.shuffle()
+	position = Vector2(500*16,500*16) #Vector2i(spawn_locs[0])*Vector2i(16,16)
 	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
 	Server.player_node = self
 	Server.world.get_node("WorldBuilder").initialize()
@@ -80,6 +77,14 @@ func _ready():
 	state = MOVEMENT
 	set_held_object()
 	Server.isLoaded = true
+
+func initialize_player_template():
+	set_process_input(false)
+	set_process_unhandled_input(false)
+	set_process(false)
+	await get_tree().create_timer(8.0).timeout
+	composite_sprites.show()
+	$AttachedText.show()
 
 
 func _physics_process(delta):
@@ -102,8 +107,11 @@ func _physics_process(delta):
 		else:
 			holding_item.show()
 			$CompositeSprites/HoldingItem.texture = load("res://Assets/Images/inventory_icons/"+JsonData.item_data[holding_item_name]["ItemCategory"] +"/"+ holding_item_name +".png")
+		if play_animation_backwards:
+			animation_player.play_backwards(animation_player.current_animation)
+		else:
+			animation_player.play(animation_player.current_animation)
 		composite_sprites.set_player_animation(character,animation,tool_name)
-		animation_player.play(animation_player.current_animation)
 
 
 func _enter_tree():
@@ -460,7 +468,8 @@ func walk_state(_direction):
 				composite_sprites.set_player_animation(character, animation, null)
 		elif Sounds.current_footsteps_sound == Sounds.swimming:
 			holding_item_name = ""
+			animation = "swim_" + direction.to_lower()
 			$Area2Ds/HurtBox.decrease_energy_or_health_while_sprinting()
-			composite_sprites.set_player_animation(character, "swim_" + direction.to_lower(), "swim")
+			composite_sprites.set_player_animation(character, animation, "swim")
 			holding_item.hide()
 			$HoldingTorch.set_inactive()

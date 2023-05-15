@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=4 format=3 uid="uid://cm306lgc2hau1"]
 
 [ext_resource type="AudioStream" uid="uid://bdedmyao5swjq" path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScenes/Actions/Actions.gd" id="1_nu2wu"]

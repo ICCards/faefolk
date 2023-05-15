@@ -194,7 +194,7 @@ func return_advanced_fruit_tree_phase(current_phase):
 func isObjectPlaceableOnGround(item_name):
 	if item_name == "wood fence" or item_name == "stone fence" or item_name == "metal fence" or \
 	item_name == "wood gate" or item_name == "stone gate" or item_name == "metal gate" or \
-	item_name == "well" or item_name == "torch" or item_name == "campfire":
+	item_name == "well" or item_name == "torch" or item_name == "campfire" or item_name == "sleeping bag":
 		return true
 	return false
 

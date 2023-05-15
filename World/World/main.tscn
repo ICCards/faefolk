@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://clgao2r8dhjp2"]
+[gd_scene load_steps=42 format=3 uid="uid://ccj70qn1crooy"]
 
 [ext_resource type="Script" path="res://World/World/main.gd" id="1_ddhom"]
 [ext_resource type="PackedScene" uid="uid://bkq17vop8u2tj" path="res://MainMenu/LoadingScreen.tscn" id="2_41261"]
@@ -13,7 +13,7 @@
 [ext_resource type="TileSet" uid="uid://dyhpf5ycylv47" path="res://Assets/Tilesets/Terrain/tres files/deep ocean.tres" id="11_o78d0"]
 [ext_resource type="TileSet" uid="uid://kur362tioktp" path="res://Assets/Tilesets/Terrain/tres files/dirt.tres" id="12_bs77d"]
 [ext_resource type="TileSet" uid="uid://46xup2d252wi" path="res://Assets/Tilesets/Terrain/tres files/forest.tres" id="13_kdqba"]
-[ext_resource type="TileSet" uid="uid://b4kvswgv27btw" path="res://Assets/Tilesets/Terrain/elevated terrain.tres" id="14_mwr1d"]
+[ext_resource type="TileSet" uid="uid://b4kvswgv27btw" path="res://Assets/Tilesets/Terrain/tres files/elevated terrain.tres" id="14_n1ubj"]
 [ext_resource type="TileSet" uid="uid://5ievp1f6ocsj" path="res://Assets/Tilesets/Terrain/tres files/freshwater.tres" id="15_1jx3y"]
 [ext_resource type="TileSet" uid="uid://c8oj3vj13c2wy" path="res://Assets/Tilesets/Terrain/tres files/sand.tres" id="16_psrlb"]
 [ext_resource type="TileSet" uid="uid://r6da5qp2qgn3" path="res://Assets/Tilesets/Terrain/tres files/waves.tres" id="17_asoyo"]
@@ -3414,6 +3414,7 @@ y_sort_enabled = true
 script = ExtResource("1_ddhom")
 
 [node name="InitLoadScreen" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="LoadingScreen" parent="InitLoadScreen" instance=ExtResource("2_41261")]
 
@@ -3486,7 +3487,7 @@ layer_0/z_index = -4
 
 [node name="Elevation" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
-tile_set = ExtResource("14_mwr1d")
+tile_set = ExtResource("14_n1ubj")
 format = 2
 
 [node name="Freshwater" type="TileMap" parent="TerrainTiles"]

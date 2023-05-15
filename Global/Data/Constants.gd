@@ -45,10 +45,10 @@ const dimensions_dict = {
 	"couch": Vector2(3,2),
 	"armchair": Vector2(2,2),
 	"bed": Vector2(2,2),
+	"sleeping bag": Vector2(2,2),
 	"large rug": Vector2(4,3),
 	"medium rug": Vector2(2,2),
 	"small rug": Vector2(1,1),
-	"sleeping bag": Vector2(1,2),
 	"round table": Vector2(2,2),
 	"wood door": Vector2(2,1),
 	"metal door": Vector2(2,1),
@@ -92,6 +92,7 @@ var customizable_object_atlas_tiles = {
 		9: Vector2i(16,31),
 		10: Vector2i(18,31),
 		11: Vector2i(20,31),
+		12: Vector2i(22,31),
 	},
 	"round table" : {
 		1: Vector2i(0,39),
@@ -111,6 +112,7 @@ var customizable_object_atlas_tiles = {
 		8: Vector2i(49,50),
 		9: Vector2i(56,50),
 		10: Vector2i(63,50),
+		11: Vector2i(70,50),
 	},
 	"medium rug" : {
 		1: Vector2i(4,50),
@@ -123,6 +125,7 @@ var customizable_object_atlas_tiles = {
 		8: Vector2i(53,50),
 		9: Vector2i(60,50),
 		10: Vector2i(67,50),
+		11: Vector2i(74,50),
 	},
 	"small rug" : {
 		1: Vector2i(6,50),
@@ -135,6 +138,7 @@ var customizable_object_atlas_tiles = {
 		8: Vector2i(55,50),
 		9: Vector2i(62,50),
 		10: Vector2i(69,50),
+		11: Vector2i(76,50),
 	},
 	"dresser" : {
 		1: Vector2i(0,92),
@@ -202,6 +206,14 @@ var customizable_object_atlas_tiles = {
 		2: Vector2i(1,108),
 		3: Vector2i(2,108),
 		4: Vector2i(3,108),
+		5: Vector2i(4,108),
+		6: Vector2i(5,108),
+		7: Vector2i(6,108),
+		8: Vector2i(7,108),
+	},
+	"sleeping bag": {
+		1: Vector2i(0,110),
+		2: Vector2i(2,110)
 	}
 	
 }
@@ -416,6 +428,12 @@ var customizable_rotatable_object_atlas_tiles = {
 			"right": Vector2i(5,4),
 			"down": Vector2i(6,4),
 			"left": Vector2i(7,4)
+		},
+		3: {
+			"up": Vector2i(8,4),
+			"right": Vector2i(9,4),
+			"down": Vector2i(10,4),
+			"left": Vector2i(11,4)
 		},
 		
 	},

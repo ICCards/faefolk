@@ -124,30 +124,34 @@ func _input(event):
 			PlayerData.slot_selected(9)
 
 
-#func death():
-#	if $Menu.visible:
-#		hide_menu()
-#	else:
-#		match object_name:
-#			"workbench":
-#				close_workbench()
-#			"grain mill":
-#				close_grain_mill()
-#			"stove":
-#				close_stove(object_id)
-#			"chest":
-#				close_chest(object_id)
-#			"furnace":
-#				close_furnace(object_id)
-#			"campfire":
-#				close_campfire(object_id)
-#			"brewing table":
-#				close_brewing_table(object_id)
-#	close_hotbar_clock_and_stats()
-#	if holding_item:
-#		InstancedScenes.initiateInventoryItemDrop([holding_item.item_name, holding_item.item_quantity, holding_item.item_health], Server.player_node.position)
-#		holding_item.queue_free()
-#		holding_item = null
+func death():
+	$DeathEffect.show()
+	$DeathEffect.color = Color("ff000000")
+	var tween = get_tree().create_tween()
+	tween.tween_property($DeathEffect,"color",Color("ff030384"),1.6)
+	if $Menu.visible:
+		hide_menu()
+	elif has_node("Workbench"):
+		close_workbench()
+	elif has_node("Grain mill"):
+		close_grain_mill(object_id)
+	elif has_node("Stove"):
+		close_stove(object_id)
+	elif has_node("Chest"):
+		close_chest(object_id)
+	elif has_node("Furnace"):
+		close_furnace(object_id)
+	elif has_node("Campfire"):
+		close_campfire(object_id)
+	elif has_node("Brewing table"):
+		close_brewing_table(object_id)
+	elif has_node("Tool cabinet"):
+		close_tc(object_id)
+	close_hotbar_clock_and_stats()
+	if holding_item:
+		InstancedScenes.initiateInventoryItemDrop([holding_item.item_name, holding_item.item_quantity, holding_item.item_health], Server.player_node.position)
+		holding_item.queue_free()
+		holding_item = null
 
 
 
@@ -165,8 +169,8 @@ func toggle_save_and_exit():
 
 
 func respawn():
+	$DeathEffect.hide()
 	add_hotbar_clock_and_stats()
-
 
 func open_chest(id):
 	PlayerData.interactive_screen_mode = true
@@ -363,7 +367,7 @@ func close_campfire(id):
 	if not holding_item and has_node("Campfire"):
 		Sounds.play_deselect_sound()
 		add_hotbar_clock_and_stats()
-		get_node(str(id)).hide()
+		get_node("Campfire").destroy()
 		drop_items()
 		Server.world.rpc_id(1,"send_updated_ui_slots", id, Server.world.server_data["ui_slots"][id])
 		Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":current_interactice_area_location})

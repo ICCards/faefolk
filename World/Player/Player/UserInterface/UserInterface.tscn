@@ -1,9 +1,9 @@
-[gd_scene load_steps=32 format=3]
+[gd_scene load_steps=32 format=3 uid="uid://c3f02b7na2fkr"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/UserInterface.gd" id="1_pv3v8"]
 [ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" id="2_dv8vv"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/WeatherEffects.gd" id="2_rl35f"]
-[ext_resource type="PackedScene" path="res://MainMenu/LoadingScreen.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://bkq17vop8u2tj" path="res://MainMenu/LoadingScreen.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://dkn2fivmq1v8o" path="res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn" id="4_nwvkq"]
 [ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.tscn" id="5_mppsu"]
 [ext_resource type="Texture2D" uid="uid://c81fev363dte8" path="res://Assets/Images/User interface/PlaceObject/RotationUI1.png" id="5_yyu54"]

@@ -46,8 +46,7 @@ var active_item_slot_combat_hotbar = 0
 
 
 var starting_player_data = {
-	"current_save_location": null,
-	"respawn_location": Vector2(500*16,500*16),
+	"respawn_position": null,
 	"health": 100,
 	"mana": 100,
 	"energy": 100,
@@ -91,13 +90,6 @@ var starting_player_data = {
 	"combat_hotbar": {
 	#		"0": ["wind staff", 1, null],
 	},
-	"chests": {},
-	"barrels" : {},
-	"furnaces": {},
-	"brewing_tables": {},
-	"grain_mills": {},
-	"stoves": {},
-	"campfires": {},
 	"skill_experience": {
 			"farming": 0,
 			"foraging": 0,

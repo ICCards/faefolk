@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=13 format=3 uid="uid://cyv5t6hbxjs73"]
 
 [ext_resource type="Texture2D" uid="uid://cefhq312qr2uq" path="res://Assets/Images/User interface/inventory/crafting/crafting slider.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.gd" id="1_gsu72"]
@@ -256,6 +256,11 @@ layout_mode = 2
 script = ExtResource("9")
 
 [node name="well" type="Panel" parent="CraftingMenu/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9")
+
+[node name="sleeping bag" type="Panel" parent="CraftingMenu/Items"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("9")

@@ -1,15 +1,4 @@
-res://MainMenu/MainMenu.tscn
-res://World/World/main.tscn
-res://Assets/Themes/Flash.tres
-res://Assets/Images/Animals/Bird/bird1.tres
-res://Assets/Images/Animals/Bunny/yellowBunny.tres
-res://Assets/Images/Animals/Duck/duck3.tres
-res://Assets/Tilesets/Objects/objects.tres
-res://Assets/Tilesets/Objects/crops.tres
-res://Assets/Tilesets/Terrain/tres files/cave walls.tres
-res://Assets/Themes/MiniMap.tres
-res://Assets/Images/tree_sets/oak/mature/animated top.tres
-res://Assets/Images/IC Kitties/SpriteFrames/White.tres
+res://World/Player/Player/Player.tscn
 res://Assets/Tilesets/Terrain/tres files/plains.tres
 res://Assets/Tilesets/Terrain/tres files/deep ocean.tres
 res://Assets/Tilesets/Terrain/tres files/dirt.tres
@@ -23,26 +12,43 @@ res://Assets/Tilesets/Terrain/tres files/wet sand.tres
 res://Assets/Tilesets/Terrain/tres files/shallow ocean.tres
 res://Assets/Tilesets/foundation/foundation.tres
 res://Assets/Tilesets/walls/walls.tres
+res://Assets/Tilesets/Objects/objects.tres
 res://Assets/Tilesets/Terrain/tres files/hoed.tres
 res://Assets/Tilesets/Terrain/tres files/watered hoed.tres
+res://Assets/Themes/MiniMap.tres
+res://Assets/Themes/LockedAsset.tres
+res://Assets/Themes/whiten.tres
+res://World/Player/Player/AttachedScenes/Sound/FootstepsSound.gd
+res://World/Player/Player/Player.gd
+res://World/World/main.tscn
+res://Assets/Themes/Flash.tres
+res://World/Player/Player/AttachedScenes/Actions/Actions.gd
 res://World/World/main.gd
+res://MainMenu/MainMenu.tscn
 res://MainMenu/MainMenuButtons.tscn
+res://World/Animals/Bear.tscn
+res://Global/Data/PlayerData.gd
+res://World/World/Builder/BuildTerrain.gd
+res://Global/Data/Constants.gd
+res://World/Player/Player/UserInterface/Menu/Crafting/Crafting.tscn
 res://MainMenu/MainMenu.gd
-res://World/World/Scripts/PlaceableObjects.gd
-res://Global/Data/PlaceObject.gd
+res://World/Player/Player/UserInterface/UserInterface.gd
+res://World/Player/Player/AttachedScenes/Actions/Actions.tscn
 res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
 res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd
-res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn
-res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn
-res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.gd
-res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.gd
+res://World/Objects/Nature/Cactus/cactus.tscn
+res://World/Objects/Nature/Cactus/cactus.gd
+res://World/Player/Player/UserInterface/UserInterface.tscn
 res://World/World/Builder/WorldBuilder.gd
-res://World/Player/Player/Player.tscn
-res://Assets/Themes/whiten.tres
-res://MainMenu/LoadingScreen.gd
-res://World/Player/Player/Player.gd
-res://MainMenu/LoadingScreen.tscn
-res://World/World/Scripts/FarmingTiles.gd
-res://World/World/Scripts/NatureObjects.gd
-res://World/World/Scripts/ForageObjects.gd
-res://World/World/Scripts/GrassObjects.gd
+res://InventoryLogic/ItemDrop.tscn
+res://World/Building/PlaceObjectPreview.tscn
+res://Assets/Tilesets/Objects/crops.tres
+res://helpers/Util.gd
+res://World/Building/PlaceObjectPreview.gd
+res://Global/Data/Sounds.gd
+res://elevation_test.tscn
+res://Assets/Tilesets/Terrain/tres files/decoration.tres
+res://Assets/Tilesets/Terrain/tres files/elevation 2.tres
+res://World/Animals/Duck.tscn
+res://Assets/Images/Animals/Duck/duck3.tres
+res://World/Animals/Duck.gd

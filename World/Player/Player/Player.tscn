@@ -1,10 +1,10 @@
 [gd_scene load_steps=70 format=3 uid="uid://coi1140g0nrrc"]
 
 [ext_resource type="Script" path="res://World/Player/Player/Player.gd" id="1_hovno"]
-[ext_resource type="PackedScene" path="res://World/Player/Player/AttachedScenes/Actions/Actions.tscn" id="2_dmkl7"]
+[ext_resource type="PackedScene" uid="uid://cm306lgc2hau1" path="res://World/Player/Player/AttachedScenes/Actions/Actions.tscn" id="2_dmkl7"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" id="3_8lsbn"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/Camera2D.gd" id="3_jyj42"]
-[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/UserInterface.tscn" id="3_w02x5"]
+[ext_resource type="PackedScene" uid="uid://c3f02b7na2fkr" path="res://World/Player/Player/UserInterface/UserInterface.tscn" id="3_w02x5"]
 [ext_resource type="Material" uid="uid://dshi8sn4j6jfa" path="res://Assets/Themes/whiten.tres" id="5_3of15"]
 [ext_resource type="Texture2D" uid="uid://3ik13tk6hyny" path="res://Characters/Human/male/HOLDING WALK/body/down/body.png" id="5_yvg8i"]
 [ext_resource type="Texture2D" uid="uid://b2yqfp3r1tqa4" path="res://Characters/Human/male/HOLDING WALK/body/down/arms.png" id="6_lbf3e"]
@@ -699,46 +699,22 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Camera2D/UserInterface/DeathEffect:color")
+tracks/8/path = NodePath("CompositeSprites/HoldingItem:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
-"times": PackedFloat32Array(0, 1.6),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 0, 0, 0), Color(1, 0.0117647, 0.0117647, 0.517647)]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("Camera2D/UserInterface/DeathEffect:visible")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("CompositeSprites/HoldingItem:visible")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
 }
-tracks/11/type = "value"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("CompositeSprites:position")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("CompositeSprites:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -3463,6 +3439,9 @@ properties/4/sync = true
 properties/5/path = NodePath(".:position")
 properties/5/spawn = true
 properties/5/sync = true
+properties/6/path = NodePath(".:play_animation_backwards")
+properties/6/spawn = true
+properties/6/sync = true
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -3475,6 +3454,7 @@ script = ExtResource("1_hovno")
 [node name="Actions" parent="." instance=ExtResource("2_dmkl7")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
 zoom = Vector2(2.25, 2.25)
 position_smoothing_enabled = true
 position_smoothing_speed = 40.0
@@ -3503,7 +3483,6 @@ texture = ExtResource("5_yvg8i")
 hframes = 4
 
 [node name="Legs" type="Sprite2D" parent="CompositeSprites"]
-visible = false
 texture_filter = 1
 use_parent_material = true
 position = Vector2(0, -16)
@@ -3632,7 +3611,6 @@ volume_db = -16.0
 [node name="FootstepsSound" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("15_w1myp")
 volume_db = -80.0
-autoplay = true
 script = ExtResource("17_287lq")
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="Sounds"]

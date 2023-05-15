@@ -159,7 +159,9 @@ func initialize_interactive_area():
 		add_interactive_area_node("furnace")
 	elif item_name == "tool cabinet":
 		add_interactive_area_node(item_name)
-	elif item_name == "bed":
+	elif item_name == "bed" or item_name == "sleeping bag":
+		if item_name == "sleeping bag":
+			movement_collision.set_deferred("disabled",true)
 		add_bed_interactive_area_node()
 	elif item_name == "chair" or item_name == "armchair":
 		add_interactive_area_node(item_name,null,direction)

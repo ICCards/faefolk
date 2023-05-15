@@ -2,7 +2,7 @@ extends Node2D
 
 
 const PORT = 65124
-const URL = "157.245.88.190"
+const URL = "localhost" #"157.245.88.190"
 var enet_peer = ENetMultiplayerPeer.new()
 
 var terrain = {

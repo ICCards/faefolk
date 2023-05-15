@@ -169,7 +169,7 @@ func destroy(killed_by_player):
 	set_physics_process(false)
 	duck_sprite.material = null
 	if killed_by_player:
-		MapData.remove_object("animal",name)
+#		MapData.remove_object("animal",name)
 		PlayerData.player_data["collections"]["mobs"]["duck"] += 1
 		await get_tree().create_timer(randf_range(0.05,0.25)).timeout
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3"))
