@@ -112,6 +112,15 @@ func _physics_process(delta):
 		else:
 			animation_player.play(animation_player.current_animation)
 		composite_sprites.set_player_animation(character,animation,tool_name)
+#		if animation_player.current_animation == "eat":
+#			InstancedScenes.add_eating_particles(holding_item_name)
+#			await animation_player.animation_finished
+#			get_parent().composite_sprites.get_node("Body").hframes = 4
+#			get_parent().composite_sprites.get_node("Arms").hframes = 4
+#			get_parent().composite_sprites.get_node("Pants").hframes = 4
+#			get_parent().composite_sprites.get_node("Shoes").hframes = 4
+#			get_parent().composite_sprites.get_node("Shirts").hframes = 4
+#			get_parent().composite_sprites.get_node("HeadAtr").hframes = 4
 
 
 func _enter_tree():

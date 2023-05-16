@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://ccj70qn1crooy"]
+[gd_scene load_steps=43 format=3 uid="uid://ccj70qn1crooy"]
 
 [ext_resource type="Script" path="res://World/World/main.gd" id="1_ddhom"]
 [ext_resource type="PackedScene" uid="uid://bkq17vop8u2tj" path="res://MainMenu/LoadingScreen.tscn" id="2_41261"]
@@ -28,6 +28,7 @@
 [ext_resource type="TileSet" uid="uid://bnm5mir3awwa7" path="res://Assets/Tilesets/Terrain/tres files/watered hoed.tres" id="26_1en4m"]
 [ext_resource type="Script" path="res://World/World/Scripts/ItemDrops.gd" id="27_xbcwi"]
 [ext_resource type="Script" path="res://World/World/Scripts/PlaceableObjects.gd" id="28_8tvvt"]
+[ext_resource type="Script" path="res://World/World/Scripts/Mobs.gd" id="28_pnul4"]
 [ext_resource type="Script" path="res://World/World/Scripts/ForageObjects.gd" id="29_n13sw"]
 [ext_resource type="Script" path="res://World/World/Scripts/NatureObjects.gd" id="30_xvhlc"]
 [ext_resource type="Script" path="res://World/World/Scripts/GrassObjects.gd" id="31_2yv75"]
@@ -3414,7 +3415,6 @@ y_sort_enabled = true
 script = ExtResource("1_ddhom")
 
 [node name="InitLoadScreen" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="LoadingScreen" parent="InitLoadScreen" instance=ExtResource("2_41261")]
 
@@ -3602,9 +3602,10 @@ spawn_path = NodePath("..")
 
 [node name="Mobs" type="Node2D" parent="."]
 y_sort_enabled = true
+script = ExtResource("28_pnul4")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Mobs"]
-_spawnable_scenes = PackedStringArray("res://World/Animals/Bear.tscn")
+_spawnable_scenes = PackedStringArray("res://World/Animals/Duck.tscn")
 spawn_path = NodePath("..")
 
 [node name="Projectiles" type="Node2D" parent="."]

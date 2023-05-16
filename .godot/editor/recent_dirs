@@ -1,5 +1,7 @@
-res://Assets/Tilesets/Terrain/tres files
+res://World/World/Scripts
+res://World/Animals
 res://
+res://Assets/Tilesets/Terrain/tres files
 res://Assets/Images/cacti
 res://World/Objects/Nature/Cactus
 /Users/maxwischusen/development/godot

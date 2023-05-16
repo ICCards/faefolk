@@ -52,7 +52,7 @@ func get_world_data(result, response_code, headers, body):
 	multiplayer.multiplayer_peer = enet_peer
 	
 	$WorldMap.buildMap()
-	$WorldBuilder/BuildTerrain.initialize()
+#	$WorldBuilder/BuildTerrain.initialize()
 	
 #	$WorldBuilder/SpawnAnimal.initialize()
 

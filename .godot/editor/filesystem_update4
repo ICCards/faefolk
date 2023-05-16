@@ -52,3 +52,12 @@ res://Assets/Tilesets/Terrain/tres files/elevation 2.tres
 res://World/Animals/Duck.tscn
 res://Assets/Images/Animals/Duck/duck3.tres
 res://World/Animals/Duck.gd
+res://test.tscn
+res://World/Objects/Nature/Grasses/TallGrass.tscn
+res://World/Animals/Deer.tscn
+res://World/Objects/Nature/Trees/Stump.tscn
+res://World/World/Scripts/Mobs.gd
+res://World/Objects/Projectiles/PotionProjectile.tscn
+res://World/Objects/Projectiles/PotionProjectile.gd
+res://Global/Data/InstancedScenes.gd
+res://World/Player/Player/AttachedParticles/Eating/EatingParticles.tscn

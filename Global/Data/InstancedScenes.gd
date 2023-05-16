@@ -12,11 +12,18 @@ extends Node
 @onready var UpgradeBuildingEffect = load("res://World/Objects/Nature/Effects/UpgradeBuilding.tscn")
 @onready var RemoveBuildingEffect = load("res://World/Objects/Nature/Effects/RemoveBuilding.tscn")
 @onready var LightningLine = load("res://World/Objects/Misc/LightningLine.tscn")
+@onready var EatingParticles = load("res://World/Player/Player/AttachedParticles/Eating/EatingParticles.tscn")
 
 var rng = RandomNumberGenerator.new()
 
 func _ready():
 	rng.randomize()
+
+func add_eating_particles(item_name):
+	var eating_paricles = EatingParticles.instantiate()
+	eating_paricles.item_name = item_name
+	Server.player_node.add_child(eating_paricles)
+
 
 func intitiateItemDrop(item_name: String, pos: Vector2, amount: int): 
 		for _i in range(amount):

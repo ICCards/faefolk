@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cp5uhwufghps4"]
+[gd_scene load_steps=31 format=3 uid="uid://cp5uhwufghps4"]
 
 [ext_resource type="Script" path="res://World/Animals/Duck.gd" id="2_je0mu"]
 [ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="3"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dx8hix2epqruo" path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" id="6_oi7sl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5oyd3"]
-radius = 2.0
+radius = 4.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1dgbd"]
 radius = 5.0
@@ -296,9 +296,19 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_k6vdn"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:sync_velocity")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath(".:variety")
+properties/2/spawn = true
+properties/2/sync = false
+
 [node name="Duck" type="CharacterBody2D"]
 collision_mask = 67
-motion_mode = 1
 script = ExtResource("2_je0mu")
 
 [node name="EnemyTornadoState" parent="." instance=ExtResource("3_tlvvh")]
@@ -310,7 +320,7 @@ script = ExtResource("2_je0mu")
 [node name="EnemyFrozenState" parent="." instance=ExtResource("6_oi7sl")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-rotation = 1.5708
+position = Vector2(0, -2)
 shape = SubResource("CircleShape2D_5oyd3")
 
 [node name="HurtBox" type="Area2D" parent="."]
@@ -322,30 +332,10 @@ collision_mask = 262400
 rotation = 1.5708
 shape = SubResource("CircleShape2D_1dgbd")
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 100.0
-target_desired_distance = 100.0
-avoidance_enabled = true
-max_speed = 40.0
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_dvhf4")
 }
-
-[node name="Timers" type="Node" parent="."]
-
-[node name="RunStateTimer" type="Timer" parent="Timers"]
-wait_time = 5.0
-
-[node name="Timer" type="Timer" parent="Timers"]
-autostart = true
-
-[node name="IdleTimer" type="Timer" parent="Timers"]
-
-[node name="DropEggTimer" type="Timer" parent="Timers"]
-wait_time = 180.0
-autostart = true
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
@@ -363,9 +353,9 @@ sprite_frames = SubResource("35")
 animation = &"new_animation"
 frame_progress = 0.605022
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_k6vdn")
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="timeout" from="Timers/RunStateTimer" to="." method="_on_RunStateTimer_timeout"]
-[connection signal="timeout" from="Timers/IdleTimer" to="." method="_on_IdleTimer_timeout"]
-[connection signal="timeout" from="Timers/DropEggTimer" to="." method="_on_DropEggTimer_timeout"]
 
 [editable path="EnemyPoisonState"]

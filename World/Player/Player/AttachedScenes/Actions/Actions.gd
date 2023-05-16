@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var Fishing = load("res://World/Player/Player/Fishing/Fishing.tscn")
 @onready var PlaceObjectScene = load("res://World/Building/PlaceObjectPreview.tscn") 
-@onready var Eating_particles = load("res://World/Player/Player/AttachedParticles/Eating/EatingParticles.tscn")
 
 @onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
@@ -133,10 +132,8 @@ func eat(item_name):
 		sound_effects.play()
 		get_parent().state = get_parent().EATING
 		PlayerData.remove_single_object_from_hotbar()
-		var eating_paricles = Eating_particles.instantiate()
-		eating_paricles.item_name = item_name
+		InstancedScenes.add_eating_particles(item_name)
 		get_parent().animation = "eat"
-		get_parent().add_child(eating_paricles)
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, get_parent().animation, null)
 		get_parent().animation_player.play("eat")
 		await get_parent().animation_player.animation_finished

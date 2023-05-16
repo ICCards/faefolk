@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://coicdv45y4wn2"]
 
 [ext_resource type="Script" path="res://World/Player/Player/AttachedParticles/Eating/EatingParticles.gd" id="1_2f4cr"]
 
