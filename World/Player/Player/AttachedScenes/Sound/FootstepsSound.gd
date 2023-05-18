@@ -6,8 +6,6 @@ func _ready():
 	Sounds.connect("footsteps_sound_change",Callable(self,"set_footsteps_sound"))
 	Sounds.connect("volume_change",Callable(self,"set_new_music_volume"))
 	PlayerData.connect("health_depleted",Callable(self,"reset_sound"))
-	await get_tree().create_timer(1.0).timeout
-	playing = true
 	set_footsteps_sound()
 
 
@@ -23,6 +21,8 @@ func set_footsteps_sound():
 		get_node("../../").is_walking_on_dirt = true
 	else:
 		get_node("../../").is_walking_on_dirt = false
+	playing = true
+	await get_tree().create_timer(0.1).timeout
 	stream_paused = true
 
 

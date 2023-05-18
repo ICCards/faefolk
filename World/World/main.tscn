@@ -3419,6 +3419,7 @@ script = ExtResource("1_ddhom")
 [node name="LoadingScreen" parent="InitLoadScreen" instance=ExtResource("2_41261")]
 
 [node name="WorldAmbience" type="CanvasModulate" parent="."]
+visible = false
 script = ExtResource("3_vvdm7")
 
 [node name="WorldBuilder" type="Node" parent="."]

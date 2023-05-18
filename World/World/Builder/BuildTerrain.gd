@@ -67,6 +67,10 @@ func build():
 		for adjTile in Constants.randomAdjacentTiles:
 			deep_ocean.set_cell(0,loc+adjTile,0,Vector2i(26,56))
 			top_ocean2.set_cell(0,loc+adjTile,0,Vector2i(24,56))
+	await get_tree().create_timer(0.25).timeout
+	get_parent().initialize()
+	await get_tree().create_timer(0.25).timeout
+	get_node("../../WorldMap").buildMap()
 
 
 func _on_build_terrain_timer_timeout():

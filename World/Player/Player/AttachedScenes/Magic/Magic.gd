@@ -128,7 +128,7 @@ func draw_bow_deferred(spell_index):
 	if validate_bow_requirement(spell_index):
 		get_parent().state = MAGIC_CASTING
 		is_drawing = true
-		animation = "draw_" + get_parent().direction.to_lower()
+		get_parent().animation = "draw_" + get_parent().direction.to_lower()
 		player_animation_player.play("bow draw release")
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
@@ -151,15 +151,15 @@ func validate_bow_requirement(spell_index):
 
 func wait_for_bow_release(spell_index):
 	if not mouse_left_down:
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		sound_effects.play()
+		get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
+		get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		get_parent().sound_effects.play()
 		PlayerData.change_energy(-1)
 		Stats.decrease_tool_health()
 		shoot(spell_index)
 		is_drawing = false
 		is_releasing = true
-		animation = "release_" + direction.to_lower()
+		get_parent().animation = "release_" + direction.to_lower()
 		composite_sprites.set_player_animation(get_parent().character, animation, "bow release")
 		player_animation_player.play("bow draw release")
 		await player_animation_player.animation_finished

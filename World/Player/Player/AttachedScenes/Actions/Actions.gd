@@ -127,9 +127,9 @@ func teleport(portal_position):
 func eat(item_name):
 	if get_parent().state != get_parent().EATING:
 		get_node("../Sounds/FootstepsSound").stream_paused = true
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/Player/eat.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
-		sound_effects.play()
+		get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Player/eat.mp3")
+		get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+		get_parent().sound_effects.play()
 		get_parent().state = get_parent().EATING
 		PlayerData.remove_single_object_from_hotbar()
 		InstancedScenes.add_eating_particles(item_name)

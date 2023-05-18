@@ -78,23 +78,30 @@ func get_chunks():
 			thread.wait_to_finish()
 			return
 		current_chunks = new_chunks
-		get_parent().rpc_id(1,"get_chunk_data",Server.player_node.name,current_chunks)
-		erase_other_chunks(current_chunks)
+		rpc_id(1,"get_chunk_data",Server.player_node.name,current_chunks)
+		#erase_other_chunks(current_chunks)
 	await get_tree().create_timer(1.0).timeout
 	thread.wait_to_finish()
 
-func erase_other_chunks(current_chunks):
-	for chunk in get_parent().world.keys():
-		if not current_chunks.has(chunk):
-			get_parent().world[chunk] = {
-						"tree": {},
-						"stump": {},
-						"log": {},
-						"ore_large": {},
-						"ore": {},
-						"tall_grass": {},
-						"forage": {},
-						"animal": {},
-						"crop": {},
-						"tile": {},
-						"placeable": {}}
+@rpc
+func get_chunk_data(peer_id,chunks): pass
+
+@rpc 
+func receive_chunk_data(chunk_name,data): 
+	get_parent().world[chunk_name] = data
+
+#func erase_other_chunks(current_chunks):
+#	for chunk in get_parent().world.keys():
+#		if not current_chunks.has(chunk):
+#			get_parent().world[chunk] = {
+#						"tree": {},
+#						"stump": {},
+#						"log": {},
+#						"ore_large": {},
+#						"ore": {},
+#						"tall_grass": {},
+#						"forage": {},
+#						"animal": {},
+#						"crop": {},
+#						"tile": {},
+#						"placeable": {}}

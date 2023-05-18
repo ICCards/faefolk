@@ -498,7 +498,7 @@ func generate_grass_bunch(loc, variety):
 		loc += randomAdjacentTiles[0]
 		if valid_tiles.get_cell_atlas_coords(0,loc) == Constants.VALID_TILE_ATLAS_CORD:
 			var id = uuid.v4()
-			PlaceObject.place_tall_grass_in_world(id,"cave"+str(variety),loc)
+		#	PlaceObject.place_tall_grass_in_world(id,"cave"+str(variety),loc)
 #			map["tall_grass"][id] = {"l": str(loc), "v": variety}
 		else:
 			loc -= randomAdjacentTiles[0]

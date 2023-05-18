@@ -1,8 +1,8 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=17 format=3 uid="uid://in7jmp6w27hu"]
 
 [ext_resource type="PackedScene" uid="uid://dvmsm12osyn5r" path="res://World/Caves/CaveGenerator.tscn" id="1_72qd8"]
 [ext_resource type="Script" path="res://World/Caves/random_cave.gd" id="1_mpt1j"]
-[ext_resource type="TileSet" path="res://Assets/Tilesets/Terrain/tres files/cave walls.tres" id="2_bgu55"]
+[ext_resource type="TileSet" uid="uid://dvlbpldkgmaxq" path="res://Assets/Tilesets/Terrain/tres files/cave walls.tres" id="2_bgu55"]
 [ext_resource type="PackedScene" path="res://World/Caves/CaveAmbientLight.tscn" id="3_44og5"]
 [ext_resource type="Texture2D" uid="uid://cqtxugm0or5mr" path="res://Assets/Tilesets/Terrain/CLM_MainLev.png" id="4_mp61e"]
 [ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/Terrain/CL_MainLev.png" id="6_77qpy"]
@@ -5024,10 +5024,12 @@ script = ExtResource("1_mpt1j")
 redraw = true
 
 [node name="CaveAmbientLight" parent="." instance=ExtResource("3_44og5")]
+visible = false
 color = Color(0.65098, 0.65098, 0.65098, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(1144, 1589)
+position = Vector2(806, 756)
+zoom = Vector2(0.8, 0.8)
 
 [node name="Line2D" type="Line2D" parent="."]
 width = 2.0

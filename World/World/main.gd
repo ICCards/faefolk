@@ -36,6 +36,10 @@ func convertArrayToVector(value):
 	return newArray
 
 func get_world_data(result, response_code, headers, body):
+	enet_peer.create_client(URL,PORT)
+	multiplayer.multiplayer_peer = enet_peer
+	await get_tree().create_timer(1.0).timeout
+	
 	print("GOT TERRAIN DATA FROM HTTP")
 	var data = JSON.parse_string(body.get_string_from_utf8())
 	terrain.snow = convertArrayToVector(data.terrain.snow)
@@ -48,11 +52,7 @@ func get_world_data(result, response_code, headers, body):
 	terrain.deep_ocean = convertArrayToVector(data.terrain.deep_ocean)
 	terrain.beach = convertArrayToVector(data.terrain.beach)
 
-	enet_peer.create_client(URL,PORT)
-	multiplayer.multiplayer_peer = enet_peer
-	
-	$WorldMap.buildMap()
-#	$WorldBuilder/BuildTerrain.initialize()
+	$WorldBuilder/BuildTerrain.initialize()
 	
 #	$WorldBuilder/SpawnAnimal.initialize()
 
@@ -69,6 +69,10 @@ func init_world():
 	initialize_empty_world_data()
 	$HTTPRequest.request_completed.connect(get_world_data)
 	$HTTPRequest.request("http://"+URL+":8080/getData")
+#	enet_peer.create_client(URL,PORT)
+#	multiplayer.multiplayer_peer = enet_peer
+	
+	#$WorldMap.buildMap()
 
 func initialize_empty_world_data():
 	for column in range(12):
@@ -106,12 +110,7 @@ func set_map_tiles():
 	Tiles.wet_sand_tiles = $TerrainTiles/WetSand
 	Tiles.forest_tiles = $TerrainTiles/Forest
 
-@rpc
-func get_chunk_data(peer_id,chunks): pass
 
-@rpc 
-func receive_chunk_data(chunk_name,data): 
-	world[chunk_name] = data
 
 @rpc
 func send_message(data): pass

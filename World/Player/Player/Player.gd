@@ -55,6 +55,7 @@ var is_building_world = false
 @onready var _character = load("res://Global/Data/Characters.gd")
 
 func _ready():
+	print("SPAWNING PLAYER")
 	composite_sprites.hide()
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
@@ -63,12 +64,12 @@ func _ready():
 		initialize_player_template()
 		return
 	$Camera2D.enabled = true
-	#var spawn_locs = Server.world.get_node("TerrainTiles/Desert").get_used_cells(0)
+	var spawn_locs = Server.world.terrain.beach
 	#spawn_locs.shuffle()
-	position = Vector2(500*16,500*16) #Vector2i(spawn_locs[0])*Vector2i(16,16)
+	position = Vector2i(spawn_locs[0])*Vector2i(16,16)
+	#position = Vector2(500*16,500*16)
 	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
 	Server.player_node = self
-	Server.world.get_node("WorldBuilder").initialize()
 	state = DYING
 	$Camera2D/UserInterface/LoadingScreen.initialize(8)
 	await get_tree().create_timer(8.0).timeout
@@ -112,15 +113,6 @@ func _physics_process(delta):
 		else:
 			animation_player.play(animation_player.current_animation)
 		composite_sprites.set_player_animation(character,animation,tool_name)
-#		if animation_player.current_animation == "eat":
-#			InstancedScenes.add_eating_particles(holding_item_name)
-#			await animation_player.animation_finished
-#			get_parent().composite_sprites.get_node("Body").hframes = 4
-#			get_parent().composite_sprites.get_node("Arms").hframes = 4
-#			get_parent().composite_sprites.get_node("Pants").hframes = 4
-#			get_parent().composite_sprites.get_node("Shoes").hframes = 4
-#			get_parent().composite_sprites.get_node("Shirts").hframes = 4
-#			get_parent().composite_sprites.get_node("HeadAtr").hframes = 4
 
 
 func _enter_tree():
