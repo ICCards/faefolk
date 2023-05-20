@@ -9,6 +9,7 @@ func initialize():
 	print("STARTING NATURE/PLACEABLE BUILD")
 	$BuildNature.initialize()
 	$WorldBuilderTimer.start()
+	get_node("../FullMapParticles").initialize()
 	if not thread.is_started() and not Server.world.is_changing_scene:
 		thread.start(Callable(self,"_whoAmI"))
 

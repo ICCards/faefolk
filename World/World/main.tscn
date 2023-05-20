@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://ccj70qn1crooy"]
+[gd_scene load_steps=45 format=3 uid="uid://ccj70qn1crooy"]
 
 [ext_resource type="Script" path="res://World/World/main.gd" id="1_ddhom"]
 [ext_resource type="PackedScene" uid="uid://bkq17vop8u2tj" path="res://MainMenu/LoadingScreen.tscn" id="2_41261"]
@@ -34,6 +34,7 @@
 [ext_resource type="Script" path="res://World/World/Scripts/NatureObjects.gd" id="30_xvhlc"]
 [ext_resource type="Script" path="res://World/World/Scripts/GrassObjects.gd" id="31_2yv75"]
 [ext_resource type="PackedScene" path="res://World/Map/WorldMap.tscn" id="32_13y4f"]
+[ext_resource type="PackedScene" uid="uid://bkvw6820ue7ga" path="res://World/Objects/Nature/Particles/FullMapParticles.tscn" id="34_7smup"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7b1tf"]
 texture = ExtResource("9_lynqu")
@@ -3598,7 +3599,7 @@ spawn_path = NodePath("..")
 script = ExtResource("29_sxv2b")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Projectiles"]
-_spawnable_scenes = PackedStringArray("res://World/Objects/Projectiles/ArrowProjectile.tscn")
+_spawnable_scenes = PackedStringArray("res://World/Objects/Projectiles/ArrowProjectile.tscn", "res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
 spawn_path = NodePath("..")
 
 [node name="ItemDrops" type="Node2D" parent="."]
@@ -3633,6 +3634,9 @@ script = ExtResource("30_xvhlc")
 [node name="GrassObjects" type="Node2D" parent="."]
 y_sort_enabled = true
 script = ExtResource("31_2yv75")
+
+[node name="FullMapParticles" parent="." instance=ExtResource("34_7smup")]
+visible = false
 
 [node name="WorldMap" parent="." instance=ExtResource("32_13y4f")]
 visible = false

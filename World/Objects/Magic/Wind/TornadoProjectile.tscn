@@ -1,7 +1,6 @@
-[gd_scene load_steps=30 format=3]
+[gd_scene load_steps=28 format=3 uid="uid://cqb8f8ikquqar"]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Wind/TornadoProjectile.gd" id="1_d48oj"]
-[ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_8gvaj"]
 [ext_resource type="Texture2D" uid="uid://ikebn4yq3yjf" path="res://Assets/Images/Magic/wind/projectile.png" id="2_b1bax"]
 [ext_resource type="AudioStream" uid="uid://cf2jarycewv12" path="res://Assets/Sound/Sound effects/Magic/Wind/tornado.mp3" id="4"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="5"]
@@ -10,12 +9,6 @@
 max_value = 3.0
 _data = [Vector2(0.00103413, 1.2973), 0.0, 0.0, 0, 0, Vector2(1, 0.707061), 0.0, 0.0, 0, 0]
 point_count = 2
-
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(0, 0)
-
-[sub_resource type="CircleShape2D" id="41"]
-radius = 14.0
 
 [sub_resource type="Animation" id="9"]
 resource_name = "fade out"
@@ -170,8 +163,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="TornadoProjectile" type="CharacterBody2D"]
-collision_layer = 0
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_wcan3"]
+properties/0/path = NodePath(".:sync_velocity")
+properties/0/spawn = true
+properties/0/sync = false
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/sync = true
+
+[node name="TornadoProjectile" type="Node2D"]
 script = ExtResource("1_d48oj")
 
 [node name="TrailParticles" type="Node2D" parent="."]
@@ -287,19 +287,6 @@ orbit_velocity_max = 0.3
 scale_amount_curve = SubResource("40")
 color = Color(0.54902, 0.54902, 0.54902, 1)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-shape = SubResource("1")
-disabled = true
-
-[node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 264192
-collision_mask = 0
-script = ExtResource("2_8gvaj")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("41")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_eddv1")
@@ -320,4 +307,7 @@ texture_scale = 0.75
 modulate = Color(1.2, 1.2, 1.2, 1)
 position = Vector2(15, -42)
 sprite_frames = SubResource("SpriteFrames_6r3pm")
-animation = &"end"
+animation = &"start"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_wcan3")

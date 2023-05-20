@@ -32,25 +32,25 @@ func _ready():
 #	$Hitbox.id = uuid.v4()
 #	$Hitbox.tool_name = "arrow"
 #	$Hitbox.knockback_vector = velocity
-	if is_fire_arrow:
-		$PointLight2D.enabled = true
-		$Hitbox.special_ability = "fire"
-		$ArrowBreak.modulate = Color("ff0000")
-		$FireTrailParticles/Particles1.emitting = true
-		$FireTrailParticles/Particles2.emitting = true
-		$FireTrailParticles/Particles3.emitting = true
-	elif is_ice_arrow:
-		$Hitbox.special_ability = "ice"
-		$ArrowBreak.modulate = Color("009bff")
-		$IceTrailParticles/Particles1.emitting = true
-		$IceTrailParticles/Particles2.emitting = true
-		$IceTrailParticles/Particles3.emitting = true
-	elif is_poison_arrow:
-		$Hitbox.special_ability = "poison"
-		$ArrowBreak.modulate = Color("00ee18")
-		$PoisonTrailParticles/Particles1.emitting = true
-		$PoisonTrailParticles/Particles2.emitting = true
-		$PoisonTrailParticles/Particles3.emitting = true
+#	if is_fire_arrow:
+#		$PointLight2D.enabled = true
+#		$Hitbox.special_ability = "fire"
+#		$ArrowBreak.modulate = Color("ff0000")
+#		$FireTrailParticles/Particles1.emitting = true
+#		$FireTrailParticles/Particles2.emitting = true
+#		$FireTrailParticles/Particles3.emitting = true
+#	elif is_ice_arrow:
+#		$Hitbox.special_ability = "ice"
+#		$ArrowBreak.modulate = Color("009bff")
+#		$IceTrailParticles/Particles1.emitting = true
+#		$IceTrailParticles/Particles2.emitting = true
+#		$IceTrailParticles/Particles3.emitting = true
+#	elif is_poison_arrow:
+#		$Hitbox.special_ability = "poison"
+#		$ArrowBreak.modulate = Color("00ee18")
+#		$PoisonTrailParticles/Particles1.emitting = true
+#		$PoisonTrailParticles/Particles2.emitting = true
+#		$PoisonTrailParticles/Particles3.emitting = true
 
 
 func fade_out():
