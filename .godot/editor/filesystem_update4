@@ -1,4 +1,4 @@
-res://MainMenu/MainMenu.tscn
+res://World/Player/Player/Fishing/Fishing.tscn
 res://Assets/Tilesets/Terrain/tres files/plains.tres
 res://Assets/Tilesets/Terrain/tres files/deep ocean.tres
 res://Assets/Tilesets/Terrain/tres files/dirt.tres
@@ -19,22 +19,32 @@ res://Assets/Themes/MiniMap.tres
 res://Assets/Themes/Flash.tres
 res://Assets/Images/Animals/Duck/duck3.tres
 res://Assets/Themes/LockedAsset.tres
-res://Assets/Themes/whiten.tres
-res://Assets/Tilesets/Terrain/tres files/cave walls.tres
+res://MainMenu/MainMenu.tscn
 res://World/World/main.tscn
 res://World/Animals/Duck.tscn
 res://World/Player/Player/Player.tscn
-res://World/Player/Player/AttachedScenes/Actions/Actions.tscn
-res://World/Caves/CaveGenerator.tscn
-res://World/Caves/random_cave.tscn
-res://World/Caves/CaveGenerator.gd
-res://World/World/Builder/WorldBuilder.gd
-res://World/World/main.gd
-res://World/Player/Player/Player.gd
-res://World/World/Builder/BuildTerrain.gd
-res://World/Player/Player/AttachedScenes/Sound/FootstepsSound.gd
-res://Global/Data/PlayerData.gd
-res://World/Player/Player/Fishing/FishingMiniGame.tscn
+res://Assets/Themes/whiten.tres
 res://World/Player/Player/Fishing/Fishing.gd
-res://World/Player/Player/Fishing/RippleParticles.tscn
-res://World/Player/Player/Fishing/Fishing.tscn
+res://Assets/Images/tree_sets/oak/mature/animated top.tres
+res://World/Objects/Nature/Trees/TreeObject.tscn
+res://World/Player/Player/Player.gd
+res://World/Objects/Nature/Ores/SmallOre.tscn
+res://World/Objects/Nature/Ores/LargeOre.tscn
+res://test.tscn
+res://World/Objects/Nature/Trees/Log.tscn
+res://World/Objects/Nature/Trees/Stump.tscn
+res://World/Animals/Duck.gd
+res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd
+res://Assets/Images/Animals/Duck/duck1.tres
+res://Assets/Images/Animals/Duck/duck2.tres
+res://World/Player/Player/AttachedScenes/Swing/Swing.gd
+res://World/Player/Player/AttachedScenes/Magic/Magic.gd
+res://World/World/Projectiles.gd
+res://World/Objects/Projectiles/ArrowProjectile.tscn
+res://World/Objects/Projectiles/ArrowProjectile.gd
+res://World/Player/Player/AttachedScenes/Magic/Magic.tscn
+res://World/Player/Player/AttachedScripts/CompositeSprites.gd
+res://World/Animals/Bunny.tscn
+res://Assets/Images/Animals/Bunny/yellowBunny.tres
+res://World/Animals/Bunny.gd
+res://World/World/Builder/WorldBuilder.gd

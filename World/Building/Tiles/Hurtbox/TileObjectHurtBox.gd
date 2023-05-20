@@ -99,7 +99,6 @@ func change(_opened_or_light_toggled):
 
 func set_dimensions():
 	rng.randomize()
-	item_name = Util.return_adjusted_item_name(item_name)
 	$Marker2D.scale = Constants.dimensions_dict[item_name]
 	if direction == "left" or direction == "right":
 		Tiles.remove_valid_tiles(location, Vector2(Constants.dimensions_dict[item_name].y, Constants.dimensions_dict[item_name].x))

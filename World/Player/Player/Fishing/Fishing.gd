@@ -68,10 +68,10 @@ func _physics_process(delta):
 		elif (Input.is_action_just_released("mouse_click") or Input.is_action_just_released("use_tool")):
 			cast()
 	elif waiting_for_fish_bite:
-		setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, hook.position) #+ Vector2(4.5,4.5))
+		setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, hook.position)
 	elif is_reeling_in_fish:
-		$CaughtFish.position = hook.position #+ Vector2(4.5,4.5)
-		line.points = [start_point, hook.position] #+ Vector2(4.5,4.5)]
+		$CaughtFish.position = hook.position
+		line.points = [start_point, hook.position]
 
 func retract_and_stop(fish_name):
 	play_ripple_effect()
@@ -214,8 +214,8 @@ func draw_cast_line():
 			cast_distance = start_point.y - end_point.y - 12
 	line.show()
 	hook.show()
-	hook.position = end_point #+ Vector2(4,4)
-	setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, end_point )
+	hook.position = end_point
+	setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, end_point)
 	var location = Tiles.ocean_tiles.local_to_map(hook.position + Server.player_node.position)
 	if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles) or Tiles.deep_ocean_tiles.get_cell_atlas_coords(0,location) != Vector2i(-1,-1): # valid cast
 		play_ripple_effect()
@@ -240,7 +240,7 @@ func setLinePointsToBezierCurve(a: Vector2, postA: Vector2, preB: Vector2, b: Ve
 
 func set_moving_fish_line_position(progress_of_game):
 	var temp_end_point = return_adjusted_end_point(progress_of_game)
-	hook.position = temp_end_point #- Vector2(4.5,4.5)
+	hook.position = temp_end_point - Vector2(2,2)
 	line.points = [start_point, temp_end_point]
 
 func return_adjusted_end_point(progress_of_game):
@@ -279,6 +279,6 @@ func _on_RippleTimer_timeout():
 
 func play_ripple_effect():
 	var rippleParticles = RippleParticles.instantiate()
-	rippleParticles.position = hook.position #+ Vector2(4.5,4.5)
+	rippleParticles.position = hook.position 
 	add_child(rippleParticles)
 	

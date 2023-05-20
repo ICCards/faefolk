@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=24 format=3]
+[gd_resource type="SpriteFrames" load_steps=24 format=3 uid="uid://cd0qcco4x7kcc"]
 
 [ext_resource type="Texture2D" uid="uid://budrsk3jiywxw" path="res://Assets/Images/Animals/Animals.png" id="1"]
 
@@ -146,9 +146,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_muh6x")
 }],
-"loop": true,
+"loop": false,
 "name": &"eat",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,

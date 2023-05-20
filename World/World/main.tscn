@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://ccj70qn1crooy"]
+[gd_scene load_steps=44 format=3 uid="uid://ccj70qn1crooy"]
 
 [ext_resource type="Script" path="res://World/World/main.gd" id="1_ddhom"]
 [ext_resource type="PackedScene" uid="uid://bkq17vop8u2tj" path="res://MainMenu/LoadingScreen.tscn" id="2_41261"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" path="res://World/World/Scripts/PlaceableObjects.gd" id="28_8tvvt"]
 [ext_resource type="Script" path="res://World/World/Scripts/Mobs.gd" id="28_pnul4"]
 [ext_resource type="Script" path="res://World/World/Scripts/ForageObjects.gd" id="29_n13sw"]
+[ext_resource type="Script" path="res://World/World/Projectiles.gd" id="29_sxv2b"]
 [ext_resource type="Script" path="res://World/World/Scripts/NatureObjects.gd" id="30_xvhlc"]
 [ext_resource type="Script" path="res://World/World/Scripts/GrassObjects.gd" id="31_2yv75"]
 [ext_resource type="PackedScene" path="res://World/Map/WorldMap.tscn" id="32_13y4f"]
@@ -3419,7 +3420,6 @@ script = ExtResource("1_ddhom")
 [node name="LoadingScreen" parent="InitLoadScreen" instance=ExtResource("2_41261")]
 
 [node name="WorldAmbience" type="CanvasModulate" parent="."]
-visible = false
 script = ExtResource("3_vvdm7")
 
 [node name="WorldBuilder" type="Node" parent="."]
@@ -3594,6 +3594,13 @@ y_sort_enabled = true
 _spawnable_scenes = PackedStringArray("res://World/Player/Player/Player.tscn")
 spawn_path = NodePath("..")
 
+[node name="Projectiles" type="Node2D" parent="."]
+script = ExtResource("29_sxv2b")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Projectiles"]
+_spawnable_scenes = PackedStringArray("res://World/Objects/Projectiles/ArrowProjectile.tscn")
+spawn_path = NodePath("..")
+
 [node name="ItemDrops" type="Node2D" parent="."]
 script = ExtResource("27_xbcwi")
 
@@ -3606,11 +3613,8 @@ y_sort_enabled = true
 script = ExtResource("28_pnul4")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Mobs"]
-_spawnable_scenes = PackedStringArray("res://World/Animals/Duck.tscn")
+_spawnable_scenes = PackedStringArray("res://World/Animals/Duck.tscn", "res://World/Animals/Bunny.tscn")
 spawn_path = NodePath("..")
-
-[node name="Projectiles" type="Node2D" parent="."]
-y_sort_enabled = true
 
 [node name="BuildingObjects" type="Node2D" parent="."]
 
@@ -3632,6 +3636,7 @@ script = ExtResource("31_2yv75")
 
 [node name="WorldMap" parent="." instance=ExtResource("32_13y4f")]
 visible = false
+z_index = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yn58q")

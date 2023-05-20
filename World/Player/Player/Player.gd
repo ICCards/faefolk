@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var animation_player = $CompositeSprites/AnimationPlayer
+@onready var animation_player2 = $CompositeSprites/AnimationPlayer2
 @onready var sword_swing = $Swing/SwordSwing
 @onready var composite_sprites = $CompositeSprites
 @onready var holding_item = $CompositeSprites/HoldingItem
@@ -39,6 +40,7 @@ var rng = RandomNumberGenerator.new()
 @export var tool_name: String = ""
 @export var footstep_stream_paused: bool
 @export var play_animation_backwards: bool = false
+@export var walk_legs: bool = false
 @export var holding_item_name: String = ""
 var MAX_SPEED_DIRT := 8
 var MAX_SPEED_PATH := 9
@@ -64,10 +66,10 @@ func _ready():
 		initialize_player_template()
 		return
 	$Camera2D.enabled = true
-	var spawn_locs = Server.world.terrain.beach
+	#var spawn_locs = Server.world.terrain.beach
 	#spawn_locs.shuffle()
-	position = Vector2i(spawn_locs[0])*Vector2i(16,16)
-	#position = Vector2(500*16,500*16)
+	#position = Vector2i(spawn_locs[0])*Vector2i(16,16)
+	position = Vector2(50*16,50*16)
 	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
 	Server.player_node = self
 	state = DYING
@@ -112,6 +114,10 @@ func _physics_process(delta):
 			animation_player.play_backwards(animation_player.current_animation)
 		else:
 			animation_player.play(animation_player.current_animation)
+		if not walk_legs:
+			animation_player2.stop()
+		else:
+			animation_player2.play("walk legs")
 		composite_sprites.set_player_animation(character,animation,tool_name)
 
 

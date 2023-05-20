@@ -234,7 +234,6 @@ default_color = Color(0.156863, 0.156863, 0.156863, 1)
 [node name="CastedFishHook" type="Sprite2D" parent="."]
 visible = false
 texture = ExtResource("5")
-centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

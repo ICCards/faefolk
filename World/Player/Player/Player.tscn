@@ -8,7 +8,7 @@
 [ext_resource type="Material" uid="uid://dshi8sn4j6jfa" path="res://Assets/Themes/whiten.tres" id="5_3of15"]
 [ext_resource type="Texture2D" uid="uid://b2yqfp3r1tqa4" path="res://Characters/Human/male/HOLDING WALK/body/down/arms.png" id="6_lbf3e"]
 [ext_resource type="Texture2D" uid="uid://bd203lf8kbmej" path="res://Characters/Human/male/CAST FISHING/body/up/body.png" id="7_rje32"]
-[ext_resource type="PackedScene" path="res://World/Player/Player/AttachedScenes/Magic/Magic.tscn" id="8_wf6cw"]
+[ext_resource type="PackedScene" uid="uid://b82wip6drmj56" path="res://World/Player/Player/AttachedScenes/Magic/Magic.tscn" id="8_wf6cw"]
 [ext_resource type="Texture2D" uid="uid://cmdxruvowhdc0" path="res://Characters/Weapon swings/fishing rod cast/down.png" id="9_yth5m"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="10"]
 [ext_resource type="Texture2D" uid="uid://utxboaqigwsd" path="res://Assets/Images/inventory_icons/Resource/wood.png" id="10_7rpna"]
@@ -299,6 +299,7 @@ tracks/21/keys = {
 [sub_resource type="Animation" id="55"]
 resource_name = "axe pickaxe swing"
 length = 0.8
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -394,6 +395,18 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CompositeSprites/ToolEquipped:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="72"]
@@ -495,6 +508,30 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CompositeSprites/Legs:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("CompositeSprites/ToolEquipped:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="48"]
@@ -1659,6 +1696,7 @@ tracks/7/keys = {
 [sub_resource type="Animation" id="Animation_jokvi"]
 resource_name = "scythe_swing"
 length = 0.4
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1754,6 +1792,18 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CompositeSprites/ToolEquipped:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="49"]
@@ -2797,10 +2847,23 @@ tracks/6/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CompositeSprites/ToolEquipped:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="31"]
 resource_name = "sword_swing"
 length = 0.4
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -2896,6 +2959,18 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("CompositeSprites/ToolEquipped:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.35),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="62"]
@@ -3442,6 +3517,9 @@ properties/5/sync = true
 properties/6/path = NodePath(".:play_animation_backwards")
 properties/6/spawn = true
 properties/6/sync = true
+properties/7/path = NodePath(".:walk_legs")
+properties/7/spawn = true
+properties/7/sync = true
 
 [node name="Player" type="CharacterBody2D"]
 y_sort_enabled = true

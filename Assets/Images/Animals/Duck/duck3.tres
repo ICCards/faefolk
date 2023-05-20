@@ -148,7 +148,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"eat",
-"speed": 8.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,

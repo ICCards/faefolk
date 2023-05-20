@@ -23,10 +23,12 @@ var thread := Thread.new()
 var destroy_thread := Thread.new()
 #var mutex := Mutex.new()
 
-@export var variety: int
+var variety: int
 @export var sync_velocity: Vector2
 
 func _ready():
+	randomize()
+	variety = randi_range(1,3)
 	duck_sprite.sprite_frames = Images.DuckVariations[variety-1]
 #	_timer.connect("timeout",Callable(self,"_update_pathfinding"))
 #	navigation_agent.connect("velocity_computed",Callable(self,"move_deferred"))
@@ -38,23 +40,16 @@ func _ready():
 #		duck_sprite.flip_h = true
 
 func _physics_process(delta):
-	duck_sprite.flip_h = _get_direction_string(sync_velocity) != "Right"
 	if sync_velocity == Vector2.ZERO:
-		duck_sprite.play("idle")
+		if is_eating:
+			duck_sprite.play("eat")
+		else:
+			duck_sprite.play("idle")
+		return
 	else:
 		duck_sprite.play("walk")
-#	if destroyed or is_eating or stunned:
-#		return
-#		if stunned:
-#			duck_sprite.playing = false
-#		return
-#	if not navigation_agent.is_target_reachable():
-#		print("TARGET NOT REACHABLE")
-#		return
-#	elif navigation_agent.is_target_reached():
-#		print("TARGET REACHED")
-#		return
-		
+	duck_sprite.flip_h = _get_direction_string(sync_velocity) != "Right"
+
 #	if navigation_agent.is_navigation_finished():
 #		if running_state or frozen:
 #			_update_pathfinding()
@@ -177,15 +172,16 @@ func _on_HurtBox_area_entered(area):
 #		destroy(true)
 
 func mob_hit(data):
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/duck/quack.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
+	sound_effects.call_deferred("play")
 	var dmg = data["dmg"]
 	InstancedScenes.player_hit_effect(-dmg, position)
 	$AnimationPlayer.call_deferred("play", "hit")
 
 func destroy(data):
-#	_timer.call_deferred("stop")
 	set_physics_process(false)
 	duck_sprite.material = null
-#		PlayerData.player_data["collections"]["mobs"]["duck"] += 1
 	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3"))
 	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
 	sound_effects.call_deferred("play")
@@ -193,9 +189,6 @@ func destroy(data):
 	duck_sprite.call_deferred("play", "death")
 	$AnimationPlayer.call_deferred("play", "death")
 	await get_tree().create_timer(0.5).timeout
-#	InstancedScenes.intitiateItemDrop("raw wing", position, 1)
-	#if Util.chance(50):
-		#InstancedScenes.intitiateItemDrop("raw egg", position, 1) 
 	await $AnimationPlayer.animation_finished
 	hide()
 
