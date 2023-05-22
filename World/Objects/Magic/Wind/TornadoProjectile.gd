@@ -1,12 +1,12 @@
-extends Node2D
+extends CharacterBody2D
 
+var speed = 100
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var collided = false
 var is_hostile_projectile: bool = false
 
 @export var sync_velocity: Vector2
-@export var destroyed: bool
 
 var last_pos: Vector2
 
@@ -26,6 +26,9 @@ func _ready():
 	$AnimatedSprite2D.hide()
 
 
+func _physics_process(delta):
+	move_and_collide(sync_velocity * delta * speed)
+
 func set_particles():
 	$TornadoParticles/Particles1.set_deferred("emitting", true)
 	$TornadoParticles/Particles2.set_deferred("emitting", true)
@@ -37,7 +40,7 @@ func set_particles():
 	$TrailParticles/Particles2.set_deferred("emitting", true)
 	$TrailParticles/Particles3.set_deferred("emitting", true)
 	
-func stop_trail_particles():
+func stop_particles():
 	$TornadoParticles/Particles1.set_deferred("emitting", false)
 	$TornadoParticles/Particles2.set_deferred("emitting", false)
 	$TornadoParticles/Particles3.set_deferred("emitting", false)
@@ -46,8 +49,7 @@ func stop_trail_particles():
 	$TrailParticles/Particles3.set_deferred("emitting", false)
 	
 func fade_out():
-	stop_trail_particles()
-	$AnimatedSprite2D.call_deferred("hide")
+	stop_particles()
 	var tween = get_tree().create_tween()
 	tween.tween_property(sound_effects, "volume_db", -80, 2.0)
 	tween.tween_property($PointLight2D, "energy", 0.0, 2.0)

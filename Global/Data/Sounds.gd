@@ -6,10 +6,7 @@ signal footsteps_sound_change
 var background_songs = [
 	load("res://Assets/Sound/music/bg music.mp3"),
 	load("res://Assets/Sound/music/edutainment.mp3"),
-	load("res://Assets/Sound/music/make it easy.mp3"),
-	
-	
-	]
+	load("res://Assets/Sound/music/make it easy.mp3")]
 
 
 func play_pick_up_item_sound():

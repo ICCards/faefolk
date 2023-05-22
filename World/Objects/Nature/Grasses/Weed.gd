@@ -52,7 +52,6 @@ func _on_Area2D_body_exited(_body):
 	bodyEnteredFlag = false
 
 func _on_Area2D_area_entered(area):
-	print("WEED HIT")
 	get_parent().rpc_id(1,"weed_hit",name,location)
 	
 

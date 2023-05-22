@@ -3596,10 +3596,11 @@ _spawnable_scenes = PackedStringArray("res://World/Player/Player/Player.tscn")
 spawn_path = NodePath("..")
 
 [node name="Projectiles" type="Node2D" parent="."]
+y_sort_enabled = true
 script = ExtResource("29_sxv2b")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Projectiles"]
-_spawnable_scenes = PackedStringArray("res://World/Objects/Projectiles/ArrowProjectile.tscn", "res://World/Objects/Magic/Wind/TornadoProjectile.tscn")
+_spawnable_scenes = PackedStringArray("res://World/Objects/Projectiles/ArrowProjectile.tscn", "res://World/Objects/Magic/Wind/TornadoProjectile.tscn", "res://World/Objects/Magic/Wind/LingeringTornado.tscn")
 spawn_path = NodePath("..")
 
 [node name="ItemDrops" type="Node2D" parent="."]

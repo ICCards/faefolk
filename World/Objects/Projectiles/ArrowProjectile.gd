@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 
 
 var speed = 250
@@ -16,7 +16,6 @@ var _uuid = load("res://helpers/UUID.gd")
 @onready var uuid = _uuid.new()
 
 @export var sync_velocity: Vector2
-@export var destroyed: bool
 
 #func _physics_process(delta):
 #	if not collided:
@@ -84,9 +83,9 @@ func fade_out():
 #	destroy()
 
 
-func _physics_process(delta):
-	if destroyed == true:
-		destroy()
+#func _physics_process(delta):
+#	if destroyed == true:
+#		destroy()
 
 func destroy():
 	if not collided:

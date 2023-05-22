@@ -2,13 +2,14 @@ extends CharacterBody2D
 
 @onready var animation_player = $CompositeSprites/AnimationPlayer
 @onready var animation_player2 = $CompositeSprites/AnimationPlayer2
-@onready var sword_swing = $Swing/SwordSwing
-@onready var composite_sprites = $CompositeSprites
-@onready var holding_item = $CompositeSprites/HoldingItem
-@onready var actions = $Actions
-@onready var user_interface = $Camera2D/UserInterface
-@onready var sound_effects = $Sounds/SoundEffects
-@onready var synchronizer = $MultiplayerSynchronizer
+#@onready var sword_swing = $Swing/SwordSwing
+@onready var composite_sprites: Node2D = $CompositeSprites
+@onready var holding_item: TextureRect = $CompositeSprites/HoldingItem
+@onready var actions: Node2D = $Actions
+@onready var magic: Node2D = $Magic
+@onready var user_interface: CanvasLayer = $Camera2D/UserInterface
+@onready var sound_effects: AudioStreamPlayer = $Sounds/SoundEffects
+@onready var synchronizer: MultiplayerSynchronizer = $MultiplayerSynchronizer
 @onready var footsteps_sound: AudioStreamPlayer2D = $Sounds/FootstepsSound
 
 var running = false
@@ -38,9 +39,6 @@ var rng = RandomNumberGenerator.new()
 @export var current_footsteps_sound: String = ""
 @export var animation: String = "idle_down"
 @export var tool_name: String = ""
-@export var footstep_stream_paused: bool
-@export var play_animation_backwards: bool = false
-@export var walk_legs: bool = false
 @export var holding_item_name: String = ""
 var MAX_SPEED_DIRT := 8
 var MAX_SPEED_PATH := 9
@@ -57,7 +55,6 @@ var is_building_world = false
 @onready var _character = load("res://Global/Data/Characters.gd")
 
 func _ready():
-	print("SPAWNING PLAYER")
 	composite_sprites.hide()
 	character = _character.new()
 	character.LoadPlayerCharacter("human_male")
@@ -92,11 +89,6 @@ func initialize_player_template():
 
 func _physics_process(delta):
 	if not is_multiplayer_authority(): 
-		if footstep_stream_paused:
-			footsteps_sound.stream_paused = true
-		else:
-			footsteps_sound.volume_db = -10 #Sounds.return_adjusted_sound_db("footstep",-10)
-			footsteps_sound.stream_paused = false
 		if animation == "sword_swing_up" or animation == "sword_block_up" or animation == "scythe_swing_up":
 			composite_sprites.get_node("ToolEquipped").show_behind_parent = true
 		else:
@@ -110,14 +102,15 @@ func _physics_process(delta):
 		else:
 			holding_item.show()
 			$CompositeSprites/HoldingItem.texture = load("res://Assets/Images/inventory_icons/"+JsonData.item_data[holding_item_name]["ItemCategory"] +"/"+ holding_item_name +".png")
-		if play_animation_backwards:
-			animation_player.play_backwards(animation_player.current_animation)
+		if animation.left(4) == "idle":
+			footsteps_sound.stream_paused = true
 		else:
-			animation_player.play(animation_player.current_animation)
-		if not walk_legs:
-			animation_player2.stop()
-		else:
-			animation_player2.play("walk legs")
+			footsteps_sound.stream_paused = false
+		animation_player.play(animation_player.current_animation)
+#		if not walk_legs:
+#			animation_player2.stop()
+#		else:
+#			animation_player2.play("walk legs")
 		composite_sprites.set_player_animation(character,animation,tool_name)
 
 
@@ -137,6 +130,7 @@ func destroy():
 	set_process_unhandled_input(false)
 	state = DYING
 	character.queue_free()
+
 
 func set_held_object():
 	if PlayerData.normal_hotbar_mode:
@@ -186,7 +180,6 @@ func _process(_delta) -> void:
 		magic_casting_movement_state(_delta)
 	else:
 		footsteps_sound.stream_paused = true
-		footstep_stream_paused = true
 
 
 func set_movement_speed_change():
@@ -209,7 +202,6 @@ func set_movement_speed_change():
 
 
 func _unhandled_input(event):
-	#if not syncronizer.is_multiplayer_authority(): return
 	if not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and not PlayerData.interactive_screen_mode and not PlayerData.viewMapMode and not PlayerData.chatMode and state == MOVEMENT and Sounds.current_footsteps_sound != Sounds.swimming: 
 		if PlayerData.normal_hotbar_mode:
 			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
@@ -351,7 +343,7 @@ func movement_state(delta):
 				velocity = velocity.limit_length(MAX_SPEED_DIRT * delta)
 			else:
 				velocity = velocity.limit_length(MAX_SPEED_PATH * delta)
-			sword_swing.knockback_vector = input_vector
+		#	sword_swing.knockback_vector = input_vector
 		else:
 			if Sounds.current_footsteps_sound != Sounds.swimming:
 				velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta )
@@ -369,7 +361,6 @@ func movement_state(delta):
 
 func idle_state(_direction):
 	if state == MOVEMENT:
-		footstep_stream_paused = true
 		$Sounds/FootstepsSound.stream_paused = true
 		animation_player.play("idle loop")
 		if Sounds.current_footsteps_sound != Sounds.swimming:
@@ -423,7 +414,6 @@ func idle_state(_direction):
 func walk_state(_direction):
 	if state == MOVEMENT:
 		animation_player.play("walk loop")
-		footstep_stream_paused = false
 		$Sounds/FootstepsSound.stream_paused = false
 		if Sounds.current_footsteps_sound != Sounds.swimming and not running:
 			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and PlayerData.normal_hotbar_mode:

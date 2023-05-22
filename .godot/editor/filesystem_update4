@@ -40,3 +40,21 @@ res://World/World/Builder/BuildNature.gd
 res://World/Objects/Nature/Trees/Log.tscn
 res://World/Objects/Nature/Particles/FullMapParticles.gd
 res://World/World/Builder/WorldBuilder.gd
+res://World/Player/Player/UserInterface/Chatbox/ChatBox.tscn
+res://World/Player/Player/UserInterface/Chatbox/ChatBox.gd
+res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn
+res://World/Player/Player/UserInterface/Hotbar/Hotbar.gd
+res://World/Player/Player/UserInterface/UserInterface.tscn
+res://World/Player/Player/UserInterface/UserInterface.gd
+res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.tscn
+res://Global/Data/Sounds.gd
+res://World/Player/Player/Player.gd
+res://World/Player/Player/AttachedScenes/Actions/Actions.tscn
+res://World/Player/Player/AttachedScenes/Actions/Actions.gd
+res://World/Objects/Magic/Wind/LingeringTornado.tscn
+res://World/Objects/Magic/Wind/LingeringTornado.gd
+res://World/Objects/Nature/Grasses/Weed.tscn
+res://World/World/main.gd
+res://World/Objects/Magic/Wind/Whirlwind.tscn
+res://World/Objects/Magic/Wind/Whirlwind.gd
+res://World/Objects/Nature/Grasses/Weed.gd

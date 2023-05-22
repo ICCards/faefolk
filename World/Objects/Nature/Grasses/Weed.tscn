@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3]
+[gd_scene load_steps=19 format=3 uid="uid://bs4tbl6smymdw"]
 
 [ext_resource type="AudioStream" uid="uid://2u73yye23mpv" path="res://Assets/Sound/Sound effects/Tree/rustle.mp3" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Nature/Grasses/Weed.gd" id="1_hwrrt"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3]
+[gd_scene load_steps=52 format=3 uid="uid://dl4nde0q6hyno"]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Wind/Whirlwind.gd" id="1_0pxx6"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="2"]
@@ -487,7 +487,7 @@ animation = &"player"
 autoplay = "player"
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 264192
+collision_layer = 0
 collision_mask = 0
 script = ExtResource("2_0aw6s")
 

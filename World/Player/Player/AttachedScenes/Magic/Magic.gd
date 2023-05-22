@@ -341,13 +341,11 @@ func _physics_process(delta):
 			get_parent().direction = "DOWN"
 	if is_casting and get_parent().state != DYING:
 		if get_parent().cast_movement_direction == "":
-			get_parent().walk_legs = false
 			player_animation_player2.stop(false)
 			get_parent().tool_name = current_staff_name
 			get_parent().animation = "magic_cast_"+get_parent().direction.to_lower()
 			composite_sprites.set_player_animation(get_parent().character, "magic_cast_"+get_parent().direction.to_lower(), current_staff_name)
 		else:
-			get_parent().walk_legs = true
 			player_animation_player2.play("walk legs")
 			get_parent().tool_name = current_staff_name
 			get_parent().animation = "magic_cast_"+get_parent().direction.to_lower()+"_"+get_parent().cast_movement_direction
@@ -356,13 +354,11 @@ func _physics_process(delta):
 		if get_parent().cast_movement_direction == "":
 			get_parent().tool_name = "bow"
 			get_parent().animation = "draw_"+get_parent().direction.to_lower()
-			get_parent().walk_legs = false
 			player_animation_player2.stop(false)
 			composite_sprites.set_player_animation(get_parent().character, get_parent().animation, get_parent().tool_name)
 		else:
 			get_parent().tool_name = "bow"
 			get_parent().animation = "draw_"+get_parent().direction.to_lower()+"_"+get_parent().cast_movement_direction
-			get_parent().walk_legs = true
 			player_animation_player2.play("walk legs")
 			composite_sprites.set_player_animation(get_parent().character, get_parent().animation, get_parent().tool_name)
 	if is_releasing and get_parent().state != DYING:
@@ -656,25 +652,29 @@ func play_blizzard():
 # Wind #
 
 func play_lingering_tornado():
-	var spell = LingeringTornado.instantiate()
-	spell.particles_transform = $CastDirection.transform
-	spell.target = get_global_mouse_position() + Vector2(0,32)
-	spell.position = $CastDirection/Marker2D.global_position
-	get_node("../../../Projectiles").call_deferred("add_child", spell)
+	Server.world.get_node("Projectiles").rpc_id(1,"play_wind_spell",{"p_id":Server.player_node.name, "p":$CastDirection/Marker2D.global_position,"t": get_global_mouse_position()+Vector2(0,16),"i":3})
+#	var spell = LingeringTornado.instantiate()
+#	spell.particles_transform = $CastDirection.transform
+#	spell.target = get_global_mouse_position() + Vector2(0,32)
+#	spell.position = $CastDirection/Marker2D.global_position
+#	get_node("../../../Projectiles").call_deferred("add_child", spell)
 
 func play_wind_projectile():
-	Server.world.get_node("Projectiles").rpc_id(1,"play_tornado_projectile",{"p_id":Server.player_node.name, "p":$CastDirection/Marker2D.global_position,"v":(get_global_mouse_position() - $CastDirection/Marker2D.global_position).normalized()})
+	Server.world.get_node("Projectiles").rpc_id(1,"play_wind_spell",{"p_id":Server.player_node.name, "p":$CastDirection/Marker2D.global_position,"v":(get_global_mouse_position() - $CastDirection/Marker2D.global_position).normalized(),"i":1})
 #	var spell = TornadoProjectile.instantiate()
 #	spell.position = $CastDirection/Marker2D.global_position
 #	spell.velocity = get_global_mouse_position() - spell.position
 #	get_node("../../../").call_deferred("add_child", spell)
 
 func play_dash():
+	Server.world.get_node("Projectiles").rpc_id(1,"play_wind_spell",{"p_id":Server.player_node.name, "i":2})
+	
+func play_dash_effect():
 	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Magic/Wind/dash.mp3"))
 	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -16))
 	sound_effects.call_deferred("play")
 	$DustParticles.set_deferred("emitting", true)
-	$DustBurst.set_deferred("rotation", (get_parent().input_vector*-1).angle())
+	#$DustBurst.set_deferred("rotation", (get_parent().input_vector*-1).angle())
 	$DustBurst.call_deferred("restart")
 	$DustBurst.set_deferred("emitting", true)
 	set_player_whitened()
@@ -704,7 +704,11 @@ func _on_GhostTimer_timeout():
 		ghost.frame = sprite.frame
 
 func play_whirlwind():
+	Server.world.get_node("Projectiles").rpc_id(1,"play_wind_spell",{"p_id":Server.player_node.name,"i":4})
+	
+func play_whirlwind_effect(data):
 	var spell = Whirlwind.instantiate()
+	spell.player_id = data["p_id"]
 	call_deferred("add_child", spell)
 
 # Fire #

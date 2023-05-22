@@ -57,7 +57,7 @@ var starting_player_data = {
 		"3": ["stone fishing rod", 1, null],
 		"4": ["blueprint", 1, null],
 		#"5": ["hammer", 1, null],
-		"5": ["wind staff", 1, null],
+		#"5": ["wind staff", 1, null],
 		"6": ["stone sword", 1, 50],
 		"8": ["raw egg", 10, null],
 		"9": ["bow", 1, 50],
@@ -88,7 +88,7 @@ var starting_player_data = {
 			"3": ["bronze ore", 100, null],
 	},
 	"combat_hotbar": {
-	#		"0": ["wind staff", 1, null],
+			"0": ["wind staff", 1, null],
 	},
 	"skill_experience": {
 			"farming": 0,
@@ -101,7 +101,7 @@ var starting_player_data = {
 			"electric": 0,
 			"earth": 0,
 			"fire": 0,
-			"wind": 0,
+			"wind": 1000,
 			"ice": 0,
 		},
 	"collections": {

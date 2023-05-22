@@ -208,9 +208,9 @@ func sit(chair_name,chair_position,chair_direction):
 func stand_up():
 	if not sitting:
 		get_parent().play_animation_backwards = true
-		get_parent().animation = "sit_"+direction_of_current_chair
-		get_parent().composite_sprites.set_player_animation(Server.player_node.character, "sit_"+direction_of_current_chair, null)
-		get_parent().animation_player.play_backwards("sit_"+direction_of_current_chair)
+		get_parent().animation = "stand_"+direction_of_current_chair
+		get_parent().composite_sprites.set_player_animation(Server.player_node.character, get_parent().animation, null)
+		get_parent().animation_player.play_backwards(get_parent().animation)
 		await get_parent().animation_player.animation_finished
 		get_parent().state = get_parent().MOVEMENT
 		get_parent().play_animation_backwards = false

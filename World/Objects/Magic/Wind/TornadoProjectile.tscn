@@ -169,9 +169,9 @@ properties/0/spawn = true
 properties/0/sync = false
 properties/1/path = NodePath(".:position")
 properties/1/spawn = true
-properties/1/sync = true
+properties/1/sync = false
 
-[node name="TornadoProjectile" type="Node2D"]
+[node name="TornadoProjectile" type="CharacterBody2D"]
 script = ExtResource("1_d48oj")
 
 [node name="TrailParticles" type="Node2D" parent="."]

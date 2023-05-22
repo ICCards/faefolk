@@ -86,6 +86,7 @@ func switch_hotbar():
 			$Hotbar.initialize_hotbar()
 			$CombatHotbar.hide()
 			$PlayerDataUI/EnergyBars.show()
+		$ChatBox.set_chat_box()
 		get_node("../../").set_held_object()
 
 
