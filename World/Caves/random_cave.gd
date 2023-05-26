@@ -22,5 +22,6 @@ func set_nav():
 
 
 
-func _on_timer_timeout():
+func _on_timer_timeout(): 
+	return
 	set_nav()

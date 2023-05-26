@@ -8,8 +8,8 @@ extends Node
 
 var caves = []
 
-@export var map_width: int = 150
-@export var map_height: int = 150
+@export var map_width: int = 300
+@export var map_height: int = 300
 @export var redraw: bool : set = redraw_walls
 
 @export var world_seed: String = "Hgfdddsdssdel"
@@ -61,7 +61,7 @@ func fix_tiles_and_set_ladders_and_lights():
 	valid_light_or_ladder_tiles = []
 	for loc in walls.get_used_cells(0): # fix tiles and get light/ladder locs
 		var autotile_id = Tiles.return_autotile_id(loc,walls.get_used_cells(0))
-		if autotile_id == 13:
+		if autotile_id == null:
 			walls.set_cell(0,loc,0,Vector2i(-1,-1))
 			reset_flag = true
 		elif autotile_id == 7 or autotile_id == 11 or autotile_id == 12:
@@ -134,10 +134,10 @@ func redraw_walls(value = null) -> void:
 	get_caves()
 	connect_caves()
 	fix_tiles_and_set_ladders_and_lights()
-	set_valid_tiles()
-	set_decorations()
-	set_resources()
-	set_mobs()
+#	set_valid_tiles()
+#	set_decorations()
+#	set_resources()
+#	set_mobs()
 	
 func set_mobs():
 	var locs = valid_tiles.get_used_cells(0)
@@ -347,8 +347,17 @@ func flood_fill(tilex, tiley):
 				if walls.get_cell_atlas_coords(0,dir) == Vector2i(-1,-1): #if not wall_tiles.has(dir):
 					if !to_fill.has(dir) and !cave.has(dir):
 						to_fill.append(dir)
-	if cave.size() >= min_cave_size:
+	if cave.size() >= min_cave_size and not cave_has_border_tile(cave):
 		caves.append(cave)
+
+
+func cave_has_border_tile(cave):
+#	for tile in cave:
+#		if tile.x == 1:
+#			return true
+#		if tile.y == 1:
+#			return true
+	return false
 
 
 func connect_caves():

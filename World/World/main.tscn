@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://ccj70qn1crooy"]
+[gd_scene load_steps=46 format=3 uid="uid://ccj70qn1crooy"]
 
 [ext_resource type="Script" path="res://World/World/main.gd" id="1_ddhom"]
 [ext_resource type="PackedScene" uid="uid://bkq17vop8u2tj" path="res://MainMenu/LoadingScreen.tscn" id="2_41261"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" path="res://World/World/Scripts/FarmingTiles.gd" id="24_tk18i"]
 [ext_resource type="TileSet" uid="uid://d140vlni5xnsr" path="res://Assets/Tilesets/Terrain/tres files/hoed.tres" id="25_5i4gv"]
 [ext_resource type="TileSet" uid="uid://bnm5mir3awwa7" path="res://Assets/Tilesets/Terrain/tres files/watered hoed.tres" id="26_1en4m"]
+[ext_resource type="Script" path="res://World/World/Scripts/Players.gd" id="27_pdxgh"]
 [ext_resource type="Script" path="res://World/World/Scripts/ItemDrops.gd" id="27_xbcwi"]
 [ext_resource type="Script" path="res://World/World/Scripts/PlaceableObjects.gd" id="28_8tvvt"]
 [ext_resource type="Script" path="res://World/World/Scripts/Mobs.gd" id="28_pnul4"]
@@ -3590,6 +3591,7 @@ format = 2
 
 [node name="Players" type="Node2D" parent="."]
 y_sort_enabled = true
+script = ExtResource("27_pdxgh")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players"]
 _spawnable_scenes = PackedStringArray("res://World/Player/Player/Player.tscn")

@@ -83,7 +83,7 @@ func _input(event):
 func text_submitted(text):
 	if text != "":
 		var data =  {"player_id": Server.player_node.name, "m": text}
-		Server.world.rpc_id(1,"send_message",data)
+		Server.world.get_node("Players").rpc_id(1,"send_message",data)
 		inputField.text = ''
 		inputField.release_focus()
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://11fn0l4pns6v"]
 
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="1"]
 [ext_resource type="Script" path="res://World/Caves/Objects/CaveLight.gd" id="1_5gc40"]
@@ -8,8 +8,7 @@ script = ExtResource("1_5gc40")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.988235, 1, 0.796078, 1)
-energy = 1.3
+energy = 1.61
 blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("1")
-texture_scale = 1.2

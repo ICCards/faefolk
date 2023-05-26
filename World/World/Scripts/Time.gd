@@ -2,7 +2,7 @@ extends Node
 
 @rpc
 func refresh_crop_and_tree_chunk(chunk, tree_dict, crop_dict, tile_dict):
-	if not get_node("../").server_data == {}:
+	if not get_node("../").world == {}:
 		get_node("../").world[chunk]["tree"] = tree_dict
 		get_node("../").world[chunk]["crop"] = crop_dict
 		get_node("../").world[chunk]["tile"] = tile_dict
