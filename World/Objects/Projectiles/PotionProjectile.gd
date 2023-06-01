@@ -26,24 +26,24 @@ func _ready():
 	else:
 		$Sprite2D.texture = load("res://Assets/Images/inventory_icons/Potion/"+ potion_name  +".png")
 		$PotionHitbox.tool_name = potion_name
-	if potion_name == "destruction potion I" or potion_name == "destruction potion II" or potion_name == "destruction potion III":
-		$PotionHitbox.set_collision_mask(264320)
-		$DestructionTrailParticles.show()
-		$DestructionTrailParticles.transform = particles_transform
-		$DestructionTrailParticles.position += Vector2(0,32)
-	elif potion_name == "poison potion I" or potion_name == "poison potion II" or potion_name == "poison potion III":
-		$PotionHitbox.set_collision_mask(384)
-		$PoisonTrailParticles.show()
-		$PoisonTrailParticles.transform = particles_transform
-		$PoisonTrailParticles.position += Vector2(0,32)
-	elif potion_name == "speed potion I" or potion_name == "speed potion II" or potion_name == "speed potion III":
-		$SpeedTrailParticles.show()
-		$SpeedTrailParticles.transform = particles_transform
-		$SpeedTrailParticles.position += Vector2(0,32)
-	else:
-		$HealthTrailParticles.show()
-		$HealthTrailParticles.transform = particles_transform
-		$HealthTrailParticles.position += Vector2(0,32)
+#	if potion_name == "destruction potion I" or potion_name == "destruction potion II" or potion_name == "destruction potion III":
+#		$PotionHitbox.set_collision_mask(264320)
+#		$DestructionTrailParticles.show()
+#		$DestructionTrailParticles.transform = particles_transform
+#		$DestructionTrailParticles.position += Vector2(0,32)
+#	elif potion_name == "poison potion I" or potion_name == "poison potion II" or potion_name == "poison potion III":
+#		$PotionHitbox.set_collision_mask(384)
+#		$PoisonTrailParticles.show()
+#		$PoisonTrailParticles.transform = particles_transform
+#		$PoisonTrailParticles.position += Vector2(0,32)
+#	elif potion_name == "speed potion I" or potion_name == "speed potion II" or potion_name == "speed potion III":
+#		$SpeedTrailParticles.show()
+#		$SpeedTrailParticles.transform = particles_transform
+#		$SpeedTrailParticles.position += Vector2(0,32)
+#	else:
+#		$HealthTrailParticles.show()
+#		$HealthTrailParticles.transform = particles_transform
+#		$HealthTrailParticles.position += Vector2(0,32)
 	await get_tree().create_timer(0.025).timeout
 	if not destroyed:
 		$Sprite2D.show()
@@ -53,14 +53,14 @@ func destroy():
 	$Sprite2D.call_deferred("hide")
 	if potion_name == "raw egg":
 		$AnimationPlayer.call_deferred("play", "raw egg break")
-	elif potion_name == "destruction potion I" or potion_name == "destruction potion II" or potion_name == "destruction potion III":
-		$AnimationPlayer.call_deferred("play", "destruction potion")
-	elif potion_name == "poison potion I" or potion_name == "poison potion II" or potion_name == "poison potion III":
-		$AnimationPlayer.call_deferred("play", "poison potion")
-	elif potion_name == "speed potion I" or potion_name == "speed potion II" or potion_name == "speed potion III":
-		$AnimationPlayer.call_deferred("play", "speed potion")
-	else:
-		$AnimationPlayer.call_deferred("play", "health potion")
+#	elif potion_name == "destruction potion I" or potion_name == "destruction potion II" or potion_name == "destruction potion III":
+#		$AnimationPlayer.call_deferred("play", "destruction potion")
+#	elif potion_name == "poison potion I" or potion_name == "poison potion II" or potion_name == "poison potion III":
+#		$AnimationPlayer.call_deferred("play", "poison potion")
+#	elif potion_name == "speed potion I" or potion_name == "speed potion II" or potion_name == "speed potion III":
+#		$AnimationPlayer.call_deferred("play", "speed potion")
+#	else:
+#		$AnimationPlayer.call_deferred("play", "health potion")
 	await $AnimationPlayer.animation_finished
 	queue_free()
 	
@@ -80,6 +80,7 @@ func play_egg_break_sound():
 	
 	
 func spawn_duck():
+	return
 	if Tiles.valid_tiles.get_cell_atlas_coords(0,global_position/32) != Vector2i(-1,-1) and Server.world.name == "Overworld":
 		if Util.chance(25):
 			var uuid = _uuid.new()

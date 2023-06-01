@@ -1,12 +1,8 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=15 format=3 uid="uid://d4cskc5neav7x"]
 
 [ext_resource type="Script" path="res://World/Objects/Projectiles/ArrowProjectile.gd" id="1_orj32"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="2"]
-[ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_csnra"]
 [ext_resource type="Texture2D" uid="uid://dmwt5k6qtf56l" path="res://Assets/Images/Magic/Arrow/Arrow_Hit.png" id="2_ili42"]
-
-[sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(6, 3)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1ilct"]
 atlas = ExtResource("2_ili42")
@@ -69,23 +65,22 @@ animations = [{
 }],
 "loop": true,
 "name": &"break",
-"speed": 5.0
+"speed": 8.0
 }]
-
-[sub_resource type="CapsuleShape2D" id="2"]
-radius = 2.0
-height = 4.0
 
 [sub_resource type="CircleShape2D" id="12"]
 radius = 294.0
 
-[node name="ArrowProjectile" type="CharacterBody2D"]
-collision_layer = 0
-script = ExtResource("1_orj32")
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_s5ms0"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = false
+properties/1/path = NodePath(".:sync_velocity")
+properties/1/spawn = true
+properties/1/sync = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5, 0.5)
-shape = SubResource("1")
+[node name="ArrowProjectile" type="CharacterBody2D"]
+script = ExtResource("1_orj32")
 
 [node name="FireTrailParticles" type="Node2D" parent="."]
 position = Vector2(0, 1)
@@ -248,17 +243,6 @@ animation = &"break"
 wait_time = 2.0
 autostart = true
 
-[node name="Hitbox" type="Area2D" parent="."]
-position = Vector2(0, 1)
-collision_layer = 258
-collision_mask = 0
-script = ExtResource("2_csnra")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(11, -1)
-rotation = 1.5708
-shape = SubResource("2")
-
 [node name="DetectEnemyBox" type="Area2D" parent="."]
 visible = false
 collision_layer = 64
@@ -273,6 +257,7 @@ energy = 1.01
 texture = ExtResource("2")
 texture_scale = 0.25
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_s5ms0")
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="area_entered" from="Hitbox" to="." method="_on_Area2D_area_entered"]
-[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

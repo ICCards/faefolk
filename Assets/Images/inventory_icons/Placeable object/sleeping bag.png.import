@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://mi0ngnk1weho"
-path="res://.godot/imported/cactus5-explode.png-807b2971c7870f22500a56ac3fdef2e7.ctex"
+uid="uid://y5q4c05kcgdk"
+path="res://.godot/imported/sleeping bag.png-027026e7f2c0d64d0744514c11799adb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Images/cacti/cactus5-explode.png"
-dest_files=["res://.godot/imported/cactus5-explode.png-807b2971c7870f22500a56ac3fdef2e7.ctex"]
+source_file="res://Assets/Images/inventory_icons/Placeable object/sleeping bag.png"
+dest_files=["res://.godot/imported/sleeping bag.png-027026e7f2c0d64d0744514c11799adb.ctex"]
 
 [params]
 

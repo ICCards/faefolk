@@ -1,9 +1,9 @@
-[gd_scene load_steps=32 format=3]
+[gd_scene load_steps=32 format=3 uid="uid://c3f02b7na2fkr"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/UserInterface.gd" id="1_pv3v8"]
 [ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Menu/Menu.tscn" id="2_dv8vv"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/WeatherEffects.gd" id="2_rl35f"]
-[ext_resource type="PackedScene" path="res://MainMenu/LoadingScreen.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://bkq17vop8u2tj" path="res://MainMenu/LoadingScreen.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://dkn2fivmq1v8o" path="res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn" id="4_nwvkq"]
 [ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.tscn" id="5_mppsu"]
 [ext_resource type="Texture2D" uid="uid://c81fev363dte8" path="res://Assets/Images/User interface/PlaceObject/RotationUI1.png" id="5_yyu54"]
@@ -13,15 +13,15 @@
 [ext_resource type="Texture2D" uid="uid://dvfrk41vachbj" path="res://Assets/Images/Animations/loading/sprite_2.png" id="8_tq2d6"]
 [ext_resource type="Texture2D" uid="uid://u7b5ardk075b" path="res://Assets/Images/Animations/loading/sprite_1.png" id="9_ela15"]
 [ext_resource type="Texture2D" uid="uid://dtv2tv7c6saxr" path="res://Assets/Images/Animations/loading/sprite_3.png" id="10_k0pdh"]
-[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Chatbox/ChatBox.tscn" id="10_stju0"]
+[ext_resource type="PackedScene" uid="uid://do3jh4so8wc2p" path="res://World/Player/Player/UserInterface/Chatbox/ChatBox.tscn" id="10_stju0"]
 [ext_resource type="Texture2D" uid="uid://b72oxa6602dkg" path="res://Assets/Images/Animations/loading/sprite_4.png" id="11_6e6cq"]
 [ext_resource type="Texture2D" uid="uid://bh0xuop77usp4" path="res://Assets/Images/Animations/loading/sprite_5.png" id="12_13luq"]
 [ext_resource type="AudioStream" uid="uid://86w4gtnxusdy" path="res://Assets/Sound/Sound effects/Ambience/thunder crack.mp3" id="13"]
 [ext_resource type="Texture2D" uid="uid://40dmypwmoqg6" path="res://Assets/Images/Animations/loading/sprite_6.png" id="13_y8wut"]
 [ext_resource type="Texture2D" uid="uid://dw0g2r5gq0txa" path="res://Assets/Images/Animations/loading/sprite_7.png" id="14_0pw86"]
 [ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Misc/BetaLabel.tscn" id="15_tm6fr"]
-[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.tscn" id="16_cnrm0"]
-[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn" id="17_n0y8n"]
+[ext_resource type="PackedScene" uid="uid://d0h15yiyqop2c" path="res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.tscn" id="16_cnrm0"]
+[ext_resource type="PackedScene" uid="uid://dfdoxod3ri0gf" path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn" id="17_n0y8n"]
 [ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.tscn" id="18_gbc14"]
 [ext_resource type="PackedScene" uid="uid://rpuaufnru6of" path="res://World/Player/Player/UserInterface/ItemPickUpDialogue/ItemPickUpDialogue.tscn" id="19_n03k2"]
 
@@ -370,9 +370,9 @@ offset_top = 520.0
 offset_bottom = 75.0
 
 [node name="CombatHotbar" parent="." instance=ExtResource("16_cnrm0")]
-visible = false
 
 [node name="Hotbar" parent="." instance=ExtResource("17_n0y8n")]
+visible = false
 
 [node name="PlayerDataUI" parent="." instance=ExtResource("18_gbc14")]
 visible = false

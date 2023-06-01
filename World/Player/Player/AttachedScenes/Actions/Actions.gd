@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var Fishing = load("res://World/Player/Player/Fishing/Fishing.tscn")
 @onready var PlaceObjectScene = load("res://World/Building/PlaceObjectPreview.tscn") 
-@onready var Eating_particles = load("res://World/Player/Player/AttachedParticles/Eating/EatingParticles.tscn")
 
 @onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
@@ -29,7 +28,7 @@ var current_interactive_node = null
 
 
 func _ready():
-	if not get_node("../").is_multiplayer_authority(): return
+	if not get_node("../").is_multiplayer_authority(): queue_free()
 	PlayerData.connect("health_depleted",Callable(self,"player_death"))
 
 
@@ -60,7 +59,6 @@ func _input(event):
 						sleep(current_interactive_node.object_position)
 					"tree":
 						Server.world.get_node("NatureObjects").rpc_id(1,"harvest_tree",{"id":id,"chunk":chunk,"player_id":Server.player_node.name})
-						#current_interactive_node.harvest()
 					"crop":
 						harvest_crop(current_interactive_node)
 					"forage":
@@ -88,11 +86,8 @@ func _input(event):
 								Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
 								get_parent().user_interface.open_stove(current_interactive_node.name, current_interactive_node.object_level)
 					"chest":
-						print("YUP")
 						if Server.world.world[chunk]["placeable"].has(id):
-							print("HERE")
 							if not Server.world.world[chunk]["placeable"][id]["o"]:
-								print("HERE2")
 								Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
 								get_parent().user_interface.open_chest(current_interactive_node.name)
 					"campfire":
@@ -108,16 +103,12 @@ func _input(event):
 						sit("armchair",current_interactive_node.object_position,current_interactive_node.object_direction)
 					"door":
 						Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
-						#Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_door()
 					"gate":
 						Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
-#						#Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_gate()
 					"lamp":
 						Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
-#						#Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_lamp()
 					"fireplace":
 						Server.world.get_node("PlaceableObjects").rpc_id(1,"player_interact_with_object",{"id":id,"l":location})
-#						#Server.world.get_node("PlaceableObjects/"+current_interactive_node.name).interactives.toggle_fireplace()
 			current_interactive_node = null
 	elif Server.player_node.state == SITTING and event.is_action_pressed("action"):
 		stand_up()
@@ -136,15 +127,13 @@ func teleport(portal_position):
 func eat(item_name):
 	if get_parent().state != get_parent().EATING:
 		get_node("../Sounds/FootstepsSound").stream_paused = true
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/Player/eat.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
-		sound_effects.play()
+		get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Player/eat.mp3")
+		get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+		get_parent().sound_effects.play()
 		get_parent().state = get_parent().EATING
 		PlayerData.remove_single_object_from_hotbar()
-		var eating_paricles = Eating_particles.instantiate()
-		eating_paricles.item_name = item_name
+		InstancedScenes.add_eating_particles(item_name)
 		get_parent().animation = "eat"
-		get_parent().add_child(eating_paricles)
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, get_parent().animation, null)
 		get_parent().animation_player.play("eat")
 		await get_parent().animation_player.animation_finished
@@ -210,19 +199,21 @@ func sit(chair_name,chair_position,chair_direction):
 	get_parent().composite_sprites.set_player_animation(Server.player_node.character, get_parent().animation, null)
 	get_parent().animation_player.play("sit_"+chair_direction)
 	await get_parent().animation_player.animation_finished
-	await get_tree().process_frame
-	get_parent().composite_sprites.set_player_animation(Server.player_node.character, "sit_idle_"+chair_direction, null)
+	get_parent().animation = "sit_idle_"+chair_direction
+	get_parent().composite_sprites.set_player_animation(Server.player_node.character, get_parent().animation, null)
 	get_parent().animation_player.play("sit_idle")
 	sitting = false
 
 
 func stand_up():
 	if not sitting:
-		get_parent().animation = "sit_"+direction_of_current_chair
+		get_parent().play_animation_backwards = true
+		get_parent().animation = "stand_"+direction_of_current_chair
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, get_parent().animation, null)
-		get_parent().animation_player.play_backwards("sit_"+direction_of_current_chair)
+		get_parent().animation_player.play_backwards(get_parent().animation)
 		await get_parent().animation_player.animation_finished
 		get_parent().state = get_parent().MOVEMENT
+		get_parent().play_animation_backwards = false
 
 func return_adjusted_chair_position(_chair_name,_pos,_direction):
 	match _chair_name:
@@ -272,8 +263,8 @@ func player_death():
 		get_node("../Magic").invisibility_active = true
 		get_parent().state = get_parent().DYING
 		get_node("../Sounds/FootstepsSound").stream_paused = true
-		get_node("../PoisonParticles").stop_poison_state()
-		get_node("../SpeedParticles").stop_speed_buff()
+#		get_node("../PoisonParticles").stop_poison_state()
+#		get_node("../SpeedParticles").stop_speed_buff()
 		get_parent().animation = "death_" + get_parent().direction.to_lower()
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, get_parent().animation, null)
 		get_parent().animation_player.play("death")
@@ -300,7 +291,12 @@ func drop_inventory_items():
 
 func respawn():
 	PlayerData.reset_player_stats()
-	get_parent().position = PlayerData.player_data["respawn_location"]*16
+	if PlayerData.player_data["respawn_position"]:
+		get_parent().position = PlayerData.player_data["respawn_position"]
+	else:
+		var spawn_locs = Server.world.get_node("TerrainTiles/Beach").get_used_cells(0)
+		spawn_locs.shuffle()
+		get_parent().position = Vector2i(spawn_locs[0])*Vector2i(16,16)
 	get_parent().animation_player.stop()
 	get_node("../Camera2D/UserInterface").respawn()
 	await get_tree().create_timer(0.5).timeout
@@ -334,7 +330,7 @@ func sleep(sleeping_bag_pos):
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
-		PlayerData.player_data["respawn_location"] = player_enter_position/16
+		PlayerData.player_data["respawn_position"] = player_enter_position
 		await get_tree().process_frame
 		get_parent().position = player_enter_position
 		get_parent().z_index = 0

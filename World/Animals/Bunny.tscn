@@ -1,9 +1,9 @@
-[gd_scene load_steps=31 format=3]
+[gd_scene load_steps=32 format=3 uid="uid://cnbopxh6mi5wm"]
 
 [ext_resource type="Script" path="res://World/Animals/Bunny.gd" id="2_bon8t"]
 [ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="3"]
 [ext_resource type="PackedScene" uid="uid://dr88n2qik0tat" path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" id="3_8k70x"]
-[ext_resource type="SpriteFrames" path="res://Assets/Images/Animals/Bunny/yellowBunny.tres" id="3_djxbj"]
+[ext_resource type="SpriteFrames" uid="uid://j4eltt0u1x2" path="res://Assets/Images/Animals/Bunny/yellowBunny.tres" id="3_djxbj"]
 [ext_resource type="PackedScene" uid="uid://cqt04hkompf5f" path="res://World/Enemies/AttachedStates/EnemyStunnedState.tscn" id="4_lm4gw"]
 [ext_resource type="Texture2D" uid="uid://bbybm4xho1nc8" path="res://Assets/Images/Magic/lightning/Shock_Small.png" id="4_nh64w"]
 [ext_resource type="PackedScene" uid="uid://cvfur4ra58e75" path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" id="5_6f3da"]
@@ -287,6 +287,14 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_r30k0"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:sync_velocity")
+properties/1/spawn = true
+properties/1/sync = true
+
 [node name="Bunny" type="CharacterBody2D"]
 collision_mask = 67
 motion_mode = 1
@@ -333,22 +341,7 @@ libraries = {
 "": SubResource("AnimationLibrary_epbpm")
 }
 
-[node name="Timers" type="Node" parent="."]
-
-[node name="RunStateTimer" type="Timer" parent="Timers"]
-wait_time = 5.0
-
-[node name="Timer" type="Timer" parent="Timers"]
-wait_time = 4.0
-autostart = true
-
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 100.0
-target_desired_distance = 100.0
-avoidance_enabled = true
-max_speed = 65.0
 
 [node name="Electricity" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -357,7 +350,9 @@ position = Vector2(0, -6)
 sprite_frames = SubResource("SpriteFrames_snwb2")
 animation = &"new_animation"
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_r30k0")
+
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
-[connection signal="timeout" from="Timers/RunStateTimer" to="." method="_on_RunStateTimer_timeout"]
 
 [editable path="EnemyPoisonState"]

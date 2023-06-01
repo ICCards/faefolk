@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3]
+[gd_scene load_steps=15 format=3 uid="uid://d2il8o3t7ubea"]
 
 [ext_resource type="Script" path="res://InventoryLogic/ItemDrop.gd" id="2"]
 [ext_resource type="Texture2D" uid="uid://bbduu3gxlbfp6" path="res://Assets/Images/inventory_icons/Placeable object/workbench #2.png" id="2_0fpab"]

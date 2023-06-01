@@ -1,9 +1,8 @@
-[gd_scene load_steps=17 format=3]
+[gd_scene load_steps=16 format=3 uid="uid://in7jmp6w27hu"]
 
 [ext_resource type="PackedScene" uid="uid://dvmsm12osyn5r" path="res://World/Caves/CaveGenerator.tscn" id="1_72qd8"]
 [ext_resource type="Script" path="res://World/Caves/random_cave.gd" id="1_mpt1j"]
-[ext_resource type="TileSet" path="res://Assets/Tilesets/Terrain/tres files/cave walls.tres" id="2_bgu55"]
-[ext_resource type="PackedScene" path="res://World/Caves/CaveAmbientLight.tscn" id="3_44og5"]
+[ext_resource type="TileSet" uid="uid://dvlbpldkgmaxq" path="res://Assets/Tilesets/Terrain/tres files/cave walls.tres" id="2_bgu55"]
 [ext_resource type="Texture2D" uid="uid://cqtxugm0or5mr" path="res://Assets/Tilesets/Terrain/CLM_MainLev.png" id="4_mp61e"]
 [ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/Terrain/CL_MainLev.png" id="6_77qpy"]
 
@@ -16,7 +15,7 @@ glow_intensity = 8.0
 glow_mix = 0.369
 glow_blend_mode = 4
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_qcvch"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_5tg6c"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
@@ -24,7 +23,7 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u3x8b"]
 texture = ExtResource("6_77qpy")
 0:0/0 = 0
-0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_qcvch")
+0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_5tg6c")
 
 [sub_resource type="TileSet" id="TileSet_wc8ba"]
 navigation_layer_0/layers = 1
@@ -5021,13 +5020,9 @@ y_sort_enabled = true
 script = ExtResource("1_mpt1j")
 
 [node name="CaveGenerator" parent="." instance=ExtResource("1_72qd8")]
-redraw = true
-
-[node name="CaveAmbientLight" parent="." instance=ExtResource("3_44og5")]
-color = Color(0.65098, 0.65098, 0.65098, 1)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(1144, 1589)
+position = Vector2(704, 586)
 
 [node name="Line2D" type="Line2D" parent="."]
 width = 2.0

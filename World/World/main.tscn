@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://clgao2r8dhjp2"]
+[gd_scene load_steps=46 format=3 uid="uid://ccj70qn1crooy"]
 
 [ext_resource type="Script" path="res://World/World/main.gd" id="1_ddhom"]
 [ext_resource type="PackedScene" uid="uid://bkq17vop8u2tj" path="res://MainMenu/LoadingScreen.tscn" id="2_41261"]
@@ -13,7 +13,7 @@
 [ext_resource type="TileSet" uid="uid://dyhpf5ycylv47" path="res://Assets/Tilesets/Terrain/tres files/deep ocean.tres" id="11_o78d0"]
 [ext_resource type="TileSet" uid="uid://kur362tioktp" path="res://Assets/Tilesets/Terrain/tres files/dirt.tres" id="12_bs77d"]
 [ext_resource type="TileSet" uid="uid://46xup2d252wi" path="res://Assets/Tilesets/Terrain/tres files/forest.tres" id="13_kdqba"]
-[ext_resource type="TileSet" uid="uid://b4kvswgv27btw" path="res://Assets/Tilesets/Terrain/elevated terrain.tres" id="14_mwr1d"]
+[ext_resource type="TileSet" uid="uid://b4kvswgv27btw" path="res://Assets/Tilesets/Terrain/tres files/elevated terrain.tres" id="14_n1ubj"]
 [ext_resource type="TileSet" uid="uid://5ievp1f6ocsj" path="res://Assets/Tilesets/Terrain/tres files/freshwater.tres" id="15_1jx3y"]
 [ext_resource type="TileSet" uid="uid://c8oj3vj13c2wy" path="res://Assets/Tilesets/Terrain/tres files/sand.tres" id="16_psrlb"]
 [ext_resource type="TileSet" uid="uid://r6da5qp2qgn3" path="res://Assets/Tilesets/Terrain/tres files/waves.tres" id="17_asoyo"]
@@ -26,12 +26,16 @@
 [ext_resource type="Script" path="res://World/World/Scripts/FarmingTiles.gd" id="24_tk18i"]
 [ext_resource type="TileSet" uid="uid://d140vlni5xnsr" path="res://Assets/Tilesets/Terrain/tres files/hoed.tres" id="25_5i4gv"]
 [ext_resource type="TileSet" uid="uid://bnm5mir3awwa7" path="res://Assets/Tilesets/Terrain/tres files/watered hoed.tres" id="26_1en4m"]
+[ext_resource type="Script" path="res://World/World/Scripts/Players.gd" id="27_pdxgh"]
 [ext_resource type="Script" path="res://World/World/Scripts/ItemDrops.gd" id="27_xbcwi"]
 [ext_resource type="Script" path="res://World/World/Scripts/PlaceableObjects.gd" id="28_8tvvt"]
+[ext_resource type="Script" path="res://World/World/Scripts/Mobs.gd" id="28_pnul4"]
 [ext_resource type="Script" path="res://World/World/Scripts/ForageObjects.gd" id="29_n13sw"]
+[ext_resource type="Script" path="res://World/World/Projectiles.gd" id="29_sxv2b"]
 [ext_resource type="Script" path="res://World/World/Scripts/NatureObjects.gd" id="30_xvhlc"]
 [ext_resource type="Script" path="res://World/World/Scripts/GrassObjects.gd" id="31_2yv75"]
 [ext_resource type="PackedScene" path="res://World/Map/WorldMap.tscn" id="32_13y4f"]
+[ext_resource type="PackedScene" uid="uid://bkvw6820ue7ga" path="res://World/Objects/Nature/Particles/FullMapParticles.tscn" id="34_7smup"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7b1tf"]
 texture = ExtResource("9_lynqu")
@@ -3486,7 +3490,7 @@ layer_0/z_index = -4
 
 [node name="Elevation" type="TileMap" parent="TerrainTiles"]
 modulate = Color(1.2, 1.2, 1.2, 1)
-tile_set = ExtResource("14_mwr1d")
+tile_set = ExtResource("14_n1ubj")
 format = 2
 
 [node name="Freshwater" type="TileMap" parent="TerrainTiles"]
@@ -3587,9 +3591,18 @@ format = 2
 
 [node name="Players" type="Node2D" parent="."]
 y_sort_enabled = true
+script = ExtResource("27_pdxgh")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players"]
 _spawnable_scenes = PackedStringArray("res://World/Player/Player/Player.tscn")
+spawn_path = NodePath("..")
+
+[node name="Projectiles" type="Node2D" parent="."]
+y_sort_enabled = true
+script = ExtResource("29_sxv2b")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Projectiles"]
+_spawnable_scenes = PackedStringArray("res://World/Objects/Projectiles/ArrowProjectile.tscn", "res://World/Objects/Magic/Wind/TornadoProjectile.tscn", "res://World/Objects/Magic/Wind/LingeringTornado.tscn")
 spawn_path = NodePath("..")
 
 [node name="ItemDrops" type="Node2D" parent="."]
@@ -3601,13 +3614,11 @@ spawn_path = NodePath("..")
 
 [node name="Mobs" type="Node2D" parent="."]
 y_sort_enabled = true
+script = ExtResource("28_pnul4")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Mobs"]
-_spawnable_scenes = PackedStringArray("res://World/Animals/Bear.tscn")
+_spawnable_scenes = PackedStringArray("res://World/Animals/Duck.tscn", "res://World/Animals/Bunny.tscn")
 spawn_path = NodePath("..")
-
-[node name="Projectiles" type="Node2D" parent="."]
-y_sort_enabled = true
 
 [node name="BuildingObjects" type="Node2D" parent="."]
 
@@ -3627,8 +3638,12 @@ script = ExtResource("30_xvhlc")
 y_sort_enabled = true
 script = ExtResource("31_2yv75")
 
+[node name="FullMapParticles" parent="." instance=ExtResource("34_7smup")]
+visible = false
+
 [node name="WorldMap" parent="." instance=ExtResource("32_13y4f")]
 visible = false
+z_index = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_yn58q")

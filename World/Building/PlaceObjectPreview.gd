@@ -201,7 +201,11 @@ func place_customizable_state():
 	get_variety_index(Constants.customizable_object_atlas_tiles[item_name].keys().size())
 	$Objects.set_cell(0,Vector2i(0,0),0,Constants.customizable_object_atlas_tiles[item_name][variety])
 	$ColorIndicator.tile_size = dimensions
-	if not Tiles.validate_tiles(location, dimensions) or not Tiles.validate_foundation_tiles(location, dimensions):
+	if not Tiles.validate_tiles(location, dimensions):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+		return
+	elif not Util.isObjectPlaceableOnGround(item_name) and not Tiles.validate_foundation_tiles(location, dimensions): 
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 		return
@@ -223,7 +227,11 @@ func place_customizable_rotatable_state():
 		$ColorIndicator.tile_size = dimensions
 	else:
 		$ColorIndicator.tile_size = Vector2(dimensions.y, dimensions.x)
-	if not Tiles.validate_tiles(location, $ColorIndicator.tile_size) or not Tiles.validate_foundation_tiles(location, $ColorIndicator.tile_size):
+	if not Tiles.validate_tiles(location, $ColorIndicator.tile_size):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+		return
+	elif not Util.isObjectPlaceableOnGround(item_name) and not Tiles.validate_foundation_tiles(location, dimensions): 
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 		return

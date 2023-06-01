@@ -6,7 +6,10 @@ func _ready():
 	Sounds.connect("footsteps_sound_change",Callable(self,"set_footsteps_sound"))
 	Sounds.connect("volume_change",Callable(self,"set_new_music_volume"))
 	PlayerData.connect("health_depleted",Callable(self,"reset_sound"))
-	await get_tree().create_timer(1.0).timeout
+	if Server.world.name == "main":
+		pass
+	else:
+		Sounds.current_footsteps_sound = Sounds.stone_footsteps
 	set_footsteps_sound()
 
 
@@ -22,6 +25,8 @@ func set_footsteps_sound():
 		get_node("../../").is_walking_on_dirt = true
 	else:
 		get_node("../../").is_walking_on_dirt = false
+	playing = true
+	await get_tree().create_timer(0.1).timeout
 	stream_paused = true
 
 
@@ -36,11 +41,11 @@ func _process(delta):
 	if Server.player_node:
 		if has_node("/root/Main"):
 			var location = Tiles.ocean_tiles.local_to_map(Server.player_node.position)
-			if Tiles.isCenterBitmaskTile(location, Tiles.deep_ocean_tiles):
+			if Tiles.deep_ocean_tiles.get_cell_atlas_coords(0,location) != Vector2i(-1,-1):
 				if Sounds.current_footsteps_sound != Sounds.swimming:
 					Sounds.current_footsteps_sound = Sounds.swimming
 					Sounds.emit_signal("footsteps_sound_change")
-			elif Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles):
+			elif Tiles.ocean_tiles.get_cell_atlas_coords(0,location) != Vector2i(-1,-1):
 				if Sounds.current_footsteps_sound != null:
 					play_water_step_sound()
 					Sounds.current_footsteps_sound = null
@@ -57,29 +62,17 @@ func _process(delta):
 				if Sounds.current_footsteps_sound != Sounds.dirt_footsteps:
 					Sounds.current_footsteps_sound = Sounds.dirt_footsteps
 					Sounds.emit_signal("footsteps_sound_change")
-#		else:
-#			var location = Tiles.ocean_tiles.local_to_map(Server.player_node.position)
-#			if Server.world.has_node("Tiles/BridgeTiles"):
-#				if Server.world.get_node("Tiles/BridgeTiles").get_cellv(location) != -1:
-#					if Sounds.current_footsteps_sound != Sounds.wood_footsteps:
-#						Sounds.current_footsteps_sound = Sounds.wood_footsteps
-#						Sounds.emit_signal("footsteps_sound_change")
-#				elif Server.world.get_node("Tiles/Floors3").get_cellv(location) != -1 or Server.world.get_node("Tiles/Floors4").get_cellv(location) != -1:
-#					if Sounds.current_footsteps_sound != Sounds.dirt_footsteps:
-#						Sounds.current_footsteps_sound = Sounds.dirt_footsteps
-#						Sounds.emit_signal("footsteps_sound_change")
-#				else:
-#					if Sounds.current_footsteps_sound != Sounds.stone_footsteps:
-#						Sounds.current_footsteps_sound = Sounds.stone_footsteps
-#						Sounds.emit_signal("footsteps_sound_change")
-#			elif Server.world.get_node("Tiles/Floors3").get_cellv(location) != -1 or Server.world.get_node("Tiles/Floors4").get_cellv(location) != -1:
-#				if Sounds.current_footsteps_sound != Sounds.dirt_footsteps:
-#					Sounds.current_footsteps_sound = Sounds.dirt_footsteps
-#					Sounds.emit_signal("footsteps_sound_change")
-#			else:
-#				if Sounds.current_footsteps_sound != Sounds.stone_footsteps:
-#					Sounds.current_footsteps_sound = Sounds.stone_footsteps
-#					Sounds.emit_signal("footsteps_sound_change")
+		else:
+			var location = Tiles.ocean_tiles.local_to_map(Server.player_node.position)
+			if Tiles.isCenterBitmaskTile(location,Tiles.ocean_tiles):
+				if Sounds.current_footsteps_sound != Sounds.swimming:
+					Sounds.current_footsteps_sound = Sounds.swimming
+					Sounds.emit_signal("footsteps_sound_change")
+			else:
+				if Sounds.current_footsteps_sound != Sounds.stone_footsteps:
+					Sounds.current_footsteps_sound = Sounds.stone_footsteps
+					Sounds.emit_signal("footsteps_sound_change")
+
 
 func play_water_step_sound():
 	if Util.chance(33):

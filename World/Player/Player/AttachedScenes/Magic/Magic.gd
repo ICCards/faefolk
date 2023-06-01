@@ -4,7 +4,7 @@ extends Node2D
 
 @onready var PotionProjectile = load("res://World/Objects/Projectiles/PotionProjectile.tscn")
 
-@onready var ArrowProjectile = load("res://World/Objects/Projectiles/ArrowProjectile.tscn")
+#@onready var ArrowProjectile = load("res://World/Objects/Projectiles/ArrowProjectile.tscn")
 
 @onready var LightningProjectile = load("res://World/Objects/Magic/Lightning/LightningProjectile.tscn")
 @onready var LightningStrike = load("res://World/Objects/Magic/Lightning/LightningStrike.tscn")
@@ -62,8 +62,7 @@ enum {
 
 signal spell_finished
 
-var animation: String = ""
-var direction: String = "DOWN"
+
 var movement_direction: String = ""
 var current_potion: String = ""
 var current_staff_name: String = ""
@@ -120,7 +119,7 @@ func _input( event ):
 func draw_bow(spell_index):
 	if not thread.is_alive():
 		thread.start(Callable(self,"whoAmIBow").bind(spell_index))
-		
+
 func whoAmIBow(spell_index):
 	call_deferred("draw_bow_deferred",spell_index)
 
@@ -128,7 +127,7 @@ func draw_bow_deferred(spell_index):
 	if validate_bow_requirement(spell_index):
 		get_parent().state = MAGIC_CASTING
 		is_drawing = true
-		animation = "draw_" + get_parent().direction.to_lower()
+		get_parent().animation = "draw_" + get_parent().direction.to_lower()
 		player_animation_player.play("bow draw release")
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/draw.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
@@ -151,20 +150,20 @@ func validate_bow_requirement(spell_index):
 
 func wait_for_bow_release(spell_index):
 	if not mouse_left_down:
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
-		sound_effects.play()
+		get_parent().sound_effects.stream = load("res://Assets/Sound/Sound effects/Bow and arrow/release.mp3")
+		get_parent().sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -12)
+		get_parent().sound_effects.play()
 		PlayerData.change_energy(-1)
 		Stats.decrease_tool_health()
 		shoot(spell_index)
 		is_drawing = false
 		is_releasing = true
-		animation = "release_" + direction.to_lower()
-		composite_sprites.set_player_animation(get_parent().character, animation, "bow release")
+		get_parent().tool_name = "bow release"
+		get_parent().animation = "release_" + get_parent().direction.to_lower()
+		composite_sprites.set_player_animation(get_parent().character, get_parent().animation, get_parent().tool_name)
 		player_animation_player.play("bow draw release")
 		await player_animation_player.animation_finished
 		is_releasing = false
-		get_parent().direction = direction
 		get_parent().state = MOVEMENT
 		thread.wait_to_finish()
 	elif get_parent().state == DYING:
@@ -196,59 +195,60 @@ func shoot(spell_index):
 func ricochet_arrow_shot():
 	PlayerData.remove_material("arrow", 2)
 	PlayerData.change_mana(-2)
-	var arrow = ArrowProjectile.instantiate()
-	if get_node("../Magic").player_fire_buff:
-		arrow.is_fire_arrow = true
-	else:
-		arrow.is_fire_arrow = false
-	arrow.is_ricochet_shot = true
-	arrow.position = $CastDirection/Marker2D.global_position
-	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
-	get_node("../../../").call_deferred("add_child",arrow)
+#	var arrow = ArrowProjectile.instantiate()
+#	if get_node("../Magic").player_fire_buff:
+#		arrow.is_fire_arrow = true
+#	else:
+#		arrow.is_fire_arrow = false
+#	arrow.is_ricochet_shot = true
+#	arrow.position = $CastDirection/Marker2D.global_position
+#	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
+#	get_node("../../../").call_deferred("add_child",arrow)
 
 
 func enchanted_arrow_shot():
 	PlayerData.remove_material("arrow", 1)
 	PlayerData.change_mana(-1)
-	var arrow = ArrowProjectile.instantiate()
-	if Util.chance(33):
-		arrow.is_fire_arrow = true
-	elif Util.chance(33):
-		arrow.is_ice_arrow = true
-	else:
-		arrow.is_poison_arrow = true
-	arrow.position = $CastDirection/Marker2D.global_position
-	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
-	get_node("../../../").call_deferred("add_child",arrow)
+#	var arrow = ArrowProjectile.instantiate()
+#	if Util.chance(33):
+#		arrow.is_fire_arrow = true
+#	elif Util.chance(33):
+#		arrow.is_ice_arrow = true
+#	else:
+#		arrow.is_poison_arrow = true
+#	arrow.position = $CastDirection/Marker2D.global_position
+#	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
+#	get_node("../../../").call_deferred("add_child",arrow)
 
 func single_arrow_shot():
 	PlayerData.remove_material("arrow", 1)
-	var arrow = ArrowProjectile.instantiate()
-	if get_node("../Magic").player_fire_buff:
-		arrow.is_fire_arrow = true
-	else:
-		arrow.is_fire_arrow = false
-	arrow.position = $CastDirection/Marker2D.global_position
-	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
-	get_node("../../../").call_deferred("add_child", arrow)
+	Server.world.get_node("Projectiles").rpc_id(1,"single_arrow_shot",{"p":$CastDirection/Marker2D.global_position,"v":(get_global_mouse_position() - $CastDirection/Marker2D.global_position).normalized()})
+#	var arrow = ArrowProjectile.instantiate()
+#	if get_node("../Magic").player_fire_buff:
+#		arrow.is_fire_arrow = trueå
+#	else:
+#		arrow.is_fire_arrow = false
+#	arrow.position = $CastDirection/Marker2D.global_position
+#	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
+#	get_node("../../../").call_deferred("add_child", arrow)
 
 
 func multi_arrow_shot():
 	PlayerData.remove_material("arrow", 3)
-	for i in range(3):
-		var arrow = ArrowProjectile.instantiate()
-		if get_node("../Magic").player_fire_buff:
-			arrow.is_fire_arrow = true
-		else:
-			arrow.is_fire_arrow = false
-		arrow.position = $CastDirection/Marker2D.global_position
-		if i == 0:
-			arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
-		elif i == 1: 
-			arrow.velocity = ((get_global_mouse_position()-arrow.position).normalized()+Vector2(0.25,0.25)).normalized()
-		elif i == 2:
-			arrow.velocity = ((get_global_mouse_position()-arrow.position).normalized()-Vector2(0.25,0.25)).normalized()
-		get_node("../../../").call_deferred("add_child", arrow)
+#	for i in range(3):
+#		var arrow = ArrowProjectile.instantiate()
+#		if get_node("../Magic").player_fire_buff:
+#			arrow.is_fire_arrow = true
+#		else:
+#			arrow.is_fire_arrow = false
+#		arrow.position = $CastDirection/Marker2D.global_position
+#		if i == 0:
+#			arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
+#		elif i == 1: 
+#			arrow.velocity = ((get_global_mouse_position()-arrow.position).normalized()+Vector2(0.25,0.25)).normalized()
+#		elif i == 2:
+#			arrow.velocity = ((get_global_mouse_position()-arrow.position).normalized()-Vector2(0.25,0.25)).normalized()
+#		get_node("../../../").call_deferred("add_child", arrow)
 
 
 func wait_for_cast_release(staff_name,spell_index):
@@ -283,7 +283,7 @@ func cast_spell_deferred(staff_and_spell_index):
 			get_parent().state = MAGIC_CASTING
 			current_staff_name = staff_and_spell_index[0]
 			is_casting = true
-			animation = "magic_cast_" + get_parent().direction.to_lower()
+			get_parent().animation = "magic_cast_" + get_parent().direction.to_lower()
 			player_animation_player.play("bow draw release")
 			await player_animation_player.animation_finished
 		wait_for_cast_release(staff_and_spell_index[0],staff_and_spell_index[1])
@@ -323,53 +323,64 @@ func _physics_process(delta):
 	$CastDirection.look_at(get_global_mouse_position())
 	if $CastDirection.rotation_degrees >= 0:
 		if degrees <= 45 or degrees >= 315:
-			direction = "RIGHT"
+			get_parent().direction = "RIGHT"
 		elif degrees <= 135:
-			direction = "DOWN"
+			get_parent().direction = "DOWN"
 		elif degrees <= 225:
-			direction = "LEFT"
+			get_parent().direction = "LEFT"
 		else:
-			direction = "UP"
+			get_parent().direction = "UP"
 	else:
 		if degrees >= -45 or degrees <= -315:
-			direction = "RIGHT"
+			get_parent().direction = "RIGHT"
 		elif degrees >= -135:
-			direction = "UP"
+			get_parent().direction = "UP"
 		elif degrees >= -225:
-			direction = "LEFT"
+			get_parent().direction = "LEFT"
 		else:
-			direction = "DOWN"
+			get_parent().direction = "DOWN"
 	if is_casting and get_parent().state != DYING:
 		if get_parent().cast_movement_direction == "":
 			player_animation_player2.stop(false)
-			composite_sprites.set_player_animation(get_parent().character, "magic_cast_"+direction.to_lower(), current_staff_name)
+			get_parent().tool_name = current_staff_name
+			get_parent().animation = "magic_cast_"+get_parent().direction.to_lower()
+			composite_sprites.set_player_animation(get_parent().character, "magic_cast_"+get_parent().direction.to_lower(), current_staff_name)
 		else:
 			player_animation_player2.play("walk legs")
-			composite_sprites.set_player_animation(get_parent().character, "magic_cast_"+direction.to_lower()+"_"+get_parent().cast_movement_direction, current_staff_name)
+			get_parent().tool_name = current_staff_name
+			get_parent().animation = "magic_cast_"+get_parent().direction.to_lower()+"_"+get_parent().cast_movement_direction
+			composite_sprites.set_player_animation(get_parent().character, "magic_cast_"+get_parent().direction.to_lower()+"_"+get_parent().cast_movement_direction, current_staff_name)
 	if is_drawing and get_parent().state != DYING:
 		if get_parent().cast_movement_direction == "":
+			get_parent().tool_name = "bow"
+			get_parent().animation = "draw_"+get_parent().direction.to_lower()
 			player_animation_player2.stop(false)
-			composite_sprites.set_player_animation(get_parent().character, "draw_"+direction.to_lower(), "bow")
+			composite_sprites.set_player_animation(get_parent().character, get_parent().animation, get_parent().tool_name)
 		else:
+			get_parent().tool_name = "bow"
+			get_parent().animation = "draw_"+get_parent().direction.to_lower()+"_"+get_parent().cast_movement_direction
 			player_animation_player2.play("walk legs")
-			composite_sprites.set_player_animation(get_parent().character, "draw_"+direction.to_lower()+"_"+get_parent().cast_movement_direction, "bow")
+			composite_sprites.set_player_animation(get_parent().character, get_parent().animation, get_parent().tool_name)
 	if is_releasing and get_parent().state != DYING:
-		composite_sprites.set_player_animation(get_parent().character, "release_" + direction.to_lower(), "bow release")
-	if is_throwing and get_parent().state != DYING:
-		if get_parent().cast_movement_direction == "":
-			player_animation_player2.stop(false)
-			composite_sprites.set_player_animation(get_parent().character, "throw_" + direction.to_lower(), current_potion)
-		else:
-			player_animation_player2.play("walk legs")
-			composite_sprites.set_player_animation(get_parent().character, "throw_"+direction.to_lower()+"_"+get_parent().cast_movement_direction, current_potion)
+		get_parent().tool_name = "bow release"
+		get_parent().animation = "release_" + get_parent().direction.to_lower()
+		composite_sprites.set_player_animation(get_parent().character, get_parent().animation, get_parent().tool_name)
+#	if is_throwing and get_parent().state != DYING:
+#		if get_parent().cast_movement_direction == "":
+#			get_parent().walk_legs = false
+#			player_animation_player2.stop(false)
+#			composite_sprites.set_player_animation(get_parent().character, "throw_" + get_parent().direction.to_lower(), current_potion)
+#		else:
+#			get_parent().walk_legs = true
+#			player_animation_player2.play("walk legs")
+#			composite_sprites.set_player_animation(get_parent().character, "throw_"+get_parent().direction.to_lower()+"_"+get_parent().cast_movement_direction, current_potion)
 
 func throw_potion(potion_name, init_direction):
 	PlayerData.remove_single_object_from_hotbar()
 	is_throwing = true
 	current_potion = potion_name
-	direction = init_direction
 	get_parent().state = MAGIC_CASTING
-	composite_sprites.set_player_animation(get_parent().character, "throw_" + direction.to_lower(), potion_name)
+	composite_sprites.set_player_animation(get_parent().character, "throw_" + get_parent().direction.to_lower(), potion_name)
 	player_animation_player.play("bow draw release")
 	await get_tree().create_timer(0.3).timeout
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Potion/throw.mp3")
@@ -379,7 +390,6 @@ func throw_potion(potion_name, init_direction):
 	throw(potion_name)
 	is_throwing = false
 	get_parent().state = MOVEMENT
-	get_parent().direction = direction
 	
 func throw(potion_name):
 	var potion = PotionProjectile.instantiate()
@@ -470,7 +480,6 @@ func cast(staff_name, spell_index):
 	is_casting = false
 	if get_parent().state != DYING: 
 		get_parent().state = MOVEMENT
-		get_parent().direction = direction
 	thread.wait_to_finish()
 
 
@@ -643,24 +652,29 @@ func play_blizzard():
 # Wind #
 
 func play_lingering_tornado():
-	var spell = LingeringTornado.instantiate()
-	spell.particles_transform = $CastDirection.transform
-	spell.target = get_global_mouse_position() + Vector2(0,32)
-	spell.position = $CastDirection/Marker2D.global_position
-	get_node("../../../Projectiles").call_deferred("add_child", spell)
+	Server.world.get_node("Projectiles").rpc_id(1,"play_wind_spell",{"p_id":Server.player_node.name, "p":$CastDirection/Marker2D.global_position,"t": get_global_mouse_position()+Vector2(0,16),"i":3})
+#	var spell = LingeringTornado.instantiate()
+#	spell.particles_transform = $CastDirection.transform
+#	spell.target = get_global_mouse_position() + Vector2(0,32)
+#	spell.position = $CastDirection/Marker2D.global_position
+#	get_node("../../../Projectiles").call_deferred("add_child", spell)
 
 func play_wind_projectile():
-	var spell = TornadoProjectile.instantiate()
-	spell.position = $CastDirection/Marker2D.global_position
-	spell.velocity = get_global_mouse_position() - spell.position
-	get_node("../../../").call_deferred("add_child", spell)
+	Server.world.get_node("Projectiles").rpc_id(1,"play_wind_spell",{"p_id":Server.player_node.name, "p":$CastDirection/Marker2D.global_position,"v":(get_global_mouse_position() - $CastDirection/Marker2D.global_position).normalized(),"i":1})
+#	var spell = TornadoProjectile.instantiate()
+#	spell.position = $CastDirection/Marker2D.global_position
+#	spell.velocity = get_global_mouse_position() - spell.position
+#	get_node("../../../").call_deferred("add_child", spell)
 
 func play_dash():
+	Server.world.get_node("Projectiles").rpc_id(1,"play_wind_spell",{"p_id":Server.player_node.name, "i":2})
+	
+func play_dash_effect():
 	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Magic/Wind/dash.mp3"))
 	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -16))
 	sound_effects.call_deferred("play")
 	$DustParticles.set_deferred("emitting", true)
-	$DustBurst.set_deferred("rotation", (get_parent().input_vector*-1).angle())
+	#$DustBurst.set_deferred("rotation", (get_parent().input_vector*-1).angle())
 	$DustBurst.call_deferred("restart")
 	$DustBurst.set_deferred("emitting", true)
 	set_player_whitened()
@@ -690,7 +704,11 @@ func _on_GhostTimer_timeout():
 		ghost.frame = sprite.frame
 
 func play_whirlwind():
+	Server.world.get_node("Projectiles").rpc_id(1,"play_wind_spell",{"p_id":Server.player_node.name,"i":4})
+	
+func play_whirlwind_effect(data):
 	var spell = Whirlwind.instantiate()
+	spell.player_id = data["p_id"]
 	call_deferred("add_child", spell)
 
 # Fire #

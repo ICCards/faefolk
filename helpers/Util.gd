@@ -97,28 +97,6 @@ func valid_holding_item_category(item_category):
 	if item_category == "Resource" or item_category == "Seed" or item_category == "Food" or item_category == "Fish" or item_category == "Crop" or item_category == "Forage":
 		return true
 	return false
-	
-func return_adjusted_item_name(item_name):
-	if item_name.substr(0,5) == "couch":
-		return "couch"
-	elif item_name.substr(0,5) == "chair":
-		return "chair"
-	elif item_name.substr(0,8) == "armchair":
-		return "armchair"
-	elif item_name.substr(0,9) == "large rug":
-		return "large rug"
-	elif item_name.substr(0,10) == "medium rug":
-		return "medium rug"
-	elif item_name.substr(0,9) == "small rug":
-		return "small rug"
-	elif item_name.substr(0,5) == "table":
-		return "table"
-	elif item_name.substr(0,3) == "bed":
-		return "bed"
-	elif item_name.substr(0,11) == "round table":
-		return "round table"
-	return item_name
-
 
 func get_random_idle_pos(pos,max_move_dist):
 	var random1 = randf_range(max_move_dist-100,max_move_dist)
@@ -127,9 +105,9 @@ func get_random_idle_pos(pos,max_move_dist):
 		random1*=-1
 	if Util.chance(50):
 		random2*=-1
-	if Tiles.valid_tiles.get_cell_atlas_coords(0,(pos+Vector2(random1,random2))/16) != Vector2i(-1,-1):
+	if Util.chance(50): #Tiles.valid_tiles.get_cell_atlas_coords(0,(pos+Vector2(random1,random2))/16) != Vector2i(-1,-1):
 		return pos+Vector2(random1,random2)
-	elif Tiles.valid_tiles.get_cell_atlas_coords(0,(pos+Vector2(random1,random2))/16) !=  Vector2i(-1,-1):
+	elif Util.chance(50): # Tiles.valid_tiles.get_cell_atlas_coords(0,(pos+Vector2(random1,random2))/16) !=  Vector2i(-1,-1):
 		return pos-Vector2(random1,random2)
 	else:
 		return pos
@@ -194,7 +172,7 @@ func return_advanced_fruit_tree_phase(current_phase):
 func isObjectPlaceableOnGround(item_name):
 	if item_name == "wood fence" or item_name == "stone fence" or item_name == "metal fence" or \
 	item_name == "wood gate" or item_name == "stone gate" or item_name == "metal gate" or \
-	item_name == "well" or item_name == "torch" or item_name == "campfire":
+	item_name == "well" or item_name == "torch" or item_name == "campfire" or item_name == "sleeping bag":
 		return true
 	return false
 

@@ -1,21 +1,11 @@
 res://MainMenu/MainMenu.tscn
-res://World/World/main.tscn
-res://Assets/Themes/Flash.tres
-res://Assets/Images/Animals/Bird/bird1.tres
-res://Assets/Images/Animals/Bunny/yellowBunny.tres
-res://Assets/Images/Animals/Duck/duck3.tres
-res://Assets/Tilesets/Objects/objects.tres
-res://Assets/Tilesets/Objects/crops.tres
 res://Assets/Tilesets/Terrain/tres files/cave walls.tres
-res://Assets/Themes/MiniMap.tres
-res://Assets/Images/tree_sets/oak/mature/animated top.tres
-res://Assets/Images/IC Kitties/SpriteFrames/White.tres
+res://Assets/Tilesets/Terrain/tres files/freshwater.tres
 res://Assets/Tilesets/Terrain/tres files/plains.tres
 res://Assets/Tilesets/Terrain/tres files/deep ocean.tres
 res://Assets/Tilesets/Terrain/tres files/dirt.tres
 res://Assets/Tilesets/Terrain/tres files/forest.tres
-res://Assets/Tilesets/Terrain/elevated terrain.tres
-res://Assets/Tilesets/Terrain/tres files/freshwater.tres
+res://Assets/Tilesets/Terrain/tres files/elevated terrain.tres
 res://Assets/Tilesets/Terrain/tres files/sand.tres
 res://Assets/Tilesets/Terrain/tres files/waves.tres
 res://Assets/Tilesets/Terrain/tres files/snow.tres
@@ -23,26 +13,32 @@ res://Assets/Tilesets/Terrain/tres files/wet sand.tres
 res://Assets/Tilesets/Terrain/tres files/shallow ocean.tres
 res://Assets/Tilesets/foundation/foundation.tres
 res://Assets/Tilesets/walls/walls.tres
+res://Assets/Tilesets/Objects/objects.tres
 res://Assets/Tilesets/Terrain/tres files/hoed.tres
 res://Assets/Tilesets/Terrain/tres files/watered hoed.tres
-res://World/World/main.gd
-res://MainMenu/MainMenuButtons.tscn
-res://MainMenu/MainMenu.gd
-res://World/World/Scripts/PlaceableObjects.gd
-res://Global/Data/PlaceObject.gd
-res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
-res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.gd
-res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.tscn
-res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn
-res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.gd
-res://World/Player/Player/UserInterface/UpgradeWallMenu/RadialUpgradeMenu.gd
-res://World/World/Builder/WorldBuilder.gd
+res://Assets/Themes/MiniMap.tres
+res://Assets/Themes/LockedAsset.tres
+res://World/Player/Player/AttachedScenes/Magic/Magic.tscn
+res://World/Caves/random_cave.tscn
+res://World/Caves/Lobby/lobby.tscn
+res://World/World/main.tscn
 res://World/Player/Player/Player.tscn
 res://Assets/Themes/whiten.tres
-res://MainMenu/LoadingScreen.gd
+res://World/Caves/Objects/CaveLight.tscn
 res://World/Player/Player/Player.gd
-res://MainMenu/LoadingScreen.tscn
-res://World/World/Scripts/FarmingTiles.gd
-res://World/World/Scripts/NatureObjects.gd
-res://World/World/Scripts/ForageObjects.gd
-res://World/World/Scripts/GrassObjects.gd
+res://World/Caves/CaveAmbientLight.tscn
+res://World/Caves/Objects/CaveLight.gd
+res://World/Player/Player/Fishing/Fishing.gd
+res://World/Caves/Lobby/lobby.gd
+res://World/Player/Player/UserInterface/Chatbox/ChatBox.tscn
+res://World/Player/Player/UserInterface/Chatbox/ChatBox.gd
+res://World/Player/Player/UserInterface/UserInterface.tscn
+res://World/Player/Player/AttachedScenes/Sound/FootstepsSound.gd
+res://World/Player/Player/Fishing/Fishing.tscn
+res://World/Player/Player/Fishing/Fish.tscn
+res://World/Player/Player/Fishing/Fish.gd
+res://World/Player/Player/AttachedScenes/Magic/Magic.gd
+res://World/Player/Player/Fishing/FishingMiniGame.tscn
+res://World/Player/Player/Fishing/FishingMiniGame.gd
+res://World/Caves/CaveGenerator.tscn
+res://World/Caves/CaveGenerator.gd

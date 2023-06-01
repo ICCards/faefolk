@@ -2,12 +2,10 @@ extends Control
 
 @onready var PlayerMenuState = load("res://World/Player/PlayerInMenu/PlayerMenuState.tscn")
 var playerMenuState
-
 var game_state: GameState
 
 
 func _ready():
-	#get_tree().get_root().set_min_size(Vector2(1280, 720))
 	if GameState.save_exists(): # Load world
 		game_state = GameState.new()
 		game_state.load_state()

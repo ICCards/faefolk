@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=12 format=3 uid="uid://d0h15yiyqop2c"]
 
 [ext_resource type="Texture2D" uid="uid://h5xwa73koaw8" path="res://Assets/Images/User interface/combat hotbar/hotbar23.png" id="1"]
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.gd" id="1_hue8c"]
@@ -178,10 +178,10 @@ texture = ExtResource("8")
 
 [node name="SwitchHotbarBtn" type="TextureButton" parent="."]
 layout_mode = 0
-offset_left = 231.0
-offset_top = 666.0
-offset_right = 247.0
-offset_bottom = 682.0
+offset_left = 1002.0
+offset_top = 665.0
+offset_right = 1018.0
+offset_bottom = 681.0
 scale = Vector2(3, 3)
 texture_normal = ExtResource("12")
 texture_pressed = ExtResource("13")

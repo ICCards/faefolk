@@ -46,7 +46,7 @@ func move(target):
 	if not is_mini_game_over:
 		randomize()
 		var tween = get_tree().create_tween()
-		tween.tween_property(self, "position", target, movement_speed+randf_range(-0.75,0.75))
+		tween.tween_property(self, "position", target, movement_speed+randf_range(-1.5,0.0))
 		$MoveTimer.set_wait_time(randf_range(min_movement_time, max_movement_time))
 		$MoveTimer.start()
 

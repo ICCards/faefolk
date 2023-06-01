@@ -37,6 +37,12 @@ func initialize():
 
 func build():
 	var terrain = get_node("../../").terrain
+	await get_tree().create_timer(0.25).timeout
+	for tile in terrain["desert"]:
+		desert.set_cell(0,tile,0,Tiles.return_atlas_tile_cord("desert",null))
+	await get_tree().create_timer(0.25).timeout
+	for tile in terrain["beach"]:
+		beach.set_cell(0,tile,0,Tiles.return_atlas_tile_cord("beach",null))
 	snow.set_cells_terrain_connect(0,terrain["snow"],0,0)
 	await get_tree().create_timer(0.25).timeout
 	forest.set_cells_terrain_connect(0,terrain["forest"],0,0)
@@ -62,11 +68,9 @@ func build():
 			deep_ocean.set_cell(0,loc+adjTile,0,Vector2i(26,56))
 			top_ocean2.set_cell(0,loc+adjTile,0,Vector2i(24,56))
 	await get_tree().create_timer(0.25).timeout
-	for tile in terrain["desert"]:
-		desert.set_cell(0,tile,0,Tiles.return_atlas_tile_cord("desert",null))
+	get_parent().initialize()
 	await get_tree().create_timer(0.25).timeout
-	for tile in terrain["beach"]:
-		beach.set_cell(0,tile,0,Tiles.return_atlas_tile_cord("beach",null))
+	get_node("../../WorldMap").buildMap()
 
 
 func _on_build_terrain_timer_timeout():

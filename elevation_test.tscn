@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://de6ukmw6ruof3"]
+
+[ext_resource type="TileSet" uid="uid://b4kvswgv27btw" path="res://Assets/Tilesets/Terrain/tres files/elevated terrain.tres" id="1_0awb6"]
+[ext_resource type="TileSet" uid="uid://s4bt6u8hs3ya" path="res://Assets/Tilesets/Terrain/tres files/plains.tres" id="2_cj20r"]
+[ext_resource type="TileSet" uid="uid://bqg0qh1wtaefa" path="res://Assets/Tilesets/Terrain/tres files/elevation 2.tres" id="2_e2wcr"]
+[ext_resource type="TileSet" uid="uid://mskwto3waful" path="res://Assets/Tilesets/Terrain/tres files/decoration.tres" id="3_cfqdj"]
+[ext_resource type="TileSet" uid="uid://5ievp1f6ocsj" path="res://Assets/Tilesets/Terrain/tres files/freshwater.tres" id="4_h7bpr"]
+
+[sub_resource type="Environment" id="Environment_t4748"]
+background_mode = 3
+tonemap_mode = 3
+tonemap_exposure = 0.4
+tonemap_white = 0.94
+glow_enabled = true
+glow_intensity = 6.13
+glow_strength = 1.38
+glow_blend_mode = 0
+glow_hdr_threshold = 1.2
+fog_light_energy = 0.0
+fog_sun_scatter = 0.64
+
+[node name="elevation_test" type="Node2D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_t4748")
+
+[node name="1" type="Node2D" parent="."]
+
+[node name="Elevation" type="TileMap" parent="1"]
+modulate = Color(1.4, 1.4, 1.4, 1)
+tile_set = ExtResource("1_0awb6")
+format = 2
+
+[node name="Elevation2" type="TileMap" parent="1"]
+modulate = Color(1.4, 1.4, 1.4, 1)
+tile_set = ExtResource("2_e2wcr")
+format = 2
+
+[node name="Plains" type="TileMap" parent="1"]
+modulate = Color(1.4, 1.4, 1.4, 1)
+tile_set = ExtResource("2_cj20r")
+cell_quadrant_size = 8
+format = 2
+layer_0/z_index = -4
+
+[node name="Decoration" type="TileMap" parent="1"]
+tile_set = ExtResource("3_cfqdj")
+format = 2
+
+[node name="Freshwater" type="TileMap" parent="1"]
+modulate = Color(1.2, 1.2, 1.2, 1)
+tile_set = ExtResource("4_h7bpr")
+format = 2

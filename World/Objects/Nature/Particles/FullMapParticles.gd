@@ -4,12 +4,13 @@ const LENGTH_OF_TRANSITION = 60.0
 
 
 func _ready():
-	PlayerData.connect("set_day",Callable(self,"play_set_day"))
-	PlayerData.connect("set_night",Callable(self,"play_set_night"))
-	if PlayerData.player_data:
-		if PlayerData.player_data["time_hours"] >= 18 or PlayerData.player_data["time_hours"] < 6:
-			$Clouds.set_deferred("self_modulate", Color("00ffffff"))
-			$LargeClouds.set_deferred("self_modulate", Color("00ffffff"))
+	PlayerData.connect("set_sunrise",Callable(self,"play_set_day"))
+	PlayerData.connect("set_sunset",Callable(self,"play_set_night"))
+
+func initialize():
+	if get_node("../").server_data["time_hours"] >= 22 or get_node("../").server_data["time_hours"] < 6: # night time
+		$Clouds.set_deferred("self_modulate", Color("00ffffff"))
+		$LargeClouds.set_deferred("self_modulate", Color("00ffffff"))
 
 func _physics_process(delta):
 	if Server.player_node:

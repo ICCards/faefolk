@@ -1510,7 +1510,7 @@
         "ItemCategory": "Placeable object",
         "StackSize": 999,
         "Description": "Can be placed and used to set respawn point.",
-        "Ingredients": [["wood", 10],["stone", 2]],
+        "Ingredients": [["cloth", 10]],
         "EnergyHealth": null
     },
     "eel":{

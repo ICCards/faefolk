@@ -1,14 +1,65 @@
 extends Control
 
+@onready var overlay = $Overlay
+@onready var bg = $Bg
+@onready var chat_container = $VBoxContainer
+@onready var toggle_chat_btn = $ToggleChat
 @onready var chatLog = $VBoxContainer/RichTextLabel
-@onready var inputLabel = $VBoxContainer/HBoxContainer/Label
 @onready var inputField = $VBoxContainer/HBoxContainer/LineEdit
+
+
+var chatbox_opened: bool = true
 
 
 func _ready():
 #	initialize_chat_history()
 	inputField.connect("text_submitted",Callable(self,"text_submitted"))
+	set_chat_box()
 	
+	
+func set_chat_box():
+	if PlayerData.normal_hotbar_mode:
+		if chatbox_opened:
+			overlay.texture = load("res://Assets/Images/User interface/chat/chats/Bg/image2.png")
+			overlay.position = Vector2(0,18)
+			bg.texture = load("res://Assets/Images/User interface/chat/chats/chat-wide-long.png")
+			bg.position = Vector2(0,0)
+			chat_container.size = Vector2(3140,1760)
+			chat_container.position = Vector2(6,17)
+			toggle_chat_btn.position = Vector2(0,0)
+			toggle_chat_btn.size = Vector2(324,21)
+		else:
+			overlay.texture = load("res://Assets/Images/User interface/chat/chats/Bg/image4.png")
+			overlay.size = Vector2(108,21)
+			overlay.position = Vector2(0,108)
+			bg.texture = load("res://Assets/Images/User interface/chat/chats/chat-wide.png")
+			bg.position = Vector2(0,90)
+			chat_container.size = Vector2(3140,840)
+			chat_container.position = Vector2(6,109)
+			toggle_chat_btn.position = Vector2(0,90)
+			toggle_chat_btn.size = Vector2(324,21)
+	else:
+		if chatbox_opened:
+			overlay.texture = load("res://Assets/Images/User interface/chat/chats/Bg/image1.png")
+			overlay.position = Vector2(0,15)
+			overlay.size = Vector2(92,53)
+			bg.texture = load("res://Assets/Images/User interface/chat/chats/chat-smol-long.png")
+			bg.position = Vector2(0,0)
+			chat_container.size = Vector2(2670,1750)
+			chat_container.position = Vector2(6,18)
+			toggle_chat_btn.position = Vector2(0,0)
+			toggle_chat_btn.size = Vector2(276,21)
+		else:
+			overlay.texture = load("res://Assets/Images/User interface/chat/chats/Bg/image3.png")
+			overlay.position = Vector2(0,108)
+			overlay.size = Vector2(92,21)
+			bg.texture = load("res://Assets/Images/User interface/chat/chats/chat-smol.png")
+			bg.position = Vector2(0,90)
+			bg.size = Vector2(92,35)
+			chat_container.size = Vector2(2670,850)
+			chat_container.position = Vector2(6,108)
+			toggle_chat_btn.position = Vector2(0,90)
+			toggle_chat_btn.size = Vector2(276,21)
 
 var message_history = []
 
@@ -45,7 +96,7 @@ func _input(event):
 func text_submitted(text):
 	if text != "":
 		var data =  {"player_id": Server.player_node.name, "m": text}
-		Server.world.rpc_id(1,"send_message",data)
+		Server.world.get_node("Players").rpc_id(1,"send_message",data)
 		inputField.text = ''
 		inputField.release_focus()
 	
@@ -74,3 +125,9 @@ func _on_TextureButton_pressed():
 		$TextureButton.texture_normal = load("res://Assets/Images/Misc/right arrow.png")
 	else:
 		$TextureButton.texture_normal = load("res://Assets/Images/Misc/left arrow.png")
+
+
+func _on_toggle_chat_pressed():
+	Sounds.play_small_select_sound()
+	chatbox_opened = not chatbox_opened
+	set_chat_box()
