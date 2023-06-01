@@ -20,7 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://40dmypwmoqg6" path="res://Assets/Images/Animations/loading/sprite_6.png" id="13_y8wut"]
 [ext_resource type="Texture2D" uid="uid://dw0g2r5gq0txa" path="res://Assets/Images/Animations/loading/sprite_7.png" id="14_0pw86"]
 [ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Misc/BetaLabel.tscn" id="15_tm6fr"]
-[ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.tscn" id="16_cnrm0"]
+[ext_resource type="PackedScene" uid="uid://d0h15yiyqop2c" path="res://World/Player/Player/UserInterface/Combat hotbar/CombatHotbar.tscn" id="16_cnrm0"]
 [ext_resource type="PackedScene" uid="uid://dfdoxod3ri0gf" path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn" id="17_n0y8n"]
 [ext_resource type="PackedScene" path="res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.tscn" id="18_gbc14"]
 [ext_resource type="PackedScene" uid="uid://rpuaufnru6of" path="res://World/Player/Player/UserInterface/ItemPickUpDialogue/ItemPickUpDialogue.tscn" id="19_n03k2"]

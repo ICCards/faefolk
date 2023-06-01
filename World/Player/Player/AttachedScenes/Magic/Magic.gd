@@ -119,7 +119,7 @@ func _input( event ):
 func draw_bow(spell_index):
 	if not thread.is_alive():
 		thread.start(Callable(self,"whoAmIBow").bind(spell_index))
-		
+
 func whoAmIBow(spell_index):
 	call_deferred("draw_bow_deferred",spell_index)
 

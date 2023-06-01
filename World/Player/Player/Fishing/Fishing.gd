@@ -98,14 +98,7 @@ func retract_and_stop(fish_name):
 	
 func reel_in_fish_line():
 	is_reeling_in_fish = true
-	if get_parent().direction == "RIGHT":
-		start_point = Vector2(20,-40)
-	elif get_parent().direction == "LEFT":
-		start_point = Vector2(-20,-40)
-	elif get_parent().direction == "DOWN":
-		start_point = Vector2(-14,-54)
-	elif get_parent().direction == "UP":
-		start_point = Vector2(14,-54)
+	change_start_point_pos()
 	line.points = [start_point, end_point]
 	var tween = get_tree().create_tween()
 	tween.tween_property(hook, "position", start_point, 0.8)
@@ -131,12 +124,15 @@ func start_fishing_mini_game():
 
 func change_start_point_pos():
 	match get_parent().direction:
-		"UP":
-			start_point = Vector2(8,-12)
+		"RIGHT":
+			start_point = Vector2(10,-24)
+		"LEFT":
+			start_point = Vector2(-10,-24)
 		"DOWN":
-			start_point = Vector2(-6,-16)
-		_:
-			start_point += Vector2(0,-9)
+			start_point = Vector2(-7,-28)
+		"UP":
+			start_point = Vector2(7,-27)
+
 
 func start():
 	line.hide()
@@ -194,7 +190,7 @@ func draw_cast_line():
 	match get_parent().direction:
 		"RIGHT":
 			start_point = Vector2(13,-15)
-			end_point = Vector2( 90*percent+18, -8 )
+			end_point = Vector2( 90*percent+18, 0 )
 			mid_point = Vector2(-(end_point.x-start_point.x)/2, 0)
 			cast_distance = abs(start_point.x - end_point.x)
 		"LEFT":
@@ -217,19 +213,29 @@ func draw_cast_line():
 	hook.position = end_point
 	setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, end_point)
 	var location = Tiles.ocean_tiles.local_to_map(hook.position + Server.player_node.position)
-	if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles) or Tiles.deep_ocean_tiles.get_cell_atlas_coords(0,location) != Vector2i(-1,-1): # valid cast
-		play_ripple_effect()
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/dropItemInWater.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-		sound_effects.play()
-		waiting_for_fish_bite = true
-		if get_parent().direction == "RIGHT" or get_parent().direction == "LEFT":
-			player_animation_player.play("waiting for fish side")
+	if Server.world.name == "lobby": # caves
+		if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles) and Tiles.cave_wall_tiles.get_cell_atlas_coords(0,location) == Vector2i(-1,-1):
+			valid_cast()
 		else:
-			player_animation_player.play("waiting for fish upwards")
+			await get_tree().create_timer(0.2).timeout
+			stop_fishing_state()
 	else:
-		await get_tree().create_timer(0.2).timeout
-		stop_fishing_state()
+		if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles) or Tiles.deep_ocean_tiles.get_cell_atlas_coords(0,location) != Vector2i(-1,-1): # valid cast
+			valid_cast()
+		else:
+			await get_tree().create_timer(0.2).timeout
+			stop_fishing_state()
+
+func valid_cast():
+	play_ripple_effect()
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/dropItemInWater.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
+	waiting_for_fish_bite = true
+	if get_parent().direction == "RIGHT" or get_parent().direction == "LEFT":
+		player_animation_player.play("waiting for fish side")
+	else:
+		player_animation_player.play("waiting for fish upwards")
 
 
 func setLinePointsToBezierCurve(a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):

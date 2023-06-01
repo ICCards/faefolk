@@ -8,8 +8,8 @@ extends Node
 
 var caves = []
 
-@export var map_width: int = 300
-@export var map_height: int = 300
+@export var map_width: int = 200
+@export var map_height: int = 200
 @export var redraw: bool : set = redraw_walls
 
 @export var world_seed: String = "Hgfdddsdssdel"
@@ -58,6 +58,7 @@ func _ready() -> void:
 
 
 func fix_tiles_and_set_ladders_and_lights():
+	walls.set_cells_terrain_connect(0,walls.get_used_cells(0),0,0)
 	valid_light_or_ladder_tiles = []
 	for loc in walls.get_used_cells(0): # fix tiles and get light/ladder locs
 		var autotile_id = Tiles.return_autotile_id(loc,walls.get_used_cells(0))
@@ -70,13 +71,14 @@ func fix_tiles_and_set_ladders_and_lights():
 		reset_flag = false
 		fix_tiles_and_set_ladders_and_lights()
 		counter += 1
+		print(str(counter))
 		return
 	
 	var room_positions = []
 	for cave in caves: # get two farthest points in cave
 		room_positions.append(Util.choose(cave))
 	var two_fatherest_points = return_two_farthest_points(room_positions)
-	
+
 	var ladder1 = room_positions[0]
 	var distance_to_valid_ladder_placement = 100000
 	var valid_ladder_location
@@ -324,10 +326,10 @@ func get_caves():
 	for cave in caves:
 		for tile in cave:
 			walls.set_cell(0, tile, 0, Vector2i(-1,-1))
-			#walls.set_cells_terrain_connect(0,[tile],0,-1)
 
 
 func flood_fill(tilex, tiley):
+	walls.set_cells_terrain_connect(0,walls.get_used_cells(0),0,0)
 	var cave = []
 	var to_fill = [Vector2i(tilex, tiley)]
 	while to_fill:
@@ -347,7 +349,7 @@ func flood_fill(tilex, tiley):
 				if walls.get_cell_atlas_coords(0,dir) == Vector2i(-1,-1): #if not wall_tiles.has(dir):
 					if !to_fill.has(dir) and !cave.has(dir):
 						to_fill.append(dir)
-	if cave.size() >= min_cave_size and not cave_has_border_tile(cave):
+	if cave.size() >= min_cave_size:
 		caves.append(cave)
 
 

@@ -27,6 +27,7 @@ func set_chat_box():
 			chat_container.size = Vector2(3140,1760)
 			chat_container.position = Vector2(6,17)
 			toggle_chat_btn.position = Vector2(0,0)
+			toggle_chat_btn.size = Vector2(324,21)
 		else:
 			overlay.texture = load("res://Assets/Images/User interface/chat/chats/Bg/image4.png")
 			overlay.size = Vector2(108,21)
@@ -36,16 +37,28 @@ func set_chat_box():
 			chat_container.size = Vector2(3140,840)
 			chat_container.position = Vector2(6,109)
 			toggle_chat_btn.position = Vector2(0,90)
+			toggle_chat_btn.size = Vector2(324,21)
 	else:
 		if chatbox_opened:
-			overlay.texture = load("res://Assets/Images/User interface/chat/chats/Bg/image2.png")
+			overlay.texture = load("res://Assets/Images/User interface/chat/chats/Bg/image1.png")
 			overlay.position = Vector2(0,15)
 			overlay.size = Vector2(92,53)
-			bg.texture = load("res://Assets/Images/User interface/chat/chats/chat-wide-long.png")
+			bg.texture = load("res://Assets/Images/User interface/chat/chats/chat-smol-long.png")
 			bg.position = Vector2(0,0)
 			chat_container.size = Vector2(2670,1750)
 			chat_container.position = Vector2(6,18)
 			toggle_chat_btn.position = Vector2(0,0)
+			toggle_chat_btn.size = Vector2(276,21)
+		else:
+			overlay.texture = load("res://Assets/Images/User interface/chat/chats/Bg/image3.png")
+			overlay.position = Vector2(0,108)
+			overlay.size = Vector2(92,21)
+			bg.texture = load("res://Assets/Images/User interface/chat/chats/chat-smol.png")
+			bg.position = Vector2(0,90)
+			bg.size = Vector2(92,35)
+			chat_container.size = Vector2(2670,850)
+			chat_container.position = Vector2(6,108)
+			toggle_chat_btn.position = Vector2(0,90)
 			toggle_chat_btn.size = Vector2(276,21)
 
 var message_history = []

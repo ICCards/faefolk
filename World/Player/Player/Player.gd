@@ -65,14 +65,14 @@ func _ready():
 		return
 	$Camera2D.enabled = true
 	#var spawn_locs = Server.world.terrain.beach
-	#spawn_locs.shuffle()
-	#position = Vector2i(spawn_locs[0])*Vector2i(16,16)
-	position = Vector2(randi_range(370,410),randi_range(160,190))
+	var spawn_locs = Server.world.get_node("TerrainTiles/ValidTiles").get_used_cells(0)
+	spawn_locs.shuffle()
+	position = Vector2i(spawn_locs[0])*Vector2i(16,16)
 	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
 	Server.player_node = self
 	state = DYING
-	$Camera2D/UserInterface/LoadingScreen.initialize(3)
-	await get_tree().create_timer(3.0).timeout
+#	$Camera2D/UserInterface/LoadingScreen.initialize(3)
+#	await get_tree().create_timer(3.0).timeout
 	composite_sprites.show()
 	$AttachedText.show()
 	state = MOVEMENT
@@ -83,7 +83,7 @@ func initialize_player_template():
 	set_process_input(false)
 	set_process_unhandled_input(false)
 	set_process(false)
-	await get_tree().create_timer(3.0).timeout
+#	await get_tree().create_timer(3.0).timeout
 	composite_sprites.show()
 	$AttachedText.show()
 

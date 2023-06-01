@@ -10,5 +10,7 @@ func _ready():
 		"red":
 			$PointLight2D.color = Color("ff9c9c")
 		"yellow":
-			$PointLight2D.color = Color("fcffcb")
+			$PointLight2D.color = Color("fcff9f")
+	if type == null:
+		queue_free()
 

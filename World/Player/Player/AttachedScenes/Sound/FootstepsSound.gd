@@ -6,6 +6,10 @@ func _ready():
 	Sounds.connect("footsteps_sound_change",Callable(self,"set_footsteps_sound"))
 	Sounds.connect("volume_change",Callable(self,"set_new_music_volume"))
 	PlayerData.connect("health_depleted",Callable(self,"reset_sound"))
+	if Server.world.name == "main":
+		pass
+	else:
+		Sounds.current_footsteps_sound = Sounds.stone_footsteps
 	set_footsteps_sound()
 
 
@@ -57,6 +61,16 @@ func _process(delta):
 			else:
 				if Sounds.current_footsteps_sound != Sounds.dirt_footsteps:
 					Sounds.current_footsteps_sound = Sounds.dirt_footsteps
+					Sounds.emit_signal("footsteps_sound_change")
+		else:
+			var location = Tiles.ocean_tiles.local_to_map(Server.player_node.position)
+			if Tiles.isCenterBitmaskTile(location,Tiles.ocean_tiles):
+				if Sounds.current_footsteps_sound != Sounds.swimming:
+					Sounds.current_footsteps_sound = Sounds.swimming
+					Sounds.emit_signal("footsteps_sound_change")
+			else:
+				if Sounds.current_footsteps_sound != Sounds.stone_footsteps:
+					Sounds.current_footsteps_sound = Sounds.stone_footsteps
 					Sounds.emit_signal("footsteps_sound_change")
 
 

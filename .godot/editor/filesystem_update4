@@ -1,22 +1,11 @@
 res://MainMenu/MainMenu.tscn
-res://World/Player/Player/AttachedScenes/Magic/Magic.tscn
-res://World/Objects/Magic/Wind/Whirlwind.tscn
-res://World/Objects/Projectiles/ArrowProjectile.tscn
-res://World/Objects/Magic/Wind/LingeringTornado.tscn
-res://World/Objects/Magic/Wind/TornadoProjectile.tscn
-res://World/Objects/Nature/Grasses/Weed.tscn
-res://World/Objects/Nature/Grasses/TallGrass.tscn
-res://World/Caves/CaveGenerator.tscn
 res://Assets/Tilesets/Terrain/tres files/cave walls.tres
-res://World/Caves/random_cave.tscn
-res://World/Caves/random_cave.gd
-res://World/Caves/CaveGenerator.gd
+res://Assets/Tilesets/Terrain/tres files/freshwater.tres
 res://Assets/Tilesets/Terrain/tres files/plains.tres
 res://Assets/Tilesets/Terrain/tres files/deep ocean.tres
 res://Assets/Tilesets/Terrain/tres files/dirt.tres
 res://Assets/Tilesets/Terrain/tres files/forest.tres
 res://Assets/Tilesets/Terrain/tres files/elevated terrain.tres
-res://Assets/Tilesets/Terrain/tres files/freshwater.tres
 res://Assets/Tilesets/Terrain/tres files/sand.tres
 res://Assets/Tilesets/Terrain/tres files/waves.tres
 res://Assets/Tilesets/Terrain/tres files/snow.tres
@@ -28,16 +17,28 @@ res://Assets/Tilesets/Objects/objects.tres
 res://Assets/Tilesets/Terrain/tres files/hoed.tres
 res://Assets/Tilesets/Terrain/tres files/watered hoed.tres
 res://Assets/Themes/MiniMap.tres
+res://Assets/Themes/LockedAsset.tres
+res://World/Player/Player/AttachedScenes/Magic/Magic.tscn
+res://World/Caves/random_cave.tscn
 res://World/Caves/Lobby/lobby.tscn
-res://World/Caves/Lobby/lobby.gd
 res://World/World/main.tscn
+res://World/Player/Player/Player.tscn
+res://Assets/Themes/whiten.tres
 res://World/Caves/Objects/CaveLight.tscn
-res://World/World/main.gd
-res://World/World/Scripts/Players.gd
+res://World/Player/Player/Player.gd
+res://World/Caves/CaveAmbientLight.tscn
+res://World/Caves/Objects/CaveLight.gd
+res://World/Player/Player/Fishing/Fishing.gd
+res://World/Caves/Lobby/lobby.gd
 res://World/Player/Player/UserInterface/Chatbox/ChatBox.tscn
 res://World/Player/Player/UserInterface/Chatbox/ChatBox.gd
-res://World/World/Scripts/Time.gd
-res://World/Player/Player/Player.tscn
-res://Assets/Themes/LockedAsset.tres
-res://Assets/Themes/whiten.tres
-res://World/Player/Player/Player.gd
+res://World/Player/Player/UserInterface/UserInterface.tscn
+res://World/Player/Player/AttachedScenes/Sound/FootstepsSound.gd
+res://World/Player/Player/Fishing/Fishing.tscn
+res://World/Player/Player/Fishing/Fish.tscn
+res://World/Player/Player/Fishing/Fish.gd
+res://World/Player/Player/AttachedScenes/Magic/Magic.gd
+res://World/Player/Player/Fishing/FishingMiniGame.tscn
+res://World/Player/Player/Fishing/FishingMiniGame.gd
+res://World/Caves/CaveGenerator.tscn
+res://World/Caves/CaveGenerator.gd
