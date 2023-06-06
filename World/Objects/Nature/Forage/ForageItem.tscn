@@ -242,10 +242,3 @@ sprite_frames = SubResource("9")
 animation = &"dandelion"
 frame = 1
 frame_progress = 0.29993
-
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(0.499994, 1.52588e-05)
-scale = Vector2(5.75, 5.25)
-
-[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

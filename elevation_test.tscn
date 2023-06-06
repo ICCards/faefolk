@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://bxd405lq8ng3i"]
 
 [ext_resource type="Script" path="res://ElevationTest.gd" id="1_n2im1"]
-[ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/terrain/tres files/plains.tres" id="2_hhdg0"]
-[ext_resource type="TileSet" uid="uid://de28nfavviio7" path="res://Assets/Tilesets/terrain/elevated terrain.tres" id="2_pf863"]
-[ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/terrain/CL_MainLev.png" id="4_ewu00"]
-[ext_resource type="TileSet" uid="uid://dja0b16fhgms6" path="res://Assets/Tilesets/terrain/tres files/freshwater.tres" id="4_rs0y7"]
+[ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/Terrain/tres files/plains.tres" id="2_hhdg0"]
+[ext_resource type="TileSet" uid="uid://de28nfavviio7" path="res://Assets/Tilesets/Terrain/elevated terrain.tres" id="2_pf863"]
+[ext_resource type="Texture2D" uid="uid://nxbfcsoot5tk" path="res://Assets/Tilesets/Terrain/CL_MainLev.png" id="4_ewu00"]
+[ext_resource type="TileSet" uid="uid://dja0b16fhgms6" path="res://Assets/Tilesets/Terrain/tres files/freshwater.tres" id="4_rs0y7"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_nngou"]
 tile_data = PackedInt32Array(0, 1048576, 57, 65536, 1048576, 57, 131072, 1048576, 57, 196608, 1048576, 59, 1, 1048576, 57, 65537, 1048576, 57, 131073, 1048576, 57, 196609, 1048576, 59, 2, 1048576, 57, 65538, 1048576, 57, 131074, 1048576, 57, 196610, 1048576, 59)
@@ -66,7 +66,7 @@ modulate = Color(1.2, 1.2, 1.2, 1)
 tile_set = ExtResource("4_rs0y7")
 format = 2
 
-[node name="Decoration" type="TileMap" parent="."]
+[node name="Waterfall" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_regpm")
 format = 2
 

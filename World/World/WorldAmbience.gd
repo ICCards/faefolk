@@ -7,7 +7,6 @@ const CURSE_COLOR = Color("cd0000")
 func _ready():
 	PlayerData.connect("set_day",Callable(self,"play_set_day"))
 	PlayerData.connect("set_night",Callable(self,"play_set_night"))
-	PlayerData.connect("play_wind_curse",Callable(self,"set_curse_effect"))
 	if PlayerData.player_data:
 		if PlayerData.player_data["time_hours"] >= 22 or PlayerData.player_data["time_hours"] < 6: # night time
 			set_deferred("color", Color("323237"))

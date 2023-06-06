@@ -6,7 +6,9 @@ var built_chunks = []
 var current_chunks = []
 
 func initialize():
+	$BuildNature.initialize()
 	$WorldBuilderTimer.start()
+	$SpawnAnimal.initialize()
 
 func _on_world_build_timer_timeout():
 	if not thread.is_started() and not Server.world.is_changing_scene:

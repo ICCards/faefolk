@@ -15,6 +15,8 @@ var rng = RandomNumberGenerator.new()
 var spawn_thread := Thread.new()
 var remove_thread := Thread.new()
 
+var current_chunks = []
+
 const NUM_WIND_CURSE_ENEMIES = 25
 
 func _ready():
@@ -69,23 +71,27 @@ func remove_animals():
 	var value = remove_thread.wait_to_finish()
 
 func spawn_animals():
-	var player_loc = Server.player_node.position / 16
-	if Server.world.is_changing_scene:
-		var value = spawn_thread.wait_to_finish()
-		return
-	for id in MapData.world["animal"]:
-		var loc = Util.string_to_vector2(MapData.world["animal"][id]["l"])
-		if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
-			if not Enemies.has_node(id) and MapData.world["animal"].has(id):
-				spawn_mob(MapData.world, id)
-	print("NUM ANIMALS = " + str(Enemies.get_children().size()) )
-	await get_tree().create_timer(1.0).timeout
+	current_chunks = get_parent().current_chunks
+	for chunk in current_chunks:
+		print(chunk)
+		var player_loc = Server.player_node.position / 16
+		if Server.world.is_changing_scene:
+			var value = spawn_thread.wait_to_finish()
+			return
+		print("NUM ANIMALS IN CHUNK " + str(MapData.world[chunk]["animal"].keys().size()))
+		for id in MapData.world[chunk]["animal"]:
+			var loc = Util.string_to_vector2(MapData.world[chunk]["animal"][id]["l"])
+			if player_loc.distance_to(loc) < Constants.DISTANCE_TO_SPAWN_OBJECT:
+				if not Enemies.has_node(id) and MapData.world[chunk]["animal"].has(id):
+					spawn_mob(MapData.world[chunk], id)
+		print("NUM ANIMALS = " + str(Enemies.get_children().size()) )
+		await get_tree().create_timer(1.0).timeout
 	var value = spawn_thread.wait_to_finish()
 
-func spawn_mob(map,id):
+func spawn_mob(chunk,id):
 	var mob = Mob.instantiate()
 	mob.name = id
-	mob.map = map
+	mob.chunk = chunk
 	mob.id = id
 	Enemies.call_deferred("add_child", mob)
 

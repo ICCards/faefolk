@@ -13,7 +13,8 @@ func _ready():
 		game_state = GameState.new()
 		game_state.load_state()
 		PlayerData.player_data = game_state.player_state
-		MapData.world = game_state.world_state
+		MapData.world = game_state.world
+		MapData.terrain = game_state.terrain
 	$TitleMusic.stream = Sounds.title_music
 	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
 	$TitleMusic.play()

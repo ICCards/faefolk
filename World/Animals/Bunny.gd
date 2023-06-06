@@ -18,6 +18,8 @@ var running_state: bool = false
 var MAX_MOVE_DISTANCE: float = 300.0
 var tornado_node = null
 
+var spawn_loc: Vector2i
+
 var variety
 
 var rng := RandomNumberGenerator.new()
@@ -27,7 +29,6 @@ var mutex := Mutex.new()
 
 
 func _ready(): 
-	visible = false
 	randomize()
 	set_attributes()
 	_timer.connect("timeout",Callable(self,"_update_pathfinding"))
@@ -135,7 +136,7 @@ func destroy(killed_by_player):
 	set_physics_process(false)
 	bunny_sprite.material = null
 	if killed_by_player:
-		MapData.remove_object("animal",name)
+		#MapData.remove_object("animal",name)
 		PlayerData.player_data["collections"]["mobs"]["bunny"] += 1
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bunny/death.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
@@ -196,6 +197,6 @@ func screen_entered():
 	set_deferred("visible", true)
 
 func screen_exited():
-	if MapData.world["animal"].has(name):
-		MapData.world["animal"][name]["l"] = position/16
+	if MapData.world[Util.return_chunk_from_location(spawn_loc)]["animal"].has(name):
+		MapData.world[Util.return_chunk_from_location(spawn_loc)]["animal"][name]["l"] = position/16
 		set_deferred("visible", false)

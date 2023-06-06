@@ -35,6 +35,8 @@ var tornado_node = null
 var state = WALK
 var hit_projectiles = []
 
+var spawn_loc: Vector2i
+
 enum {
 	IDLE,
 	WALK,
@@ -187,7 +189,7 @@ func destroy(killed_by_player):
 	_idle_timer.call_deferred("stop")
 	set_physics_process(false)
 	if killed_by_player:
-		MapData.remove_object("animal",name)
+		#MapData.remove_object("animal",name)
 		PlayerData.player_data["collections"]["mobs"]["deer"] += 1
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/deer/death.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
@@ -313,8 +315,8 @@ func screen_entered():
 	set_deferred("visible", true)
 
 func screen_exited():
-	if MapData.world["animal"].has(name):
-		MapData.world["animal"][name]["l"] = position/16
+	if MapData.world[Util.return_chunk_from_location(spawn_loc)]["animal"].has(name):
+		MapData.world[Util.return_chunk_from_location(spawn_loc)]["animal"][name]["l"] = position/16
 		if playing_sound_effect:
 			call_deferred("stop_sound_effects")
 		set_deferred("visible", false)

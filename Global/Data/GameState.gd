@@ -3,8 +3,8 @@ extends Resource
 class_name GameState
 
 @export var player_state = {}
-@export var world_state = {}
-@export var cave_state = {}
+@export var world = {}
+@export var terrain = {}
 ## any other object here  and the the save and load methods that needs to be save
 
 const GAME_STATE_PATH = "user://gamestate.tres"
@@ -24,7 +24,8 @@ func load_state():
 		var game_State = ResourceLoader.load(GAME_STATE_PATH)
 		if game_State: #is GameState: # Check that the data is valid
 			player_state = game_State.player_state
-			world_state = game_State.world_state
-			cave_state = game_State.cave_state
+			world = game_State.world
+			terrain = game_State.terrain
 		PlayerData.player_data = player_state
-		MapData.world = world_state
+		MapData.world = world
+		MapData.terrain = terrain

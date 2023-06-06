@@ -32,7 +32,7 @@ var cast_movement_direction = ""
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
 var animation = "idle_down"
-var MAX_SPEED_DIRT := 8
+var MAX_SPEED_DIRT := 12 #8
 var MAX_SPEED_PATH := 9
 var DASH_SPEED := 25
 var MAX_SPEED_SWIMMING := 6
@@ -114,7 +114,7 @@ func set_current_object(item_name):
 		holding_item.hide()
 		$HoldingTorch.set_inactive()
 	# Placable object
-	if item_category == "Placeable object" or item_category == "Seed" or (item_category == "Forage" and item_name != "raw egg"):
+	if item_category == "Placeable object" or item_category == "Seed" or (item_category == "Forage" and (item_name != "raw egg" and item_name.right(5) != "grass")):
 		actions.show_placeable_object(item_name, item_category)
 		return
 	if item_name == "blueprint" and current_building_item != "":

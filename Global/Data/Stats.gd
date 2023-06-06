@@ -101,6 +101,8 @@ func return_starting_door_health(item_name):
 
 func return_tool_damage(tool_name):
 	match tool_name:
+		"cactus":
+			return randi_range(8,12)
 		"destruction potion I":
 			return DESTRUCTION_POTION_I
 		"destruction potion II":

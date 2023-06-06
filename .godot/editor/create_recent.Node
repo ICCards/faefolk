@@ -1,3 +1,8 @@
+TextureButton
+Label
+Control
+TextureRect
+CanvasLayer
 Camera2D
 Node
 Node2D
@@ -9,16 +14,12 @@ MultiplayerSynchronizer
 MultiplayerSpawner
 TextureProgressBar
 ProgressBar
-Control
 AnimatedSprite2D
-Label
 Button
-TextureRect
 AudioStreamPlayer2D
 MarginContainer
 VBoxContainer
 PanelContainer
-CanvasLayer
 TileMap
 Timer
 CollisionShape2D
@@ -29,4 +30,3 @@ NavigationLink2D
 CanvasGroup
 AnimationPlayer
 Sprite2D
-StaticBody2D

@@ -25,6 +25,8 @@ var thread := Thread.new()
 var destroy_thread := Thread.new()
 var mutex := Mutex.new()
 
+var spawn_loc: Vector2i
+
 var variety
 
 func _ready():
@@ -169,7 +171,7 @@ func destroy(killed_by_player):
 	set_physics_process(false)
 	duck_sprite.material = null
 	if killed_by_player:
-		MapData.remove_object("animal",name)
+		#MapData.remove_object("animal",name)
 		PlayerData.player_data["collections"]["mobs"]["duck"] += 1
 		await get_tree().create_timer(randf_range(0.05,0.25)).timeout
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3"))
@@ -180,8 +182,6 @@ func destroy(killed_by_player):
 	$AnimationPlayer.call_deferred("play", "death")
 	await get_tree().create_timer(0.5).timeout
 	InstancedScenes.intitiateItemDrop("raw wing", position, 1)
-	#if Util.chance(50):
-		#InstancedScenes.intitiateItemDrop("raw egg", position, 1) 
 	await $AnimationPlayer.animation_finished
 	get_parent().call_deferred("queue_free")
 
@@ -212,11 +212,11 @@ func _on_DropEggTimer_timeout():
 		forageItem.item_name = "raw egg"
 		forageItem.global_position = position
 		get_node("../../").call_deferred("add_child", forageItem)
-	
+
 func screen_entered():
 	set_deferred("visible", true)
 
 func screen_exited():
-	if MapData.world["animal"].has(name):
-		MapData.world["animal"][name]["l"] = position/16
+	if MapData.world[Util.return_chunk_from_location(spawn_loc)]["animal"].has(name):
+		MapData.world[Util.return_chunk_from_location(spawn_loc)]["animal"][name]["l"] = position/16
 		set_deferred("visible", false)

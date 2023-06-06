@@ -4,8 +4,6 @@ signal refresh_crops
 
 var game_state: GameState
 
-var world_file_name = "res://JSONData/world.json"
-var caves_file_name = "res://JSONData/caves.json"
 
 var tile_types = ["beach", "ocean", "wet_sand", "deep_ocean1","deep_ocean2","deep_ocean3","deep_ocean4","plains", "forest", "dirt", "snow"]#, "desert", "beach", "ocean", "wet_sand", "deep_ocean"]
 #var autotile_types = ["plains", "forest", "dirt", "snow",]
@@ -13,7 +11,7 @@ var nature_types = ["tree", "stump", "log", "ore_large", "ore", "tall_grass", "f
 var is_world_data_in_chunks = false
 
 var world = {}
-var caves = {} 
+var terrain = {} 
 
 func _ready() -> void:
 	PlayerData.connect("season_changed",Callable(self,"reset_cave_data"))
@@ -53,13 +51,13 @@ func advance_crop():
 	emit_signal("refresh_crops")
 
 func set_hoed_tile(loc):
-	world["tile"][loc] = "h"
+	world[Util.return_chunk_from_location(loc)]["tile"][loc] = "h"
 	
 func set_watered_tile(loc):
-	world["tile"][loc] = "w"
+	world[Util.return_chunk_from_location(loc)]["tile"][loc] = "w"
 	
 func remove_hoed_tile(loc):
-	world["tile"].erase(loc)
+	world[Util.return_chunk_from_location(loc)]["tile"].erase(loc)
 
 func add_object(type,id,data):
 	PlaceObject.place(type,id,data)
@@ -73,11 +71,11 @@ func update_object_health(type, id,new_health):
 #	if world[Util.return_chunk_from_location(location)][type].has(id):
 #		world[Util.return_chunk_from_location(location)][type][id]["h"] = new_health
 
-func return_cave_data(cave_name):
-	match cave_name:
-		"Overworld":
-			return world
-	return caves[cave_name]
+#func return_cave_data(cave_name):
+#	match cave_name:
+#		"Overworld":
+#			return world
+#	return caves[cave_name]
 
 #func add_nature_objects_to_chunks():
 #	for type in nature_types:

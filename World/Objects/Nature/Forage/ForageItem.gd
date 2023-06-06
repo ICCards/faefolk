@@ -38,10 +38,10 @@ func set_forage_texture():
 		$Sprite2D.set_deferred("texture", load("res://Assets/Images/inventory_icons/Forage/"+ item_name +".png"))
 
 
-func _on_VisibilityNotifier2D_screen_entered():
-	call_deferred("show")
-	$AnimatedFlower.set_deferred("playing", true)
-
-func _on_VisibilityNotifier2D_screen_exited():
-	call_deferred("hide")
-	$AnimatedFlower.set_deferred("playing", false)
+#func _on_VisibilityNotifier2D_screen_entered():
+#	call_deferred("show")
+#	$AnimatedFlower.set_deferred("playing", true)
+#
+#func _on_VisibilityNotifier2D_screen_exited():
+#	call_deferred("hide")
+#	$AnimatedFlower.set_deferred("playing", false)

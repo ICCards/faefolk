@@ -5,7 +5,7 @@ extends Node2D
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var rng = RandomNumberGenerator.new()
 
-var location
+var location: Vector2i
 var variety
 var health
 var large_break = false

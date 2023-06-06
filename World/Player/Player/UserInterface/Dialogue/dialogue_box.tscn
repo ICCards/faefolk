@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmyqim28d1o0u"]
+
+[ext_resource type="Script" path="res://World/Player/Player/UserInterface/Dialogue/dialogue_box.gd" id="1_ds52f"]
+[ext_resource type="Texture2D" uid="uid://c85xwauyoq6jo" path="res://Assets/Images/User interface/dialogue/box.png" id="1_s6dr0"]
+[ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="2_3gxja"]
+[ext_resource type="Texture2D" uid="uid://j3hb1uh8qo7u" path="res://Assets/Images/User interface/ItemPickUpBox/x3.png" id="3_ohh71"]
+
+[node name="DialogueBox" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ds52f")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = 426.0
+offset_right = 426.0
+offset_bottom = 522.0
+scale = Vector2(3, 3)
+texture = ExtResource("1_s6dr0")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 276.0
+offset_top = 465.0
+offset_right = 2719.0
+offset_bottom = 1640.0
+scale = Vector2(0.185, 0.185)
+theme = ExtResource("2_3gxja")
+theme_override_colors/font_color = Color(0.266667, 0.109804, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.564706, 0.384314, 0.356863, 1)
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/shadow_outline_size = 4
+theme_override_constants/line_spacing = 31
+text = "Welcome to the world of FaeFolk! Gather resources to craft tools and build a base. Be vigilant, surviving on this island is no easy feat. Good luck!"
+autowrap_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 678.0
+offset_top = 633.0
+offset_right = 694.0
+offset_bottom = 649.0
+scale = Vector2(3, 3)
+texture_normal = ExtResource("3_ohh71")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]

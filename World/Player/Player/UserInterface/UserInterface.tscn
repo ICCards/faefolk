@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cffchl0ffi2hf"]
+[gd_scene load_steps=32 format=3 uid="uid://cffchl0ffi2hf"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/UserInterface.gd" id="1_pv3v8"]
 [ext_resource type="PackedScene" uid="uid://3vr0ijbqi0bd" path="res://Assets/Images/User interface/loading screen/LoadingScreen.tscn" id="2_ai2q6"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://dd0n86ke85w5d" path="res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn" id="17_n0y8n"]
 [ext_resource type="PackedScene" uid="uid://cm8c7p7g6ii7g" path="res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.tscn" id="18_gbc14"]
 [ext_resource type="PackedScene" uid="uid://rpuaufnru6of" path="res://World/Player/Player/UserInterface/ItemPickUpDialogue/ItemPickUpDialogue.tscn" id="19_n03k2"]
+[ext_resource type="PackedScene" uid="uid://dmyqim28d1o0u" path="res://World/Player/Player/UserInterface/Dialogue/dialogue_box.tscn" id="24_ucklu"]
 
 [sub_resource type="Animation" id="18"]
 length = 0.001
@@ -393,7 +394,10 @@ visible = false
 [node name="Hotbar" parent="." instance=ExtResource("17_n0y8n")]
 
 [node name="PlayerDataUI" parent="." instance=ExtResource("18_gbc14")]
+
+[node name="DialogueBox" parent="." instance=ExtResource("24_ucklu")]
 visible = false
+custom_minimum_size = Vector2(1280, 720)
 
 [node name="LoadingScreen" parent="." instance=ExtResource("2_ai2q6")]
 visible = false

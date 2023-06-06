@@ -10,17 +10,20 @@ extends Node2D
 @onready var shoesSprite = $Shoes
 @onready var toolEquippedSprite = $ToolEquipped
 
+var anim: String = ""
 
 func set_player_animation(_character, _anim, _tool = ""):
-	bodySprite.set_texture(_character.body_sprites[returnAdjustedAnimTop(_anim)])
-	legsSprite.set_texture(_character.leg_sprites[returnAdjustedAnimBottom(_anim)])
-	armsSprite.set_texture(_character.arms_sprites[returnAdjustedAnimTop(_anim)])
-	accessorySprite.set_texture(_character.acc_sprites[returnAdjustedAnimTop(_anim)])
-	headAttributeSprite.set_texture(_character.headAtr_sprites[returnAdjustedAnimTop(_anim)])
-	pantsSprite.set_texture(_character.pants_sprites[returnAdjustedAnimBottom(_anim)])
-	shirtsSprite.set_texture(_character.shirts_sprites[returnAdjustedAnimTop(_anim)])
-	shoesSprite.set_texture(_character.shoes_sprites[returnAdjustedAnimBottom(_anim)])
-	toolEquippedSprite.set_texture(Images.returnToolSprite(_tool, returnAdjustedAnimTop(_anim)))
+	if not anim == _anim:
+		anim = _anim
+		bodySprite.set_texture(_character.body_sprites[returnAdjustedAnimTop(_anim)])
+		legsSprite.set_texture(_character.leg_sprites[returnAdjustedAnimBottom(_anim)])
+		armsSprite.set_texture(_character.arms_sprites[returnAdjustedAnimTop(_anim)])
+		accessorySprite.set_texture(_character.acc_sprites[returnAdjustedAnimTop(_anim)])
+		headAttributeSprite.set_texture(_character.headAtr_sprites[returnAdjustedAnimTop(_anim)])
+		pantsSprite.set_texture(_character.pants_sprites[returnAdjustedAnimBottom(_anim)])
+		shirtsSprite.set_texture(_character.shirts_sprites[returnAdjustedAnimTop(_anim)])
+		shoesSprite.set_texture(_character.shoes_sprites[returnAdjustedAnimBottom(_anim)])
+		toolEquippedSprite.set_texture(Images.returnToolSprite(_tool, returnAdjustedAnimTop(_anim)))
 
 func returnAdjustedAnimTop(_anim):
 	if _anim == "draw_up_down" or _anim == "draw_up_up" or _anim == "draw_up_left" or _anim == "draw_up_right":

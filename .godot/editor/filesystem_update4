@@ -1,7 +1,9 @@
-res://World/Overworld/Overworld.tscn
-res://Assets/Themes/text.tres
+res://World/Caves/Lobby/lobby.tscn
 res://Assets/Themes/LockedAsset.tres
-res://Assets/Themes/MenuTitle.tres
+res://Assets/Themes/whiten.tres
+res://Assets/Themes/Flash.tres
+res://Assets/Tilesets/Terrain/tres files/cave walls.tres
+res://Assets/Tilesets/Terrain/tres files/freshwater.tres
 res://Assets/Tilesets/foundation/foundation.tres
 res://Assets/Tilesets/Terrain/elevated terrain.tres
 res://Assets/Tilesets/walls/walls.tres
@@ -10,26 +12,17 @@ res://Assets/Tilesets/Terrain/tres files/deep ocean.tres
 res://Assets/Tilesets/Terrain/tres files/dirt.tres
 res://Assets/Tilesets/Terrain/tres files/forest.tres
 res://Assets/Themes/MiniMap.tres
-res://Assets/Tilesets/Terrain/tres files/freshwater.tres
 res://Assets/Tilesets/Terrain/tres files/waves.tres
 res://Assets/Tilesets/Objects/objects.tres
 res://Assets/Tilesets/Terrain/tres files/snow.tres
 res://Assets/Tilesets/Terrain/tres files/wet sand.tres
-res://Assets/Tilesets/Objects/crops.tres
-res://Assets/Images/tree_sets/oak/mature/animated top.tres
-res://Assets/Themes/whiten.tres
-res://World/Overworld/Overworld.gd
-res://World/Player/Player/UserInterface/UserInterface.tscn
-res://MainMenu/MainMenu.tscn
-res://World/Building/PlaceObjectPreview.tscn
-res://World/Objects/Nature/Trees/TreeObject.tscn
-res://World/Objects/Nature/Ores/LargeOre.tscn
-res://World/Objects/Nature/Ores/SmallOre.tscn
-res://World/Objects/Nature/Trees/Stump.tscn
-res://Assets/Images/User interface/loading screen/LoadingScreen.tscn
 res://World/Player/Player/Player.tscn
-res://InventoryLogic/ItemDrop.tscn
-res://Global/Data/PlaceObject.gd
-res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn
-res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.gd
-res://World/Building/Tiles/Hurtbox/TileObjectHurtBox.tscn
+res://World/Animals/Bear.tscn
+res://World/Player/Player/UserInterface/Dialogue/dialogue_box.tscn
+res://World/Objects/Nature/Forage/ForageItem.tscn
+res://World/Caves/random_cave.tscn
+res://World/Overworld/Overworld.tscn
+res://elevation_test.tscn
+res://World/Caves/Objects/CaveLight.tscn
+res://World/Caves/Lobby/lobby.gd
+res://World/Player/Player/UserInterface/Dialogue/dialogue_box.gd

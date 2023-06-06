@@ -84,8 +84,8 @@ func save_player_data(exit_to_main_menu):
 	$PlayerDataUI.hide()
 	PlayerData.player_data["current_save_location"] = Server.player_node.position/16
 	game_state = GameState.new()
-	game_state.world_state = MapData.world
-	game_state.cave_state = MapData.caves
+	game_state.terrain = MapData.terrain
+	game_state.world = MapData.world
 	game_state.player_state = PlayerData.player_data
 	game_state.save_state()
 	await get_tree().create_timer(2.0).timeout

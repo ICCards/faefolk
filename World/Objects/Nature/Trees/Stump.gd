@@ -8,7 +8,7 @@ extends Node2D
 var rng = RandomNumberGenerator.new()
 
 var tree_object
-var location = Vector2i(0,0)
+var location: Vector2i
 var health 
 var variety 
 var destroyed: bool = false

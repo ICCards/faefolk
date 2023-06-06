@@ -11,6 +11,8 @@ extends Node
 @onready var BuildingTileObjectHurtBox = load("res://World/Building/Tiles/Hurtbox/BuildingTileObjectHurtBox.tscn")
 @onready var LargeOre = load("res://World/Objects/Nature/Ores/LargeOre.tscn")
 @onready var SmallOre = load("res://World/Objects/Nature/Ores/SmallOre.tscn")
+@onready var Cactus = load("res://World/Objects/Nature/Cactus/cactus.tscn")
+
 
 var rng = RandomNumberGenerator.new()
 
@@ -68,10 +70,12 @@ func place_door_in_world(id,item_name,direction,location,health,variety,door_ope
 
 
 
-func place_tall_grass_in_world(id,biome,location):
+func place_tall_grass_in_world(id,biome,location,front_health,back_health):
 	GrassObjects = Server.world.get_node("GrassObjects")
 	var object = TallGrass.instantiate()
 	object.name = id
+	object.front_health = front_health
+	object.back_health = back_health
 	object.biome = biome
 	object.location = location 
 	object.position = Tiles.valid_tiles.map_to_local(location) + Vector2(-8,8)
@@ -94,6 +98,16 @@ func place_log_in_world(id,variety,location):
 	object.location = location
 	object.position = Tiles.valid_tiles.map_to_local(location) #+ Vector2(8,-8)
 	NatureObjects.call_deferred("add_child",object,true)
+
+func place_cactus_in_world(id,variety,location):
+	NatureObjects = Server.world.get_node("NatureObjects")
+	var object = Cactus.instantiate()
+	object.name = id
+	object.variety = variety
+	#object.location = location
+	object.position = Tiles.valid_tiles.map_to_local(location) #+ Vector2(8,-8)
+	NatureObjects.call_deferred("add_child",object,true)
+
 
 func place_forage_in_world(id,item_name,location,first_placement):
 	ForageObjects = Server.world.get_node("ForageObjects")

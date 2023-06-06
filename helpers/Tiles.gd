@@ -26,6 +26,11 @@ func return_atlas_tile_cord(tile_name,id):
 	match tile_name:
 		"beach":
 			return Vector2i(rng.randi_range(50,52),rng.randi_range(24,26))
+		"desert":
+			if Util.chance(50):
+				return Vector2i(rng.randi_range(50,52),rng.randi_range(24,26))
+			else:
+				return Vector2i(rng.randi_range(48,55),rng.randi_range(37,43))
 		"plains":
 			match id:
 				0:

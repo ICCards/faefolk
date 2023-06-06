@@ -13,7 +13,7 @@ extends Area2D
 
 var rng = RandomNumberGenerator.new()
 
-var location = Vector2i(0,0)
+var location: Vector2i
 var variety = "oak"
 var hit_dir
 var health = 40

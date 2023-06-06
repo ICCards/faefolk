@@ -1,3 +1,4 @@
+res://World/Player/Player/UserInterface/Dialogue
 res://MainMenu
 res://Assets/Tilesets/terrain/tres files
 res://
@@ -19,4 +20,3 @@ res://World/Enemies
 res://Assets/Images/Animals
 res://Assets/Images/Magic/wind
 res://Assets/Images/Animations/leaf break
-res://World/Building/Tiles/Attached nodes

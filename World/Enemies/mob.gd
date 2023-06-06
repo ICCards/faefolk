@@ -7,52 +7,58 @@ extends Node2D
 @onready var Deer = load("res://World/Animals/Deer.tscn")
 @onready var Wolf = load("res://World/Animals/Wolf.tscn")
 
-var map
+var chunk
 var id
 
 func _ready():
 	spawn_mob()
 
 func spawn_mob():
-	var animal_name = map["animal"][id]["n"]
-	var location = map["animal"][id]["l"]
+	var animal_name = chunk["animal"][id]["n"]
+	var location = chunk["animal"][id]["l"]
 	match animal_name:
 		"bunny":
 			var animal = Bunny.instantiate()
 			animal.name = id
-			animal.health = map["animal"][id]["h"]
-			animal.variety = map["animal"][id]["v"]
+			animal.spawn_loc= chunk["animal"][id]["l"]
+			animal.health = chunk["animal"][id]["h"]
+			animal.variety = chunk["animal"][id]["v"]
 			animal.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(16, 16)
 			call_deferred("add_child", animal)
 		"duck":
 			var animal = Duck.instantiate()
 			animal.name = id
-			animal.health = map["animal"][id]["h"]
-			animal.variety = map["animal"][id]["v"]
+			animal.spawn_loc = chunk["animal"][id]["l"]
+			animal.health = chunk["animal"][id]["h"]
+			animal.variety = chunk["animal"][id]["v"]
 			animal.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(16, 16)
 			call_deferred("add_child", animal)
 		"bear":
 			var animal = Bear.instantiate()
 			animal.name = id
-			animal.health = map["animal"][id]["h"]
+			animal.spawn_loc = chunk["animal"][id]["l"]
+			animal.health = chunk["animal"][id]["h"]
 			animal.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(8,8)
 			call_deferred("add_child", animal)
 		"boar":
 			var animal = Boar.instantiate()
 			animal.name = id
-			animal.health = map["animal"][id]["h"]
+			animal.spawn_loc = chunk["animal"][id]["l"]
+			animal.health = chunk["animal"][id]["h"]
 			animal.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(16, 16)
 			call_deferred("add_child", animal)
 		"wolf":
 			var animal = Wolf.instantiate()
 			animal.name = id
-			animal.health = map["animal"][id]["h"]
+			animal.spawn_loc = chunk["animal"][id]["l"]
+			animal.health = chunk["animal"][id]["h"]
 			animal.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(16, 16)
 			call_deferred("add_child", animal)
 		"deer":
 			var animal = Deer.instantiate()
 			animal.name = id
-			animal.health = map["animal"][id]["h"]
+			animal.spawn_loc = chunk["animal"][id]["l"]
+			animal.health = chunk["animal"][id]["h"]
 			animal.global_position = Tiles.valid_tiles.map_to_local(location) + Vector2(8, 8)
 			call_deferred("add_child", animal)
 
