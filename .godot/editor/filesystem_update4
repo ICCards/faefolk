@@ -1,9 +1,6 @@
-res://World/Caves/Lobby/lobby.tscn
-res://Assets/Themes/LockedAsset.tres
-res://Assets/Themes/whiten.tres
+res://World/Animals/Boar.tscn
 res://Assets/Themes/Flash.tres
-res://Assets/Tilesets/Terrain/tres files/cave walls.tres
-res://Assets/Tilesets/Terrain/tres files/freshwater.tres
+res://Assets/Images/Animals/Duck/duck3.tres
 res://Assets/Tilesets/foundation/foundation.tres
 res://Assets/Tilesets/Terrain/elevated terrain.tres
 res://Assets/Tilesets/walls/walls.tres
@@ -12,17 +9,78 @@ res://Assets/Tilesets/Terrain/tres files/deep ocean.tres
 res://Assets/Tilesets/Terrain/tres files/dirt.tres
 res://Assets/Tilesets/Terrain/tres files/forest.tres
 res://Assets/Themes/MiniMap.tres
+res://Assets/Themes/daynightcycle-gradient-texture.tres
+res://Assets/Tilesets/Terrain/tres files/freshwater.tres
 res://Assets/Tilesets/Terrain/tres files/waves.tres
 res://Assets/Tilesets/Objects/objects.tres
 res://Assets/Tilesets/Terrain/tres files/snow.tres
 res://Assets/Tilesets/Terrain/tres files/wet sand.tres
-res://World/Player/Player/Player.tscn
+res://World/Animals/Wolf.tscn
 res://World/Animals/Bear.tscn
+res://World/Animals/Deer.tscn
+res://World/Animals/Duck.tscn
+res://World/Animals/Bunny.tscn
+res://Assets/Images/Animals/Bunny/yellowBunny.tres
+res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.tscn
+res://World/Player/Player/UserInterface/RadialBuildingMenu/RadialBuildingMenu.gd
+res://Global/Data/Constants.gd
+res://World/Building/PlaceObjectPreview.tscn
+res://Assets/Tilesets/Objects/crops.tres
+res://World/Building/PlaceObjectPreview.gd
 res://World/Player/Player/UserInterface/Dialogue/dialogue_box.tscn
-res://World/Objects/Nature/Forage/ForageItem.tscn
-res://World/Caves/random_cave.tscn
-res://World/Overworld/Overworld.tscn
-res://elevation_test.tscn
-res://World/Caves/Objects/CaveLight.tscn
-res://World/Caves/Lobby/lobby.gd
 res://World/Player/Player/UserInterface/Dialogue/dialogue_box.gd
+res://World/Overworld/Overworld.tscn
+res://World/World/BuildNature.gd
+res://World/Objects/Nature/Trees/TreeObject.tscn
+res://Assets/Images/tree_sets/oak/mature/animated top.tres
+res://World/Objects/Projectiles/PotionProjectile.gd
+res://World/Objects/Nature/Trees/TreeObject.gd
+res://World/World/SpawnAnimal.gd
+res://World/Enemies/mob.gd
+res://World/Player/Player/Player.tscn
+res://Assets/Themes/LockedAsset.tres
+res://Assets/Themes/whiten.tres
+res://World/Animals/Boar.gd
+res://World/World/WorldAmbience.gd
+res://World/Player/Player/Player.gd
+res://MainMenu/MainMenuButtons.tscn
+res://Assets/Themes/MenuTitle.tres
+res://Assets/Tilesets/Terrain/tres files/cave walls.tres
+res://MainMenu/MainMenu.tscn
+res://World/Caves/random_cave.tscn
+res://World/Caves/random_cave.gd
+res://World/Caves/Lobby/lobby.tscn
+res://Global/Data/PlayerData.gd
+res://Global/Functions/SceneChanger.gd
+res://World/Enemies/Slime/Slime.gd
+res://World/Caves/Lobby/lobby.gd
+res://World/Enemies/Slime/Slime.tscn
+res://World/Enemies/Spider.tscn
+res://Assets/Themes/whiten.gdshader
+res://World/Player/Player/AttachedScripts/HurtBox.gd
+res://World/Player/Player/PoisonParticles.tscn
+res://World/Player/Player/Swing.tscn
+res://InventoryLogic/ItemPickUpBox.tscn
+res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.gd
+res://World/Player/Player/Actions.tscn
+res://World/Player/Player/Actions.gd
+res://World/Player/Player/UserInterface/UserInterface.tscn
+res://World/Player/Player/UserInterface/UserInterface.gd
+res://World/Player/Player/Fishing/Fish.tscn
+res://World/Player/Player/Fishing/Fish.gd
+res://World/Player/Player/Fishing/FishingMiniGame.tscn
+res://World/Player/Player/Fishing/FishingMiniGame.gd
+res://World/Player/Player/UserInterface/Hotbar/Hotbar.tscn
+res://World/Player/Player/UserInterface/Hotbar/Hotbar.gd
+res://World/Objects/Farm/PlantedCrop.tscn
+res://World/Objects/Nature/Forage/ForageItem.tscn
+res://World/Player/Player/UserInterface/Menu/Menu.tscn
+res://World/Player/Player/UserInterface/Menu/Inventory/Inventory.tscn
+res://World/Enemies/Skeleton.tscn
+res://World/Enemies/Skeleton.gd
+res://World/Objects/Projectiles/ArrowProjectile.tscn
+res://World/Objects/Projectiles/ArrowProjectile.gd
+res://World/Caves/CaveAmbientLight.tscn
+res://World/Caves/Bosses/WindBoss.tscn
+res://World/Caves/Bosses/Level/wind_boss_level.tscn
+res://World/Caves/Bosses/WindBoss.gd

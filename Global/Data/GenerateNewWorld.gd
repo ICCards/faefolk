@@ -1,6 +1,7 @@
 extends Node
 
 var world = {}
+var caves = {}
 
 var terrain = {
 	"ocean": [],
@@ -44,8 +45,8 @@ var occupied_terrain_tiles = []
 
 const width := 1000
 const height := 1000
-const MAX_GRASS_BUNCH_SIZE = 150
-var oreTypes = ["stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "stone1", "stone2", "bronze ore", "iron ore", "bronze ore", "iron ore", "gold ore"]
+const MAX_GRASS_BUNCH_SIZE = 50
+var oreTypes = ["stone1", "stone2"]
 var treeTypes = ['oak','spruce','birch','evergreen','pine','apple','plum','cherry','pear']
 var weedTypes = ["A1","A2","A3","A4","B1","B2","B3","B4","C1","C2","C3","C4","D1","D2","D3","D4"]
 var flowerTypes = ["poppy flower","sunflower","tulip","lily of the nile","dandelion"]
@@ -337,12 +338,14 @@ func save_starting_world_data():
 	game_state = GameState.new()
 	game_state.terrain = terrain
 	game_state.world = world
+	game_state.caves = caves
 	game_state.player_state = PlayerData.player_data
 	game_state.save_state()
 	MapData.world = world
 	MapData.terrain = terrain
+	MapData.caves = caves
 	print("here")
-	get_node("/root/Overworld").build_world()
+	Server.world.build_world()
 	print("SAVED")
 
 func generate_animals():

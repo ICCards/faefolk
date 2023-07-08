@@ -4,26 +4,9 @@ extends CanvasLayer
 
 var current_scene = null
 
-var levels = [
-	"res://World3D/World3D/World.tscn",
-	"res://World3D/Caves/Level 1/Cave 1-1/Cave 1-1.tscn",
-	"res://World3D/Caves/Level 1/Cave 1-2/Cave 1-2.tscn",
-	"res://World3D/Caves/Level 1/Cave 1-3/Cave 1-3.tscn",
-	"res://World3D/Caves/Level 1/Cave 1-4/Cave 1-4.tscn",
-	"res://World3D/Caves/Level 1/Cave 1-5/Cave 1-5.tscn",
-	"res://World3D/Caves/Level 1/Cave 1-6/Cave 1-6.tscn",
-	"res://World3D/Caves/Level 1/Cave 1-7/Cave 1-7.tscn",
-	"res://World3D/Caves/Level 1/Cave 1-Boss/Cave 1-Boss.tscn",
-	"res://World3D/Caves/Level 1/Cave 1-Fishing/Cave 1-Fishing.tscn",
-	"res://World3D/Caves/Level 2/Cave 2-1/Cave 2-1.tscn",
-	"res://World3D/Caves/Level 2/Cave 2-2/Cave 2-2.tscn",
-	"res://World3D/Caves/Level 2/Cave 2-3/Cave 2-3.tscn",
-	"res://World3D/Caves/Level 2/Cave 2-4/Cave 2-4.tscn",
-	"res://World3D/Caves/Level 2/Cave 2-5/Cave 2-5.tscn",
-	"res://World3D/Caves/Level 2/Cave 2-6/Cave 2-6.tscn",
-	"res://World3D/Caves/Level 2/Cave 2-7/Cave 2-7.tscn",
-	"res://World3D/Caves/Level 2/Cave 2-Boss/Cave 2-Boss.tscn"
-]
+var scene = ""
+var cave_level
+var cave_tier
 
 func _ready():
 	var root = get_tree().get_root()
@@ -47,42 +30,14 @@ func _deferred_goto_scene(path):
 	#print_orphan_nodes()
 
 
-func advance_cave_level(current_scene, going_downwards):
-	destroy_current_scene()
-	var index = levels.find(current_scene)
-	if going_downwards:
-		PlayerData.spawn_at_cave_entrance = true
-		index += 1
-	else:
-		PlayerData.spawn_at_cave_exit = true
-		index -= 1
-	await get_tree().create_timer(1.0).timeout
-	goto_scene(levels[index])
 
-func respawn():
-	Server.world.is_changing_scene = true
-	Server.player_node.destroy()
-	for node in Server.world.get_node("Projectiles").get_children():
-		node.destroy()
-	for node in Server.world.get_node("Enemies").get_children():
-		node.destroy(false)
-#	for node in Server.world.get_node("NatureObjects").get_children():
-#		node.queue_free()
-#	for node in Server.world.get_node("ForageObjects").get_children():
-#		node.queue_free()
-#	for node in Server.world.get_node("GrassObjects").get_children():
-#		node.queue_free()
-	PlayerData.spawn_at_respawn_location = true
-	await get_tree().create_timer(1.0).timeout
-	goto_scene(PlayerData.player_data["respawn_scene"])
-	
 func destroy_current_scene():
 	Server.world.is_changing_scene = true
 	Server.player_node.destroy()
 	for node in Server.world.get_node("Projectiles").get_children():
 		node.destroy()
 	for node in Server.world.get_node("Enemies").get_children():
-		node.destroy(false)
+		node.get_children()[1].screen_exited()
 #	for node in Server.world.get_node("NatureObjects").get_children():
 #		node.queue_free()
 #	for node in Server.world.get_node("ForageObjects").get_children():

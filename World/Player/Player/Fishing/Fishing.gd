@@ -9,7 +9,6 @@ extends Node2D
 @onready var sound_effects: AudioStreamPlayer = $SoundEffects
 
 @onready var player_animation_player = Server.player_node.animation_player
-@onready var composite_sprites = Server.player_node.composite_sprites
 
 @onready var ItemDrop = load("res://InventoryLogic/ItemDrop.tscn")
 
@@ -26,7 +25,6 @@ var start_point
 var end_point
 var mid_point
 var cast_distance
-var direction
 var adjusted_end_point
 var temp_end_point
 var temp
@@ -70,10 +68,10 @@ func _physics_process(delta):
 		elif (Input.is_action_just_released("mouse_click") or Input.is_action_just_released("use_tool")):
 			cast()
 	elif waiting_for_fish_bite:
-		setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, hook.position + Vector2(4.5,4.5))
+		setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, hook.position)
 	elif is_reeling_in_fish:
-		$CaughtFish.position = hook.position + Vector2(4.5,4.5)
-		line.points = [start_point, hook.position + Vector2(4.5,4.5)]
+		$CaughtFish.position = hook.position
+		line.points = [start_point, hook.position]
 
 func retract_and_stop(fish_name):
 	play_ripple_effect()
@@ -86,7 +84,8 @@ func retract_and_stop(fish_name):
 		$CaughtFish.show()
 		$CaughtFish.texture = load("res://Assets/Images/inventory_icons/Fish/" + fish_name + ".png")
 	reel_in_fish_line()
-	composite_sprites.set_player_animation(Server.player_node.character, "retract_" + direction.to_lower(), "fishing rod retract")
+	get_parent().animation = "retract_" + get_parent().direction.to_lower()
+	get_parent().composite_sprites.set_player_animation(Server.player_node.character, get_parent().animation, "fishing rod retract")
 	player_animation_player.play("axe pickaxe swing")
 	await player_animation_player.animation_finished
 	if fish_name:
@@ -98,14 +97,7 @@ func retract_and_stop(fish_name):
 	
 func reel_in_fish_line():
 	is_reeling_in_fish = true
-	if direction == "RIGHT":
-		start_point = Vector2(20,-40)
-	elif direction == "LEFT":
-		start_point = Vector2(-20,-40)
-	elif direction == "DOWN":
-		start_point = Vector2(-14,-54)
-	elif direction == "UP":
-		start_point = Vector2(14,-54)
+	change_start_point_pos()
 	line.points = [start_point, end_point]
 	var tween = get_tree().create_tween()
 	tween.tween_property(hook, "position", start_point, 0.8)
@@ -119,7 +111,8 @@ func start_fishing_mini_game():
 	sound_effects.play()
 	await $AnimationPlayer.animation_finished
 	await get_tree().create_timer(0.25).timeout
-	composite_sprites.set_player_animation(Server.player_node.character, "struggle_" + direction.to_lower(), "fishing rod struggle")
+	get_parent().animation = "struggle_" + get_parent().direction.to_lower()
+	get_parent().composite_sprites.set_player_animation(Server.player_node.character, get_parent().animation, "fishing rod struggle")
 	player_animation_player.play("struggle")
 	mini_game_active = true
 	change_start_point_pos()
@@ -128,19 +121,22 @@ func start_fishing_mini_game():
 	$RippleTimer.start()
 
 func change_start_point_pos():
-	match direction:
-		"UP":
-			start_point = Vector2(8,-12)
+	match get_parent().direction:
+		"RIGHT":
+			start_point = Vector2(10,-24)
+		"LEFT":
+			start_point = Vector2(-10,-24)
 		"DOWN":
-			start_point = Vector2(-6,-16)
-		_:
-			start_point += Vector2(0,-9)
+			start_point = Vector2(-7,-28)
+		"UP":
+			start_point = Vector2(7,-27)
+
 
 func start():
 	line.hide()
 	rng.randomize()
-	direction = Server.player_node.direction
-	composite_sprites.set_player_animation(Server.player_node.character, "cast_" + direction.to_lower(), "fishing rod cast")
+	get_parent().animation = "cast_" + get_parent().direction.to_lower()
+	get_parent().composite_sprites.set_player_animation(Server.player_node.character, get_parent().animation, "fishing rod cast")
 	player_animation_player.play("set cast first frame")
 	await player_animation_player.animation_finished
 	player_animation_player.stop()
@@ -163,7 +159,7 @@ func lost_fish():
 func _on_MoveBobTimer_timeout():
 	if waiting_for_fish_bite:
 		rng.randomize()
-		if direction == "RIGHT" or direction == "LEFT":
+		if get_parent().direction == "RIGHT" or get_parent().direction == "LEFT":
 			temp = end_point + Vector2(rng.randi_range(0, 0),rng.randi_range(-4, 4))
 		else:
 			temp = (end_point + Vector2(rng.randi_range(-4, 4),rng.randi_range(0, 0)))
@@ -188,10 +184,10 @@ func cast():
 
 func draw_cast_line():
 	var percent = progress.value/progress.max_value
-	match direction:
+	match get_parent().direction:
 		"RIGHT":
 			start_point = Vector2(13,-15)
-			end_point = Vector2( 90*percent+18, -8 )
+			end_point = Vector2( 90*percent+18, 0 )
 			mid_point = Vector2(-(end_point.x-start_point.x)/2, 0)
 			cast_distance = abs(start_point.x - end_point.x)
 		"LEFT":
@@ -211,22 +207,49 @@ func draw_cast_line():
 			cast_distance = start_point.y - end_point.y - 12
 	line.show()
 	hook.show()
-	hook.position = end_point + Vector2(4,4)
-	setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, end_point )
-	var location = Tiles.ocean_tiles.local_to_map(hook.position + Server.player_node.position)
-	if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles) or Tiles.deep_ocean_tiles.get_cell_atlas_coords(0,location) != Vector2i(-1,-1): # valid cast
-		play_ripple_effect()
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/dropItemInWater.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-		sound_effects.play()
-		waiting_for_fish_bite = true
-		if direction == "RIGHT" or direction == "LEFT":
-			player_animation_player.play("waiting for fish side")
+	hook.position = end_point
+	setLinePointsToBezierCurve(start_point, Vector2(0, 0), mid_point, end_point)
+	if Server.world.name == "Overworld":
+		var location = Tiles.ocean_tiles.local_to_map(hook.position + Server.player_node.position)
+		if Tiles.isCenterBitmaskTile(location, Tiles.ocean_tiles) or Tiles.deep_ocean_tiles.get_cell_atlas_coords(0,location) != Vector2i(-1,-1): # valid cast
+			play_ripple_effect()
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/dropItemInWater.mp3")
+			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+			sound_effects.play()
+			waiting_for_fish_bite = true
+			if get_parent().direction == "RIGHT" or get_parent().direction == "LEFT":
+				player_animation_player.play("waiting for fish side")
+			else:
+				player_animation_player.play("waiting for fish upwards")
 		else:
-			player_animation_player.play("waiting for fish upwards")
+			await get_tree().create_timer(0.2).timeout
+			stop_fishing_state()
 	else:
-		await get_tree().create_timer(0.2).timeout
-		stop_fishing_state()
+		var location = Tiles.cave_water_tiles.local_to_map(hook.position + Server.player_node.position)
+		if Tiles.isCenterBitmaskTile(location, Tiles.cave_water_tiles): # valid cast
+			play_ripple_effect()
+			sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/dropItemInWater.mp3")
+			sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+			sound_effects.play()
+			waiting_for_fish_bite = true
+			if get_parent().direction == "RIGHT" or get_parent().direction == "LEFT":
+				player_animation_player.play("waiting for fish side")
+			else:
+				player_animation_player.play("waiting for fish upwards")
+		else:
+			await get_tree().create_timer(0.2).timeout
+			stop_fishing_state()
+
+func valid_cast():
+	play_ripple_effect()
+	sound_effects.stream = load("res://Assets/Sound/Sound effects/Fishing/dropItemInWater.mp3")
+	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+	sound_effects.play()
+	waiting_for_fish_bite = true
+	if get_parent().direction == "RIGHT" or get_parent().direction == "LEFT":
+		player_animation_player.play("waiting for fish side")
+	else:
+		player_animation_player.play("waiting for fish upwards")
 
 
 func setLinePointsToBezierCurve(a: Vector2, postA: Vector2, preB: Vector2, b: Vector2):
@@ -237,11 +260,11 @@ func setLinePointsToBezierCurve(a: Vector2, postA: Vector2, preB: Vector2, b: Ve
 
 func set_moving_fish_line_position(progress_of_game):
 	var temp_end_point = return_adjusted_end_point(progress_of_game)
-	hook.position = temp_end_point - Vector2(4.5,4.5)
+	hook.position = temp_end_point - Vector2(2,2)
 	line.points = [start_point, temp_end_point]
 
 func return_adjusted_end_point(progress_of_game):
-	match direction:
+	match get_parent().direction:
 		"RIGHT":
 			temp_end_point = end_point - Vector2(((progress_of_game-200)/800)*cast_distance, 0)
 		"LEFT":
@@ -275,8 +298,8 @@ func _on_RippleTimer_timeout():
 	play_ripple_effect()
 
 func play_ripple_effect():
-	return
 	var rippleParticles = RippleParticles.instantiate()
-	rippleParticles.position = hook.position + Vector2(4.5,4.5)
+	rippleParticles.position = hook.position 
 	add_child(rippleParticles)
+	
 	

@@ -58,11 +58,13 @@ func hit(tool_name):
 func _on_SmallHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
+	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff" and _area.tool_name != "arrow":
 		call_deferred("hit", _area.tool_name)
-	if _area.special_ability == "fire buff":
+	if _area.special_ability == "fire":
 		health -= Stats.FIRE_DEBUFF_DAMAGE
-		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-8, 8), randf_range(-16,0)))
+		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-8, 8), randf_range(-8,8)))
+	if _area.tool_name == "arrow" or _area.tool_name == "fire projectile":
+		_area.destroy()
 
 
 func _on_VisibilityNotifier2D_screen_entered():

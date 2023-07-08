@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cffchl0ffi2hf"]
+[gd_scene load_steps=33 format=3 uid="uid://cffchl0ffi2hf"]
 
 [ext_resource type="Script" path="res://World/Player/Player/UserInterface/UserInterface.gd" id="1_pv3v8"]
 [ext_resource type="PackedScene" uid="uid://3vr0ijbqi0bd" path="res://Assets/Images/User interface/loading screen/LoadingScreen.tscn" id="2_ai2q6"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://cm8c7p7g6ii7g" path="res://World/Player/Player/UserInterface/StatBars/PlayerDataUI.tscn" id="18_gbc14"]
 [ext_resource type="PackedScene" uid="uid://rpuaufnru6of" path="res://World/Player/Player/UserInterface/ItemPickUpDialogue/ItemPickUpDialogue.tscn" id="19_n03k2"]
 [ext_resource type="PackedScene" uid="uid://dmyqim28d1o0u" path="res://World/Player/Player/UserInterface/Dialogue/dialogue_box.tscn" id="24_ucklu"]
+[ext_resource type="PackedScene" uid="uid://c3h518er5pspb" path="res://World/Player/Player/UserInterface/SaveAndExit/SaveAndExit.tscn" id="25_m1hsv"]
 
 [sub_resource type="Animation" id="18"]
 length = 0.001
@@ -113,18 +114,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 0.552941)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SavingProgress:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="21"]
 resource_name = "sleep"
@@ -152,18 +141,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0.552941), Color(0, 0, 0, 0.552941), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SavingProgress:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(1.5, 4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ll8n3"]
@@ -246,14 +223,17 @@ libraries = {
 [node name="SavingProgress" type="RichTextLabel" parent="SleepEffect"]
 visible = false
 layout_mode = 0
-offset_left = 20.0
-offset_top = 640.0
-offset_right = 1217.0
-offset_bottom = 863.0
-scale = Vector2(0.35, 0.35)
+offset_left = 14.0
+offset_top = 619.0
+offset_right = 1529.0
+offset_bottom = 868.0
+scale = Vector2(0.4, 0.4)
 theme = ExtResource("6_rh7sc")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
 bbcode_enabled = true
-text = "Saving progress"
+text = "[wave amp=75]Saving progress..."
 
 [node name="RadialUpgradeMenu" parent="." instance=ExtResource("4_nwvkq")]
 visible = false
@@ -286,25 +266,27 @@ texture = ExtResource("5_yyu54")
 layout_mode = 0
 offset_left = 56.0
 offset_top = -9.0
-offset_right = 1018.0
-offset_bottom = 175.0
-scale = Vector2(0.22, 0.22)
+offset_right = 1260.0
+offset_bottom = 230.0
+scale = Vector2(0.18, 0.18)
 theme = ExtResource("6_rh7sc")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 10
 theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 200
 text = "Change rotation"
 
 [node name="RotateKey" type="Label" parent="ChangeRotation"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = 8.0
-offset_top = -15.0
-offset_right = 152.0
-offset_bottom = 169.0
-scale = Vector2(0.25, 0.25)
+offset_top = -19.0
+offset_right = 172.0
+offset_bottom = 210.0
+scale = Vector2(0.22, 0.22)
 theme = ExtResource("6_rh7sc")
+theme_override_font_sizes/font_size = 200
 text = "R"
 horizontal_alignment = 1
 
@@ -324,27 +306,29 @@ texture = ExtResource("7_u87cj")
 
 [node name="VarietyLabel" type="Label" parent="ChangeVariety"]
 layout_mode = 0
-offset_left = 712.0
+offset_left = 687.0
 offset_top = 570.0
-offset_right = 1579.0
-offset_bottom = 754.0
-scale = Vector2(0.22, 0.22)
+offset_right = 1847.0
+offset_bottom = 799.0
+scale = Vector2(0.18, 0.18)
 theme = ExtResource("6_rh7sc")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 10
 theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 200
 text = "Change variety"
 
 [node name="VarietyKey" type="Label" parent="ChangeVariety"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_left = 910.0
-offset_top = 564.0
-offset_right = 1043.0
-offset_bottom = 748.0
-scale = Vector2(0.25, 0.25)
+offset_top = 560.0
+offset_right = 1069.0
+offset_bottom = 789.0
+scale = Vector2(0.22, 0.22)
 theme = ExtResource("6_rh7sc")
+theme_override_font_sizes/font_size = 200
 text = "V"
 horizontal_alignment = 1
 
@@ -355,6 +339,7 @@ offset_right = 1280.0
 offset_bottom = 720.0
 
 [node name="LoadingIndicator" type="AnimatedSprite2D" parent="LoadingIndicator"]
+process_mode = 3
 position = Vector2(721, 369)
 scale = Vector2(10, 10)
 sprite_frames = SubResource("22")
@@ -373,11 +358,12 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="SavingProgress" type="RichTextLabel" parent="LoadingIndicator"]
+process_mode = 3
 layout_mode = 0
 offset_left = 14.0
-offset_top = 634.0
-offset_right = 1177.0
-offset_bottom = 845.0
+offset_top = 619.0
+offset_right = 1529.0
+offset_bottom = 868.0
 scale = Vector2(0.4, 0.4)
 theme = ExtResource("6_rh7sc")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -392,6 +378,7 @@ text = "[wave amp=75]Saving progress..."
 visible = false
 
 [node name="Hotbar" parent="." instance=ExtResource("17_n0y8n")]
+visible = false
 
 [node name="PlayerDataUI" parent="." instance=ExtResource("18_gbc14")]
 
@@ -402,6 +389,10 @@ custom_minimum_size = Vector2(1280, 720)
 [node name="LoadingScreen" parent="." instance=ExtResource("2_ai2q6")]
 visible = false
 
+[node name="SaveAndExit" parent="." instance=ExtResource("25_m1hsv")]
+visible = false
+
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
+process_mode = 3
 
 [connection signal="timeout" from="WeatherEffects/LightningTimer" to="WeatherEffects" method="_on_LightningTimer_timeout"]

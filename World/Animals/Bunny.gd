@@ -16,7 +16,6 @@ var health: int = Stats.BUNNY_HEALTH
 var STARTING_HEALTH: int = Stats.BUNNY_HEALTH
 var running_state: bool = false
 var MAX_MOVE_DISTANCE: float = 300.0
-var tornado_node = null
 
 var spawn_loc: Vector2i
 
@@ -25,7 +24,6 @@ var variety
 var rng := RandomNumberGenerator.new()
 var thread := Thread.new()
 var destroy_thread := Thread.new()
-var mutex := Mutex.new()
 
 
 func _ready(): 
@@ -46,7 +44,7 @@ func set_attributes():
 func _update_pathfinding():
 	if not thread.is_started() and visible and not destroyed:
 		thread.start(Callable(self,"_get_path").bind(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE)))
-		if Util.chance(15):
+		if Util.chance(3):
 			if not destroyed and not sound_effects.playing:
 				sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bunny/idle.mp3"))
 				sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
@@ -89,7 +87,7 @@ func move_deferred(_velocity: Vector2) -> void:
 	call_deferred("move", _velocity)
 
 func move(_velocity: Vector2) -> void:
-	if tornado_node or stunned or destroyed:
+	if $EnemyTornadoState.tornado_node or stunned or destroyed:
 		return
 	if frozen:
 		set_velocity(_velocity*0.75)
@@ -136,7 +134,7 @@ func destroy(killed_by_player):
 	set_physics_process(false)
 	bunny_sprite.material = null
 	if killed_by_player:
-		#MapData.remove_object("animal",name)
+		MapData.remove_object("animal",name,spawn_loc)
 		PlayerData.player_data["collections"]["mobs"]["bunny"] += 1
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bunny/death.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
@@ -160,15 +158,14 @@ func _on_HurtBox_area_entered(area):
 		$EnemyPoisonState.call_deferred("start", area.tool_name)
 		return
 	if area.name == "SwordSwing":
-		PlayerData.player_data["skill_experience"]["sword"] += 1
+		PlayerDataHelpers.add_skill_experience("sword")
 		Stats.decrease_tool_health()
 	else:
 		PlayerDataHelpers.add_skill_experience(area.tool_name)
 	if area.tool_name == "lingering tornado":
-		$EnemyTornadoState.set_deferred("orbit_radius", randf_range(0,20))
-		tornado_node = area
+		$EnemyTornadoState.tornado_node = area
 	if area.special_ability == "fire":
-		var randomPos = Vector2(randf_range(-8,8), randf_range(-8,8))
+		var randomPos = Vector2(randf_range(-4,4), randf_range(-4,0))
 		InstancedScenes.initiateExplosionParticles(position+randomPos)
 		InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
 		health -= Stats.FIRE_DEBUFF_DAMAGE
@@ -180,9 +177,11 @@ func _on_HurtBox_area_entered(area):
 		$EnemyPoisonState.call_deferred("start", "poison arrow")
 	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 		call_deferred("hit", area.tool_name)
+	if area.tool_name == "arrow" or area.tool_name == "fire projectile":
+		area.destroy()
 
 func start_run_state():
-	navigation_agent.set_deferred("max_speed", 135)
+	navigation_agent.set_deferred("max_speed", 100)
 	running_state = true
 	$Timers/RunStateTimer.call_deferred("start")
 	_timer.set_deferred("wait_time", 0.5)
@@ -198,5 +197,5 @@ func screen_entered():
 
 func screen_exited():
 	if MapData.world[Util.return_chunk_from_location(spawn_loc)]["animal"].has(name):
-		MapData.world[Util.return_chunk_from_location(spawn_loc)]["animal"][name]["l"] = position/16
+		MapData.set_updated_animal_position(name,spawn_loc,position,{"n":"boar","l":Vector2i(position/16),"h":health,"v":variety})
 		set_deferred("visible", false)

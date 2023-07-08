@@ -170,11 +170,11 @@ layout_mode = 0
 offset_left = 493.0
 offset_top = 346.0
 offset_right = 2453.0
-offset_bottom = 519.0
+offset_bottom = 566.0
 scale = Vector2(0.15, 0.15)
 theme = ExtResource("13_yel4h")
 bbcode_enabled = true
-text = "1 x Wood(total wood)"
+text = "[center]1 x Wood(total wood)"
 scroll_active = false
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]

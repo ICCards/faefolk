@@ -87,11 +87,12 @@ texture = ExtResource("7")
 layout_mode = 0
 offset_left = 858.0
 offset_top = 29.0
-offset_right = 1491.0
-offset_bottom = 258.0
-scale = Vector2(0.17, 0.17)
+offset_right = 1686.0
+offset_bottom = 329.0
+scale = Vector2(0.13, 0.13)
 theme = ExtResource("7_dgns7")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 0
 text = "Mon. 1"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -100,18 +101,18 @@ vertical_alignment = 1
 layout_mode = 0
 offset_left = 879.0
 offset_top = 65.0
-offset_right = 1530.0
-offset_bottom = 277.0
-scale = Vector2(0.17, 0.17)
+offset_right = 1730.0
+offset_bottom = 319.0
+scale = Vector2(0.13, 0.13)
 theme = ExtResource("7_dgns7")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 0
 text = "12:00 a.m."
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AdvanceTime" type="Timer" parent="DateTime"]
 wait_time = 3.0
-autostart = true
 
 [node name="ClockIcon" type="TextureRect" parent="DateTime"]
 layout_mode = 0

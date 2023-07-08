@@ -12,6 +12,7 @@ var bodyEnteredFlag = false
 
 var object_name = "crop"
 
+
 func _ready():
 	Tiles.remove_valid_tiles(location)
 	$Crop/TileMap.set_cell(0,Vector2i(0,-1),0,Constants.crop_atlas_tiles[crop_name][return_phase()])
@@ -19,9 +20,10 @@ func _ready():
 
 
 func refresh_image():
-	in_regrowth_phase = MapData.world["crop"][name]["rp"]
-	days_until_harvest = MapData.world["crop"][name]["dh"]
-	days_without_water = MapData.world["crop"][name]["dww"]
+	var chunk = Util.return_chunk_from_location(location)
+	in_regrowth_phase = MapData.world[chunk]["crop"][name]["rp"]
+	days_until_harvest = MapData.world[chunk]["crop"][name]["dh"]
+	days_without_water = MapData.world[chunk]["crop"][name]["dww"]
 	$Crop/TileMap.set_cell(0,Vector2i(0,-1),0,Constants.crop_atlas_tiles[crop_name][return_phase()])
 
 
@@ -79,17 +81,20 @@ func harvest_and_remove():
 		await get_tree().create_timer(0.6).timeout
 		yield_harvest(JsonData.crop_data[crop_name]["yield"])
 		await get_tree().create_timer(1.0).timeout
-		queue_free()
-	
+		MapData.remove_object("crop",name,location)
+		call_deferred("queue_free")
+
+
 func harvest_and_keep_planted():
 	if !isBeingHarvested:
 		isBeingHarvested = true
 		await get_tree().create_timer(0.6).timeout
 		yield_harvest(JsonData.crop_data[crop_name]["yield"])
-		MapData.world["crops"][name]["rp"] = true # start regrowth phase
-		MapData.world["crops"][name]["dh"] = 1 # days until next harvest
+		var chunk = Util.return_chunk_from_location(location)
+		MapData.world[chunk]["crops"][name]["rp"] = true # start regrowth phase
+		MapData.world[chunk]["crops"][name]["dh"] = 1 # days until next harvest
 		refresh_image()
-		
+
 
 func yield_harvest(yield_list):
 	yield_list.shuffle()
@@ -111,7 +116,8 @@ func play_effect():
 		$RustleSound.volume_db = Sounds.return_adjusted_sound_db("sound", -24)
 		$RustleSound.play()
 		$AnimationPlayer.play("animate")
-		
+
+
 func _on_PlayAnimBox_body_entered(body):
 	play_effect()
 	bodyEnteredFlag = true
@@ -137,6 +143,5 @@ func harvest():
 
 func _on_VisibilityNotifier2D_screen_entered():
 	show()
-
 func _on_VisibilityNotifier2D_screen_exited():
 	hide()

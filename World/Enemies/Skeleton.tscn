@@ -1,9 +1,12 @@
-[gd_scene load_steps=42 format=3 uid="uid://c1tqcyguyjy6l"]
+[gd_scene load_steps=45 format=3 uid="uid://c1tqcyguyjy6l"]
 
 [ext_resource type="Texture2D" uid="uid://cisqfn3brgmab" path="res://Assets/Images/Enemies/skeleton/DRAW/down/body.png" id="1"]
 [ext_resource type="Script" path="res://World/Enemies/Skeleton.gd" id="1_2fleq"]
 [ext_resource type="PackedScene" uid="uid://do7vd3a7rt4q5" path="res://World/Enemies/AttachedStates/SetEnemyDirection.tscn" id="2_taegw"]
+[ext_resource type="PackedScene" uid="uid://cvfur4ra58e75" path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" id="3_1igoi"]
+[ext_resource type="PackedScene" uid="uid://dx8hix2epqruo" path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" id="4_fxv38"]
 [ext_resource type="Texture2D" uid="uid://swg0f7q8o7on" path="res://Assets/Images/Magic/lightning/Shock_Med.png" id="4_jmwbv"]
+[ext_resource type="PackedScene" uid="uid://dr88n2qik0tat" path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" id="5_n3wcm"]
 [ext_resource type="Texture2D" uid="uid://cxygul52no3b" path="res://Assets/Images/Enemies/skeleton/death.png" id="6_p7dv5"]
 [ext_resource type="Texture2D" uid="uid://c7pbioiyoq5hg" path="res://Assets/Images/Enemies/knockback dust.png" id="9"]
 [ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="11"]
@@ -166,7 +169,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="164"]
-radius = 194.003
+radius = 110.0
 
 [sub_resource type="Animation" id="166"]
 length = 0.001
@@ -221,22 +224,10 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("DeathAnimation:frame")
+tracks/4/path = NodePath("SpiderHit/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("SpiderHit/CollisionShape2D:disabled")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -296,31 +287,31 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
+tracks/4/path = NodePath("DeathAnimation:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
+tracks/5/path = NodePath("SpiderHit/CollisionShape2D:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
+tracks/6/path = NodePath("EnemyPoisonState/PoisonParticles/Parts1:emitting")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -332,50 +323,26 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("DeathAnimation:visible")
+tracks/7/path = NodePath("EnemyPoisonState/PoisonParticles/Parts2:emitting")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("DeathAnimation:playing")
+tracks/8/path = NodePath("EnemyPoisonState/PoisonParticles/Parts3:emitting")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("DeathAnimation:frame")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("SpiderHit/CollisionShape2D:disabled")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"values": [false]
 }
 
 [sub_resource type="Animation" id="183"]
@@ -468,7 +435,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_iwf4t")
 }],
 "loop": true,
-"name": &"new_animation",
+"name": &"play",
 "speed": 5.0
 }]
 
@@ -481,6 +448,21 @@ collision_mask = 2097251
 script = ExtResource("1_2fleq")
 
 [node name="SetEnemyDirection" parent="." instance=ExtResource("2_taegw")]
+
+[node name="EnemyPoisonState" parent="." instance=ExtResource("3_1igoi")]
+
+[node name="Parts3" parent="EnemyPoisonState/PoisonParticles" index="0"]
+emitting = false
+
+[node name="Parts2" parent="EnemyPoisonState/PoisonParticles" index="1"]
+emitting = false
+
+[node name="Parts1" parent="EnemyPoisonState/PoisonParticles" index="2"]
+emitting = false
+
+[node name="EnemyFrozenState" parent="." instance=ExtResource("4_fxv38")]
+
+[node name="EnemyTornadoState" parent="." instance=ExtResource("5_n3wcm")]
 
 [node name="KnockbackParticles" type="CPUParticles2D" parent="."]
 material = SubResource("CanvasItemMaterial_p1liq")
@@ -502,8 +484,7 @@ hframes = 4
 
 [node name="Electricity" type="AnimatedSprite2D" parent="."]
 visible = false
-position = Vector2(0, -25)
-scale = Vector2(2, 2)
+position = Vector2(0, -12)
 sprite_frames = SubResource("182")
 animation = &"new_animation"
 
@@ -528,18 +509,17 @@ libraries = {
 }
 
 [node name="DetectPlayer" type="Area2D" parent="."]
-visible = false
-collision_layer = 32
-collision_mask = 0
+collision_layer = 0
+collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
 shape = SubResource("164")
 
 [node name="ShootDirection" type="Node2D" parent="."]
-position = Vector2(0, -33)
+position = Vector2(0, -11)
 
 [node name="Marker2D" type="Marker2D" parent="ShootDirection"]
-position = Vector2(45, 0)
+position = Vector2(20, 2.08165e-12)
 
 [node name="Timers" type="Node" parent="."]
 
@@ -564,7 +544,7 @@ path_desired_distance = 10.0
 target_desired_distance = 20.0
 path_max_distance = 10.0
 avoidance_enabled = true
-max_speed = 50.0
+max_speed = 25.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -575,7 +555,7 @@ libraries = {
 visible = false
 position = Vector2(0, -11)
 sprite_frames = SubResource("189")
-animation = &"new_animation"
+animation = &"play"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_jhoei")
@@ -583,3 +563,5 @@ shape = SubResource("CircleShape2D_jhoei")
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_AttackTimer_timeout"]
+
+[editable path="EnemyPoisonState"]

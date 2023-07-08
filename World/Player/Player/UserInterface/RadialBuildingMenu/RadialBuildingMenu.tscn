@@ -161,5 +161,5 @@ offset_bottom = 535.0
 scale = Vector2(0.15, 0.15)
 theme = ExtResource("8_lj53a")
 bbcode_enabled = true
-text = "1 x Wood(total wood)"
+text = "[center]1 x Wood(total wood)"
 scroll_active = false

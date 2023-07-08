@@ -137,7 +137,6 @@ visible = false
 visible = false
 
 [node name="collections" parent="Pages" instance=ExtResource("12_8aw2w")]
-visible = false
 
 [node name="Trash" parent="." instance=ExtResource("16_tc1bk")]
 

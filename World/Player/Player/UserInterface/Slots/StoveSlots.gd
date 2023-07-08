@@ -29,6 +29,7 @@ func initialize_locked_slots():
 			slots_in_stove[i].slot_index = i
 			slots_in_stove[i].slotType = SlotClass.SlotType.STOVE
 	elif get_parent().level == "2":
+		$Ingredient2/LockSlot.hide()
 		$Ingredient3/LockSlot.show()
 		for i in range(slots_in_stove.size()):
 			if i != 3:
@@ -38,6 +39,8 @@ func initialize_locked_slots():
 			slots_in_stove[i].slot_index = i
 			slots_in_stove[i].slotType = SlotClass.SlotType.STOVE
 	else:
+		$Ingredient2/LockSlot.hide()
+		$Ingredient3/LockSlot.hide()
 		for i in range(slots_in_stove.size()):
 			slots_in_stove[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots_in_stove[i]))
 			slots_in_stove[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots_in_stove[i]))
@@ -50,8 +53,8 @@ func initialize_slots():
 	for i in range(slots.size()):
 		if slots[i].item:
 			slots[i].removeFromSlot()
-		if PlayerData.player_data["stoves"][get_parent().id].has(str(i)):
-			slots[i].initialize_item(PlayerData.player_data["stoves"][get_parent().id][str(i)][0], PlayerData.player_data["stoves"][get_parent().id][str(i)][1], PlayerData.player_data["stoves"][get_parent().id][str(i)][2])
+		if PlayerData.player_data["ui_slots"][get_parent().id].has(str(i)):
+			slots[i].initialize_item(PlayerData.player_data["ui_slots"][get_parent().id][str(i)][0], PlayerData.player_data["ui_slots"][get_parent().id][str(i)][1], PlayerData.player_data["ui_slots"][get_parent().id][str(i)][2])
 
 func able_to_put_into_slot(slot):
 	var holding_item = find_parent("UserInterface").holding_item

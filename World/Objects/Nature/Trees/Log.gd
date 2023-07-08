@@ -56,9 +56,11 @@ func hit(tool_name, special_ability = ""):
 func _on_BranchHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	if _area.special_ability == "fire buff":
-		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-16,16), randf_range(-16,16)))
-	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
+	if _area.special_ability == "fire":
+		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-8,8), randf_range(-8,8)))
+	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff" and _area.tool_name != "arrow":
 		call_deferred("hit", _area.tool_name)
+	if _area.tool_name == "arrow" or _area.tool_name == "fire projectile":
+		_area.destroy()
 
 

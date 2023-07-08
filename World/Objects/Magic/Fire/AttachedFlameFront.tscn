@@ -1,20 +1,91 @@
-[gd_scene load_steps=4 format=3 uid="uid://bf6c800nwx3sq"]
+[gd_scene load_steps=14 format=3 uid="uid://bf6c800nwx3sq"]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Fire/AttachedFlameFront.gd" id="1_22hgp"]
+[ext_resource type="Texture2D" uid="uid://cdajtgm02p5j8" path="res://Assets/Images/Magic/fire/FlameFront.png" id="1_ntr0m"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="3"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnmk8"]
+atlas = ExtResource("1_ntr0m")
+region = Rect2(0, 0, 34, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwhlk"]
+atlas = ExtResource("1_ntr0m")
+region = Rect2(34, 0, 34, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyf2u"]
+atlas = ExtResource("1_ntr0m")
+region = Rect2(68, 0, 34, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k563h"]
+atlas = ExtResource("1_ntr0m")
+region = Rect2(102, 0, 34, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpgvn"]
+atlas = ExtResource("1_ntr0m")
+region = Rect2(136, 0, 34, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wc3q0"]
+atlas = ExtResource("1_ntr0m")
+region = Rect2(170, 0, 34, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8s44"]
+atlas = ExtResource("1_ntr0m")
+region = Rect2(204, 0, 34, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qr5n3"]
+atlas = ExtResource("1_ntr0m")
+region = Rect2(238, 0, 34, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vuhv6"]
+atlas = ExtResource("1_ntr0m")
+region = Rect2(272, 0, 34, 48)
+
 [sub_resource type="SpriteFrames" id="10"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tnmk8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwhlk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyf2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k563h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpgvn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wc3q0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8s44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qr5n3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vuhv6")
+}],
+"loop": true,
+"name": &"loop",
+"speed": 5.0
+}]
 
 [node name="AttachedFlameFront" type="AnimatedSprite2D"]
 modulate = Color(1.25, 1.25, 1.25, 1)
-position = Vector2(0, -42)
-scale = Vector2(2, 2)
+position = Vector2(2.08165e-12, -20)
 sprite_frames = SubResource("10")
+animation = &"loop"
+frame = 7
+frame_progress = 0.974031
 script = ExtResource("1_22hgp")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, 10)
-energy = 1.01
+blend_mode = 2
 texture = ExtResource("3")
 texture_scale = 0.5

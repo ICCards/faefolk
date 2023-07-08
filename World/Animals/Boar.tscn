@@ -18,7 +18,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="CircleShape2D" id="1"]
-radius = 9.0
+radius = 7.5
 
 [sub_resource type="CircleShape2D" id="15"]
 radius = 14.0
@@ -493,6 +493,15 @@ script = ExtResource("1_pcgcp")
 
 [node name="PoisonParticles" parent="EnemyPoisonState" index="0"]
 position = Vector2(0, -8)
+
+[node name="Parts3" parent="EnemyPoisonState/PoisonParticles" index="0"]
+emitting = false
+
+[node name="Parts2" parent="EnemyPoisonState/PoisonParticles" index="1"]
+emitting = false
+
+[node name="Parts1" parent="EnemyPoisonState/PoisonParticles" index="2"]
+emitting = false
 
 [node name="EnemyFrozenState" parent="." instance=ExtResource("5_7k6nt")]
 

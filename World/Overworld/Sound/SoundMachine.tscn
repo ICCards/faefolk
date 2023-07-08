@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://bnxy26up5n3qf"]
+
+[ext_resource type="Script" path="res://World/Overworld/Sound/SoundMachine.gd" id="1_ff5rp"]
+[ext_resource type="AudioStream" uid="uid://c7vhftoij2h0t" path="res://Assets/Sound/Sound effects/Ambience/morningcrow.mp3" id="2_7lfpp"]
+[ext_resource type="AudioStream" uid="uid://dprkhfgc5iv1i" path="res://Assets/Sound/Sound effects/Ambience/howlingwolf.mp3" id="3_fn0kt"]
+[ext_resource type="AudioStream" uid="uid://cgan8rhrjg346" path="res://Assets/Sound/Sound effects/Ambience/spring_day.mp3" id="4_sixy2"]
+[ext_resource type="AudioStream" uid="uid://16xd5et1kxkk" path="res://Assets/Sound/Sound effects/Ambience/night sound.mp3" id="5_h2125"]
+
+[node name="SoundMachine" type="Node"]
+script = ExtResource("1_ff5rp")
+
+[node name="DayJingle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_7lfpp")
+volume_db = -10.0
+
+[node name="NightJingle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_fn0kt")
+
+[node name="DaySoundscape" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_sixy2")
+
+[node name="NightSoundscape" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_h2125")

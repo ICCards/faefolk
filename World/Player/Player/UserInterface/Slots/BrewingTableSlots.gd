@@ -4,24 +4,24 @@ extends Control
 @onready var InventoryItem = load("res://InventoryLogic/InventoryItem.tscn")
 
 
-func _ready():
-	initialize()
-	initialize_slots()
-
-func initialize():
-	var slots = self.get_children()
-	if get_parent().level == "1":
-		$GlassSlot/TextureRect.texture = load("res://Assets/Images/inventory_icons/Potion/empty potion I.png")
-	elif get_parent().level == "2":
-		$GlassSlot/TextureRect.texture = load("res://Assets/Images/inventory_icons/Potion/empty potion II.png")
-	else:
-		$GlassSlot/TextureRect.texture = load("res://Assets/Images/inventory_icons/Potion/empty potion III.png")
-		for i in range(slots.size()):
-			slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i))
-			slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i))
-			slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i))
-			slots[i].slot_index = i
-			slots[i].slotType = SlotClass.SlotType.GRAIN_MILL
+#func _ready():
+#	initialize()
+#	initialize_slots()
+#
+#func initialize():
+#	var slots = self.get_children()
+#	if get_parent().level == "1":
+#		$GlassSlot/TextureRect.texture = load("res://Assets/Images/inventory_icons/Potion/empty potion I.png")
+#	elif get_parent().level == "2":
+#		$GlassSlot/TextureRect.texture = load("res://Assets/Images/inventory_icons/Potion/empty potion II.png")
+#	else:
+#		$GlassSlot/TextureRect.texture = load("res://Assets/Images/inventory_icons/Potion/empty potion III.png")
+#		for i in range(slots.size()):
+#			slots[i].connect("gui_input",Callable(self,"slot_gui_input").bind(slots[i))
+#			slots[i].connect("mouse_entered",Callable(self,"hovered_slot").bind(slots[i))
+#			slots[i].connect("mouse_exited",Callable(self,"exited_slot").bind(slots[i))
+#			slots[i].slot_index = i
+#			slots[i].slotType = SlotClass.SlotType.GRAIN_MILL
 
 func initialize_slots():
 	var slots = self.get_children()

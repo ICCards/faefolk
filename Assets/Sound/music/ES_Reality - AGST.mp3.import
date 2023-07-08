@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dglrpmbdsn564"
+path="res://.godot/imported/ES_Reality - AGST.mp3-19a8c9de0e1026474c62c470e6fa1231.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/music/ES_Reality - AGST.mp3"
+dest_files=["res://.godot/imported/ES_Reality - AGST.mp3-19a8c9de0e1026474c62c470e6fa1231.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

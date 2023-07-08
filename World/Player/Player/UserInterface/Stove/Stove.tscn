@@ -188,6 +188,7 @@ position = Vector2(461, 465)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_1tcni")
 animation = &"new_animation"
+autoplay = "new_animation"
 
 [node name="ColorRect" type="ColorRect" parent="FireAnimatedSprite"]
 show_behind_parent = true

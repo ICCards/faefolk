@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dvnl2j0u3v17n"]
+[gd_scene load_steps=36 format=3 uid="uid://dvnl2j0u3v17n"]
 
 [ext_resource type="Texture2D" uid="uid://bktodylgrgdkv" path="res://Assets/Images/Enemies/Bird Boss/idle/down/body.png" id="1"]
 [ext_resource type="Script" path="res://World/Caves/Bosses/WindBoss.gd" id="1_a63k8"]
@@ -6,14 +6,19 @@
 [ext_resource type="Texture2D" uid="uid://ckal8dga4akml" path="res://Assets/Images/Misc/watering can progress indicator.png" id="5"]
 [ext_resource type="Texture2D" uid="uid://bv2e37vy0s7h4" path="res://Assets/Images/mini map/snow.png" id="6"]
 [ext_resource type="Texture2D" uid="uid://yraxnacv4k1w" path="res://Assets/Images/Enemies/Bird Boss/death/body.png" id="8"]
+[ext_resource type="Texture2D" uid="uid://vrvbxbi5ycv8" path="res://Assets/Images/Enemies/ChangeForm.png" id="8_aa4cd"]
+[ext_resource type="AudioStream" uid="uid://dvlq2uw38srcr" path="res://Assets/Sound/Sound effects/Enemies/BirdBoss/boss upgrade phase.wav" id="9_uf47h"]
+[ext_resource type="AudioStream" uid="uid://bbfki8a6ovma2" path="res://Assets/Sound/Sound effects/Enemies/BirdBoss/wings flap.mp3" id="10_1ni4o"]
 [ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="11"]
+[ext_resource type="AudioStream" uid="uid://cxgjvbklk531q" path="res://Assets/Sound/Sound effects/Enemies/BirdBoss/bird attack.mp3" id="11_t2itq"]
+[ext_resource type="AudioStream" uid="uid://bl20mh63tbnp7" path="res://Assets/Sound/Sound effects/Enemies/hitEnemy.mp3" id="12_3fhja"]
+[ext_resource type="AudioStream" uid="uid://b0qfy0ayi1dgw" path="res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3" id="13_houdx"]
 
 [sub_resource type="CircleShape2D" id="16"]
 radius = 6.08276
 
 [sub_resource type="CapsuleShape2D" id="184"]
-radius = 0.0
-height = 0.0
+height = 34.0
 
 [sub_resource type="Animation" id="147"]
 length = 0.001
@@ -53,11 +58,8 @@ _data = {
 "hit": SubResource("148")
 }
 
-[sub_resource type="SpriteFrames" id="182"]
-animations = []
-
 [sub_resource type="CircleShape2D" id="183"]
-radius = 240.033
+radius = 150.0
 
 [sub_resource type="Animation" id="185"]
 length = 0.001
@@ -76,46 +78,34 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Boss:modulate")
+tracks/1/path = NodePath("Boss:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(2.08165e-12, -30)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Boss:position")
+tracks/2/path = NodePath("ShadowSprite:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -60)]
+"update": 1,
+"values": [true]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("ShadowSprite:visible")
+tracks/3/path = NodePath("HurtBox/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("HurtBox/CollisionShape2D:disabled")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -140,7 +130,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="186"]
 resource_name = "death"
-length = 4.0
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -168,103 +158,56 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Boss:modulate")
+tracks/2/path = NodePath("ShadowSprite:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 3, 4),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("ShadowSprite:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.6),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("HurtBox/CollisionShape2D:disabled")
+tracks/4/path = NodePath("HealthBar:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("HealthBar:visible")
+tracks/5/path = NodePath("Boss:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Boss:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, -90), Vector2(0, -60)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"values": [Vector2(2.08165e-12, -45), Vector2(2.08165e-12, -30)]
 }
 
 [sub_resource type="Animation" id="187"]
 resource_name = "loop"
 length = 0.8
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -317,7 +260,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, -60), Vector2(0, -90)]
+"values": [Vector2(2.08165e-12, -30), Vector2(2.08165e-12, -45)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -359,7 +302,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.8),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, -90), Vector2(0, -60)]
+"values": [Vector2(2.08165e-12, -45), Vector2(2.08165e-12, -30)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_un06r"]
@@ -372,8 +315,69 @@ _data = {
 "transition to idle": SubResource("189")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdky5"]
+atlas = ExtResource("8_aa4cd")
+region = Rect2(0, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgpo7"]
+atlas = ExtResource("8_aa4cd")
+region = Rect2(300, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ifog"]
+atlas = ExtResource("8_aa4cd")
+region = Rect2(600, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mrtu"]
+atlas = ExtResource("8_aa4cd")
+region = Rect2(900, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48s6u"]
+atlas = ExtResource("8_aa4cd")
+region = Rect2(1200, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bxa4"]
+atlas = ExtResource("8_aa4cd")
+region = Rect2(1500, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3ftm"]
+atlas = ExtResource("8_aa4cd")
+region = Rect2(1800, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08h7e"]
+atlas = ExtResource("8_aa4cd")
+region = Rect2(2100, 0, 300, 300)
+
 [sub_resource type="SpriteFrames" id="199"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdky5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgpo7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ifog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mrtu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48s6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0bxa4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3ftm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08h7e")
+}],
+"loop": false,
+"name": &"play",
+"speed": 8.0
+}]
 
 [node name="WindBoss" type="CharacterBody2D"]
 script = ExtResource("1_a63k8")
@@ -381,21 +385,6 @@ script = ExtResource("1_a63k8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("16")
 disabled = true
-
-[node name="HurtBox" type="Area2D" parent="."]
-collision_layer = 262400
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, -49)
-shape = SubResource("184")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
-libraries = {
-"": SubResource("AnimationLibrary_qvajj")
-}
-
-[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
 [node name="Timers" type="Node" parent="."]
 
@@ -413,12 +402,13 @@ wait_time = 12.0
 [node name="ShootDirection" type="Node2D" parent="."]
 
 [node name="Marker2D" type="Marker2D" parent="ShootDirection"]
-position = Vector2(75, 0)
+position = Vector2(35, 2.08165e-12)
 
 [node name="HealthBar" type="Node2D" parent="."]
+visible = false
 z_index = 1
-position = Vector2(-19, 20)
-scale = Vector2(2.5, 3)
+position = Vector2(-10, 15)
+scale = Vector2(1.25, 1.5)
 
 [node name="Border" type="TextureRect" parent="HealthBar"]
 offset_right = 16.0
@@ -438,26 +428,28 @@ texture_progress = ExtResource("6")
 
 [node name="Boss" type="Sprite2D" parent="."]
 material = ExtResource("11")
-position = Vector2(0, -60)
-scale = Vector2(2, 2)
+position = Vector2(2.08165e-12, -30)
 texture = ExtResource("1")
 hframes = 4
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 0.435294)
-scale = Vector2(2, 2)
 texture = ExtResource("4")
 
-[node name="Electricity" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(0, -76)
-scale = Vector2(2, 2)
-sprite_frames = SubResource("182")
-animation = &"play"
-frame = 1
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 262400
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, -17)
+shape = SubResource("184")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
+libraries = {
+"": SubResource("AnimationLibrary_qvajj")
+}
 
 [node name="DetectPlayer" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 32
 
@@ -472,12 +464,38 @@ libraries = {
 [node name="UpgradePhase" type="AnimatedSprite2D" parent="."]
 visible = false
 modulate = Color(1.2, 1.2, 1.2, 1)
-position = Vector2(0, -76)
-scale = Vector2(2, 2)
+position = Vector2(0, -45)
 sprite_frames = SubResource("199")
 animation = &"play"
+frame = 7
+frame_progress = 1.0
 
-[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
+[node name="Sound" type="Node" parent="."]
+
+[node name="UpgradePhase" type="AudioStreamPlayer2D" parent="Sound"]
+position = Vector2(0, -21)
+stream = ExtResource("9_uf47h")
+
+[node name="WingFlap" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource("10_1ni4o")
+
+[node name="Attack" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource("11_t2itq")
+
+[node name="Hurt" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource("12_3fhja")
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Sound"]
+stream = ExtResource("13_houdx")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_desired_distance = 10.0
+target_desired_distance = 20.0
+path_max_distance = 10.0
+avoidance_enabled = true
+max_speed = 60.0
+
 [connection signal="timeout" from="Timers/AttackTimer" to="." method="_on_AttackTimer_timeout"]
 [connection signal="timeout" from="Timers/ChangePos" to="." method="_on_ChangePos_timeout"]
 [connection signal="timeout" from="Timers/WhirlwindTimer" to="." method="_on_WhirlwindTimer_timeout"]
+[connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]

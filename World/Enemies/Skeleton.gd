@@ -22,19 +22,16 @@ var attacking: bool = false
 var playing_sound_effect: bool = false
 var random_pos := Vector2.ZERO
 var knockback := Vector2.ZERO
-var MAX_MOVE_DISTANCE: float = 60.0
+var MAX_MOVE_DISTANCE: float = 30.0
 var cancel_attack: bool = false
 var health: int = Stats.SKELETON_HEALTH
 var STARTING_HEALTH: int = Stats.SKELETON_HEALTH
-var tornado_node = null
-var hit_projectiles = []
 
-var orbit_radius = 0
 var state = IDLE
-const KNOCKBACK_SPEED = 50
-const ACCELERATION = 90
-const FRICTION = 40
-const KNOCKBACK_AMOUNT = 35
+const KNOCKBACK_SPEED = 30
+const ACCELERATION = 45
+const FRICTION = 20
+const KNOCKBACK_AMOUNT = 20
 
 enum {
 	IDLE,
@@ -81,7 +78,7 @@ func get_random_player_pos(_player_pos):
 
 
 func move(_velocity: Vector2) -> void:
-	if tornado_node or stunned or destroyed or attacking:
+	if $EnemyTornadoState.tornado_node or stunned or destroyed or attacking:
 		return
 	elif frozen:
 		skeleton_sprite.modulate = Color("00c9ff")
@@ -105,12 +102,12 @@ func _physics_process(delta):
 		move_and_slide()
 		return
 	set_sprite_texture()
-#	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
-#		if not chasing:
-#			start_chase_state()
-#	elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
-#		if chasing:
-#			end_chase_state()
+	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
+		if not chasing:
+			start_chase_state()
+	elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
+		if chasing:
+			end_chase_state()
 	if navigation_agent.is_navigation_finished() and not aiming:
 		velocity = Vector2.ZERO
 		state = IDLE
@@ -218,51 +215,50 @@ func destroy(killed_by_player):
 	elif Util.chance(50):
 		InstancedScenes.intitiateItemDrop("arrow", position, 1)
 	animation_player.play("death")
+	$DeathAnimation.play("play")
 	destroyed = true
 	await animation_player.animation_finished
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
-	if not hit_projectiles.has(area.id):
-		if area.id != "":
-			hit_projectiles.append(area.id)
-		if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
-			$HurtBox/AnimationPlayer.play("hit")
-			$EnemyPoisonState.start(area.tool_name)
-			if state == IDLE or state == WALK:
-				start_chase_state()
-			return
-		if area.name == "SwordSwing":
-			PlayerData.player_data["skill_experience"]["sword"] += 1
-			Stats.decrease_tool_health()
-		else:
-			PlayerDataHelpers.add_skill_experience(area.tool_name)
-		if area.knockback_vector != Vector2.ZERO:
-			$KnockbackParticles.emitting = true
-			knocking_back = true
-			$Timers/KnockbackTimer.start()
-			knockback = area.knockback_vector
-			velocity = knockback * 200
-		if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
-			hit(area.tool_name)
-		if area.tool_name == "lingering tornado":
-			$EnemyTornadoState.orbit_radius = randf_range(0,20)
-			tornado_node = area
-		if area.special_ability == "fire":
-			var randomPos = Vector2(randf_range(-8,8), randf_range(-8,8))
-			InstancedScenes.initiateExplosionParticles(position+randomPos)
-			InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
-			health -= Stats.FIRE_DEBUFF_DAMAGE
-		elif area.special_ability == "ice":
-			$EnemyFrozenState.start(3)
-		elif area.special_ability == "poison":
-			$EnemyPoisonState.start("poison arrow")
-		await get_tree().create_timer(0.25).timeout
-		$KnockbackParticles.emitting = false
+	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
+		$HurtBox/AnimationPlayer.play("hit")
+		$EnemyPoisonState.start(area.tool_name)
+		if state == IDLE or state == WALK:
+			start_chase_state()
+		return
+	if area.name == "SwordSwing":
+		PlayerData.player_data["skill_experience"]["sword"] += 1
+		Stats.decrease_tool_health()
+	else:
+		PlayerDataHelpers.add_skill_experience(area.tool_name)
+	if area.knockback_vector != Vector2.ZERO:
+		$KnockbackParticles.emitting = true
+		knocking_back = true
+		$Timers/KnockbackTimer.start()
+		knockback = area.knockback_vector
+		velocity = knockback * 200
+	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
+		hit(area.tool_name)
+	if area.tool_name == "lingering tornado":
+		$EnemyTornadoState.tornado_node = area
+	if area.special_ability == "fire":
+		var randomPos = Vector2(randf_range(-8,8), randf_range(-8,8))
+		InstancedScenes.initiateExplosionParticles(position+randomPos)
+		InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
+		health -= Stats.FIRE_DEBUFF_DAMAGE
+	elif area.special_ability == "ice":
+		$EnemyFrozenState.start(3)
+	elif area.special_ability == "poison":
+		$EnemyPoisonState.start("poison arrow")
+	if area.tool_name == "arrow" or area.tool_name == "fire projectile":
+		area.destroy()
+	await get_tree().create_timer(0.25).timeout
+	$KnockbackParticles.emitting = false
 
 func start_chase_state():
 	$Timers/AttackTimer.start()
-	navigation_agent.max_speed = 125
+	navigation_agent.max_speed = 60
 	_idle_timer.stop()
 	_chase_timer.start()
 	navigation_agent.set_target_position(get_random_player_pos(Server.player_node.global_position))
@@ -271,7 +267,7 @@ func start_chase_state():
 
 func end_chase_state():
 	$Timers/AttackTimer.stop()
-	navigation_agent.max_speed = 75
+	navigation_agent.max_speed = 25
 	_chase_timer.stop()
 	_idle_timer.start()
 	chasing = false

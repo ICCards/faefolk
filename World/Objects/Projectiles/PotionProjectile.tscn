@@ -1,8 +1,21 @@
-[gd_scene load_steps=31 format=3 uid="uid://dl3qyg8hwupxv"]
+[gd_scene load_steps=105 format=3 uid="uid://dl3qyg8hwupxv"]
 
 [ext_resource type="Texture2D" uid="uid://cigfphdnphb86" path="res://Assets/Images/Forage/animal/raw egg.png" id="1"]
 [ext_resource type="Script" path="res://World/Objects/Projectiles/PotionProjectile.gd" id="1_4tjvv"]
 [ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="3_b8nqr"]
+[ext_resource type="Texture2D" uid="uid://dphuwis4tfoaa" path="res://Assets/Images/Magic/Potions/smoke5_100x100.png" id="4_aai6h"]
+[ext_resource type="Texture2D" uid="uid://c5v1dhsu08ajk" path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b1.png" id="4_cbcbn"]
+[ext_resource type="Texture2D" uid="uid://c10gldjgps3nx" path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b2.png" id="5_kv7yr"]
+[ext_resource type="Texture2D" uid="uid://dfqg6q75xn0d2" path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b3.png" id="6_ol40b"]
+[ext_resource type="Texture2D" uid="uid://cn0rn35rx7dj0" path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b4.png" id="7_6sfdq"]
+[ext_resource type="Texture2D" uid="uid://cabeydam7pgga" path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b5.png" id="8_mddh6"]
+[ext_resource type="Texture2D" uid="uid://dqu5qw3jyi4r8" path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b6.png" id="9_epk1d"]
+[ext_resource type="Texture2D" uid="uid://b0seaol4hdvkn" path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b7.png" id="10_ppodi"]
+[ext_resource type="Texture2D" uid="uid://dfp0otcr32yox" path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b8.png" id="11_edy5s"]
+[ext_resource type="Texture2D" uid="uid://c4nm2t8srjjch" path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b9.png" id="12_iq48c"]
+[ext_resource type="Texture2D" uid="uid://bsfsi2lbcqpv3" path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b10.png" id="13_p14i1"]
+[ext_resource type="Texture2D" uid="uid://27uxtcnuotxq" path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b11.png" id="14_5s5q0"]
+[ext_resource type="Texture2D" uid="uid://cxmxes615216h" path="res://Assets/Images/Magic/Potions/explosion-b/explosion-b12.png" id="15_immdv"]
 
 [sub_resource type="Curve" id="80"]
 min_value = -400.0
@@ -92,13 +105,479 @@ _data = [Vector2(0, 2.73165), 0.0, 0.0, 0, 0, Vector2(1, 1.73165), 0.0, 0.0, 0, 
 point_count = 2
 
 [sub_resource type="CircleShape2D" id="6"]
-radius = 64.0
+radius = 32.0
 
 [sub_resource type="SpriteFrames" id="7"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_cbcbn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kv7yr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ol40b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_6sfdq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mddh6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_epk1d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ppodi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_edy5s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_iq48c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_p14i1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_5s5q0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_immdv")
+}],
+"loop": false,
+"name": &"play",
+"speed": 12.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_me60s"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqhj6"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v15vj"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rllwn"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i8krc"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmj2p"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kf0qi"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(600, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r5fum"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(700, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sek4b"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3fu8"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4cbay"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(200, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8b8gr"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(300, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3h2hu"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(400, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_run0r"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(500, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vwkyv"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(600, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f57is"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(700, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mknn1"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(0, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1t5id"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(100, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xg1n5"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(200, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjnn7"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(300, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78ec5"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(400, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1udnl"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(500, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0p0ad"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(600, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fphfo"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(700, 200, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_krsb7"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(0, 300, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbdb1"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(100, 300, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvpca"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(200, 300, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_466pr"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(300, 300, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ufl0n"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(400, 300, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j8bde"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(500, 300, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ji6k"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(600, 300, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u1bii"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(700, 300, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ylk6h"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(0, 400, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5tfw"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(100, 400, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jef75"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(200, 400, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksd2f"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(300, 400, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rg40w"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(400, 400, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3742h"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(500, 400, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tku2m"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(600, 400, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ceirs"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(700, 400, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mrgn1"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(0, 500, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7r531"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(100, 500, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mx8ml"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(200, 500, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1t25f"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(300, 500, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urf0y"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(400, 500, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8w5ri"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(500, 500, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4up1k"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(600, 500, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mmgnd"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(700, 500, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wq7ro"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(0, 600, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oatcp"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(100, 600, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ly7o"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(200, 600, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cdj15"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(300, 600, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vcnw"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(400, 600, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obfdt"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(500, 600, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u78ql"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(600, 600, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ooi4u"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(700, 600, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6bob1"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(0, 700, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3p1m"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(100, 700, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrucp"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(200, 700, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_22di2"]
+atlas = ExtResource("4_aai6h")
+region = Rect2(300, 700, 100, 100)
 
 [sub_resource type="SpriteFrames" id="70"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_me60s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqhj6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v15vj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rllwn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i8krc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmj2p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kf0qi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r5fum")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sek4b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3fu8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4cbay")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8b8gr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3h2hu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_run0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vwkyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f57is")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mknn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1t5id")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xg1n5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjnn7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78ec5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1udnl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0p0ad")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fphfo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krsb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbdb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvpca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_466pr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ufl0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j8bde")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ji6k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u1bii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ylk6h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5tfw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jef75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksd2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rg40w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3742h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tku2m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ceirs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mrgn1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7r531")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mx8ml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1t25f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urf0y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8w5ri")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4up1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mmgnd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wq7ro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oatcp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ly7o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cdj15")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vcnw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obfdt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u78ql")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ooi4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6bob1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3p1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrucp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_22di2")
+}],
+"loop": false,
+"name": &"play",
+"speed": 40.0
+}]
 
 [sub_resource type="Animation" id="8"]
 resource_name = "destruction potion"
@@ -118,43 +597,43 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DestructionPotion:playing")
+tracks/1/path = NodePath("DestructionPotion:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [0]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("DestructionPotion:frame")
+tracks/2/path = NodePath("PotionHitbox/CollisionShape2D:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PotionHitbox/CollisionShape2D:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.3, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("DestructionTrailParticles/P1:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("DestructionTrailParticles/P1:emitting")
+tracks/4/path = NodePath("DestructionTrailParticles/P2:emitting")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -166,7 +645,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("DestructionTrailParticles/P2:emitting")
+tracks/5/path = NodePath("DestructionTrailParticles/P3:emitting")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -175,30 +654,32 @@ tracks/5/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/6/type = "value"
+tracks/6/type = "method"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("DestructionTrailParticles/P3:emitting")
+tracks/6/path = NodePath(".")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"values": [{
+"args": [],
+"method": &"play_glass_break_sound"
+}]
 }
 tracks/7/type = "method"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath(".")
+tracks/7/path = NodePath("DestructionPotion")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [],
-"method": &"play_glass_break_sound"
+"args": [&"play", 1.0, false],
+"method": &"play"
 }]
 }
 
@@ -346,51 +827,53 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("PoisonPotion:playing")
+tracks/4/path = NodePath("PoisonPotion:frame")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [0]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("PoisonPotion:frame")
+tracks/5/path = NodePath("PotionHitbox/CollisionShape2D:disabled")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("PotionHitbox/CollisionShape2D:disabled")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.4, 1.1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
 }
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_glass_break_sound"
+}]
+}
 tracks/7/type = "method"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath(".")
+tracks/7/path = NodePath("PoisonPotion")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [],
-"method": &"play_glass_break_sound"
+"args": [&"play", 1.0, false],
+"method": &"play"
 }]
 }
 
@@ -537,8 +1020,12 @@ tracks/6/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_83fk1"]
+length = 0.001
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_haor8"]
 _data = {
+"RESET": SubResource("Animation_83fk1"),
 "destruction potion": SubResource("8"),
 "health potion": SubResource("9"),
 "poison potion": SubResource("71"),
@@ -550,7 +1037,6 @@ _data = {
 script = ExtResource("1_4tjvv")
 
 [node name="HealthTrailParticles" type="Node2D" parent="."]
-visible = false
 
 [node name="P3" type="CPUParticles2D" parent="HealthTrailParticles"]
 modulate = Color(1.35, 1.35, 1.35, 1)
@@ -564,6 +1050,8 @@ emission_sphere_radius = 1.0
 direction = Vector2(-1, 0)
 spread = 20.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
 color = Color(1, 0.505882, 0.505882, 1)
 
 [node name="P2" type="CPUParticles2D" parent="HealthTrailParticles"]
@@ -578,6 +1066,8 @@ emission_sphere_radius = 1.0
 direction = Vector2(-1, 0)
 spread = 20.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
 color = Color(1, 0.00392157, 0.00392157, 1)
 
 [node name="P1" type="CPUParticles2D" parent="HealthTrailParticles"]
@@ -592,10 +1082,11 @@ emission_sphere_radius = 1.0
 direction = Vector2(-1, 0)
 spread = 20.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
 color = Color(0.501961, 0, 0, 1)
 
 [node name="DestructionTrailParticles" type="Node2D" parent="."]
-visible = false
 
 [node name="P3" type="CPUParticles2D" parent="DestructionTrailParticles"]
 modulate = Color(1.35, 1.35, 1.35, 1)
@@ -608,7 +1099,9 @@ emission_shape = 2
 emission_sphere_radius = 1.0
 direction = Vector2(-1, 0)
 spread = 20.0
-gravity = Vector2(0, 0)
+gravity = Vector2(0, 2.08165e-12)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
 color = Color(0.247059, 0.247059, 0.247059, 1)
 
 [node name="P2" type="CPUParticles2D" parent="DestructionTrailParticles"]
@@ -622,7 +1115,9 @@ emission_shape = 2
 emission_sphere_radius = 1.0
 direction = Vector2(-1, 0)
 spread = 20.0
-gravity = Vector2(0, 0)
+gravity = Vector2(0, 2.08165e-12)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
 color = Color(0.576471, 0.576471, 0.576471, 1)
 
 [node name="P1" type="CPUParticles2D" parent="DestructionTrailParticles"]
@@ -636,10 +1131,11 @@ emission_shape = 2
 emission_sphere_radius = 1.0
 direction = Vector2(-1, 0)
 spread = 20.0
-gravity = Vector2(0, 0)
+gravity = Vector2(0, 2.08165e-12)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
 
 [node name="PoisonTrailParticles" type="Node2D" parent="."]
-visible = false
 
 [node name="P3" type="CPUParticles2D" parent="PoisonTrailParticles"]
 modulate = Color(1.35, 1.35, 1.35, 1)
@@ -653,6 +1149,8 @@ emission_sphere_radius = 1.0
 direction = Vector2(-1, 0)
 spread = 20.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
 color = Color(0, 0.332031, 0, 1)
 
 [node name="P2" type="CPUParticles2D" parent="PoisonTrailParticles"]
@@ -667,6 +1165,8 @@ emission_sphere_radius = 1.0
 direction = Vector2(-1, 0)
 spread = 20.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
 color = Color(0.145098, 0.545098, 0.145098, 1)
 
 [node name="P1" type="CPUParticles2D" parent="PoisonTrailParticles"]
@@ -681,6 +1181,8 @@ emission_sphere_radius = 1.0
 direction = Vector2(-1, 0)
 spread = 20.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
 color = Color(0.14902, 0.937255, 0.14902, 1)
 
 [node name="SpeedTrailParticles" type="Node2D" parent="."]
@@ -697,6 +1199,8 @@ emission_sphere_radius = 1.0
 direction = Vector2(-1, 0)
 spread = 20.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
 color = Color(0.14902, 0.466667, 0.937255, 1)
 
 [node name="P2" type="CPUParticles2D" parent="SpeedTrailParticles"]
@@ -711,6 +1215,8 @@ emission_sphere_radius = 1.0
 direction = Vector2(-1, 0)
 spread = 20.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
 color = Color(0.545098, 0.701961, 0.937255, 1)
 
 [node name="P1" type="CPUParticles2D" parent="SpeedTrailParticles"]
@@ -725,6 +1231,8 @@ emission_sphere_radius = 1.0
 direction = Vector2(-1, 0)
 spread = 20.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
 color = Color(0.145098, 0.305882, 0.545098, 1)
 
 [node name="RawEggParticles" type="Node2D" parent="."]
@@ -741,6 +1249,8 @@ emission_shape = 1
 emission_sphere_radius = 3.0
 spread = 180.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
 linear_accel_curve = SubResource("80")
 scale_amount_curve = SubResource("81")
 color_ramp = SubResource("82")
@@ -758,6 +1268,8 @@ emission_sphere_radius = 1.0
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 140)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
 scale_amount_curve = SubResource("83")
 color_ramp = SubResource("82")
 
@@ -776,6 +1288,8 @@ emission_sphere_radius = 2.0
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
 linear_accel_curve = SubResource("84")
 scale_amount_curve = SubResource("85")
 color_ramp = SubResource("86")
@@ -789,12 +1303,11 @@ shape = SubResource("1")
 disabled = true
 
 [node name="ExplosionParticles" type="Node2D" parent="."]
-visible = false
 
 [node name="Explosion" type="CPUParticles2D" parent="ExplosionParticles"]
 modulate = Color(1.12, 1.12, 1.12, 1)
 emitting = false
-amount = 400
+amount = 200
 lifetime = 2.5
 one_shot = true
 speed_scale = 2.0
@@ -805,6 +1318,8 @@ emission_sphere_radius = 3.0
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
 linear_accel_curve = SubResource("73")
 scale_amount_curve = SubResource("74")
 color_ramp = SubResource("75")
@@ -812,7 +1327,7 @@ color_ramp = SubResource("75")
 [node name="Shards" type="CPUParticles2D" parent="ExplosionParticles/Explosion"]
 modulate = Color(1.12, 1.12, 1.12, 1)
 emitting = false
-amount = 200
+amount = 100
 lifetime = 2.0
 one_shot = true
 speed_scale = 2.0
@@ -823,17 +1338,18 @@ emission_sphere_radius = 1.0
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 40)
+initial_velocity_min = 15.0
+initial_velocity_max = 25.0
 linear_accel_curve = SubResource("76")
 scale_amount_curve = SubResource("77")
 color_ramp = SubResource("78")
 
 [node name="SpeedExplosionParticles" type="Node2D" parent="."]
-visible = false
 
 [node name="Explosion" type="CPUParticles2D" parent="SpeedExplosionParticles"]
 modulate = Color(1.12, 1.12, 1.12, 1)
 emitting = false
-amount = 400
+amount = 200
 lifetime = 2.5
 one_shot = true
 speed_scale = 2.0
@@ -844,14 +1360,20 @@ emission_sphere_radius = 3.0
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+angular_velocity_min = 5.0
+angular_velocity_max = 20.0
 linear_accel_curve = SubResource("2")
+radial_accel_min = 5.0
+radial_accel_max = 10.0
 scale_amount_curve = SubResource("3")
 color_ramp = SubResource("4")
 
 [node name="Shards" type="CPUParticles2D" parent="SpeedExplosionParticles/Explosion"]
 modulate = Color(1.12, 1.12, 1.12, 1)
 emitting = false
-amount = 200
+amount = 100
 lifetime = 2.0
 one_shot = true
 speed_scale = 2.0
@@ -862,13 +1384,19 @@ emission_sphere_radius = 1.0
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 40)
+initial_velocity_min = 10.0
+initial_velocity_max = 30.0
+angular_velocity_min = 5.0
+angular_velocity_max = 20.0
 linear_accel_curve = SubResource("2")
+radial_accel_min = 5.0
+radial_accel_max = 10.0
 scale_amount_curve = SubResource("5")
 color_ramp = SubResource("4")
 
 [node name="PotionHitbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 128
+collision_layer = 128
+collision_mask = 0
 script = ExtResource("3_b8nqr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PotionHitbox"]
@@ -878,20 +1406,16 @@ disabled = true
 [node name="DestructionPotion" type="AnimatedSprite2D" parent="."]
 visible = false
 modulate = Color(1.2, 1.2, 1.2, 1)
-position = Vector2(0, -10)
-scale = Vector2(2, 2)
+position = Vector2(2.08165e-12, -5)
 sprite_frames = SubResource("7")
-animation = &""
-frame = 11
+animation = &"play"
 
 [node name="PoisonPotion" type="AnimatedSprite2D" parent="."]
 visible = false
 modulate = Color(0.27, 1.2, 0, 1)
-position = Vector2(0, -16)
-scale = Vector2(2, 2)
+position = Vector2(2.08165e-12, -8)
 sprite_frames = SubResource("70")
-animation = &""
-frame = 59
+animation = &"play"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

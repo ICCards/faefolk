@@ -5,6 +5,7 @@ class_name GameState
 @export var player_state = {}
 @export var world = {}
 @export var terrain = {}
+@export var caves = {}
 ## any other object here  and the the save and load methods that needs to be save
 
 const GAME_STATE_PATH = "user://gamestate.tres"
@@ -23,9 +24,7 @@ func load_state():
 	if ResourceLoader.exists(GAME_STATE_PATH):
 		var game_State = ResourceLoader.load(GAME_STATE_PATH)
 		if game_State: #is GameState: # Check that the data is valid
-			player_state = game_State.player_state
-			world = game_State.world
-			terrain = game_State.terrain
-		PlayerData.player_data = player_state
-		MapData.world = world
-		MapData.terrain = terrain
+			PlayerData.player_data = game_State.player_state
+			MapData.world = game_State.world
+			MapData.terrain = game_State.terrain
+			MapData.caves =  game_State.caves

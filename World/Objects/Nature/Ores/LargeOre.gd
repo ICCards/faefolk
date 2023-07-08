@@ -95,11 +95,13 @@ func hit(tool_name):
 func _on_BigHurtBox_area_entered(_area):
 	if _area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	if _area.special_ability == "fire buff":
+	if _area.special_ability == "fire":
 		health -= Stats.FIRE_DEBUFF_DAMAGE
-		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-8, 8), randf_range(8,24)))
-	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff":
+		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-14, 14), randf_range(-8,8)))
+	if _area.tool_name != "lightning spell" and _area.tool_name != "lightning spell debuff" and _area.tool_name != "arrow":
 		call_deferred("hit", _area.tool_name)
+	if _area.tool_name == "arrow" or _area.tool_name == "fire projectile":
+		_area.destroy()
 
 
 func _on_small_hurt_box_area_entered(area):
@@ -107,6 +109,8 @@ func _on_small_hurt_box_area_entered(area):
 		Stats.decrease_tool_health()
 	if area.special_ability == "fire":
 		health -= Stats.FIRE_DEBUFF_DAMAGE
-		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-20, 20), randf_range(-8,16)))
-	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell":
+		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-8, 8), randf_range(-8,8)))
+	if area.tool_name != "lightning spell" and area.tool_name != "explosion spell" and area.tool_name != "arrow":
 		call_deferred("hit", area.tool_name)
+	if area.tool_name == "arrow" or area.tool_name == "fire projectile":
+		area.destroy()

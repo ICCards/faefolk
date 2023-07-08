@@ -47,6 +47,9 @@ func add_skill_experience(tool_name):
 	elif tool_name == "fire projectile":
 		PlayerData.player_data["skill_experience"]["fire"] += 1
 		check_level_up(PlayerData.player_data["skill_experience"]["fire"])
+	else:
+		PlayerData.player_data["skill_experience"]["sword"] += 1
+		check_level_up(PlayerData.player_data["skill_experience"]["sword"])
 
 func check_level_up(new_xp):
 	if new_xp == 100 or new_xp == 500 or new_xp == 1000:

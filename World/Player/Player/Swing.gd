@@ -107,7 +107,7 @@ func swing_deferred(item_name):
 		if item_name == "stone watering can" or item_name == "bronze watering can" or item_name == "gold watering can":
 			set_watered_tile()
 			animation = "watering_" + get_parent().direction.to_lower()
-			player_animation_player.play("axe pickaxe swing")
+			player_animation_player.play("watering")
 		elif item_name == "scythe":
 			player_animation_player.play("scythe_swing_" + get_parent().direction.to_lower())
 			animation = "sword_swing_" + get_parent().direction.to_lower()

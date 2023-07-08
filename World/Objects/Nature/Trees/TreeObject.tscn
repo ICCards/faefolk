@@ -12963,6 +12963,7 @@ texture = ExtResource("4_j64mt")
 offset = Vector2(2.08165e-12, -30)
 
 [node name="AnimatedTop" type="AnimatedSprite2D" parent="TreeSprites"]
+process_mode = 3
 sprite_frames = ExtResource("5_goq62")
 offset = Vector2(2.08165e-12, -28)
 

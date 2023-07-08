@@ -237,6 +237,7 @@ scale = Vector2(0.25, 0.25)
 texture_normal = ExtResource("3")
 
 [node name="TitleMusic" type="AudioStreamPlayer" parent="."]
+autoplay = true
 
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 

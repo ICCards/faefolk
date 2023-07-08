@@ -18,27 +18,29 @@ func play_level_up_sound():
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Player/skill unlocked.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 	sound_effects.play()
+	Server.player_node.composite_sprites.play_skill_unlocked()
 	set_bgs()
 
 func initialize(item_name):
 	show()
 	selected_spell = 1
-	if item_name == "wind staff":
-		selected_staff = "wind"
-	elif item_name == "fire staff":
-		selected_staff = "fire"
-	elif item_name == "earth staff":
-		selected_staff = "earth"
-	elif item_name == "ice staff":
-		selected_staff = "ice"
-	elif item_name == "dark magic staff":
-		selected_staff = "dark"
-	elif item_name == "electric staff":
-		selected_staff = "electric"
-	elif item_name == "wood sword" or item_name == "stone sword" or item_name == "bronze sword" or item_name == "iron sword" or item_name == "gold sword":
-		selected_staff = "sword"
-	elif item_name == "bow":
-		selected_staff = "bow"
+	match item_name:
+		"wind staff":
+			selected_staff = "wind"
+		"fire staff":
+			selected_staff = "fire"
+		"earth staff":
+			selected_staff = "earth"
+		"ice staff":
+			selected_staff = "ice"
+		"dark magic staff":
+			selected_staff = "dark"
+		"electric staff":
+			selected_staff = "electric"
+		"bow":
+			selected_staff = "bow"
+		_:
+			selected_staff = "sword"
 	set_selected_spell()
 	set_bgs()
 
@@ -111,6 +113,7 @@ func set_selected_spell():
 
 
 func start_spell_cooldown(spell_index):
+	get_node("Cooldown"+str(spell_index)).size = Vector2(48,48)
 	var tween = get_tree().create_tween()
 	match spell_index:
 		1:
@@ -124,7 +127,6 @@ func start_spell_cooldown(spell_index):
 
 func validate_spell_cooldown(spell_index):
 	return get_node("Cooldown"+str(spell_index)).size.y == 0 and not get_node("Bg/btn"+str(spell_index)).disabled
-
 
 func _on_btn1_pressed():
 	Sounds.play_small_select_sound()

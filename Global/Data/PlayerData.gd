@@ -4,6 +4,7 @@ var spawn_at_last_saved_location: bool = false
 var spawn_at_cave_entrance: bool = false
 var spawn_at_cave_exit: bool = false
 var spawn_at_respawn_location: bool = false
+var enter_cave_position: Vector2
 
 var normal_hotbar_mode = true
 
@@ -16,15 +17,13 @@ signal health_changed
 signal health_depleted
 signal tool_health_change
 signal active_item_updated
-signal play_wind_curse
 signal key_binding_button_changed
 
-var file_name = "res://JSONData/PlayerData.json"
+
 @onready var SlotClass = load("res://InventoryLogic/Slot.gd")
 @onready var ItemClass = load("res://InventoryLogic/InventoryItem.gd")
 
 var viewInventoryMode: bool = false
-var viewSaveAndExitMode: bool = false
 var viewMapMode: bool = false
 var interactive_screen_mode: bool = false
 
@@ -43,15 +42,14 @@ var active_item_slot_combat_hotbar = 0
 
 
 var starting_player_data = {
-	"current_save_location": null,
-	"current_save_scene" : "res://World/Overworld/Overworld.tscn",
+	"save_position": null,
 	"respawn_position": null,
-	"respawn_scene" : "res://World/Overworld/Overworld.tscn",
+	"fae_entrance_placed": false,
 	"season": "spring",
 	"day_week": "Mon.",
 	"day_number": 1,
 	"time_minutes": 0,
-	"time_hours": 6,
+	"time_hours": 10,
 	"health": 100,
 	"mana": 100,
 	"energy": 100,
@@ -62,7 +60,7 @@ var starting_player_data = {
 		"3": ["blueprint", 1, null],
 		"4": ["hammer", 1, null],
 #		"2": ["brewing table #1", 999, null],
-		"6": ["stone fishing rod", 1, null],
+		"6": ["stone hoe", 1, 100],
 #		"5": ["furnace", 10, null],
 #		"7": ["grain mill #1", 100, null],
 #		"3": ["corn", 100, null],
@@ -81,9 +79,11 @@ var starting_player_data = {
 			"16": ["grape", 999, null],
 			"15": ["bronze ingot", 999, null],
 			"4": ["iron ingot", 999, null],
-			"13": ["wood", 999, null],
-			"12": ["potato seeds", 99, null],
-			"14": ["garlic seeds", 99, null],
+		#	"13": ["wood", 999, null],
+			"12": ["oak seeds", 99, null],
+			"14": ["cherry seeds", 99, null],
+			"13": ["apple seeds", 99, null],
+			"11": ["arrow", 99, null],
 #			"15": ["pear seeds", 99, null],
 #			"10": ["evergreen seeds", 99, null],
 	#		"15": ["wheat flour", 99, null],
@@ -91,21 +91,24 @@ var starting_player_data = {
 	},
 	"combat_hotbar": {
 			"0": ["wind staff", 1, null],
+			"1": ["bow", 1, null],
+			"2": ["fire staff", 1, null],
 	},
-	"chests": {},
-	"barrels" : {},
-	"furnaces": {},
-	"brewing_tables": {},
-	"grain_mills": {},
-	"stoves": {},
-	"campfires": {},
+	"dialogue_box": {
+		"init": false,
+		"respawn": false,
+		"blueprint": false,
+		"hammer": false,
+		"caves": true
+	},
+	"ui_slots": {},
 	"skill_experience": {
 			"farming": 0,
 			"foraging": 0,
 			"fishing": 0,
 			"mining": 0,
 			"sword": 100,
-			"bow": 1,
+			"bow": 1000,
 			"dark": 0,
 			"electric": 0,
 			"earth": 0,
@@ -295,7 +298,7 @@ var starting_player_data = {
 		"volume": {
 			"music": 0.0,
 			"sound": 50.0,
-			"ambient": 0.0,
+			"ambient": 50.0,
 			"footstep": 50.0
 		}
 	}
@@ -455,18 +458,20 @@ func add_item_to_empty_slot(item, slot, id = null):
 			player_data["combat_hotbar"][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
 		SlotClass.SlotType.INVENTORY:
 			player_data["inventory"][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
-		SlotClass.SlotType.CHEST:
-			player_data["chests"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
-		SlotClass.SlotType.GRAIN_MILL:
-			player_data["grain_mills"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
-		SlotClass.SlotType.STOVE:
-			player_data["stoves"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
-		SlotClass.SlotType.FURNACE:
-			player_data["furnaces"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
-		SlotClass.SlotType.CAMPFIRE:
-			player_data["campfires"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
-		SlotClass.SlotType.BARREL:
-			player_data["barrels"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+		_:
+			player_data["ui_slots"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+#		SlotClass.SlotType.CHEST:
+#			player_data["chests"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+#		SlotClass.SlotType.GRAIN_MILL:
+#			player_data["grain_mills"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+#		SlotClass.SlotType.STOVE:
+#			player_data["stoves"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+#		SlotClass.SlotType.FURNACE:
+#			player_data["furnaces"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+#		SlotClass.SlotType.CAMPFIRE:
+#			player_data["campfires"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
+#		SlotClass.SlotType.BARREL:
+#			player_data["barrels"][id][str(slot.slot_index)] = [item.item_name, item.item_quantity, item.item_health]
 
 
 func remove_item(slot, id = null):
@@ -481,18 +486,20 @@ func remove_item(slot, id = null):
 			player_data["combat_hotbar"].erase(str(slot.slot_index))
 		SlotClass.SlotType.INVENTORY:
 			player_data["inventory"].erase(str(slot.slot_index))
-		SlotClass.SlotType.CHEST:
-			player_data["chests"][id].erase(str(slot.slot_index))
-		SlotClass.SlotType.GRAIN_MILL:
-			player_data["grain_mills"][id].erase(str(slot.slot_index))
-		SlotClass.SlotType.STOVE:
-			player_data["stoves"][id].erase(str(slot.slot_index))
-		SlotClass.SlotType.FURNACE:
-			player_data["furnaces"][id].erase(str(slot.slot_index))
-		SlotClass.SlotType.CAMPFIRE:
-			player_data["campfires"][id].erase(str(slot.slot_index))
-		SlotClass.SlotType.BARREL:
-			player_data["barrels"][id].erase(str(slot.slot_index))
+		_:
+			player_data["ui_slots"][id].erase(str(slot.slot_index))
+#		SlotClass.SlotType.CHEST:
+#			player_data["chests"][id].erase(str(slot.slot_index))
+#		SlotClass.SlotType.GRAIN_MILL:
+#			player_data["grain_mills"][id].erase(str(slot.slot_index))
+#		SlotClass.SlotType.STOVE:
+#			player_data["stoves"][id].erase(str(slot.slot_index))
+#		SlotClass.SlotType.FURNACE:
+#			player_data["furnaces"][id].erase(str(slot.slot_index))
+#		SlotClass.SlotType.CAMPFIRE:
+#			player_data["campfires"][id].erase(str(slot.slot_index))
+#		SlotClass.SlotType.BARREL:
+#			player_data["barrels"][id].erase(str(slot.slot_index))
 
 func add_item_quantity(slot, quantity_to_add: int, id = null):
 	match slot.slotType:
@@ -506,18 +513,20 @@ func add_item_quantity(slot, quantity_to_add: int, id = null):
 			player_data["combat_hotbar"].erase(str(slot.slot_index))
 		SlotClass.SlotType.INVENTORY:
 			player_data["inventory"][str(slot.slot_index)][1] += quantity_to_add
-		SlotClass.SlotType.CHEST:
-			player_data["chests"][id][str(slot.slot_index)][1] += quantity_to_add
-		SlotClass.SlotType.GRAIN_MILL:
-			player_data["grain_mills"][id][str(slot.slot_index)][1] += quantity_to_add
-		SlotClass.SlotType.STOVE:
-			player_data["stoves"][id][str(slot.slot_index)][1] += quantity_to_add
-		SlotClass.SlotType.FURNACE:
-			player_data["furnaces"][id][str(slot.slot_index)][1] += quantity_to_add
-		SlotClass.SlotType.CAMPFIRE:
-			player_data["campfires"][id][str(slot.slot_index)][1] += quantity_to_add
-		SlotClass.SlotType.BARREL:
-			player_data["barrels"][id][str(slot.slot_index)][1] += quantity_to_add
+		_:
+			player_data["ui_slots"][id][str(slot.slot_index)][1] += quantity_to_add
+#		SlotClass.SlotType.CHEST:
+#			player_data["chests"][id][str(slot.slot_index)][1] += quantity_to_add
+#		SlotClass.SlotType.GRAIN_MILL:
+#			player_data["grain_mills"][id][str(slot.slot_index)][1] += quantity_to_add
+#		SlotClass.SlotType.STOVE:
+#			player_data["stoves"][id][str(slot.slot_index)][1] += quantity_to_add
+#		SlotClass.SlotType.FURNACE:
+#			player_data["furnaces"][id][str(slot.slot_index)][1] += quantity_to_add
+#		SlotClass.SlotType.CAMPFIRE:
+#			player_data["campfires"][id][str(slot.slot_index)][1] += quantity_to_add
+#		SlotClass.SlotType.BARREL:
+#			player_data["barrels"][id][str(slot.slot_index)][1] += quantity_to_add
 			
 func decrease_item_quantity(slot, quantity_to_subtract: int, id = null):
 	match slot.slotType:
@@ -531,18 +540,20 @@ func decrease_item_quantity(slot, quantity_to_subtract: int, id = null):
 			player_data["combat_hotbar"][str(slot.slot_index)][1] -= quantity_to_subtract
 		SlotClass.SlotType.INVENTORY:
 			player_data["inventory"][str(slot.slot_index)][1] -= quantity_to_subtract
-		SlotClass.SlotType.CHEST:
-			player_data["chests"][id][str(slot.slot_index)][1] -= quantity_to_subtract
-		SlotClass.SlotType.GRAIN_MILL:
-			player_data["grain_mills"][id][str(slot.slot_index)][1] -= quantity_to_subtract
-		SlotClass.SlotType.STOVE:
-			player_data["stoves"][id][str(slot.slot_index)][1] -= quantity_to_subtract
-		SlotClass.SlotType.FURNACE:
-			player_data["furnaces"][id][str(slot.slot_index)][1] -= quantity_to_subtract
-		SlotClass.SlotType.CAMPFIRE:
-			player_data["campfires"][id][str(slot.slot_index)][1] -= quantity_to_subtract
-		SlotClass.SlotType.BARREL:
-			player_data["barrels"][id][str(slot.slot_index)][1] -= quantity_to_subtract
+		_:
+			player_data["ui_slots"][id][str(slot.slot_index)][1] -= quantity_to_subtract
+#		SlotClass.SlotType.CHEST:
+#			player_data["chests"][id][str(slot.slot_index)][1] -= quantity_to_subtract
+#		SlotClass.SlotType.GRAIN_MILL:
+#			player_data["grain_mills"][id][str(slot.slot_index)][1] -= quantity_to_subtract
+#		SlotClass.SlotType.STOVE:
+#			player_data["stoves"][id][str(slot.slot_index)][1] -= quantity_to_subtract
+#		SlotClass.SlotType.FURNACE:
+#			player_data["furnaces"][id][str(slot.slot_index)][1] -= quantity_to_subtract
+#		SlotClass.SlotType.CAMPFIRE:
+#			player_data["campfires"][id][str(slot.slot_index)][1] -= quantity_to_subtract
+#		SlotClass.SlotType.BARREL:
+#			player_data["barrels"][id][str(slot.slot_index)][1] -= quantity_to_subtract
 
 func return_resource_total(item_name):
 	var total = 0

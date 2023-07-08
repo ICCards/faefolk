@@ -1,17 +1,19 @@
 extends CharacterBody2D
 
-@onready var animation_player = $CompositeSprites/AnimationPlayer
-@onready var sword_swing = $Swing/SwordSwing
-@onready var composite_sprites = $CompositeSprites
-@onready var holding_item = $CompositeSprites/HoldingItem
-@onready var actions = $Actions
-@onready var user_interface = $Camera2D/UserInterface
-@onready var sound_effects = $Sounds/SoundEffects
+@onready var animation_player: AnimationPlayer = $CompositeSprites/AnimationPlayer
+@onready var sword_swing: Area2D = $Swing/SwordSwing
+@onready var composite_sprites: Node2D = $CompositeSprites
+@onready var holding_item: TextureRect = $CompositeSprites/HoldingItem
+@onready var actions: Node2D = $Actions
+@onready var user_interface: CanvasLayer = $Camera2D/UserInterface
+@onready var sound_effects: AudioStreamPlayer = $Sounds/SoundEffects
 
 var running = false
 var character
 var current_building_item = ""
 var running_speed_change = 1.0
+
+var load_screen_timer = 8.0
 
 @onready var state = MOVEMENT
 enum {
@@ -32,7 +34,7 @@ var cast_movement_direction = ""
 var direction = "DOWN"
 var rng = RandomNumberGenerator.new()
 var animation = "idle_down"
-var MAX_SPEED_DIRT := 12 #8
+var MAX_SPEED_DIRT := 8
 var MAX_SPEED_PATH := 9
 var DASH_SPEED := 25
 var MAX_SPEED_SWIMMING := 6
@@ -43,7 +45,6 @@ var speed_buff_active: bool = false
 var ACCELERATION := 6
 var FRICTION := 8
 var input_vector
-var is_building_world = false
 @onready var _character = load("res://Global/Data/Characters.gd")
 
 func _ready():
@@ -51,16 +52,26 @@ func _ready():
 	character.LoadPlayerCharacter("human_male")
 	PlayerData.connect("active_item_updated",Callable(self,"set_held_object"))
 	Server.player_node = self
-	if is_building_world:
-		state = DYING
-		$Camera2D/UserInterface/LoadingScreen.initialize(8)
-		await get_tree().create_timer(8.0).timeout
+	state = DYING
+	$Camera2D/UserInterface/LoadingScreen.initialize(load_screen_timer)
+	await get_tree().create_timer(load_screen_timer).timeout
 	state = MOVEMENT
 	$Camera2D/UserInterface/LoadingScreen.hide()
-	await get_tree().process_frame
 	set_held_object()
 	await get_tree().create_timer(0.25).timeout
 	Server.isLoaded = true
+	if Server.world.name == "Overworld" and not PlayerData.player_data.dialogue_box["init"]:
+		PlayerData.player_data.dialogue_box["init"] = true
+		$Camera2D/UserInterface/DialogueBox.initialize("init")
+	elif Server.world.name == "Lobby" and not PlayerData.player_data.dialogue_box["caves"]:
+		PlayerData.player_data.dialogue_box["caves"] = true
+		$Camera2D/UserInterface/DialogueBox.initialize("caves")
+	elif PlayerData.spawn_at_respawn_location and not PlayerData.player_data.dialogue_box["respawn"]:
+		PlayerData.player_data.dialogue_box["respawn"] = true
+		get_node("../Camera2D/UserInterface/DialogueBox").initialize("respawn")
+	PlayerData.spawn_at_respawn_location = false
+	PlayerData.spawn_at_cave_exit = false
+	PlayerData.spawn_at_last_saved_location = false
 
 
 func _input( event ):
@@ -102,6 +113,13 @@ func set_current_object(item_name):
 		item_category = JsonData.item_data[item_name]["ItemCategory"]
 	else:
 		item_category = null
+	# Helper dialogues
+	if item_name == "blueprint" and not PlayerData.player_data.dialogue_box["blueprint"]:
+		PlayerData.player_data.dialogue_box["blueprint"] = true
+		$Camera2D/UserInterface/DialogueBox.initialize("blueprint")
+	if item_name == "hammer" and not PlayerData.player_data.dialogue_box["hammer"]:
+		PlayerData.player_data.dialogue_box["hammer"] = true
+		$Camera2D/UserInterface/DialogueBox.initialize("hammer")
 	# Holding item
 	if Util.valid_holding_item_category(item_category):
 		holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
@@ -156,7 +174,7 @@ func set_movement_speed_change():
 
 
 func _unhandled_input(event):
-	if not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and not PlayerData.interactive_screen_mode and not PlayerData.viewMapMode and state == MOVEMENT and Sounds.current_footsteps_sound != Sounds.swimming: 
+	if not PlayerData.viewInventoryMode and not PlayerData.interactive_screen_mode and not PlayerData.viewMapMode and state == MOVEMENT and Sounds.current_footsteps_sound != Sounds.swimming: 
 		if PlayerData.normal_hotbar_mode:
 			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)):
 				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
@@ -269,7 +287,7 @@ func magic_casting_movement_state(_delta):
 
 
 func movement_state(delta):
-	if not PlayerData.viewInventoryMode and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
+	if not PlayerData.viewInventoryMode and not PlayerData.interactive_screen_mode:
 		set_movement_speed_change()
 		input_vector = Vector2.ZERO
 		if Input.is_action_pressed("move up"):
@@ -361,12 +379,15 @@ func idle_state(_direction):
 func walk_state(_direction):
 	if state == MOVEMENT:
 		animation_player.play("walk loop")
+#		if $Sounds/FootstepsSound.playing == false:
+#			print("FUCK U")
+#			$Sounds/FootstepsSound.playing = true
 		$Sounds/FootstepsSound.stream_paused = false
 		if Sounds.current_footsteps_sound != Sounds.swimming and not running:
 			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and PlayerData.normal_hotbar_mode:
 				var item_name = PlayerData.player_data["hotbar"][str(PlayerData.active_item_slot)][0]
 				var item_category = JsonData.item_data[item_name]["ItemCategory"]
-				if Util.valid_holding_item_category(item_category) or item_name == "torch":
+				if Util.valid_holding_item_category(item_category):
 					holding_item.texture = load("res://Assets/Images/inventory_icons/" + item_category + "/" + item_name + ".png")
 					holding_item.show()
 					$HoldingTorch.set_inactive()

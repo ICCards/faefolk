@@ -21,9 +21,9 @@ expand_mode = 1
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_right = 1208.0
-offset_bottom = 222.0
-scale = Vector2(0.3, 0.3)
+offset_right = 1450.0
+offset_bottom = 267.0
+scale = Vector2(0.25, 0.25)
 theme = ExtResource("2_7mxy2")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10

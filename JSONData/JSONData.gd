@@ -2,14 +2,15 @@ extends Node
 
 var item_data: Dictionary
 var crop_data: Dictionary
-var world_data: Dictionary
-#var player_data: Dictionary
+var cave_data: Dictionary
+
 
 var game_state: GameState
 
 func _ready():
 	item_data = LoadData("res://JSONData/ItemData.json")
 	crop_data = LoadData("res://JSONData/CropData.json")
+	cave_data = LoadData("res://JSONData/caves.json")
 #	if not GameState.save_exists(): # Initial launch
 #		world_data = LoadData("res://JSONData/NewWorld.json")
 #		game_state = GameState.new()

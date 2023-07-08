@@ -424,3 +424,7 @@ libraries = {
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

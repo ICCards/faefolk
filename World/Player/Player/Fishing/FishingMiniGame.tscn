@@ -74,7 +74,6 @@ collision_mask = 1048576
 shape = SubResource("1")
 
 [node name="stone fishing rod" type="Node2D" parent="."]
-visible = false
 position = Vector2(24, 83)
 
 [node name="Sprite2D" type="Sprite2D" parent="stone fishing rod"]

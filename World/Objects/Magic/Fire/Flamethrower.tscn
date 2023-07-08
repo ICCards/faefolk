@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7ykvt7pjhbqy"]
+[gd_scene load_steps=36 format=3 uid="uid://c7ykvt7pjhbqy"]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Fire/Flamethrower.gd" id="1_k5484"]
 [ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_ksujs"]
 [ext_resource type="AudioStream" uid="uid://cd8s37s0jdkhn" path="res://Assets/Sound/Sound effects/Magic/Fire/flamethrower.mp3" id="3"]
+[ext_resource type="Texture2D" uid="uid://cin18stllfebu" path="res://Assets/Images/Magic/fire/FlameThrower.png" id="4_nfi1r"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="5"]
 
 [sub_resource type="Curve" id="31"]
@@ -57,46 +58,207 @@ _data = {
 "play": SubResource("28")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hps2"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(512, 96, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uv2xj"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(640, 96, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5221r"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(0, 192, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_niy54"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(128, 192, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_516el"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(256, 192, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfp5j"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(384, 192, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qps57"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(512, 192, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vudj5"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(640, 192, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lot8x"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(0, 288, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6tkg"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(128, 288, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0upl"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(256, 288, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a32kr"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(0, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi7yt"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(128, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkn5a"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(256, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1oto"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(384, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhpuj"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(512, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1x4i"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(640, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7fog"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(0, 96, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aapod"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(128, 96, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kx6fw"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(256, 96, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hq245"]
+atlas = ExtResource("4_nfi1r")
+region = Rect2(384, 96, 128, 96)
+
 [sub_resource type="SpriteFrames" id="57"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hps2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uv2xj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5221r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_niy54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_516el")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfp5j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qps57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vudj5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lot8x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6tkg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0upl")
+}],
+"loop": true,
+"name": &"loop",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a32kr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qi7yt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkn5a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1oto")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhpuj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1x4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7fog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aapod")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kx6fw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hq245")
+}],
+"loop": false,
+"name": &"start",
+"speed": 8.0
+}]
 
 [node name="Flamethrower" type="Node2D"]
 rotation = 1.5708
 script = ExtResource("1_k5484")
 
 [node name="Fire" type="CPUParticles2D" parent="."]
-visible = false
+emitting = false
 amount = 3000
 lifetime = 1.5
 lifetime_randomness = 0.1
 emission_shape = 1
 emission_sphere_radius = 3.0
 direction = Vector2(0, -1)
-spread = 20.0
+spread = 30.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 100.0
 linear_accel_curve = SubResource("31")
 scale_amount_curve = SubResource("32")
 color_ramp = SubResource("29")
 
 [node name="Smoke" type="CPUParticles2D" parent="."]
-visible = false
 self_modulate = Color(1, 1, 1, 0.823529)
 show_behind_parent = true
+emitting = false
 amount = 450
 lifetime = 1.7
 lifetime_randomness = 0.3
 emission_shape = 1
 emission_sphere_radius = 2.0
 direction = Vector2(0, -1)
-spread = 20.0
+spread = 30.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 100.0
 linear_accel_curve = SubResource("33")
 scale_amount_curve = SubResource("34")
 color_ramp = SubResource("35")
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 264192
+collision_layer = 264192
+collision_mask = 0
 script = ExtResource("2_ksujs")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
@@ -118,10 +280,8 @@ rotation = -1.5708
 scale = Vector2(2, 2)
 sprite_frames = SubResource("57")
 animation = &"loop"
-frame = 8
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(-0.000396729, -109)
-color = Color(1, 1, 1, 0)
-energy = 0.9
+blend_mode = 2
 texture = ExtResource("5")

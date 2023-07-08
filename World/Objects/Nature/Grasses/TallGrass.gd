@@ -113,7 +113,7 @@ func _on_Area2D_area_entered(area):
 		$Area2D/CollisionShape2D.set_deferred("disabled", true)
 		$AnimationPlayer.call_deferred("play", "animate front")
 		await get_tree().create_timer(randf_range(0.0, 0.25)).timeout
-		if Util.chance(50):
+		if Util.chance(50) and biome.left(4) != "cave":
 			PlayerData.player_data["collections"]["forage"][type] += 1
 			InstancedScenes.intitiateItemDrop(type,position+Vector2(8,-6),1)
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))
@@ -134,7 +134,7 @@ func _on_BackArea2D_area_entered(area):
 		$BackArea2D/CollisionShape2D.set_deferred("disabled", true)
 		$AnimationPlayer2.call_deferred("play", "animate back")
 		await get_tree().create_timer(randf_range(0.0, 0.25)).timeout
-		if Util.chance(50):
+		if Util.chance(50) and biome.left(4) != "cave":
 			PlayerData.player_data["collections"]["forage"][type] += 1
 			InstancedScenes.intitiateItemDrop(type,position+Vector2(8,-10), 1)
 		$SoundEffects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -24))

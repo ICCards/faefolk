@@ -49,7 +49,7 @@ func craft():
 func add_to_yield_slot(item_name):
 	if not $GrainMillSlots/YieldSlot.item:
 		$GrainMillSlots/YieldSlot.initialize_item(item_name, 1, null)
-		PlayerData.player_data["grain_mills"][id]["3"] = [item_name, 1, null]
+		PlayerData.player_data["ui_slots"][id]["3"] = [item_name, 1, null]
 	else:
 		PlayerData.add_item_quantity($GrainMillSlots/YieldSlot, 1, id)
 		$GrainMillSlots/YieldSlot.item.add_item_quantity(1)

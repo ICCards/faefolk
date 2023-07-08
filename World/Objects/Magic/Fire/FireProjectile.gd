@@ -13,9 +13,8 @@ func _physics_process(delta):
 		var collision_info = move_and_collide(velocity.normalized() * delta * speed)
 
 func _ready():
-	$Projectile.play("loop")
 	if is_hostile_projectile:
-		$Hitbox.set_collision_mask(2+8+16+128)
+		$Hitbox.set_collision_layer(2+8+16+128)
 	sound_effects.stream = load("res://Assets/Sound/Sound effects/Magic/Fire/cast.mp3")
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
 	sound_effects.play()
@@ -30,8 +29,9 @@ func _ready():
 		$TrailParticles/Particles3.emitting = true
 
 func destroy():
-	if is_instance_valid(self):
-		queue_free()
+	projectile_collided()
+#	if is_instance_valid(self):
+#		queue_free()
 
 func _on_Area2D_area_entered(area):
 	projectile_collided()
@@ -59,7 +59,7 @@ func projectile_collided():
 			$Hitbox/CollisionShape2D.shape.set_deferred("radius", 80)
 			await get_tree().create_timer(0.5).timeout
 			var tween = get_tree().create_tween()
-			tween.tween_property($PointLight2D, "color", Color("00ffffff"), 0.5)
+			tween.tween_property($PointLight2D, "color", Color("ffffff00"), 0.5)
 			$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 			await $Explosion.animation_finished
 			$Explosion.hide()
@@ -70,7 +70,7 @@ func projectile_collided():
 			InstancedScenes.initiateExplosionParticles(position)
 			$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 			var tween = get_tree().create_tween()
-			tween.tween_property($PointLight2D, "color", Color("00ffffff"), 0.5)
+			tween.tween_property($PointLight2D, "color", Color("ffffff00"), 0.5)
 			await get_tree().create_timer(0.25).timeout
 		await get_tree().create_timer(1.5).timeout
 		destroy()

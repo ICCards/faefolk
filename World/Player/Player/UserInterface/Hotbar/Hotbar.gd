@@ -75,6 +75,7 @@ func update_tool_health():
 func initialize_hotbar():
 	show()
 	item = null
+	PlayerData.HotbarSlots = $HotbarSlots
 	for i in range(slots.size()):
 		if slots[i].item != null:
 			slots[i].removeFromSlot()

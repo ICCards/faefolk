@@ -32,8 +32,12 @@ func set_name_plate(selected_tab):
 func change_inventory_tab(new_tab):
 	if not find_parent("UserInterface").holding_item:
 		if new_tab == "save":
-			find_parent("UserInterface").hide_menu()
-			find_parent("UserInterface").toggle_save_and_exit()
+			if Server.world.name == "Overworld":
+				find_parent("UserInterface").hide_menu()
+				get_node("../SaveAndExit").initialize()
+			else:
+				Sounds.play_error_sound()
+				return
 		Sounds.play_small_select_sound()
 		set_tab(new_tab)
 		set_name_plate(new_tab)

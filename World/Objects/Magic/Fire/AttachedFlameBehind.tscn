@@ -1,17 +1,86 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnt2b3qwvx4ls"]
+[gd_scene load_steps=14 format=3 uid="uid://bnt2b3qwvx4ls"]
 
 [ext_resource type="AudioStream" uid="uid://u1s8jop6046i" path="res://Assets/Sound/Sound effects/Magic/Fire/fire buff.mp3" id="1"]
+[ext_resource type="Texture2D" uid="uid://y452hs0shx4c" path="res://Assets/Images/Magic/fire/FlameBehind.png" id="1_ua03p"]
 [ext_resource type="Script" path="res://World/Objects/Magic/Fire/AttachedFlameBehind.gd" id="1_xvjia"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_puq54"]
+atlas = ExtResource("1_ua03p")
+region = Rect2(0, 0, 34, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udkhx"]
+atlas = ExtResource("1_ua03p")
+region = Rect2(34, 0, 34, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lboej"]
+atlas = ExtResource("1_ua03p")
+region = Rect2(68, 0, 34, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47mht"]
+atlas = ExtResource("1_ua03p")
+region = Rect2(102, 0, 34, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v8b64"]
+atlas = ExtResource("1_ua03p")
+region = Rect2(136, 0, 34, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jwrtt"]
+atlas = ExtResource("1_ua03p")
+region = Rect2(170, 0, 34, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bt2td"]
+atlas = ExtResource("1_ua03p")
+region = Rect2(204, 0, 34, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qbeh"]
+atlas = ExtResource("1_ua03p")
+region = Rect2(238, 0, 34, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7xcp"]
+atlas = ExtResource("1_ua03p")
+region = Rect2(272, 0, 34, 48)
+
 [sub_resource type="SpriteFrames" id="30"]
-animations = []
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_puq54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_udkhx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lboej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47mht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v8b64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jwrtt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bt2td")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qbeh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7xcp")
+}],
+"loop": true,
+"name": &"loop",
+"speed": 5.0
+}]
 
 [node name="AttachedFlameBehind" type="AnimatedSprite2D"]
 modulate = Color(1.25, 1.25, 1.25, 1)
 show_behind_parent = true
-position = Vector2(0, -42)
-scale = Vector2(2, 2)
+position = Vector2(2.08165e-12, -20)
 sprite_frames = SubResource("30")
+animation = &"loop"
 script = ExtResource("1_xvjia")
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]

@@ -1,8 +1,12 @@
-[gd_scene load_steps=65 format=3 uid="uid://biuhgq4tgyqn0"]
+[gd_scene load_steps=69 format=3 uid="uid://biuhgq4tgyqn0"]
 
 [ext_resource type="Script" path="res://World/Enemies/Spider.gd" id="1_l1td4"]
 [ext_resource type="PackedScene" uid="uid://do7vd3a7rt4q5" path="res://World/Enemies/AttachedStates/SetEnemyDirection.tscn" id="2_dj35k"]
+[ext_resource type="PackedScene" uid="uid://cvfur4ra58e75" path="res://World/Enemies/AttachedStates/EnemyPoisonState.tscn" id="2_ni6hj"]
 [ext_resource type="Texture2D" uid="uid://c7pbioiyoq5hg" path="res://Assets/Images/Enemies/knockback dust.png" id="3"]
+[ext_resource type="PackedScene" uid="uid://dr88n2qik0tat" path="res://World/Enemies/AttachedStates/EnemyTornadoState.tscn" id="3_6iwsh"]
+[ext_resource type="PackedScene" uid="uid://dx8hix2epqruo" path="res://World/Enemies/AttachedStates/EnemyFrozenState.tscn" id="3_r14hf"]
+[ext_resource type="Material" uid="uid://b8xy6lgm0q7vk" path="res://Assets/Themes/Flash.tres" id="3_u146p"]
 [ext_resource type="Texture2D" uid="uid://doa6x4le23xy6" path="res://Assets/Images/Enemies/Spider/idle.png" id="3_wihmq"]
 [ext_resource type="Texture2D" uid="uid://bbybm4xho1nc8" path="res://Assets/Images/Magic/lightning/Shock_Small.png" id="4_5tpr6"]
 [ext_resource type="Texture2D" uid="uid://rpojpo2x08yt" path="res://Assets/Images/Enemies/Spider/walk.png" id="4_r0nvp"]
@@ -450,42 +454,6 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [false]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="195"]
 resource_name = "destroy"
@@ -589,7 +557,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("EnemyPoisonState/PoisonParticles/P1:emitting")
+tracks/8/path = NodePath("EnemyPoisonState/PoisonParticles/Parts3:emitting")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -601,7 +569,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("EnemyPoisonState/PoisonParticles/P2:emitting")
+tracks/9/path = NodePath("EnemyPoisonState/PoisonParticles/Parts2:emitting")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -613,10 +581,22 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("EnemyPoisonState/PoisonParticles/P3:emitting")
+tracks/10/path = NodePath("EnemyPoisonState/PoisonParticles/Parts1:emitting")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("KnockbackParticles:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -640,9 +620,25 @@ collision_layer = 0
 collision_mask = 2097251
 script = ExtResource("1_l1td4")
 
+[node name="EnemyPoisonState" parent="." instance=ExtResource("2_ni6hj")]
+
+[node name="Parts3" parent="EnemyPoisonState/PoisonParticles" index="0"]
+emitting = false
+
+[node name="Parts2" parent="EnemyPoisonState/PoisonParticles" index="1"]
+emitting = false
+
+[node name="Parts1" parent="EnemyPoisonState/PoisonParticles" index="2"]
+emitting = false
+
+[node name="EnemyFrozenState" parent="." instance=ExtResource("3_r14hf")]
+
+[node name="EnemyTornadoState" parent="." instance=ExtResource("3_6iwsh")]
+
 [node name="SetEnemyDirection" parent="." instance=ExtResource("2_dj35k")]
 
 [node name="Spider" type="AnimatedSprite2D" parent="."]
+material = ExtResource("3_u146p")
 sprite_frames = SubResource("SpriteFrames_auy8j")
 animation = &"idle down"
 autoplay = "idle down"
@@ -675,8 +671,8 @@ libraries = {
 }
 
 [node name="DetectPlayer" type="Area2D" parent="."]
-collision_layer = 32
-collision_mask = 0
+collision_layer = 0
+collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectPlayer"]
 shape = SubResource("148")
@@ -689,6 +685,7 @@ modulate = Color(1.25, 1.25, 1.25, 1)
 position = Vector2(0, -3)
 
 [node name="Explosion" type="CPUParticles2D" parent="ExplosionParticles"]
+position = Vector2(0, 3)
 emitting = false
 amount = 50
 lifetime = 0.8
@@ -700,6 +697,8 @@ emission_shape = 1
 emission_sphere_radius = 3.0
 spread = 180.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 25.0
 linear_accel_curve = SubResource("188")
 scale_amount_curve = SubResource("189")
 color_ramp = SubResource("190")
@@ -717,6 +716,8 @@ emission_sphere_radius = 1.0
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 140)
+initial_velocity_min = 10.0
+initial_velocity_max = 25.0
 scale_amount_curve = SubResource("191")
 color_ramp = SubResource("190")
 
@@ -735,6 +736,8 @@ emission_sphere_radius = 2.0
 direction = Vector2(0, 0)
 spread = 180.0
 gravity = Vector2(0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 25.0
 linear_accel_curve = SubResource("192")
 scale_amount_curve = SubResource("193")
 color_ramp = SubResource("194")
@@ -746,17 +749,17 @@ wait_time = 5.0
 autostart = true
 
 [node name="ChaseTimer" type="Timer" parent="Timers"]
-wait_time = 0.1
+wait_time = 0.25
 
 [node name="KnockbackTimer" type="Timer" parent="Timers"]
-wait_time = 0.25
+wait_time = 0.2
 one_shot = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 10.0
 path_max_distance = 10.0
 avoidance_enabled = true
-max_speed = 75.0
+max_speed = 35.0
 
 [node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
 
@@ -778,3 +781,5 @@ anim_speed_max = 1.0
 
 [connection signal="area_entered" from="HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="timeout" from="Timers/KnockbackTimer" to="." method="_on_KnockbackTimer_timeout"]
+
+[editable path="EnemyPoisonState"]

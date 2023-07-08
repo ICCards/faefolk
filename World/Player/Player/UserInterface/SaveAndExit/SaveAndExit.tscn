@@ -10,6 +10,7 @@
 [ext_resource type="Theme" uid="uid://d3voewdqos1nj" path="res://Assets/Themes/text.tres" id="8_ukmko"]
 
 [node name="SaveAndExit" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -37,6 +38,7 @@ stretch_mode = 3
 metadata/_edit_lock_ = true
 
 [node name="ExitBtn" type="TextureButton" parent="."]
+process_mode = 2
 layout_mode = 0
 offset_left = 681.0
 offset_top = 282.0
@@ -47,6 +49,7 @@ texture_normal = ExtResource("1")
 texture_pressed = ExtResource("2")
 
 [node name="SaveAndCtn" type="TextureButton" parent="."]
+process_mode = 2
 layout_mode = 0
 offset_left = 570.0
 offset_top = 294.0
@@ -57,6 +60,7 @@ texture_normal = ExtResource("5")
 texture_pressed = ExtResource("6")
 
 [node name="SaveAndExit" type="TextureButton" parent="."]
+process_mode = 2
 layout_mode = 0
 offset_left = 570.0
 offset_top = 342.0
@@ -67,6 +71,7 @@ texture_normal = ExtResource("5")
 texture_pressed = ExtResource("6")
 
 [node name="Exit" type="TextureButton" parent="."]
+process_mode = 2
 layout_mode = 0
 offset_left = 570.0
 offset_top = 390.0
@@ -79,16 +84,16 @@ texture_pressed = ExtResource("6")
 [node name="1" type="Label" parent="."]
 layout_mode = 0
 offset_left = 570.0
-offset_top = 297.0
+offset_top = 292.0
 offset_right = 1470.0
-offset_bottom = 635.0
+offset_bottom = 806.0
 scale = Vector2(0.1, 0.1)
 theme = ExtResource("8_ukmko")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 10
 theme_override_constants/shadow_outline_size = 0
-theme_override_constants/line_spacing = -28
+theme_override_constants/line_spacing = -48
 text = "Save and
 continue"
 horizontal_alignment = 1
@@ -97,16 +102,16 @@ clip_text = true
 [node name="2" type="Label" parent="."]
 layout_mode = 0
 offset_left = 570.0
-offset_top = 345.0
-offset_right = 1470.0
-offset_bottom = 685.0
+offset_top = 340.0
+offset_right = 1490.0
+offset_bottom = 770.0
 scale = Vector2(0.1, 0.1)
 theme = ExtResource("8_ukmko")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 10
 theme_override_constants/shadow_outline_size = 0
-theme_override_constants/line_spacing = -28
+theme_override_constants/line_spacing = -48
 text = "Save and
 exit"
 horizontal_alignment = 1
@@ -115,16 +120,16 @@ clip_text = true
 [node name="3" type="Label" parent="."]
 layout_mode = 0
 offset_left = 570.0
-offset_top = 393.0
+offset_top = 388.0
 offset_right = 1470.0
-offset_bottom = 733.0
+offset_bottom = 808.0
 scale = Vector2(0.1, 0.1)
 theme = ExtResource("8_ukmko")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 10
 theme_override_constants/shadow_outline_size = 0
-theme_override_constants/line_spacing = -28
+theme_override_constants/line_spacing = -48
 text = "Don't save 
 and exit"
 horizontal_alignment = 1

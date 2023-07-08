@@ -34,7 +34,7 @@ func _ready():
 
 func _input(event):
 	if Server.player_node.state == 0 and get_parent().user_interface.holding_item == null and not PlayerData.viewMapMode:
-		if event.is_action_pressed("action") and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode:
+		if event.is_action_pressed("action") and not PlayerData.viewInventoryMode:
 			if $DetectInteractiveArea.get_overlapping_areas().size() > 0:
 				for new_node in $DetectInteractiveArea.get_overlapping_areas():
 					if is_instance_valid(new_node):
@@ -268,15 +268,26 @@ func drop_inventory_items():
 
 
 func respawn():
+	if Server.world.name == "Overworld":
+		Server.player_node.user_interface.get_node("LoadingScreen").initialize(3)
+	else:
+		PlayerData.spawn_at_respawn_location = true
+		SceneChanger.goto_scene("res://World/Overworld/Overworld.tscn")
+		return
 	PlayerData.reset_player_stats()
-	get_parent().position = PlayerData.player_data["respawn_location"]*16
+	get_parent().position = PlayerData.player_data["respawn_position"]
 	get_parent().animation_player.stop()
 	get_node("../Camera2D/UserInterface").respawn()
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(3.0).timeout
 	get_node("../Area2Ds/PickupZone/CollisionShape2D").set_deferred("disabled", false) 
+	get_parent().direction = "DOWN"
 	get_parent().state = get_parent().MOVEMENT
 	get_parent().set_held_object()
 	get_node("../Magic").invisibility_active = false
+	await get_tree().create_timer(0.5).timeout
+	if not PlayerData.player_data.dialogue_box["respawn"]:
+		PlayerData.player_data.dialogue_box["respawn"] = true
+		get_node("../Camera2D/UserInterface/DialogueBox").initialize("respawn")
 
 
 func fish():
@@ -302,19 +313,16 @@ func sleep(sleeping_bag_pos):
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/save/save-game.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
 		sound_effects.play()
-		PlayerData.player_data["current_save_location"] = player_enter_position/16
-		PlayerData.player_data["current_save_scene"] = "res://World/Overworld/Overworld.tscn"
-		PlayerData.player_data["respawn_scene"] = "res://World/Overworld/Overworld.tscn"
-		PlayerData.player_data["respawn_location"] = player_enter_position/16
+		PlayerData.player_data["save_position"] = player_enter_position
+		PlayerData.player_data["respawn_position"] = player_enter_position
 		await get_tree().process_frame
 		game_state = GameState.new()
-		game_state.world_state = MapData.world
-		game_state.cave_state = MapData.caves
+		game_state.terrain = MapData.terrain
+		game_state.world = MapData.world
 		game_state.player_state = PlayerData.player_data
 		game_state.save_state()
 		get_parent().position = player_enter_position
 		get_parent().z_index = 0
-		get_parent().composite_sprites.rotation_degrees = 0
 		get_parent().state = get_parent().MOVEMENT
 
 
@@ -338,6 +346,8 @@ func show_placeable_object(item_name, item_category):
 			get_node("../").add_child(placeObject)
 		else:
 			if get_node("../PlaceObject").item_name != item_name and not has_node("../MoveObject"): # exists but item changed
+				get_node("../PlaceObject").direction_index = 0
+				get_node("../PlaceObject").variety = 1
 				get_node("../PlaceObject").item_name = item_name
 				get_node("../PlaceObject").item_category = item_category
 				get_node("../PlaceObject").initialize()

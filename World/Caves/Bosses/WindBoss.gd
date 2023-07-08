@@ -7,7 +7,7 @@ extends CharacterBody2D
 
 @onready var boss_sprite: Sprite2D = $Boss
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
+@onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
 var direction: String = "down"
 var changing_phase: bool = false
@@ -15,10 +15,8 @@ var destroyed: bool = false
 var poisoned: bool = false
 var frozen: bool = false
 var random_pos := Vector2.ZERO
-#var velocity := Vector2.ZERO
-var MAX_MOVE_DISTANCE: float = 100.0
 var changed_direction_delay: bool = false
-var health: int = Stats.WIND_BOSS
+var health: int = 500 #Stats.WIND_BOSS
 var STARTING_HEALTH: int = Stats.WIND_BOSS
 var state = IDLE
 
@@ -44,6 +42,7 @@ func _ready():
 	animation_player.play("loop")
 	$HealthBar/Progress.max_value = Stats.WIND_BOSS
 	$HealthBar/Progress.value = Stats.WIND_BOSS
+	navigation_agent.connect("velocity_computed",Callable(self,"move_deferred"))
 
 
 func _on_AttackTimer_timeout():
@@ -53,9 +52,8 @@ func attack():
 	if state != IDLE and state != TRANSITION_TO_IDLE and not destroyed and not changing_phase:
 		if state == TRANSITION_TO_FLY:
 			return
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/BirdBoss/bird attack.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
-		sound_effects.play()
+		$Sound/Attack.volume_db = Sounds.return_adjusted_sound_db("sound", -8)
+		$Sound/Attack.play()
 		$ShootDirection.look_at(Server.player_node.position)
 		var amt
 		if phase == 1:
@@ -76,7 +74,7 @@ func attack():
 			spell.is_hostile_projectile = true
 			spell.position =$ShootDirection/Marker2D.global_position
 			spell.velocity = Server.player_node.position - position
-			get_node("../../../").add_child(spell)
+			get_node("../../Projectiles").add_child(spell)
 			await get_tree().create_timer(0.5).timeout
 		elif phase == 2:
 			for i in range(3):
@@ -84,15 +82,15 @@ func attack():
 				spell.position =$ShootDirection/Marker2D.global_position
 				spell.is_hostile_projectile = true
 				spell.target = Server.player_node.position
-				get_node("../../").add_child(spell)
+				get_node("../../Projectiles").add_child(spell)
 				await get_tree().create_timer(0.5).timeout
 		else:
 			for i in range(12):
 				var spell = LingeringTornado.instantiate()
 				spell.position =$ShootDirection/Marker2D.global_position
 				spell.is_hostile_projectile = true
-				spell.target = Vector2(randf_range(15,45), randf_range(15,45))*32
-				get_node("../../").add_child(spell)
+				spell.target = get_random_target_pos()
+				get_node("../../Projectiles").add_child(spell)
 				await get_tree().create_timer(0.05).timeout
 	else:
 		var directions = ["down", "left", "right", "up"]
@@ -113,44 +111,54 @@ func set_texture():
 		ATTACK:
 			boss_sprite.texture = load("res://Assets/Images/Enemies/Bird Boss/screech/" + direction + "/body.png")
 
+func move_deferred(_velocity: Vector2) -> void:
+	call_deferred("move", _velocity)
 
 func move(_velocity: Vector2) -> void:
 	if destroyed and not changing_phase:
 		return
-	elif frozen:
-		boss_sprite.modulate = Color("00c9ff")
-		set_velocity(_velocity*0.75)
-		move_and_slide()
-		velocity = velocity
-	elif poisoned:
-		boss_sprite.modulate = Color("009000")
-		set_velocity(_velocity*0.9)
-		move_and_slide()
-		velocity = velocity
-	else:
-		boss_sprite.modulate = Color("ffffff")
-		set_velocity(_velocity)
-		move_and_slide()
-		velocity = velocity
+#	elif frozen:
+#		boss_sprite.modulate = Color("00c9ff")
+#		set_velocity(_velocity*0.75)
+#		move_and_slide()
+#		velocity = velocity
+#	elif poisoned:
+#		boss_sprite.modulate = Color("009000")
+#		set_velocity(_velocity*0.9)
+#		move_and_slide()
+#		velocity = velocity
+#	else:
+	#boss_sprite.modulate = Color("ffffff")
+	set_velocity(_velocity)
+	move_and_slide()
 
 func _physics_process(delta):
-	if destroyed:
-		return
-	$HealthBar/Progress.value = health
-	set_texture()
-	if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
-		if state == IDLE:
-			start_attack_state()
-	elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
-		if state != IDLE and state != TRANSITION_TO_IDLE:
-			end_attack_state()
-	if state == IDLE or state == TRANSITION_TO_IDLE:
-		return
-	set_direction_chase_state()
-	$ShootDirection.look_at(Server.player_node.position)
-	var direction = (random_pos - global_position).normalized()
-	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
-	move(velocity)
+	if Server.player_node:
+		if destroyed:
+			return
+		$HealthBar/Progress.value = health
+		set_texture()
+		if $DetectPlayer.get_overlapping_areas().size() >= 1 and not Server.player_node.state == 5 and not Server.player_node.get_node("Magic").invisibility_active:
+			if state == IDLE:
+				start_attack_state()
+		elif Server.player_node.state == 5 or Server.player_node.get_node("Magic").invisibility_active:
+			if state != IDLE and state != TRANSITION_TO_IDLE:
+				end_attack_state()
+		if state == IDLE or state == TRANSITION_TO_IDLE:
+			return
+		set_direction_chase_state()
+		$ShootDirection.look_at(Server.player_node.position)
+		if navigation_agent.is_navigation_finished():
+			return
+		var target = navigation_agent.get_next_path_position()
+		var move_direction = position.direction_to(target)
+		var desired_velocity = move_direction * navigation_agent.max_speed
+		var steering = (desired_velocity - velocity) * delta * 4.0
+		velocity += steering
+		navigation_agent.set_velocity(velocity)
+#		var direction = (random_pos - global_position).normalized()
+#		velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
+#		move(velocity)
 
 func set_direction_chase_state():
 	var degrees = int($ShootDirection.rotation_degrees) % 360
@@ -174,15 +182,15 @@ func set_direction_chase_state():
 			direction = "down"
 
 func hit(tool_name):
-	if tool_name == "blizzard":
-		$EnemyFrozenState.start(8)
-		return
-	elif tool_name == "ice projectile":
-		$EnemyFrozenState.start(3)
-		pass
-	elif tool_name == "lightning spell debuff":
-		#$EnemyStunnedState.start()
-		pass
+#	if tool_name == "blizzard":
+#		$EnemyFrozenState.start(8)
+#		return
+#	elif tool_name == "ice projectile":
+#		$EnemyFrozenState.start(3)
+#		pass
+#	elif tool_name == "lightning spell debuff":
+#		#$EnemyStunnedState.start()
+#		pass
 	$HurtBox/AnimationPlayer.play("hit")
 	var dmg = Stats.return_tool_damage(tool_name)
 	health -= dmg
@@ -193,9 +201,8 @@ func hit(tool_name):
 func destroy(killed_by_player):
 	if killed_by_player:
 		PlayerData.player_data["skill_experience"]["wind"] += 1
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
-		sound_effects.play()
+		$Sound/Death.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
+		$Sound/Death.play()
 		InstancedScenes.intitiateItemDrop("wind staff", position, 1)
 	destroyed = true
 	animation_player.play("death")
@@ -205,51 +212,56 @@ func destroy(killed_by_player):
 	queue_free()
 
 func _on_HurtBox_area_entered(area):
-	sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/hitEnemy.mp3")
-	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-	sound_effects.play()
+	$Sound/Hurt.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
+	$Sound/Hurt.play()
+	if area.tool_name == "arrow" or area.tool_name == "fire projectile":
+		area.destroy()
 	if state == IDLE:
 		start_attack_state()
-	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
-		$HurtBox/AnimationPlayer.play("hit")
-		$EnemyPoisonState.start(area.tool_name)
-		return
+#	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
+#		$HurtBox/AnimationPlayer.play("hit")
+#		$EnemyPoisonState.start(area.tool_name)
+#		return
 	if area.name == "SwordSwing":
+		PlayerDataHelpers.add_skill_experience("sword")
 		Stats.decrease_tool_health()
 	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 		hit(area.tool_name)
-	if area.special_ability == "fire":
-		InstancedScenes.initiateExplosionParticles(position)
-		InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position)
-		health -= Stats.FIRE_DEBUFF_DAMAGE
+#	if area.special_ability == "fire":
+#		InstancedScenes.initiateExplosionParticles(position)
+#		InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position)
+#		health -= Stats.FIRE_DEBUFF_DAMAGE
 	set_phase()
 
 func set_phase():
-	if health > 650:
+	if health > 700:
 		return
 	elif health > 350 and phase != 2:
+		phase = 2
 		play_change_phase()
 		await get_tree().create_timer(1.0).timeout
-		phase = 2
-		MAX_SPEED = 125
+		navigation_agent.max_speed = 70
 		$Timers/WhirlwindTimer.start()
 		play_whirlwind()
 	elif health < 350 and phase != 3:
+		phase = 3
 		play_change_phase()
 		await get_tree().create_timer(1.0).timeout
-		MAX_SPEED = 150
-		phase = 3
+		navigation_agent.max_speed = 80
 
 func play_change_phase():
-	animation_player.stop(false)
-	changing_phase = true
-	$UpgradePhase.show()
-	$UpgradePhase.frame = 0
-	$UpgradePhase.playing = true
-	await $UpgradePhase.animation_finished
-	animation_player.play()
-	changing_phase = false
-	$UpgradePhase.hide()
+	if not changing_phase:
+		animation_player.stop(false)
+		changing_phase = true
+		$Sound/UpgradePhase.volume_db = Sounds.return_adjusted_sound_db("sound",0)
+		$Sound/UpgradePhase.play()
+		$UpgradePhase.show()
+		$UpgradePhase.frame = 0
+		$UpgradePhase.play("play")
+		await $UpgradePhase.animation_finished
+		animation_player.play()
+		changing_phase = false
+		$UpgradePhase.hide()
 
 func play_whirlwind():
 	var spell = Whirlwind.instantiate()
@@ -271,7 +283,9 @@ func end_attack_state():
 	animation_player.play("loop")
 	
 func _on_ChangePos_timeout():
-	random_pos = Vector2(randf_range(10,40), randf_range(10,40))*32
+	$Timers/ChangePos.start(randf_range(3,5))
+	var random_pos = get_random_player_pos()
+	navigation_agent.set_target_position(random_pos)
 
 func _on_WhirlwindTimer_timeout():
 	if not changing_phase:
@@ -279,6 +293,30 @@ func _on_WhirlwindTimer_timeout():
 	
 func play_wing_flap():
 	if state != IDLE:
-		sound_effects.stream = load("res://Assets/Sound/Sound effects/Enemies/BirdBoss/wings flap.mp3")
-		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
-		sound_effects.play()
+		$Sound/WingFlap.volume_db = Sounds.return_adjusted_sound_db("sound", 4)
+		$Sound/WingFlap.play()
+
+func get_random_target_pos():
+	var locs = Tiles.nav_tiles.get_used_cells(0)
+	locs.shuffle()
+	for loc in locs:
+		if Vector2(loc).distance_to(Vector2(Server.player_node.position/16)) < 28:
+			return Vector2(loc*16)
+
+func get_random_player_pos():
+	var random1 = randf_range(20, 40)
+	var random2 = randf_range(10, 30)
+	var _player_pos = Server.player_node.position
+	if Util.chance(50):
+		random1 *= -1
+	if Util.chance(50):
+		random2 *= -1
+	random_pos = Vector2(random1, random2)
+	if Tiles.cave_wall_tiles.get_cell_atlas_coords(0,Tiles.cave_wall_tiles.local_to_map(_player_pos + random_pos)) == Vector2i(-1,-1):
+		return _player_pos + random_pos
+	elif Tiles.cave_wall_tiles.get_cell_atlas_coords(0,Tiles.cave_wall_tiles.local_to_map(_player_pos - random_pos)) == Vector2i(-1,-1):
+		return _player_pos - random_pos
+	else:
+		return _player_pos
+
+

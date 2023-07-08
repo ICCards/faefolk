@@ -149,11 +149,13 @@ hframes = 4
 frame = 3
 
 [node name="Legs" type="Sprite2D" parent="CompositeSprites"]
+visible = false
 use_parent_material = true
 position = Vector2(0, -16)
 hframes = 4
 
 [node name="HeadAtr" type="Sprite2D" parent="CompositeSprites"]
+visible = false
 use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("16")
@@ -168,6 +170,7 @@ hframes = 4
 frame = 3
 
 [node name="Pants" type="Sprite2D" parent="CompositeSprites"]
+visible = false
 use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("18")
@@ -175,6 +178,7 @@ hframes = 4
 frame = 3
 
 [node name="Shirts" type="Sprite2D" parent="CompositeSprites"]
+visible = false
 use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("19")
@@ -182,12 +186,14 @@ hframes = 4
 frame = 3
 
 [node name="Accessory" type="Sprite2D" parent="CompositeSprites"]
+visible = false
 use_parent_material = true
 position = Vector2(0, -16)
 hframes = 4
 frame = 3
 
 [node name="Shoes" type="Sprite2D" parent="CompositeSprites"]
+visible = false
 use_parent_material = true
 position = Vector2(0, -16)
 texture = ExtResource("20")
@@ -195,6 +201,7 @@ hframes = 4
 frame = 3
 
 [node name="ToolEquipped" type="Sprite2D" parent="CompositeSprites"]
+visible = false
 position = Vector2(0, -16)
 hframes = 4
 
@@ -211,35 +218,38 @@ script = ExtResource("12_ipi64")
 
 [node name="Energy" type="ColorRect" parent="EnergyManaHealth"]
 layout_mode = 0
-offset_left = 336.0
-offset_top = 379.0
-offset_right = 394.0
-offset_bottom = 437.0
+offset_left = 394.0
+offset_top = 437.0
+offset_right = 452.0
+offset_bottom = 495.0
+rotation = 3.14159
 color = Color(0.00392157, 1, 0, 1)
 
 [node name="Mana" type="ColorRect" parent="EnergyManaHealth"]
 layout_mode = 0
-offset_left = 397.0
-offset_top = 379.0
-offset_right = 455.0
-offset_bottom = 437.0
+offset_left = 455.0
+offset_top = 437.0
+offset_right = 513.0
+offset_bottom = 495.0
+rotation = 3.14159
 color = Color(0, 0.203922, 1, 1)
 
 [node name="Health" type="ColorRect" parent="EnergyManaHealth"]
 layout_mode = 0
-offset_left = 458.0
-offset_top = 379.0
-offset_right = 516.0
-offset_bottom = 437.0
+offset_left = 516.0
+offset_top = 437.0
+offset_right = 574.0
+offset_bottom = 495.0
+rotation = 3.14159
 color = Color(0.941176, 0, 0, 1)
 
 [node name="EnergyLabel" type="Label" parent="EnergyManaHealth"]
 layout_mode = 0
-offset_left = 339.0
+offset_left = 338.0
 offset_top = 397.0
-offset_right = 771.0
-offset_bottom = 581.0
-scale = Vector2(0.12, 0.12)
+offset_right = 879.0
+offset_bottom = 626.0
+scale = Vector2(0.1, 0.1)
 theme = ExtResource("14_0oqb8")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10
@@ -250,11 +260,11 @@ horizontal_alignment = 1
 
 [node name="ManaLabel" type="Label" parent="EnergyManaHealth"]
 layout_mode = 0
-offset_left = 406.0
+offset_left = 405.0
 offset_top = 397.0
-offset_right = 738.0
-offset_bottom = 581.0
-scale = Vector2(0.12, 0.12)
+offset_right = 820.0
+offset_bottom = 626.0
+scale = Vector2(0.1, 0.1)
 theme = ExtResource("14_0oqb8")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10
@@ -265,11 +275,11 @@ horizontal_alignment = 1
 
 [node name="HealthLabel" type="Label" parent="EnergyManaHealth"]
 layout_mode = 0
-offset_left = 463.0
+offset_left = 462.0
 offset_top = 397.0
-offset_right = 850.0
-offset_bottom = 581.0
-scale = Vector2(0.12, 0.12)
+offset_right = 947.0
+offset_bottom = 626.0
+scale = Vector2(0.1, 0.1)
 theme = ExtResource("14_0oqb8")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10
@@ -284,7 +294,7 @@ offset_left = 347.0
 offset_top = 374.0
 offset_right = 698.0
 offset_bottom = 435.0
-scale = Vector2(0.12, 0.12)
+scale = Vector2(0.1, 0.1)
 theme = ExtResource("14_0oqb8")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10

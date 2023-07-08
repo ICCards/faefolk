@@ -12,40 +12,63 @@ extends Node2D
 @onready var object_tiles: TileMap = $ObjectTiles
 
 var rng := RandomNumberGenerator.new()
-var thread := Thread.new()
 
 var location
 var item_name
 var direction
 var variety
-var health
 
+var opened_or_light_toggled: bool
 
+var destroyed: bool = false
 var is_player_sitting: bool = false
 
-var temp_health = 3
+var health = 3
 
 func _ready():
+	if variety:
+		variety = int(variety)
+	initialize()
+	initialize_interactive_area()
+	
+func initialize():
 	if Constants.object_atlas_tiles.keys().has(item_name):
 		if Util.isStorageItem(item_name):
 			object_tiles.set_cell(0,Vector2i(0,-1),0,Constants.object_atlas_tiles[item_name])
+		else:
+			Tiles.object_tiles.set_cell(0,location,0,Constants.object_atlas_tiles[item_name])
 	elif Constants.autotile_object_atlas_tiles.keys().has(item_name):
-		pass
+		Tiles.object_tiles.set_cells_terrain_connect(0,[location],0,Constants.autotile_object_atlas_tiles[item_name])
 	elif Constants.customizable_rotatable_object_atlas_tiles.keys().has(item_name):
 		if Util.isStorageItem(item_name):
 			object_tiles.set_cell(0,Vector2i(0,-1),0,Constants.customizable_rotatable_object_atlas_tiles[item_name][variety][direction])
+		else:
+			Tiles.object_tiles.set_cell(0,location,0,Constants.customizable_rotatable_object_atlas_tiles[item_name][variety][direction])
 	elif Constants.customizable_object_atlas_tiles.keys().has(item_name):
 		if Util.isStorageItem(item_name):
 			object_tiles.set_cell(0,location,0,Constants.customizable_object_atlas_tiles[item_name][variety])
+		else:
+			Tiles.object_tiles.set_cell(0,location,0,Constants.customizable_object_atlas_tiles[item_name][variety])
 	else:
 		if Util.isStorageItem(item_name):
 			object_tiles.set_cell(0,Vector2i(0,-1),0,Constants.rotatable_object_atlas_tiles[item_name][direction])
+		else:
+			Tiles.object_tiles.set_cell(0,location,0,Constants.rotatable_object_atlas_tiles[item_name][direction])
 	set_dimensions()
+	if item_name == "fireplace":
+		if opened_or_light_toggled:
+			interactives.turn_on_fireplace(true)
+	elif item_name == "lamp":
+		if opened_or_light_toggled:
+			interactives.turn_on_lamp(true)
+	elif item_name == "wood gate" or item_name == "stone gate" or item_name == "metal gate":
+		if opened_or_light_toggled:
+			interactives.open_gate(true)
+
 
 
 func set_dimensions():
 	rng.randomize()
-	item_name = Util.return_adjusted_item_name(item_name)
 	$Marker2D.scale = Constants.dimensions_dict[item_name]
 	if direction == "left" or direction == "right":
 		Tiles.remove_valid_tiles(location, Vector2(Constants.dimensions_dict[item_name].y, Constants.dimensions_dict[item_name].x))
@@ -62,70 +85,52 @@ func set_dimensions():
 			$Marker2D.rotation_degrees = 180
 		"right":
 			$Marker2D.rotation_degrees = 270
-	if item_name == "wood chest" or item_name == "stone chest":
+		"down":
+			$Marker2D.rotation_degrees = 0
+
+
+func initialize_interactive_area():
+	if item_name == "chest":
 		add_interactive_area_node("chest")
-		if PlayerData.player_data["chests"].has(name):
-			pass
-		else:
-			PlayerData.player_data["chests"][name] = {}
+		if opened_or_light_toggled:
+			interactives.open_chest(true)
 	elif item_name == "crate":
 		add_campfire_interactive_area_node("crate")
-		if PlayerData.player_data["chests"].has(name):
-			pass
-		else:
-			PlayerData.player_data["chests"][name] = {}
+		if opened_or_light_toggled:
+			interactives.open_crate(true)
 	elif item_name == "barrel":
 		add_campfire_interactive_area_node("barrel")
-		if PlayerData.player_data["barrels"].has(name):
-			pass
-		else:
-			PlayerData.player_data["barrels"][name] = {}
+		if opened_or_light_toggled:
+			interactives.open_barrel(true)
 	elif item_name == "lamp":
 		add_campfire_interactive_area_node("lamp")
+		if opened_or_light_toggled:
+			interactives.turn_on_lamp(true)
 	elif item_name == "fireplace":
 		add_interactive_area_node("fireplace")
+		if opened_or_light_toggled:
+			interactives.turn_on_fireplace(true)
 	elif item_name == "torch":
+		movement_collision.set_deferred("disabled", true)
 		$PointLight2D.set_deferred("enabled", true)
 	elif item_name == "campfire":
 		add_campfire_interactive_area_node("campfire")
 		$PointLight2D.set_deferred("enabled", true)
-		if PlayerData.player_data["campfires"].has(name):
-			pass
-		else:
-			PlayerData.player_data["campfires"][name] = {}
 	elif item_name == "workbench #1" or item_name == "workbench #2" or item_name == "workbench #3":
 		add_interactive_area_node("workbench",item_name.right(1))
 	elif item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
 		add_interactive_area_node("stove",item_name.right(1))
-		if PlayerData.player_data["stoves"].has(name):
-			pass
-		else:
-			PlayerData.player_data["stoves"][name] = {}
 	elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
 		add_interactive_area_node("grain mill",item_name.right(1))
-		if PlayerData.player_data["grain_mills"].has(name):
-			pass
-		else:
-			PlayerData.player_data["grain_mills"][name] = {}
 	elif item_name == "brewing table #1" or item_name == "brewing table #2" or item_name == "brewing table #3":
 		add_interactive_area_node("brewing table",item_name.right(1))
-		if PlayerData.player_data["brewing_tables"].has(name):
-			pass
-		else:
-			PlayerData.player_data["brewing_tables"][name] = {}
 	elif item_name == "furnace":
 		add_interactive_area_node("furnace")
-		if PlayerData.player_data["furnaces"].has(name):
-			pass
-		else:
-			PlayerData.player_data["furnaces"][name] = {}
 	elif item_name == "tool cabinet":
 		add_interactive_area_node(item_name)
-		if PlayerData.player_data["chests"].has(name):
-			pass
-		else:
-			PlayerData.player_data["chests"][name] = {}
-	elif item_name == "bed":
+	elif item_name == "bed" or item_name == "sleeping bag":
+		if item_name == "sleeping bag":
+			movement_collision.set_deferred("disabled",true)
 		add_bed_interactive_area_node()
 	elif item_name == "chair" or item_name == "armchair":
 		add_interactive_area_node(item_name,null,direction)
@@ -133,12 +138,21 @@ func set_dimensions():
 		movement_collision.set_deferred("disabled", true)
 	elif item_name == "wood gate" or item_name == "stone gate" or item_name == "metal gate":
 		add_door_interactive_area_node("gate")
-	elif item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
-		add_door_interactive_area_node("door")
+		if opened_or_light_toggled:
+			interactives.open_gate(true)
+	elif item_name == "fae entrance":
+		$Marker2D/HurtBox.queue_free()
+		add_cave_ladder_node()
 
+
+func add_cave_ladder_node():
+	var caveLadder = load("res://World/Caves/Objects/CaveLadder.tscn").instantiate()
+	caveLadder.position = Vector2(8,0)
+	call_deferred("add_child",caveLadder)
 
 func add_interactive_area_node(object_name,level = null,direction = null):
 	var interactiveAreaNode = InteractiveAreaNode.instantiate()
+	interactiveAreaNode.location = location
 	interactiveAreaNode.object_position = location*16
 	interactiveAreaNode.object_direction = direction
 	interactiveAreaNode.object_level = level
@@ -148,12 +162,14 @@ func add_interactive_area_node(object_name,level = null,direction = null):
 
 func add_campfire_interactive_area_node(object_name):
 	var campfireInteractiveAreaNode = CampfireInteractiveAreaNode.instantiate()
+	campfireInteractiveAreaNode.location = location
 	campfireInteractiveAreaNode.object_name = object_name
 	campfireInteractiveAreaNode.name = name
 	$Marker2D.call_deferred("add_child", campfireInteractiveAreaNode)
 	
 func add_bed_interactive_area_node():
 	var bedInteractiveAreaNode = BedInteractiveAreaNode.instantiate()
+	bedInteractiveAreaNode.location = location
 	bedInteractiveAreaNode.object_position = location*16
 	bedInteractiveAreaNode.object_name = "bed"
 	bedInteractiveAreaNode.name = name
@@ -161,6 +177,7 @@ func add_bed_interactive_area_node():
 	
 func add_door_interactive_area_node(type):
 	var doorInteractiveAreaNode = DoorInteractiveAreaNode.instantiate()
+	doorInteractiveAreaNode.location = location
 	doorInteractiveAreaNode.object_name = type
 	doorInteractiveAreaNode.name = name
 	$Marker2D.call_deferred("add_child", doorInteractiveAreaNode)
@@ -169,95 +186,57 @@ func add_door_interactive_area_node(type):
 func _on_HurtBox_area_entered(area):
 	if area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	if check_if_has_items() and temp_health != 0:
-		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Building/wood/wood hit.mp3"))
-		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound",0))
-		sound_effects.call_deferred("play")
-		$AnimationPlayer.call_deferred("play","shake")
-		temp_health -= 1
-		$ResetTempHealthTimer.call_deferred("start")
-	else:
-#		$PointLight2D.set_deferred("enabled", false)
-#		$FurnaceSmoke.call_deferred("hide")
-		if $Marker2D.has_node(str(name)):
-			$Marker2D.get_node(name+ "/CollisionShape2D").set_deferred("disabled", true)
-		$ObjectTiles.call_deferred("hide")
-		hurt_box.set_deferred("disabled", true)
-		movement_collision.set_deferred("disabled", true)
-		if item_name == "wood chest" or item_name == "stone chest" or item_name == "tool cabinet":
-			drop_items_in_chest()
-			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break wood.mp3"))
-		elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
-			drop_items_in_grain_mill()
-			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break stone.mp3"))
-		elif item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
-			drop_items_in_stove()
-			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break stone.mp3"))
-		elif item_name == "furnace":
-			drop_items_in_furnace()
-			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break stone.mp3"))
-		elif item_name == "campfire":
-			drop_items_in_campfire()
-			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break stone.mp3"))
-		else: 
-			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break wood.mp3"))
-		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -16))
-		sound_effects.call_deferred("play")
+	if Util.isStorageItem(item_name):
+		if PlayerData.player_data["ui_slots"][name].keys().size() > 0:
+			health -= 1
+			if health > 0:
+				hit()
+				return
+	destroy()
+
+
+func hit():
+	sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Building/wood/wood hit.mp3"))
+	sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound",0))
+	sound_effects.call_deferred("play")
+	$AnimationPlayer.call_deferred("play","shake")
+	$ResetHealthTimer.stop()
+	$ResetHealthTimer.start(3)
+
+
+func destroy():
+	if not destroyed:
 		var dimensions = Constants.dimensions_dict[item_name]
 		if direction == "left" or direction == "right":
 			Tiles.add_valid_tiles(location, Vector2(dimensions.y, dimensions.x))
 		else:
 			Tiles.add_valid_tiles(location, dimensions)
 		Tiles.object_tiles.erase_cell(0,location)
+		destroyed = true
+		$PointLight2D.set_deferred("enabled", false)
+		if has_node("FurnaceSmoke"):
+			get_node("FurnaceSmoke").queue_free()
+		if $Marker2D.has_node(str(name)):
+			$Marker2D.get_node(name+ "/CollisionShape2D").set_deferred("disabled", true)
+		$ObjectTiles.call_deferred("hide")
+		hurt_box.set_deferred("disabled", true)
+		movement_collision.set_deferred("disabled", true)
+		if item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3" or item_name == "furnace" or  item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
+			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break stone.mp3"))
+		else: 
+			sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/objects/break wood.mp3"))
+		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", -16))
+		sound_effects.call_deferred("play")
 		InstancedScenes.intitiateItemDrop(item_name, position, 1)
 		MapData.remove_object("placeable",name,location)
+		if Util.isStorageItem(item_name):
+			if PlayerData.player_data["ui_slots"].has(name):
+				var items = PlayerData.player_data["ui_slots"][name].values()
+				for item in items:
+					InstancedScenes.initiateInventoryItemDrop(item, position)
+				PlayerData.player_data["ui_slots"].erase(name)
 		await sound_effects.finished
-		queue_free()
-
-func check_if_has_items():
-	if item_name == "wood chest" or item_name == "stone chest" or item_name == "wood box" or item_name == "tool cabinet":
-		return PlayerData.player_data["chests"][name].keys().size() > 0
-	elif item_name == "furnace":
-		return PlayerData.player_data["furnaces"][name].keys().size() > 0
-	elif item_name == "wood barrel":
-		return PlayerData.player_data["wood_barrels"][name].keys().size() > 0
-	elif item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3":
-		return PlayerData.player_data["stoves"][name].keys().size() > 0
-	elif item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3":
-		return PlayerData.player_data["grain_mills"][name].keys().size() > 0
-	elif item_name == "campfire":
-		return PlayerData.player_data["campfires"][name].keys().size() > 0
-	return false
-
-
-func drop_items_in_campfire():
-	for item in PlayerData.player_data["campfires"][name].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["campfires"][name][item], position)
-	PlayerData.player_data["campfires"].erase(name)
-
-func drop_items_in_stove():
-	for item in PlayerData.player_data["stoves"][name].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["stoves"][name][item], position)
-	PlayerData.player_data["stoves"].erase(name)
-
-func drop_items_in_grain_mill():
-	for item in PlayerData.player_data["grain_mills"][name].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["grain_mills"][name][item], position)
-	PlayerData.player_data["grain_mills"].erase(name)
-
-func drop_items_in_chest():
-	for item in PlayerData.player_data["chests"][name].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["chests"][name][item], position)
-	PlayerData.player_data["chests"].erase(name)
-
-func drop_items_in_furnace():
-	for item in PlayerData.player_data["furnaces"][name].keys():
-		InstancedScenes.initiateInventoryItemDrop(PlayerData.player_data["furnaces"][name][item], position)
-	PlayerData.player_data["furnaces"].erase(name)
-
-
-func _on_ResetTempHealthTimer_timeout():
-	temp_health = 3
+		call_deferred("queue_free")
 
 
 func _physics_process(delta):
@@ -267,7 +246,6 @@ func _physics_process(delta):
 			if selected_hotbar_item == "hammer":
 				if $Marker2D/Btn.is_hovered():
 					Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/grabber.png"))
-
 
 func _on_btn_pressed():
 	if PlayerData.normal_hotbar_mode:
@@ -281,11 +259,14 @@ func _on_btn_pressed():
 					Tiles.add_valid_tiles(location, dimensions)
 				Tiles.object_tiles.erase_cell(0,location)
 				MapData.remove_object("placeable",name,location)
-				Server.player_node.actions.move_placeable_object({"id":name,"n":item_name,"d":direction,"v":variety,"l":location})
+				Server.player_node.actions.move_placeable_object({"id":name,"n":item_name,"d":direction,"v":variety,"l":location,"h":health,"o":opened_or_light_toggled})
 				Sounds.play_pick_up_placeable_object()
-				queue_free()
-	
+				call_deferred("queue_free")
 
 func _on_btn_mouse_exited():
 	if not Server.player_node.has_node("PlaceObject") and not Server.player_node.has_node("MoveObject"):
 		Input.set_custom_mouse_cursor(load("res://Assets/mouse cursors/cursor.png"))
+
+
+func _on_reset_health_timer_timeout():
+	health = 3

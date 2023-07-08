@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgspep13qs4jx"]
+[gd_scene load_steps=7 format=3 uid="uid://c404eye3ylbwn"]
 
 [ext_resource type="Script" path="res://World/Building/PlaceObjectPreview.gd" id="1_q80yc"]
 [ext_resource type="TileSet" uid="uid://bmjc5ou5oyowx" path="res://Assets/Tilesets/Objects/objects.tres" id="2_4p5xs"]
@@ -28,7 +28,6 @@ z_index = 2
 position = Vector2(-8, -8)
 
 [node name="TreeSeedToPlace" type="TextureRect" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0.627451)
 offset_left = -25.0
 offset_top = -121.0
@@ -39,7 +38,6 @@ mouse_filter = 2
 texture = ExtResource("4_exfva")
 
 [node name="ForageItemToPlace" type="TextureRect" parent="."]
-visible = false
 offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0

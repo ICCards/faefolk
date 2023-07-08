@@ -66,18 +66,7 @@ visible = false
 [node name="SoundEffects" type="AudioStreamPlayer" parent="."]
 
 [node name="CookTimer" type="Timer" parent="."]
-wait_time = 15.0
-
-[node name="TimerProgress" type="TextureProgressBar" parent="."]
-modulate = Color(0.513726, 0.513726, 0.513726, 1)
-layout_mode = 0
-offset_left = 441.0
-offset_top = 309.0
-offset_right = 455.0
-offset_bottom = 329.0
-scale = Vector2(3, 3)
-fill_mode = 3
-texture_progress = ExtResource("14")
+wait_time = 10.0
 
 [node name="Background" type="TextureRect" parent="."]
 layout_mode = 0
@@ -122,6 +111,9 @@ position = Vector2(461, 465)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_ru1ci")
 animation = &"new_animation"
+autoplay = "new_animation"
+frame = 7
+frame_progress = 0.572143
 
 [node name="ColorRect" type="ColorRect" parent="FireAnimatedSprite"]
 show_behind_parent = true
@@ -178,6 +170,16 @@ offset_top = 183.0
 offset_right = 939.0
 offset_bottom = 297.0
 metadata/_edit_lock_ = true
+
+[node name="TimerProgress" type="TextureProgressBar" parent="."]
+modulate = Color(0.513726, 0.513726, 0.513726, 1)
+offset_left = 441.0
+offset_top = 309.0
+offset_right = 455.0
+offset_bottom = 329.0
+scale = Vector2(3, 3)
+fill_mode = 3
+texture_progress = ExtResource("14")
 
 [connection signal="timeout" from="CookTimer" to="." method="_on_CookTimer_timeout"]
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]

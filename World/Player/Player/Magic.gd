@@ -227,6 +227,7 @@ func single_arrow_shot():
 	if get_node("../Magic").player_fire_buff:
 		arrow.is_fire_arrow = true
 	else:
+		
 		arrow.is_fire_arrow = false
 	arrow.position = $CastDirection/Marker2D.global_position
 	arrow.velocity = (get_global_mouse_position() - arrow.position).normalized()
@@ -645,7 +646,7 @@ func play_blizzard():
 func play_lingering_tornado():
 	var spell = LingeringTornado.instantiate()
 	spell.particles_transform = $CastDirection.transform
-	spell.target = get_global_mouse_position() + Vector2(0,32)
+	spell.target = get_global_mouse_position() + Vector2(0,8)
 	spell.position = $CastDirection/Marker2D.global_position
 	get_node("../../../Projectiles").call_deferred("add_child", spell)
 
@@ -708,9 +709,9 @@ func play_fire_projectile(debuff):
 func play_fire_buff():
 	var spell = FireBuffFront.instantiate()
 	spell.name = "FIREBUFF"
-	get_node("../").call_deferred("add_child", spell)
+	get_node("../CompositeSprites").call_deferred("add_child", spell)
 	var spell2 = FireBuffBehind.instantiate()
-	get_node("../").call_deferred("add_child", spell2)
+	get_node("../CompositeSprites").call_deferred("add_child", spell2)
 	player_fire_buff = true
 	await get_tree().create_timer(FIRE_BUFF_LENGTH+0.25).timeout
 	if not get_node("../").has_node("FIREBUFF"):

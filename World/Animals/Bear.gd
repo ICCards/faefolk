@@ -30,15 +30,12 @@ var knockback := Vector2.ZERO
 var state = IDLE
 var health: int = Stats.BEAR_HEALTH
 var STARTING_HEALTH: int = Stats.BEAR_HEALTH
-var MAX_MOVE_DISTANCE: float = 200.0
-var hit_projectiles = []
+var MAX_MOVE_DISTANCE: float = 60.0
 var spawn_loc: Vector2i
 
-const KNOCKBACK_SPEED = 20
+const KNOCKBACK_SPEED = 10
 const ACCELERATION = 75
 const KNOCKBACK_AMOUNT = 35
-
-var tornado_node = null
 
 enum {
 	IDLE,
@@ -51,7 +48,6 @@ enum {
 
 func _ready():
 	randomize()
-	visible = false
 	_idle_timer.set_deferred("wait_time", randf_range(5.0, 10.0))
 	_idle_timer.connect("timeout",Callable(self,"_update_pathfinding_idle"))
 	_chase_timer.connect("timeout",Callable(self,"_update_pathfinding_chase"))
@@ -121,22 +117,19 @@ func move_deferred(_velocity: Vector2) -> void:
 	call_deferred("move", _velocity)
 
 func move(_velocity: Vector2) -> void:
-	if not visible or tornado_node or stunned or attacking or destroyed or state == IDLE:
+	if not visible or $EnemyTornadoState.tornado_node or stunned or attacking or destroyed or state == IDLE:
 		return
 	if frozen:
 		set_velocity(_velocity*0.75)
 		move_and_slide()
-		velocity = velocity
 		bear_sprite.modulate = Color("00c9ff")
 	elif poisoned:
 		set_velocity(_velocity*0.9)
 		move_and_slide()
-		velocity = velocity
 		bear_sprite.modulate = Color("009000")
 	else:
 		set_velocity(_velocity)
 		move_and_slide()
-		velocity = velocity
 		bear_sprite.modulate = Color("ffffff")
 
 
@@ -241,7 +234,7 @@ func destroy(killed_by_player):
 	set_physics_process(false)
 	destroyed = true
 	if killed_by_player:
-		#MapData.remove_object("animal",name,location)
+		MapData.remove_object("animal",name,spawn_loc)
 		PlayerData.player_data["collections"]["mobs"]["bear"] += 1
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/bear/death.mp3"))
 		sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
@@ -259,43 +252,41 @@ func destroy(killed_by_player):
 	get_parent().call_deferred("queue_free")
 
 func _on_HurtBox_area_entered(area):
-	if not hit_projectiles.has(area.id):
-		if area.id != "":
-			hit_projectiles.append(area.id)
-		if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
-			bear_sprite.set_deferred("modulate", Color("009000"))
-			$HurtBox/AnimationPlayer.call_deferred("play", "hit")
-			$EnemyPoisonState.call_deferred("start", area.tool_name)
-			return
-		if area.name == "SwordSwing":
-			PlayerData.player_data["skill_experience"]["sword"] += 1
-			Stats.decrease_tool_health()
-		else:
-			PlayerDataHelpers.add_skill_experience(area.tool_name)
-		if area.knockback_vector != Vector2.ZERO:
-			$KnockbackParticles.set_deferred("emitting", true)
-			knocking_back = true
-			$Timers/KnockbackTimer.call_deferred("start")
-			knockback = area.knockback_vector
-			velocity = knockback * 200
-		if area.tool_name == "lingering tornado":
-			$EnemyTornadoState.set_deferred("orbit_radius", randf_range(0,20))
-			tornado_node = area
-		if area.special_ability == "fire":
-			var randomPos = Vector2(randf_range(-8,8), randf_range(-8,8))
-			InstancedScenes.initiateExplosionParticles(position+randomPos)
-			InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
-			health -= Stats.FIRE_DEBUFF_DAMAGE
-		elif area.special_ability == "ice":
-			bear_sprite.set_deferred("modulate", Color("00c9ff"))
-			$EnemyFrozenState.call_deferred("start", 3)
-		elif area.special_ability == "poison":
-			bear_sprite.set_deferred("modulate", Color("009000"))
-			$EnemyPoisonState.call_deferred("start", "posion arrow") 
-		if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
-			call_deferred("hit", area.tool_name)
-		await get_tree().create_timer(0.25).timeout
-		$KnockbackParticles.set_deferred("emitting", false)
+	if area.name == "PotionHitbox" and area.tool_name.substr(0,6) == "poison":
+		bear_sprite.set_deferred("modulate", Color("009000"))
+		$HurtBox/AnimationPlayer.call_deferred("play", "hit")
+		$EnemyPoisonState.call_deferred("start", area.tool_name)
+		return
+	if area.name == "SwordSwing":
+		PlayerDataHelpers.add_skill_experience("sword")
+		Stats.decrease_tool_health()
+	else:
+		PlayerDataHelpers.add_skill_experience(area.tool_name)
+	if area.knockback_vector != Vector2.ZERO:
+		$KnockbackParticles.set_deferred("emitting", true)
+		knocking_back = true
+		$Timers/KnockbackTimer.call_deferred("start")
+		knockback = area.knockback_vector
+		velocity = knockback * 200
+	if area.tool_name == "lingering tornado":
+		$EnemyTornadoState.tornado_node = area
+	if area.special_ability == "fire":
+		var randomPos = Vector2(randf_range(-6,6), randf_range(-8,0))
+		InstancedScenes.initiateExplosionParticles(position+randomPos)
+		InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
+		health -= Stats.FIRE_DEBUFF_DAMAGE
+	elif area.special_ability == "ice":
+		bear_sprite.set_deferred("modulate", Color("00c9ff"))
+		$EnemyFrozenState.call_deferred("start", 3)
+	elif area.special_ability == "poison":
+		bear_sprite.set_deferred("modulate", Color("009000"))
+		$EnemyPoisonState.call_deferred("start", "posion arrow") 
+	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
+		call_deferred("hit", area.tool_name)
+	if area.tool_name == "arrow" or area.tool_name == "fire projectile":
+		area.destroy()
+	await get_tree().create_timer(0.25).timeout
+	$KnockbackParticles.set_deferred("emitting", false)
 
 func _on_KnockbackTimer_timeout():
 	knocking_back = false
@@ -354,7 +345,7 @@ func screen_entered():
 
 func screen_exited():
 	if MapData.world[Util.return_chunk_from_location(spawn_loc)]["animal"].has(name):
-		MapData.world[Util.return_chunk_from_location(spawn_loc)]["animal"][name]["l"] = position/16
+		MapData.set_updated_animal_position(name,spawn_loc,position,{"n":"boar","l":Vector2i(position/16),"h":health})
 		if playing_sound_effect:
 			call_deferred("stop_sound_effects")
 		set_deferred("visible", false)

@@ -2,6 +2,7 @@ extends Node2D
 
 var directions = ["down", "left", "up", "right"]
 var direction_index: int = 0
+var variety = 1
 var rotation_delay: bool = false
 var variety_delay: bool = false
 var mousePos := Vector2.ZERO 
@@ -11,7 +12,7 @@ var item_category
 var moving_object: bool
 var previous_moving_object_data
 var state
-var variety = 1
+
 
 
 
@@ -39,9 +40,9 @@ func destroy():
 	name = "removing"
 	hide()
 	set_physics_process(false)
-#	if moving_object:
-#		MapData.add_object("placeable",previous_moving_object_data["id"],{"n":previous_moving_object_data["n"],"d":previous_moving_object_data["d"],"l":previous_moving_object_data["l"],"v":previous_moving_object_data["v"]})
-#		PlaceObject.place_object_in_world(previous_moving_object_data["id"], previous_moving_object_data["n"], previous_moving_object_data["d"], previous_moving_object_data["l"], previous_moving_object_data["v"], false)
+	if moving_object:
+		MapData.world[Util.return_chunk_from_location(previous_moving_object_data["l"])]["placeable"][previous_moving_object_data["id"]] = previous_moving_object_data
+		PlaceObject.place("placeable",previous_moving_object_data["id"],previous_moving_object_data)
 	call_deferred("queue_free")
 
 func destroy_and_remove_previous_object():
@@ -76,6 +77,7 @@ func _physics_process(delta):
 
 func initialize():
 	if moving_object:
+		item_name = previous_moving_object_data["n"]
 		variety = previous_moving_object_data["v"]
 		direction_index = directions.find(previous_moving_object_data["d"])
 	if item_name != "foundation" and item_name != "wall":
@@ -198,7 +200,11 @@ func place_customizable_state():
 	get_variety_index(Constants.customizable_object_atlas_tiles[item_name].keys().size())
 	$Objects.set_cell(0,Vector2i(0,0),0,Constants.customizable_object_atlas_tiles[item_name][variety])
 	$ColorIndicator.tile_size = dimensions
-	if not Tiles.validate_tiles(location, dimensions) or not Tiles.validate_foundation_tiles(location, dimensions):
+	if not Tiles.validate_tiles(location, dimensions):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+		return
+	elif not Util.isObjectPlaceableOnGround(item_name) and not Tiles.validate_foundation_tiles(location, dimensions): 
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 		return
@@ -220,7 +226,11 @@ func place_customizable_rotatable_state():
 		$ColorIndicator.tile_size = dimensions
 	else:
 		$ColorIndicator.tile_size = Vector2(dimensions.y, dimensions.x)
-	if not Tiles.validate_tiles(location, $ColorIndicator.tile_size) or not Tiles.validate_foundation_tiles(location, $ColorIndicator.tile_size):
+	if not Tiles.validate_tiles(location, $ColorIndicator.tile_size):
+		$ColorIndicator.indicator_color = "Red"
+		$ColorIndicator.set_indicator_color()
+		return
+	elif not Util.isObjectPlaceableOnGround(item_name) and not Tiles.validate_foundation_tiles(location, dimensions): 
 		$ColorIndicator.indicator_color = "Red"
 		$ColorIndicator.set_indicator_color()
 		return
@@ -321,6 +331,11 @@ func place_item_state():
 		$ColorIndicator.indicator_color = "Green"
 		$ColorIndicator.set_indicator_color()
 		if (Input.is_action_pressed("mouse_click") or Input.is_action_pressed("use tool")):
+			if item_name == "fae entrance" and not moving_object: # allow only 1 cave entrance to be placed
+				if PlayerData.player_data["fae_entrance_placed"]: 
+					return
+				else:
+					PlayerData.player_data["fae_entrance_placed"] = true
 			place_object(item_name, null, location, "placeable")
 
 func place_seed_state():
@@ -361,13 +376,13 @@ func place_object(item_name, direction, location, type, variety = null):
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 					$SoundEffects.play()
 					MapData.add_object("placeable",id,{"n":item_name,"l":location,"h":Stats.MAX_TWIG_BUILDING,"t":"twig"})
-					PlayerData.remove_material("wood", 5)
+					PlayerData.remove_material("wood", Constants.WALL_COST)
 				elif PlayerData.returnSufficentCraftingMaterial("wood", 2) and item_name == "foundation":
 					$SoundEffects.stream = Sounds.place_object
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 					$SoundEffects.play()
 					MapData.add_object("placeable",id,{"n":item_name,"l":location,"h":Stats.MAX_TWIG_BUILDING,"t":"twig"})
-					PlayerData.remove_material("wood", 2)
+					PlayerData.remove_material("wood", Constants.FOUNDATION_COST)
 				else:
 					$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/ES_Error Tone Chime 6 - SFX Producer.mp3")
 					$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
@@ -377,11 +392,13 @@ func place_object(item_name, direction, location, type, variety = null):
 				$SoundEffects.volume_db = Sounds.return_adjusted_sound_db("sound", -16)
 				$SoundEffects.play()
 				if item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
-					MapData.add_object("placeable",id, {"n":item_name,"v":variety,"l":location,"h":Stats.return_starting_door_health(item_name),"d":direction,"o":false})
+					MapData.add_object("placeable",id, {"n":item_name,"v":variety,"l":location,"h":Stats.return_max_door_health(item_name),"d":direction,"o":false})
 				elif moving_object:
 					MapData.add_object("placeable",previous_moving_object_data["id"],{"n":item_name,"d":direction,"l":location,"v":variety,"h":3,"o":false})
 					Server.player_node.actions.destroy_moveable_object()
 				else:
+					if Util.isStorageItem(item_name):
+						PlayerData.player_data["ui_slots"][id] = {}
 					MapData.add_object("placeable",id,{"n":item_name,"d":direction,"l":location,"v":variety,"h":3,"o":false})
 		elif type == "tree":
 			$SoundEffects.stream = load("res://Assets/Sound/Sound effects/Farming/place seed.mp3")

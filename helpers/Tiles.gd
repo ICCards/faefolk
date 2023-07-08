@@ -1,6 +1,7 @@
 extends Node
 
 var valid_tiles: TileMap = null
+var nav_tiles: TileMap = null
 var path_tiles: TileMap = null
 var hoed_tiles: TileMap = null
 var watered_tiles: TileMap = null
@@ -16,7 +17,9 @@ var object_tiles: TileMap = null
 var fence_tiles: TileMap = null
 var light_tiles: TileMap = null
 var wet_sand_tiles: TileMap = null
+
 var cave_wall_tiles: TileMap = null
+var cave_water_tiles: TileMap = null
 
 var rng = RandomNumberGenerator.new()
 
@@ -300,52 +303,55 @@ func validate_foundation_tiles(location, dimensions):
 
 
 func isValidNavigationTile(loc) -> bool:
-	if Server.world.name == "Overworld":
-		if wet_sand_tiles.get_cell_atlas_coords(0,loc) != Vector2i(-1,-1) and deep_ocean_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
-			return true
-		elif valid_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
-			return false
-		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1):
-			return false
-		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
-			return false
-		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1):
-			return false
-		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
-			return false
-		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1):
-			return false
-		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
-			return false
-		return true
-	else:
-		if valid_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
-			return false
-		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1):
-			return false
-		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
-			return false
-		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1):
-			return false
-		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
-			return false
-		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(1,0)) == Vector2i(-1,-1):
-			return false
-		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,1)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2(0,-1)) == Vector2i(-1,-1):
-			return false
-		return true
+#	if Server.world.name == "Overworld":
+#		if wet_sand_tiles.get_cell_atlas_coords(0,loc) != Vector2i(-1,-1) and deep_ocean_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
+#			return true
+	if valid_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
+		return false
+	return true
+#		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(0,1)) == Vector2i(-1,-1):
+#			return false
+#		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(0,-1)) == Vector2i(-1,-1):
+#			return false
+#		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(0,1)) == Vector2i(-1,-1):
+#			return false
+#		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(0,-1)) == Vector2i(-1,-1):
+#			return false
+#		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(1,0)) == Vector2i(-1,-1):
+#			return false
+#		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(0,1)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(0,-1)) == Vector2i(-1,-1):
+#			return false
+#		return true
+#	else:
+#		if valid_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
+#			return false
+#		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(0,1)) == Vector2i(-1,-1):
+#			return false
+#		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(0,-1)) == Vector2i(-1,-1):
+#			return false
+#		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(0,1)) == Vector2i(-1,-1):
+#			return false
+#		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(0,-1)) == Vector2i(-1,-1):
+#			return false
+#		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(-1,0)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(1,0)) == Vector2i(-1,-1):
+#			return false
+#		elif valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(0,1)) == Vector2i(-1,-1) and valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(0,-1)) == Vector2i(-1,-1):
+#			return false
+#		return true
 
 func remove_valid_tiles(location, dimensions = Vector2i(1,1)):
 	location = Vector2i(location.x,location.y)
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
 			valid_tiles.erase_cell(0,location+Vector2i(x,-y))
+			nav_tiles.erase_cell(0,location+Vector2i(x,-y))
 
 func add_valid_tiles(location, dimensions = Vector2i(1,1)):
 	location = Vector2i(location.x,location.y)
 	for x in range(dimensions.x):
 		for y in range(dimensions.y):
 			valid_tiles.set_cell(0,location+Vector2i(x,-y),0,Constants.VALID_TILE_ATLAS_CORD,0)
+			nav_tiles.set_cell(0,location+Vector2i(x,-y),0,Constants.VALID_TILE_ATLAS_CORD,0)
 
 func add_navigation_tiles(location, dimensions = Vector2i(1,1)):
 	location = Vector2i(location.x,location.y)

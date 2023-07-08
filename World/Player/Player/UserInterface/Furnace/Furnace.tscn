@@ -86,9 +86,6 @@ offset_top = 117.0
 offset_right = 917.0
 offset_bottom = 192.0
 
-[node name="Label" parent="MenuTitle" index="1"]
-text = "Furnace"
-
 [node name="ExitBtn" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 918.0
@@ -147,6 +144,7 @@ position = Vector2(461, 465)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("1")
 animation = &"new_animation"
+autoplay = "new_animation"
 
 [node name="ColorRect" type="ColorRect" parent="FireAnimatedSprite"]
 show_behind_parent = true
@@ -193,5 +191,4 @@ metadata/_edit_lock_ = true
 [connection signal="pressed" from="ExitBtn" to="." method="_on_ExitBtn_pressed"]
 [connection signal="timeout" from="CookTimer" to="." method="_on_CookTimer_timeout"]
 
-[editable path="MenuTitle"]
 [editable path="FurnaceSlots"]

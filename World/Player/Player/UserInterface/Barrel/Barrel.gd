@@ -16,14 +16,14 @@ func destroy():
 	queue_free()
 
 func _physics_process(delta):
-#	if hovered_item and not find_parent("UserInterface").holding_item:
-#		$ItemDescription.show()
-#		$ItemDescription.item_category = JsonData.item_data[hovered_item]["ItemCategory"]
-#		$ItemDescription.item_name = hovered_item
-#		$ItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
-#		$ItemDescription.initialize()
-#	else:
-#		$ItemDescription.hide()
+	if hovered_item and not find_parent("UserInterface").holding_item:
+		$ItemDescription.show()
+		$ItemDescription.item_category = JsonData.item_data[hovered_item]["ItemCategory"]
+		$ItemDescription.item_name = hovered_item
+		$ItemDescription.position = get_local_mouse_position() + Vector2(20 , 25)
+		$ItemDescription.initialize()
+	else:
+		$ItemDescription.hide()
 	if $CookTimer.time_left == 0:
 		return 
 	else:
@@ -57,7 +57,7 @@ func check_valid_recipe():
 	
 func start_cooking():
 	is_cooking_active = true
-	$CookTimer.start(30)
+	$CookTimer.start(100)
 
 func stop_cooking():
 	is_cooking_active = false
@@ -66,7 +66,7 @@ func stop_cooking():
 
 
 func _on_cook_timer_timeout():
-	if ingredient_slot.item.item_quantity >= 5 and PlayerData.player_data["barrels"].has(id):
+	if ingredient_slot.item.item_quantity >= 5 and PlayerData.player_data["ui_slots"].has(id):
 		add_to_yield_slot()
 		remove_ingredients()
 		check_valid_recipe()
@@ -76,7 +76,7 @@ func add_to_yield_slot():
 	PlayerData.player_data["collections"]["food"]["wine"] += 1
 	if not yield_slot.item:
 		yield_slot.initialize_item("wine", 1, null)
-		PlayerData.player_data["barrels"][id]["1"] = ["wine",1,null]
+		PlayerData.player_data["ui_slots"][id]["1"] = ["wine",1,null]
 	else:
 		PlayerData.add_item_quantity(yield_slot,1,id)
 		yield_slot.item.add_item_quantity(1)

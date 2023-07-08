@@ -101,6 +101,7 @@ func _on_PlayBtn_pressed():
 #		if MapData.world["is_built"]:
 #			SceneChanger.goto_scene(PlayerData.player_data["current_save_scene"])
 #		else:
+		PlayerData.spawn_at_last_saved_location = true
 		SceneChanger.goto_scene("res://World/Overworld/Overworld.tscn")
 
 

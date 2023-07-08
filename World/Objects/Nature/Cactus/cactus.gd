@@ -10,3 +10,8 @@ func _ready():
 	else:
 		$AnimatedSprite2D.position = Vector2(0,-22)
 	$AnimatedSprite2D.play(str(variety))
+
+
+func _on_hurt_box_area_entered(area):
+	if area.tool_name == "arrow" or area.tool_name == "fire projectile":
+		area.destroy()

@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
 var is_hostile_projectile: bool = false
-var speed = 125
+var speed = 100
 var target 
 var particles_transform
 
@@ -16,7 +16,7 @@ func _physics_process(delta):
 
 func _ready():
 	if is_hostile_projectile:
-		$Hitbox.set_collision_mask(128+2048+8+16)
+		$Hitbox.set_collision_layer(128+2048+8+16)
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
 	sound_effects.play()
 	$Hitbox.tool_name = "lingering tornado"
@@ -65,6 +65,7 @@ func fade_out():
 	stop_trail_particles()
 	var tween = get_tree().create_tween()
 	tween.tween_property(sound_effects, "volume_db", -80, 3.0)
-	tween.tween_property($PointLight2D, "color", Color("00ffffff"), 3.0)
+#	var tween2 = get_tree().create_tween()
+#	tween2.tween_property($PointLight2D, "energy", 0.5, 3.0)
 	await get_tree().create_timer(3.0).timeout
 	call_deferred("queue_free")

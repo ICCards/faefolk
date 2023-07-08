@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://m0o5qh6dwrah"
+path="res://.godot/imported/ES_Back to Business - William Benckert (1).mp3-9171003af18d2d024e05c6c91705334e.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/music/ES_Back to Business - William Benckert (1).mp3"
+dest_files=["res://.godot/imported/ES_Back to Business - William Benckert (1).mp3-9171003af18d2d024e05c6c91705334e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

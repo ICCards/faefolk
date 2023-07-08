@@ -90,7 +90,7 @@ func _physics_process(delta):
 				if ($GameProgress.value >= 999):
 					caught_fish()
 			else:
-				get_node(fishing_rod_level).modulate = Color("7dffffff")
+				get_node(fishing_rod_level).modulate = Color("ffffff7d")
 				$GameProgress.value -= 195 * delta
 				if ($GameProgress.value <= 0):
 					lost_fish()

@@ -29,7 +29,7 @@ enum Tiles {
 
 
 func _input(event):
-	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and not PlayerData.viewSaveAndExitMode and has_node("/root/Overworld"):
+	if not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode and has_node("/root/Overworld"):
 		if event.is_action_pressed("open map"):
 			Server.player_node.actions.destroy_placeable_object()
 			Server.world.get_node("WorldAmbience").call_deferred("hide")

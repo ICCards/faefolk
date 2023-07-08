@@ -90,9 +90,9 @@ color = Color(0.247059, 0.109804, 0.0627451, 1)
 layout_mode = 0
 offset_left = 321.0
 offset_top = 171.0
-offset_right = 1251.0
-offset_bottom = 1611.0
-scale = Vector2(0.3, 0.3)
+offset_right = 1437.0
+offset_bottom = 1903.0
+scale = Vector2(0.25, 0.25)
 theme = ExtResource("11_dnnw6")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 6
@@ -102,5 +102,3 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="pressed" from="ExitBtn" to="." method="_on_exit_btn_pressed"]
-
-[editable path="MenuTitle"]

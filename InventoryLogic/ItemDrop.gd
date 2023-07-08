@@ -28,6 +28,8 @@ func initItemDropType(_item_name, _quantity = 1, _health = null):
 
 func _ready():
 	rng.randomize()
+	$Timer.wait_time = rng.randi_range(90,100)
+	$Timer.start()
 	itemSprite.set_deferred("texture", load("res://Assets/Images/inventory_icons/" + JsonData.item_data[item_name]["ItemCategory"] + "/" + item_name + ".png"))
 	if item_quantity == 1:
 		itemQuantity.call_deferred("hide")
@@ -82,3 +84,7 @@ func _physics_process(_delta):
 func pick_up_item(body):
 	player = body
 	being_picked_up = true
+
+
+func _on_timer_timeout():
+	call_deferred("queue_free")

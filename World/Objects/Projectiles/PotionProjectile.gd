@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@onready var Duck = load("res://World/Animals/Duck.tscn")
+@onready var Mob = load("res://World/Enemies/mob.tscn")
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 var _uuid = load("res://helpers/UUID.gd")
 
@@ -85,10 +85,10 @@ func spawn_duck():
 			var uuid = _uuid.new()
 			var id = uuid.v4()
 			var variety = rng.randi_range(1,3)
-			MapData.world["animal"][id] = {"l":global_position/32,"n":"duck","v":variety,"h":Stats.DUCK_HEALTH}
-			var duck = Duck.instantiate()
-			duck.name = id
-			duck.health = Stats.DUCK_HEALTH
-			duck.variety = variety 
-			duck.global_position = global_position
-			Server.world.get_node("Enemies").call_deferred("add_child", duck)
+			var loc = Vector2i(global_position/32,)
+			var chunk = Util.return_chunk_from_location(loc)
+			MapData.world[chunk]["animal"][id] = {"l":loc,"n":"duck","v":variety,"h":Stats.DUCK_HEALTH}
+			var mob = Mob.instantiate()
+			mob.id = id
+			mob.chunk = chunk
+			Server.world.get_node("Enemies").call_deferred("add_child", mob)

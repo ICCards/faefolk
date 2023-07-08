@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dgtupng24b2k"]
+[gd_scene load_steps=37 format=3 uid="uid://dgtupng24b2k"]
 
 [ext_resource type="Script" path="res://World/Objects/Nature/Forage/ForageItem.gd" id="1_43ob6"]
 [ext_resource type="Texture2D" uid="uid://8dj2tnwugqc0" path="res://Assets/Images/Forage/clam/blue clam.png" id="2_4tgp7"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://dlur3nqia2gjf" path="res://Assets/Images/Animations/Flowers/tulip.png" id="7_dejqu"]
 
 [sub_resource type="CircleShape2D" id="2"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lfps0"]
 radius = 8.0
 
 [sub_resource type="CircleShape2D" id="3"]
@@ -223,6 +226,7 @@ collision_mask = 0
 script = ExtResource("1_43ob6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(1.2, 1.2, 1.2, 1)
 texture = ExtResource("2_4tgp7")
 
@@ -233,12 +237,26 @@ collision_layer = 3
 shape = SubResource("2")
 disabled = true
 
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(0, -2)
+collision_layer = 0
+collision_mask = 262400
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_lfps0")
+disabled = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("3")
 
 [node name="AnimatedFlower" type="AnimatedSprite2D" parent="."]
+process_mode = 3
 modulate = Color(1.2, 1.2, 1.2, 1)
 sprite_frames = SubResource("9")
 animation = &"dandelion"
 frame = 1
 frame_progress = 0.29993
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

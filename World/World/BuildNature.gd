@@ -13,8 +13,9 @@ var placeable_thread := Thread.new()
 var remove_placeable_thread := Thread.new()
 var crop_thread := Thread.new()
 var current_chunks = []
+var old_navigation_locs = []
+var new_navigation_locs = []
 
-@onready var navTiles: TileMap = get_node("../../TerrainTiles/NavigationTiles")
 @onready var GrassObjects = get_node("../../GrassObjects")
 @onready var NatureObjects = get_node("../../NatureObjects")
 @onready var ForageObjects = get_node("../../ForageObjects")
@@ -23,10 +24,7 @@ var current_chunks = []
 
 func initialize():
 	place_farming_tiles()
-#	placeable_thread.start(Callable(self,"whoAmIPlaceable").bind(null))
-#	crop_thread.start(Callable(self,"whoAmICrop").bind(null))
 	$SpawnNatureTimer.start()
-
 
 
 func place_farming_tiles():
@@ -35,7 +33,6 @@ func place_farming_tiles():
 			get_node("../../FarmingTiles/HoedTiles").set_cells_terrain_connect(0,[loc],0,0)
 			if MapData.world[chunk]["tile"][loc] == "w":
 				get_node("../../FarmingTiles/WateredTiles").set_cells_terrain_connect(0,[loc],0,0)
-
 
 func whoAmIPlaceable(value):
 	call_deferred("spawn_placeables")
@@ -64,42 +61,40 @@ func spawn_forage():
 func spawn_placeables():
 	for chunk in current_chunks:
 		if Server.world.is_changing_scene:
-			var value = forage_thread.wait_to_finish()
+			var value = placeable_thread.wait_to_finish()
 			return
 		var map = MapData.world[chunk]
 		for id in map["placeable"]:
+			var player_loc = Server.player_node.position / 16
 			if not PlaceableObjects.has_node(str(id)) and MapData.world[chunk]["placeable"].has(id):
 				PlaceObject.place("placeable",id,map["placeable"][id])
-#			var item_name = map["placeable"][id]["n"]
-#			var location = map["placeable"][id]["l"]
-#			var variety = map["placeable"][id]["v"]
-#			var direction = map["placeable"][id]["d"]
-#			if not PlaceableObjects.has_node(id):
-#				if item_name == "wall" or item_name == "foundation" or item_name == "wood door" or item_name == "metal door" or item_name == "armored door":
-#					PlaceObject.place_building_object_in_world(id,item_name,direction,variety,location,map["placeable"][id]["h"])
-#				else:
-#					PlaceObject.place_object_in_world(id,item_name,direction,location,variety)
+				await get_tree().process_frame
+		for id in map["crop"]:
+			var location = Util.string_to_vector2(map["crop"][id]["l"])
+			if not PlaceableObjects.has_node(id) and MapData.world[chunk]["crop"].has(id):
+				PlaceObject.place("crop",id,map["crop"][id])
+				await get_tree().process_frame
 	var value = placeable_thread.wait_to_finish()
 
-func spawn_crops():
-	for chunk in current_chunks:
-		if Server.world.is_changing_scene:
-			var value = forage_thread.wait_to_finish()
-			return
-		var map = MapData.world[chunk]
-		for id in map["crop"]:
-			if not PlaceableObjects.has_node(id) and MapData.world[chunk]["crop"].has(id):
-				var item_name = map["crop"][id]["n"]
-				var location = Util.string_to_vector2(map["crop"][id]["l"])
-				var days_until_harvest = map["crop"][id]["dh"]
-				var days_without_water = map["crop"][id]["dww"]
-				var regrowth_phase = map["crop"][id]["rp"]
-				PlaceObject.place_seed_in_world(id,item_name,location,days_until_harvest,days_without_water,regrowth_phase)
-		for loc in map["tile"]:
-			Tiles.hoed_tiles.set_cells_terrain_connect(0,[loc],0,0)
-			if map["tile"][loc] == "w":
-				Tiles.watered_tiles.set_cells_terrain_connect(0,[loc],0,0)
-	var value = crop_thread.wait_to_finish()
+#func spawn_crops():
+#	for chunk in current_chunks:
+#		if Server.world.is_changing_scene:
+#			var value = forage_thread.wait_to_finish()
+#			return
+#		var map = MapData.world[chunk]
+#		for id in map["crop"]:
+#			if not PlaceableObjects.has_node(id) and MapData.world[chunk]["crop"].has(id):
+#				var item_name = map["crop"][id]["n"]
+#				var location = Util.string_to_vector2(map["crop"][id]["l"])
+#				var days_until_harvest = map["crop"][id]["dh"]
+#				var days_without_water = map["crop"][id]["dww"]
+#				var regrowth_phase = map["crop"][id]["rp"]
+#				PlaceObject.place_seed_in_world(id,item_name,location,days_until_harvest,days_without_water,regrowth_phase)
+#		for loc in map["tile"]:
+#			Tiles.hoed_tiles.set_cells_terrain_connect(0,[loc],0,0)
+#			if map["tile"][loc] == "w":
+#				Tiles.watered_tiles.set_cells_terrain_connect(0,[loc],0,0)
+#	var value = crop_thread.wait_to_finish()
 
 
 func _whoAmI(_value):
@@ -121,7 +116,8 @@ func _whoAmI6(_value):
 	call_deferred("spawn_forage")
 
 func _whoAmI7(_value):
-	call_deferred("set_nav")
+	call_deferred("update_navigation")
+	
 
 func _whoAmI8(_value):
 	call_deferred("spawn_placeables")
@@ -138,25 +134,30 @@ func _on_spawn_nature_timer_timeout():
 func spawn_nature():
 	if not remove_objects_thread.is_started():
 		remove_objects_thread.start(Callable(self,"_whoAmI").bind(null))
+	await get_tree().process_frame
 	if not remove_grass_thread.is_started():
 		remove_grass_thread.start(Callable(self,"_whoAmI5").bind(null))
+	await get_tree().process_frame
 	if not trees_thread.is_started():
 		trees_thread.start(Callable(self,"_whoAmI2").bind(null))
+	await get_tree().process_frame
 	if not ores_thread.is_started():
 		ores_thread.start(Callable(self,"_whoAmI3").bind(null))
+	await get_tree().process_frame
 	if not grass_thread.is_started():
 		grass_thread.start(Callable(self,"_whoAmI4").bind(null))
+	await get_tree().process_frame
 	if not forage_thread.is_started():
 		forage_thread.start(Callable(self,"_whoAmI6").bind(null))
-	if not navigation_thread.is_started():
-		navigation_thread.start(Callable(self,"_whoAmI7").bind(null))
+	await get_tree().process_frame
 	if not placeable_thread.is_started():
 		placeable_thread.start(Callable(self,"_whoAmI8").bind(null))
+	await get_tree().process_frame
 	if not remove_placeable_thread.is_started():
 		remove_placeable_thread.start(Callable(self,"_whoAmI9").bind(null))
-#	print("NUM NATURE OBJECTS = " +str(NatureObjects.get_children().size()))
-#	print("NUM GRASS OBJECTS = " +str(GrassObjects.get_children().size()))
-#	print("NUM FORAGE OBJECTS = " +str(ForageObjects.get_children().size()))
+	await get_tree().process_frame
+	if not navigation_thread.is_started():
+		navigation_thread.start(Callable(self,"_whoAmI7").bind(null))
 
 
 func remove_nature():
@@ -293,17 +294,33 @@ func spawn_grass():
 	var value = grass_thread.wait_to_finish()
 
 
-func set_nav():
-	pass
-	if Server.player_node:
-		var player_loc = Server.player_node.position/16
-		navTiles.clear()
-		for y in range(40):
-			for x in range(60):
-				var loc = player_loc+Vector2(-30,-20)+Vector2(x,y)
-				if Tiles.isValidNavigationTile(loc):
-					navTiles.set_cell(0,loc,0,Vector2i(0,0))
-		await get_tree().create_timer(0.5).timeout
-		var value = navigation_thread.wait_to_finish()
+
+func update_navigation():
+	var player_loc = Vector2i(Server.player_node.position/16)
+#	if old_navigation_locs == []: # init
+	for y in range(40):
+		for x in range(60):
+			var loc = player_loc+Vector2i(-30,-20)+Vector2i(x,y)
+			old_navigation_locs.append(loc)
+#			if Tiles.isValidNavigationTile(loc):
+			Tiles.nav_tiles.set_cell(0,loc,0,Vector2i(0,0))
+#	else:
+#		new_navigation_locs = []
+#		for y in range(40):
+#			for x in range(60):
+#				var loc = player_loc+Vector2i(-30,-20)+Vector2i(x,y)
+#				new_navigation_locs.append(loc)
+#				if not old_navigation_locs.has(loc):
+#					if Tiles.isValidNavigationTile(loc):
+#						Tiles.nav_tiles.set_cell(0,loc,0,Vector2i(0,0))
+#			await get_tree().process_frame
+#		for loc in old_navigation_locs:
+#			if not new_navigation_locs.has(loc):
+#				Tiles.nav_tiles.set_cell(0,loc,0,Vector2i(-1,-1))
+#		old_navigation_locs = new_navigation_locs
+	var value = navigation_thread.wait_to_finish()
+	
+	
+
 
 

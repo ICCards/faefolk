@@ -41,48 +41,49 @@ enum {
 }
 
 func _ready():
-	await get_tree().create_timer(0.25).timeout
-	$Menu.hide()
-	initialize_furnaces_campfires_and_stoves()
 	add_hotbar_clock_and_stats()
+	await get_tree().create_timer(4.0).timeout
+	initialize_furnaces_campfires_and_stoves()
 
 func initialize_furnaces_campfires_and_stoves():
-	for id in PlayerData.player_data["furnaces"]:
-		var furnace = Furnace.instantiate()
-		furnace.name = str(id)
-		furnace.id = id
-		add_child(furnace)
-		furnace.check_if_furnace_active()
-		furnace.hide()
-	for id in PlayerData.player_data["stoves"]:
-		var stove = Stove.instantiate()
-		stove.name = str(id)
-		stove.id = id
-		add_child(stove)
-		stove.check_valid_recipe()
-		stove.hide()
-	for id in PlayerData.player_data["campfires"]:
-		var campfire = Campfire.instantiate()
-		campfire.name = str(id)
-		campfire.id = id
-		add_child(campfire)
-		campfire.check_valid_recipe()
-		campfire.hide()
-	for id in PlayerData.player_data["barrels"]:
-		var barrel = Barrel.instantiate()
-		barrel.name = str(id)
-		barrel.id = id
-		add_child(barrel)
-		barrel.check_valid_recipe()
-		barrel.hide()
+	for chunk in MapData.world:
+		for id in MapData.world[chunk]["placeable"]:
+			var item_name = MapData.world[chunk]["placeable"][id]["n"]
+			match item_name:
+				"furnace":
+					var furnace = Furnace.instantiate()
+					furnace.name = str(id)
+					furnace.id = id
+					add_child(furnace)
+					furnace.check_if_furnace_active()
+					furnace.hide()
+				"stove":
+					var stove = Stove.instantiate()
+					stove.name = str(id)
+					stove.id = id
+					add_child(stove)
+					stove.check_valid_recipe()
+					stove.hide()
+				"campfire":
+					var campfire = Campfire.instantiate()
+					campfire.name = str(id)
+					campfire.id = id
+					add_child(campfire)
+					campfire.check_valid_recipe()
+					campfire.hide()
+				"barrel":
+					var barrel = Barrel.instantiate()
+					barrel.name = str(id)
+					barrel.id = id
+					add_child(barrel)
+					barrel.check_valid_recipe()
+					barrel.hide()
 
 
 func save_player_data(exit_to_main_menu):
+	get_tree().paused = true
 	$LoadingIndicator.show()
-	$Hotbar.hide()
-	$CombatHotbar.hide()
-	$PlayerDataUI.hide()
-	PlayerData.player_data["current_save_location"] = Server.player_node.position/16
+	PlayerData.player_data["save_position"] = Server.player_node.position
 	game_state = GameState.new()
 	game_state.terrain = MapData.terrain
 	game_state.world = MapData.world
@@ -93,14 +94,11 @@ func save_player_data(exit_to_main_menu):
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 	sound_effects.play()
 	$LoadingIndicator.hide()
+	get_tree().paused = false
 	if exit_to_main_menu:
 		SceneChanger.goto_scene("res://MainMenu/MainMenu.tscn")
 	else:
-		$PlayerDataUI.show()
-		if PlayerData.normal_hotbar_mode:
-			$Hotbar.show()
-		else:
-			$CombatHotbar.show()
+		add_hotbar_clock_and_stats()
 
 
 func switch_hotbar():
@@ -121,11 +119,9 @@ func switch_hotbar():
 
 func _input(event):
 	if Server.player_node.state == MOVEMENT and holding_item == null and not PlayerData.viewMapMode and not Server.world.is_changing_scene:
-		if event.is_action_pressed("exit") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode:
-			toggle_save_and_exit()
-		elif event.is_action_pressed("open menu") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode:
+		if event.is_action_pressed("open menu") and not PlayerData.interactive_screen_mode:
 			toggle_menu()
-		elif event.is_action_pressed("switch hotbar") and not PlayerData.interactive_screen_mode and not PlayerData.viewSaveAndExitMode and not PlayerData.viewInventoryMode:
+		elif event.is_action_pressed("switch hotbar") and not PlayerData.interactive_screen_mode and not PlayerData.viewInventoryMode:
 			switch_hotbar()
 		elif Input.is_action_just_released("scroll_up") and not PlayerData.viewMapMode:
 			PlayerData.active_item_scroll_up()
@@ -197,15 +193,13 @@ func toggle_brewing_table(id,level):
 
 
 func toggle_save_and_exit():
-	if has_node("SaveAndExit"):
-		Sounds.play_deselect_sound()
-		PlayerData.viewSaveAndExitMode = false
-		get_node("SaveAndExit").queue_free()
+	if Server.world.name == "Overworld":
+		if not $SaveAndExit.visible:
+			$SaveAndExit.initialize()
+		else:
+			$SaveAndExit.destroy()
 	else:
-		Sounds.play_big_select_sound()
-		var saveAndExit = SaveAndExitDialogue.instantiate()
-		add_child(saveAndExit)
-		PlayerData.viewSaveAndExitMode = true
+		Sounds.play_error_sound()
 
 
 func respawn():
@@ -229,7 +223,7 @@ func toggle_chest(id):
 			sound_effects.play()
 			PlayerData.interactive_screen_mode = true
 			is_opening_chest = true
-			Server.world.get_node("PlaceableObjects/"+id).interactives.open_chest()
+			Server.world.get_node("PlaceableObjects/"+id).interactives.open_chest(false)
 			await get_tree().create_timer(0.5).timeout
 			is_opening_chest = false
 			var chest = Chest.instantiate()
@@ -245,7 +239,7 @@ func toggle_barrel(id):
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/gate/open.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 		sound_effects.play()
-		Server.world.get_node("PlaceableObjects/"+id).interactives.open_barrel()
+		Server.world.get_node("PlaceableObjects/"+id).interactives.open_barrel(false)
 		await get_tree().create_timer(0.2).timeout
 		var barrel = Barrel.instantiate()
 		barrel.name = str(id)
@@ -256,7 +250,7 @@ func toggle_barrel(id):
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/gate/open.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -4)
 		sound_effects.play()
-		Server.world.get_node("PlaceableObjects/"+id).interactives.open_barrel()
+		Server.world.get_node("PlaceableObjects/"+id).interactives.open_barrel(false)
 		await get_tree().create_timer(0.2).timeout
 		get_node(str(id)).initialize()
 		close_hotbar_clock_and_stats()
@@ -272,7 +266,7 @@ func toggle_crate(id):
 			sound_effects.play()
 			PlayerData.interactive_screen_mode = true
 			is_opening_chest = true
-			Server.world.get_node("PlaceableObjects/"+id).interactives.open_crate()
+			Server.world.get_node("PlaceableObjects/"+id).interactives.open_crate(false)
 			await get_tree().create_timer(0.2).timeout
 			is_opening_chest = false
 			var chest = Crate.instantiate()
@@ -292,7 +286,6 @@ func close_hotbar_clock_and_stats():
 
 
 func add_hotbar_clock_and_stats():
-	PlayerData.HotbarSlots = $Hotbar/HotbarSlots
 	PlayerData.interactive_screen_mode = false
 	if PlayerData.normal_hotbar_mode:
 		$CombatHotbar.hide()

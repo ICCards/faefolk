@@ -22,8 +22,8 @@ func return_adjusted_position():
 		y = 720-height
 	else:
 		y = pos.y
-	if width+pos.x > 1080:
-		x = 1080-width
+	if width+pos.x > 1280:
+		x = 1280-width
 	else:
 		x = pos.x
 	return Vector2(x,y)
@@ -83,7 +83,6 @@ func returnIfValidMaterial(item, amount):
 
 func set_description_text(item):
 	if item:
-		print(item)
 		var category = JsonData.item_data[item]["ItemCategory"]
 		var description = JsonData.item_data[item]["Description"]
 		$Body/ItemName.set_text(Util.capitalizeFirstLetter(item))

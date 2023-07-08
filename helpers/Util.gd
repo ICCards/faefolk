@@ -46,14 +46,24 @@ func toMessage(name, data):
 #
 #	return Vector2.ZERO
 
+func convertArrayToVector(value):
+	var newArray = [];
+	for loc in value:
+		var vec = str_to_var("Vector2i" + loc)
+		newArray.append(vec)
+	return newArray
+
+
 func string_to_vector2(string) -> Vector2:
 	if string is String:
-		var new_string: String = string
-		new_string.left(1)
-		new_string.left(-1)
-		var array: Array = new_string.split(", ")
-
-		return Vector2(array[0], array[1])
+		var vec = str_to_var("Vector2i" + string)
+		return vec
+#		var new_string: String = string
+#		new_string.left(1)
+#		new_string.left(-1)
+#		var array: Array = new_string.split(", ")
+#
+#		return Vector2(array[0], array[1])
 
 	return string
 
@@ -210,17 +220,17 @@ func return_advanced_fruit_tree_phase(current_phase):
 func isObjectPlaceableOnGround(item_name):
 	if item_name == "wood fence" or item_name == "stone fence" or item_name == "metal fence" or \
 	item_name == "wood gate" or item_name == "stone gate" or item_name == "metal gate" or \
-	item_name == "well" or item_name == "torch" or item_name == "campfire":
+	item_name == "well" or item_name == "torch" or item_name == "campfire" or item_name == "fae entrance" or \
+	item_name == "sleeping bagsa":
 		return true
 	return false
 
 
 func isStorageItem(item_name):
-	if item_name == "wood box" or item_name == "wood barrel" or item_name == "wood chest" or \
-	item_name == "stone chest" or item_name == "tool cabinet" or item_name == "furnace" or \
-	item_name == "stove #1" or item_name == "stove #2" or item_name == "stove #3" or \
-	item_name == "grain mill #1" or item_name == "grain mill #2" or item_name == "grain mill #3" or \
-	item_name == "campfire":
+	if item_name == "crate" or item_name == "barrel" or item_name == "chest" or  item_name == "tool cabinet" \
+	or item_name == "furnace" or item_name == "stove #1" or item_name == "stove #2" \
+	or item_name == "stove #3" or item_name == "grain mill #1" or item_name == "grain mill #2" \
+	or item_name == "grain mill #3" or item_name == "campfire":
 		return true
 	return false
 

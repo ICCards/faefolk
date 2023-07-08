@@ -8,8 +8,6 @@ var is_ice_arrow: bool = false
 var is_poison_arrow: bool = false
 var is_hostile: bool = false
 var is_ricochet_shot: bool = false
-var is_multishot1: bool = false
-var is_multishot2: bool = false
 var ricochet_enemies = []
 
 var _uuid = load("res://helpers/UUID.gd")
@@ -18,8 +16,6 @@ var _uuid = load("res://helpers/UUID.gd")
 func _physics_process(delta):
 	if not collided:
 		var collision_info = move_and_collide(velocity * delta * speed)
-	if $Hitbox.get_overlapping_areas().size() > 0:
-		destroy()
 
 func _ready():
 	if is_hostile:
@@ -49,10 +45,6 @@ func _ready():
 		$PoisonTrailParticles/Particles3.emitting = true
 
 
-func fade_out():
-	var tween = get_tree().create_tween()
-	tween.tween_property($Sprite2D, "modulate:a", 0.0, 0.5)
-
 func _on_Area2D_area_entered(area):
 	if is_ricochet_shot:
 		ricochet_enemies.append(area.get_parent().name)
@@ -76,8 +68,6 @@ func find_next_player():
 	rotation_degrees = rad_to_deg(Vector2(1,0).angle_to(velocity))
 	$Hitbox.knockback_vector = velocity
 
-func _on_Hitbox_body_entered(body):
-	destroy()
 
 func destroy():
 	if not collided:
@@ -95,10 +85,14 @@ func destroy():
 		collided = true
 		$ArrowBreak.play("break")
 		var tween = get_tree().create_tween()
-		tween.tween_property($PointLight2D, "color", Color("00ffffff"), 0.5)
+		tween.tween_property($PointLight2D, "color", Color("ffffff00"), 0.5)
 		await $ArrowBreak.animation_finished
 		$ArrowBreak.hide()
 
 func _on_Timer_timeout():
 	hide()
+	destroy()
+
+
+func _on_detect_wall_collision_body_entered(body):
 	destroy()

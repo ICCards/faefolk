@@ -4,8 +4,6 @@ extends Node2D
 
 var rng := RandomNumberGenerator.new()
 
-var spawn_loc
-
 var is_changing_scene: bool = false
 
 var game_state: GameState
@@ -14,8 +12,6 @@ var game_state: GameState
 func _ready():
 	Server.world = self
 	create_or_load_world()
-#	set_valid_tiles()
-
 
 func set_valid_tiles():
 	for x in range(1000):
@@ -33,6 +29,7 @@ func create_or_load_world():
 func build_world():
 	$WorldBuilder/BuildTerrain.build()
 
+
 func initialize():
 	$InitLoadingScreen.queue_free()
 	$WorldBuilder.initialize()
@@ -40,35 +37,34 @@ func initialize():
 	buildMap()
 	set_valid_tiles()
 	spawn_player()
+	$SoundMachine.initialize()
 
 
 func spawn_player():
 	var player = Player.instantiate()
-	player.is_building_world = true
+	player.load_screen_timer = 8.0
 	player.name = str("PLAYER")
 	$Players.add_child(player)
-	spawn_loc = Vector2i(500,500)
+	var spawn_pos
 	if PlayerData.spawn_at_respawn_location:
-		spawn_loc = PlayerData.player_data["respawn_location"]
-	elif PlayerData.spawn_at_cave_exit:
-		spawn_loc = MapData.world["cave_entrance_location"]
+		spawn_pos = PlayerData.player_data["respawn_position"]
 	elif PlayerData.spawn_at_last_saved_location:
-		spawn_loc = PlayerData.player_data["current_save_location"]
-	if spawn_loc == null: # initial random spawn
+		spawn_pos = PlayerData.player_data["save_position"]
+	elif PlayerData.spawn_at_cave_entrance:
+		spawn_pos = PlayerData.enter_cave_position
+	if spawn_pos == null: # initial random spawn
 		var tiles = MapData.terrain["beach"]
 		tiles.shuffle()
-		spawn_loc = tiles[0]
-		PlayerData.player_data["current_save_location"] =  spawn_loc
-		PlayerData.player_data["respawn_location"] = spawn_loc
+		var spawn_loc = tiles[0]
+		spawn_pos = spawn_loc*16
+		PlayerData.player_data["save_position"] =  spawn_pos
+		PlayerData.player_data["respawn_position"] = spawn_pos
 		var game_state = GameState.new()
 		game_state.player_state = PlayerData.player_data
 		game_state.world = MapData.world
 		game_state.terrain = MapData.terrain
 		game_state.save_state()
-	player.position = spawn_loc*16
-	PlayerData.spawn_at_respawn_location = false
-	PlayerData.spawn_at_cave_exit = false
-	PlayerData.spawn_at_last_saved_location = false
+	player.position = spawn_pos
 
 
 func buildMap():
@@ -83,5 +79,6 @@ func buildMap():
 	Tiles.object_tiles = $BuildingTiles/ObjectTiles
 	Tiles.wet_sand_tiles = $TerrainTiles/WetSand
 	Tiles.forest_tiles = $TerrainTiles/Forest
+	Tiles.nav_tiles = $TerrainTiles/NavigationTiles
 	#create_cave_entrance(map["cave_entrance_location"])
 

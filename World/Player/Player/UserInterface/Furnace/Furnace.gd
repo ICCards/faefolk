@@ -43,7 +43,7 @@ func _physics_process(delta):
 
 
 func _on_CookTimer_timeout():
-	if PlayerData.player_data["furnaces"].has(id):
+	if PlayerData.player_data["ui_slots"].has(id):
 		smelt()
 		check_if_furnace_active()
 
@@ -81,7 +81,7 @@ func remove_fuel():
 			coal_yield_slot.item.add_item_quantity(3)
 		else:
 			coal_yield_slot.initialize_item("coal", 3, null)
-			PlayerData.player_data["furnaces"][id]["5"] = ["coal", 3, null]
+			PlayerData.player_data["ui_slots"][id]["5"] = ["coal", 3, null]
 	elif fuel_slot.item.item_name == "coal":
 		fuel_slot.item.decrease_item_quantity(1)
 		PlayerData.decrease_item_quantity(fuel_slot, 1, id)
@@ -110,11 +110,11 @@ func add_to_yield_slot(ore_name):
 			return
 	if not yield_slot1.item:
 		yield_slot1.initialize_item(ingot_name, 1, null)
-		PlayerData.player_data["furnaces"][id]["3"] = [ingot_name, 1, null]
+		PlayerData.player_data["ui_slots"][id]["3"] = [ingot_name, 1, null]
 		return
 	if not yield_slot2.item:
 		yield_slot2.initialize_item(ingot_name, 1, null)
-		PlayerData.player_data["furnaces"][id]["4"] = [ingot_name, 1, null]
+		PlayerData.player_data["ui_slots"][id]["4"] = [ingot_name, 1, null]
 		return
 
 
@@ -162,7 +162,8 @@ func cooking_active():
 	$CookTimer.start()
 	$FireAnimatedSprite.show()
 	if Server.world.name == "Overworld":
-		Server.world.get_node("PlaceableObjects/"+id).interactives.toggle_furnace_smoke(true)
+		if Server.world.has_node("PlaceableObjects/"+id):
+			Server.world.get_node("PlaceableObjects/"+id).interactives.turn_on_furnace()
 	if self.visible and Server.isLoaded:
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/furnace/furnace.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", 0)
@@ -173,7 +174,7 @@ func cooking_inactive():
 	$TimerProgress.value = 0
 	$FireAnimatedSprite.hide()
 	if Server.world.name == "Overworld":
-		Server.world.get_node("PlaceableObjects/"+id).interactives.toggle_furnace_smoke(false)
+		Server.world.get_node("PlaceableObjects/"+id).interactives.turn_off_furnace()
 
 func valid_fuel():
 	if fuel_slot.item:

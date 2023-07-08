@@ -7,18 +7,17 @@ var game_state: GameState
 
 
 func _ready():
-	#get_tree().get_root().set_min_size(Vector2(1280, 720))
+	get_tree().paused = false
+	Server.player_node = null
 	if GameState.save_exists(): # Load world
 		print("LOAD WORLD")
 		game_state = GameState.new()
 		game_state.load_state()
-		PlayerData.player_data = game_state.player_state
-		MapData.world = game_state.world
-		MapData.terrain = game_state.terrain
 	$TitleMusic.stream = Sounds.title_music
 	$TitleMusic.volume_db = Sounds.return_adjusted_sound_db("music", -32)
 	$TitleMusic.play()
 	Sounds.connect("volume_change",Callable(self,"change_title_volume"))
+	change_title_volume()
 	$Background/Water1.play("loop")
 	$Background/Water2.play("loop")
 	spawn_player_in_menu()  

@@ -24,6 +24,6 @@ text = "Move left:"
 
 [node name="KeyBindingBtn" parent="." instance=ExtResource("2_0nqhb")]
 layout_mode = 0
-offset_left = 468.0
-offset_right = 488.0
+offset_left = 486.0
+offset_right = 506.0
 offset_bottom = 12.0

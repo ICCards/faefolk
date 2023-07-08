@@ -27,15 +27,17 @@ texture = ExtResource("2_bagk8")
 
 [node name="PlayLabel" type="Label" parent="PlayShopQuit/Play"]
 offset_left = -150.0
-offset_top = -67.0
-offset_right = 532.0
-offset_bottom = 95.0
-scale = Vector2(0.5, 0.5)
+offset_top = -74.0
+offset_right = 755.0
+offset_bottom = 181.0
+scale = Vector2(0.4, 0.4)
 theme = ExtResource("3_0bwq0")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.0470588, 0.0470588, 0.0470588, 0.933333)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_x = 8
-theme_override_constants/shadow_offset_y = 8
-theme_override_constants/outline_size = 38
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 10
+theme_override_constants/outline_size = 18
 text = "PLAY"
 horizontal_alignment = 1
 

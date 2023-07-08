@@ -19,8 +19,8 @@ func return_adjusted_position():
 		y = 720-height
 	else:
 		y = pos.y
-	if width+pos.x > 1080:
-		x = 1080-width
+	if width+pos.x > 1280:
+		x = 1280-width
 	else:
 		x = pos.x
 	return Vector2(x,y)
@@ -64,4 +64,4 @@ func set_size_of_description(x):
 		width = 39 + ((x - 726) / 22)
 	var lines = $Body/ItemDescription.get_line_count()
 	$Body/ItemDescription.custom_minimum_size.y = 124*lines
-	height = 36 + ((lines - 1) * 4.5)
+	height = 36 + ((lines - 1) * 4.75)

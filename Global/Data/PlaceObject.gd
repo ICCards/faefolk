@@ -26,8 +26,8 @@ var GrassObjects
 func place(type,id,data):
 	if type == "forage":
 		place_forage_in_world(id,data["n"],data["l"],data["f"])
-#	elif type == "crop":
-#		PlaceObject.place_seed_in_world(id,data["n"],data["l"],data["d"],0,false)
+	elif type == "crop":
+		place_seed_in_world(id,data["n"],data["l"],data["dh"],data["dww"],false)
 	elif type == "tree":
 		place_tree_in_world(id,data["v"],data["l"],data["b"],data["h"],data["p"])
 	elif type == "placeable":
@@ -51,7 +51,7 @@ func place_building_object_in_world(id,item_name,location,health,tier):
 	object.item_name = item_name
 	object.tier = tier
 	PlaceableObjects.call_deferred("add_child", object, true)
-	object.global_position = Tiles.wall_tiles.map_to_local(location)
+	object.position = Tiles.wall_tiles.map_to_local(location)
 
 
 func place_door_in_world(id,item_name,direction,location,health,variety,door_opened):
@@ -65,7 +65,7 @@ func place_door_in_world(id,item_name,direction,location,health,variety,door_ope
 	object.item_name = item_name
 	object.door_opened = door_opened
 	PlaceableObjects.call_deferred("add_child", object, true)
-	object.global_position = Tiles.wall_tiles.map_to_local(location)
+	object.position = Tiles.wall_tiles.map_to_local(location)
 	Tiles.object_tiles.set_cell(0,location,0,Constants.customizable_rotatable_object_atlas_tiles[item_name][variety][direction])
 
 
@@ -154,7 +154,7 @@ func place_seed_in_world(id, item_name, location, days_until_harvest, days_witho
 	plantedCrop.days_without_water = days_without_water
 	plantedCrop.in_regrowth_phase = in_regrowth_phase
 	PlaceableObjects.call_deferred("add_child", plantedCrop, true)
-	plantedCrop.global_position = Tiles.valid_tiles.map_to_local(location)
+	plantedCrop.position = Tiles.valid_tiles.map_to_local(location)
 
 
 func place_small_ore_in_world(id,variety,location,health):
@@ -166,7 +166,8 @@ func place_small_ore_in_world(id,variety,location,health):
 	object.location = location
 	object.position = Tiles.valid_tiles.map_to_local(location)
 	NatureObjects.call_deferred("add_child",object,true)
-	
+
+
 func place_large_ore_in_world(id,variety,location,health):
 	NatureObjects = Server.world.get_node("NatureObjects")
 	var object = LargeOre.instantiate()
@@ -176,7 +177,6 @@ func place_large_ore_in_world(id,variety,location,health):
 	object.location = location
 	object.position = Tiles.valid_tiles.map_to_local(location) + Vector2(-8,0)
 	NatureObjects.call_deferred("add_child",object,true)
-	
 
 
 #func remove_valid_tiles(item_name,direction, location):
@@ -185,17 +185,19 @@ func place_large_ore_in_world(id,variety,location,health):
 #		Tiles.remove_valid_tiles(location, Vector2(Constants.dimensions_dict[item_name].y, Constants.dimensions_dict[item_name].x))
 #	else:
 #		Tiles.remove_valid_tiles(location, Constants.dimensions_dict[item_name])
-		
+
+
 func place_object_in_world(id, item_name, direction, location, variety, opened_or_light_toggled):
 	PlaceableObjects = Server.world.get_node("PlaceableObjects")
 	var tileObjectHurtBox = TileObjectHurtBox.instantiate()
+	tileObjectHurtBox.opened_or_light_toggled = opened_or_light_toggled
 	tileObjectHurtBox.variety = variety
 	tileObjectHurtBox.name = id
 	tileObjectHurtBox.item_name = item_name
 	tileObjectHurtBox.location = location
 	tileObjectHurtBox.direction = direction
 	PlaceableObjects.call_deferred("add_child", tileObjectHurtBox, true)
-	tileObjectHurtBox.global_position = Tiles.valid_tiles.map_to_local(location)
+	tileObjectHurtBox.position = Tiles.valid_tiles.map_to_local(location)
 	if Constants.autotile_object_atlas_tiles.keys().has(item_name):
 		Tiles.object_tiles.set_cells_terrain_connect(0,[location],0,Constants.autotile_object_atlas_tiles[item_name])
 	elif Constants.object_atlas_tiles.keys().has(item_name):

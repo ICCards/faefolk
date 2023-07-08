@@ -12,14 +12,14 @@ func _ready():
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -10)
 	sound_effects.play()
 	$Hitbox.tool_name = "flamethrower"
-	$Fire.emitting = true
-	$Smoke.emitting = true
+#	$Fire.emitting = true
+#	$Smoke.emitting = true
 	$AnimationPlayer.play("play")
 	$Flamethrower.play("start")
 	await $Flamethrower.animation_finished
 	$Flamethrower.play("loop")
 	await get_tree().create_timer(3.0).timeout
-	$Flamethrower.play("start", true)
+	$Flamethrower.play_backwards("start")
 	fade_out_sound()
 	$Fire.emitting = false
 	$Smoke.emitting = false
@@ -29,4 +29,5 @@ func _ready():
 func fade_out_sound():
 	var tween = get_tree().create_tween()
 	tween.tween_property($PointLight2D, "color", Color("00ffffff"), 1.5)
-	tween.tween_property(sound_effects, "volume_db", -80, 1.5)
+	var tween2 = get_tree().create_tween()
+	tween2.tween_property(sound_effects, "volume_db", -80, 1.5)

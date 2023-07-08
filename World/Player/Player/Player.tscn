@@ -1,7 +1,6 @@
-[gd_scene load_steps=75 format=3 uid="uid://bdyinn6aswyx7"]
+[gd_scene load_steps=84 format=3 uid="uid://bgvlxbfw45hdq"]
 
 [ext_resource type="Script" path="res://World/Player/Player/Player.gd" id="1_hovno"]
-[ext_resource type="Texture2D" uid="uid://dybsd7fv08hlv" path="res://Assets/Images/inventory_icons/Fish/goldfish.png" id="2"]
 [ext_resource type="PackedScene" uid="uid://1ca7mk73gpp0" path="res://World/Player/Player/Actions.tscn" id="2_dmkl7"]
 [ext_resource type="Script" path="res://World/Player/Player/Camera2D.gd" id="2_gk7ji"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/CompositeSprites.gd" id="3_8lsbn"]
@@ -13,13 +12,14 @@
 [ext_resource type="PackedScene" uid="uid://bdpp83on80ake" path="res://World/Player/Player/Magic.tscn" id="8_wf6cw"]
 [ext_resource type="Texture2D" uid="uid://wol8ty2drk5k" path="res://Characters/Weapon swings/fishing rod struggle/right.png" id="9_5g54g"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://utxboaqigwsd" path="res://Assets/Images/inventory_icons/Resource/wood.png" id="10_7rpna"]
+[ext_resource type="Texture2D" uid="uid://vrvbxbi5ycv8" path="res://Assets/Images/Enemies/ChangeForm.png" id="11_3vl5m"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/PickupZone.gd" id="11_vhk27"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/HurtBox.gd" id="12_7dou1"]
 [ext_resource type="PackedScene" uid="uid://bbsqb6cw7rd7a" path="res://World/Player/Player/Swing.tscn" id="12_s0e2n"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/FootstepsSound.gd" id="15_a8swc"]
 [ext_resource type="AudioStream" uid="uid://bdedmyao5swjq" path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" id="16"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/BackgroundMusic.gd" id="16_d5bcc"]
-[ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/AmbientSound.gd" id="17_8vtdb"]
 [ext_resource type="Script" path="res://World/Player/Player/HoldingTorch.gd" id="18_56nxn"]
 [ext_resource type="PackedScene" uid="uid://cu3vvh0ai0n56" path="res://World/Player/Player/PoisonParticles.tscn" id="19_ejmhd"]
 [ext_resource type="Texture2D" uid="uid://h3sspgar8los" path="res://Assets/Images/Animations/objects/torch/1.png" id="20_8w7pl"]
@@ -4324,6 +4324,70 @@ _data = {
 "walk legs": SubResource("Animation_2jrpe")
 }
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdky5"]
+atlas = ExtResource("11_3vl5m")
+region = Rect2(0, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jgpo7"]
+atlas = ExtResource("11_3vl5m")
+region = Rect2(300, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ifog"]
+atlas = ExtResource("11_3vl5m")
+region = Rect2(600, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1mrtu"]
+atlas = ExtResource("11_3vl5m")
+region = Rect2(900, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48s6u"]
+atlas = ExtResource("11_3vl5m")
+region = Rect2(1200, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bxa4"]
+atlas = ExtResource("11_3vl5m")
+region = Rect2(1500, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q3ftm"]
+atlas = ExtResource("11_3vl5m")
+region = Rect2(1800, 0, 300, 300)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08h7e"]
+atlas = ExtResource("11_3vl5m")
+region = Rect2(2100, 0, 300, 300)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bdt71"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdky5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jgpo7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ifog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1mrtu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48s6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0bxa4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q3ftm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08h7e")
+}],
+"loop": false,
+"name": &"play",
+"speed": 8.0
+}]
+
 [sub_resource type="CapsuleShape2D" id="9"]
 radius = 23.5523
 height = 52.7942
@@ -4475,7 +4539,6 @@ one_shot = true
 [node name="timer_wait_times" type="Timer" parent="Camera2D"]
 
 [node name="CompositeSprites" type="Node2D" parent="."]
-texture_filter = 1
 material = ExtResource("5_3of15")
 script = ExtResource("3_8lsbn")
 
@@ -4547,7 +4610,7 @@ visible = false
 modulate = Color(1.2, 1.2, 1.2, 1)
 offset_top = -16.0
 offset_right = 16.0
-texture = ExtResource("2")
+texture = ExtResource("10_7rpna")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CompositeSprites"]
 root_node = NodePath("../..")
@@ -4560,10 +4623,18 @@ libraries = {
 "": SubResource("AnimationLibrary_kekdf")
 }
 
+[node name="UpgradePhase" type="AnimatedSprite2D" parent="CompositeSprites"]
+visible = false
+modulate = Color(1.2, 1.2, 1.2, 1)
+position = Vector2(0, -18)
+sprite_frames = SubResource("SpriteFrames_bdt71")
+animation = &"play"
+frame = 7
+frame_progress = 1.0
+
 [node name="Magic" parent="." instance=ExtResource("8_wf6cw")]
 
 [node name="Area2Ds" type="Node2D" parent="."]
-visible = false
 
 [node name="PickupZone" type="Area2D" parent="Area2Ds"]
 visible = false
@@ -4609,7 +4680,7 @@ wait_time = 2.0
 
 [node name="SwordBlock" type="StaticBody2D" parent="Area2Ds"]
 visible = false
-collision_layer = 32
+collision_layer = 8388640
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2Ds/SwordBlock"]
@@ -4638,18 +4709,14 @@ volume_db = -16.0
 
 [node name="FootstepsSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("6")
-volume_db = -16.0
+autoplay = true
 bus = &"Bus1"
 script = ExtResource("15_a8swc")
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="Sounds"]
 script = ExtResource("16_d5bcc")
 
-[node name="AmbientSound" type="AudioStreamPlayer" parent="Sounds"]
-script = ExtResource("17_8vtdb")
-
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
-visible = false
 light_mask = 0
 position = Vector2(0, 9.91821e-05)
 rotation = -1.5708
@@ -4663,24 +4730,25 @@ position = Vector2(0, -16)
 [node name="HoldingTorch" type="Node2D" parent="."]
 script = ExtResource("18_56nxn")
 
-[node name="Light" type="PointLight2D" parent="HoldingTorch"]
-visible = false
-position = Vector2(0, -32)
-enabled = false
-energy = 1.05
-shadow_enabled = true
-texture = ExtResource("10")
-
 [node name="HoldingTorch" type="AnimatedSprite2D" parent="HoldingTorch"]
 visible = false
 position = Vector2(0, -40)
 sprite_frames = SubResource("117")
 animation = &"new_animation"
+autoplay = "new_animation"
 frame_progress = 0.579862
+
+[node name="Light" type="PointLight2D" parent="HoldingTorch"]
+enabled = false
+blend_mode = 2
+texture = ExtResource("10")
+texture_scale = 0.65
 
 [connection signal="body_entered" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_entered"]
 [connection signal="body_exited" from="Area2Ds/PickupZone" to="Area2Ds/PickupZone" method="_on_body_exited"]
 [connection signal="area_entered" from="Area2Ds/HurtBox" to="Area2Ds/HurtBox" method="_on_area_entered"]
+[connection signal="timeout" from="Area2Ds/HurtBox/PoisonTimer" to="Area2Ds/HurtBox" method="_on_poison_timer_timeout"]
+[connection signal="timeout" from="Area2Ds/HurtBox/RegenerationTimer" to="Area2Ds/HurtBox" method="_on_regeneration_timer_timeout"]
 
 [editable path="Camera2D/UserInterface"]
 [editable path="Swing"]

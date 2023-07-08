@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxd405lq8ng3i"]
+[gd_scene load_steps=10 format=3 uid="uid://bxd405lq8ng3i"]
 
 [ext_resource type="Script" path="res://ElevationTest.gd" id="1_n2im1"]
 [ext_resource type="TileSet" uid="uid://b5vo0lawafpb5" path="res://Assets/Tilesets/Terrain/tres files/plains.tres" id="2_hhdg0"]
@@ -45,6 +45,11 @@ texture = ExtResource("4_ewu00")
 sources/0 = SubResource("TileSetAtlasSource_v5kb0")
 pattern_0 = SubResource("TileMapPattern_nngou")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_oaoac"]
+vertices = PackedVector2Array(-14, 14, -14, -14, -6, -6, -8, 0, 0, 8, 16, 14, 8, 0, 16, -15, 0, -9, -14, -15, -5, -7)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4), PackedInt32Array(5, 0, 4), PackedInt32Array(5, 4, 6), PackedInt32Array(7, 5, 6), PackedInt32Array(7, 6, 8), PackedInt32Array(9, 7, 8), PackedInt32Array(10, 9, 8)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-14, -15, 16, -15, 16, 14, -14, 14, -14, -14, -6, -6, -8, 0, 0, 8, 8, 0, 0, -9, -5, -7)])
+
 [node name="ElevationTest" type="Node2D"]
 script = ExtResource("1_n2im1")
 redraw = true
@@ -73,3 +78,6 @@ format = 2
 [node name="Elevation" type="TileMap" parent="."]
 tile_set = ExtResource("2_pf863")
 format = 2
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_oaoac")

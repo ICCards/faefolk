@@ -70,7 +70,6 @@ offset_left = -8.0
 offset_top = -8.0
 offset_right = 8.0
 offset_bottom = 8.0
-mouse_filter = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_0okvp")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_pawgr")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_6fn2f")
@@ -86,9 +85,6 @@ libraries = {
 "": SubResource("AnimationLibrary_36o8j")
 }
 
-[node name="ResetTempHealthTimer" type="Timer" parent="."]
-wait_time = 5.0
-
 [node name="ObjectTiles" type="TileMap" parent="."]
 modulate = Color(1.2, 1.2, 1.2, 1)
 y_sort_enabled = true
@@ -99,12 +95,14 @@ layer_0/y_sort_enabled = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 enabled = false
-color = Color(1, 0.85098, 0.717647, 1)
 blend_mode = 2
 texture = ExtResource("3_74bdu")
 texture_scale = 0.75
 
+[node name="ResetHealthTimer" type="Timer" parent="."]
+wait_time = 3.0
+
 [connection signal="area_entered" from="Marker2D/HurtBox" to="." method="_on_HurtBox_area_entered"]
 [connection signal="mouse_exited" from="Marker2D/Btn" to="." method="_on_btn_mouse_exited"]
 [connection signal="pressed" from="Marker2D/Btn" to="." method="_on_btn_pressed"]
-[connection signal="timeout" from="ResetTempHealthTimer" to="." method="_on_ResetTempHealthTimer_timeout"]
+[connection signal="timeout" from="ResetHealthTimer" to="." method="_on_reset_health_timer_timeout"]

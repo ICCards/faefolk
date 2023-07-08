@@ -13,6 +13,7 @@ func _ready():
 	if item_name == "red clam" or item_name == "blue clam" or item_name == "pink clam":
 		Tiles.remove_valid_tiles(location)
 		$MovementCollision/CollisionShape2D.set_deferred("disabled", false)
+		$HurtBox/CollisionShape2D.set_deferred("disabled", false)
 	elif item_name == "raw egg":
 		pass
 	else:
@@ -38,10 +39,7 @@ func set_forage_texture():
 		$Sprite2D.set_deferred("texture", load("res://Assets/Images/inventory_icons/Forage/"+ item_name +".png"))
 
 
-#func _on_VisibilityNotifier2D_screen_entered():
-#	call_deferred("show")
-#	$AnimatedFlower.set_deferred("playing", true)
-#
-#func _on_VisibilityNotifier2D_screen_exited():
-#	call_deferred("hide")
-#	$AnimatedFlower.set_deferred("playing", false)
+
+func _on_hurt_box_area_entered(area):
+	if area.tool_name == "arrow" or area.tool_name == "fire projectile":
+		area.destroy()

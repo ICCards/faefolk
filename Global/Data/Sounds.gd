@@ -3,7 +3,17 @@ extends Node
 signal volume_change
 signal footsteps_sound_change
 
-var background_songs = [load("res://Assets/Sound/music/bg music.mp3"),load("res://Assets/Sound/music/edutainment.mp3"),load("res://Assets/Sound/music/make it easy.mp3")]
+var background_song_index = null
+
+var background_songs = [
+	load("res://Assets/Sound/music/edutainment.mp3"),
+	load("res://Assets/Sound/music/make it easy.mp3"),
+	load("res://Assets/Sound/music/ES_Back to Business - William Benckert (1).mp3"),
+	load("res://Assets/Sound/music/ES_Dance of the Pixel Birds - William Benckert.mp3"),
+	load("res://Assets/Sound/music/ES_Fair N Square - William Benckert.mp3"),
+	load("res://Assets/Sound/music/ES_Reality - AGST.mp3"),
+	load("res://Assets/Sound/music/ES_Seal the Deal - Eight Bits.mp3")
+	]
 
 
 func play_pick_up_item_sound():
@@ -60,6 +70,7 @@ func play_pick_up_placeable_object():
 	Server.player_node.sound_effects.stream = load("res://Assets/Sound/Sound effects/UI/pick up house object.mp3")
 	Server.player_node.sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 	Server.player_node.sound_effects.play()
+	
 
 func set_music_volume(val):
 	PlayerData.player_data["settings"]["volume"]["music"] = val
@@ -178,42 +189,6 @@ var fire_crackle = load("res://Assets/Sound/Sound effects/Fire/crackle.mp3")
 
 ### Music ###
 var title_music = load("res://Assets/Sound/music/wobble dance.mp3")
-#var background_music = [
-#	load("res://Assets/Sound/music/make it easy.mp3"),
-#	load("res://Assets/Sound/music/edutainment.mp3")
-#]
-#var background_music_names = [
-#	"Make it easy",
-#	"Edutainment"
-#]
-##
-#var demos = [
-#	load("res://Assets/Sound/Demos/8 bit adventure.mp3"),
-#	load("res://Assets/Sound/Demos/8 bit creature.mp3"),
-#	load("res://Assets/Sound/Demos/a productive day.mp3"),
-#	load("res://Assets/Sound/Demos/arcade.mp3"),
-#	load("res://Assets/Sound/Demos/chance time.mp3"),
-#	load("res://Assets/Sound/Demos/clock tower.mp3"),
-#	load("res://Assets/Sound/Demos/dance of the baobabs.mp3"),
-#	load("res://Assets/Sound/Demos/happy donk.mp3"),
-#	load("res://Assets/Sound/Demos/pixel squirrel.mp3"),
-#	load("res://Assets/Sound/Demos/pixel wave.mp3")
-#]
 
-signal song_skipped
-signal song_finished
-var index = 0
-#var demo_names = [
-#	"8 bit adventure",
-#	"8 bit creature",
-#	"a productive day",
-#	"arcade",
-#	"chance time",
-#	"clock tower",
-#	"dance of the baobabs",
-#	"happy donk",
-#	"pixel squirrel",
-#	"pixel wave"
-#]
 
 

@@ -12,7 +12,8 @@ func _ready():
 			$LargeClouds.set_deferred("self_modulate", Color("00ffffff"))
 
 func _physics_process(delta):
-	if Server.player_node:
+	return
+	if is_instance_valid(Server.player_node):
 		show()
 		if Tiles.forest_tiles.get_cell_atlas_coords(0,Tiles.forest_tiles.local_to_map(Server.player_node.position)) != Vector2i(-1,-1):
 			$FallingLeaf.emitting = true

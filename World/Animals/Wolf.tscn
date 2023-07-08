@@ -18,7 +18,7 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 
 [sub_resource type="CircleShape2D" id="40"]
-radius = 9.0
+radius = 7.5
 
 [sub_resource type="CircleShape2D" id="41"]
 radius = 14.0
@@ -28,22 +28,10 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("..:material:shader_param/flash_modifier")
+tracks/0/path = NodePath("../WolfSprite:material:shader_param/flash_modifier")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../WolfSprite:material:shader_param/flash_modifier")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -63,7 +51,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
+"update": 1,
 "values": [1.0, 0.0]
 }
 
@@ -514,6 +502,15 @@ script = ExtResource("1_m7dx3")
 [node name="PoisonParticles" parent="EnemyPoisonState" index="0"]
 position = Vector2(0, -8)
 
+[node name="Parts3" parent="EnemyPoisonState/PoisonParticles" index="0"]
+emitting = false
+
+[node name="Parts2" parent="EnemyPoisonState/PoisonParticles" index="1"]
+emitting = false
+
+[node name="Parts1" parent="EnemyPoisonState/PoisonParticles" index="2"]
+emitting = false
+
 [node name="EnemyFrozenState" parent="." instance=ExtResource("5_l5inb")]
 
 [node name="SetEnemyDirection" parent="." instance=ExtResource("6_ckc8f")]
@@ -537,7 +534,6 @@ texture = ExtResource("4")
 hframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3)
 shape = SubResource("40")
 
 [node name="HurtBox" type="Area2D" parent="."]
@@ -545,7 +541,7 @@ collision_layer = 0
 collision_mask = 262400
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(0, -8)
+position = Vector2(0, -7)
 shape = SubResource("41")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HurtBox"]
@@ -598,7 +594,7 @@ libraries = {
 }
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -5)
 target_position = Vector2(50, 2.08165e-12)
 collision_mask = 32
 

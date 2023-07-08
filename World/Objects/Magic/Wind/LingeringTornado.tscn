@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b3b0l5e2kh7mc"]
+[gd_scene load_steps=26 format=3 uid="uid://b3b0l5e2kh7mc"]
 
 [ext_resource type="Script" path="res://World/Objects/Magic/Wind/LingeringTornado.gd" id="1_v7phb"]
 [ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_kl0jm"]
@@ -8,6 +8,11 @@
 
 [sub_resource type="RectangleShape2D" id="39"]
 size = Vector2(0, 0)
+
+[sub_resource type="Curve" id="Curve_b58wc"]
+max_value = 3.0
+_data = [Vector2(0.00103413, 1.2973), 0.0, 0.0, 0, 0, Vector2(1, 0.707061), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ig4d8"]
 atlas = ExtResource("2_y5pdp")
@@ -65,22 +70,6 @@ region = Rect2(0, 112, 112, 112)
 atlas = ExtResource("2_y5pdp")
 region = Rect2(112, 112, 112, 112)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tvfp1"]
-atlas = ExtResource("2_y5pdp")
-region = Rect2(224, 112, 112, 112)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dmgvh"]
-atlas = ExtResource("2_y5pdp")
-region = Rect2(336, 112, 112, 112)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_37non"]
-atlas = ExtResource("2_y5pdp")
-region = Rect2(0, 224, 112, 112)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_eyk2g"]
-atlas = ExtResource("2_y5pdp")
-region = Rect2(112, 224, 112, 112)
-
 [sub_resource type="SpriteFrames" id="40"]
 animations = [{
 "frames": [{
@@ -135,18 +124,6 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oc7xi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tvfp1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dmgvh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_37non")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_eyk2g")
 }],
 "loop": false,
 "name": &"start",
@@ -155,7 +132,19 @@ animations = [{
 
 [sub_resource type="Animation" id="45"]
 resource_name = "play"
-length = 2.75
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.8, 1.2, 1.3, 1.7, 1.8, 2.2, 2.3, 2.6, 2.7, 3.1, 3.2, 3.6, 3.7, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false, true, false, true, false, true, false, true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j3n2f"]
 _data = {
@@ -164,11 +153,6 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tnxa4"]
 radius = 14.0
-
-[sub_resource type="Curve" id="Curve_b58wc"]
-max_value = 3.0
-_data = [Vector2(0.00103413, 1.2973), 0.0, 0.0, 0, 0, Vector2(1, 0.707061), 0.0, 0.0, 0, 0]
-point_count = 2
 
 [node name="LingeringTornado" type="CharacterBody2D"]
 collision_layer = 0
@@ -185,6 +169,7 @@ position = Vector2(0, 13)
 [node name="Particles1" type="CPUParticles2D" parent="TrailParticles"]
 modulate = Color(1.3, 1.3, 1.3, 1)
 position = Vector2(0, -13)
+emitting = false
 amount = 16
 lifetime = 4.0
 lifetime_randomness = 0.5
@@ -199,6 +184,7 @@ initial_velocity_max = 15.0
 [node name="Particles2" type="CPUParticles2D" parent="TrailParticles"]
 modulate = Color(1.3, 1.3, 1.3, 1)
 position = Vector2(0, -13)
+emitting = false
 amount = 16
 lifetime = 4.0
 lifetime_randomness = 0.5
@@ -214,6 +200,7 @@ color = Color(0.815686, 0.815686, 0.815686, 1)
 [node name="Particles3" type="CPUParticles2D" parent="TrailParticles"]
 modulate = Color(1.3, 1.3, 1.3, 1)
 position = Vector2(0, -13)
+emitting = false
 amount = 16
 lifetime = 4.0
 lifetime_randomness = 0.5
@@ -226,35 +213,6 @@ initial_velocity_min = 5.0
 initial_velocity_max = 15.0
 color = Color(0.54902, 0.54902, 0.54902, 1)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-modulate = Color(1.2, 1.2, 1.2, 1)
-position = Vector2(15, -42)
-sprite_frames = SubResource("40")
-animation = &"end"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_j3n2f")
-}
-
-[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4")
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(18, -67)
-scale = Vector2(0.71875, 0.746094)
-energy = 1.03
-shadow_enabled = true
-texture = ExtResource("5")
-
-[node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 264192
-collision_mask = 0
-script = ExtResource("2_kl0jm")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("CircleShape2D_tnxa4")
-
 [node name="TornadoParticles" type="Node2D" parent="."]
 modulate = Color(1.6, 1.6, 1.6, 1)
 position = Vector2(-92, -1)
@@ -263,7 +221,7 @@ position = Vector2(-92, -1)
 modulate = Color(1.12, 1.12, 1.12, 1)
 position = Vector2(98, -55)
 emitting = false
-amount = 45
+amount = 30
 lifetime = 2.5
 lifetime_randomness = 1.0
 local_coords = true
@@ -282,7 +240,7 @@ scale_amount_curve = SubResource("Curve_b58wc")
 modulate = Color(1.12, 1.12, 1.12, 1)
 position = Vector2(98, -30)
 emitting = false
-amount = 45
+amount = 30
 lifetime = 2.5
 lifetime_randomness = 1.0
 local_coords = true
@@ -302,7 +260,7 @@ color = Color(0.815686, 0.815686, 0.815686, 1)
 modulate = Color(1.12, 1.12, 1.12, 1)
 position = Vector2(98, -45)
 emitting = false
-amount = 45
+amount = 30
 lifetime = 2.5
 lifetime_randomness = 1.0
 local_coords = true
@@ -317,3 +275,34 @@ orbit_velocity_min = -0.3
 orbit_velocity_max = 0.3
 scale_amount_curve = SubResource("Curve_b58wc")
 color = Color(0.54902, 0.54902, 0.54902, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1.2, 1.2, 1.2, 1)
+position = Vector2(15, -42)
+sprite_frames = SubResource("40")
+animation = &"middle"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_j3n2f")
+}
+
+[node name="SoundEffects" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(18, -67)
+scale = Vector2(0.71875, 0.746094)
+energy = 1.1
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("5")
+texture_scale = 0.75
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 264192
+collision_mask = 0
+script = ExtResource("2_kl0jm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_tnxa4")

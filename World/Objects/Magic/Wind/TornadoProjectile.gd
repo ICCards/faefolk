@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var sound_effects: AudioStreamPlayer2D = $SoundEffects
 
-var speed = 125
+var speed = 100
 var collided = false
 var is_hostile_projectile: bool = false
 
@@ -19,7 +19,6 @@ func _ready():
 	sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound", -20)
 	sound_effects.play()
 	$Hitbox.tool_name = "tornado spell"
-	$Hitbox.knockback_vector = velocity / 150
 	set_particles()
 	$AnimatedSprite2D.play("start")
 	await $AnimatedSprite2D.animation_finished
@@ -56,7 +55,8 @@ func fade_out():
 	$Hitbox/CollisionShape2D.set_deferred("disabled", true)
 	var tween = get_tree().create_tween()
 	tween.tween_property(sound_effects, "volume_db", -80, 2.0)
-	tween.tween_property($PointLight2D, "energy", 0.0, 2.0)
+#	var tween2 = get_tree().create_tween()
+#	tween2.tween_property($PointLight2D, "energy", 0.5, 2.0)
 	await get_tree().create_timer(2.0).timeout
 	uuid.call_deferred("queue_free")
 	call_deferred("queue_free")

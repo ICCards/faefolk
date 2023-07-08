@@ -9,7 +9,6 @@ script = ExtResource("1_a3o1v")
 
 [node name="Parts3" type="CPUParticles2D" parent="PoisonParticles"]
 modulate = Color(1.35, 1.35, 1.35, 1)
-emitting = false
 amount = 10
 lifetime = 2.5
 lifetime_randomness = 0.8
@@ -24,7 +23,6 @@ color = Color(0, 0.332031, 0, 1)
 
 [node name="Parts2" type="CPUParticles2D" parent="PoisonParticles"]
 modulate = Color(1.35, 1.35, 1.35, 1)
-emitting = false
 amount = 10
 lifetime = 2.5
 lifetime_randomness = 0.8
@@ -39,7 +37,6 @@ color = Color(0.145098, 0.545098, 0.145098, 1)
 
 [node name="Parts1" type="CPUParticles2D" parent="PoisonParticles"]
 modulate = Color(1.35, 1.35, 1.35, 1)
-emitting = false
 amount = 10
 lifetime = 2.5
 lifetime_randomness = 0.8

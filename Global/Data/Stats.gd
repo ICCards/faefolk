@@ -90,7 +90,7 @@ const SKELETON_HEALTH = 100
 const BAT_HEALTH = 90
 const WIND_BOSS = 1200
 
-func return_starting_door_health(item_name):
+func return_max_door_health(item_name):
 	match item_name:
 		"wood door":
 			return MAX_WOOD_DOOR
@@ -98,6 +98,19 @@ func return_starting_door_health(item_name):
 			return MAX_METAL_DOOR
 		"armored door":
 			return MAX_ARMORED_DOOR
+
+func return_max_building_health(tier):
+	match tier:
+		"twig":
+			return MAX_TWIG_BUILDING
+		"wood":
+			return MAX_WOOD_BUILDING
+		"stone":
+			return MAX_STONE_BUILDING
+		"metal":
+			return MAX_METAL_BUILDING
+		"armored":
+			return MAX_ARMORED_BUILDING
 
 func return_tool_damage(tool_name):
 	match tool_name:
@@ -124,7 +137,7 @@ func return_tool_damage(tool_name):
 		"lingering tornado":
 			return LINGERING_TORNADO_DAMAGE
 		"whirlwind spell":
-			return LIGHTNING_SPELL_DAMAGE
+			return WHIRLWIND_SPELL_DAMAGE
 		"lightning spell":
 			return LIGHTNING_SPELL_DAMAGE
 		"lightning spell debuff":

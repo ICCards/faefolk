@@ -81,7 +81,7 @@ func initiateOreHitEffect(variety: String, effect_type: String, pos: Vector2):
 func initiateExplosionParticles(pos: Vector2):
 	var explosion = ExplosionParticles.instantiate()
 	Server.world.call_deferred("add_child", explosion)
-	explosion.global_position = pos + Vector2(0,32)
+	explosion.global_position = pos
 	
 func player_hit_effect(amt: int, pos: Vector2, is_player_hit = false):
 	var effect = PlayerHitEffect.instantiate()

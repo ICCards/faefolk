@@ -25,8 +25,8 @@ func return_adjusted_position():
 		y = 720-height
 	else:
 		y = pos.y
-	if width+pos.x > 1080:
-		x = 1080-width
+	if width+pos.x > 1280:
+		x = 1280-width
 	else:
 		x = pos.x
 	return Vector2(x,y)

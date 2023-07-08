@@ -506,7 +506,7 @@ stream = ExtResource("48")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -31)
-energy = 0.7
+blend_mode = 2
 shadow_enabled = true
 texture = ExtResource("2")
-texture_scale = 0.6
+texture_scale = 0.7

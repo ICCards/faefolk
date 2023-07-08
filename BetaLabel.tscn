@@ -13,15 +13,15 @@ theme = ExtResource("1_f8a1e")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 980.0
-offset_top = 19.0
-offset_right = 1525.0
-offset_bottom = 203.0
+offset_left = 924.0
+offset_top = 13.0
+offset_right = 1605.0
+offset_bottom = 242.0
 scale = Vector2(0.5, 0.5)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.176471, 0.176471, 0.176471, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 10
 theme_override_constants/shadow_offset_y = 10
 theme_override_constants/outline_size = 16
-theme_override_constants/shadow_outline_size = 0
+theme_override_constants/shadow_outline_size = 4
 text = "Beta v1.4"

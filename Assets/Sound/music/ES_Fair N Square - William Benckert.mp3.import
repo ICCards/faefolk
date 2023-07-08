@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c8o1o8stnj4ik"
+path="res://.godot/imported/ES_Fair N Square - William Benckert.mp3-f9e3faeb957a1d6dc43b574ecc4fb5bf.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sound/music/ES_Fair N Square - William Benckert.mp3"
+dest_files=["res://.godot/imported/ES_Fair N Square - William Benckert.mp3-f9e3faeb957a1d6dc43b574ecc4fb5bf.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

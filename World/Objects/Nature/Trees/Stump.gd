@@ -82,11 +82,13 @@ func hit(tool_name):
 func _on_tree_hurtbox_area_entered(area):
 	if area.name == "AxePickaxeSwing":
 		Stats.decrease_tool_health()
-	if area.special_ability == "fire buff":
-		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-16,16), randf_range(-18,12)))
+	if area.special_ability == "fire":
+		InstancedScenes.initiateExplosionParticles(position+Vector2(randf_range(-8,8), randf_range(-4,8)))
 		health -= Stats.FIRE_DEBUFF_DAMAGE
-	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
+	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff" and area.tool_name != "arrow":
 		call_deferred("hit", area.tool_name)
+	if area.tool_name == "arrow" or area.tool_name == "fire projectile":
+		area.destroy()
 
 
 func _on_VisibilityNotifier2D_screen_entered():

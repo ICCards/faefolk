@@ -40,14 +40,14 @@ func return_resource_cost_string(index):
 	match index:
 		0:
 			if PlayerData.return_resource_total("wood") >= 5:
-				return "[center]5 x Wood ( [color=#00ff00]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
+				return "[center]"+str(Constants.WALL_COST)+ " x Wood ( [color=#00ff00]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
 			else:
-				return "[center]5 x Wood ( [color=#ff0000]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
+				return "[center]"+str(Constants.WALL_COST)+ " x Wood ( [color=#ff0000]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
 		1:
 			if PlayerData.return_resource_total("wood") >= 2:
-				return "[center]2 x Wood ( [color=#00ff00]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
+				return "[center]"+str(Constants.FOUNDATION_COST)+ " x Wood ( [color=#00ff00]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
 			else:
-				return "[center]2 x Wood ( [color=#ff0000]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
+				return "[center]"+str(Constants.FOUNDATION_COST)+ " x Wood ( [color=#ff0000]" + str(PlayerData.return_resource_total("wood")) + "[/color] )[/center]"
 
 
 func set_icon_position():

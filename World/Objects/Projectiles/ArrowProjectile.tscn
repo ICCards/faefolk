@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c24mw76rb6tmv"]
+[gd_scene load_steps=18 format=3 uid="uid://c24mw76rb6tmv"]
 
 [ext_resource type="Script" path="res://World/Objects/Projectiles/ArrowProjectile.gd" id="1_orj32"]
 [ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="2"]
@@ -67,9 +67,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_x6mme")
 }],
-"loop": true,
+"loop": false,
 "name": &"break",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="2"]
@@ -78,6 +78,9 @@ height = 4.0
 
 [sub_resource type="CircleShape2D" id="12"]
 radius = 294.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eeeaa"]
+radius = 2.0
 
 [node name="ArrowProjectile" type="CharacterBody2D"]
 collision_layer = 0
@@ -250,7 +253,7 @@ autostart = true
 
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(0, 1)
-collision_layer = 258
+collision_layer = 262144
 collision_mask = 0
 script = ExtResource("2_csnra")
 
@@ -270,9 +273,17 @@ shape = SubResource("12")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 enabled = false
 energy = 1.01
+blend_mode = 2
 texture = ExtResource("2")
 texture_scale = 0.25
 
+[node name="DetectWallCollision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8388608
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectWallCollision"]
+position = Vector2(11, 0)
+shape = SubResource("CircleShape2D_eeeaa")
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-[connection signal="area_entered" from="Hitbox" to="." method="_on_Area2D_area_entered"]
-[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
+[connection signal="body_entered" from="DetectWallCollision" to="." method="_on_detect_wall_collision_body_entered"]

@@ -88,14 +88,18 @@ func _on_area_entered(area):
 				diminish_HOT(area.name)
 				$AnimationPlayer.play("hit")
 				get_node("../../Camera2D").player_hit_screen_shake()
+				play_sound_effect()
 				await $AnimationPlayer.animation_finished
 				if not get_node("../../Magic").ice_shield_active:
 					$CollisionShape2D.set_deferred("disabled", false)
 				return
 			elif area.name == "Hitbox":
 				health_to_subtract = Stats.return_tool_damage(area.tool_name)
+				if area.tool_name == "arrow":
+					area.destroy()
 			else:
 				health_to_subtract = 0
+			play_sound_effect()
 			$AnimationPlayer.play("hit")
 			PlayerData.change_health(-health_to_subtract)
 			get_node("../../Camera2D").player_hit_screen_shake()
@@ -151,7 +155,7 @@ func start_HOT(type):
 		$RegenerationTimer.start()
 
 
-func _on_PoisonTimer_timeout():
+func _on_poison_timer_timeout():
 	if int(amount_to_diminish) > 0 and get_node("../../").state != DYING:
 		if amount_to_diminish < poison_increment:
 			PlayerData.change_health(-amount_to_diminish)
@@ -164,7 +168,7 @@ func _on_PoisonTimer_timeout():
 			amount_to_diminish -= poison_increment
 
 
-func _on_RegenerationTimer_timeout():
+func _on_regeneration_timer_timeout():
 	if int(amount_to_heal) > 0 and get_node("../../").state != DYING:
 		if amount_to_heal < regeneration_increment:
 			PlayerData.change_health(amount_to_heal)

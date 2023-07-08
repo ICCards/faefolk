@@ -97,7 +97,7 @@ func cooking_inactive():
 
 
 func _on_CookTimer_timeout():
-	if current_cooking_item and PlayerData.player_data["stoves"].has(id):
+	if current_cooking_item and PlayerData.player_data["ui_slots"].has(id):
 		add_to_yield_slot()
 		remove_ingredients()
 		remove_fuel()
@@ -116,7 +116,7 @@ func remove_fuel():
 			coal_yield_slot.item.add_item_quantity(3)
 		else:
 			coal_yield_slot.initialize_item("coal", 3, null)
-			PlayerData.player_data["stoves"][id]["6"] = ["coal", 3, null]
+			PlayerData.player_data["ui_slots"][id]["6"] = ["coal", 3, null]
 	elif fuel_slot.item.item_name == "coal":
 		fuel_slot.item.decrease_item_quantity(1)
 		PlayerData.decrease_item_quantity(fuel_slot, 1, id)
@@ -152,13 +152,13 @@ func add_to_yield_slot():
 	PlayerData.player_data["collections"]["food"][current_cooking_item] += 1
 	if not yield_slot1.item:
 		yield_slot1.initialize_item(current_cooking_item, 1, null)
-		PlayerData.player_data["stoves"][id]["4"] = [current_cooking_item, 1, null]
+		PlayerData.player_data["ui_slots"][id]["4"] = [current_cooking_item, 1, null]
 	elif not yield_slot1.item.item_quantity == 999 and yield_slot1.item.item_name == current_cooking_item:
 		PlayerData.add_item_quantity(yield_slot1, 1, id)
 		yield_slot1.item.add_item_quantity(1)
 	elif not yield_slot2.item:
 		yield_slot2.initialize_item(current_cooking_item, 1, null)
-		PlayerData.player_data["stoves"][id]["5"] = [current_cooking_item, 1, null]
+		PlayerData.player_data["ui_slots"][id]["5"] = [current_cooking_item, 1, null]
 	else:
 		PlayerData.add_item_quantity(yield_slot2, 1, id)
 		yield_slot2.item.add_item_quantity(1)

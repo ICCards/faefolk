@@ -1,7 +1,12 @@
+res://Assets/Images/Magic/Potions
+res://Assets/Images/Enemies
+res://World/Caves/Bosses/Level
+res://
+res://Assets/Themes
+res://Assets/Images/Magic/fire
 res://World/Player/Player/UserInterface/Dialogue
 res://MainMenu
 res://Assets/Tilesets/terrain/tres files
-res://
 res://Assets/Tilesets/terrain
 res://InventoryLogic
 res://World/Player/Player/AttachedScenes
@@ -15,8 +20,3 @@ res://Assets/Images/Enemies/Spider
 res://Assets/Images/Enemies/slime
 res://World/Caves
 res://Assets/Tilesets/objects
-res://Assets/Themes
-res://World/Enemies
-res://Assets/Images/Animals
-res://Assets/Images/Magic/wind
-res://Assets/Images/Animations/leaf break

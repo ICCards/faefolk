@@ -1,35 +1,29 @@
 extends CanvasModulate
 
-const LENGTH_OF_TRANSITION = 60.0
-
-const CURSE_COLOR = Color("cd0000")
-
-func _ready():
-	PlayerData.connect("set_day",Callable(self,"play_set_day"))
-	PlayerData.connect("set_night",Callable(self,"play_set_night"))
-	if PlayerData.player_data:
-		if PlayerData.player_data["time_hours"] >= 22 or PlayerData.player_data["time_hours"] < 6: # night time
-			set_deferred("color", Color("323237"))
-
-func play_set_day():
-	if Server.world.name == "World":
-		call_deferred("set_day")
-
-func play_set_night():
-	if Server.world.name == "World":
-		call_deferred("set_night")
-
-func set_day():
-	var tween = get_tree().create_tween()
-	tween.tween_property(self, "color", Color("ffffff"), LENGTH_OF_TRANSITION)
+const MINUTES_PER_DAY = 1440
+const MINUTES_PER_HOUR = 60
+const INGAME_TO_REAL_MINUTE_DURATION = (2 * PI) / MINUTES_PER_DAY
 
 
-func set_night():
-	var tween = get_tree().create_tween()
-	tween.tween_property(self, "color", Color("323237"), LENGTH_OF_TRANSITION)
+signal time_tick(day:int, hour:int, minute:int)
 
 
-func set_curse_effect():
-	var tween = get_tree().create_tween()
-	tween.tween_property(self, "color", CURSE_COLOR, 3.0)
+@export var gradient_texture:GradientTexture1D
+var INGAME_SPEED = 10.0 / 3.0
+var INITIAL_HOUR
 
+var time: float
+var past_minute:int= -1
+
+func _process(delta: float) -> void:
+	if time:
+		time += delta * INGAME_TO_REAL_MINUTE_DURATION * INGAME_SPEED
+		
+		var value = (sin(time - PI / 2.0) + 1.0) / 2.0
+		self.color = gradient_texture.gradient.sample(value)
+	
+func initialize(mins,hour):
+	INITIAL_HOUR = hour + (mins/60.0)
+	time = INGAME_TO_REAL_MINUTE_DURATION * MINUTES_PER_HOUR * INITIAL_HOUR
+	
+	

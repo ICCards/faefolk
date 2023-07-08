@@ -1,6 +1,6 @@
 extends Control
 
-var game_time_speed_per_second = 5
+var game_time_speed_per_second = 10
 var week_days = ["Mon.","Tue.","Wed.","Thu.","Fri.","Sat.","Sun."]
 var seasons = ["spring", "summer", "fall", "winter"]
 var clock_icon_index = 1
@@ -14,7 +14,9 @@ func _ready():
 	set_mana_bar()
 	$DateTime/SeasonIcon.texture = load("res://Assets/Images/User interface/DateTime/season icons/"+ PlayerData.player_data["season"] +".png")
 	set_date_time()
-	
+	if Server.world.name == "Overworld":
+		Server.world.get_node("WorldAmbience").initialize(PlayerData.player_data["time_minutes"],PlayerData.player_data["time_hours"])
+	$DateTime/AdvanceTime.start()
 
 func set_mana_bar():
 	$EnergyBars/ManaPgBar.max_value = 100
@@ -81,14 +83,14 @@ func advance_clock_icon():
 
 
 func _on_advance_time_timeout():
-	if Server.isLoaded:
+	#if Server.isLoaded:
 		PlayerData.player_data["time_minutes"] += game_time_speed_per_second
 		if PlayerData.player_data["time_minutes"] == 60:
 			PlayerData.player_data["time_minutes"] = 0
 			PlayerData.player_data["time_hours"] += 1
-			if PlayerData.player_data["time_hours"] == 6:
+			if PlayerData.player_data["time_hours"] == 5:
 				PlayerData.emit_signal("set_day")
-			elif PlayerData.player_data["time_hours"] == 22:
+			elif PlayerData.player_data["time_hours"] == 17:
 				PlayerData.emit_signal("set_night")
 			elif PlayerData.player_data["time_hours"] == 24:
 				advance_day()
@@ -99,7 +101,7 @@ func _on_advance_time_timeout():
 
 
 func _on_mana_timer_timeout():
-	PlayerData.player_data["mana"] += 1
+	PlayerData.player_data["mana"] += 2
 	if PlayerData.player_data["mana"] > 100:
 		PlayerData.player_data["mana"] = 100
 	PlayerData.emit_signal("mana_changed")

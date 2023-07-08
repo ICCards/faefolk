@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://crsvivhg1sob8"]
+[gd_scene load_steps=93 format=3 uid="uid://crsvivhg1sob8"]
 
 [ext_resource type="Script" path="res://World/Objects/Nature/Cactus/cactus.gd" id="1_d051j"]
 [ext_resource type="Texture2D" uid="uid://d3ho0il61gq72" path="res://Assets/Images/cacti/cactus1.png" id="2_7qqyo"]
@@ -609,6 +609,9 @@ radius = 6.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_al6yo"]
 radius = 5.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_854bk"]
+radius = 6.0
+
 [node name="Cactus" type="Node2D"]
 script = ExtResource("1_d051j")
 
@@ -631,3 +634,14 @@ script = ExtResource("7_r4mnh")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, -3)
 shape = SubResource("CircleShape2D_al6yo")
+
+[node name="HurtBox" type="Area2D" parent="."]
+position = Vector2(0, -2)
+collision_layer = 0
+collision_mask = 262400
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_854bk")
+
+[connection signal="area_entered" from="HurtBox" to="." method="_on_hurt_box_area_entered"]

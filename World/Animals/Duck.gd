@@ -18,12 +18,10 @@ var health: int = Stats.DUCK_HEALTH
 var STARTING_HEALTH: int = Stats.DUCK_HEALTH
 var running_state: bool = false
 var MAX_MOVE_DISTANCE: float = 500.0
-var tornado_node
 
 var rng := RandomNumberGenerator.new()
 var thread := Thread.new()
 var destroy_thread := Thread.new()
-var mutex := Mutex.new()
 
 var spawn_loc: Vector2i
 
@@ -75,7 +73,7 @@ func move_deferred(_velocity: Vector2) -> void:
 	call_deferred("move", _velocity)
 
 func move(_velocity: Vector2) -> void:
-	if tornado_node or stunned or destroyed:
+	if $EnemyTornadoState.tornado_node or stunned or destroyed:
 		return
 	if frozen:
 		set_velocity(_velocity*0.75)
@@ -98,7 +96,7 @@ func _get_direction_string(velocitiy) -> String:
 func _update_pathfinding():
 	if not thread.is_started() and visible:
 		thread.start(Callable(self,"_get_path").bind(Util.get_random_idle_pos(position, MAX_MOVE_DISTANCE)))
-		if Util.chance(5):
+		if Util.chance(2):
 			if not destroyed and not sound_effects.playing:
 				sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/duck/quack.mp3"))
 				sound_effects.set_deferred("volume_db", Sounds.return_adjusted_sound_db("sound", 0))
@@ -132,10 +130,9 @@ func _on_HurtBox_area_entered(area):
 	if area.tool_name != "lightning spell" and area.tool_name != "lightning spell debuff":
 		call_deferred("hit", area.tool_name)
 	if area.tool_name == "lingering tornado":
-		$EnemyTornadoState.set_deferred("orbit_radius", randf_range(0,20))
-		tornado_node = area
+		$EnemyTornadoState.tornado_node = area
 	if area.special_ability == "fire":
-		var randomPos = Vector2(randf_range(-8,8), randf_range(-8,8))
+		var randomPos = Vector2(randf_range(-4,4), randf_range(-4,0))
 		InstancedScenes.initiateExplosionParticles(position+randomPos)
 		InstancedScenes.player_hit_effect(-Stats.FIRE_DEBUFF_DAMAGE, position+randomPos)
 		health -= Stats.FIRE_DEBUFF_DAMAGE
@@ -145,6 +142,8 @@ func _on_HurtBox_area_entered(area):
 	elif area.special_ability == "poison":
 		duck_sprite.set_deferred("modulate", Color("009000"))
 		$EnemyPoisonState.call_deferred("start", "poison arrow")
+	if area.tool_name == "arrow" or area.tool_name == "fire projectile":
+		area.destroy()
 
 
 func hit(tool_name, special_ability = ""):
@@ -171,7 +170,7 @@ func destroy(killed_by_player):
 	set_physics_process(false)
 	duck_sprite.material = null
 	if killed_by_player:
-		#MapData.remove_object("animal",name)
+		MapData.remove_object("animal",name,spawn_loc)
 		PlayerData.player_data["collections"]["mobs"]["duck"] += 1
 		await get_tree().create_timer(randf_range(0.05,0.25)).timeout
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/Enemies/killAnimal.mp3"))
@@ -201,7 +200,6 @@ func _on_IdleTimer_timeout():
 	is_eating = false
 
 func _on_DropEggTimer_timeout():
-	return
 	if visible and Server.isLoaded and not destroyed and velocity != Vector2.ZERO and not is_eating:
 		$Timers/DropEggTimer.wait_time = randf_range(60, 180)
 		sound_effects.set_deferred("stream", load("res://Assets/Sound/Sound effects/animals/duck/egg drop.mp3"))
@@ -218,5 +216,5 @@ func screen_entered():
 
 func screen_exited():
 	if MapData.world[Util.return_chunk_from_location(spawn_loc)]["animal"].has(name):
-		MapData.world[Util.return_chunk_from_location(spawn_loc)]["animal"][name]["l"] = position/16
+		MapData.set_updated_animal_position(name,spawn_loc,position,{"n":"boar","l":Vector2i(position/16),"h":health,"v":variety})
 		set_deferred("visible", false)

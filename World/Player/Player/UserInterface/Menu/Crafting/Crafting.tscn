@@ -165,12 +165,7 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("9")
 
-[node name="wood chest" type="Panel" parent="CraftingMenu/Items"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-script = ExtResource("9")
-
-[node name="stone chest" type="Panel" parent="CraftingMenu/Items"]
+[node name="chest" type="Panel" parent="CraftingMenu/Items"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("9")
@@ -270,6 +265,11 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("9")
 
+[node name="sleeping bag" type="Panel" parent="CraftingMenu/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9")
+
 [node name="chair" type="Panel" parent="CraftingMenu/Items"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -336,6 +336,16 @@ layout_mode = 2
 script = ExtResource("9")
 
 [node name="fireplace" type="Panel" parent="CraftingMenu/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9")
+
+[node name="wall art" type="Panel" parent="CraftingMenu/Items"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("9")
+
+[node name="fae entrance" type="Panel" parent="CraftingMenu/Items"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("9")

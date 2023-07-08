@@ -80,10 +80,10 @@ texture = ExtResource("1")
 
 [node name="ItemName" type="Label" parent="."]
 layout_mode = 0
-offset_left = 24.6667
-offset_top = 6.0
-offset_right = 391.667
-offset_bottom = 190.0
+offset_left = 25.0
+offset_top = 4.0
+offset_right = 475.0
+offset_bottom = 233.0
 scale = Vector2(0.075, 0.075)
 theme = ExtResource("5_y5atq")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
@@ -108,9 +108,9 @@ stretch_mode = 5
 [node name="Quantity" type="Label" parent="."]
 layout_mode = 0
 offset_left = 13.0
-offset_top = 17.0
+offset_top = 16.0
 offset_right = 253.0
-offset_bottom = 201.0
+offset_bottom = 245.0
 scale = Vector2(0.03, 0.03)
 theme = ExtResource("5_y5atq")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)

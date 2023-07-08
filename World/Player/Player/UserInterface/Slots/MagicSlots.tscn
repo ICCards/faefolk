@@ -47,8 +47,7 @@ offset_left = 51.0
 offset_top = 51.0
 offset_right = 99.0
 offset_bottom = 51.0
-grow_vertical = 0
-rotation = 180.0
+rotation = 3.14159
 mouse_filter = 2
 color = Color(0.447059, 0.447059, 0.447059, 0.823529)
 
@@ -59,8 +58,7 @@ offset_left = 111.0
 offset_top = 51.0
 offset_right = 159.0
 offset_bottom = 51.0
-grow_vertical = 0
-rotation = 180.0
+rotation = 3.14159
 mouse_filter = 2
 color = Color(0.447059, 0.447059, 0.447059, 0.823529)
 
@@ -71,8 +69,7 @@ offset_left = 171.0
 offset_top = 51.0
 offset_right = 219.0
 offset_bottom = 51.0
-grow_vertical = 0
-rotation = 180.0
+rotation = 3.14159
 mouse_filter = 2
 color = Color(0.447059, 0.447059, 0.447059, 0.823529)
 
@@ -83,8 +80,7 @@ offset_left = 231.0
 offset_top = 51.0
 offset_right = 279.0
 offset_bottom = 51.0
-grow_vertical = 0
-rotation = 180.0
+rotation = 3.14159
 mouse_filter = 2
 color = Color(0.447059, 0.447059, 0.447059, 0.823529)
 

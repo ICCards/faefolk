@@ -87,3 +87,10 @@ func returnAdjustedAnimBottom(_anim):
 		return "magic_cast_left_left"
 	return _anim
 
+
+func play_skill_unlocked():
+	$UpgradePhase.show()
+	$UpgradePhase.frame = 0
+	$UpgradePhase.play("play")
+	await $UpgradePhase.animation_finished
+	$UpgradePhase.hide()
