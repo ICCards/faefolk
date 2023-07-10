@@ -187,9 +187,10 @@ func place_large_ore_in_world(id,variety,location,health):
 #		Tiles.remove_valid_tiles(location, Constants.dimensions_dict[item_name])
 
 
-func place_object_in_world(id, item_name, direction, location, variety, opened_or_light_toggled):
+func place_object_in_world(id, item_name, direction, location, variety, opened_or_light_toggled, is_cave_chest = false):
 	PlaceableObjects = Server.world.get_node("PlaceableObjects")
 	var tileObjectHurtBox = TileObjectHurtBox.instantiate()
+	tileObjectHurtBox.is_cave_chest = is_cave_chest
 	tileObjectHurtBox.opened_or_light_toggled = opened_or_light_toggled
 	tileObjectHurtBox.variety = variety
 	tileObjectHurtBox.name = id

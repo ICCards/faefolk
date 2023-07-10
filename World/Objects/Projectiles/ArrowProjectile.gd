@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-var speed = 250
+var speed = 300
 var collided = false
 var is_fire_arrow: bool = false
 var is_ice_arrow: bool = false
@@ -25,7 +25,6 @@ func _ready():
 	$Hitbox.tool_name = "arrow"
 	$Hitbox.knockback_vector = velocity
 	if is_fire_arrow:
-		$PointLight2D.enabled = true
 		$Hitbox.special_ability = "fire"
 		$ArrowBreak.modulate = Color("ff0000")
 		$FireTrailParticles/Particles1.emitting = true
@@ -84,10 +83,9 @@ func destroy():
 		$CollisionShape2D.set_deferred("disabled", true)
 		collided = true
 		$ArrowBreak.play("break")
-		var tween = get_tree().create_tween()
-		tween.tween_property($PointLight2D, "color", Color("ffffff00"), 0.5)
 		await $ArrowBreak.animation_finished
 		$ArrowBreak.hide()
+
 
 func _on_Timer_timeout():
 	hide()

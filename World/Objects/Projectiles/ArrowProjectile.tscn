@@ -1,7 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://c24mw76rb6tmv"]
+[gd_scene load_steps=17 format=3 uid="uid://c24mw76rb6tmv"]
 
 [ext_resource type="Script" path="res://World/Objects/Projectiles/ArrowProjectile.gd" id="1_orj32"]
-[ext_resource type="Texture2D" uid="uid://bt8wejlwv77xj" path="res://Assets/Images/Misc/light.png" id="2"]
 [ext_resource type="Script" path="res://World/Objects/Scripts/Hitbox.gd" id="2_csnra"]
 [ext_resource type="Texture2D" uid="uid://dmwt5k6qtf56l" path="res://Assets/Images/Magic/Arrow/Arrow_Hit.png" id="2_ili42"]
 
@@ -97,7 +96,7 @@ position = Vector2(0, 1)
 modulate = Color(1.35, 1.35, 1.35, 1)
 position = Vector2(-6, -1)
 emitting = false
-amount = 10
+amount = 15
 lifetime = 2.0
 lifetime_randomness = 0.8
 emission_shape = 2
@@ -113,7 +112,7 @@ color = Color(1, 0.792157, 0.203922, 1)
 modulate = Color(1.35, 1.35, 1.35, 1)
 position = Vector2(-6, -1)
 emitting = false
-amount = 10
+amount = 15
 lifetime = 2.0
 lifetime_randomness = 0.8
 emission_shape = 2
@@ -129,7 +128,7 @@ color = Color(0.996078, 0.380392, 0.203922, 1)
 modulate = Color(1.35, 1.35, 1.35, 1)
 position = Vector2(-6, -1)
 emitting = false
-amount = 10
+amount = 15
 lifetime = 2.0
 lifetime_randomness = 0.8
 emission_shape = 2
@@ -147,7 +146,7 @@ color = Color(0.996078, 0.0784314, 0.00784314, 1)
 modulate = Color(1.35, 1.35, 1.35, 1)
 position = Vector2(-6, 0)
 emitting = false
-amount = 10
+amount = 15
 lifetime = 4.0
 lifetime_randomness = 0.5
 emission_shape = 2
@@ -163,7 +162,7 @@ color = Color(0.454902, 1, 1, 1)
 modulate = Color(1.35, 1.35, 1.35, 1)
 position = Vector2(-6, 0)
 emitting = false
-amount = 10
+amount = 15
 lifetime = 4.0
 lifetime_randomness = 0.5
 emission_shape = 2
@@ -179,7 +178,7 @@ color = Color(0.101961, 0.67451, 1, 1)
 modulate = Color(1.35, 1.35, 1.35, 1)
 position = Vector2(-6, 0)
 emitting = false
-amount = 10
+amount = 15
 lifetime = 4.0
 lifetime_randomness = 0.5
 emission_shape = 2
@@ -197,7 +196,7 @@ color = Color(0, 0.4, 0.870588, 1)
 modulate = Color(1.35, 1.35, 1.35, 1)
 position = Vector2(-6, 0)
 emitting = false
-amount = 10
+amount = 15
 lifetime = 2.5
 lifetime_randomness = 0.8
 emission_shape = 2
@@ -213,7 +212,7 @@ color = Color(0, 0.332031, 0, 1)
 modulate = Color(1.35, 1.35, 1.35, 1)
 position = Vector2(-6, 0)
 emitting = false
-amount = 10
+amount = 15
 lifetime = 2.5
 lifetime_randomness = 0.8
 emission_shape = 2
@@ -229,7 +228,7 @@ color = Color(0.145098, 0.545098, 0.145098, 1)
 modulate = Color(1.35, 1.35, 1.35, 1)
 position = Vector2(-6, 0)
 emitting = false
-amount = 10
+amount = 15
 lifetime = 2.5
 lifetime_randomness = 0.8
 emission_shape = 2
@@ -269,13 +268,6 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectEnemyBox"]
 shape = SubResource("12")
-
-[node name="PointLight2D" type="PointLight2D" parent="."]
-enabled = false
-energy = 1.01
-blend_mode = 2
-texture = ExtResource("2")
-texture_scale = 0.25
 
 [node name="DetectWallCollision" type="Area2D" parent="."]
 collision_layer = 0

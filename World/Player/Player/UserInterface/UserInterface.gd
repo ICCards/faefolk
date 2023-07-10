@@ -22,13 +22,11 @@ var items_to_drop = []
 
 var rng = RandomNumberGenerator.new()
 
-var object_name
-var object_level
-var object_id
-
 var is_opening_chest: bool = false
 
 var game_state: GameState
+
+var object_id
 
 enum {
 	MOVEMENT, 
@@ -150,29 +148,23 @@ func _input(event):
 
 
 func death():
-	if $Menu.visible:
-		hide_menu()
-	else:
-		match object_name:
-			"workbench":
-				close_workbench()
-			"grain mill":
-				close_grain_mill()
-			"stove":
-				close_stove(object_id)
-			"chest":
-				close_chest(object_id)
-			"furnace":
-				close_furnace(object_id)
-			"campfire":
-				close_campfire(object_id)
-			"brewing table":
-				close_brewing_table(object_id)
-	close_hotbar_clock_and_stats()
 	if holding_item:
 		InstancedScenes.initiateInventoryItemDrop([holding_item.item_name, holding_item.item_quantity, holding_item.item_health], Server.player_node.position)
 		holding_item.queue_free()
 		holding_item = null
+	await get_tree().process_frame
+	if $Menu.visible:
+		hide_menu()
+	else:
+		close_workbench()
+		close_grain_mill()
+		close_stove(object_id)
+		close_chest(object_id)
+		close_furnace(object_id)
+		close_campfire(object_id)
+		close_brewing_table(object_id)
+	close_hotbar_clock_and_stats()
+	
 
 
 func toggle_brewing_table(id,level):

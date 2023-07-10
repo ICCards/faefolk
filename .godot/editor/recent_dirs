@@ -1,3 +1,5 @@
+res://Assets/Images/Enemies/bat
+res://Assets/Tilesets/Terrain/tres files
 res://Assets/Images/Magic/Potions
 res://Assets/Images/Enemies
 res://World/Caves/Bosses/Level
@@ -18,5 +20,3 @@ res://Assets/Images/Enemies/skeleton
 res://Assets/Images/Magic/lightning
 res://Assets/Images/Enemies/Spider
 res://Assets/Images/Enemies/slime
-res://World/Caves
-res://Assets/Tilesets/objects

@@ -1,11 +1,12 @@
+Timer
+AudioStreamPlayer2D
+AudioStreamPlayer
+Node
+TileMap
 CollisionShape2D
 Area2D
 Node2D
 CanvasGroup
-Timer
-AudioStreamPlayer2D
-Node
-AudioStreamPlayer
 NavigationRegion2D
 CanvasLayer
 TextureButton
@@ -24,7 +25,6 @@ Button
 MarginContainer
 VBoxContainer
 PanelContainer
-TileMap
 Line2D
 VisibleOnScreenNotifier2D
 NavigationLink2D

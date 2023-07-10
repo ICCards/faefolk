@@ -76,7 +76,7 @@ func _ready():
 
 func _input( event ):
 	if event is InputEvent:
-		if event.is_action_pressed("sprint"):
+		if event.is_action_pressed("sprint") and not poisoned:
 			running = true
 		elif event.is_action_released("sprint"):
 			running = false
@@ -379,9 +379,6 @@ func idle_state(_direction):
 func walk_state(_direction):
 	if state == MOVEMENT:
 		animation_player.play("walk loop")
-#		if $Sounds/FootstepsSound.playing == false:
-#			print("FUCK U")
-#			$Sounds/FootstepsSound.playing = true
 		$Sounds/FootstepsSound.stream_paused = false
 		if Sounds.current_footsteps_sound != Sounds.swimming and not running:
 			if PlayerData.player_data["hotbar"].has(str(PlayerData.active_item_slot)) and PlayerData.normal_hotbar_mode:

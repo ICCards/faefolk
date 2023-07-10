@@ -21,13 +21,14 @@ func spawn_player():
 	player.name = str("PLAYER") 
 	player.load_screen_timer = 3.0
 	$Players.add_child(player)
-	var spawn_loc = $TerrainTiles/UpLadder.get_used_cells(0)[0]
+	var spawn_loc = $TerdaSrainTiles/UpLadder.get_used_cells(0)[0]
 	player.position = Vector2(spawn_loc*16) + Vector2(8,8)
 
 
 func initialize():
 	Tiles.cave_wall_tiles = $TerrainTiles/Walls
 	Tiles.cave_water_tiles = $TerrainTiles/Freshwater
+	Tiles.cave_grass_tiles = $TerrainTiles/Grass
 	if not PlayerData.player_data["skill_experience"]["wind"] == 0:
 		$TerrainTiles/Doors.set_cell(0,Vector2i(37,13),0,Vector2i(48,11))
 	if not PlayerData.player_data["skill_experience"]["fire"] == 0:

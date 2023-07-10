@@ -145,6 +145,7 @@ sprite_frames = SubResource("4")
 animation = &"loop"
 
 [node name="Sprite2" type="Sprite2D" parent="Background"]
+visible = false
 modulate = Color(1, 1, 1, 0.0627451)
 material = SubResource("9")
 position = Vector2(628, 385)

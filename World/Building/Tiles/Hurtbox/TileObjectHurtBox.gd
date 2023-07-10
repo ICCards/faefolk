@@ -19,7 +19,7 @@ var direction
 var variety
 
 var opened_or_light_toggled: bool
-
+var is_cave_chest: bool = false
 var destroyed: bool = false
 var is_player_sitting: bool = false
 
@@ -94,6 +94,9 @@ func initialize_interactive_area():
 		add_interactive_area_node("chest")
 		if opened_or_light_toggled:
 			interactives.open_chest(true)
+		if is_cave_chest:
+			$Marker2D/Btn.queue_free()
+			$Marker2D/HurtBox.queue_free()
 	elif item_name == "crate":
 		add_campfire_interactive_area_node("crate")
 		if opened_or_light_toggled:

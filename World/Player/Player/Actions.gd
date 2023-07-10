@@ -49,6 +49,7 @@ func _input(event):
 						elif current_interactive_node.object_name == "forage" and new_node.object_name == "forage" and get_parent().position.distance_to(new_node.position) < get_parent().position.distance_to(current_interactive_node.position):
 							current_interactive_node = new_node
 			if current_interactive_node:
+				get_parent().user_interface.object_id = current_interactive_node.name
 				match current_interactive_node.object_name:
 					"bed":
 						sleep(current_interactive_node.object_position)
@@ -236,14 +237,15 @@ func return_adjusted_chair_position(_chair_name,_pos,_direction):
 
 func player_death():
 	if get_parent().state != get_parent().DYING:
+		get_parent().state = get_parent().DYING
+		await get_tree().process_frame
 		sound_effects.stream = load("res://Assets/Sound/Sound effects/Player/death.mp3")
 		sound_effects.volume_db = Sounds.return_adjusted_sound_db("sound",0)
 		sound_effects.play()
 		get_node("../Magic").invisibility_active = true
-		get_parent().state = get_parent().DYING
-		get_node("../Sounds/FootstepsSound").stream_paused = true
 		get_node("../PoisonParticles").stop_poison_state()
 		get_node("../SpeedParticles").stop_speed_buff()
+		get_node("../Sounds/FootstepsSound").stream_paused = true
 		get_parent().composite_sprites.set_player_animation(Server.player_node.character, "death_" + get_parent().direction.to_lower(), null)
 		get_parent().animation_player.play("death")
 		get_node("../Camera2D/UserInterface").death()

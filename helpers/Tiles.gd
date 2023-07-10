@@ -19,6 +19,7 @@ var light_tiles: TileMap = null
 var wet_sand_tiles: TileMap = null
 
 var cave_wall_tiles: TileMap = null
+var cave_grass_tiles: TileMap = null
 var cave_water_tiles: TileMap = null
 
 var rng = RandomNumberGenerator.new()

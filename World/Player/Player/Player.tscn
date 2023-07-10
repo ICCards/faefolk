@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://cffchl0ffi2hf" path="res://World/Player/Player/UserInterface/UserInterface.tscn" id="3_w02x5"]
 [ext_resource type="Material" uid="uid://dshi8sn4j6jfa" path="res://Assets/Themes/whiten.tres" id="5_3of15"]
 [ext_resource type="Texture2D" uid="uid://3ik13tk6hyny" path="res://Characters/Human/male/HOLDING WALK/body/down/body.png" id="5_yvg8i"]
-[ext_resource type="AudioStream" uid="uid://bwubv5h3bqf1k" path="res://Assets/Sound/Sound effects/Footsteps/stone footsteps.mp3" id="6"]
 [ext_resource type="Texture2D" uid="uid://b2yqfp3r1tqa4" path="res://Characters/Human/male/HOLDING WALK/body/down/arms.png" id="6_lbf3e"]
 [ext_resource type="PackedScene" uid="uid://bdpp83on80ake" path="res://World/Player/Player/Magic.tscn" id="8_wf6cw"]
 [ext_resource type="Texture2D" uid="uid://wol8ty2drk5k" path="res://Characters/Weapon swings/fishing rod struggle/right.png" id="9_5g54g"]
@@ -20,6 +19,7 @@
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/FootstepsSound.gd" id="15_a8swc"]
 [ext_resource type="AudioStream" uid="uid://bdedmyao5swjq" path="res://Assets/Sound/Sound effects/Farming/hoe.mp3" id="16"]
 [ext_resource type="Script" path="res://World/Player/Player/AttachedScripts/BackgroundMusic.gd" id="16_d5bcc"]
+[ext_resource type="AudioStream" uid="uid://qqpxtamwd4do" path="res://Assets/Sound/Sound effects/Footsteps/dirt footsteps.mp3" id="17_ax220"]
 [ext_resource type="Script" path="res://World/Player/Player/HoldingTorch.gd" id="18_56nxn"]
 [ext_resource type="PackedScene" uid="uid://cu3vvh0ai0n56" path="res://World/Player/Player/PoisonParticles.tscn" id="19_ejmhd"]
 [ext_resource type="Texture2D" uid="uid://h3sspgar8los" path="res://Assets/Images/Animations/objects/torch/1.png" id="20_8w7pl"]
@@ -4708,10 +4708,13 @@ stream = ExtResource("16")
 volume_db = -16.0
 
 [node name="FootstepsSound" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("6")
-autoplay = true
-bus = &"Bus1"
+stream = ExtResource("17_ax220")
+volume_db = -80.0
 script = ExtResource("15_a8swc")
+
+[node name="Timer" type="Timer" parent="Sounds/FootstepsSound"]
+wait_time = 0.25
+autostart = true
 
 [node name="BackgroundMusic" type="AudioStreamPlayer" parent="Sounds"]
 script = ExtResource("16_d5bcc")
@@ -4749,6 +4752,7 @@ texture_scale = 0.65
 [connection signal="area_entered" from="Area2Ds/HurtBox" to="Area2Ds/HurtBox" method="_on_area_entered"]
 [connection signal="timeout" from="Area2Ds/HurtBox/PoisonTimer" to="Area2Ds/HurtBox" method="_on_poison_timer_timeout"]
 [connection signal="timeout" from="Area2Ds/HurtBox/RegenerationTimer" to="Area2Ds/HurtBox" method="_on_regeneration_timer_timeout"]
+[connection signal="timeout" from="Sounds/FootstepsSound/Timer" to="Sounds/FootstepsSound" method="_on_timer_timeout"]
 
 [editable path="Camera2D/UserInterface"]
 [editable path="Swing"]

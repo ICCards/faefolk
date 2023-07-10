@@ -3,6 +3,7 @@ extends Node2D
 @onready var Slime = load("res://World/Enemies/Slime/Slime.tscn")
 @onready var Spider = load("res://World/Enemies/Spider.tscn")
 @onready var Skeleton = load("res://World/Enemies/Skeleton.tscn")
+@onready var Bat = load("res://World/Enemies/Slime/Bat.tscn")
 
 @onready var Player = load("res://World/Player/Player/Player.tscn")
 @onready var CaveLight = load("res://World/Caves/Objects/CaveLight.tscn")
@@ -11,7 +12,7 @@ extends Node2D
 @onready var valid_tiles: TileMap = $TerrainTiles/ValidTiles
 @onready var nav_tiles: TileMap = $TerrainTiles/NavigationTiles
 
-var level = 2
+var level = 1
 var tier = "wind"
 
 var map_size: int
@@ -20,13 +21,12 @@ var game_state: GameState
 
 var is_changing_scene: bool = false
 
-var NUM_BATS = 12
-var NUM_SLIMES = 8
-var NUM_SPIDERS = 8
-var NUM_SKELETONS = 8
-var NUM_MUSHROOMS #= 20
-var NUM_SMALL_ORE #= 30
-var NUM_LARGE_ORE #= 10
+var NUM_SLIMES 
+var NUM_SPIDERS 
+var NUM_SKELETONS 
+var NUM_MUSHROOMS 
+var NUM_SMALL_ORE 
+var NUM_LARGE_ORE 
 
 var oreTypesLevel2 = ["bronze ore", "bronze ore", "bronze ore", "iron ore", "iron ore", "gold ore"]
 var mushroomTypes = ["common mushroom", "healing mushroom", "purple mushroom", "chanterelle"]
@@ -37,17 +37,16 @@ var uuid = _uuid.new()
 func _ready():
 #	level = SceneChanger.cave_level
 #	tier = SceneChanger.cave_tier
-#	if GameState.save_exists(): # Load world
-#		print("LOAD WORLD")
-#		game_state = GameState.new()
-#		game_state.load_state()
-#		PlayerData.player_data = game_state.player_state
-#		MapData.world = game_state.world
-#		MapData.terrain = game_state.terrain
-#		MapData.caves = game_state.caves
+	name = tier+str(level)
 	match tier:
 		"wind":
 			map_size = 100
+			NUM_LARGE_ORE = 6
+			NUM_SMALL_ORE = 12
+			NUM_MUSHROOMS = 8
+			NUM_SPIDERS = 7
+			NUM_SLIMES = 7
+			NUM_SKELETONS = 7
 		"fire":
 			map_size = 125
 		"ice":
@@ -56,14 +55,59 @@ func _ready():
 	Tiles.nav_tiles = $TerrainTiles/ValidTiles
 	Tiles.valid_tiles = $TerrainTiles/ValidTiles
 	Tiles.cave_wall_tiles = $TerrainTiles/Walls
+	Tiles.cave_water_tiles = $TerrainTiles/Freshwater
+	Tiles.cave_grass_tiles = $TerrainTiles/Grass
 	await get_tree().create_timer(0.5).timeout
-	load_cave() 
+	load_cave_terrain() 
 	set_valid_tiles()
 	set_mobs()
+	if MapData.world.has(tier+str(level)):
+		load_resources()
+	else:
+		MapData.world[tier+str(level)] = {
+				"tree": {},
+				"stump": {},
+				"log": {},
+				"ore_large": {},
+				"ore": {},
+				"tall_grass": {},
+				"forage": {},
+				"animal": {},
+				"crop": {},
+				"tile": {},
+				"placeable": {}}
+		generate_random_resources()
+	spawn_player()
+
+func generate_random_resources():
 	generate_ore()
 	generate_mushroom_forage()
 	generate_tall_grass()
-	spawn_player()
+
+
+func load_resources():
+	var map = MapData.world[tier+str(level)]
+	# ore
+	for id in map["ore_large"]:
+		var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
+		var health = map["ore_large"][id]["h"]
+		var variety = map["ore_large"][id]["v"]
+		PlaceObject.place_large_ore_in_world(id,variety,loc,health)
+		await get_tree().process_frame
+	for id in map["ore"]:
+		var loc = Util.string_to_vector2(map["ore"][id]["l"])
+		var health = map["ore"][id]["h"]
+		var variety = map["ore"][id]["v"]
+		PlaceObject.place_small_ore_in_world(id,variety,loc,health)
+		await get_tree().process_frame
+	for id in map["tall_grass"]:
+		var loc = Util.string_to_vector2(map["ore"][id]["l"])
+		PlaceObject.place_tall_grass_in_world(id,map["tall_grass"][id]["b"],loc,map["tall_grass"][id]["fh"],map["tall_grass"][id]["bh"])
+		await get_tree().process_frame
+	for id in map["forage"]:
+		var location = Util.string_to_vector2(map["forage"][id]["l"])
+		var variety = map["forage"][id]["v"]
+		PlaceObject.place_forage_in_world(id,variety,location,true)
 
 func set_mobs():
 	var locs = valid_tiles.get_used_cells(0)
@@ -92,13 +136,13 @@ func spawn_player():
 	$InitLoadingScreen.queue_free()
 	var player = Player.instantiate()
 	player.name = str("PLAYER")
-	player.load_screen_timer = 1.0
+	player.load_screen_timer = 3.0
 	$Players.add_child(player)
 	var spawn_loc = $TerrainTiles/UpLadder.get_used_cells(0)[0]
 	player.position = Vector2(spawn_loc*16) + Vector2(8,8)
 
 
-func load_cave():
+func load_cave_terrain():
 	var map = JsonData.cave_data[tier+str(level)]
 	# walls
 	var walls = Util.convertArrayToVector(map["wall"])
@@ -124,7 +168,7 @@ func load_cave():
 	var g1 = Util.convertArrayToVector(map["ground1"])
 	$TerrainTiles/Ground2.set_cells_terrain_connect(0,g1,0,1)
 	var g2 = Util.convertArrayToVector(map["ground2"])
-	$TerrainTiles/Ground3.set_cells_terrain_connect(0,g2,0,2)
+	$TerrainTiles/Grass.set_cells_terrain_connect(0,g2,0,0)
 	
 	# decor
 	var r1 = Util.convertArrayToVector(map["rail"])
@@ -152,30 +196,21 @@ func load_cave():
 		else:
 			var loc = Util.string_to_vector2(map["ladder"]["down"])
 			$TerrainTiles/DownLadder.set_cell(0,loc,0,Vector2i(61,11))
-	PlaceObject.place_object_in_world("id", "chest", "down", Util.string_to_vector2(map["chest"]), 1, false)
-	# resources
-#	for id in map["ore_large"]:
-#		var loc = Util.string_to_vector2(map["ore_large"][id]["l"])
-#		var health = map["ore_large"][id]["h"]
-#		var variety = map["ore_large"][id]["v"]
-#		PlaceObject.place_large_ore_in_world(id,variety,loc,health)
-#	for id in map["ore"]:
-#		var loc = Util.string_to_vector2(map["ore"][id]["l"])
-#		var health = map["ore"][id]["h"]
-#		var variety = map["ore"][id]["v"]
-#		PlaceObject.place_small_ore_in_world(id,variety,loc,health)
-#	for id in map["forage"]:
-#		var loc = Util.string_to_vector2(map["forage"][id]["l"])
-#		var variety = map["forage"][id]["v"]
-#		PlaceObject.place_forage_in_world(id,variety,loc,true)
-#	for id in map["tall_grass"]:
-#		var loc = Util.string_to_vector2(map["tall_grass"][id]["l"])
-#		var variety = map["tall_grass"][id]["v"]
-#		var fh = map["tall_grass"][id]["fh"]
-#		var bh = map["tall_grass"][id]["bh"]
-#		PlaceObject.place_tall_grass_in_world(id,"cave"+str(variety),loc,fh,bh)
+	PlaceObject.place_object_in_world(tier+str(level), "chest", "down", Util.string_to_vector2(map["chest"]), 1, false, true)
+	PlayerData.player_data["ui_slots"][tier+str(level)] = return_random_chest_data()
 
 
+func return_random_chest_data():
+	var dict = {}
+	var indices = []
+	for i in range(2):
+		dict[str(randi_range(0,29))] = [return_random_seed(), randi_range(15,50), null]
+	return dict
+
+func return_random_seed():
+	var crops = JsonData.crop_data.keys()
+	crops.shuffle()
+	return crops.front() + " seeds"
 
 
 func set_valid_tiles():
@@ -187,21 +222,31 @@ func set_valid_tiles():
 				nav_tiles.set_cell(0,loc,0,Vector2i(0,0))
 
 
-
-
 func _on_spawn_bat_timer_timeout():
-	pass # Replace with function body.
+	var spawn_loc
+	if Util.chance(25): # top
+		spawn_loc = Vector2(randf_range(0,map_size),-10)
+	elif Util.chance(25): # bottom
+		spawn_loc = Vector2(randf_range(0,map_size),map_size+10)
+	elif Util.chance(25): # left
+		spawn_loc = Vector2(-10,randf_range(0,map_size))
+	else:
+		spawn_loc = Vector2(map_size+10,randf_range(0,map_size))
+	var bat = Bat.instantiate()
+	bat.position = spawn_loc*16
+	$Enemies.call_deferred("add_child",bat)
+	$SpawnBatTimer.start(randi_range(10,25))
+
 
 func generate_mushroom_forage():
-	NUM_MUSHROOMS = map_size / 5
 	for i in range(NUM_MUSHROOMS):
 		var loc = Vector2i(randi_range(1,map_size), randi_range(1,map_size))
 		if not valid_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
 			mushroomTypes.shuffle()
 			var id = uuid.v4()
 			PlaceObject.place_forage_in_world(id,mushroomTypes.front(),loc,true)
-#			await get_tree().process_frame
-#			cave_dict[get_parent().tier+str(1)]["forage"][id] = {"l": loc, "v": mushroomTypes.front()}
+			MapData.world[tier+str(level)]["forage"][id] = {"l": loc, "v": mushroomTypes.front()}
+			await get_tree().create_timer(0.1).timeout
 
 
 func generate_tall_grass():
@@ -219,32 +264,28 @@ func generate_grass_bunch(loc, variety):
 		loc += randomAdjacentTiles[0]
 		if not valid_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
 			var id = uuid.v4()
-#			decoration_locations.append(loc)
 			PlaceObject.place_tall_grass_in_world(id,"cave"+str(variety),loc,3,3)
-#			cave_dict[get_parent().tier+str(1)]["tall_grass"][id] = {"l": loc, "v": variety, "fh":randi_range(1,3), "bh":randi_range(1,3)}
+			MapData.world[tier+str(level)]["tall_grass"][id] = {"l": loc, "v": variety, "fh":randi_range(1,3), "bh":randi_range(1,3)}
 		else:
 			loc -= randomAdjacentTiles[0]
 
 
-var count = 0
+
 func generate_ore():
-	NUM_SMALL_ORE = map_size / 2
 	for i in range(NUM_SMALL_ORE):
 		var loc = Vector2i(randi_range(1,map_size), randi_range(1,map_size))
 		if not valid_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1):
 			var id = uuid.v4()
 			oreTypesLevel2.shuffle()
 			PlaceObject.place_small_ore_in_world(id,oreTypesLevel2.front(),loc,Stats.SMALL_ORE_HEALTH)
-#			await get_tree().process_frame
-#			cave_dict[get_parent().tier+str(1)]["ore"][id] = {"l": loc, "v": oreTypesLevel2.front(), "h": Stats.SMALL_ORE_HEALTH}
-	NUM_LARGE_ORE = map_size / 4
-	while count < NUM_LARGE_ORE:
+			MapData.world[tier+str(level)]["ore"][id] = {"l": loc, "v": oreTypesLevel2.front(), "h": Stats.SMALL_ORE_HEALTH}
+			await get_tree().create_timer(0.1).timeout
+	for i in range(NUM_LARGE_ORE):
 		var loc = Vector2i(randi_range(1,map_size), randi_range(1,map_size))
 		if not valid_tiles.get_cell_atlas_coords(0,loc) == Vector2i(-1,-1) and not valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(-1,0)) == Vector2i(-1,-1) and not valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(-1,-1)) == Vector2i(-1,-1) and not valid_tiles.get_cell_atlas_coords(0,loc+Vector2i(0,-1)) == Vector2i(-1,-1): 
 			var id = uuid.v4()
-			count += 1
 			oreTypesLevel2.shuffle()
 			PlaceObject.place_large_ore_in_world(id,oreTypesLevel2.front(),loc,Stats.LARGE_ORE_HEALTH)
-#			await get_tree().process_frame
-#			cave_dict[get_parent().tier+str(1)]["ore_large"][id] = {"l": loc, "v": oreTypesLevel2.front(), "h": Stats.LARGE_ORE_HEALTH}
+			MapData.world[tier+str(level)]["ore_large"][id] = {"l": loc, "v": oreTypesLevel2.front(), "h": Stats.LARGE_ORE_HEALTH}
+			await get_tree().create_timer(0.1).timeout
 
